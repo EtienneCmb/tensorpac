@@ -1,0 +1,6 @@
+Doc
+	-5 Descriptif détaillé des vecteurs fréquences
+		- Tuple simple (2, 4)
+		- List de fréquences [(1, 2), (3, 4)] 
+		- Tuple 4 (fstart, fend, fwidth, fstep)
+		- List séquentielle (1, 2, 3, 4, 5)
