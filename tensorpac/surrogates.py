@@ -164,7 +164,7 @@ def SwapPhaAmp(pha, amp, axis):
     npha = pha.shape[0]
     pa = _dimswap(np.concatenate((pha, amp)), axis=axis)
 
-    return _dimswap(pa[0:npha, ...], axis), _dimswap(pa[npha::, ...], axis)
+    return pa[0:npha, ...], pa[npha::, ...]
 
 
 def SwapAmp(pha, amp, axis):
@@ -249,7 +249,11 @@ def ShufflePhaAmp(pha, amp, axis):
     [pha] = (nPha, npts, ntrials)
     [amp] = (nAmp, npts, ntrials)
     """
-    return _dimswap(pha, axis), _dimswap(amp, axis)
+    # shp, sha = pha.shape, amp.shape
+    np.random.shuffle(pha.flat)
+    np.random.shuffle(amp.flat)
+    return pha, amp
+    # return _dimswap(pha, axis), _dimswap(amp, axis)
 
 
 def ShufflePha(pha, amp, axis):

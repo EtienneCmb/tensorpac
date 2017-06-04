@@ -63,13 +63,13 @@ class Pac(object):
         print('SHAPE : ', pha.shape, amp.shape)
 
         # Compute pac :
-        pacargs = (self.idpac[0], axis, self.nbins, p)
+        pacargs = (self.idpac[0], self.nbins, p)
         pac = ComputePac(pha, amp, *pacargs)
         print('PAC : ', pac.shape)
 
         # Compute surogates :
         if self.idpac[1] != 0:
-            surargs = (self.idpac[1], axis, traxis)
+            surargs = (self.idpac[1], axis+1, traxis+1)
             suro = ComputeSurogates(pha, amp, surargs, pacargs, nperm, njobs)
             print('SURO : ', suro.shape)
 
@@ -79,4 +79,4 @@ class Pac(object):
 
             # Compute statistics :
 
-        return pac
+        return pac, suro.mean(0)
