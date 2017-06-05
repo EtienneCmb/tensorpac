@@ -8,14 +8,15 @@ from tensorpac.pac import Pac
 from brainpipe.feature import pac
 
 
-x = PacSignals(fpha=12, famp=100, ndatasets=30, tmax=1, noise=1, chi=0.8, dpha=10, damp=10)[0]
+x = PacSignals(fpha=12, famp=100, ndatasets=30, tmax=1, noise=2, chi=0.5, dpha=10, damp=10)[0]
 # x = np.squeeze(x)
 print('DATASET :', x.shape)
+x = np.concatenate((x, np.random.rand(30, 1000)), axis=1)
 
 
 # TENSORPAC :
-p = Pac(1024, idpac=(1, 1, 0), fpha=(1, 30, 2, 2), famp=(60, 160, 10, 10), dcomplex='wavelet')
-xpac, spac = p.fit(x, x, axis=1, nperm=50, traxis=0, njobs=1)
+p = Pac(1024, idpac=(2, 2, 3), fpha=(1, 30, 2, 2), famp=(60, 160, 10, 10), dcomplex='hilbert')
+xpac, spac = p.fit(x, x, axis=1, nperm=50, traxis=0, njobs=-1, nblocks=10)
 print('MINMAX : ', xpac.min(), xpac.max(), spac.min(), spac.max())
 print(np.min(xpac-spac), np.max(xpac-spac))
 

@@ -79,4 +79,7 @@ class Pac(object):
 
             # Compute statistics :
 
+        if correct:
+            pac[pac < 0.] = 0.
+
         return pac, suro.mean(0)
