@@ -53,7 +53,8 @@ class Pac(object):
         """String representation."""
         pass
 
-    def fit(self, xpha, xamp, axis=-1, traxis=-2, nperm=200, njobs=-1):
+    def fit(self, xpha, xamp, axis=-1, traxis=-2, nperm=200, correct=True,
+            nblocks=2, njobs=-1):
         p = 1/nperm
         # Extract phase (npha, ...) and amplitude (namp, ...) :
         pha = spectral(xpha, self.sf, self.fpha, axis, 'pha', self.dcomplex,
@@ -63,20 +64,23 @@ class Pac(object):
         print('SHAPE : ', pha.shape, amp.shape)
 
         # Compute pac :
-        pacargs = (self.idpac[0], axis, self.nbins, p)
+        pacargs = (self.idpac[0], self.nbins, p)
         pac = ComputePac(pha, amp, *pacargs)
         print('PAC : ', pac.shape)
 
         # Compute surogates :
         if self.idpac[1] != 0:
-            surargs = (self.idpac[1], axis, traxis)
+            surargs = (self.idpac[1], axis+1, traxis+1, nblocks)
             suro = ComputeSurogates(pha, amp, surargs, pacargs, nperm, njobs)
             print('SURO : ', suro.shape)
 
             # Normalize pac by surrogates :
-            pac = normalize(pac, np.mean(suro, axis=0, keepdims=0),
-                            np.std(suro, axis=0, keepdims=0), self.idpac[2])
+            pac = normalize(pac, np.mean(suro, axis=0),
+                            np.std(suro, axis=0), self.idpac[2])
 
             # Compute statistics :
 
-        return pac
+        if correct:
+            pac[pac < 0.] = 0.
+
+        return pac, suro.mean(0)
