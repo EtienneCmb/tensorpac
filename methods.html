@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Modular philosophy &mdash; Tensorpac 0.0 documentation</title>
+  <title>Methods &mdash; Tensorpac 0.0 documentation</title>
   
 
   
@@ -34,7 +34,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Tensorpac 0.0 documentation" href="index.html"/>
-        <link rel="next" title="&lt;no title&gt;" href="utils.html"/>
+        <link rel="next" title="Utils" href="utils.html"/>
         <link rel="prev" title="Tensorpac" href="index.html"/> 
 
   
@@ -67,14 +67,16 @@
           
           
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Modular philosophy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#implemented-methods">Implemented methods</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#pac-methods">Pac methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#surrogates-methods">Surrogates methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#normalization-methods">Normalization methods</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Methods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#modular-philosophy">Modular philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#link-with-publications">Link with publications</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#link-with-publications">Link with publications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+</ul>
+</li>
 </ul>
 
           
@@ -99,7 +101,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>Modular philosophy</li>
+    <li>Methods</li>
       <li class="wy-breadcrumbs-aside">
         
           <a href="_sources/methods.rst.txt" rel="nofollow"> View page source</a>
@@ -110,36 +112,56 @@
 </div>
           <div role="main" class="document">
             
-  <div class="section" id="modular-philosophy">
-<span id="methods"></span><h1>Modular philosophy<a class="headerlink" href="#modular-philosophy" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="methods">
+<span id="id1"></span><h1>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="modular-philosophy">
+<h2>Modular philosophy<a class="headerlink" href="#modular-philosophy" title="Permalink to this headline">¶</a></h2>
 <p>Digit description</p>
-</div>
 <div class="section" id="implemented-methods">
-<h1>Implemented methods<a class="headerlink" href="#implemented-methods" title="Permalink to this headline">¶</a></h1>
+<h3>Implemented methods<a class="headerlink" href="#implemented-methods" title="Permalink to this headline">¶</a></h3>
+</div>
 <div class="section" id="pac-methods">
-<h2>Pac methods<a class="headerlink" href="#pac-methods" title="Permalink to this headline">¶</a></h2>
-<p>Methods used tensors
-* Mean Vector Length
-* Kullback-Leibler
-* Heigth-ratio
-* ndPAC</p>
+<h3>Pac methods<a class="headerlink" href="#pac-methods" title="Permalink to this headline">¶</a></h3>
+<p>Methods used tensors :</p>
+<ul class="simple">
+<li>Mean Vector Length</li>
+<li>Kullback-Leibler</li>
+<li>Heigth-ratio</li>
+<li>ndPAC</li>
+</ul>
 </div>
 <div class="section" id="surrogates-methods">
-<h2>Surrogates methods<a class="headerlink" href="#surrogates-methods" title="Permalink to this headline">¶</a></h2>
+<h3>Surrogates methods<a class="headerlink" href="#surrogates-methods" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
+<li>No surrogates</li>
 <li>Swap phase/amplitude trials</li>
 <li>Swap amplitude time blocks</li>
 <li>Shuffle phase and amplitude time-series</li>
 <li>Shuffle phase time-series</li>
 <li>Shuffle amplitude time-series</li>
 </ul>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<ul class="last simple">
+<li>Circular shifting</li>
+<li>Time-lag</li>
+</ul>
+</div>
 </div>
 <div class="section" id="normalization-methods">
-<h2>Normalization methods<a class="headerlink" href="#normalization-methods" title="Permalink to this headline">¶</a></h2>
+<h3>Normalization methods<a class="headerlink" href="#normalization-methods" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>No normalization</li>
+<li>Substraction of the mean of surrogates</li>
+<li>Division of the mean of surrogates</li>
+<li>Substraction then division of the mean of surrogates</li>
+<li>Substraction by the mean, then division by the diviation of the surrogates (z-scored)</li>
+</ul>
 </div>
 </div>
 <div class="section" id="link-with-publications">
-<h1>Link with publications<a class="headerlink" href="#link-with-publications" title="Permalink to this headline">¶</a></h1>
+<h2>Link with publications<a class="headerlink" href="#link-with-publications" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
@@ -148,7 +170,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="utils.html" class="btn btn-neutral float-right" title="&lt;no title&gt;">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="utils.html" class="btn btn-neutral float-right" title="Utils">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral" title="Tensorpac"><span class="fa fa-arrow-circle-left"></span> Previous</a>
