@@ -1,0 +1,39 @@
+.. _Methods:
+
+Modular philosophy
+==================
+Digit description
+
+Implemented methods
+===================
+
+Pac methods
+-----------
+
+Methods used tensors 
+* Mean Vector Length
+* Kullback-Leibler
+* Heigth-ratio
+* ndPAC
+
+Surrogates methods
+------------------
+
+* Swap phase/amplitude trials
+* Swap amplitude time blocks
+* Shuffle phase and amplitude time-series
+* Shuffle phase time-series
+* Shuffle amplitude time-series
+
+.. todolist::
+    
+    Circular shifting
+    Time-lag
+
+Normalization methods
+---------------------
+
+
+Link with publications
+======================
+
