@@ -74,8 +74,8 @@ class Pac(object):
             print('SURO : ', suro.shape)
 
             # Normalize pac by surrogates :
-            pac = normalize(pac, np.mean(suro, axis=0, keepdims=0),
-                            np.std(suro, axis=0, keepdims=0), self.idpac[2])
+            pac = normalize(pac, np.mean(suro, axis=0),
+                            np.std(suro, axis=0), self.idpac[2])
 
             # Compute statistics :
 

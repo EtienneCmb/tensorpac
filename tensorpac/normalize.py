@@ -8,7 +8,6 @@ This file include the following methods :
 - Z-score : substract the mean and divide by the deviation of the
             surrogates
 """
-import numpy as np
 
 __all__ = ['normalize']
 
@@ -37,7 +36,10 @@ def normalize(pac, sMean, sStd, idn):
         return pac/sMean
 
     elif idn == 3:  # Substract then divide
-        return (pac-sMean)/sMean
+        pac -= sMean
+        pac /= sMean
+        return pac
+        # return (pac-sMean)/sMean
 
     elif idn == 4:  # Z-score
         return (pac-sMean)/sStd

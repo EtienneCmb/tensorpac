@@ -101,10 +101,10 @@ def HeightsRatio(pha, amp, nbins):
 
     Args:
         pha: np.ndarray
-            Array of phases of shapes (npha, ...)
+            Array of phases of shapes (npha, ..., npts)
 
         amp: np.ndarra
-            Array of amplitudes of shapes (namp, ...)
+            Array of amplitudes of shapes (namp, ..., npts)
 
         nbins: int
             Number of bins in which the phase in cut in bins.

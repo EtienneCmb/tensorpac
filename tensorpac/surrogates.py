@@ -161,11 +161,26 @@ def SwapPhaAmp(pha, amp, axis):
         amp: np.ndarra
             Swapped version of amplitudes of shapes (namp, ...)
     """
-    npha = pha.shape[0]
-    pa = _dimswap(np.concatenate((pha, amp)), axis=axis)
+    # Variables and pre-allocation :
+    npha, namp = pha.shape[0], amp.shape[0]
+    phas, amps = np.zeros_like(pha), np.zeros_like(amp)
+    # Loop over frequencies :
+    for k in range(npha):
+        for i in range(namp):
+            c = np.concatenate((pha[k, ...], amp[i, ...]))
+            np.swapaxes(c, axis, 0)
+            np.random.shuffle(c)
+            np.swapaxes(c, axis, 0)
+            phas[k, ...] = c[0:npha, ...]
+            amps[i, ...] = c[npha::]
+    return phas, amps
 
-    return pa[0:npha, ...], pa[npha::, ...]
 
+def swap(a, b, axis=0):
+    pass
+    # a = np.swapaxes(a, 0, axis)
+    # np.random.shuffle(a)
+    # return np.swapaxes(a, axis, 0)
 
 def SwapAmp(pha, amp, axis):
     """Swap amplitude across trials, (Bahramisharif, 2013).
@@ -250,10 +265,10 @@ def ShufflePhaAmp(pha, amp, axis):
     [amp] = (nAmp, npts, ntrials)
     """
     # shp, sha = pha.shape, amp.shape
-    np.random.shuffle(pha.flat)
-    np.random.shuffle(amp.flat)
-    return pha, amp
-    # return _dimswap(pha, axis), _dimswap(amp, axis)
+    # np.random.shuffle(pha.flat)
+    # np.random.shuffle(amp.flat)
+    # return pha, amp
+    return _dimswap(pha, axis), _dimswap(amp, axis)
 
 
 def ShufflePha(pha, amp, axis):
