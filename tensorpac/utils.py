@@ -124,14 +124,7 @@ def PacVec(pha=(2, 30, 2, 1), amp=(60, 200, 10, 5)):
         aVec: np.ndarray, shape (N, 2)
             Array containing the pairs of amplitude frequencies.
     """
-    return _CreatePairsVector(*pha), _CreatePairsVector(*amp)
-
-
-def _CreatePairsVector(fstart, fend, fwidth, fstep):
-    # Generate two array for phase and amplitude :
-    fdown = np.arange(fstart, fend-fwidth, fstep)
-    fup = np.arange(fstart+fwidth, fend, fstep)
-    return np.c_[fdown, fup]
+    return _CheckFreq(pha), _CheckFreq(amp)
 
 
 def _CheckFreq(f):
@@ -150,6 +143,13 @@ def _CheckFreq(f):
         f.sort()
         f = np.c_[f[0:-1], f[1::]]
     return f
+
+
+def _CreatePairsVector(fstart, fend, fwidth, fstep):
+    # Generate two array for phase and amplitude :
+    fdown = np.arange(fstart, fend-fwidth, fstep)
+    fup = np.arange(fstart+fwidth, fend, fstep)
+    return np.c_[fdown, fup]
 
 
 ###############################################################################
