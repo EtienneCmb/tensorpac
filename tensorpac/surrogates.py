@@ -22,10 +22,10 @@ def ComputeSurogates(pha, amp, surargs, pacargs, nperm, njobs):
 
     Args:
         pha: np.ndarray
-            Array of phases of shapes (npha, ...)
+            Array of phases of shapes (npha, ..., npts)
 
         amp: np.ndarra
-            Array of amplitudes of shapes (namp, ...)
+            Array of amplitudes of shapes (namp, ..., npts)
 
         suragrs: tuple
             Tuple containing the arguments to pass to the suroSwitch function.
@@ -41,7 +41,7 @@ def ComputeSurogates(pha, amp, surargs, pacargs, nperm, njobs):
 
     Returns:
         suro: np.ndarray
-            Array of pac surrogates of shape (nperm, npha, namp, ...)
+            Array of pac surrogates of shape (nperm, npha, namp, ..., npts)
     """
     s = Parallel(n_jobs=njobs)(delayed(_computeSur)(
                             pha, amp, surargs, pacargs) for k in range(nperm))
@@ -58,10 +58,10 @@ def _computeSur(pha, amp, surargs, pacargs):
 
     Args:
         pha: np.ndarray
-            Array of phases of shapes (npha, ...)
+            Array of phases of shapes (npha, ..., npts)
 
         amp: np.ndarra
-            Array of amplitudes of shapes (namp, ...)
+            Array of amplitudes of shapes (namp, ..., npts)
 
         suragrs: tuple
             Tuple containing the arguments to pass to the suroSwitch function.
@@ -75,7 +75,7 @@ def _computeSur(pha, amp, surargs, pacargs):
     return ComputePac(pha, amp, *pacargs)
 
 
-def suroSwitch(pha, amp, idn, axis, traxis):
+def suroSwitch(pha, amp, idn, axis, traxis, nblocks):
     """List of methods to compute surrogates.
 
     The surrogates are used to normalized the cfc value. It help to determine
@@ -84,14 +84,12 @@ def suroSwitch(pha, amp, idn, axis, traxis):
     Here's the list of methods to compute surrogates:
     - No surrogates
     - Swap phase/amplitude across trials
-    - Swap amplitude across trials
+    - Swap amplitude blocks across time.
+    - Shuffle amplitude and phase time-series
     - Shuffle phase time-series
     - Shuffle amplitude time-series
     - Time lag
     - circular shifting
-
-    Each method should return the surrogates, the mean of the surrogates and
-    the deviation of the surrogates.
     """
     # No surrogates
     if idn == 0:
@@ -101,32 +99,28 @@ def suroSwitch(pha, amp, idn, axis, traxis):
     elif idn == 1:
         return SwapPhaAmp(pha, amp, traxis)
 
-    # Swap phase :
-    elif idn == 2:
-        return SwapPha(pha, amp, traxis)
-
     # Swap amplitude :
-    elif idn == 3:
-        return SwapAmp(pha, amp, traxis)
+    elif idn == 2:
+        return SwapBlocks(pha, amp, axis, nblocks)
 
     # Shuffle phase/amplitude time-series :
-    elif idn == 4:
+    elif idn == 3:
         return ShufflePhaAmp(pha, amp, axis)
 
     # Shuffle phase values
-    elif idn == 5:
+    elif idn == 4:
         return ShufflePha(pha, amp, axis)
 
     # Shuffle amplitude values
-    elif idn == 6:
+    elif idn == 5:
         return ShuffleAmp(pha, amp, axis)
 
     # Introduce a time lag
-    elif idn == 7:
+    elif idn == 6:
         raise(NotImplementedError)
 
     # Circular shifting
-    elif idn == 8:
+    elif idn == 7:
         raise(NotImplementedError)
 
     else:
@@ -146,86 +140,130 @@ def SwapPhaAmp(pha, amp, axis):
 
     Args:
         pha: np.ndarray
-            Array of phases of shapes (npha, ...)
+            Array of phases of shapes (npha, ..., npts)
 
         amp: np.ndarra
-            Array of amplitudes of shapes (namp, ...)
+            Array of amplitudes of shapes (namp, ..., npts)
 
         axis: int
             Location of the trial axis.
 
     Return:
         pha: np.ndarray
-            Swapped version of phases of shapes (npha, ...)
+            Swapped version of phases of shapes (npha, ..., npts)
 
         amp: np.ndarra
-            Swapped version of amplitudes of shapes (namp, ...)
+            Swapped version of amplitudes of shapes (namp, ..., npts)
     """
-    # Variables and pre-allocation :
-    npha, namp = pha.shape[0], amp.shape[0]
-    phas, amps = np.zeros_like(pha), np.zeros_like(amp)
-    # Loop over frequencies :
-    for k in range(npha):
-        for i in range(namp):
-            c = np.concatenate((pha[k, ...], amp[i, ...]))
-            np.swapaxes(c, axis, 0)
-            np.random.shuffle(c)
-            np.swapaxes(c, axis, 0)
-            phas[k, ...] = c[0:npha, ...]
-            amps[i, ...] = c[npha::]
-    return phas, amps
+    return _dimswap(pha, axis), _dimswap(amp, axis)
 
 
-def swap(a, b, axis=0):
-    pass
-    # a = np.swapaxes(a, 0, axis)
-    # np.random.shuffle(a)
-    # return np.swapaxes(a, axis, 0)
+def SwapBlocks(pha, amp, axis, nblocks):
+    """Swap amplitudes time blocks.
 
-def SwapAmp(pha, amp, axis):
-    """Swap amplitude across trials, (Bahramisharif, 2013).
+    To reproduce (Bahramisharif, 2013), use a number of blocks of 2.
 
     Args:
         pha: np.ndarray
-            Array of phases of shapes (npha, ...)
+            Array of phases of shapes (npha, ..., npts)
 
         amp: np.ndarra
-            Array of amplitudes of shapes (namp, ...)
+            Array of amplitudes of shapes (namp, ..., npts)
 
         axis: int
-            Location of the trial axis.
+            Location of the time axis.
+
+        nblocks: int
+            Number of blocks to in which the amplitude is splitted.
 
     Return:
         pha: np.ndarray
-            Original version of phases of shapes (npha, ...)
+            Original version of phases of shapes (npha, ..., npts)
 
         amp: np.ndarra
-            Swapped version of amplitudes of shapes (namp, ...)
+            Swapped version of amplitudes of shapes (namp, ..., npts)
     """
-    return pha, _dimswap(amp, axis)
+    # Split amplitude across time into two parts :
+    ampl = np.array_split(amp, nblocks, axis=axis)
+    # Revered elements :
+    ampl.reverse()
+    return pha, np.concatenate(ampl, axis=axis)
 
 
-def SwapPha(pha, amp, axis):
-    """Swap phase across trials.
+###############################################################################
+###############################################################################
+#                            SHUFFLING
+###############################################################################
+###############################################################################
+
+
+def ShufflePhaAmp(pha, amp, axis):
+    """Randomly shuffle phase and amplitudes across time.
 
     Args:
         pha: np.ndarray
-            Array of phases of shapes (npha, ...)
+            Array of phases of shapes (npha, ..., npts)
 
         amp: np.ndarra
-            Array of amplitudes of shapes (namp, ...)
+            Array of amplitudes of shapes (namp, ..., npts)
 
         axis: int
-            Location of the trial axis.
+            Location of the time axis.
 
     Return:
         pha: np.ndarray
-            Swapped version of phases of shapes (npha, ...)
+            Shuffled version of phases of shapes (npha, ..., npts)
 
         amp: np.ndarra
-            Original version of amplitudes of shapes (namp, ...)
+            Shuffled version of amplitudes of shapes (namp, ..., npts)
+    """
+    return _dimswap(pha, axis), _dimswap(amp, axis)
+
+
+def ShufflePha(pha, amp, axis):
+    """Randomly shuffle phase across time.
+
+    Args:
+        pha: np.ndarray
+            Array of phases of shapes (npha, ..., npts)
+
+        amp: np.ndarra
+            Array of amplitudes of shapes (namp, ..., npts)
+
+        axis: int
+            Location of the time axis.
+
+    Return:
+        pha: np.ndarray
+            Shuffled version of phases of shapes (npha, ..., npts)
+
+        amp: np.ndarra
+            Original version of amplitudes of shapes (namp, ..., npts)
     """
     return _dimswap(pha, axis), amp
+
+
+def ShuffleAmp(pha, amp, axis):
+    """Randomly shuffle amplitudes across time.
+
+    Args:
+        pha: np.ndarray
+            Array of phases of shapes (npha, ..., npts)
+
+        amp: np.ndarra
+            Array of amplitudes of shapes (namp, ..., npts)
+
+        axis: int
+            Location of the time axis.
+
+    Return:
+        pha: np.ndarray
+            Original version of phases of shapes (npha, ..., npts)
+
+        amp: np.ndarra
+            Shuffled version of amplitudes of shapes (namp, ..., npts)
+    """
+    return pha, _dimswap(amp, axis)
 
 
 def _dimswap(x, axis=0):
@@ -251,39 +289,3 @@ def _dimswap(x, axis=0):
     dimvec[axis] = rndvec
     # Return a swapped version of x :
     return x[dimvec]
-
-###############################################################################
-###############################################################################
-#                            SHUFFLING
-###############################################################################
-###############################################################################
-
-def ShufflePhaAmp(pha, amp, axis):
-    """Randomly shuffle amplitudes
-
-    [pha] = (nPha, npts, ntrials)
-    [amp] = (nAmp, npts, ntrials)
-    """
-    # shp, sha = pha.shape, amp.shape
-    # np.random.shuffle(pha.flat)
-    # np.random.shuffle(amp.flat)
-    # return pha, amp
-    return _dimswap(pha, axis), _dimswap(amp, axis)
-
-
-def ShufflePha(pha, amp, axis):
-    """Randomly shuffle phase
-
-    [pha] = (nPha, npts, ntrials)
-    [amp] = (nAmp, npts, ntrials)
-    """
-    return _dimswap(pha, axis), amp
-
-
-def ShuffleAmp(pha, amp, axis):
-    """Randomly shuffle amplitudes
-
-    [pha] = (nPha, npts, ntrials)
-    [amp] = (nAmp, npts, ntrials)
-    """
-    return pha, _dimswap(amp, axis)
