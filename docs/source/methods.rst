@@ -49,3 +49,9 @@ Normalization methods
 Link with publications
 ----------------------
 
+Inputs
+------
+.. autoclass:: tensorpac.pac.Pac
+
+.. automethod:: tensorpac.pac.Pac.fit
+
