@@ -159,10 +159,12 @@ def ndPac(pha, amp, p):
     """
     npts = amp.shape[-1]
     # Normalize amplitude :
-    amp = np.divide(amp - np.mean(amp, axis=-1, keepdims=True),
-                    np.std(amp, axis=-1, keepdims=True))
+    np.subtract(amp, np.mean(amp, axis=-1, keepdims=True), out=amp)
+    np.divide(amp, np.std(amp, axis=-1, keepdims=True), out=amp)
     # Compute pac :
-    pac = np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j*pha)))/npts
+    pac = np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j*pha)))
+    pac *= pac/npts
     # Set to zero non-significant values:
-    pac[pac < 2 * erfinv(1-p)**2] = 0
+    xlim = erfinv(1-p)**2
+    pac[pac <= 2 * xlim] = 0.
     return pac

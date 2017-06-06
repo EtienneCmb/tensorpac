@@ -2,12 +2,13 @@
 
 This file include the following methods :
 - No surrogates
-- Swap phase/amplitude through trials
-- Swap amplitude
+- Swap phase/amplitude across trials
+- Swap amplitude blocks across time
+- Shuffle amplitude and phase time-series
 - Shuffle phase time-series
 - Shuffle amplitude time-series
 - Time lag
-- Circular shifting
+- circular shifting
 """
 
 import numpy as np
