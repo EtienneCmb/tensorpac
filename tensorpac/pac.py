@@ -325,7 +325,7 @@ class Pac(object):
         return self.fit(sf, pha, amp, axis+1, traxis+1, nperm, correct, njobs)
 
     def comodulogram(self, pac, title='', cmap='viridis', clim=None, vmin=None,
-                     vmax=None, under=None, over=None, pvalues=None):
+                     vmax=None, under=None, over=None, bad=None, pvalues=None):
         """Plot PAC using comodulogram.
 
         Args:
