@@ -2,7 +2,6 @@
 
 Note that this script do not perform any correction by surrogates.
 """
-import numpy as np
 import matplotlib.pyplot as plt
 from tensorpac.utils import PacSignals
 from tensorpac import Pac
