@@ -6,10 +6,11 @@ Doc
 		- List séquentielle (1, 2, 3, 4, 5)
 
 Méthodes
-	-5 Time la
+	-5 String
+	-5 Time lag
 	-5 Circular shiffting
 	-5 Morse wavelet
 	-5 ERPAC
 	-5 Visualisation
 	-5 Stats
-	-4 Possibilité de passer des signaux déjà filtrés.
+	-4 Possibilité de passer des signaux déjà filtrés (découpage filtfit, fit)
