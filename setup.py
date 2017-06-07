@@ -15,7 +15,6 @@ setup(
     long_description=read('README.md'),
     install_requires=[
         'numpy',
-        'scipy',
         'joblib',
     ],
     dependency_links=[],
