@@ -105,15 +105,15 @@ def PacSignals(fpha=2, famp=100, sf=1024, ndatasets=10, tmax=1, chi=0, noise=1,
 ###############################################################################
 
 
-def PacVec(pha=(2, 30, 2, 1), amp=(60, 200, 10, 5)):
+def PacVec(fpha=(2, 30, 2, 1), famp=(60, 200, 10, 5)):
     """Generate cross-frequency coupling vectors.
 
     Kargs:
-        pha: tuple, optional, [def: (2, 30, 2, 1)]
+        fpha: tuple, optional, [def: (2, 30, 2, 1)]
             Frequency parameters for phase. Each argument inside the tuple
             mean (starting fcy, ending fcy, width, step)
 
-        amp: tuple, optional, [def: (60, 200, 10, 5)]
+        famp: tuple, optional, [def: (60, 200, 10, 5)]
             Frequency parameters for amplitude. Each argument inside the
             tuple mean (starting fcy, ending fcy, width, step)
 
@@ -124,7 +124,7 @@ def PacVec(pha=(2, 30, 2, 1), amp=(60, 200, 10, 5)):
         aVec: np.ndarray, shape (N, 2)
             Array containing the pairs of amplitude frequencies.
     """
-    return _CheckFreq(pha), _CheckFreq(amp)
+    return _CheckFreq(fpha), _CheckFreq(famp)
 
 
 def _CheckFreq(f):

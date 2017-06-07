@@ -1,7 +1,7 @@
 """Main PAC class."""
 import numpy as np
 
-from .utils import _CheckFreq
+from .utils import PacVec
 from .spectral import spectral
 from .methods import ComputePac
 from .surrogates import ComputeSurogates
@@ -121,7 +121,7 @@ class Pac(object):
             if (idpac[1] == 0) or (idpac[2] == 0):
                 self._csuro = False
         # Frequency checking :
-        fpha, famp = _CheckFreq(fpha), _CheckFreq(famp)
+        fpha, famp = PacVec(fpha, famp)
         # Check cycle :
         if (len(cycle) is not 2) or not all(isinstance(k, int) for k in cycle):
             raise ValueError("Cycle must be a tuple of two integers.")
