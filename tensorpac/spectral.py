@@ -8,7 +8,8 @@ from .filtering import filtdata
 __all__ = ['spectral']
 
 
-def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, njobs):
+def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, width,
+             njobs):
     """Extract spectral informations from data.
 
     Args:
@@ -40,6 +41,9 @@ def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, njobs):
         cycle: int
             Number of cycles to use for fir1 filtering.
 
+        width: int
+            Width of the wavelet.
+
         njobs: int
             Number of jobs to use. If jobs is -1, all of them are going to be
             used.
@@ -54,7 +58,8 @@ def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, njobs):
         xd = hilbert(xf, axis=axis)
     elif dcomplex is 'wavelet':
         f = f.mean(1)
-        xd = Parallel(n_jobs=njobs)(delayed(morlet)(x, sf, k, axis) for k in f)
+        xd = Parallel(n_jobs=njobs)(delayed(morlet)(
+                                            x, sf, k, axis, width) for k in f)
 
     # Extract phase / amplitude :
     if stype is 'pha':
