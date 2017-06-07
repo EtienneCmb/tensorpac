@@ -66,9 +66,14 @@
           
           
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial.html#the-phase-amplitude-coupling">The Phase-Amplitude Coupling</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../methods.html">Methods</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../methods.html#modular-philosophy">Modular philosophy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../methods.html#link-with-publications">Link with publications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../methods.html#inputs">Inputs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utils</a><ul>
@@ -219,15 +224,15 @@
 <span class="c1">###############################################################################</span>
 
 
-<div class="viewcode-block" id="PacVec"><a class="viewcode-back" href="../../utils.html#tensorpac.utils.PacVec">[docs]</a><span class="k">def</span> <span class="nf">PacVec</span><span class="p">(</span><span class="n">pha</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">amp</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)):</span>
+<div class="viewcode-block" id="PacVec"><a class="viewcode-back" href="../../utils.html#tensorpac.utils.PacVec">[docs]</a><span class="k">def</span> <span class="nf">PacVec</span><span class="p">(</span><span class="n">fpha</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">famp</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)):</span>
     <span class="sd">&quot;&quot;&quot;Generate cross-frequency coupling vectors.</span>
 
 <span class="sd">    Kargs:</span>
-<span class="sd">        pha: tuple, optional, [def: (2, 30, 2, 1)]</span>
+<span class="sd">        fpha: tuple, optional, [def: (2, 30, 2, 1)]</span>
 <span class="sd">            Frequency parameters for phase. Each argument inside the tuple</span>
 <span class="sd">            mean (starting fcy, ending fcy, width, step)</span>
 
-<span class="sd">        amp: tuple, optional, [def: (60, 200, 10, 5)]</span>
+<span class="sd">        famp: tuple, optional, [def: (60, 200, 10, 5)]</span>
 <span class="sd">            Frequency parameters for amplitude. Each argument inside the</span>
 <span class="sd">            tuple mean (starting fcy, ending fcy, width, step)</span>
 
@@ -238,7 +243,7 @@
 <span class="sd">        aVec: np.ndarray, shape (N, 2)</span>
 <span class="sd">            Array containing the pairs of amplitude frequencies.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">_CheckFreq</span><span class="p">(</span><span class="n">pha</span><span class="p">),</span> <span class="n">_CheckFreq</span><span class="p">(</span><span class="n">amp</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">_CheckFreq</span><span class="p">(</span><span class="n">fpha</span><span class="p">),</span> <span class="n">_CheckFreq</span><span class="p">(</span><span class="n">famp</span><span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">_CheckFreq</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>

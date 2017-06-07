@@ -66,9 +66,14 @@
           
           
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-phase-amplitude-coupling">The Phase-Amplitude Coupling</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="methods.html">Methods</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#modular-philosophy">Modular philosophy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#link-with-publications">Link with publications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#inputs">Inputs</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Utils</a><ul>
@@ -117,15 +122,15 @@
 <h2>Generate phase and amplitude vectors<a class="headerlink" href="#generate-phase-and-amplitude-vectors" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="tensorpac.utils.PacVec">
-<code class="descclassname">tensorpac.utils.</code><code class="descname">PacVec</code><span class="sig-paren">(</span><em>pha=(2</em>, <em>30</em>, <em>2</em>, <em>1)</em>, <em>amp=(60</em>, <em>200</em>, <em>10</em>, <em>5)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#PacVec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PacVec" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tensorpac.utils.</code><code class="descname">PacVec</code><span class="sig-paren">(</span><em>fpha=(2</em>, <em>30</em>, <em>2</em>, <em>1)</em>, <em>famp=(60</em>, <em>200</em>, <em>10</em>, <em>5)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#PacVec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PacVec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate cross-frequency coupling vectors.</p>
 <dl class="docutils">
 <dt>Kargs:</dt>
 <dd><dl class="first last docutils">
-<dt>pha: tuple, optional, [def: (2, 30, 2, 1)]</dt>
+<dt>fpha: tuple, optional, [def: (2, 30, 2, 1)]</dt>
 <dd>Frequency parameters for phase. Each argument inside the tuple
 mean (starting fcy, ending fcy, width, step)</dd>
-<dt>amp: tuple, optional, [def: (60, 200, 10, 5)]</dt>
+<dt>famp: tuple, optional, [def: (60, 200, 10, 5)]</dt>
 <dd>Frequency parameters for amplitude. Each argument inside the
 tuple mean (starting fcy, ending fcy, width, step)</dd>
 </dl>

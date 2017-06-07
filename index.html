@@ -34,7 +34,7 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Tensorpac 0.0 documentation" href="#"/>
-        <link rel="next" title="Methods" href="methods.html"/> 
+        <link rel="next" title="Tutorial" href="tutorial.html"/> 
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
@@ -66,9 +66,14 @@
           
           
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-phase-amplitude-coupling">The Phase-Amplitude Coupling</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="methods.html">Methods</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#modular-philosophy">Modular philosophy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#link-with-publications">Link with publications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#inputs">Inputs</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
@@ -113,19 +118,24 @@
             
   <div class="section" id="tensorpac">
 <h1>Tensorpac<a class="headerlink" href="#tensorpac" title="Permalink to this headline">¶</a></h1>
-<p>Tensorpac description</p>
+<p>Tensorpac is an Python open-source toolbox for computing Phase-Amplitude Coupling (PAC) using tensors and parallel computing. On top of that, we designed a modular implementation with a relatively large amount of parameters.</p>
 <p>This package was developped in collaboration with <strong>Juan L.P. Soto</strong></p>
 <div class="section" id="installation">
 <h2>Installation:<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>Tensorpac installtion</p>
+<p>Tensorpac is only based on NumPy and use <a class="reference external" href="https://pythonhosted.org/joblib/">Joblib</a> for parallel computing. For the installation, in a terminal run :</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/EtienneCmb/tensorpac.git tensorpac
+<span class="nb">cd</span> tensorpac
+pip setup.py install
+</pre></div>
+</div>
 </div>
 <div class="section" id="what-s-new">
 <h2>What&#8217;s new?<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">New in version v0.0</p>
+<li><p class="first">New in version v0.1</p>
 <blockquote>
 <div><ul class="simple">
-<li>First version</li>
+<li>Bug fixing</li>
 </ul>
 </div></blockquote>
 </li>
@@ -135,6 +145,10 @@
 <h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-phase-amplitude-coupling">The Phase-Amplitude Coupling</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="methods.html">Methods</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#modular-philosophy">Modular philosophy</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="methods.html#implemented-methods">Implemented methods</a></li>
@@ -144,6 +158,15 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#link-with-publications">Link with publications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#inputs">Inputs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="methods.html#main-pac-class">Main PAC class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="methods.html#id2">Main PAC class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="methods.html#filter-the-data">Filter the data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="methods.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="methods.html#all-in-one-method">All in one method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="methods.html#plot-pac">Plot PAC</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
@@ -170,7 +193,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="methods.html" class="btn btn-neutral float-right" title="Methods">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="tutorial.html" class="btn btn-neutral float-right" title="Tutorial">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>

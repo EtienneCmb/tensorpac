@@ -1,0 +1,673 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tensorpac.pac &mdash; Tensorpac 0.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Tensorpac 0.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../index.html" class="fa fa-home"> Tensorpac</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial.html#the-phase-amplitude-coupling">The Phase-Amplitude Coupling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../methods.html">Methods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../methods.html#modular-philosophy">Modular philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../methods.html#link-with-publications">Link with publications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../methods.html#inputs">Inputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Tensorpac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>tensorpac.pac</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for tensorpac.pac</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Main PAC class.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">PacVec</span>
+<span class="kn">from</span> <span class="nn">.spectral</span> <span class="k">import</span> <span class="n">spectral</span>
+<span class="kn">from</span> <span class="nn">.methods</span> <span class="k">import</span> <span class="n">ComputePac</span>
+<span class="kn">from</span> <span class="nn">.surrogates</span> <span class="k">import</span> <span class="n">ComputeSurogates</span>
+<span class="kn">from</span> <span class="nn">.normalize</span> <span class="k">import</span> <span class="n">normalize</span>
+
+
+<div class="viewcode-block" id="Pac"><a class="viewcode-back" href="../../methods.html#tensorpac.pac.Pac">[docs]</a><span class="k">class</span> <span class="nc">Pac</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute Phase-Amplitude Coupling (PAC) using tensors.</span>
+
+<span class="sd">    Computing PAC is assessed in three steps : compute the real PAC, compute</span>
+<span class="sd">    surrogates and finally, because PAC is very sensible to the noise, correct</span>
+<span class="sd">    the real PAC by the surrogates. This implementation is modular i.e. it lets</span>
+<span class="sd">    you choose among a large range of possible combinations.</span>
+
+<span class="sd">    Kargs:</span>
+<span class="sd">        idpac: tuple/list, optional, (def: (1, 1, 3))</span>
+<span class="sd">            Choose the combination of methods to use in order to extract PAC.</span>
+<span class="sd">            This tuple must be composed of three integers where each one them</span>
+<span class="sd">            refer</span>
+
+<span class="sd">            * First digit: refer to the pac method:</span>
+
+<span class="sd">                - &#39;1&#39;: Mean Vector Length (MVL) [#f1]_</span>
+<span class="sd">                - &#39;2&#39;: Kullback-Leibler Divergence (KLD) [#f2]_</span>
+<span class="sd">                - &#39;3&#39;: Heights Ratio (HR) [#f3]_</span>
+<span class="sd">                - &#39;4&#39;: ndPAC [#f4]_</span>
+<span class="sd">                - &#39;5&#39;: ERPAC</span>
+
+<span class="sd">            * Second digit: refer to the method for computing surrogates:</span>
+
+<span class="sd">                - &#39;0&#39;: No surrogates</span>
+<span class="sd">                - &#39;1&#39;: Swap phase/amplitude across trials [#f2]_</span>
+<span class="sd">                - &#39;2&#39;: Swap amplitude time blocks [#f5]_</span>
+<span class="sd">                - &#39;3&#39;: Shuffle amplitude and phase time-series</span>
+<span class="sd">                - &#39;4&#39;: Shuffle phase time-series</span>
+<span class="sd">                - &#39;5&#39;: Shuffle amplitude time-series</span>
+<span class="sd">                - &#39;6&#39;: Time lag [#f1]_ [NOT IMPLEMENTED]</span>
+<span class="sd">                - &#39;7&#39;: Circular shifting [NOT IMPLEMENTED]</span>
+
+<span class="sd">            * Third digit: refer to the normalization method for correction:</span>
+
+<span class="sd">                - &#39;0&#39;: No normalization</span>
+<span class="sd">                - &#39;1&#39;: Substract the mean of surrogates</span>
+<span class="sd">                - &#39;2&#39;: Divide by the mean of surrogates</span>
+<span class="sd">                - &#39;3&#39;: Substract then divide by the mean of surrogates</span>
+<span class="sd">                - &#39;4&#39;: Z-score</span>
+
+<span class="sd">        fpha, famp: list/tuple/array, optional, (def: [2, 4] and [60, 200])</span>
+<span class="sd">            Frequency vector for the phase and amplitude. Here you can use</span>
+<span class="sd">            several forms to define those vectors :</span>
+
+<span class="sd">                * Basic list/tuple (ex: [2, 4] or [8, 12]...)</span>
+<span class="sd">                * List of frequency bands (ex: [[2, 4], [5, 7]]...)</span>
+<span class="sd">                * Dynamic definition : (start, stop, width, step)</span>
+<span class="sd">                * Range definition (ex : np.arange(3) =&gt; [[0, 1], [1, 2]])</span>
+
+<span class="sd">        dcomplex: string, optional, (def: &#39;hilbert&#39;)</span>
+<span class="sd">            Method for the complex definition. Use either &#39;hilbert&#39; or</span>
+<span class="sd">            &#39;wavelet&#39;.</span>
+
+<span class="sd">        filt: string, optional, (def: &#39;fir1&#39;)</span>
+<span class="sd">            Filtering method (only if dcomplex is &#39;hilbert&#39;). Choose either</span>
+<span class="sd">            &#39;fir1&#39;, &#39;butter&#39; or &#39;bessel&#39;</span>
+
+<span class="sd">        cycle: tuple, optional, (def: (3, 6))</span>
+<span class="sd">            Control the number of cycles for filtering (only if dcomplex is</span>
+<span class="sd">            &#39;hilbert&#39;). Should be a tuple of integers where the first one</span>
+<span class="sd">            refers to the number of cycles for the phase and the second for the</span>
+<span class="sd">            amplitude [#f5]_.</span>
+
+<span class="sd">        filtorder: int, optional, (def: 3)</span>
+<span class="sd">            Filter order for the Butterworth and Bessel filters (only if</span>
+<span class="sd">            dcomplex is &#39;hilbert&#39;).</span>
+
+<span class="sd">        width: int, optional, (def: 7)</span>
+<span class="sd">            Width of the Morlet&#39;s wavelet.</span>
+
+<span class="sd">        nbins: int, optional, (def: 18)</span>
+<span class="sd">            Number of bins for the KLD and HR PAC method [#f2]_ [#f3]_</span>
+
+<span class="sd">        nblocks: int, optional, (def: 2)</span>
+<span class="sd">            Number of blocks for splitting the amplitude. Only active is</span>
+<span class="sd">            the surrogate method is 2 [#f5]_.</span>
+
+<span class="sd">    .. warning::</span>
+<span class="sd">        * The ndPac [#f4]_ include a fast and reliable statistical test. As a</span>
+<span class="sd">          result, if the ndPAC is choosed as the main PAC method, surrogates</span>
+<span class="sd">          and normalization will be deactivate.</span>
+
+<span class="sd">        * The phase in a particular frequency band can either be extracted</span>
+<span class="sd">          using wavelet convolution or filtering followed by the Hilbert</span>
+<span class="sd">          transform. As a result, every filtering related input (cycle, filt,</span>
+<span class="sd">          filtorder) are going to be active if the complex decomposition is</span>
+<span class="sd">          Hilbert.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        self.filt:</span>
+<span class="sd">            Filt the data in the specified frequency bands.</span>
+
+<span class="sd">        self.fit:</span>
+<span class="sd">            Run the PAC on filtered data.</span>
+
+<span class="sd">        self.filtfit:</span>
+<span class="sd">            Filt the data then compute PAC on it.</span>
+
+<span class="sd">        self.comodulogram:</span>
+<span class="sd">            Plot PAC.</span>
+
+<span class="sd">    .. rubric:: Footnotes</span>
+<span class="sd">    .. [#f1] `Canolty et al, 2006 &lt;http://www.ncbi.nlm.nih.gov/pmc/articles/</span>
+<span class="sd">       PMC2628289/&gt;`_</span>
+<span class="sd">    .. [#f2] `Tort et al, 2010 &lt;http://www.ncbi.nlm.nih.gov/pmc/articles/</span>
+<span class="sd">       PMC2941206/&gt;`_</span>
+<span class="sd">    .. [#f3] `Lakata et al, 2005 &lt;https://www.ncbi.nlm.nih.gov/pubmed/</span>
+<span class="sd">       15901760&gt;`_</span>
+<span class="sd">    .. [#f4] `Ozkurt et al, 2012 &lt;http://www.ncbi.nlm.nih.gov/pubmed/</span>
+<span class="sd">       22531738/&gt;`_</span>
+<span class="sd">    .. [#f5] `Bahramisharif et al, 2013 &lt;http://www.jneurosci.org/content/33/</span>
+<span class="sd">       48/18849.short/&gt;`_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">###########################################################################</span>
+    <span class="c1">#                              __FCN__</span>
+    <span class="c1">###########################################################################</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idpac</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">fpha</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">famp</span><span class="o">=</span><span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span>
+                 <span class="n">dcomplex</span><span class="o">=</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="s1">&#39;fir1&#39;</span><span class="p">,</span> <span class="n">cycle</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">filtorder</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                 <span class="n">width</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">nblocks</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check and initialize.&quot;&quot;&quot;</span>
+        <span class="c1"># ----------------- CHECKING -----------------</span>
+        <span class="c1"># Pac methods :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_idcheck</span><span class="p">(</span><span class="n">idpac</span><span class="p">)</span>
+        <span class="c1"># Frequency checking :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fpha</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">famp</span> <span class="o">=</span> <span class="n">PacVec</span><span class="p">(</span><span class="n">fpha</span><span class="p">,</span> <span class="n">famp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xvec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yvec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fpha</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">famp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Check spectral properties :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_speccheck</span><span class="p">(</span><span class="n">filt</span><span class="p">,</span> <span class="n">dcomplex</span><span class="p">,</span> <span class="n">filtorder</span><span class="p">,</span> <span class="n">cycle</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+
+        <span class="c1"># ----------------- SELF -----------------</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nbins</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nblocks</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nbins</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">nblocks</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;String representation.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="c1">###########################################################################</span>
+    <span class="c1">#                              METHODS</span>
+    <span class="c1">###########################################################################</span>
+<div class="viewcode-block" id="Pac.filter"><a class="viewcode-back" href="../../methods.html#tensorpac.pac.Pac.filter">[docs]</a>    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Filt the data in the specified frequency bands.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sf: float</span>
+<span class="sd">                The sampling frequency.</span>
+
+<span class="sd">            x: np.ndarray</span>
+<span class="sd">                Array of data.</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            axis: int, optional, (def: -1)</span>
+<span class="sd">                Location of the time axis.</span>
+
+<span class="sd">            ftype: string, optional, (def: &#39;phase&#39;)</span>
+<span class="sd">                Specify if you want to extract phase (&#39;phase&#39;) or the amplitude</span>
+<span class="sd">                (&#39;amplitude&#39;).</span>
+
+<span class="sd">            njobs: int, optional, (def: -1)</span>
+<span class="sd">                Number of jobs to compute PAC in parallel. For very large data,</span>
+<span class="sd">                set this parameter to 1 in order to prevent large memory usage.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            xfilt: np.ndarray</span>
+<span class="sd">                The filtered data of shape (n_frequency, ...)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># --------------------------------------------------------------</span>
+        <span class="c1"># keepfilt=False,</span>
+        <span class="c1"># keepfilt: bool, optional, (def: False)</span>
+        <span class="c1">#     Specify if you only want the filtered data (True) or either</span>
+        <span class="c1">#     the angle (ftype=&#39;phase&#39;) or the modulus (ftype=&#39;amplitude&#39;).</span>
+        <span class="c1"># --------------------------------------------------------------</span>
+        <span class="c1"># Sampling frequency :</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The sampling frequency must be a float number.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sf</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
+        <span class="c1"># Switch between phase or amplitude :</span>
+        <span class="k">if</span> <span class="n">ftype</span> <span class="ow">is</span> <span class="s1">&#39;phase&#39;</span><span class="p">:</span>
+            <span class="n">xfilt</span> <span class="o">=</span> <span class="n">spectral</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fpha</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="s1">&#39;pha&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dcomplex</span><span class="p">,</span>
+                             <span class="bp">self</span><span class="o">.</span><span class="n">_filt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filtorder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cycle</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                             <span class="bp">self</span><span class="o">.</span><span class="n">_width</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ftype</span> <span class="ow">is</span> <span class="s1">&#39;amplitude&#39;</span><span class="p">:</span>
+            <span class="n">xfilt</span> <span class="o">=</span> <span class="n">spectral</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">famp</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="s1">&#39;amp&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dcomplex</span><span class="p">,</span>
+                             <span class="bp">self</span><span class="o">.</span><span class="n">_filt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filtorder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cycle</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                             <span class="bp">self</span><span class="o">.</span><span class="n">_width</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ftype must either be &#39;phase&#39; or &#39;amplitude.&#39;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">xfilt</span></div>
+
+<div class="viewcode-block" id="Pac.fit"><a class="viewcode-back" href="../../methods.html#tensorpac.pac.Pac.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nperm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute PAC on filtered data.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sf: float</span>
+<span class="sd">                The sampling frequency.</span>
+
+<span class="sd">            pha, amp: np.ndarray</span>
+<span class="sd">                Array of filtered data with respectively a shape of (npha, ...)</span>
+<span class="sd">                and (namp, ...). If you want to compute PAC locally i.e. on the</span>
+<span class="sd">                same electrode, x=pha=amp. For distant coupling, pha and</span>
+<span class="sd">                amp could be different but still must to have the same shape.</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            axis: int, optional, (def: 1)</span>
+<span class="sd">                Dimension where is located the time axis. By default, the axis</span>
+<span class="sd">                will be consider as well.</span>
+
+<span class="sd">            traxis: int, optional, (def: 0)</span>
+<span class="sd">                Dimension where is located the trial axis. By default the next-</span>
+<span class="sd">                to-last axis is consider as the trial axis.</span>
+
+<span class="sd">            nperm: int, optional, (def: 200)</span>
+<span class="sd">                Number of surrogates to compute.</span>
+
+<span class="sd">            correct: bool, optional, (def: True)</span>
+<span class="sd">                Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
+
+<span class="sd">            njobs: int, optional, (def: -1)</span>
+<span class="sd">                Number of jobs to compute PAC in parallel. For very large data,</span>
+<span class="sd">                set this parameter to 1 in order to prevent large memory usage.</span>
+
+<span class="sd">        .. warning::</span>
+<span class="sd">            * Surrogates are only going to be computed if the second and third</span>
+<span class="sd">              digits are no 0.</span>
+
+<span class="sd">            * The ndPAC use a p value and every non-significant PAC estimation</span>
+<span class="sd">              is set to zero. This p value is computed as 1/nperm.</span>
+
+<span class="sd">            * The traxis argument is only used if you picked up the surrogates</span>
+<span class="sd">              method 1: &quot;swap phase and amplitude trials [#f2]_&quot;</span>
+
+<span class="sd">            * Basically, the surrogate evaluation proposed by [#f5]_ split the</span>
+<span class="sd">              amplitude into two equal parts, then swap those two blocks. But</span>
+<span class="sd">              the nblocks parameter allow to split into a larger number.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Compute pac :</span>
+        <span class="n">pacargs</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbins</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">nperm</span><span class="p">)</span>
+        <span class="n">pac</span> <span class="o">=</span> <span class="n">ComputePac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="o">*</span><span class="n">pacargs</span><span class="p">)</span>
+
+        <span class="c1"># Compute surogates :</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_csuro</span><span class="p">:</span>
+            <span class="n">surargs</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span><span class="p">,</span> <span class="n">traxis</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nblocks</span><span class="p">)</span>
+            <span class="n">suro</span> <span class="o">=</span> <span class="n">ComputeSurogates</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">surargs</span><span class="p">,</span> <span class="n">pacargs</span><span class="p">,</span> <span class="n">nperm</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span>
+
+            <span class="c1"># Normalize pac by surrogates :</span>
+            <span class="n">pac</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">pac</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">suro</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+                            <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">suro</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+            <span class="c1"># Compute statistics :</span>
+
+        <span class="k">if</span> <span class="n">correct</span><span class="p">:</span>
+            <span class="n">pac</span><span class="p">[</span><span class="n">pac</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+
+        <span class="k">return</span> <span class="n">pac</span><span class="p">,</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Pac.filterfit"><a class="viewcode-back" href="../../methods.html#tensorpac.pac.Pac.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nperm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                  <span class="n">correct</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Filt the data then compute PAC on it.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            sf: float</span>
+<span class="sd">                The sampling frequency.</span>
+
+<span class="sd">            xpha, xamp: np.ndarray</span>
+<span class="sd">                Array of data for computing PAC. xpha is the data used for</span>
+<span class="sd">                extracting phases and xamp, amplitudes. Both arrays must have</span>
+<span class="sd">                the same shapes. If you want to compute PAC locally i.e. on the</span>
+<span class="sd">                same electrode, x=xpha=xamp. For distant coupling, xpha and</span>
+<span class="sd">                xamp could be different but still must to have the same shape.</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            axis: int, optional, (def: 1)</span>
+<span class="sd">                Dimension where is located the time axis. By default, the axis</span>
+<span class="sd">                will be consider as well.</span>
+
+<span class="sd">            traxis: int, optional, (def: 0)</span>
+<span class="sd">                Dimension where is located the trial axis. By default the next-</span>
+<span class="sd">                to-last axis is consider as the trial axis.</span>
+
+<span class="sd">            nperm: int, optional, (def: 200)</span>
+<span class="sd">                Number of surrogates to compute.</span>
+
+<span class="sd">            correct: bool, optional, (def: True)</span>
+<span class="sd">                Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
+
+<span class="sd">            njobs: int, optional, (def: -1)</span>
+<span class="sd">                Number of jobs to compute PAC in parallel. For very large data,</span>
+<span class="sd">                set this parameter to 1 in order to prevent large memory usage.</span>
+
+<span class="sd">        .. warning::</span>
+<span class="sd">            * Surrogates are only going to be computed if the second and third</span>
+<span class="sd">              digits are no 0.</span>
+
+<span class="sd">            * The ndPAC use a p value and every non-significant PAC estimation</span>
+<span class="sd">              is set to zero. This p value is computed as 1/nperm.</span>
+
+<span class="sd">            * The traxis argument is only used if you picked up the surrogates</span>
+<span class="sd">              method 1: &quot;swap phase and amplitude trials [#f2]_&quot;</span>
+
+<span class="sd">            * Basically, the surrogate evaluation proposed by [#f5]_ split the</span>
+<span class="sd">              amplitude into two equal parts, then swap those two blocks. But</span>
+<span class="sd">              the nblocks parameter allow to split into a larger number.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Shape checking :</span>
+        <span class="k">if</span> <span class="n">xpha</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">xamp</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The shape of xpha and xamp must be equals.&quot;</span><span class="p">)</span>
+        <span class="c1"># Extract phase (npha, ...) and amplitude (namp, ...) :</span>
+        <span class="n">pha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">xpha</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span>
+        <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span>
+
+        <span class="c1"># Compute pac :</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">nperm</span><span class="p">,</span> <span class="n">correct</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Pac.comodulogram"><a class="viewcode-back" href="../../methods.html#tensorpac.pac.Pac.comodulogram">[docs]</a>    <span class="k">def</span> <span class="nf">comodulogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pac</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">clim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">under</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">over</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bad</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pvalues</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Plot PAC using comodulogram.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pac: np.ndarray</span>
+<span class="sd">                PAC array of shape (pha, namp)</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            title: string, optional, (def: &#39;&#39;)</span>
+<span class="sd">                Title of the plot.</span>
+
+<span class="sd">            cmap: string, optional, (def: &#39;viridis&#39;)</span>
+<span class="sd">                Name of one Matplotlib&#39;s colomap.</span>
+
+<span class="sd">            clim: tuple, optional, (def: None)</span>
+<span class="sd">                Limit of the colorbar.</span>
+
+<span class="sd">            vmin: float, optional, (def: None)</span>
+<span class="sd">                Threshold under which set the color to the uner parameter.</span>
+
+<span class="sd">            vmax: float, optional, (def: None)</span>
+<span class="sd">                Threshold over which set the color in the over parameter.</span>
+
+<span class="sd">            under: string, optional, (def: None)</span>
+<span class="sd">                Color for values under the vmin parameter.</span>
+
+<span class="sd">            over: string, optional, (def: None)</span>
+<span class="sd">                Color for values over the vmax parameter.</span>
+
+<span class="sd">            pvalues: np.ndarray, optional, (def: None)</span>
+<span class="sd">                P-values to use for masking PAC values. The shape of this</span>
+<span class="sd">                parameter must be the same as the shape as pac.</span>
+
+<span class="sd">            bad: string, optional, (def: None)</span>
+<span class="sd">                Color for non-significant values.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            gca: axes</span>
+<span class="sd">                The current matplotlib axes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xvec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yvec</span><span class="p">,</span> <span class="n">pac</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency for phase (hz)&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency for amplitude (hz)&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span></div>
+
+    <span class="c1">###########################################################################</span>
+    <span class="c1">#                              CHECKING</span>
+    <span class="c1">###########################################################################</span>
+    <span class="k">def</span> <span class="nf">_idcheck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idpac</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check the idpac parameter.&quot;&quot;&quot;</span>
+        <span class="n">idpac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">idpac</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_csuro</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">idpac</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">idpac</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;idpac must be a tuple/list of 3 integers.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Ozkurt PAC case :</span>
+            <span class="k">if</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="n">idpac</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_csuro</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">idpac</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">idpac</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_csuro</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_idpac</span> <span class="o">=</span> <span class="n">idpac</span>
+
+    <span class="k">def</span> <span class="nf">_speccheck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dcomplex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filtorder</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cycle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check spectral parameters.&quot;&quot;&quot;</span>
+        <span class="c1"># Check the filter name :</span>
+        <span class="k">if</span> <span class="n">filt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">filt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;fir1&#39;</span><span class="p">,</span> <span class="s1">&#39;butter&#39;</span><span class="p">,</span> <span class="s1">&#39;bessel&#39;</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;filt must either be &#39;fir1&#39;, &#39;butter&#39; or &quot;</span>
+                                 <span class="s2">&quot;&#39;bessel&#39;&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_filt</span> <span class="o">=</span> <span class="n">filt</span>
+        <span class="c1"># Check cycle :</span>
+        <span class="k">if</span> <span class="n">cycle</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cycle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">cycle</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cycle must be a tuple of two integers.&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cycle</span> <span class="o">=</span> <span class="n">cycle</span>
+        <span class="c1"># Check complex decomposition :</span>
+        <span class="k">if</span> <span class="n">dcomplex</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dcomplex</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="s1">&#39;wavelet&#39;</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dcomplex must either be &#39;hilbert&#39; or &quot;</span>
+                                 <span class="s2">&quot;&#39;wavelet&#39;.&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_dcomplex</span> <span class="o">=</span> <span class="n">dcomplex</span>
+        <span class="c1"># Convert filtorder :</span>
+        <span class="k">if</span> <span class="n">filtorder</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_filtorder</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">filtorder</span><span class="p">)</span>
+        <span class="c1"># Convert Morlet&#39;s width :</span>
+        <span class="k">if</span> <span class="n">width</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+
+    <span class="c1">###########################################################################</span>
+    <span class="c1">#                              PROPERTIES</span>
+    <span class="c1">###########################################################################</span>
+    <span class="c1"># ----------- IDPAC -----------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">idpac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the idpac value.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_idpac</span>
+
+    <span class="nd">@idpac</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">idpac</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set idpac value.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_idcheck</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="c1"># ----------- FILT -----------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">filt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the filt value.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filt</span>
+
+    <span class="nd">@filt</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">filt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set filt value.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_speccheck</span><span class="p">(</span><span class="n">filt</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="c1"># ----------- DCOMPLEX -----------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dcomplex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the dcomplex value.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dcomplex</span>
+
+    <span class="nd">@dcomplex</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">dcomplex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set dcomplex value.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_speccheck</span><span class="p">(</span><span class="n">dcomplex</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="c1"># ----------- CYCLE -----------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the cycle value.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cycle</span>
+
+    <span class="nd">@cycle</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set cycle value.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_speccheck</span><span class="p">(</span><span class="n">cycle</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="c1"># ----------- FILTORDER -----------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">filtorder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the filtorder value.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filtorder</span>
+
+    <span class="nd">@filtorder</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">filtorder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set filtorder value.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_speccheck</span><span class="p">(</span><span class="n">filtorder</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="c1"># ----------- WIDTH -----------</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the width value.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_width</span>
+
+    <span class="nd">@width</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">width</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set width value.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">=</span> <span class="n">value</span></div>
+
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
