@@ -47,7 +47,8 @@ def ComputePac(pha, amp, idp, nbins, p):
         return ndPac(pha, amp, p)
 
     elif idp == 5:
-        return erpac(pha, amp, p)
+        # return erpac(pha, amp, p)
+        raise(NotImplementedError)
 
     else:
         raise ValueError(str(idp) + " is not recognized as a valid pac "
