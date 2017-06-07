@@ -32,7 +32,7 @@ Surrogates methods
 * Shuffle amplitude time-series
 
 .. todo::
-    
+
     * Circular shifting
     * Time-lag
 
@@ -49,3 +49,45 @@ Normalization methods
 Link with publications
 ----------------------
 
+Inputs
+------
+
+Main PAC class
+~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    from tensorpac import Pac
+
+Main PAC class
+~~~~~~~~~~~~~~
+
+.. autoclass:: tensorpac.pac.Pac
+
+Filter the data
+~~~~~~~~~~~~~~~
+
+This method can be used to filter the data only in order to extract phase and amplitude.
+
+.. automethod:: tensorpac.pac.Pac.filter
+
+Compute PAC on filtered data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For those who already have filtered and computed the phase and amplitude, use this method to compute PAC.
+
+.. automethod:: tensorpac.pac.Pac.fit
+
+All in one method
+~~~~~~~~~~~~~~~~~
+
+Finally, use the following method to filter and compute the PAC directly.
+
+.. automethod:: tensorpac.pac.Pac.filterfit
+
+Plot PAC
+~~~~~~~~
+
+Small but useful method for plotting PAC in a comodulogram form. 
+
+.. automethod:: tensorpac.pac.Pac.comodulogram

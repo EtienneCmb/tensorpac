@@ -9,6 +9,7 @@ This file include the following methods :
 
 import numpy as np
 from scipy.special import erfinv
+from .stats import circ_corrcc
 
 __all__ = ['ComputePac']
 
@@ -44,6 +45,10 @@ def ComputePac(pha, amp, idp, nbins, p):
     # ndPac (Ozkurt, 2012)
     elif idp == 4:
         return ndPac(pha, amp, p)
+
+    elif idp == 5:
+        # return erpac(pha, amp, p)
+        raise(NotImplementedError)
 
     else:
         raise ValueError(str(idp) + " is not recognized as a valid pac "
@@ -159,10 +164,17 @@ def ndPac(pha, amp, p):
     """
     npts = amp.shape[-1]
     # Normalize amplitude :
-    amp = np.divide(amp - np.mean(amp, axis=-1, keepdims=True),
-                    np.std(amp, axis=-1, keepdims=True))
+    np.subtract(amp, np.mean(amp, axis=-1, keepdims=True), out=amp)
+    np.divide(amp, np.std(amp, axis=-1, keepdims=True), out=amp)
     # Compute pac :
-    pac = np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j*pha)))/npts
+    pac = np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j*pha)))
+    pac *= pac/npts
     # Set to zero non-significant values:
-    pac[pac < 2 * erfinv(1-p)**2] = 0
+    xlim = erfinv(1-p)**2
+    pac[pac <= 2 * xlim] = 0.
     return pac
+
+def erpac(pha, amp, p):
+    pha = np.swapaxes(pha, -1, -2)
+    amp = np.swapaxes(amp, -1, -2)
+    return circ_corrcc(pha, amp)
