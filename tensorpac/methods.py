@@ -9,6 +9,7 @@ This file include the following methods :
 
 import numpy as np
 from scipy.special import erfinv
+from .stats import circ_corrcc
 
 __all__ = ['ComputePac']
 
@@ -44,6 +45,9 @@ def ComputePac(pha, amp, idp, nbins, p):
     # ndPac (Ozkurt, 2012)
     elif idp == 4:
         return ndPac(pha, amp, p)
+
+    elif idp == 5:
+        return erpac(pha, amp, p)
 
     else:
         raise ValueError(str(idp) + " is not recognized as a valid pac "
@@ -168,3 +172,8 @@ def ndPac(pha, amp, p):
     xlim = erfinv(1-p)**2
     pac[pac <= 2 * xlim] = 0.
     return pac
+
+def erpac(pha, amp, p):
+    pha = np.swapaxes(pha, -1, -2)
+    amp = np.swapaxes(amp, -1, -2)
+    return circ_corrcc(pha, amp)

@@ -28,6 +28,7 @@ class Pac(object):
                 - '2': Kullback-Leibler Divergence (KLD) [#f2]_
                 - '3': Heights Ratio (HR) [#f3]_
                 - '4': ndPAC [#f4]_
+                - '5': ERPAC
 
             * Second digit: refer to the method for computing surrogates:
 
@@ -204,7 +205,7 @@ class Pac(object):
             raise ValueError("The sampling frequency must be a float number.")
         else:
             sf = float(sf)
-        if xpha.shape is not xamp.shape:
+        if xpha.shape != xamp.shape:
             raise ValueError("The shape of xpha and xamp must be equals.")
 
         # Extract phase (npha, ...) and amplitude (namp, ...) :
