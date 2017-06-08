@@ -8,7 +8,6 @@ This file include the following methods :
 - Shuffle phase time-series
 - Shuffle amplitude time-series
 - Time lag
-- circular shifting
 """
 
 import numpy as np
@@ -90,7 +89,6 @@ def suroSwitch(pha, amp, idn, axis, traxis, nblocks):
     - Shuffle phase time-series
     - Shuffle amplitude time-series
     - Time lag
-    - circular shifting
     """
     # No surrogates
     if idn == 0:
@@ -118,11 +116,7 @@ def suroSwitch(pha, amp, idn, axis, traxis, nblocks):
 
     # Introduce a time lag
     elif idn == 6:
-        raise(NotImplementedError)
-
-    # Circular shifting
-    elif idn == 7:
-        raise(NotImplementedError)
+        return TimeLag(pha, amp, axis)
 
     else:
         raise ValueError(str(idn) + " is not recognized as a valid surrogates"
@@ -265,6 +259,30 @@ def ShuffleAmp(pha, amp, axis):
             Shuffled version of amplitudes of shapes (namp, ..., npts)
     """
     return pha, _dimswap(amp, axis)
+
+
+def TimeLag(pha, amp, axis):
+    """Introduce a time lag on phase series..
+
+    Args:
+        pha: np.ndarray
+            Array of phases of shapes (npha, ..., npts)
+
+        amp: np.ndarra
+            Array of amplitudes of shapes (namp, ..., npts)
+
+        axis: int
+            Location of the time axis.
+
+    Return:
+        pha: np.ndarray
+            Shiffted version of phases of shapes (npha, ..., npts)
+
+        amp: np.ndarra
+            Original version of amplitudes of shapes (namp, ..., npts)
+    """
+    npts = pha.shape[-1]
+    return np.roll(pha, np.random.randint(npts), axis=axis), amp
 
 
 def _dimswap(x, axis=0):
