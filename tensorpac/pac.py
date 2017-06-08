@@ -3,6 +3,7 @@ import numpy as np
 from scipy.signal import hilbert
 
 from .utils import PacVec
+from .pacstr import pacstr
 from .spectral import spectral
 from .methods import ComputePac
 from .surrogates import ComputeSurogates
@@ -29,7 +30,8 @@ class Pac(object):
                 - '2': Kullback-Leibler Divergence (KLD) [#f2]_
                 - '3': Heights Ratio (HR) [#f3]_
                 - '4': ndPAC [#f4]_
-                - '5': ERPAC
+                - '5': Phase Synchrony [#f3]_
+                - '6': ERPAC [#f6]_
 
             * Second digit: refer to the method for computing surrogates:
 
@@ -122,6 +124,8 @@ class Pac(object):
        22531738/>`_
     .. [#f5] `Bahramisharif et al, 2013 <http://www.jneurosci.org/content/33/
        48/18849.short/>`_
+       [#f6] `Voytek et al, 2013 <https://www.ncbi.nlm.nih.gov/pubmed/
+       22986076>`_
     """
 
     ###########################################################################
@@ -397,6 +401,7 @@ class Pac(object):
             if (idpac[1] == 0) or (idpac[2] == 0):
                 self._csuro = False
         self._idpac = idpac
+        self.method, self.surro, self.norm = pacstr(idpac)
 
     def _speccheck(self, filt=None, dcomplex=None, filtorder=None, cycle=None,
                    width=None):

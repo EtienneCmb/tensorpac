@@ -25,8 +25,6 @@ p = Pac(fpha=(1, 30, 1, 1), famp=(60, 160, 5, 5), dcomplex='wavelet', width=12)
 phases = p.filter(sf, data, axis=1, ftype='phase')
 amplitudes = p.filter(sf, data, axis=1, ftype='amplitude')
 
-titles = ['Mean Vector Length', 'Kullback-Leibler Divergence',
-          'Heigh-Ratio', 'ndPAC']
 for i, k in enumerate([1, 2, 3, 4]):
     # Change the pac method :
     p.idpac = (k, 0, 0)
@@ -34,13 +32,13 @@ for i, k in enumerate([1, 2, 3, 4]):
     xpac, _ = p.fit(1024, phases, amplitudes, axis=2)
     # Plot :
     plt.subplot(3, 2, k)
-    p.comodulogram(xpac.mean(-1), title=titles[i], cmap='Spectral_r')    
+    p.comodulogram(xpac.mean(-1), title=p.method, cmap='Spectral_r')    
 
 # The Phase-Synchrony needs the phase of the amplitude :
 phaamplitudes = np.angle(hilbert(amplitudes))
 p.idpac = (5, 0, 0)
 xpac, _ = p.fit(1024, phases, phaamplitudes, axis=2)
 plt.subplot(3, 2, 5)
-p.comodulogram(xpac.mean(-1), title='Phase Synchrony', cmap='Spectral_r')
+p.comodulogram(xpac.mean(-1), title=p.method, cmap='Spectral_r')
 
 plt.show()
