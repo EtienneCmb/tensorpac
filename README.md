@@ -1,5 +1,5 @@
 # Tensorpac
-![logo](https://github.com/EtienneCmb/visbrain/blob/master/docs/source/picture/tp.png "Hello PAC")
+![logo](https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/tp.png "Hello PAC")
 
 ## Description
 
@@ -34,7 +34,7 @@ In a terminal, run :
 
     plt.show()
 
-![logo](https://github.com/EtienneCmb/visbrain/blob/master/docs/source/picture/readme.png "Comodulogram")
+![logo](https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/readme.png "Comodulogram")
 
 ## Contributors
 
