@@ -30,25 +30,17 @@ famp = [60, 160]
 pvec1, avec1 = PacVec(fpha, famp)
 plot(1, pvec1, avec1, '1 - One frequency band')
 
-
-print('\n\n')
-
 # 2 - List/tuple/array :
 fpha = [[2, 4], [5, 7], [8, 13]]
 famp = ([60, 160], [60, 200])
 pvec2, avec2 = PacVec(fpha, famp)
 plot(2, pvec2, avec2, 'Manually define several frequency bands')
 
-
-print('\n\n')
-
 # 3 - (start, end, width, step) :
 fpha = (1, 30, 2, 1)
 famp = (60, 200, 10, 5)
 pvec3, avec3 = PacVec(fpha, famp)
 plot(3, pvec3, avec3, 'Use the (start, stop, width, step definition')
-
-print('\n\n')
 
 # 4 - Range :
 fpha = np.arange(1, 20)

@@ -1,9 +1,5 @@
-"""This script compare the several PAC methods.
-
-Note that this script do not perform any correction by surrogates.
-"""
-import numpy as np
-from scipy.signal import hilbert
+"""This script compare the several normalization methods."""
+from __future__ import print_function
 import matplotlib.pyplot as plt
 from tensorpac.utils import PacSignals
 from tensorpac import Pac
@@ -25,20 +21,14 @@ p = Pac(fpha=(1, 30, 1, 1), famp=(60, 160, 5, 5), dcomplex='wavelet', width=12)
 phases = p.filter(sf, data, axis=1, ftype='phase')
 amplitudes = p.filter(sf, data, axis=1, ftype='amplitude')
 
-for i, k in enumerate([1, 2, 3, 4]):
+for i, k in enumerate(range(5)):
     # Change the pac method :
-    p.idpac = (k, 0, 0)
+    p.idpac = (1, 3, k)
+    print('-> Normalization using '+p.norm)
     # Compute only the PAC without filtering :
-    xpac, _ = p.fit(1024, phases, amplitudes, axis=2)
+    xpac, _ = p.fit(1024, phases, amplitudes, axis=2, nperm=50)
     # Plot :
-    plt.subplot(3, 2, k)
-    p.comodulogram(xpac.mean(-1), title=p.method, cmap='Spectral_r')    
-
-# The Phase-Synchrony needs the phase of the amplitude :
-phaamplitudes = np.angle(hilbert(amplitudes))
-p.idpac = (5, 0, 0)
-xpac, _ = p.fit(1024, phases, phaamplitudes, axis=2)
-plt.subplot(3, 2, 5)
-p.comodulogram(xpac.mean(-1), title=p.method, cmap='Spectral_r')
+    plt.subplot(3, 2, k+1)
+    p.comodulogram(xpac.mean(-1), title=p.norm, cmap='Spectral_r')
 
 plt.show()
