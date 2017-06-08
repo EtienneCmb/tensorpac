@@ -5,6 +5,9 @@ Tensorpac is an Python open-source toolbox for computing Phase-Amplitude Couplin
 
 This package was developped in collaboration with **Juan L.P. Soto**
 
+.. figure::  picture/tp.png
+   :align:   center
+
 Installation:
 *************
 
