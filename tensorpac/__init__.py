@@ -1,3 +1,3 @@
 from .pac import Pac
 
-version = '0.0'
+__version__ = '0.3'

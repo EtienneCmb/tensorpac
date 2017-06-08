@@ -124,8 +124,9 @@ class Pac(PacPlot):
        22531738/>`_
     .. [#f5] `Bahramisharif et al, 2013 <http://www.jneurosci.org/content/33/
        48/18849.short/>`_
-       [#f6] `Voytek et al, 2013 <https://www.ncbi.nlm.nih.gov/pubmed/
+    .. [#f6] `Voytek et al, 2013 <https://www.ncbi.nlm.nih.gov/pubmed/
        22986076>`_
+
     """
 
     ###########################################################################
