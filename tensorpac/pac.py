@@ -41,7 +41,7 @@ class Pac(object):
                 - '3': Shuffle amplitude and phase time-series
                 - '4': Shuffle phase time-series
                 - '5': Shuffle amplitude time-series
-                - '6': Time lag [#f1]_ [NOT IMPLEMENTED]
+                - '6': Time lag [#f1]_
                 - '7': Circular shifting [NOT IMPLEMENTED]
 
             * Third digit: refer to the normalization method for correction:
