@@ -2,6 +2,8 @@
 
 Note that this script do not perform any correction by surrogates.
 """
+import numpy as np
+from scipy.signal import hilbert
 import matplotlib.pyplot as plt
 from tensorpac.utils import PacSignals
 from tensorpac import Pac
@@ -31,7 +33,14 @@ for i, k in enumerate([1, 2, 3, 4]):
     # Compute only the PAC without filtering :
     xpac, _ = p.fit(1024, phases, amplitudes, axis=2)
     # Plot :
-    plt.subplot(2, 2, k)
-    p.comodulogram(xpac.mean(-1), title=titles[i], cmap='Spectral_r')
+    plt.subplot(3, 2, k)
+    p.comodulogram(xpac.mean(-1), title=titles[i], cmap='Spectral_r')    
+
+# The Phase-Synchrony needs the phase of the amplitude :
+phaamplitudes = np.angle(hilbert(amplitudes))
+p.idpac = (5, 0, 0)
+xpac, _ = p.fit(1024, phases, phaamplitudes, axis=2)
+plt.subplot(3, 2, 5)
+p.comodulogram(xpac.mean(-1), title='Phase Synchrony', cmap='Spectral_r')
 
 plt.show()
