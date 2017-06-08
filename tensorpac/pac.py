@@ -8,9 +8,10 @@ from .spectral import spectral
 from .methods import ComputePac
 from .surrogates import ComputeSurogates
 from .normalize import normalize
+from .visu import PacPlot
 
 
-class Pac(object):
+class Pac(PacPlot):
     """Compute Phase-Amplitude Coupling (PAC) using tensors.
 
     Computing PAC is assessed in three steps : compute the real PAC, compute
@@ -42,7 +43,6 @@ class Pac(object):
                 - '4': Shuffle phase time-series
                 - '5': Shuffle amplitude time-series
                 - '6': Time lag [#f1]_
-                - '7': Circular shifting [NOT IMPLEMENTED]
 
             * Third digit: refer to the normalization method for correction:
 
@@ -251,25 +251,36 @@ class Pac(object):
               amplitude into two equal parts, then swap those two blocks. But
               the nblocks parameter allow to split into a larger number.
         """
+        pvalues = None
         # Compute pac :
         pacargs = (self.idpac[0], self.nbins, 1/nperm)
         pac = ComputePac(pha, amp, *pacargs)
 
-        # Compute surogates :
+        # Compute surogates (if needed) :
         if self._csuro:
             surargs = (self.idpac[1], axis, traxis, self.nblocks)
             suro = ComputeSurogates(pha, amp, surargs, pacargs, nperm, njobs)
 
+            # Get the mean / deviation of surrogates :
+            m_surro, std_surro = np.mean(suro, axis=0), np.std(suro, axis=0)
+
             # Normalize pac by surrogates :
-            pac = normalize(pac, np.mean(suro, axis=0),
-                            np.std(suro, axis=0), self.idpac[2])
+            pac = normalize(pac, m_surro, std_surro, self.idpac[2])
 
             # Compute statistics :
+            suro.sort(0)
+            suro -= pac[np.newaxis, ...]
+            pvalues = 1 - np.sum(suro < 0, axis=0)/nperm
+            pvalues[pvalues < 1/nperm] = 1/nperm
+
+        if self._idpac[0] == 4:
+            pvalues = np.ones_like(pac)
+            pvalues[np.nonzero(pac)] = 1/nperm
 
         if correct:
             pac[pac < 0.] = 0.
 
-        return pac, None
+        return pac, pvalues
 
     def filterfit(self, sf, xpha, xamp, axis=1, traxis=0, nperm=200,
                   correct=False, njobs=-1):
@@ -333,57 +344,6 @@ class Pac(object):
         # Compute pac :
         return self.fit(sf, pha, amp, axis+1, traxis+1, nperm, correct, njobs)
 
-    def comodulogram(self, pac, title='', cmap='viridis', clim=None, vmin=None,
-                     vmax=None, under=None, over=None, bad=None, pvalues=None):
-        """Plot PAC using comodulogram.
-
-        Args:
-            pac: np.ndarray
-                PAC array of shape (pha, namp)
-
-        Kargs:
-            title: string, optional, (def: '')
-                Title of the plot.
-
-            cmap: string, optional, (def: 'viridis')
-                Name of one Matplotlib's colomap.
-
-            clim: tuple, optional, (def: None)
-                Limit of the colorbar.
-
-            vmin: float, optional, (def: None)
-                Threshold under which set the color to the uner parameter.
-
-            vmax: float, optional, (def: None)
-                Threshold over which set the color in the over parameter.
-
-            under: string, optional, (def: None)
-                Color for values under the vmin parameter.
-
-            over: string, optional, (def: None)
-                Color for values over the vmax parameter.
-
-            pvalues: np.ndarray, optional, (def: None)
-                P-values to use for masking PAC values. The shape of this
-                parameter must be the same as the shape as pac.
-
-            bad: string, optional, (def: None)
-                Color for non-significant values.
-
-        Returns:
-            gca: axes
-                The current matplotlib axes.
-        """
-        import matplotlib.pyplot as plt
-        plt.pcolormesh(self.xvec, self.yvec, pac, cmap=cmap)
-        plt.axis('tight')
-        plt.xlabel('Frequency for phase (hz)')
-        plt.ylabel('Frequency for amplitude (hz)')
-        plt.title(title)
-        plt.clim(vmin=vmin, vmax=vmax)
-        plt.colorbar()
-        return plt.gca()
-
     ###########################################################################
     #                              CHECKING
     ###########################################################################
@@ -396,10 +356,11 @@ class Pac(object):
         else:
             # Ozkurt PAC case :
             if idpac[0] == 4:
-                idpac[1], idpac[2] = 0, 0
+                idpac = np.array([4, 0, 0])
                 self._csuro = False
             if (idpac[1] == 0) or (idpac[2] == 0):
                 self._csuro = False
+                idpac = (idpac[0], 0, 0)
         self._idpac = idpac
         self.method, self.surro, self.norm = pacstr(idpac)
 
