@@ -8,7 +8,6 @@ This file include the following methods :
 - Shuffle phase time-series
 - Shuffle amplitude time-series
 - Time lag
-- circular shifting
 """
 
 import numpy as np
@@ -90,7 +89,6 @@ def suroSwitch(pha, amp, idn, axis, traxis, nblocks):
     - Shuffle phase time-series
     - Shuffle amplitude time-series
     - Time lag
-    - circular shifting
     """
     # No surrogates
     if idn == 0:
@@ -119,10 +117,6 @@ def suroSwitch(pha, amp, idn, axis, traxis, nblocks):
     # Introduce a time lag
     elif idn == 6:
         return TimeLag(pha, amp, axis)
-
-    # Circular shifting
-    elif idn == 7:
-        raise(NotImplementedError)
 
     else:
         raise ValueError(str(idn) + " is not recognized as a valid surrogates"
