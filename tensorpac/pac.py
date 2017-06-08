@@ -1,5 +1,6 @@
 """Main PAC class."""
 import numpy as np
+from scipy.signal import hilbert
 
 from .utils import PacVec
 from .spectral import spectral
@@ -320,6 +321,10 @@ class Pac(object):
         # Extract phase (npha, ...) and amplitude (namp, ...) :
         pha = self.filter(sf, xpha, axis, 'phase', njobs)
         amp = self.filter(sf, xamp, axis, 'amplitude', njobs)
+
+        # Special cases :
+        if self._idpac[0] == 5:
+            amp = np.angle(hilbert(amp, axis=-1))
 
         # Compute pac :
         return self.fit(sf, pha, amp, axis+1, traxis+1, nperm, correct, njobs)

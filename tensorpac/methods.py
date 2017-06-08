@@ -3,8 +3,9 @@
 This file include the following methods :
 - Mean Vector Length (Canolty, 2006)
 - Kullback Leibler Divergence (Tort, 2010)
-- Heights Ratio
+- Heights Ratio (Lakata, 2005)
 - Normalized direct Pac (Ozkurt, 2012)
+- Phase Synchrony
 """
 
 import numpy as np
@@ -46,7 +47,12 @@ def ComputePac(pha, amp, idp, nbins, p):
     elif idp == 4:
         return ndPac(pha, amp, p)
 
+    # Phase-Synchrony (or adapted PLV)
     elif idp == 5:
+        return PhaseSync(pha, amp)
+
+    # Event-Related Phase amplitude Coupling
+    elif idp == 6:
         # return erpac(pha, amp, p)
         raise(NotImplementedError)
 
@@ -158,6 +164,9 @@ def ndPac(pha, amp, p):
         amp: np.ndarra
             Array of amplitudes of shapes (namp, ..., npts)
 
+        p: float
+            The p-value to use.
+
     Return:
         pac: np.ndarray
             PAC of shape (npha, namp, ...)
@@ -173,6 +182,26 @@ def ndPac(pha, amp, p):
     xlim = erfinv(1-p)**2
     pac[pac <= 2 * xlim] = 0.
     return pac
+
+
+def PhaseSync(pha, amp):
+    """Phase Synchrony.
+
+    Args:
+        pha: np.ndarray
+            Array of phases of shapes (npha, ..., npts)
+
+        amp: np.ndarra
+            Array of amplitudes of shapes (namp, ..., npts)
+
+    Return:
+        pac: np.ndarray
+            PAC of shape (npha, namp, ...)
+    """
+    # Number of time points :
+    npts = pha.shape[-1]
+    pac = np.einsum('i...j, k...j->ik...', np.exp(-1j*amp), np.exp(1j*pha))
+    return np.abs(pac)/npts
 
 def erpac(pha, amp, p):
     pha = np.swapaxes(pha, -1, -2)
