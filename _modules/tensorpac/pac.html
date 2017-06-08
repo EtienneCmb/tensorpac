@@ -5,18 +5,20 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tensorpac.pac &mdash; Tensorpac 0.2 documentation</title>
+  <title>tensorpac.pac &mdash; Tensorpac 0.2. documentation</title>
   
 
   
   
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
+  
+  
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
   
   
@@ -35,25 +37,45 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Tensorpac 0.2 documentation" href="../../index.html"/>
+    <link rel="top" title="Tensorpac 0.2. documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        
-          <a href="../../index.html" class="fa fa-home"> Tensorpac</a>
-        
-        
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Tensorpac
+          
+
+          
+            
+            <img src="../../_static/ico64.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.
+              </div>
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -61,21 +83,38 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-      </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
           
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
+            
+            
+              
+            
+            
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../tutorial.html#the-phase-amplitude-coupling">The Phase-Amplitude Coupling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../methods.html">Methods</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../methods.html#modular-philosophy">Modular philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../methods.html#modular-philosophy">Modular philosophy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../methods.html#pac-methods">Pac methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../methods.html#surrogates-methods">Surrogates methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../methods.html#normalization-methods">Normalization methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../methods.html#example">Example</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../../methods.html#link-with-publications">Link with publications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../methods.html#inputs">Inputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyfcn.html">Python functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#pac-object">PAC object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#filter-the-data">Filter the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#filter-then-compute-pac">Filter then compute PAC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utils</a><ul>
@@ -83,41 +122,73 @@
 <li class="toctree-l2"><a class="reference internal" href="../../utils.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../example.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../visu.html">Visualization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../visu.html#code-example">Code example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visu.html#comodulogram-method-description">Comodulogram method description</a></li>
+</ul>
+</li>
 </ul>
 
+            
           
-        
+        </div>
       </div>
-      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="../../index.html">Tensorpac</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Tensorpac</a>
+        
       </nav>
 
 
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="../../index.html">Docs</a> &raquo;</li>
-      
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
           <li><a href="../index.html">Module code</a> &raquo;</li>
-      
-    <li>tensorpac.pac</li>
+        
+      <li>tensorpac.pac</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
+            
+        
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
-          <div role="main" class="document">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <h1>Source code for tensorpac.pac</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Main PAC class.&quot;&quot;&quot;</span>
@@ -133,7 +204,7 @@
 <span class="kn">from</span> <span class="nn">.visu</span> <span class="k">import</span> <span class="n">PacPlot</span>
 
 
-<div class="viewcode-block" id="Pac"><a class="viewcode-back" href="../../methods.html#tensorpac.pac.Pac">[docs]</a><span class="k">class</span> <span class="nc">Pac</span><span class="p">(</span><span class="n">PacPlot</span><span class="p">):</span>
+<div class="viewcode-block" id="Pac"><a class="viewcode-back" href="../../pyfcn.html#tensorpac.pac.Pac">[docs]</a><span class="k">class</span> <span class="nc">Pac</span><span class="p">(</span><span class="n">PacPlot</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute Phase-Amplitude Coupling (PAC) using tensors.</span>
 
 <span class="sd">    Computing PAC is assessed in three steps : compute the real PAC, compute</span>
@@ -246,8 +317,9 @@
 <span class="sd">       22531738/&gt;`_</span>
 <span class="sd">    .. [#f5] `Bahramisharif et al, 2013 &lt;http://www.jneurosci.org/content/33/</span>
 <span class="sd">       48/18849.short/&gt;`_</span>
-<span class="sd">       [#f6] `Voytek et al, 2013 &lt;https://www.ncbi.nlm.nih.gov/pubmed/</span>
+<span class="sd">    .. [#f6] `Voytek et al, 2013 &lt;https://www.ncbi.nlm.nih.gov/pubmed/</span>
 <span class="sd">       22986076&gt;`_</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1">###########################################################################</span>
@@ -277,7 +349,7 @@
     <span class="c1">###########################################################################</span>
     <span class="c1">#                              METHODS</span>
     <span class="c1">###########################################################################</span>
-<div class="viewcode-block" id="Pac.filter"><a class="viewcode-back" href="../../methods.html#tensorpac.pac.Pac.filter">[docs]</a>    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="Pac.filter"><a class="viewcode-back" href="../../pyfcn.html#tensorpac.pac.Pac.filter">[docs]</a>    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Filt the data in the specified frequency bands.</span>
 
 <span class="sd">        Args:</span>
@@ -326,7 +398,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ftype must either be &#39;phase&#39; or &#39;amplitude.&#39;&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">xfilt</span></div>
 
-<div class="viewcode-block" id="Pac.fit"><a class="viewcode-back" href="../../methods.html#tensorpac.pac.Pac.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nperm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<div class="viewcode-block" id="Pac.fit"><a class="viewcode-back" href="../../pyfcn.html#tensorpac.pac.Pac.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nperm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute PAC on filtered data.</span>
 
@@ -404,7 +476,7 @@
 
         <span class="k">return</span> <span class="n">pac</span><span class="p">,</span> <span class="n">pvalues</span></div>
 
-<div class="viewcode-block" id="Pac.filterfit"><a class="viewcode-back" href="../../methods.html#tensorpac.pac.Pac.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nperm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+<div class="viewcode-block" id="Pac.filterfit"><a class="viewcode-back" href="../../pyfcn.html#tensorpac.pac.Pac.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nperm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
                   <span class="n">correct</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Filt the data then compute PAC on it.</span>
 
@@ -588,6 +660,10 @@
 
 </pre></div>
 
+           </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
@@ -597,12 +673,13 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, Etienne Combrisson.
+
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-  
 </footer>
+
         </div>
       </div>
 
@@ -617,10 +694,11 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.2',
+            VERSION:'0.2.',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="../../_static/jquery.js"></script>

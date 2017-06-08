@@ -5,18 +5,20 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tensorpac &mdash; Tensorpac 0.2 documentation</title>
+  <title>Tensorpac &mdash; Tensorpac 0.2. documentation</title>
   
 
   
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
   
+  
+  
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
   
   
@@ -35,25 +37,45 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.2 documentation" href="#"/>
+    <link rel="top" title="Tensorpac 0.2. documentation" href="#"/>
         <link rel="next" title="Tutorial" href="tutorial.html"/> 
 
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
 <body class="wy-body-for-nav" role="document">
 
+   
   <div class="wy-grid-for-nav">
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        
-          <a href="#" class="fa fa-home"> Tensorpac</a>
-        
-        
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> Tensorpac
+          
+
+          
+            
+            <img src="_static/ico64.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.
+              </div>
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -61,21 +83,38 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-      </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
           
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
+            
+            
+              
+            
+            
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-phase-amplitude-coupling">The Phase-Amplitude Coupling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="methods.html">Methods</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="methods.html#modular-philosophy">Modular philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods.html#modular-philosophy">Modular philosophy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="methods.html#pac-methods">Pac methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="methods.html#surrogates-methods">Surrogates methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="methods.html#normalization-methods">Normalization methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="methods.html#example">Example</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#link-with-publications">Link with publications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="methods.html#inputs">Inputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pyfcn.html">Python functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyfcn.html#pac-object">PAC object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-the-data">Filter the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyfcn.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-then-compute-pac">Filter then compute PAC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
@@ -83,45 +122,78 @@
 <li class="toctree-l2"><a class="reference internal" href="utils.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="example.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visu.html">Visualization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#code-example">Code example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#comodulogram-method-description">Comodulogram method description</a></li>
+</ul>
+</li>
 </ul>
 
+            
           
-        
+        </div>
       </div>
-      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="#">Tensorpac</a>
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Tensorpac</a>
+        
       </nav>
 
 
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-    <li><a href="#">Docs</a> &raquo;</li>
-      
-    <li>Tensorpac</li>
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>Tensorpac</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
         
-          <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
-          <div role="main" class="document">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="tensorpac">
 <h1>Tensorpac<a class="headerlink" href="#tensorpac" title="Permalink to this headline">¶</a></h1>
-<p>Tensorpac is an Python open-source toolbox for computing Phase-Amplitude Coupling (PAC) using tensors and parallel computing. On top of that, we designed a modular implementation with a relatively large amount of parameters.</p>
+<p>Tensorpac is an Python open-source toolbox for computing Phase-Amplitude Coupling (PAC) using tensors and parallel computing. On top of that, we designed a modular implementation with a relatively large amount of parameters.
+We provide a set of <a class="reference external" href="https://github.com/EtienneCmb/tensorpac/tree/master/examples">examples</a>.</p>
 <p>This package was developped in collaboration with <strong>Juan L.P. Soto</strong></p>
 <div class="figure align-center">
 <img alt="_images/tp.png" src="_images/tp.png" />
@@ -147,6 +219,19 @@ pip setup.py install
 </li>
 </ul>
 </div>
+<div class="section" id="todo-list">
+<h2>Todo list<a class="headerlink" href="#todo-list" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<ul class="last simple">
+<li>Generalized Linear Model (GLM - Lakata, 2005)</li>
+<li>Event Related PAC (ERPAC - Voytek, 2013)</li>
+<li>Memory tracking</li>
+<li>Example Tensorpac Vs pacpy</li>
+<li>Installation using <em>pip install tensorpac</em></li>
+</ul>
+</div>
+</div>
 <div class="section" id="contents">
 <h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
@@ -157,21 +242,20 @@ pip setup.py install
 </li>
 <li class="toctree-l1"><a class="reference internal" href="methods.html">Methods</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#modular-philosophy">Modular philosophy</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="methods.html#implemented-methods">Implemented methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="methods.html#pac-methods">Pac methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="methods.html#surrogates-methods">Surrogates methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="methods.html#normalization-methods">Normalization methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="methods.html#example">Example</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#link-with-publications">Link with publications</a></li>
-<li class="toctree-l2"><a class="reference internal" href="methods.html#inputs">Inputs</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="methods.html#main-pac-class">Main PAC class</a></li>
-<li class="toctree-l3"><a class="reference internal" href="methods.html#filter-the-data">Filter the data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="methods.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="methods.html#all-in-one-method">All in one method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="methods.html#plot-pac">Plot PAC</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="pyfcn.html">Python functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyfcn.html#pac-object">PAC object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-the-data">Filter the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyfcn.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-then-compute-pac">Filter then compute PAC</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
@@ -179,7 +263,11 @@ pip setup.py install
 <li class="toctree-l2"><a class="reference internal" href="utils.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="example.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visu.html">Visualization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#code-example">Code example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#comodulogram-method-description">Comodulogram method description</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -194,12 +282,16 @@ pip setup.py install
 </div>
 
 
+           </div>
+           <div class="articleComments">
+            
+           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tutorial.html" class="btn btn-neutral float-right" title="Tutorial">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="tutorial.html" class="btn btn-neutral float-right" title="Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>
@@ -210,12 +302,13 @@ pip setup.py install
   <div role="contentinfo">
     <p>
         &copy; Copyright 2017, Etienne Combrisson.
+
     </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-  
 </footer>
+
         </div>
       </div>
 
@@ -230,10 +323,11 @@ pip setup.py install
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.2',
+            VERSION:'0.2.',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>
