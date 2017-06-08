@@ -1,0 +1,415 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tensorpac.visu &mdash; Tensorpac 0.2 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Tensorpac 0.2 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../index.html" class="fa fa-home"> Tensorpac</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial.html#the-phase-amplitude-coupling">The Phase-Amplitude Coupling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../methods.html">Methods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../methods.html#modular-philosophy">Modular philosophy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../methods.html#link-with-publications">Link with publications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../methods.html#inputs">Inputs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../example.html">Examples</a></li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Tensorpac</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>tensorpac.visu</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for tensorpac.visu</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Visualization functions.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PacPlot&#39;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">PacPlot</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Main PAC plotting class.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">comodulogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pac</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">under</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">over</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bad</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pvalues</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rmaxis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dpaxis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                     <span class="n">plotas</span><span class="o">=</span><span class="s1">&#39;imshow&#39;</span><span class="p">,</span> <span class="n">ncontours</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">levelcmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Plot PAC using comodulogram.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pac: np.ndarray</span>
+<span class="sd">                PAC array of shape (pha, namp)</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            title: string, optional, (def: &#39;&#39;)</span>
+<span class="sd">                Title of the plot.</span>
+
+<span class="sd">            cmap: string, optional, (def: &#39;viridis&#39;)</span>
+<span class="sd">                Name of one Matplotlib&#39;s colomap.</span>
+
+<span class="sd">            vmin: float, optional, (def: None)</span>
+<span class="sd">                Threshold under which set the color to the uner parameter.</span>
+
+<span class="sd">            vmax: float, optional, (def: None)</span>
+<span class="sd">                Threshold over which set the color in the over parameter.</span>
+
+<span class="sd">            under: string, optional, (def: &#39;gray&#39;)</span>
+<span class="sd">                Color for values under the vmin parameter.</span>
+
+<span class="sd">            over: string, optional, (def: &#39;red&#39;)</span>
+<span class="sd">                Color for values over the vmax parameter.</span>
+
+<span class="sd">            bad: string, optional, (def: None)</span>
+<span class="sd">                Color for non-significant values.</span>
+
+<span class="sd">            pvalues: np.ndarray, optional, (def: None)</span>
+<span class="sd">                P-values to use for masking PAC values. The shape of this</span>
+<span class="sd">                parameter must be the same as the shape as pac.</span>
+
+<span class="sd">            p: float, optional, (def: .05)</span>
+<span class="sd">                If pvalues is pass, use this threshold for masking</span>
+<span class="sd">                non-significant PAC.</span>
+
+<span class="sd">            interp: tuple, optional, (def: None)</span>
+<span class="sd">                Tuple for controlling the 2D interpolation. For example,</span>
+<span class="sd">                (.1, .1) will multiply the number of row and columns by 10.</span>
+
+<span class="sd">            rmaxis: bool, optional, (def: False)</span>
+<span class="sd">                Remove unecessary axis.</span>
+
+<span class="sd">            dpaxis: bool, optional, (def: False)</span>
+<span class="sd">                Despine axis.</span>
+
+<span class="sd">            plotas: string, optional, (def: &#39;imshow&#39;)</span>
+<span class="sd">                Choose how to display the comodulogram, either using imshow</span>
+<span class="sd">                (&#39;imshow&#39;) or contours (&#39;contour&#39;). If you choose &#39;contour&#39;,</span>
+<span class="sd">                use the ncontours parameter for controlling the number of</span>
+<span class="sd">                contours.</span>
+
+<span class="sd">            ncontours: int, optional, (def: 5)</span>
+<span class="sd">                Number of contours if plotas is &#39;contour&#39;.</span>
+
+<span class="sd">            levels: list, optional, (def: None)</span>
+<span class="sd">                Add significency levels. This parameter must be a sorted list</span>
+<span class="sd">                of p-values to use as levels.</span>
+
+<span class="sd">            levelcmap: string, optional, (def: Reds)</span>
+<span class="sd">                Colormap of signifiency levels.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            gca: axes</span>
+<span class="sd">                The current matplotlib axes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="c1"># Define p-values (if needed) :</span>
+        <span class="k">if</span> <span class="n">pvalues</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">pac</span><span class="p">)</span>
+        <span class="c1"># 2D interpolation (if needed)</span>
+        <span class="k">if</span> <span class="n">interp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pac</span><span class="p">,</span> <span class="n">yvec</span><span class="p">,</span> <span class="n">xvec</span> <span class="o">=</span> <span class="n">mapinterpolation</span><span class="p">(</span><span class="n">pac</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xvec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yvec</span><span class="p">,</span>
+                                               <span class="n">interp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">interp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">pvalues</span> <span class="o">=</span> <span class="n">mapinterpolation</span><span class="p">(</span><span class="n">pvalues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xvec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yvec</span><span class="p">,</span>
+                                       <span class="n">interp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">interp</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">xvec</span><span class="p">,</span> <span class="n">yvec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xvec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yvec</span>
+        <span class="n">pac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="n">pac</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">pvalues</span> <span class="o">&gt;=</span> <span class="n">p</span><span class="p">)</span>
+
+        <span class="c1"># Plot type :</span>
+        <span class="n">toplot</span> <span class="o">=</span> <span class="n">pac</span><span class="o">.</span><span class="n">data</span> <span class="k">if</span> <span class="n">levels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">pac</span>
+        <span class="k">if</span> <span class="n">plotas</span> <span class="ow">is</span> <span class="s1">&#39;imshow&#39;</span><span class="p">:</span>
+            <span class="n">im</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">toplot</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;upper&#39;</span><span class="p">,</span>
+                            <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+                            <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">xvec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xvec</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">yvec</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">yvec</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">plotas</span> <span class="ow">is</span> <span class="s1">&#39;contour&#39;</span><span class="p">:</span>
+            <span class="n">im</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">xvec</span><span class="p">,</span> <span class="n">yvec</span><span class="p">,</span> <span class="n">toplot</span><span class="p">,</span> <span class="n">ncontours</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+                              <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The plotas parameter must either be &#39;imshow&#39; or &quot;</span>
+                             <span class="s2">&quot;&#39;contour&#39;&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Add levels :</span>
+        <span class="k">if</span> <span class="n">levels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">pvalues</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">xvec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xvec</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">yvec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">yvec</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
+                        <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">levelcmap</span><span class="p">)</span>
+
+        <span class="c1"># Under/Over/Bad :</span>
+        <span class="k">if</span> <span class="n">under</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">im</span><span class="o">.</span><span class="n">cmap</span><span class="o">.</span><span class="n">set_under</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">under</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">over</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">im</span><span class="o">.</span><span class="n">cmap</span><span class="o">.</span><span class="n">set_over</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">over</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">bad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">im</span><span class="o">.</span><span class="n">cmap</span><span class="o">.</span><span class="n">set_bad</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">bad</span><span class="p">)</span>
+
+        <span class="c1"># Title/Xlabel/Ylabel :</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency for phase (hz)&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency for amplitude (hz)&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
+
+        <span class="c1"># Colorbar</span>
+        <span class="n">cb</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;PAC values&#39;</span><span class="p">)</span>
+        <span class="n">cb</span><span class="o">.</span><span class="n">outline</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+        <span class="c1"># Remove axis :</span>
+        <span class="k">if</span> <span class="n">rmaxis</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">loc</span><span class="p">,</span> <span class="n">spine</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">loc</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">]:</span>
+                    <span class="n">spine</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">loc</span><span class="p">:</span> <span class="s1">&#39;off&#39;</span><span class="p">})</span>
+
+        <span class="c1"># Despine axis :</span>
+        <span class="k">if</span> <span class="n">dpaxis</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">loc</span><span class="p">,</span> <span class="n">spine</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">loc</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">]:</span>
+                    <span class="n">spine</span><span class="o">.</span><span class="n">set_position</span><span class="p">((</span><span class="s1">&#39;outward&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+                    <span class="n">spine</span><span class="o">.</span><span class="n">set_smart_bounds</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">mapinterpolation</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">interpx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">interpy</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Interpolate a 2D map.&quot;&quot;&quot;</span>
+    <span class="c1"># Get data size :</span>
+    <span class="n">dim2</span><span class="p">,</span> <span class="n">dim1</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+    <span class="c1"># Define xticklabel and yticklabel :</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim1</span><span class="p">,</span> <span class="n">interpx</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim2</span><span class="p">,</span> <span class="n">interpy</span><span class="p">)</span>
+    <span class="c1"># Define the meshgrid :</span>
+    <span class="n">Xi</span><span class="p">,</span> <span class="n">Yi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim1</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">interpx</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dim2</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">interpy</span><span class="p">))</span>
+    <span class="c1"># 2D interpolation :</span>
+    <span class="n">datainterp</span> <span class="o">=</span> <span class="n">interp2</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">Xi</span><span class="p">,</span> <span class="n">Yi</span><span class="p">)</span>
+    <span class="c1"># Linearly interpolate vectors :</span>
+    <span class="n">xvecI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">datainterp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">yvecI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">datainterp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">datainterp</span><span class="p">,</span> <span class="n">xvecI</span><span class="p">,</span> <span class="n">yvecI</span>
+
+
+<span class="k">def</span> <span class="nf">interp2</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="n">extrapval</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Linear interpolation equivalent to interp2(z, xi, yi,&#39;linear&#39;) in MATLAB</span>
+<span class="sd">    @param z: function defined on square lattice [0..width(z))X[0..height(z))</span>
+<span class="sd">    @param xi: matrix of x coordinates where interpolation is required</span>
+<span class="sd">    @param yi: matrix of y coordinates where interpolation is required</span>
+<span class="sd">    @param extrapval: value for out of range positions. default is numpy.nan</span>
+<span class="sd">    @return: interpolated values in [xi,yi] points</span>
+<span class="sd">    @raise Exception:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">xi</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">yi</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="k">if</span> <span class="n">nrows</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">ncols</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;z shape is too small&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;sizes of X indexes and Y-indexes must match&quot;</span><span class="p">)</span>
+
+    <span class="c1"># find x values out of range</span>
+    <span class="n">x_bad</span> <span class="o">=</span> <span class="p">((</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">ncols</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">x_bad</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">x_bad</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># find y values out of range</span>
+    <span class="n">y_bad</span> <span class="o">=</span> <span class="p">((</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">nrows</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">y_bad</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">y_bad</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># linear indexing. z must be in &#39;C&#39; order</span>
+    <span class="n">ndx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">ncols</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">ndx</span> <span class="o">=</span> <span class="n">ndx</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int32&#39;</span><span class="p">)</span>
+
+    <span class="c1"># fix parameters on x border</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">ncols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">ndx</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+
+    <span class="c1"># fix parameters on y border</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">nrows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">ndx</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="o">-=</span> <span class="n">ncols</span>
+
+    <span class="c1"># interpolate</span>
+    <span class="n">one_minus_t</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">y</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">ndx</span><span class="p">]</span> <span class="o">*</span> <span class="n">one_minus_t</span> <span class="o">+</span> <span class="n">z</span><span class="p">[</span><span class="n">ndx</span> <span class="o">+</span> <span class="n">ncols</span><span class="p">]</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">ndx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">one_minus_t</span> <span class="o">+</span> <span class="n">z</span><span class="p">[</span><span class="n">ndx</span> <span class="o">+</span> <span class="n">ncols</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span>
+
+    <span class="c1"># Set out of range positions to extrapval</span>
+    <span class="k">if</span> <span class="n">x_bad</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">f</span><span class="p">[</span><span class="n">x_bad</span><span class="p">]</span> <span class="o">=</span> <span class="n">extrapval</span>
+    <span class="k">if</span> <span class="n">y_bad</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">f</span><span class="p">[</span><span class="n">y_bad</span><span class="p">]</span> <span class="o">=</span> <span class="n">extrapval</span>
+
+    <span class="k">return</span> <span class="n">f</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

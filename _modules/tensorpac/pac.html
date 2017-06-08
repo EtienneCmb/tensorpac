@@ -7,10 +7,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tensorpac.pac &mdash; Tensorpac 0.0 documentation</title>
+  <title>tensorpac.pac &mdash; Tensorpac 0.2 documentation</title>
   
 
   
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
   
 
   
@@ -33,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Tensorpac 0.0 documentation" href="../../index.html"/>
+    <link rel="top" title="Tensorpac 0.2 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -81,6 +83,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../utils.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../example.html">Examples</a></li>
 </ul>
 
           
@@ -119,15 +122,18 @@
   <h1>Source code for tensorpac.pac</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Main PAC class.&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="k">import</span> <span class="n">hilbert</span>
 
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">PacVec</span>
+<span class="kn">from</span> <span class="nn">.pacstr</span> <span class="k">import</span> <span class="n">pacstr</span>
 <span class="kn">from</span> <span class="nn">.spectral</span> <span class="k">import</span> <span class="n">spectral</span>
 <span class="kn">from</span> <span class="nn">.methods</span> <span class="k">import</span> <span class="n">ComputePac</span>
 <span class="kn">from</span> <span class="nn">.surrogates</span> <span class="k">import</span> <span class="n">ComputeSurogates</span>
 <span class="kn">from</span> <span class="nn">.normalize</span> <span class="k">import</span> <span class="n">normalize</span>
+<span class="kn">from</span> <span class="nn">.visu</span> <span class="k">import</span> <span class="n">PacPlot</span>
 
 
-<div class="viewcode-block" id="Pac"><a class="viewcode-back" href="../../methods.html#tensorpac.pac.Pac">[docs]</a><span class="k">class</span> <span class="nc">Pac</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Pac"><a class="viewcode-back" href="../../methods.html#tensorpac.pac.Pac">[docs]</a><span class="k">class</span> <span class="nc">Pac</span><span class="p">(</span><span class="n">PacPlot</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute Phase-Amplitude Coupling (PAC) using tensors.</span>
 
 <span class="sd">    Computing PAC is assessed in three steps : compute the real PAC, compute</span>
@@ -147,7 +153,8 @@
 <span class="sd">                - &#39;2&#39;: Kullback-Leibler Divergence (KLD) [#f2]_</span>
 <span class="sd">                - &#39;3&#39;: Heights Ratio (HR) [#f3]_</span>
 <span class="sd">                - &#39;4&#39;: ndPAC [#f4]_</span>
-<span class="sd">                - &#39;5&#39;: ERPAC</span>
+<span class="sd">                - &#39;5&#39;: Phase Synchrony [#f3]_</span>
+<span class="sd">                - &#39;6&#39;: ERPAC [#f6]_</span>
 
 <span class="sd">            * Second digit: refer to the method for computing surrogates:</span>
 
@@ -157,8 +164,7 @@
 <span class="sd">                - &#39;3&#39;: Shuffle amplitude and phase time-series</span>
 <span class="sd">                - &#39;4&#39;: Shuffle phase time-series</span>
 <span class="sd">                - &#39;5&#39;: Shuffle amplitude time-series</span>
-<span class="sd">                - &#39;6&#39;: Time lag [#f1]_ [NOT IMPLEMENTED]</span>
-<span class="sd">                - &#39;7&#39;: Circular shifting [NOT IMPLEMENTED]</span>
+<span class="sd">                - &#39;6&#39;: Time lag [#f1]_</span>
 
 <span class="sd">            * Third digit: refer to the normalization method for correction:</span>
 
@@ -240,6 +246,8 @@
 <span class="sd">       22531738/&gt;`_</span>
 <span class="sd">    .. [#f5] `Bahramisharif et al, 2013 &lt;http://www.jneurosci.org/content/33/</span>
 <span class="sd">       48/18849.short/&gt;`_</span>
+<span class="sd">       [#f6] `Voytek et al, 2013 &lt;https://www.ncbi.nlm.nih.gov/pubmed/</span>
+<span class="sd">       22986076&gt;`_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1">###########################################################################</span>
@@ -365,25 +373,36 @@
 <span class="sd">              amplitude into two equal parts, then swap those two blocks. But</span>
 <span class="sd">              the nblocks parameter allow to split into a larger number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pvalues</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="c1"># Compute pac :</span>
         <span class="n">pacargs</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbins</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">nperm</span><span class="p">)</span>
         <span class="n">pac</span> <span class="o">=</span> <span class="n">ComputePac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="o">*</span><span class="n">pacargs</span><span class="p">)</span>
 
-        <span class="c1"># Compute surogates :</span>
+        <span class="c1"># Compute surogates (if needed) :</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_csuro</span><span class="p">:</span>
             <span class="n">surargs</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span><span class="p">,</span> <span class="n">traxis</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nblocks</span><span class="p">)</span>
             <span class="n">suro</span> <span class="o">=</span> <span class="n">ComputeSurogates</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">surargs</span><span class="p">,</span> <span class="n">pacargs</span><span class="p">,</span> <span class="n">nperm</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span>
 
+            <span class="c1"># Get the mean / deviation of surrogates :</span>
+            <span class="n">m_surro</span><span class="p">,</span> <span class="n">std_surro</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">suro</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">suro</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
             <span class="c1"># Normalize pac by surrogates :</span>
-            <span class="n">pac</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">pac</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">suro</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
-                            <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">suro</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">pac</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">pac</span><span class="p">,</span> <span class="n">m_surro</span><span class="p">,</span> <span class="n">std_surro</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
             <span class="c1"># Compute statistics :</span>
+            <span class="n">suro</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">suro</span> <span class="o">-=</span> <span class="n">pac</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+            <span class="n">pvalues</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">suro</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="n">nperm</span>
+            <span class="n">pvalues</span><span class="p">[</span><span class="n">pvalues</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">/</span><span class="n">nperm</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">nperm</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">pac</span><span class="p">)</span>
+            <span class="n">pvalues</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">pac</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">nperm</span>
 
         <span class="k">if</span> <span class="n">correct</span><span class="p">:</span>
             <span class="n">pac</span><span class="p">[</span><span class="n">pac</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
 
-        <span class="k">return</span> <span class="n">pac</span><span class="p">,</span> <span class="kc">None</span></div>
+        <span class="k">return</span> <span class="n">pac</span><span class="p">,</span> <span class="n">pvalues</span></div>
 
 <div class="viewcode-block" id="Pac.filterfit"><a class="viewcode-back" href="../../methods.html#tensorpac.pac.Pac.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nperm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
                   <span class="n">correct</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
@@ -440,59 +459,12 @@
         <span class="n">pha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">xpha</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span>
         <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span>
 
+        <span class="c1"># Special cases :</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">hilbert</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+
         <span class="c1"># Compute pac :</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">nperm</span><span class="p">,</span> <span class="n">correct</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="Pac.comodulogram"><a class="viewcode-back" href="../../methods.html#tensorpac.pac.Pac.comodulogram">[docs]</a>    <span class="k">def</span> <span class="nf">comodulogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pac</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">clim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                     <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">under</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">over</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bad</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pvalues</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Plot PAC using comodulogram.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            pac: np.ndarray</span>
-<span class="sd">                PAC array of shape (pha, namp)</span>
-
-<span class="sd">        Kargs:</span>
-<span class="sd">            title: string, optional, (def: &#39;&#39;)</span>
-<span class="sd">                Title of the plot.</span>
-
-<span class="sd">            cmap: string, optional, (def: &#39;viridis&#39;)</span>
-<span class="sd">                Name of one Matplotlib&#39;s colomap.</span>
-
-<span class="sd">            clim: tuple, optional, (def: None)</span>
-<span class="sd">                Limit of the colorbar.</span>
-
-<span class="sd">            vmin: float, optional, (def: None)</span>
-<span class="sd">                Threshold under which set the color to the uner parameter.</span>
-
-<span class="sd">            vmax: float, optional, (def: None)</span>
-<span class="sd">                Threshold over which set the color in the over parameter.</span>
-
-<span class="sd">            under: string, optional, (def: None)</span>
-<span class="sd">                Color for values under the vmin parameter.</span>
-
-<span class="sd">            over: string, optional, (def: None)</span>
-<span class="sd">                Color for values over the vmax parameter.</span>
-
-<span class="sd">            pvalues: np.ndarray, optional, (def: None)</span>
-<span class="sd">                P-values to use for masking PAC values. The shape of this</span>
-<span class="sd">                parameter must be the same as the shape as pac.</span>
-
-<span class="sd">            bad: string, optional, (def: None)</span>
-<span class="sd">                Color for non-significant values.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            gca: axes</span>
-<span class="sd">                The current matplotlib axes.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xvec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yvec</span><span class="p">,</span> <span class="n">pac</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency for phase (hz)&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency for amplitude (hz)&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span></div>
 
     <span class="c1">###########################################################################</span>
     <span class="c1">#                              CHECKING</span>
@@ -506,11 +478,13 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Ozkurt PAC case :</span>
             <span class="k">if</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
-                <span class="n">idpac</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+                <span class="n">idpac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_csuro</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">idpac</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">idpac</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_csuro</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">idpac</span> <span class="o">=</span> <span class="p">(</span><span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_idpac</span> <span class="o">=</span> <span class="n">idpac</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">surro</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm</span> <span class="o">=</span> <span class="n">pacstr</span><span class="p">(</span><span class="n">idpac</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_speccheck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dcomplex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filtorder</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cycle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -643,7 +617,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.0',
+            VERSION:'0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

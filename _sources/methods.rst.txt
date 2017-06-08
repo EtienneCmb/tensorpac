@@ -59,9 +59,6 @@ Main PAC class
 
     from tensorpac import Pac
 
-Main PAC class
-~~~~~~~~~~~~~~
-
 .. autoclass:: tensorpac.pac.Pac
 
 Filter the data
