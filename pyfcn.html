@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Python functions &mdash; Tensorpac 0.3 documentation</title>
+  <title>Python functions &mdash; Tensorpac 0.4 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.3 documentation" href="index.html"/>
+    <link rel="top" title="Tensorpac 0.4 documentation" href="index.html"/>
         <link rel="next" title="Utils" href="utils.html"/>
         <link rel="prev" title="Methods" href="methods.html"/> 
 
@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                0.3
+                0.4
               </div>
             
           
@@ -366,7 +366,7 @@ Hilbert.</li>
 <p>This method can be used to filter the data only in order to extract phase and amplitude.</p>
 <dl class="method">
 <dt id="tensorpac.pac.Pac.filter">
-<code class="descclassname">Pac.</code><code class="descname">filter</code><span class="sig-paren">(</span><em>sf</em>, <em>x</em>, <em>axis=-1</em>, <em>ftype='phase'</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.filter" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Pac.</code><code class="descname">filter</code><span class="sig-paren">(</span><em>sf</em>, <em>x</em>, <em>axis=-1</em>, <em>ftype='phase'</em>, <em>keepfilt=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filt the data in the specified frequency bands.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -389,6 +389,9 @@ Hilbert.</li>
 set this parameter to 1 in order to prevent large memory usage.</dd>
 </dl>
 </dd>
+<dt>keepfilt: bool, optional, (def: False)</dt>
+<dd>Specify if you only want the filtered data (True). This parameter
+is only avaible with dcomplex=&#8217;hilbert&#8217; and not wavelet.</dd>
 <dt>Returns:</dt>
 <dd><dl class="first last docutils">
 <dt>xfilt: np.ndarray</dt>
@@ -404,13 +407,11 @@ set this parameter to 1 in order to prevent large memory usage.</dd>
 <p>For those who already have filtered and computed the phase and amplitude, use this method to compute PAC.</p>
 <dl class="method">
 <dt id="tensorpac.pac.Pac.fit">
-<code class="descclassname">Pac.</code><code class="descname">fit</code><span class="sig-paren">(</span><em>sf</em>, <em>pha</em>, <em>amp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Pac.</code><code class="descname">fit</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute PAC on filtered data.</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd><dl class="first last docutils">
-<dt>sf: float</dt>
-<dd>The sampling frequency.</dd>
 <dt>pha, amp: np.ndarray</dt>
 <dd>Array of filtered data with respectively a shape of (npha, ...)
 and (namp, ...). If you want to compute PAC locally i.e. on the
@@ -554,7 +555,7 @@ the nblocks parameter allow to split into a larger number.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.3',
+            VERSION:'0.4',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

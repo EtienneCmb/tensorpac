@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tensorpac.pac &mdash; Tensorpac 0.3 documentation</title>
+  <title>tensorpac.pac &mdash; Tensorpac 0.4 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Tensorpac 0.3 documentation" href="../../index.html"/>
+    <link rel="top" title="Tensorpac 0.4 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.3
+                0.4
               </div>
             
           
@@ -349,7 +349,7 @@
     <span class="c1">###########################################################################</span>
     <span class="c1">#                              METHODS</span>
     <span class="c1">###########################################################################</span>
-<div class="viewcode-block" id="Pac.filter"><a class="viewcode-back" href="../../pyfcn.html#tensorpac.pac.Pac.filter">[docs]</a>    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="Pac.filter"><a class="viewcode-back" href="../../pyfcn.html#tensorpac.pac.Pac.filter">[docs]</a>    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">keepfilt</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Filt the data in the specified frequency bands.</span>
 
 <span class="sd">        Args:</span>
@@ -370,42 +370,47 @@
 <span class="sd">            njobs: int, optional, (def: -1)</span>
 <span class="sd">                Number of jobs to compute PAC in parallel. For very large data,</span>
 <span class="sd">                set this parameter to 1 in order to prevent large memory usage.</span>
+
+<span class="sd">        keepfilt: bool, optional, (def: False)</span>
+<span class="sd">            Specify if you only want the filtered data (True). This parameter</span>
+<span class="sd">            is only avaible with dcomplex=&#39;hilbert&#39; and not wavelet.</span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            xfilt: np.ndarray</span>
 <span class="sd">                The filtered data of shape (n_frequency, ...)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># --------------------------------------------------------------</span>
-        <span class="c1"># keepfilt=False,</span>
-        <span class="c1"># keepfilt: bool, optional, (def: False)</span>
-        <span class="c1">#     Specify if you only want the filtered data (True) or either</span>
-        <span class="c1">#     the angle (ftype=&#39;phase&#39;) or the modulus (ftype=&#39;amplitude&#39;).</span>
-        <span class="c1"># --------------------------------------------------------------</span>
         <span class="c1"># Sampling frequency :</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The sampling frequency must be a float number.&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">sf</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
+        <span class="c1"># Compatibility between keepfilt and wavelet :</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">keepfilt</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dcomplex</span> <span class="ow">is</span> <span class="s1">&#39;wavelet&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Using wavelet for the complex decomposition do &quot;</span>
+                             <span class="s2">&quot;not allow to get filtered data only. Set the &quot;</span>
+                             <span class="s2">&quot;keepfilt parameter to False or set dcomplex to &quot;</span>
+                             <span class="s2">&quot;&#39;hilbert&#39;.&quot;</span><span class="p">)</span>
         <span class="c1"># Switch between phase or amplitude :</span>
         <span class="k">if</span> <span class="n">ftype</span> <span class="ow">is</span> <span class="s1">&#39;phase&#39;</span><span class="p">:</span>
-            <span class="n">xfilt</span> <span class="o">=</span> <span class="n">spectral</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fpha</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="s1">&#39;pha&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dcomplex</span><span class="p">,</span>
+            <span class="n">tosend</span> <span class="o">=</span> <span class="s1">&#39;pha&#39;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">keepfilt</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="n">xfilt</span> <span class="o">=</span> <span class="n">spectral</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fpha</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">tosend</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dcomplex</span><span class="p">,</span>
                              <span class="bp">self</span><span class="o">.</span><span class="n">_filt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filtorder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cycle</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
                              <span class="bp">self</span><span class="o">.</span><span class="n">_width</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">ftype</span> <span class="ow">is</span> <span class="s1">&#39;amplitude&#39;</span><span class="p">:</span>
-            <span class="n">xfilt</span> <span class="o">=</span> <span class="n">spectral</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">famp</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="s1">&#39;amp&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dcomplex</span><span class="p">,</span>
+            <span class="n">tosend</span> <span class="o">=</span> <span class="s1">&#39;amp&#39;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">keepfilt</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="n">xfilt</span> <span class="o">=</span> <span class="n">spectral</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">famp</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">tosend</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dcomplex</span><span class="p">,</span>
                              <span class="bp">self</span><span class="o">.</span><span class="n">_filt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filtorder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cycle</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
                              <span class="bp">self</span><span class="o">.</span><span class="n">_width</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ftype must either be &#39;phase&#39; or &#39;amplitude.&#39;&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ftype must either be None, &#39;phase&#39; or &quot;</span>
+                             <span class="s2">&quot;&#39;amplitude.&#39;&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">xfilt</span></div>
 
-<div class="viewcode-block" id="Pac.fit"><a class="viewcode-back" href="../../pyfcn.html#tensorpac.pac.Pac.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nperm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<div class="viewcode-block" id="Pac.fit"><a class="viewcode-back" href="../../pyfcn.html#tensorpac.pac.Pac.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nperm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute PAC on filtered data.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            sf: float</span>
-<span class="sd">                The sampling frequency.</span>
-
 <span class="sd">            pha, amp: np.ndarray</span>
 <span class="sd">                Array of filtered data with respectively a shape of (npha, ...)</span>
 <span class="sd">                and (namp, ...). If you want to compute PAC locally i.e. on the</span>
@@ -445,7 +450,7 @@
 <span class="sd">              amplitude into two equal parts, then swap those two blocks. But</span>
 <span class="sd">              the nblocks parameter allow to split into a larger number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">pvalues</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">suro</span><span class="p">,</span> <span class="n">pvalues</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
         <span class="c1"># Compute pac :</span>
         <span class="n">pacargs</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbins</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">nperm</span><span class="p">)</span>
         <span class="n">pac</span> <span class="o">=</span> <span class="n">ComputePac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="o">*</span><span class="n">pacargs</span><span class="p">)</span>
@@ -528,15 +533,15 @@
         <span class="k">if</span> <span class="n">xpha</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">xamp</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The shape of xpha and xamp must be equals.&quot;</span><span class="p">)</span>
         <span class="c1"># Extract phase (npha, ...) and amplitude (namp, ...) :</span>
-        <span class="n">pha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">xpha</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span>
-        <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span>
+        <span class="n">pha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">xpha</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span>
+        <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span>
 
         <span class="c1"># Special cases :</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
             <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">hilbert</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
 
         <span class="c1"># Compute pac :</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">nperm</span><span class="p">,</span> <span class="n">correct</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">nperm</span><span class="p">,</span> <span class="n">correct</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span></div>
 
     <span class="c1">###########################################################################</span>
     <span class="c1">#                              CHECKING</span>
@@ -694,7 +699,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.3',
+            VERSION:'0.4',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
