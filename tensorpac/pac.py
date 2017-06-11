@@ -213,7 +213,7 @@ class Pac(PacPlot):
                              "'amplitude.'")
         return xfilt
 
-    def fit(self, sf, pha, amp, axis=1, traxis=0, nperm=200, correct=False,
+    def fit(self, pha, amp, axis=1, traxis=0, nperm=200, correct=False,
             njobs=-1):
         """Compute PAC on filtered data.
 
