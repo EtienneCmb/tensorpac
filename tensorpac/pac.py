@@ -257,7 +257,7 @@ class Pac(PacPlot):
               amplitude into two equal parts, then swap those two blocks. But
               the nblocks parameter allow to split into a larger number.
         """
-        pvalues = None
+        suro, pvalues = None, None
         # Compute pac :
         pacargs = (self.idpac[0], self.nbins, 1/nperm)
         pac = ComputePac(pha, amp, *pacargs)
