@@ -156,7 +156,7 @@ class Pac(PacPlot):
     ###########################################################################
     #                              METHODS
     ###########################################################################
-    def filter(self, sf, x, axis=-1, ftype='phase', njobs=-1):
+    def filter(self, sf, x, axis=-1, ftype='phase', keepfilt=False, njobs=-1):
         """Filt the data in the specified frequency bands.
 
         Args:
@@ -177,32 +177,40 @@ class Pac(PacPlot):
             njobs: int, optional, (def: -1)
                 Number of jobs to compute PAC in parallel. For very large data,
                 set this parameter to 1 in order to prevent large memory usage.
+
+        keepfilt: bool, optional, (def: False)
+            Specify if you only want the filtered data (True). This parameter
+            is only avaible with dcomplex='hilbert' and not wavelet.
+
         Returns:
             xfilt: np.ndarray
                 The filtered data of shape (n_frequency, ...)
         """
-        # --------------------------------------------------------------
-        # keepfilt=False,
-        # keepfilt: bool, optional, (def: False)
-        #     Specify if you only want the filtered data (True) or either
-        #     the angle (ftype='phase') or the modulus (ftype='amplitude').
-        # --------------------------------------------------------------
         # Sampling frequency :
         if not isinstance(sf, (int, float)):
             raise ValueError("The sampling frequency must be a float number.")
         else:
             sf = float(sf)
+        # Compatibility between keepfilt and wavelet :
+        if (keepfilt is True) and (self._dcomplex is 'wavelet'):
+            raise ValueError("Using wavelet for the complex decomposition do "
+                             "not allow to get filtered data only. Set the "
+                             "keepfilt parameter to False or set dcomplex to "
+                             "'hilbert'.")
         # Switch between phase or amplitude :
         if ftype is 'phase':
-            xfilt = spectral(x, sf, self.fpha, axis, 'pha', self._dcomplex,
+            tosend = 'pha' if not keepfilt else None
+            xfilt = spectral(x, sf, self.fpha, axis, tosend, self._dcomplex,
                              self._filt, self._filtorder, self._cycle[0],
                              self._width, njobs)
         elif ftype is 'amplitude':
-            xfilt = spectral(x, sf, self.famp, axis, 'amp', self._dcomplex,
+            tosend = 'amp' if not keepfilt else None
+            xfilt = spectral(x, sf, self.famp, axis, tosend, self._dcomplex,
                              self._filt, self._filtorder, self._cycle[1],
                              self._width, njobs)
         else:
-            raise ValueError("ftype must either be 'phase' or 'amplitude.'")
+            raise ValueError("ftype must either be None, 'phase' or "
+                             "'amplitude.'")
         return xfilt
 
     def fit(self, sf, pha, amp, axis=1, traxis=0, nperm=200, correct=False,
@@ -335,8 +343,8 @@ class Pac(PacPlot):
         if xpha.shape != xamp.shape:
             raise ValueError("The shape of xpha and xamp must be equals.")
         # Extract phase (npha, ...) and amplitude (namp, ...) :
-        pha = self.filter(sf, xpha, axis, 'phase', njobs)
-        amp = self.filter(sf, xamp, axis, 'amplitude', njobs)
+        pha = self.filter(sf, xpha, axis, 'phase', False, njobs)
+        amp = self.filter(sf, xamp, axis, 'amplitude', False, njobs)
 
         # Special cases :
         if self._idpac[0] == 5:
