@@ -31,7 +31,7 @@ for i, k in enumerate([1, 2, 3, 4]):
     p.idpac = (k, 0, 0)
     print('-> PAC using '+p.method)
     # Compute only the PAC without filtering :
-    xpac, _ = p.fit(1024, phases, amplitudes, axis=2)
+    xpac, _ = p.fit(phases, amplitudes, axis=2)
     # Plot :
     plt.subplot(3, 2, k)
     p.comodulogram(xpac.mean(-1), title=p.method, cmap='Spectral_r')
@@ -40,7 +40,7 @@ for i, k in enumerate([1, 2, 3, 4]):
 phaamplitudes = np.angle(hilbert(amplitudes))
 p.idpac = (5, 0, 0)
 print('-> PAC using '+p.method)
-xpac, _ = p.fit(1024, phases, phaamplitudes, axis=2)
+xpac, _ = p.fit(phases, phaamplitudes, axis=2)
 plt.subplot(3, 2, 5)
 p.comodulogram(xpac.mean(-1), title=p.method, cmap='Spectral_r')
 
