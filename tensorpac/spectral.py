@@ -1,5 +1,4 @@
-"""Extract spectral informations from data.
-"""
+"""Extract spectral informations from data."""
 import numpy as np
 from joblib import Parallel, delayed
 from scipy.signal import hilbert
@@ -55,9 +54,9 @@ def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, width,
         xf = Parallel(n_jobs=njobs)(delayed(filtdata)(
                   x, sf, f[k, :], axis, filt, cycle, filtorder) for k in nf)
         # Use hilbert for the complex decomposition :
-        xd = hilbert(xf, axis=axis)
+        xd = hilbert(xf, axis=axis+1) if stype is not None else np.array(xf)
     elif dcomplex is 'wavelet':
-        f = f.mean(1)
+        f = f.mean(1)  # centered frequencies
         xd = Parallel(n_jobs=njobs)(delayed(morlet)(
                                             x, sf, k, axis, width) for k in f)
 
@@ -66,6 +65,8 @@ def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, width,
         return np.angle(np.moveaxis(xd, axis+1, -1))
     elif stype is 'amp':
         return np.abs(np.moveaxis(xd, axis+1, -1))
+    elif stype is None:
+        return np.moveaxis(xd, axis+1, -1)
 
 
 def morlet(x, sf, f, axis=0, width=7.):
