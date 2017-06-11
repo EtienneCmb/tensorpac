@@ -218,9 +218,6 @@ class Pac(PacPlot):
         """Compute PAC on filtered data.
 
         Args:
-            sf: float
-                The sampling frequency.
-
             pha, amp: np.ndarray
                 Array of filtered data with respectively a shape of (npha, ...)
                 and (namp, ...). If you want to compute PAC locally i.e. on the
