@@ -348,7 +348,7 @@ class Pac(PacPlot):
             amp = np.angle(hilbert(amp, axis=-1))
 
         # Compute pac :
-        return self.fit(sf, pha, amp, axis+1, traxis+1, nperm, correct, njobs)
+        return self.fit(pha, amp, axis+1, traxis+1, nperm, correct, njobs)
 
     ###########################################################################
     #                              CHECKING

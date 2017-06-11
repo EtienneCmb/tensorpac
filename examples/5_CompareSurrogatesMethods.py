@@ -26,7 +26,7 @@ for i, k in enumerate(range(7)):
     p.idpac = (1, k, 3)
     print('-> Surrogates using '+p.surro)
     # Compute only the PAC without filtering :
-    xpac, _ = p.fit(1024, phases, amplitudes, axis=2, nperm=50)
+    xpac, _ = p.fit(phases, amplitudes, axis=2, nperm=50)
     # Plot :
     plt.subplot(3, 3, k+1)
     p.comodulogram(xpac.mean(-1), title=p.surro, cmap='Spectral_r')

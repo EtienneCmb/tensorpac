@@ -26,7 +26,7 @@ for i, k in enumerate(range(5)):
     p.idpac = (1, 3, k)
     print('-> Normalization using '+p.norm)
     # Compute only the PAC without filtering :
-    xpac, _ = p.fit(1024, phases, amplitudes, axis=2, nperm=50)
+    xpac, _ = p.fit(phases, amplitudes, axis=2, nperm=50)
     # Plot :
     plt.subplot(3, 2, k+1)
     p.comodulogram(xpac.mean(-1), title=p.norm, cmap='Spectral_r')
