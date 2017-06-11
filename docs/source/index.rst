@@ -23,9 +23,9 @@ Tensorpac is only based on NumPy and use `Joblib <https://pythonhosted.org/jobli
 What's new?
 ***********
 
-* New in version v0.3
+* New in version v0.4
     
-    * New doc
+    * Bug fixing
 
 Todo list
 *********
