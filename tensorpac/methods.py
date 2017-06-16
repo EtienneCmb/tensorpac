@@ -2,7 +2,7 @@
 
 This file include the following methods :
 - Mean Vector Length (Canolty, 2006)
-- Kullback Leibler Divergence (Tort, 2010)
+- Kullback Leibler Distance (Tort, 2010)
 - Heights Ratio (Lakata, 2005)
 - Normalized direct Pac (Ozkurt, 2012)
 - Phase Synchrony
@@ -17,13 +17,6 @@ __all__ = ['ComputePac']
 
 def ComputePac(pha, amp, idp, nbins, p):
     """Copute real Phase-Amplitude coupling.
-
-    list of the implemented methods :
-    - Mean Vector Length
-    - Kullback-Leibler Divergence
-    - Heights Ratio
-    - ndPAC
-
 
     Each method take at least a pha and amp array with the respective
     dimensions:
@@ -80,8 +73,8 @@ def MVL(pha, amp):
     return np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j*pha)))/npts
 
 
-def klDivergence(pha, amp, nbins):
-    """Kullback Leibler Divergence (Tort, 2010).
+def klDistance(pha, amp, nbins):
+    """Kullback Leibler Distance (Tort, 2010).
 
     Args:
         pha: np.ndarray
@@ -136,7 +129,7 @@ def HeightsRatio(pha, amp, nbins):
 def _kl_hr(pha, amp, nbins):
     """Binarize the amplitude according to phase values.
 
-    This function is shared by the Kullback-Leibler Divergence and the
+    This function is shared by the Kullback-Leibler Distance and the
     Height Ratio.
     """
     # Build the default binned phase vector :
