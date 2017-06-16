@@ -70,7 +70,7 @@ def MVL(pha, amp):
     """
     # Number of time points :
     npts = pha.shape[-1]
-    return np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j*pha)))/npts
+    return np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j*pha))) / npts
 
 
 def klDistance(pha, amp, nbins):
@@ -122,9 +122,13 @@ def HeightsRatio(pha, amp, nbins):
     """
     # Get the phase locked binarized amplitude :
     p_j = _kl_hr(pha, amp, nbins)
+    # Divide the binned amplitude by the mean over the bins :
     p_j /= p_j.sum(axis=0, keepdims=True)
+    # Find (maxximum, minimum) of the binned distribution :
     h_max, h_min = p_j.max(axis=0), p_j.min(axis=0)
-    return (h_max - h_min) / h_max
+    # Compute pac :
+    pac = (h_max - h_min) / h_max
+    return pac
 
 
 def _kl_hr(pha, amp, nbins):
