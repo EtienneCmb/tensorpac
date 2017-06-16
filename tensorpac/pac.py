@@ -257,6 +257,15 @@ class Pac(PacPlot):
               amplitude into two equal parts, then swap those two blocks. But
               the nblocks parameter allow to split into a larger number.
         """
+        # Shape checking :
+        if pha.ndim != amp.ndim:
+            raise ValueError("pha and amp must have the same number of "
+                             "dimensions.")
+        # Force phase / amplitude to be at least (1, N) :
+        if (pha.ndim == 1) and (amp.ndim == 1):
+            pha = pha.reshape(1, -1)
+            amp = amp.reshape(1, -1)
+            axis = 1
         suro, pvalues = None, None
         # Compute pac :
         pacargs = (self.idpac[0], self.nbins, 1/nperm)
