@@ -266,6 +266,11 @@ class Pac(PacPlot):
             pha = pha.reshape(1, -1)
             amp = amp.reshape(1, -1)
             axis = 1
+        # Check if the phase is in radians :
+        if np.ptp(pha) > 2 * np.pi:
+            raise ValueError("Your phase is probably in degrees and should be"
+                             " converted in radians using either np.degrees or"
+                             " np.deg2rad.")
         suro, pvalues = None, None
         # Compute pac :
         pacargs = (self.idpac[0], self.nbins, 1/nperm)
