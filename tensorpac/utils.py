@@ -40,7 +40,7 @@ def PacSignals(fpha=2, famp=100, sf=1024, ndatasets=10, tmax=1, chi=0, noise=1,
             Amount of coupling. If chi=0, signals of phase and amplitude
             are strongly coupled.
 
-        noise: int/float (1<=noise<=3), optional, [def: 1]
+        noise: int/float (0<=noise<=3), optional, [def: 1]
             Amount of noise
 
         dpha: int/float (0<=dpha<=100), optional, [def: 0]
@@ -68,8 +68,8 @@ def PacSignals(fpha=2, famp=100, sf=1024, ndatasets=10, tmax=1, chi=0, noise=1,
         tmax = 1
     if (chi < 0) or (chi > 1):
         chi = 0
-    if (noise < 1) or (noise > 3):
-        noise = 1
+    if (noise < 0) or (noise > 3):
+        noise = 0
     if (dpha < 0) or (dpha > 100):
         dpha = 0
     if (damp < 0) or (damp > 100):
