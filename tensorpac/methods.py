@@ -28,9 +28,9 @@ def ComputePac(pha, amp, idp, nbins, p):
     if idp == 1:
         return MVL(pha, amp)
 
-    # Kullback-Leiber divergence (Tort, 2010)
+    # Kullback-Leiber distance (Tort, 2010)
     elif idp == 2:
-        return klDivergence(pha, amp, nbins)
+        return klDistance(pha, amp, nbins)
 
     # Heights ratio
     elif idp == 3:
