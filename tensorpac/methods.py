@@ -91,13 +91,16 @@ def klDistance(pha, amp, nbins):
             PAC of shape (npha, namp, ...)
     """
     # Get the phase locked binarized amplitude :
-    abin = _kl_hr(pha, amp, nbins)
+    p_j = _kl_hr(pha, amp, nbins)
     # Divide the binned amplitude by the mean over the bins :
-    abin = np.divide(abin, np.sum(abin, axis=0))
-    abin[abin == 0] = 1
-    abin = abin * np.log2(abin)
-
-    return (1 + abin.sum(axis=0)/np.log2(nbins))
+    p_j /= p_j.sum(axis=0, keepdims=True)
+    # Take the log of non-zero values :
+    p_j = p_j * np.ma.log10(p_j).filled(-np.inf)
+    # Compute the PAC :
+    pac = 1 + p_j.sum(axis=0)/np.log10(nbins)
+    # Set distribution distances that are really closed to zero :
+    pac[np.isinf(pac)] = 0.
+    return pac
 
 
 def HeightsRatio(pha, amp, nbins):
