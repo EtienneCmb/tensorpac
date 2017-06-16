@@ -121,12 +121,10 @@ def HeightsRatio(pha, amp, nbins):
             PAC of shape (npha, namp, ...)
     """
     # Get the phase locked binarized amplitude :
-    abin = _kl_hr(pha, amp, nbins)
-    M, m = abin.max(axis=0), abin.min(axis=0)
-    MDown = M.copy()
-    MDown[MDown == 0] = 1
-
-    return (M-m)/MDown
+    p_j = _kl_hr(pha, amp, nbins)
+    p_j /= p_j.sum(axis=0, keepdims=True)
+    h_max, h_min = p_j.max(axis=0), p_j.min(axis=0)
+    return (h_max - h_min) / h_max
 
 
 def _kl_hr(pha, amp, nbins):
