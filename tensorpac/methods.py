@@ -134,14 +134,13 @@ def _kl_hr(pha, amp, nbins):
     Height Ratio.
     """
     # Build the default binned phase vector :
-    step = 2*np.pi/nbins
-    x = np.arange(-np.pi, np.pi+step, step)
-    vecbin = np.c_[x[0:-1], x[1::]]
+    binsize = (2 * np.pi) / float(nbins)
+    vecbin = np.arange(-np.pi, np.pi, binsize)
 
     abin = []
     for i in vecbin:
         # Find where phase take vecbin values :
-        idx = np.logical_and(pha >= i[0], pha < i[1])
+        idx = np.logical_and(pha >= i, pha < i + binsize)
         # Take the sum of amplitude inside the bin :
         abin.append(np.einsum('i...j, k...j->ik...', amp, idx))
 
