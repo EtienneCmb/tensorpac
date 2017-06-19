@@ -211,8 +211,8 @@ class Pac(PacPlot):
                              "'amplitude.'")
         return xfilt
 
-    def fit(self, pha, amp, axis=1, traxis=0, nperm=200, correct=False,
-            njobs=-1):
+    def fit(self, pha, amp, axis=1, traxis=0, nperm=200, optimized=True,
+            correct=False, njobs=-1):
         """Compute PAC on filtered data.
 
         Args:
@@ -233,6 +233,10 @@ class Pac(PacPlot):
 
             nperm: int, optional, (def: 200)
                 Number of surrogates to compute.
+
+            optimized: bool, optional, (def: True)
+                Optimize argument of the np.einsum function. Use either False,
+                True, 'greedy' or 'optimal'.
 
             correct: bool, optional, (def: True)
                 Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -271,7 +275,7 @@ class Pac(PacPlot):
                              " np.deg2rad.")
         suro, pvalues = None, None
         # Compute pac :
-        pacargs = (self.idpac[0], self.nbins, 1/nperm)
+        pacargs = (self.idpac[0], self.nbins, 1/nperm, optimized)
         pac = ComputePac(pha, amp, *pacargs)
 
         # Compute surogates (if needed) :
@@ -481,4 +485,3 @@ class Pac(PacPlot):
     def width(self, value):
         """Set width value."""
         self._width = value
-
