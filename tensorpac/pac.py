@@ -39,10 +39,8 @@ class Pac(PacPlot):
                 - '0': No surrogates
                 - '1': Swap phase/amplitude across trials [#f2]_
                 - '2': Swap amplitude time blocks [#f5]_
-                - '3': Shuffle amplitude and phase time-series
-                - '4': Shuffle phase time-series
-                - '5': Shuffle amplitude time-series
-                - '6': Time lag [#f1]_
+                - '3': Shuffle amplitude time-series
+                - '4': Time lag [#f1]_
 
             * Third digit: refer to the normalization method for correction:
 
