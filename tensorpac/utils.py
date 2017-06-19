@@ -5,7 +5,7 @@
 """
 import numpy as np
 
-__all__ = ['PacSignals', 'PacVec', 'PacPlot']
+__all__ = ['PacSignals', 'PacVec', 'PacTriVec']
 
 
 ###############################################################################
@@ -14,13 +14,12 @@ __all__ = ['PacSignals', 'PacVec', 'PacPlot']
 ###############################################################################
 ###############################################################################
 
-
-def PacSignals(fpha=2, famp=100, sf=1024, ndatasets=10, tmax=1, chi=0, noise=1,
-               dpha=0, damp=0):
+def PacSignals(fpha=10, famp=100, sf=1024, ndatasets=10, tmax=1, chi=0,
+               noise=1, dpha=0, damp=0):
     """Generate artificially phase-amplitude coupled signals.
 
     Kargs:
-        fpha: int/float, optional, [def: 2]
+        fpha: int/float, optional, [def: 10]
             Frequency for phase
 
         famp: int/float, optional, [def: 100]
@@ -152,12 +151,36 @@ def _CreatePairsVector(fstart, fend, fwidth, fstep):
     return np.c_[fdown, fup]
 
 
-###############################################################################
-###############################################################################
-#                             PLOTTING
-###############################################################################
-###############################################################################
+def PacTriVec(fstart=60, fend=160, fwidth=10):
+    """Generate triangular vector.
 
-def PacPlot():
-    """Plot Pac."""
-    import matplotlib.pyplot as plt
+    Kargs:
+        fstart: float, optional, (def: 60)
+            Starting frequency.
+
+        fend: float, optional, (def: 160)
+            Ending frequency.
+
+        fwidth: float, optional, (def: 10)
+            Frequency bandwidth.
+
+    Returns:
+        f: np.ndarray
+            The triangular vector.
+
+        tridx: np.ndarray
+            The triangular index for the reconstruction.
+    """
+    starting = np.arange(fstart, fend+fwidth, fwidth)
+    f, tridx = np.array([]), np.array([])
+    for num, k in enumerate(starting[0:-1]):
+        # Lentgh of the vector to build :
+        L = len(starting) - (num + 1)
+        # Create the frequency vector for this starting frequency :
+        fst = np.c_[np.full(L, k), starting[num+1::]]
+        nfst = fst.shape[0]
+        # Create the triangular index for this vector of frequencies :
+        idx = np.c_[np.flipud(np.arange(nfst)), np.full(nfst, num)]
+        tridx = np.concatenate((tridx, idx), axis=0) if tridx.size else idx
+        f = np.concatenate((f, fst), axis=0) if f.size else fst
+    return f, tridx
