@@ -27,15 +27,9 @@ def pacstr(idpac):
     elif idpac[1] == 2:
         suro = 'Swap amplitude blocks across time'
     elif idpac[1] == 3:
-        suro = 'Shuffle amplitude and phase time-series'
-    elif idpac[1] == 4:
-        suro = 'Shuffle phase time-series'
-    elif idpac[1] == 5:
         suro = 'Shuffle amplitude time-series'
-    elif idpac[1] == 6:
+    elif idpac[1] == 4:
         suro = 'Time lag'
-    elif idpac[1] == 7:
-        suro = 'Circular shifting'
 
     # Normalization methods :
     if idpac[2] == 0:
