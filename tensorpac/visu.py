@@ -8,11 +8,9 @@ __all__ = ['PacPlot']
 class PacPlot(object):
     """Main PAC plotting class."""
 
-    def comodulogram(self, pac, title='', cmap='viridis', vmin=None,
-                     vmax=None, under=None, over=None, bad=None, pvalues=None,
-                     p=0.05, interp=None, rmaxis=False, dpaxis=False,
-                     plotas='imshow', ncontours=5, levels=None,
-                     levelcmap='Reds'):
+    def comodulogram(self, pac, xlabel='Frequency for phase (hz)',
+                     ylabel='Frequency for amplitude (hz)',
+                     cblabel='PAC values', **kwargs):
         """Plot PAC using comodulogram.
 
         Args:
@@ -20,6 +18,15 @@ class PacPlot(object):
                 PAC array of shape (pha, namp)
 
         Kargs:
+            xlabel: string, optional, (def: 'Frequency for phase (hz)')
+                Label for the phase axis.
+
+            ylabel: string, optional, (def: 'Frequency for amplitude (hz)')
+                Label for the amplitude axis.
+
+            cblabel: string, optional, (def: 'PAC values')
+                Colorbar.
+
             title: string, optional, (def: '')
                 Title of the plot.
 
@@ -79,18 +86,65 @@ class PacPlot(object):
             gca: axes
                 The current matplotlib axes.
         """
-        import matplotlib.pyplot as plt
+        xvec, yvec = self.xvec, self.yvec
+        return self._pacplot(pac, xvec, yvec, xlabel, ylabel, cblabel,
+                             **kwargs)
+
+    def triplot(self, pac, fvec, tridx, xlabel='Starting frequency (hz)',
+                ylabel='Ending frequency (hz)', cblabel='PAC values',
+                bad='lightgray', **kwargs):
+        """Triangular plot."""
+        pac, tridx = np.squeeze(pac), np.squeeze(tridx)
+        # ___________________ CHECKING ___________________
+        print(pac.shape, fvec.shape, tridx.shape)
+        # Check if pac is a raw vector :
+        if pac.ndim is not 1:
+            raise ValueError("The PAC variable must be a row vector.")
+        if len(pac) != tridx.shape[0]:
+            raise ValueError("PAC and tridx variables must have the same "
+                             "length.")
+
+        # ___________________ RECONSTRUCT ___________________
+        npac = tridx.max() + 2
+        rpac = np.zeros((npac, npac), dtype=float)
+        for num, k in enumerate(tridx):
+            rpac[k[0], k[1]] = pac[num]
+        # Build mask :
+        mask = np.zeros_like(rpac, dtype=bool)
+        mask[np.triu_indices_from(mask)] = True
+        # Mask the lower triangle :
+        rpac = np.ma.masked_array(np.flipud(rpac), mask=mask)
+
+        # ___________________ PLOT ___________________
+        # Define frequency vector :
+        vector = fvec[tridx[:, 0] == 0, 0]
+        xvec = yvec = np.append(vector, [fvec.max()])
+        return self._pacplot(rpac, xvec, yvec, xlabel, ylabel, cblabel,
+                             bad=bad, **kwargs)
+
+    def _pacplot(self, pac, xvec, yvec, xlabel='', ylabel='', cblabel='',
+                 title='', cmap='viridis', vmin=None, vmax=None, under=None,
+                 over=None, bad=None, pvalues=None, p=0.05, interp=None,
+                 rmaxis=False, dpaxis=False, plotas='imshow', ncontours=5,
+                 levels=None, levelcmap='Reds'):
+        """Main plotting pac function."""
+        # Check if pac is 2 dimensions :
+        if pac.ndim is not 2:
+            raise ValueError("The PAC variable must have two dimensions.")
+        # Try import matplotlib :
+        try:
+            import matplotlib.pyplot as plt
+        except:
+            raise ValueError("Matplotlib not installed.")
         # Define p-values (if needed) :
         if pvalues is None:
             pvalues = np.zeros_like(pac)
         # 2D interpolation (if needed)
         if interp is not None:
-            pac, yvec, xvec = mapinterpolation(pac, self.xvec, self.yvec,
+            pac, yvec, xvec = mapinterpolation(pac, xvec, yvec,
                                                interp[0], interp[1])
             pvalues = mapinterpolation(pvalues, self.xvec, self.yvec,
                                        interp[0], interp[1])[0]
-        else:
-            xvec, yvec = self.xvec, self.yvec
         pac = np.ma.masked_array(pac, mask=pvalues >= p)
 
         # Plot type :
@@ -122,14 +176,14 @@ class PacPlot(object):
 
         # Title/Xlabel/Ylabel :
         plt.axis('tight')
-        plt.xlabel('Frequency for phase (hz)')
-        plt.ylabel('Frequency for amplitude (hz)')
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
         plt.title(title)
         plt.clim(vmin=vmin, vmax=vmax)
 
         # Colorbar
         cb = plt.colorbar(im, shrink=0.7, pad=0.01, aspect=10)
-        cb.set_label('PAC values')
+        cb.set_label(cblabel)
         cb.outline.set_visible(False)
         ax = plt.gca()
 
