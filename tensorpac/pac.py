@@ -212,7 +212,7 @@ class Pac(PacPlot):
         return xfilt
 
     def fit(self, pha, amp, axis=1, traxis=0, nperm=200, optimized=True,
-            correct=False, njobs=-1):
+            get_surro=False, correct=False, njobs=-1):
         """Compute PAC on filtered data.
 
         Args:
@@ -238,12 +238,26 @@ class Pac(PacPlot):
                 Optimize argument of the np.einsum function. Use either False,
                 True, 'greedy' or 'optimal'.
 
+            get_surro: bool, optional, (def: False)
+                Return surrogate chance distribution.
+
             correct: bool, optional, (def: True)
                 Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
             njobs: int, optional, (def: -1)
                 Number of jobs to compute PAC in parallel. For very large data,
                 set this parameter to 1 in order to prevent large memory usage.
+
+        Returns:
+            pac: np.ndarray
+                Phase-Amplitude Coupling measure of shape (namp, npha, ...).
+
+            pvalue: np.ndarray
+                P-values (None if no surrogates)
+
+            suro: np.ndarray
+                If get_suro is True, get the chance distribution of shape
+                (nperm, namp, npha, ...)
 
         .. warning::
             * Surrogates are only going to be computed if the second and third
@@ -302,10 +316,13 @@ class Pac(PacPlot):
         if correct:
             pac[pac < 0.] = 0.
 
-        return pac, pvalues
+        if get_surro:
+            return pac, pvalues, suro
+        else:
+            return pac, pvalues
 
     def filterfit(self, sf, xpha, xamp, axis=1, traxis=0, nperm=200,
-                  correct=False, njobs=-1):
+                  optimized=True, get_surro=False, correct=False, njobs=-1):
         """Filt the data then compute PAC on it.
 
         Args:
@@ -331,12 +348,30 @@ class Pac(PacPlot):
             nperm: int, optional, (def: 200)
                 Number of surrogates to compute.
 
+            optimized: bool, optional, (def: True)
+                Optimize argument of the np.einsum function. Use either False,
+                True, 'greedy' or 'optimal'.
+
+            get_surro: bool, optional, (def: False)
+                Return surrogate chance distribution.
+
             correct: bool, optional, (def: True)
                 Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
             njobs: int, optional, (def: -1)
                 Number of jobs to compute PAC in parallel. For very large data,
                 set this parameter to 1 in order to prevent large memory usage.
+
+        Returns:
+            pac: np.ndarray
+                Phase-Amplitude Coupling measure of shape (namp, npha, ...).
+
+            pvalue: np.ndarray
+                P-values (None if no surrogates)
+
+            suro: np.ndarray
+                If get_suro is True, get the chance distribution of shape
+                (nperm, namp, npha, ...)
 
         .. warning::
             * Surrogates are only going to be computed if the second and third
