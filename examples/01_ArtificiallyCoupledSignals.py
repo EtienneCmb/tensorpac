@@ -15,7 +15,7 @@ sig3, time3 = PacSignals(fpha=10, famp=150, ndatasets=3, chi=0.5, noise=2)
 
 # Finally, if you want to add variability across generated signals, use the
 # dpha and damp parameters :
-sig4, time4 = PacSignals(fpha=1, famp=50, ndatasets=3, dpha=30, damp=70, tmax=3)
+sig4, time4 = PacSignals(fpha=[2, 4], famp=[30, 60], ndatasets=3, dpha=30, damp=70, tmax=3)
 
 
 def plot(time, sig, title):
