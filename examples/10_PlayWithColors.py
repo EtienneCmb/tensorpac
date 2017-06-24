@@ -11,12 +11,13 @@ plt.style.use('seaborn-paper')
 # and 100hz. By default, this dataset is organized as (ndatasets, npts) where
 # npts is the number of time points.
 n = 20  # number of datasets
-data, time = PacSignals(fpha=10, famp=100, noise=0, ndatasets=n)
+data, time = PacSignals(fpha=10, famp=100, noise=2., ndatasets=n, dpha=10,
+                        damp=10)
 
 # First, let's use the MVL, without any further correction by surrogates :
 p = Pac(idpac=(5, 3, 3), fpha=(2, 30, 1, 1), famp=(60, 150, 5, 5),
         dcomplex='wavelet', width=12)
-xpac, pval = p.filterfit(1024, data, data, axis=1, nperm=210)
+xpac, pval = p.filterfit(1024, data, data, axis=1, nperm=100)
 
 # Now, we plot the result by taking the mean across the dataset dimension.
 plt.subplot(3, 3, 1)
@@ -27,6 +28,8 @@ p.comodulogram(xpac.mean(-1), title='Peaking between [5, 20]', vmin=5,
                vmax=20, cmap='gnuplot2_r')
 
 plt.subplot(3, 3, 3)
+# Ideally, the p-values should be corrected across trials because taking the
+# mean is not correct. This is only illustrative.
 p.comodulogram(xpac.mean(-1), title='p>=.05 in black', cmap='Spectral_r',
                pvalues=pval.mean(-1), bad=(.1, .1, .1), p=.05)
 
