@@ -39,10 +39,8 @@ class Pac(PacPlot):
                 - '0': No surrogates
                 - '1': Swap phase/amplitude across trials [#f2]_
                 - '2': Swap amplitude time blocks [#f5]_
-                - '3': Shuffle amplitude and phase time-series
-                - '4': Shuffle phase time-series
-                - '5': Shuffle amplitude time-series
-                - '6': Time lag [#f1]_
+                - '3': Shuffle amplitude time-series
+                - '4': Time lag [#f1]_
 
             * Third digit: refer to the normalization method for correction:
 
@@ -213,8 +211,8 @@ class Pac(PacPlot):
                              "'amplitude.'")
         return xfilt
 
-    def fit(self, pha, amp, axis=1, traxis=0, nperm=200, correct=False,
-            njobs=-1):
+    def fit(self, pha, amp, axis=1, traxis=0, nperm=200, optimized=True,
+            get_surro=False, correct=False, njobs=-1):
         """Compute PAC on filtered data.
 
         Args:
@@ -236,12 +234,30 @@ class Pac(PacPlot):
             nperm: int, optional, (def: 200)
                 Number of surrogates to compute.
 
+            optimized: bool, optional, (def: True)
+                Optimize argument of the np.einsum function. Use either False,
+                True, 'greedy' or 'optimal'.
+
+            get_surro: bool, optional, (def: False)
+                Return surrogate chance distribution.
+
             correct: bool, optional, (def: True)
                 Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
             njobs: int, optional, (def: -1)
                 Number of jobs to compute PAC in parallel. For very large data,
                 set this parameter to 1 in order to prevent large memory usage.
+
+        Returns:
+            pac: np.ndarray
+                Phase-Amplitude Coupling measure of shape (namp, npha, ...).
+
+            pvalue: np.ndarray
+                P-values (None if no surrogates)
+
+            suro: np.ndarray
+                If get_suro is True, get the chance distribution of shape
+                (nperm, namp, npha, ...)
 
         .. warning::
             * Surrogates are only going to be computed if the second and third
@@ -257,9 +273,26 @@ class Pac(PacPlot):
               amplitude into two equal parts, then swap those two blocks. But
               the nblocks parameter allow to split into a larger number.
         """
+        # Shape checking :
+        if pha.ndim != amp.ndim:
+            raise ValueError("pha and amp must have the same number of "
+                             "dimensions.")
+        # Force phase / amplitude to be at least (1, N) :
+        if (pha.ndim == 1) and (amp.ndim == 1):
+            pha = pha.reshape(1, -1)
+            amp = amp.reshape(1, -1)
+            axis = 1
+        # Check if the phase is in radians :
+        if np.ptp(pha) > 2 * np.pi:
+            raise ValueError("Your phase is probably in degrees and should be"
+                             " converted in radians using either np.degrees or"
+                             " np.deg2rad.")
+        # For the phase synchrony, extract the phase of the amplitude :
+        if self._idpac[0] == 5:
+            amp = np.angle(hilbert(amp, axis=axis))
         suro, pvalues = None, None
         # Compute pac :
-        pacargs = (self.idpac[0], self.nbins, 1/nperm)
+        pacargs = (self.idpac[0], self.nbins, 1/nperm, optimized)
         pac = ComputePac(pha, amp, *pacargs)
 
         # Compute surogates (if needed) :
@@ -286,10 +319,13 @@ class Pac(PacPlot):
         if correct:
             pac[pac < 0.] = 0.
 
-        return pac, pvalues
+        if get_surro:
+            return pac, pvalues, suro
+        else:
+            return pac, pvalues
 
     def filterfit(self, sf, xpha, xamp, axis=1, traxis=0, nperm=200,
-                  correct=False, njobs=-1):
+                  optimized=True, get_surro=False, correct=False, njobs=-1):
         """Filt the data then compute PAC on it.
 
         Args:
@@ -315,12 +351,30 @@ class Pac(PacPlot):
             nperm: int, optional, (def: 200)
                 Number of surrogates to compute.
 
+            optimized: bool, optional, (def: True)
+                Optimize argument of the np.einsum function. Use either False,
+                True, 'greedy' or 'optimal'.
+
+            get_surro: bool, optional, (def: False)
+                Return surrogate chance distribution.
+
             correct: bool, optional, (def: True)
                 Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
             njobs: int, optional, (def: -1)
                 Number of jobs to compute PAC in parallel. For very large data,
                 set this parameter to 1 in order to prevent large memory usage.
+
+        Returns:
+            pac: np.ndarray
+                Phase-Amplitude Coupling measure of shape (namp, npha, ...).
+
+            pvalue: np.ndarray
+                P-values (None if no surrogates)
+
+            suro: np.ndarray
+                If get_suro is True, get the chance distribution of shape
+                (nperm, namp, npha, ...)
 
         .. warning::
             * Surrogates are only going to be computed if the second and third
@@ -348,7 +402,8 @@ class Pac(PacPlot):
             amp = np.angle(hilbert(amp, axis=-1))
 
         # Compute pac :
-        return self.fit(pha, amp, axis+1, traxis+1, nperm, correct, njobs)
+        return self.fit(pha, amp, axis+1, traxis+1, nperm, optimized,
+                        get_surro, correct, njobs)
 
     ###########################################################################
     #                              CHECKING
@@ -469,4 +524,3 @@ class Pac(PacPlot):
     def width(self, value):
         """Set width value."""
         self._width = value
-

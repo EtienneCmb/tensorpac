@@ -10,8 +10,10 @@ plt.style.use('seaborn-paper')
 # First, we generate a dataset of signals artificially coupled between 10hz
 # and 100hz. By default, this dataset is organized as (ndatasets, npts) where
 # npts is the number of time points.
-n = 100  # number of datasets
-data, time = PacSignals(fpha=10, famp=100, noise=0, ndatasets=n)
+n = 50  # number of datasets
+npts = 3000  # number of time points
+data, time = PacSignals(fpha=10, famp=100, noise=3., ndatasets=n, npts=npts,
+                        dpha=10, damp=5, chi=.8)
 
 # First, let's use the MVL, without any further correction by surrogates :
 p = Pac(idpac=(1, 0, 0), fpha=(2, 30, 2, 1), famp=(60, 150, 10, 5))
@@ -20,7 +22,7 @@ t1 = p.method + '\n' + p.surro + '\n' + p.norm
 
 # Now, we still use the MVL method, but in addition we shuffle amplitude time
 # series and then, subtract then divide by the mean of surrogates :
-p.idpac = (1, 3, 3)
+p.idpac = (1, 1, 1)
 xpac_corr, _ = p.filterfit(1024, data, data, axis=1, nperm=10)
 t2 = p.method + '\n' + p.surro + '\n' + p.norm
 

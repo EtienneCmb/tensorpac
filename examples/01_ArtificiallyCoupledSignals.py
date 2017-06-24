@@ -8,14 +8,16 @@ sig, time = PacSignals(ndatasets=1)
 
 # Now, we generate a longer and weaker 4 <-> 60 coupling using the chi
 #  parameter. In addition, we increase the amount of noise :
-sig2, time2 = PacSignals(fpha=4, famp=60, ndatasets=1, chi=.9, noise=3, tmax=3)
+sig2, time2 = PacSignals(fpha=4, famp=60, ndatasets=1, chi=.9, noise=3,
+                         npts=3000)
 
 # Alternatively, you can generate multiple coupled signals :
 sig3, time3 = PacSignals(fpha=10, famp=150, ndatasets=3, chi=0.5, noise=2)
 
 # Finally, if you want to add variability across generated signals, use the
 # dpha and damp parameters :
-sig4, time4 = PacSignals(fpha=1, famp=50, ndatasets=3, dpha=30, damp=70, tmax=3)
+sig4, time4 = PacSignals(fpha=10, famp=50, ndatasets=3, dpha=30,
+                         damp=70, npts=3000)
 
 
 def plot(time, sig, title):
@@ -37,6 +39,6 @@ plt.subplot(2, 2, 3)
 plot(time3, sig3, '3 signals coupled between 10hz <-> 150hz')
 
 plt.subplot(2, 2, 4)
-plot(time4, sig4, '3 signals coupled, with variability between 1hz <-> 50hz')
+plot(time4, sig4, '3 signals coupled, with variability between 10hz <-> 50hz')
 
 plt.show()

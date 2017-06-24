@@ -4,7 +4,7 @@ In Tensorpac, you can define your phase and amplitude vectors in sevral ways :
 - Manually define one band (ex : [2, 4])
 - Define multiple bands using a list/tuple/array (ex : [[2, 4], [5, 7]])
 - Using a (start, stop width step) definition. The latter lets you create
-regulary spaced bands [[start, start+width], [start+step, start+step+width], 
+regulary spaced bands [[start, start+width], [start+step, start+step+width],
                        [start+2*step, start+2*step+width], ...]
 - Using a range : np.arange(1, 6) => [[1, 2], [2, 3], [3, 4], [4, 5]]
 """

@@ -8,8 +8,9 @@ plt.style.use('seaborn-paper')
 # First, we generate a dataset of signals artificially coupled between 10hz
 # and 100hz. By default, this dataset is organized as (ndatasets, npts) where
 # npts is the number of time points.
-n = 100  # number of datasets
-data, time = PacSignals(fpha=10, famp=100, noise=0, ndatasets=n)
+n = 10  # number of datasets
+npts = 3000  # number of time points
+data, time = PacSignals(fpha=10, famp=100, noise=0, ndatasets=n, npts=npts)
 
 # First, let's use the MVL, without any further correction by surrogates :
 p = Pac(idpac=(1, 0, 0), fpha=(5, 20, 2, 1), famp=(70, 130, 5, 5))

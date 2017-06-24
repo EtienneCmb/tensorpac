@@ -14,7 +14,7 @@ plt.style.use('seaborn-poster')
 # First, we generate 2 datasets of signals artificially coupled between 10hz
 # and 100hz. By default, those datasets are organized as (ndatasets, npts)
 # where npts is the number of time points.
-n = 100  # number of datasets
+n = 20  # number of datasets
 d1, time = PacSignals(fpha=10, famp=100, noise=1, ndatasets=n)
 d2, time = PacSignals(fpha=10, famp=100, noise=3, ndatasets=n, dpha=20, damp=5,
                       chi=.3)

@@ -85,8 +85,6 @@ def suroSwitch(pha, amp, idn, axis, traxis, nblocks):
     - No surrogates
     - Swap phase/amplitude across trials
     - Swap amplitude blocks across time.
-    - Shuffle amplitude and phase time-series
-    - Shuffle phase time-series
     - Shuffle amplitude time-series
     - Time lag
     """
@@ -102,20 +100,12 @@ def suroSwitch(pha, amp, idn, axis, traxis, nblocks):
     elif idn == 2:
         return SwapBlocks(pha, amp, axis, nblocks)
 
-    # Shuffle phase/amplitude time-series :
-    elif idn == 3:
-        return ShufflePhaAmp(pha, amp, axis)
-
-    # Shuffle phase values
-    elif idn == 4:
-        return ShufflePha(pha, amp, axis)
-
     # Shuffle amplitude values
-    elif idn == 5:
+    elif idn == 3:
         return ShuffleAmp(pha, amp, axis)
 
     # Introduce a time lag
-    elif idn == 6:
+    elif idn == 4:
         return TimeLag(pha, amp, axis)
 
     else:
@@ -190,52 +180,6 @@ def SwapBlocks(pha, amp, axis, nblocks):
 #                            SHUFFLING
 ###############################################################################
 ###############################################################################
-
-
-def ShufflePhaAmp(pha, amp, axis):
-    """Randomly shuffle phase and amplitudes across time.
-
-    Args:
-        pha: np.ndarray
-            Array of phases of shapes (npha, ..., npts)
-
-        amp: np.ndarra
-            Array of amplitudes of shapes (namp, ..., npts)
-
-        axis: int
-            Location of the time axis.
-
-    Return:
-        pha: np.ndarray
-            Shuffled version of phases of shapes (npha, ..., npts)
-
-        amp: np.ndarra
-            Shuffled version of amplitudes of shapes (namp, ..., npts)
-    """
-    return _dimswap(pha, axis), _dimswap(amp, axis)
-
-
-def ShufflePha(pha, amp, axis):
-    """Randomly shuffle phase across time.
-
-    Args:
-        pha: np.ndarray
-            Array of phases of shapes (npha, ..., npts)
-
-        amp: np.ndarra
-            Array of amplitudes of shapes (namp, ..., npts)
-
-        axis: int
-            Location of the time axis.
-
-    Return:
-        pha: np.ndarray
-            Shuffled version of phases of shapes (npha, ..., npts)
-
-        amp: np.ndarra
-            Original version of amplitudes of shapes (namp, ..., npts)
-    """
-    return _dimswap(pha, axis), amp
 
 
 def ShuffleAmp(pha, amp, axis):
