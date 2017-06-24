@@ -14,7 +14,7 @@ __all__ = ['PacSignals', 'PacVec', 'PacTriVec']
 ###############################################################################
 ###############################################################################
 
-def PacSignals(fpha=10, famp=100, sf=1024, ndatasets=10, n=4000, chi=0,
+def PacSignals(fpha=10, famp=100, sf=1024, npts=4000, ndatasets=10, chi=0,
                noise=1, dpha=0, damp=0):
     """Generate artificially phase-amplitude coupled signals.
 
@@ -31,7 +31,7 @@ def PacSignals(fpha=10, famp=100, sf=1024, ndatasets=10, n=4000, chi=0,
         ndatasets : int, optional, [def: 10]
             Number of datasets
 
-        n: int/float, optional, [def: 4000]
+        npts: int, optional, [def: 4000]
             Number of points for each signal.
 
         chi: int/float (0<=chi<=1), optional, [def: 0]
@@ -71,7 +71,7 @@ def PacSignals(fpha=10, famp=100, sf=1024, ndatasets=10, n=4000, chi=0,
     if not 0 <= damp <= 100:
         damp = 0
     fpha, famp = np.asarray(fpha), np.asarray(famp)
-    time = np.mgrid[0:ndatasets, 0:n][1] / sf
+    time = np.mgrid[0:ndatasets, 0:npts][1] / sf
     data = np.zeros_like(time)
 
     # Band / Delta parameters :
