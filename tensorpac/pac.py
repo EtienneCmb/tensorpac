@@ -287,6 +287,9 @@ class Pac(PacPlot):
             raise ValueError("Your phase is probably in degrees and should be"
                              " converted in radians using either np.degrees or"
                              " np.deg2rad.")
+        # For the phase synchrony, extract the phase of the amplitude :
+        if self._idpac[0] == 5:
+            amp = np.angle(hilbert(amp, axis=axis))
         suro, pvalues = None, None
         # Compute pac :
         pacargs = (self.idpac[0], self.nbins, 1/nperm, optimized)
