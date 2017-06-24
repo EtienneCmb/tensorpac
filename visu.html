@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Visualization &mdash; Tensorpac 0.4 documentation</title>
+  <title>Visualization &mdash; Tensorpac 0.5.0 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.4 documentation" href="index.html"/>
+    <link rel="top" title="Tensorpac 0.5.0 documentation" href="index.html"/>
         <link rel="prev" title="Utils" href="utils.html"/> 
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.4
+                0.5.0
               </div>
             
           
@@ -265,7 +265,7 @@
 <h2>Comodulogram method description<a class="headerlink" href="#comodulogram-method-description" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
 <dt id="tensorpac.pac.Pac.comodulogram">
-<code class="descclassname">Pac.</code><code class="descname">comodulogram</code><span class="sig-paren">(</span><em>pac</em>, <em>title=''</em>, <em>cmap='viridis'</em>, <em>vmin=None</em>, <em>vmax=None</em>, <em>under=None</em>, <em>over=None</em>, <em>bad=None</em>, <em>pvalues=None</em>, <em>p=0.05</em>, <em>interp=None</em>, <em>rmaxis=False</em>, <em>dpaxis=False</em>, <em>plotas='imshow'</em>, <em>ncontours=5</em>, <em>levels=None</em>, <em>levelcmap='Reds'</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.pac.Pac.comodulogram" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Pac.</code><code class="descname">comodulogram</code><span class="sig-paren">(</span><em>pac</em>, <em>xlabel='Frequency for phase (hz)'</em>, <em>ylabel='Frequency for amplitude (hz)'</em>, <em>cblabel='PAC values'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.pac.Pac.comodulogram" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plot PAC using comodulogram.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -276,6 +276,12 @@
 </dd>
 <dt>Kargs:</dt>
 <dd><dl class="first last docutils">
+<dt>xlabel: string, optional, (def: &#8216;Frequency for phase (hz)&#8217;)</dt>
+<dd>Label for the phase axis.</dd>
+<dt>ylabel: string, optional, (def: &#8216;Frequency for amplitude (hz)&#8217;)</dt>
+<dd>Label for the amplitude axis.</dd>
+<dt>cblabel: string, optional, (def: &#8216;PAC values&#8217;)</dt>
+<dd>Colorbar.</dd>
 <dt>title: string, optional, (def: &#8216;&#8217;)</dt>
 <dd>Title of the plot.</dd>
 <dt>cmap: string, optional, (def: &#8216;viridis&#8217;)</dt>
@@ -371,7 +377,7 @@ of p-values to use as levels.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.4',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

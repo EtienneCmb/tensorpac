@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tensorpac.visu &mdash; Tensorpac 0.4 documentation</title>
+  <title>tensorpac.visu &mdash; Tensorpac 0.5.0 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Tensorpac 0.4 documentation" href="../../index.html"/>
+    <link rel="top" title="Tensorpac 0.5.0 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.4
+                0.5.0
               </div>
             
           
@@ -201,11 +201,9 @@
 <span class="k">class</span> <span class="nc">PacPlot</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Main PAC plotting class.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">comodulogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pac</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                     <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">under</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">over</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bad</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pvalues</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                     <span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rmaxis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dpaxis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                     <span class="n">plotas</span><span class="o">=</span><span class="s1">&#39;imshow&#39;</span><span class="p">,</span> <span class="n">ncontours</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                     <span class="n">levelcmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">comodulogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pac</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Frequency for phase (hz)&#39;</span><span class="p">,</span>
+                     <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Frequency for amplitude (hz)&#39;</span><span class="p">,</span>
+                     <span class="n">cblabel</span><span class="o">=</span><span class="s1">&#39;PAC values&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Plot PAC using comodulogram.</span>
 
 <span class="sd">        Args:</span>
@@ -213,6 +211,15 @@
 <span class="sd">                PAC array of shape (pha, namp)</span>
 
 <span class="sd">        Kargs:</span>
+<span class="sd">            xlabel: string, optional, (def: &#39;Frequency for phase (hz)&#39;)</span>
+<span class="sd">                Label for the phase axis.</span>
+
+<span class="sd">            ylabel: string, optional, (def: &#39;Frequency for amplitude (hz)&#39;)</span>
+<span class="sd">                Label for the amplitude axis.</span>
+
+<span class="sd">            cblabel: string, optional, (def: &#39;PAC values&#39;)</span>
+<span class="sd">                Colorbar.</span>
+
 <span class="sd">            title: string, optional, (def: &#39;&#39;)</span>
 <span class="sd">                Title of the plot.</span>
 
@@ -272,18 +279,65 @@
 <span class="sd">            gca: axes</span>
 <span class="sd">                The current matplotlib axes.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="n">xvec</span><span class="p">,</span> <span class="n">yvec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xvec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yvec</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pacplot</span><span class="p">(</span><span class="n">pac</span><span class="p">,</span> <span class="n">xvec</span><span class="p">,</span> <span class="n">yvec</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">cblabel</span><span class="p">,</span>
+                             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">triplot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pac</span><span class="p">,</span> <span class="n">fvec</span><span class="p">,</span> <span class="n">tridx</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Starting frequency (hz)&#39;</span><span class="p">,</span>
+                <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Ending frequency (hz)&#39;</span><span class="p">,</span> <span class="n">cblabel</span><span class="o">=</span><span class="s1">&#39;PAC values&#39;</span><span class="p">,</span>
+                <span class="n">bad</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Triangular plot.&quot;&quot;&quot;</span>
+        <span class="n">pac</span><span class="p">,</span> <span class="n">tridx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">pac</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">tridx</span><span class="p">)</span>
+        <span class="c1"># ___________________ CHECKING ___________________</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">pac</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">fvec</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">tridx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="c1"># Check if pac is a raw vector :</span>
+        <span class="k">if</span> <span class="n">pac</span><span class="o">.</span><span class="n">ndim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The PAC variable must be a row vector.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pac</span><span class="p">)</span> <span class="o">!=</span> <span class="n">tridx</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;PAC and tridx variables must have the same &quot;</span>
+                             <span class="s2">&quot;length.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># ___________________ RECONSTRUCT ___________________</span>
+        <span class="n">npac</span> <span class="o">=</span> <span class="n">tridx</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span>
+        <span class="n">rpac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">npac</span><span class="p">,</span> <span class="n">npac</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">num</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tridx</span><span class="p">):</span>
+            <span class="n">rpac</span><span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">pac</span><span class="p">[</span><span class="n">num</span><span class="p">]</span>
+        <span class="c1"># Build mask :</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">rpac</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="n">mask</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">triu_indices_from</span><span class="p">(</span><span class="n">mask</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="c1"># Mask the lower triangle :</span>
+        <span class="n">rpac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">rpac</span><span class="p">),</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">)</span>
+
+        <span class="c1"># ___________________ PLOT ___________________</span>
+        <span class="c1"># Define frequency vector :</span>
+        <span class="n">vector</span> <span class="o">=</span> <span class="n">fvec</span><span class="p">[</span><span class="n">tridx</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">xvec</span> <span class="o">=</span> <span class="n">yvec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span> <span class="p">[</span><span class="n">fvec</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pacplot</span><span class="p">(</span><span class="n">rpac</span><span class="p">,</span> <span class="n">xvec</span><span class="p">,</span> <span class="n">yvec</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">,</span> <span class="n">cblabel</span><span class="p">,</span>
+                             <span class="n">bad</span><span class="o">=</span><span class="n">bad</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_pacplot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pac</span><span class="p">,</span> <span class="n">xvec</span><span class="p">,</span> <span class="n">yvec</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">cblabel</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+                 <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">under</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">over</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bad</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pvalues</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">interp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">rmaxis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dpaxis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plotas</span><span class="o">=</span><span class="s1">&#39;imshow&#39;</span><span class="p">,</span> <span class="n">ncontours</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                 <span class="n">levels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">levelcmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Main plotting pac function.&quot;&quot;&quot;</span>
+        <span class="c1"># Check if pac is 2 dimensions :</span>
+        <span class="k">if</span> <span class="n">pac</span><span class="o">.</span><span class="n">ndim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The PAC variable must have two dimensions.&quot;</span><span class="p">)</span>
+        <span class="c1"># Try import matplotlib :</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Matplotlib not installed.&quot;</span><span class="p">)</span>
         <span class="c1"># Define p-values (if needed) :</span>
         <span class="k">if</span> <span class="n">pvalues</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">pac</span><span class="p">)</span>
         <span class="c1"># 2D interpolation (if needed)</span>
         <span class="k">if</span> <span class="n">interp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">pac</span><span class="p">,</span> <span class="n">yvec</span><span class="p">,</span> <span class="n">xvec</span> <span class="o">=</span> <span class="n">mapinterpolation</span><span class="p">(</span><span class="n">pac</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xvec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yvec</span><span class="p">,</span>
+            <span class="n">pac</span><span class="p">,</span> <span class="n">yvec</span><span class="p">,</span> <span class="n">xvec</span> <span class="o">=</span> <span class="n">mapinterpolation</span><span class="p">(</span><span class="n">pac</span><span class="p">,</span> <span class="n">xvec</span><span class="p">,</span> <span class="n">yvec</span><span class="p">,</span>
                                                <span class="n">interp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">interp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
             <span class="n">pvalues</span> <span class="o">=</span> <span class="n">mapinterpolation</span><span class="p">(</span><span class="n">pvalues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xvec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yvec</span><span class="p">,</span>
                                        <span class="n">interp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">interp</span><span class="p">[</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">xvec</span><span class="p">,</span> <span class="n">yvec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xvec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yvec</span>
         <span class="n">pac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">(</span><span class="n">pac</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">pvalues</span> <span class="o">&gt;=</span> <span class="n">p</span><span class="p">)</span>
 
         <span class="c1"># Plot type :</span>
@@ -315,14 +369,14 @@
 
         <span class="c1"># Title/Xlabel/Ylabel :</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency for phase (hz)&#39;</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency for amplitude (hz)&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
 
         <span class="c1"># Colorbar</span>
         <span class="n">cb</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-        <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;PAC values&#39;</span><span class="p">)</span>
+        <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">cblabel</span><span class="p">)</span>
         <span class="n">cb</span><span class="o">.</span><span class="n">outline</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
 
@@ -461,7 +515,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.4',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

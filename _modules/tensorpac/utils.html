@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tensorpac.utils &mdash; Tensorpac 0.4 documentation</title>
+  <title>tensorpac.utils &mdash; Tensorpac 0.5.0 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Tensorpac 0.4 documentation" href="../../index.html"/>
+    <link rel="top" title="Tensorpac 0.5.0 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.4
+                0.5.0
               </div>
             
           
@@ -198,7 +198,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PacSignals&#39;</span><span class="p">,</span> <span class="s1">&#39;PacVec&#39;</span><span class="p">,</span> <span class="s1">&#39;PacPlot&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PacSignals&#39;</span><span class="p">,</span> <span class="s1">&#39;PacVec&#39;</span><span class="p">,</span> <span class="s1">&#39;PacTriVec&#39;</span><span class="p">]</span>
 
 
 <span class="c1">###############################################################################</span>
@@ -207,13 +207,12 @@
 <span class="c1">###############################################################################</span>
 <span class="c1">###############################################################################</span>
 
-
-<div class="viewcode-block" id="PacSignals"><a class="viewcode-back" href="../../utils.html#tensorpac.utils.PacSignals">[docs]</a><span class="k">def</span> <span class="nf">PacSignals</span><span class="p">(</span><span class="n">fpha</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">famp</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">ndatasets</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">chi</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-               <span class="n">dpha</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">damp</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="PacSignals"><a class="viewcode-back" href="../../utils.html#tensorpac.utils.PacSignals">[docs]</a><span class="k">def</span> <span class="nf">PacSignals</span><span class="p">(</span><span class="n">fpha</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">famp</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span> <span class="n">ndatasets</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">chi</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+               <span class="n">noise</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dpha</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">damp</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generate artificially phase-amplitude coupled signals.</span>
 
 <span class="sd">    Kargs:</span>
-<span class="sd">        fpha: int/float, optional, [def: 2]</span>
+<span class="sd">        fpha: int/float, optional, [def: 10]</span>
 <span class="sd">            Frequency for phase</span>
 
 <span class="sd">        famp: int/float, optional, [def: 100]</span>
@@ -225,15 +224,14 @@
 <span class="sd">        ndatasets : int, optional, [def: 10]</span>
 <span class="sd">            Number of datasets</span>
 
-<span class="sd">        tmax: int/float (1&lt;=tmax&lt;=3), optional, [def: 1]</span>
-<span class="sd">            Length of the time vector. If tmax=2 and sf=1024,</span>
-<span class="sd">            the number of time points npts=1024*2=2048</span>
+<span class="sd">        npts: int, optional, [def: 4000]</span>
+<span class="sd">            Number of points for each signal.</span>
 
 <span class="sd">        chi: int/float (0&lt;=chi&lt;=1), optional, [def: 0]</span>
 <span class="sd">            Amount of coupling. If chi=0, signals of phase and amplitude</span>
 <span class="sd">            are strongly coupled.</span>
 
-<span class="sd">        noise: int/float (1&lt;=noise&lt;=3), optional, [def: 1]</span>
+<span class="sd">        noise: int/float (0&lt;=noise&lt;=3), optional, [def: 1]</span>
 <span class="sd">            Amount of noise</span>
 
 <span class="sd">        dpha: int/float (0&lt;=dpha&lt;=100), optional, [def: 0]</span>
@@ -257,39 +255,46 @@
 <span class="sd">            The corresponding time vector</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Check the inputs variables :</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">tmax</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">tmax</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">):</span>
-        <span class="n">tmax</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">chi</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">chi</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">chi</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">chi</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">noise</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">noise</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">):</span>
-        <span class="n">noise</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">dpha</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">dpha</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">noise</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">noise</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">dpha</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
         <span class="n">dpha</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">damp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">damp</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">damp</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
         <span class="n">damp</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">fpha</span><span class="p">,</span> <span class="n">famp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fpha</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">famp</span><span class="p">)</span>
-    <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">sf</span><span class="p">)</span>
+    <span class="n">fpha</span><span class="p">,</span> <span class="n">famp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">fpha</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">famp</span><span class="p">)</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">ndatasets</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">npts</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">sf</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
 
-    <span class="c1"># Delta parameters :</span>
-    <span class="n">aPha</span> <span class="o">=</span> <span class="p">[</span><span class="n">fpha</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">dpha</span><span class="o">/</span><span class="mi">100</span><span class="p">),</span> <span class="n">fpha</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">dpha</span><span class="o">/</span><span class="mi">100</span><span class="p">)]</span>
-    <span class="n">deltaPha</span> <span class="o">=</span> <span class="n">aPha</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">aPha</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">aPha</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">ndatasets</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">aAmp</span> <span class="o">=</span> <span class="p">[</span><span class="n">famp</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">damp</span><span class="o">/</span><span class="mi">100</span><span class="p">),</span> <span class="n">famp</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">damp</span><span class="o">/</span><span class="mi">100</span><span class="p">)]</span>
-    <span class="n">deltaAmp</span> <span class="o">=</span> <span class="n">aAmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">aAmp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">aAmp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">ndatasets</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># Band / Delta parameters :</span>
+    <span class="k">if</span> <span class="n">fpha</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">aPha</span> <span class="o">=</span> <span class="p">[</span><span class="n">fpha</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">dpha</span><span class="o">/</span><span class="mi">100</span><span class="p">),</span> <span class="n">fpha</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">dpha</span><span class="o">/</span><span class="mi">100</span><span class="p">)]</span>
+        <span class="n">deltaPha</span> <span class="o">=</span> <span class="n">aPha</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">aPha</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">aPha</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">ndatasets</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">fpha</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">deltaPha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">fpha</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">fpha</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ndatasets</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">famp</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">aAmp</span> <span class="o">=</span> <span class="p">[</span><span class="n">famp</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">damp</span><span class="o">/</span><span class="mi">100</span><span class="p">),</span> <span class="n">famp</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">damp</span><span class="o">/</span><span class="mi">100</span><span class="p">)]</span>
+        <span class="n">deltaAmp</span> <span class="o">=</span> <span class="n">aAmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">aAmp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">aAmp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">ndatasets</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">famp</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">deltaAmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">famp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">famp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ndatasets</span><span class="p">)</span>
 
-    <span class="c1"># Generate the rnd datasets :</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ndatasets</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)))</span>
-    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndatasets</span><span class="p">):</span>
-        <span class="c1"># Create signals :</span>
-        <span class="n">xl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">deltaPha</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">time</span><span class="p">)</span>
-        <span class="n">xh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">deltaAmp</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">time</span><span class="p">)</span>
-        <span class="n">e</span> <span class="o">=</span> <span class="n">noise</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xl</span><span class="p">))</span>
+    <span class="c1"># Reshape phase/amplitude bands :</span>
+    <span class="n">deltaPha</span><span class="p">,</span> <span class="n">deltaAmp</span> <span class="o">=</span> <span class="n">deltaPha</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">deltaAmp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-        <span class="c1"># Create the coupling :</span>
-        <span class="n">ah</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">chi</span><span class="p">)</span> <span class="o">*</span> <span class="n">xl</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">chi</span><span class="p">)</span>
-        <span class="n">al</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="n">ah</span><span class="o">*</span><span class="n">xh</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">al</span><span class="o">*</span><span class="n">xl</span><span class="p">)</span> <span class="o">+</span> <span class="n">e</span>
+    <span class="c1"># Create phase and amplitude signals :</span>
+    <span class="n">xl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">deltaPha</span> <span class="o">*</span> <span class="n">time</span><span class="p">)</span>
+    <span class="n">xh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">deltaAmp</span> <span class="o">*</span> <span class="n">time</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">time</span></div>
+    <span class="c1"># Create the coupling :</span>
+    <span class="n">ah</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span> <span class="o">*</span> <span class="p">((</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">chi</span><span class="p">)</span> <span class="o">*</span> <span class="n">xl</span> <span class="o">+</span> <span class="mf">1.</span> <span class="o">+</span> <span class="n">chi</span><span class="p">)</span>
+    <span class="n">al</span> <span class="o">=</span> <span class="mf">1.</span>
+
+    <span class="c1"># Generate datasets :</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">ah</span> <span class="o">*</span> <span class="n">xh</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">al</span> <span class="o">*</span> <span class="n">xl</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">+=</span> <span class="n">noise</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># Add noise</span>
+
+    <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span></div>
 
 <span class="c1">###############################################################################</span>
 <span class="c1">###############################################################################</span>
@@ -345,15 +350,39 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">fdown</span><span class="p">,</span> <span class="n">fup</span><span class="p">]</span>
 
 
-<span class="c1">###############################################################################</span>
-<span class="c1">###############################################################################</span>
-<span class="c1">#                             PLOTTING</span>
-<span class="c1">###############################################################################</span>
-<span class="c1">###############################################################################</span>
+<span class="k">def</span> <span class="nf">PacTriVec</span><span class="p">(</span><span class="n">fstart</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">fend</span><span class="o">=</span><span class="mi">160</span><span class="p">,</span> <span class="n">fwidth</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate triangular vector.</span>
 
-<span class="k">def</span> <span class="nf">PacPlot</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Plot Pac.&quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="sd">    Kargs:</span>
+<span class="sd">        fstart: float, optional, (def: 60)</span>
+<span class="sd">            Starting frequency.</span>
+
+<span class="sd">        fend: float, optional, (def: 160)</span>
+<span class="sd">            Ending frequency.</span>
+
+<span class="sd">        fwidth: float, optional, (def: 10)</span>
+<span class="sd">            Frequency bandwidth.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        f: np.ndarray</span>
+<span class="sd">            The triangular vector.</span>
+
+<span class="sd">        tridx: np.ndarray</span>
+<span class="sd">            The triangular index for the reconstruction.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">starting</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">fstart</span><span class="p">,</span> <span class="n">fend</span><span class="o">+</span><span class="n">fwidth</span><span class="p">,</span> <span class="n">fwidth</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">,</span> <span class="n">tridx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+    <span class="k">for</span> <span class="n">num</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">starting</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="c1"># Lentgh of the vector to build :</span>
+        <span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">starting</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Create the frequency vector for this starting frequency :</span>
+        <span class="n">fst</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">starting</span><span class="p">[</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">::]]</span>
+        <span class="n">nfst</span> <span class="o">=</span> <span class="n">fst</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># Create the triangular index for this vector of frequencies :</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nfst</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nfst</span><span class="p">,</span> <span class="n">num</span><span class="p">)]</span>
+        <span class="n">tridx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">tridx</span><span class="p">,</span> <span class="n">idx</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">tridx</span><span class="o">.</span><span class="n">size</span> <span class="k">else</span> <span class="n">idx</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">f</span><span class="p">,</span> <span class="n">fst</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">size</span> <span class="k">else</span> <span class="n">fst</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">tridx</span>
 </pre></div>
 
            </div>
@@ -390,7 +419,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.4',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

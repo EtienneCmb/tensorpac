@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Utils &mdash; Tensorpac 0.4 documentation</title>
+  <title>Utils &mdash; Tensorpac 0.5.0 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.4 documentation" href="index.html"/>
+    <link rel="top" title="Tensorpac 0.5.0 documentation" href="index.html"/>
         <link rel="next" title="Visualization" href="visu.html"/>
         <link rel="prev" title="Python functions" href="pyfcn.html"/> 
 
@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                0.4
+                0.5.0
               </div>
             
           
@@ -226,12 +226,12 @@ tuple mean (starting fcy, ending fcy, width, step)</dd>
 <h2>Generate artificially coupled signals<a class="headerlink" href="#generate-artificially-coupled-signals" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="tensorpac.utils.PacSignals">
-<code class="descclassname">tensorpac.utils.</code><code class="descname">PacSignals</code><span class="sig-paren">(</span><em>fpha=2</em>, <em>famp=100</em>, <em>sf=1024</em>, <em>ndatasets=10</em>, <em>tmax=1</em>, <em>chi=0</em>, <em>noise=1</em>, <em>dpha=0</em>, <em>damp=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#PacSignals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PacSignals" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">tensorpac.utils.</code><code class="descname">PacSignals</code><span class="sig-paren">(</span><em>fpha=10</em>, <em>famp=100</em>, <em>sf=1024</em>, <em>npts=4000</em>, <em>ndatasets=10</em>, <em>chi=0</em>, <em>noise=1</em>, <em>dpha=0</em>, <em>damp=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#PacSignals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PacSignals" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate artificially phase-amplitude coupled signals.</p>
 <dl class="docutils">
 <dt>Kargs:</dt>
 <dd><dl class="first last docutils">
-<dt>fpha: int/float, optional, [def: 2]</dt>
+<dt>fpha: int/float, optional, [def: 10]</dt>
 <dd>Frequency for phase</dd>
 <dt>famp: int/float, optional, [def: 100]</dt>
 <dd>Frequency for amplitude</dd>
@@ -239,13 +239,12 @@ tuple mean (starting fcy, ending fcy, width, step)</dd>
 <dd>Sampling frequency</dd>
 <dt>ndatasets <span class="classifier-delimiter">:</span> <span class="classifier">int, optional, [def: 10]</span></dt>
 <dd>Number of datasets</dd>
-<dt>tmax: int/float (1&lt;=tmax&lt;=3), optional, [def: 1]</dt>
-<dd>Length of the time vector. If tmax=2 and sf=1024,
-the number of time points npts=1024*2=2048</dd>
+<dt>npts: int, optional, [def: 4000]</dt>
+<dd>Number of points for each signal.</dd>
 <dt>chi: int/float (0&lt;=chi&lt;=1), optional, [def: 0]</dt>
 <dd>Amount of coupling. If chi=0, signals of phase and amplitude
 are strongly coupled.</dd>
-<dt>noise: int/float (1&lt;=noise&lt;=3), optional, [def: 1]</dt>
+<dt>noise: int/float (0&lt;=noise&lt;=3), optional, [def: 1]</dt>
 <dd>Amount of noise</dd>
 <dt>dpha: int/float (0&lt;=dpha&lt;=100), optional, [def: 0]</dt>
 <dd>Introduce a random incertitude on the phase frequency.
@@ -318,7 +317,7 @@ signal will be between :
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.4',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

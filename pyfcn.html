@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Python functions &mdash; Tensorpac 0.4 documentation</title>
+  <title>Python functions &mdash; Tensorpac 0.5.0 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.4 documentation" href="index.html"/>
+    <link rel="top" title="Tensorpac 0.5.0 documentation" href="index.html"/>
         <link rel="next" title="Utils" href="utils.html"/>
         <link rel="prev" title="Methods" href="methods.html"/> 
 
@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                0.4
+                0.5.0
               </div>
             
           
@@ -238,10 +238,8 @@ refer</p>
 <li>&#8216;0&#8217;: No surrogates</li>
 <li>&#8216;1&#8217;: Swap phase/amplitude across trials <a class="footnote-reference" href="#f2" id="id8">[2]</a></li>
 <li>&#8216;2&#8217;: Swap amplitude time blocks <a class="footnote-reference" href="#f5" id="id9">[5]</a></li>
-<li>&#8216;3&#8217;: Shuffle amplitude and phase time-series</li>
-<li>&#8216;4&#8217;: Shuffle phase time-series</li>
-<li>&#8216;5&#8217;: Shuffle amplitude time-series</li>
-<li>&#8216;6&#8217;: Time lag <a class="footnote-reference" href="#f1" id="id10">[1]</a></li>
+<li>&#8216;3&#8217;: Shuffle amplitude time-series</li>
+<li>&#8216;4&#8217;: Time lag <a class="footnote-reference" href="#f1" id="id10">[1]</a></li>
 </ul>
 </div></blockquote>
 </li>
@@ -407,7 +405,7 @@ is only avaible with dcomplex=&#8217;hilbert&#8217; and not wavelet.</dd>
 <p>For those who already have filtered and computed the phase and amplitude, use this method to compute PAC.</p>
 <dl class="method">
 <dt id="tensorpac.pac.Pac.fit">
-<code class="descclassname">Pac.</code><code class="descname">fit</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Pac.</code><code class="descname">fit</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimized=True</em>, <em>get_surro=False</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute PAC on filtered data.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -429,11 +427,27 @@ will be consider as well.</dd>
 to-last axis is consider as the trial axis.</dd>
 <dt>nperm: int, optional, (def: 200)</dt>
 <dd>Number of surrogates to compute.</dd>
+<dt>optimized: bool, optional, (def: True)</dt>
+<dd>Optimize argument of the np.einsum function. Use either False,
+True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</dd>
+<dt>get_surro: bool, optional, (def: False)</dt>
+<dd>Return surrogate chance distribution.</dd>
 <dt>correct: bool, optional, (def: True)</dt>
 <dd>Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</dd>
 <dt>njobs: int, optional, (def: -1)</dt>
 <dd>Number of jobs to compute PAC in parallel. For very large data,
 set this parameter to 1 in order to prevent large memory usage.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>pac: np.ndarray</dt>
+<dd>Phase-Amplitude Coupling measure of shape (namp, npha, ...).</dd>
+<dt>pvalue: np.ndarray</dt>
+<dd>P-values (None if no surrogates)</dd>
+<dt>suro: np.ndarray</dt>
+<dd>If get_suro is True, get the chance distribution of shape
+(nperm, namp, npha, ...)</dd>
 </dl>
 </dd>
 </dl>
@@ -459,7 +473,7 @@ the nblocks parameter allow to split into a larger number.</li>
 <p>Finally, use the following method to filter and compute the PAC directly.</p>
 <dl class="method">
 <dt id="tensorpac.pac.Pac.filterfit">
-<code class="descclassname">Pac.</code><code class="descname">filterfit</code><span class="sig-paren">(</span><em>sf</em>, <em>xpha</em>, <em>xamp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Pac.</code><code class="descname">filterfit</code><span class="sig-paren">(</span><em>sf</em>, <em>xpha</em>, <em>xamp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimized=True</em>, <em>get_surro=False</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filt the data then compute PAC on it.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -484,11 +498,27 @@ will be consider as well.</dd>
 to-last axis is consider as the trial axis.</dd>
 <dt>nperm: int, optional, (def: 200)</dt>
 <dd>Number of surrogates to compute.</dd>
+<dt>optimized: bool, optional, (def: True)</dt>
+<dd>Optimize argument of the np.einsum function. Use either False,
+True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</dd>
+<dt>get_surro: bool, optional, (def: False)</dt>
+<dd>Return surrogate chance distribution.</dd>
 <dt>correct: bool, optional, (def: True)</dt>
 <dd>Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</dd>
 <dt>njobs: int, optional, (def: -1)</dt>
 <dd>Number of jobs to compute PAC in parallel. For very large data,
 set this parameter to 1 in order to prevent large memory usage.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>pac: np.ndarray</dt>
+<dd>Phase-Amplitude Coupling measure of shape (namp, npha, ...).</dd>
+<dt>pvalue: np.ndarray</dt>
+<dd>P-values (None if no surrogates)</dd>
+<dt>suro: np.ndarray</dt>
+<dd>If get_suro is True, get the chance distribution of shape
+(nperm, namp, npha, ...)</dd>
 </dl>
 </dd>
 </dl>
@@ -555,7 +585,7 @@ the nblocks parameter allow to split into a larger number.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.4',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
