@@ -14,7 +14,7 @@ __all__ = ['PacSignals', 'PacVec', 'PacTriVec']
 ###############################################################################
 ###############################################################################
 
-def PacSignals(fpha=10, famp=100, sf=1024, ndatasets=10, tmax=1, chi=0,
+def PacSignals(fpha=10, famp=100, sf=1024, ndatasets=10, n=4000, chi=0,
                noise=1, dpha=0, damp=0):
     """Generate artificially phase-amplitude coupled signals.
 
@@ -31,9 +31,8 @@ def PacSignals(fpha=10, famp=100, sf=1024, ndatasets=10, tmax=1, chi=0,
         ndatasets : int, optional, [def: 10]
             Number of datasets
 
-        tmax: int/float (1<=tmax<=3), optional, [def: 1]
-            Length of the time vector. If tmax=2 and sf=1024,
-            the number of time points npts=1024*2=2048
+        n: int/float, optional, [def: 4000]
+            Number of points for each signal.
 
         chi: int/float (0<=chi<=1), optional, [def: 0]
             Amount of coupling. If chi=0, signals of phase and amplitude
@@ -63,39 +62,46 @@ def PacSignals(fpha=10, famp=100, sf=1024, ndatasets=10, tmax=1, chi=0,
             The corresponding time vector
     """
     # Check the inputs variables :
-    if (tmax < 1) or (tmax > 3):
-        tmax = 1
-    if (chi < 0) or (chi > 1):
+    if not 0 <= chi <= 1:
         chi = 0
-    if (noise < 0) or (noise > 3):
+    if not 0 <= noise <= 3:
         noise = 0
-    if (dpha < 0) or (dpha > 100):
+    if not 0 <= dpha <= 100:
         dpha = 0
-    if (damp < 0) or (damp > 100):
+    if not 0 <= damp <= 100:
         damp = 0
-    fpha, famp = np.array(fpha), np.array(famp)
-    time = np.arange(0, tmax, 1/sf)
+    fpha, famp = np.asarray(fpha), np.asarray(famp)
+    time = np.mgrid[0:ndatasets, 0:n][1] / sf
+    data = np.zeros_like(time)
 
-    # Delta parameters :
-    aPha = [fpha*(1-dpha/100), fpha*(1+dpha/100)]
-    deltaPha = aPha[0] + (aPha[1]-aPha[0])*np.random.rand(ndatasets, 1)
-    aAmp = [famp*(1-damp/100), famp*(1+damp/100)]
-    deltaAmp = aAmp[0] + (aAmp[1]-aAmp[0])*np.random.rand(ndatasets, 1)
+    # Band / Delta parameters :
+    if fpha.ndim == 0:
+        aPha = [fpha*(1-dpha/100), fpha*(1+dpha/100)]
+        deltaPha = aPha[0] + (aPha[1]-aPha[0])*np.random.rand(ndatasets, 1)
+    elif fpha.ndim == 1:
+        deltaPha = np.random.uniform(fpha[0], fpha[1], ndatasets)
+    if famp.ndim == 0:
+        aAmp = [famp*(1-damp/100), famp*(1+damp/100)]
+        deltaAmp = aAmp[0] + (aAmp[1]-aAmp[0])*np.random.rand(ndatasets, 1)
+    elif famp.ndim == 1:
+        deltaAmp = np.random.uniform(famp[0], famp[1], ndatasets)
 
-    # Generate the rnd datasets :
-    data = np.zeros((ndatasets, len(time)))
-    for k in range(ndatasets):
-        # Create signals :
-        xl = np.sin(2*np.pi*deltaPha[k]*time)
-        xh = np.sin(2*np.pi*deltaAmp[k]*time)
-        e = noise*np.random.rand(len(xl))
+    # Reshape phase/amplitude bands :
+    deltaPha, deltaAmp = deltaPha.reshape(-1, 1), deltaAmp.reshape(-1, 1)
 
-        # Create the coupling :
-        ah = 0.5*((1 - chi) * xl + 1 + chi)
-        al = 1
-        data[k, :] = (ah*xh) + (al*xl) + e
+    # Create phase and amplitude signals :
+    xl = np.sin(2 * np.pi * deltaPha * time)
+    xh = np.sin(2 * np.pi * deltaAmp * time)
 
-    return data, time
+    # Create the coupling :
+    ah = .5 * ((1. - chi) * xl + 1. + chi)
+    al = 1.
+
+    # Generate datasets :
+    data = (ah * xh) + (al * xl)
+    data += noise * np.random.rand(*data.shape)  # Add noise
+
+    return data, time[0, :]
 
 ###############################################################################
 ###############################################################################
