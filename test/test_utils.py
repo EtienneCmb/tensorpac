@@ -22,7 +22,7 @@ def test_pacsignals_dTrials():
 def test_pacsignals_bandwidth():
     """Definition of artificially coupled signals using bandwidth."""
     assert PacSignals(fpha=[5, 7], famp=[30, 60], sf=200., ndatasets=100,
-                      chi=0.5, noise=3.)
+                      chi=0.5, noise=3., npts=1000)
 
 
 def test_defaultArgs():
