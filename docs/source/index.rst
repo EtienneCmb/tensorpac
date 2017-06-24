@@ -1,3 +1,11 @@
+.. -*- mode: rst -*-
+
+.. image:: https://travis-ci.org/EtienneCmb/tensorpac.svg?branch=master
+    :target: https://travis-ci.org/EtienneCmb/tensorpac
+
+.. image:: https://codecov.io/gh/EtienneCmb/tensorpac/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/EtienneCmb/tensorpac
+
 Tensorpac
 #########
 
