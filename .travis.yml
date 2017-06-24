@@ -2,6 +2,7 @@ language: python
 notifications:
   email: false
 python:
+  - "2.7"
   - "3.6"
 install:
   # - sudo apt-get update
@@ -23,10 +24,9 @@ install:
   - conda info -a
 
   # Replace dep1 dep2 ... with your dependencies
-  - conda create -q -n testenv python=$TRAVIS_PYTHON_VERSION numpy scipy joblib
+  - conda create -q -n testenv python=$TRAVIS_PYTHON_VERSION numpy scipy joblib matplotlib
   - source activate testenv
   - pip install setuptools
-  - pip install nose
   - pip install codecov
   - pip install pytest pytest-cov
   - pip install .

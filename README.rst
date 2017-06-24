@@ -1,7 +1,10 @@
 .. -*- mode: rst -*-
 
-.. image:: https://travis-ci.org/EtienneCmb/visbrain.svg?branch=master
-    :target: https://travis-ci.org/EtienneCmb/visbrain
+.. image:: https://travis-ci.org/EtienneCmb/tensorpac.svg?branch=master
+    :target: https://travis-ci.org/EtienneCmb/tensorpac
+
+.. image:: https://codecov.io/gh/EtienneCmb/tensorpac/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/EtienneCmb/tensorpac
 
 Tensorpac
 #########
@@ -12,7 +15,7 @@ Tensorpac
 Description
 ===========
 
-Tensorpac is an Python open-source toolbox for computing Phase-Amplitude Coupling (PAC) using tensors and parallel computing. On top of that, we designed a modular implementation with a relatively large amount of parameters. Checkout the [documentation](http://etiennecmb.github.io/tensorpac/) for further details.
+Tensorpac is an Python open-source toolbox for computing Phase-Amplitude Coupling (PAC) using tensors and parallel computing. On top of that, we designed a modular implementation with a relatively large amount of parameters. Checkout the `documentation <http://etiennecmb.github.io/tensorpac/>`_for further details.
 
 Installation
 ============

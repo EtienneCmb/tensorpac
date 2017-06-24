@@ -18,6 +18,8 @@ def pacstr(idpac):
         method = 'Phase-Synchrony'
     elif idpac[0] == 6:
         method = 'Event-Related Phase amplitude Coupling'
+    else:
+        raise ValueError("No corresponding pac method.")
 
     # Surrogate method :
     if idpac[1] == 0:
@@ -30,6 +32,8 @@ def pacstr(idpac):
         suro = 'Shuffle amplitude time-series'
     elif idpac[1] == 4:
         suro = 'Time lag'
+    else:
+        raise ValueError("No corresponding surrogate method.")
 
     # Normalization methods :
     if idpac[2] == 0:
@@ -43,5 +47,7 @@ def pacstr(idpac):
     elif idpac[2] == 4:
         norm = "Substract the mean and divide by the deviation of the " + \
                "surrogates"
+    else:
+        raise ValueError("No corresponding normalization method.")
 
     return method, suro, norm
