@@ -5,7 +5,7 @@ from scipy.stats import chi2
 def pear(x, y, st='i...j, k...j->ik...'):
     """Pearson correlation for PAC data.
     """
-    print('XY : ', x.shape, y.shape)
+    # print('XY : ', x.shape, y.shape)
     n = x.shape[-1]
     # Distribution center :
     mu_x = x.mean(-1, keepdims=True)
