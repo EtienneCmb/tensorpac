@@ -96,7 +96,6 @@ class PacPlot(object):
         """Triangular plot."""
         pac, tridx = np.squeeze(pac), np.squeeze(tridx)
         # ___________________ CHECKING ___________________
-        print(pac.shape, fvec.shape, tridx.shape)
         # Check if pac is a raw vector :
         if pac.ndim is not 1:
             raise ValueError("The PAC variable must be a row vector.")
@@ -121,6 +120,11 @@ class PacPlot(object):
         xvec = yvec = np.append(vector, [fvec.max()])
         return self._pacplot(rpac, xvec, yvec, xlabel, ylabel, cblabel,
                              bad=bad, **kwargs)
+
+    def show(self):
+        """Display the figure."""
+        import matplotlib.pyplot as plt
+        plt.show()
 
     def _pacplot(self, pac, xvec, yvec, xlabel='', ylabel='', cblabel='',
                  title='', cmap='viridis', vmin=None, vmax=None, under=None,
