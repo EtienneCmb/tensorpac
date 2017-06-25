@@ -6,6 +6,9 @@
 .. image:: https://codecov.io/gh/EtienneCmb/tensorpac/branch/master/graph/badge.svg
   :target: https://codecov.io/gh/EtienneCmb/tensorpac
 
+.. image:: https://badge.fury.io/py/Tensorpac.svg
+    :target: https://badge.fury.io/py/Tensorpac
+
 Tensorpac
 #########
 
@@ -20,13 +23,11 @@ This package was developped in collaboration with **Juan L.P. Soto**
 Installation:
 *************
 
-Tensorpac is only based on NumPy and use `Joblib <https://pythonhosted.org/joblib/>`_ for parallel computing. For the installation, in a terminal run :
+Tensorpac is only based on NumPy, SciPy and use `Joblib <https://pythonhosted.org/joblib/>`_ for parallel computing. For the installation, in a terminal run :
 
 .. code-block:: bash
 
-    git clone https://github.com/EtienneCmb/tensorpac.git tensorpac
-    cd tensorpac
-    pip setup.py install
+    pip install tensorpac
 
 What's new?
 ***********
