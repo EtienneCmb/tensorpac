@@ -6,6 +6,9 @@
 .. image:: https://codecov.io/gh/EtienneCmb/tensorpac/branch/master/graph/badge.svg
   :target: https://codecov.io/gh/EtienneCmb/tensorpac
 
+.. image:: https://badge.fury.io/py/Tensorpac.svg
+    :target: https://badge.fury.io/py/Tensorpac
+
 Tensorpac
 #########
 
@@ -20,13 +23,11 @@ Tensorpac is an Python open-source toolbox for computing Phase-Amplitude Couplin
 Installation
 ============
 
-In a terminal, run :
+Tensorpac use NumPy, SciPy and joblib for parallel computing. In a terminal, run :
 
 .. code-block:: shell
 
-    git clone https://github.com/EtienneCmb/tensorpac.git tensorpac
-    cd tensorpac
-    pip setup.py install
+    pip install tensorpac
 
 Code snippet & illustration
 ===========================
