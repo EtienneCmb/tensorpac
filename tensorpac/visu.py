@@ -30,6 +30,9 @@ class PacPlot(object):
             title: string, optional, (def: '')
                 Title of the plot.
 
+            y: float, optional, (def: 1.02)
+                Title location.
+
             cmap: string, optional, (def: 'viridis')
                 Name of one Matplotlib's colomap.
 
@@ -93,7 +96,48 @@ class PacPlot(object):
     def triplot(self, pac, fvec, tridx, xlabel='Starting frequency (hz)',
                 ylabel='Ending frequency (hz)', cblabel='PAC values',
                 bad='lightgray', **kwargs):
-        """Triangular plot."""
+        """Triangular plot.
+
+        Kargs:
+            xlabel: string, optional, (def: 'Starting frequency (hz)')
+                Label for the phase axis.
+
+            ylabel: string, optional, (def: 'Ending frequency (hz)')
+                Label for the amplitude axis.
+
+            cblabel: string, optional, (def: 'PAC values')
+                Colorbar.
+
+            title: string, optional, (def: '')
+                Title of the plot.
+
+            y: float, optional, (def: 1.02)
+                Title location.
+
+            cmap: string, optional, (def: 'viridis')
+                Name of one Matplotlib's colomap.
+
+            vmin: float, optional, (def: None)
+                Threshold under which set the color to the uner parameter.
+
+            vmax: float, optional, (def: None)
+                Threshold over which set the color in the over parameter.
+
+            under: string, optional, (def: 'gray')
+                Color for values under the vmin parameter.
+
+            over: string, optional, (def: 'red')
+                Color for values over the vmax parameter.
+
+            bad: string, optional, (def: 'lightgray')
+                Color for non-significant values.
+
+            rmaxis: bool, optional, (def: False)
+                Remove unecessary axis.
+
+            dpaxis: bool, optional, (def: False)
+                Despine axis.
+        """
         pac, tridx = np.squeeze(pac), np.squeeze(tridx)
         # ___________________ CHECKING ___________________
         # Check if pac is a raw vector :
@@ -150,6 +194,9 @@ class PacPlot(object):
             title: string, optional, (def: '')
                 Title of the plot.
 
+            y: float, optional, (def: 1.02)
+                Title location.
+
             cmap: string, optional, (def: 'viridis')
                 Name of one Matplotlib's colomap.
 
@@ -167,6 +214,12 @@ class PacPlot(object):
 
             bad: string, optional, (def: None)
                 Color for non-significant values.
+
+            rmaxis: bool, optional, (def: False)
+                Remove unecessary axis.
+
+            dpaxis: bool, optional, (def: False)
+                Despine axis.
         """
         # Interpolation :
         if interp is not None:
