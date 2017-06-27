@@ -6,7 +6,7 @@ import pip
 from pip.req import parse_requirements
 from optparse import Option
 
-__version__ = "0.5.0"
+__version__ = "0.5.1"
 NAME = 'Tensorpac'
 AUTHOR = "Etienne Combrisson"
 MAINTAINER = "Etienne Combrisson"
