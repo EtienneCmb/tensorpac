@@ -3,7 +3,14 @@
 Visualization
 =============
 
-If matplotlib is install on your system, the main Pac class also include a comodulogram plotting method that rely on Matplotlib. This script is also present in the `example <https://github.com/EtienneCmb/tensorpac/blob/master/examples/9_PlayWithColors.py>`_ folder.
+If matplotlib is install on your system, the main Pac class also include several plotting functions :
+
+* :ref:`pltcomo` : comodulogram plot, for finding the coupling location *PAC(phase, amplitude)*
+* :ref:`plttri` : triangular plot for finding where each band [Start, Stop] and the bandwidth *PAC(Starting frequency, Ending frequency)*
+* :ref:`pltpp` : polar plot for the preferred-phase representation *PP(phase, binned amplitude)*
+
+
+plotting method that rely on Matplotlib. This script is also present in the `example <https://github.com/EtienneCmb/tensorpac/blob/master/examples/9_PlayWithColors.py>`_ folder.
 
 Code example
 ------------
@@ -70,14 +77,35 @@ Code example
 
     plt.show()
 
+
+.. _pltcomo:
+
+Comodulogram
+------------
+
 .. figure::  picture/9_plot.png
    :align:   center
 
-   `Plotting comodulogram <https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/9_plot.png>`_
-
-Comodulogram method description
--------------------------------
+   Comodulogram forms.
 
 .. automethod:: tensorpac.pac.Pac.comodulogram
 
+.. _plttri:
 
+Triangular plot
+---------------
+
+.. figure::  picture/fminfmax.png
+   :align:   center
+
+.. automethod:: tensorpac.pac.Pac.triplot
+
+.. _pltpp:
+
+Polar plot
+----------
+
+.. figure::  picture/PP_planningVsExec.png
+   :align:   center
+
+.. automethod:: tensorpac.pac.Pac.triplot
