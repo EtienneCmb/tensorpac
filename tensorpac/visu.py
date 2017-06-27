@@ -121,6 +121,58 @@ class PacPlot(object):
         return self._pacplot(rpac, xvec, yvec, xlabel, ylabel, cblabel,
                              bad=bad, **kwargs)
 
+    def polar(self, amp, xvec, yvec, interp=None, **kwargs):
+        """Polar representation.
+
+        Args:
+            amp: np.ndarray
+                2D array.
+
+            xvec: np.ndarray
+                Vector for the x-axis.
+
+            yvec: np.ndarray
+                Vector for the y-axis (phases).
+
+        Kargs:
+            interp: float, optional, (def: None)
+                Interplation factor.
+
+            xlabel: string, optional, (def: 'Frequency for phase (hz)')
+                Label for the phase axis.
+
+            ylabel: string, optional, (def: 'Frequency for amplitude (hz)')
+                Label for the amplitude axis.
+
+            cblabel: string, optional, (def: 'PAC values')
+                Colorbar.
+
+            title: string, optional, (def: '')
+                Title of the plot.
+
+            cmap: string, optional, (def: 'viridis')
+                Name of one Matplotlib's colomap.
+
+            vmin: float, optional, (def: None)
+                Threshold under which set the color to the uner parameter.
+
+            vmax: float, optional, (def: None)
+                Threshold over which set the color in the over parameter.
+
+            under: string, optional, (def: 'gray')
+                Color for values under the vmin parameter.
+
+            over: string, optional, (def: 'red')
+                Color for values over the vmax parameter.
+
+            bad: string, optional, (def: None)
+                Color for non-significant values.
+        """
+        # Interpolation :
+        if interp is not None:
+            amp, yvec, xvec = mapinterpolation(amp, yvec, xvec, interp, 1)
+        return self._pacplot(amp, xvec, yvec, polar=True, **kwargs)
+
     def show(self):
         """Display the figure."""
         import matplotlib.pyplot as plt
@@ -130,7 +182,8 @@ class PacPlot(object):
                  title='', cmap='viridis', vmin=None, vmax=None, under=None,
                  over=None, bad=None, pvalues=None, p=0.05, interp=None,
                  rmaxis=False, dpaxis=False, plotas='imshow', ncontours=5,
-                 levels=None, levelcmap='Reds'):
+                 levels=None, levelcmap='Reds', polar=False, y=1.02,
+                 subplot=111):
         """Main plotting pac function."""
         # Check if pac is 2 dimensions :
         if pac.ndim is not 2:
@@ -150,7 +203,10 @@ class PacPlot(object):
             pvalues = mapinterpolation(pvalues, self.xvec, self.yvec,
                                        interp[0], interp[1])[0]
         pac = np.ma.masked_array(pac, mask=pvalues >= p)
-
+        # Polar plot :
+        if polar:
+            plotas = 'pcolor'
+            plt.subplot(subplot, projection='polar')
         # Plot type :
         toplot = pac.data if levels is not None else pac
         if plotas is 'imshow':
@@ -161,6 +217,9 @@ class PacPlot(object):
         elif plotas is 'contour':
             im = plt.contourf(xvec, yvec, toplot, ncontours, cmap=cmap,
                               vmin=vmin, vmax=vmax)
+        elif plotas is 'pcolor':
+            im = plt.pcolormesh(xvec, yvec, toplot, cmap=cmap, vmin=vmin,
+                                vmax=vmax)
         else:
             raise ValueError("The plotas parameter must either be 'imshow' or "
                              "'contour'")
@@ -182,7 +241,7 @@ class PacPlot(object):
         plt.axis('tight')
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
-        plt.title(title)
+        plt.title(title, y=y)
         plt.clim(vmin=vmin, vmax=vmax)
 
         # Colorbar
