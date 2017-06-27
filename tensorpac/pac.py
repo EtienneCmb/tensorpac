@@ -405,6 +405,58 @@ class Pac(PacPlot):
         return self.fit(pha, amp, axis+1, traxis+1, nperm, optimized,
                         get_surro, correct, njobs)
 
+    def pp(self, pha, amp, axis=-1, nbins=72, optimized=True):
+        """Compute the prefered-phase.
+
+        Args:
+            pha: np.ndarray
+                Phase of slower oscillations.
+
+            amp: np.ndarray
+                Amplitude of fastest oscillations.
+
+        Kargs:
+            axis: int, optional, (def: -1)
+                Location of the time axis.
+
+            nbins: int, optional, (def: 72)
+                Number of bins for bining the amplitude according to phase
+                slices.
+
+            optimized: bool, optional, (def: True)
+                Optimize argument of the np.einsum function. Use either False,
+                True, 'greedy' or 'optimal'.
+
+        Returns:
+            ampbin: np.ndarray
+                The binned amplitude according to the phase of shape
+                (nbins, namp, npha...).
+
+            pp: np.ndarray
+                The prefered phase where the amplitude is maximum of shape
+                (namp, npha, ...).
+
+            polarvec: np.ndarray
+                The phase vector for the polar plot.
+        """
+        # Check phase and amplitude shapes :
+        pha, amp, axis = self._phampcheck(pha, amp, axis)
+        # Move the time axis to the end :
+        pha = np.moveaxis(pha, axis, -1)
+        amp = np.moveaxis(amp, axis, -1)
+        # Bin the amplitude according to the phase :
+        ampbin = _kl_hr(pha, amp, nbins, optimized)
+        ampbin /= ampbin.sum(axis=0, keepdims=True)
+        # Find the index where the amplitude is maximum over the bins :
+        idxmax = ampbin.argmax(axis=0)
+        # Find the prefered phase :
+        binsize = (2 * np.pi) / float(nbins)
+        vecbin = np.arange(-np.pi, np.pi, binsize) + binsize/2
+        pp = vecbin[idxmax]
+        # Build the phase vector (polar plot) :
+        polarvec = np.linspace(-np.pi, np.pi, ampbin.shape[0])
+        return ampbin, pp, polarvec
+
     ###########################################################################
     #                              CHECKING
     ###########################################################################
