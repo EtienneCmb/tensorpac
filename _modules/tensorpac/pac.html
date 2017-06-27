@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tensorpac.pac &mdash; Tensorpac 0.5.0 documentation</title>
+  <title>tensorpac.pac &mdash; Tensorpac 0.5.1 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Tensorpac 0.5.0 documentation" href="../../index.html"/>
+    <link rel="top" title="Tensorpac 0.5.1 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.5.0
+                0.5.1
               </div>
             
           
@@ -95,11 +95,7 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../tutorial.html#the-phase-amplitude-coupling">The Phase-Amplitude Coupling</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../methods.html">Methods</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../methods.html">Implemented methods</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../methods.html#modular-philosophy">Modular philosophy</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../methods.html#pac-methods">Pac methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../methods.html#surrogates-methods">Surrogates methods</a></li>
@@ -107,7 +103,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../methods.html#example">Example</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../methods.html#link-with-publications">Link with publications</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../pyfcn.html">Python functions</a><ul>
@@ -115,16 +110,20 @@
 <li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#filter-the-data">Filter the data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#filter-then-compute-pac">Filter then compute PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#preferred-phase">Preferred-phase</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utils</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../utils.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../visu.html">Visualization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../visu.html#code-example">Code example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../visu.html#comodulogram-method-description">Comodulogram method description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visu.html#comodulogram">Comodulogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visu.html#triangular-plot">Triangular plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visu.html#polar-plot">Polar plot</a></li>
 </ul>
 </li>
 </ul>
@@ -198,7 +197,7 @@
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="k">import</span> <span class="n">PacVec</span>
 <span class="kn">from</span> <span class="nn">.pacstr</span> <span class="k">import</span> <span class="n">pacstr</span>
 <span class="kn">from</span> <span class="nn">.spectral</span> <span class="k">import</span> <span class="n">spectral</span>
-<span class="kn">from</span> <span class="nn">.methods</span> <span class="k">import</span> <span class="n">ComputePac</span>
+<span class="kn">from</span> <span class="nn">.methods</span> <span class="k">import</span> <span class="n">ComputePac</span><span class="p">,</span> <span class="n">_kl_hr</span>
 <span class="kn">from</span> <span class="nn">.surrogates</span> <span class="k">import</span> <span class="n">ComputeSurogates</span>
 <span class="kn">from</span> <span class="nn">.normalize</span> <span class="k">import</span> <span class="n">normalize</span>
 <span class="kn">from</span> <span class="nn">.visu</span> <span class="k">import</span> <span class="n">PacPlot</span>
@@ -466,20 +465,8 @@
 <span class="sd">              amplitude into two equal parts, then swap those two blocks. But</span>
 <span class="sd">              the nblocks parameter allow to split into a larger number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># Shape checking :</span>
-        <span class="k">if</span> <span class="n">pha</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="n">amp</span><span class="o">.</span><span class="n">ndim</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;pha and amp must have the same number of &quot;</span>
-                             <span class="s2">&quot;dimensions.&quot;</span><span class="p">)</span>
-        <span class="c1"># Force phase / amplitude to be at least (1, N) :</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">pha</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">pha</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">amp</span> <span class="o">=</span> <span class="n">amp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="c1"># Check if the phase is in radians :</span>
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="n">pha</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Your phase is probably in degrees and should be&quot;</span>
-                             <span class="s2">&quot; converted in radians using either np.degrees or&quot;</span>
-                             <span class="s2">&quot; np.deg2rad.&quot;</span><span class="p">)</span>
+        <span class="c1"># Check phase and amplitude :</span>
+        <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phampcheck</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
         <span class="c1"># For the phase synchrony, extract the phase of the amplitude :</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
             <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">hilbert</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">))</span>
@@ -598,6 +585,58 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">nperm</span><span class="p">,</span> <span class="n">optimized</span><span class="p">,</span>
                         <span class="n">get_surro</span><span class="p">,</span> <span class="n">correct</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="Pac.pp"><a class="viewcode-back" href="../../pyfcn.html#tensorpac.pac.Pac.pp">[docs]</a>    <span class="k">def</span> <span class="nf">pp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">72</span><span class="p">,</span> <span class="n">optimized</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute the preferred-phase.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pha: np.ndarray</span>
+<span class="sd">                Phase of slower oscillations.</span>
+
+<span class="sd">            amp: np.ndarray</span>
+<span class="sd">                Amplitude of fastest oscillations.</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            axis: int, optional, (def: -1)</span>
+<span class="sd">                Location of the time axis.</span>
+
+<span class="sd">            nbins: int, optional, (def: 72)</span>
+<span class="sd">                Number of bins for bining the amplitude according to phase</span>
+<span class="sd">                slices.</span>
+
+<span class="sd">            optimized: bool, optional, (def: True)</span>
+<span class="sd">                Optimize argument of the np.einsum function. Use either False,</span>
+<span class="sd">                True, &#39;greedy&#39; or &#39;optimal&#39;.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ampbin: np.ndarray</span>
+<span class="sd">                The binned amplitude according to the phase of shape</span>
+<span class="sd">                (nbins, namp, npha...).</span>
+
+<span class="sd">            pp: np.ndarray</span>
+<span class="sd">                The prefered phase where the amplitude is maximum of shape</span>
+<span class="sd">                (namp, npha, ...).</span>
+
+<span class="sd">            polarvec: np.ndarray</span>
+<span class="sd">                The phase vector for the polar plot.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check phase and amplitude shapes :</span>
+        <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phampcheck</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+        <span class="c1"># Move the time axis to the end :</span>
+        <span class="n">pha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Bin the amplitude according to the phase :</span>
+        <span class="n">ampbin</span> <span class="o">=</span> <span class="n">_kl_hr</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">nbins</span><span class="p">,</span> <span class="n">optimized</span><span class="p">)</span>
+        <span class="n">ampbin</span> <span class="o">/=</span> <span class="n">ampbin</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># Find the index where the amplitude is maximum over the bins :</span>
+        <span class="n">idxmax</span> <span class="o">=</span> <span class="n">ampbin</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># Find the prefered phase :</span>
+        <span class="n">binsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbins</span><span class="p">)</span>
+        <span class="n">vecbin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">binsize</span><span class="p">)</span> <span class="o">+</span> <span class="n">binsize</span><span class="o">/</span><span class="mi">2</span>
+        <span class="n">pp</span> <span class="o">=</span> <span class="n">vecbin</span><span class="p">[</span><span class="n">idxmax</span><span class="p">]</span>
+        <span class="c1"># Build the phase vector (polar plot) :</span>
+        <span class="n">polarvec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">ampbin</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">ampbin</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">polarvec</span></div>
+
     <span class="c1">###########################################################################</span>
     <span class="c1">#                              CHECKING</span>
     <span class="c1">###########################################################################</span>
@@ -648,6 +687,26 @@
         <span class="c1"># Convert Morlet&#39;s width :</span>
         <span class="k">if</span> <span class="n">width</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_phampcheck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check phase and amplitude values.&quot;&quot;&quot;</span>
+        <span class="c1"># Shape checking :</span>
+        <span class="k">if</span> <span class="n">pha</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="n">amp</span><span class="o">.</span><span class="n">ndim</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;pha and amp must have the same number of &quot;</span>
+                             <span class="s2">&quot;dimensions.&quot;</span><span class="p">)</span>
+        <span class="c1"># Force phase / amplitude to be at least (1, N) :</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pha</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">pha</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">amp</span> <span class="o">=</span> <span class="n">amp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c1"># Check if the phase is in radians :</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="n">pha</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Your phase is probably in degrees and should be&quot;</span>
+                             <span class="s2">&quot; converted in radians using either np.degrees or&quot;</span>
+                             <span class="s2">&quot; np.deg2rad.&quot;</span><span class="p">)</span>
+        <span class="c1"># Force the phase to be in [-pi, pi] :</span>
+        <span class="n">pha</span> <span class="o">=</span> <span class="p">(</span><span class="n">pha</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+        <span class="k">return</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span>
 
     <span class="c1">###########################################################################</span>
     <span class="c1">#                              PROPERTIES</span>
@@ -753,7 +812,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.5.0',
+            VERSION:'0.5.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

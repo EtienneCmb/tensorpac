@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Methods &mdash; Tensorpac 0.5.0 documentation</title>
+  <title>Implemented methods &mdash; Tensorpac 0.5.1 documentation</title>
   
 
   
@@ -37,9 +37,9 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.5.0 documentation" href="index.html"/>
+    <link rel="top" title="Tensorpac 0.5.1 documentation" href="index.html"/>
         <link rel="next" title="Python functions" href="pyfcn.html"/>
-        <link rel="prev" title="Tutorial" href="tutorial.html"/> 
+        <link rel="prev" title="Tensorpac" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                0.5.0
+                0.5.1
               </div>
             
           
@@ -96,11 +96,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-phase-amplitude-coupling">The Phase-Amplitude Coupling</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Methods</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Implemented methods</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#modular-philosophy">Modular philosophy</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pac-methods">Pac methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#surrogates-methods">Surrogates methods</a></li>
@@ -108,7 +104,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#link-with-publications">Link with publications</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pyfcn.html">Python functions</a><ul>
@@ -116,16 +111,20 @@
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-the-data">Filter the data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-then-compute-pac">Filter then compute PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyfcn.html#preferred-phase">Preferred-phase</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visu.html">Visualization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="visu.html#code-example">Code example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="visu.html#comodulogram-method-description">Comodulogram method description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#comodulogram">Comodulogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#triangular-plot">Triangular plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#polar-plot">Polar plot</a></li>
 </ul>
 </li>
 </ul>
@@ -172,7 +171,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Methods</li>
+      <li>Implemented methods</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -191,8 +190,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="methods">
-<span id="id1"></span><h1>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="implemented-methods">
+<span id="methods"></span><h1>Implemented methods<a class="headerlink" href="#implemented-methods" title="Permalink to this headline">¶</a></h1>
 <p>Starting from fresh data, the first thing that need to be assessed is extracting the phase and the amplitude in several frequency bands. There is two ways to doing it :</p>
 <ul class="simple">
 <li>Filter the data in the frequency band, then, use the hilbert transform to pass from the real space, to the complex one.</li>
@@ -222,7 +221,7 @@ To pick methods you want, you&#8217;ll have to define the <strong>idpac</strong>
 <li>7 - Event Related PAC (ERPAC - Voytek, 2013) [IN PROGRESS]</li>
 </ul>
 <p>[<a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/examples/4_ComparePacMethods.py">PAC methods script</a>]</p>
-<div class="figure align-center" id="id2">
+<div class="figure align-center" id="id1">
 <img alt="_images/4_pacmeth.png" src="_images/4_pacmeth.png" />
 <p class="caption"><span class="caption-text"><a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/4_pacmeth.png">PAC methods comparison</a>.</span></p>
 </div>
@@ -240,9 +239,9 @@ To pick methods you want, you&#8217;ll have to define the <strong>idpac</strong>
 <li>6 - Time-lag (Canolty, 2006)</li>
 </ul>
 <p>[<a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/examples/5_CompareSurrogatesMethods.py">Surrogate methods script</a>]</p>
-<div class="figure align-center" id="id3">
-<img alt="_images/6_normmeth.png" src="_images/6_normmeth.png" />
-<p class="caption"><span class="caption-text"><a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/6_normmeth.png">Surrogate methods comparison</a>.</span></p>
+<div class="figure align-center" id="id2">
+<img alt="_images/5_surrometh.png" src="_images/5_surrometh.png" />
+<p class="caption"><span class="caption-text"><a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/5_surrometh.png">Surrogate methods comparison</a>.</span></p>
 </div>
 </div>
 <div class="section" id="normalization-methods">
@@ -256,7 +255,7 @@ To pick methods you want, you&#8217;ll have to define the <strong>idpac</strong>
 <li>4 - Substraction by the mean, then division by the diviation of the surrogates (z-scored)</li>
 </ul>
 <p>[<a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/examples/6_CompareNormalizationMethods.py">Normalization methods script</a>]</p>
-<div class="figure align-center" id="id4">
+<div class="figure align-center" id="id3">
 <img alt="_images/6_normmeth.png" src="_images/6_normmeth.png" />
 <p class="caption"><span class="caption-text"><a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/6_normmeth">Normalization methods comparison</a>.</span></p>
 </div>
@@ -269,13 +268,6 @@ To pick methods you want, you&#8217;ll have to define the <strong>idpac</strong>
 <li>idpac = (5, 2, 1) =&gt; PS + Swap amplitude time blocks + Substraction of the mean of surrogates</li>
 </ul>
 </div>
-</div>
-<div class="section" id="link-with-publications">
-<h2>Link with publications<a class="headerlink" href="#link-with-publications" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Canolty, 2006 : idpac = ()</li>
-<li>Tort, 2010 : idpac = ()</li>
-</ul>
 </div>
 </div>
 
@@ -292,7 +284,7 @@ To pick methods you want, you&#8217;ll have to define the <strong>idpac</strong>
         <a href="pyfcn.html" class="btn btn-neutral float-right" title="Python functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="tutorial.html" class="btn btn-neutral" title="Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Tensorpac" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -323,7 +315,7 @@ To pick methods you want, you&#8217;ll have to define the <strong>idpac</strong>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.5.0',
+            VERSION:'0.5.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; Tensorpac 0.5.0 documentation</title>
+  <title>Index &mdash; Tensorpac 0.5.1 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
         <link rel="index" title="Index"
               href="#"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.5.0 documentation" href="index.html"/> 
+    <link rel="top" title="Tensorpac 0.5.1 documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.5.0
+                0.5.1
               </div>
             
           
@@ -95,11 +95,7 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-phase-amplitude-coupling">The Phase-Amplitude Coupling</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="methods.html">Methods</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">Implemented methods</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#modular-philosophy">Modular philosophy</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="methods.html#pac-methods">Pac methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="methods.html#surrogates-methods">Surrogates methods</a></li>
@@ -107,7 +103,6 @@
 <li class="toctree-l3"><a class="reference internal" href="methods.html#example">Example</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="methods.html#link-with-publications">Link with publications</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pyfcn.html">Python functions</a><ul>
@@ -115,16 +110,20 @@
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-the-data">Filter the data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-then-compute-pac">Filter then compute PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyfcn.html#preferred-phase">Preferred-phase</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visu.html">Visualization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="visu.html#code-example">Code example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="visu.html#comodulogram-method-description">Comodulogram method description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#comodulogram">Comodulogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#triangular-plot">Triangular plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#polar-plot">Polar plot</a></li>
 </ul>
 </li>
 </ul>
@@ -195,6 +194,7 @@
  <a href="#C"><strong>C</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#P"><strong>P</strong></a>
+ | <a href="#T"><strong>T</strong></a>
  
 </div>
 <h2 id="C">C</h2>
@@ -224,11 +224,23 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pyfcn.html#tensorpac.pac.Pac">Pac (class in tensorpac.pac)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="utils.html#tensorpac.utils.PacSignals">PacSignals() (in module tensorpac.utils)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="utils.html#tensorpac.utils.PacTriVec">PacTriVec() (in module tensorpac.utils)</a>
+</li>
       <li><a href="utils.html#tensorpac.utils.PacVec">PacVec() (in module tensorpac.utils)</a>
+</li>
+      <li><a href="pyfcn.html#tensorpac.pac.Pac.pp">pp() (tensorpac.pac.Pac method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="visu.html#tensorpac.pac.Pac.triplot">triplot() (tensorpac.pac.Pac method)</a>, <a href="visu.html#tensorpac.pac.Pac.triplot">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -269,7 +281,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.5.0',
+            VERSION:'0.5.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

@@ -1,7 +1,7 @@
 .. _Methods:
 
-Methods
-=======
+Implemented methods
+===================
 
 Starting from fresh data, the first thing that need to be assessed is extracting the phase and the amplitude in several frequency bands. There is two ways to doing it :
 
@@ -57,10 +57,10 @@ The second digit refer to the method for evaluating surrogates :
 
 [`Surrogate methods script <https://github.com/EtienneCmb/tensorpac/blob/master/examples/5_CompareSurrogatesMethods.py>`_]
 
-.. figure::  picture/6_normmeth.png
+.. figure::  picture/5_surrometh.png
    :align:   center
 
-   `Surrogate methods comparison <https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/6_normmeth.png>`_.
+   `Surrogate methods comparison <https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/5_surrometh.png>`_.
 
 Normalization methods
 ~~~~~~~~~~~~~~~~~~~~~
@@ -88,8 +88,8 @@ Example
 * idpac = (5, 2, 1) => PS + Swap amplitude time blocks + Substraction of the mean of surrogates
 
 
-Link with publications
-----------------------
+.. Link with publications
+.. ----------------------
 
-* Canolty, 2006 : idpac = ()
-* Tort, 2010 : idpac = ()
+.. * Canolty, 2006 : idpac = ()
+.. * Tort, 2010 : idpac = ()

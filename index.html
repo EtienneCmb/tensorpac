@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tensorpac &mdash; Tensorpac 0.5.0 documentation</title>
+  <title>Tensorpac &mdash; Tensorpac 0.5.1 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.5.0 documentation" href="#"/>
-        <link rel="next" title="Tutorial" href="tutorial.html"/> 
+    <link rel="top" title="Tensorpac 0.5.1 documentation" href="#"/>
+        <link rel="next" title="Implemented methods" href="methods.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.5.0
+                0.5.1
               </div>
             
           
@@ -95,11 +95,7 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-phase-amplitude-coupling">The Phase-Amplitude Coupling</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="methods.html">Methods</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">Implemented methods</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#modular-philosophy">Modular philosophy</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="methods.html#pac-methods">Pac methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="methods.html#surrogates-methods">Surrogates methods</a></li>
@@ -107,7 +103,6 @@
 <li class="toctree-l3"><a class="reference internal" href="methods.html#example">Example</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="methods.html#link-with-publications">Link with publications</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pyfcn.html">Python functions</a><ul>
@@ -115,16 +110,20 @@
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-the-data">Filter the data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-then-compute-pac">Filter then compute PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyfcn.html#preferred-phase">Preferred-phase</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visu.html">Visualization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="visu.html#code-example">Code example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="visu.html#comodulogram-method-description">Comodulogram method description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#comodulogram">Comodulogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#triangular-plot">Triangular plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#polar-plot">Polar plot</a></li>
 </ul>
 </li>
 </ul>
@@ -197,13 +196,12 @@
 <h1>Tensorpac<a class="headerlink" href="#tensorpac" title="Permalink to this headline">¶</a></h1>
 <p>Tensorpac is an Python open-source toolbox for computing Phase-Amplitude Coupling (PAC) using tensors and parallel computing. On top of that, we designed a modular implementation with a relatively large amount of parameters.
 We provide a set of <a class="reference external" href="https://github.com/EtienneCmb/tensorpac/tree/master/examples">examples</a>.</p>
-<p>This package was developped in collaboration with <strong>Juan L.P. Soto</strong></p>
 <div class="figure align-center">
 <img alt="_images/tp.png" src="_images/tp.png" />
 </div>
 <div class="section" id="installation">
 <h2>Installation:<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>Tensorpac is only based on NumPy, SciPy and use <a class="reference external" href="https://pythonhosted.org/joblib/">Joblib</a> for parallel computing. For the installation, in a terminal run :</p>
+<p>Tensorpac is based on NumPy, SciPy and use <a class="reference external" href="https://pythonhosted.org/joblib/">Joblib</a> for parallel computing. For the installation, in a terminal run :</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>pip install tensorpac
 </pre></div>
 </div>
@@ -211,9 +209,10 @@ We provide a set of <a class="reference external" href="https://github.com/Etien
 <div class="section" id="what-s-new">
 <h2>What&#8217;s new?<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">New in version v0.4</p>
+<li><p class="first">New in version v0.5.1</p>
 <blockquote>
 <div><ul class="simple">
+<li>Compute and plot preferred-phase</li>
 <li>Bug fixing</li>
 </ul>
 </div></blockquote>
@@ -237,11 +236,7 @@ We provide a set of <a class="reference external" href="https://github.com/Etien
 <h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-phase-amplitude-coupling">The Phase-Amplitude Coupling</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="methods.html">Methods</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">Implemented methods</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#modular-philosophy">Modular philosophy</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="methods.html#pac-methods">Pac methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="methods.html#surrogates-methods">Surrogates methods</a></li>
@@ -249,7 +244,6 @@ We provide a set of <a class="reference external" href="https://github.com/Etien
 <li class="toctree-l3"><a class="reference internal" href="methods.html#example">Example</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="methods.html#link-with-publications">Link with publications</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pyfcn.html">Python functions</a><ul>
@@ -257,16 +251,20 @@ We provide a set of <a class="reference external" href="https://github.com/Etien
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-the-data">Filter the data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-then-compute-pac">Filter then compute PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyfcn.html#preferred-phase">Preferred-phase</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visu.html">Visualization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="visu.html#code-example">Code example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="visu.html#comodulogram-method-description">Comodulogram method description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#comodulogram">Comodulogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#triangular-plot">Triangular plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#polar-plot">Polar plot</a></li>
 </ul>
 </li>
 </ul>
@@ -292,7 +290,7 @@ We provide a set of <a class="reference external" href="https://github.com/Etien
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="tutorial.html" class="btn btn-neutral float-right" title="Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="methods.html" class="btn btn-neutral float-right" title="Implemented methods" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>
@@ -324,7 +322,7 @@ We provide a set of <a class="reference external" href="https://github.com/Etien
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.5.0',
+            VERSION:'0.5.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

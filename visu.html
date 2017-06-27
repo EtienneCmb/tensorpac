@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Visualization &mdash; Tensorpac 0.5.0 documentation</title>
+  <title>Visualization &mdash; Tensorpac 0.5.1 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.5.0 documentation" href="index.html"/>
+    <link rel="top" title="Tensorpac 0.5.1 documentation" href="index.html"/>
         <link rel="prev" title="Utils" href="utils.html"/> 
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.5.0
+                0.5.1
               </div>
             
           
@@ -95,11 +95,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-phase-amplitude-coupling">The Phase-Amplitude Coupling</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="methods.html">Methods</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">Implemented methods</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#modular-philosophy">Modular philosophy</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="methods.html#pac-methods">Pac methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="methods.html#surrogates-methods">Surrogates methods</a></li>
@@ -107,7 +103,6 @@
 <li class="toctree-l3"><a class="reference internal" href="methods.html#example">Example</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="methods.html#link-with-publications">Link with publications</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pyfcn.html">Python functions</a><ul>
@@ -115,16 +110,20 @@
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-the-data">Filter the data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-then-compute-pac">Filter then compute PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyfcn.html#preferred-phase">Preferred-phase</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Visualization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#code-example">Code example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#comodulogram-method-description">Comodulogram method description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comodulogram">Comodulogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#triangular-plot">Triangular plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#polar-plot">Polar plot</a></li>
 </ul>
 </li>
 </ul>
@@ -192,7 +191,13 @@
             
   <div class="section" id="visualization">
 <span id="id1"></span><h1>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h1>
-<p>If matplotlib is install on your system, the main Pac class also include a comodulogram plotting method that rely on Matplotlib. This script is also present in the <a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/examples/9_PlayWithColors.py">example</a> folder.</p>
+<p>If matplotlib is install on your system, the main Pac class also include several plotting functions :</p>
+<ul class="simple">
+<li><a class="reference internal" href="#pltcomo"><span class="std std-ref">Comodulogram</span></a> : comodulogram plot, for finding the coupling location <em>PAC(phase, amplitude)</em></li>
+<li><a class="reference internal" href="#plttri"><span class="std std-ref">Triangular plot</span></a> : triangular plot for finding where each band [Start, Stop] and the bandwidth <em>PAC(Starting frequency, Ending frequency)</em></li>
+<li><a class="reference internal" href="#pltpp"><span class="std std-ref">Polar plot</span></a> : polar plot for the preferred-phase representation <em>PP(phase, binned amplitude)</em></li>
+</ul>
+<p>plotting method that rely on Matplotlib. This script is also present in the <a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/examples/9_PlayWithColors.py">example</a> folder.</p>
 <div class="section" id="code-example">
 <h2>Code example<a class="headerlink" href="#code-example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -256,13 +261,13 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="comodulogram">
+<span id="pltcomo"></span><h2>Comodulogram<a class="headerlink" href="#comodulogram" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-center" id="id2">
 <img alt="_images/9_plot.png" src="_images/9_plot.png" />
-<p class="caption"><span class="caption-text"><a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/9_plot.png">Plotting comodulogram</a></span></p>
+<p class="caption"><span class="caption-text">Comodulogram forms.</span></p>
 </div>
-</div>
-<div class="section" id="comodulogram-method-description">
-<h2>Comodulogram method description<a class="headerlink" href="#comodulogram-method-description" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
 <dt id="tensorpac.pac.Pac.comodulogram">
 <code class="descclassname">Pac.</code><code class="descname">comodulogram</code><span class="sig-paren">(</span><em>pac</em>, <em>xlabel='Frequency for phase (hz)'</em>, <em>ylabel='Frequency for amplitude (hz)'</em>, <em>cblabel='PAC values'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.pac.Pac.comodulogram" title="Permalink to this definition">¶</a></dt>
@@ -284,6 +289,8 @@
 <dd>Colorbar.</dd>
 <dt>title: string, optional, (def: &#8216;&#8217;)</dt>
 <dd>Title of the plot.</dd>
+<dt>y: float, optional, (def: 1.02)</dt>
+<dd>Title location.</dd>
 <dt>cmap: string, optional, (def: &#8216;viridis&#8217;)</dt>
 <dd>Name of one Matplotlib&#8217;s colomap.</dd>
 <dt>vmin: float, optional, (def: None)</dt>
@@ -327,6 +334,94 @@ of p-values to use as levels.</dd>
 <dd><dl class="first last docutils">
 <dt>gca: axes</dt>
 <dd>The current matplotlib axes.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="triangular-plot">
+<span id="plttri"></span><h2>Triangular plot<a class="headerlink" href="#triangular-plot" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<img alt="_images/fminfmax.png" src="_images/fminfmax.png" />
+</div>
+<dl class="method">
+<dt id="tensorpac.pac.Pac.triplot">
+<code class="descclassname">Pac.</code><code class="descname">triplot</code><span class="sig-paren">(</span><em>pac</em>, <em>fvec</em>, <em>tridx</em>, <em>xlabel='Starting frequency (hz)'</em>, <em>ylabel='Ending frequency (hz)'</em>, <em>cblabel='PAC values'</em>, <em>bad='lightgray'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.pac.Pac.triplot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Triangular plot.</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>xlabel: string, optional, (def: &#8216;Starting frequency (hz)&#8217;)</dt>
+<dd>Label for the phase axis.</dd>
+<dt>ylabel: string, optional, (def: &#8216;Ending frequency (hz)&#8217;)</dt>
+<dd>Label for the amplitude axis.</dd>
+<dt>cblabel: string, optional, (def: &#8216;PAC values&#8217;)</dt>
+<dd>Colorbar.</dd>
+<dt>title: string, optional, (def: &#8216;&#8217;)</dt>
+<dd>Title of the plot.</dd>
+<dt>y: float, optional, (def: 1.02)</dt>
+<dd>Title location.</dd>
+<dt>cmap: string, optional, (def: &#8216;viridis&#8217;)</dt>
+<dd>Name of one Matplotlib&#8217;s colomap.</dd>
+<dt>vmin: float, optional, (def: None)</dt>
+<dd>Threshold under which set the color to the uner parameter.</dd>
+<dt>vmax: float, optional, (def: None)</dt>
+<dd>Threshold over which set the color in the over parameter.</dd>
+<dt>under: string, optional, (def: &#8216;gray&#8217;)</dt>
+<dd>Color for values under the vmin parameter.</dd>
+<dt>over: string, optional, (def: &#8216;red&#8217;)</dt>
+<dd>Color for values over the vmax parameter.</dd>
+<dt>bad: string, optional, (def: &#8216;lightgray&#8217;)</dt>
+<dd>Color for non-significant values.</dd>
+<dt>rmaxis: bool, optional, (def: False)</dt>
+<dd>Remove unecessary axis.</dd>
+<dt>dpaxis: bool, optional, (def: False)</dt>
+<dd>Despine axis.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="polar-plot">
+<span id="pltpp"></span><h2>Polar plot<a class="headerlink" href="#polar-plot" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<img alt="_images/PP_planningVsExec.png" src="_images/PP_planningVsExec.png" />
+</div>
+<dl class="method">
+<dt>
+<code class="descclassname">Pac.</code><code class="descname">triplot</code><span class="sig-paren">(</span><em>pac</em>, <em>fvec</em>, <em>tridx</em>, <em>xlabel='Starting frequency (hz)'</em>, <em>ylabel='Ending frequency (hz)'</em>, <em>cblabel='PAC values'</em>, <em>bad='lightgray'</em>, <em>**kwargs</em><span class="sig-paren">)</span></dt>
+<dd><p>Triangular plot.</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>xlabel: string, optional, (def: &#8216;Starting frequency (hz)&#8217;)</dt>
+<dd>Label for the phase axis.</dd>
+<dt>ylabel: string, optional, (def: &#8216;Ending frequency (hz)&#8217;)</dt>
+<dd>Label for the amplitude axis.</dd>
+<dt>cblabel: string, optional, (def: &#8216;PAC values&#8217;)</dt>
+<dd>Colorbar.</dd>
+<dt>title: string, optional, (def: &#8216;&#8217;)</dt>
+<dd>Title of the plot.</dd>
+<dt>y: float, optional, (def: 1.02)</dt>
+<dd>Title location.</dd>
+<dt>cmap: string, optional, (def: &#8216;viridis&#8217;)</dt>
+<dd>Name of one Matplotlib&#8217;s colomap.</dd>
+<dt>vmin: float, optional, (def: None)</dt>
+<dd>Threshold under which set the color to the uner parameter.</dd>
+<dt>vmax: float, optional, (def: None)</dt>
+<dd>Threshold over which set the color in the over parameter.</dd>
+<dt>under: string, optional, (def: &#8216;gray&#8217;)</dt>
+<dd>Color for values under the vmin parameter.</dd>
+<dt>over: string, optional, (def: &#8216;red&#8217;)</dt>
+<dd>Color for values over the vmax parameter.</dd>
+<dt>bad: string, optional, (def: &#8216;lightgray&#8217;)</dt>
+<dd>Color for non-significant values.</dd>
+<dt>rmaxis: bool, optional, (def: False)</dt>
+<dd>Remove unecessary axis.</dd>
+<dt>dpaxis: bool, optional, (def: False)</dt>
+<dd>Despine axis.</dd>
 </dl>
 </dd>
 </dl>
@@ -377,7 +472,7 @@ of p-values to use as levels.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.5.0',
+            VERSION:'0.5.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

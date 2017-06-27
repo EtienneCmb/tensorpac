@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Python functions &mdash; Tensorpac 0.5.0 documentation</title>
+  <title>Python functions &mdash; Tensorpac 0.5.1 documentation</title>
   
 
   
@@ -37,9 +37,9 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.5.0 documentation" href="index.html"/>
+    <link rel="top" title="Tensorpac 0.5.1 documentation" href="index.html"/>
         <link rel="next" title="Utils" href="utils.html"/>
-        <link rel="prev" title="Methods" href="methods.html"/> 
+        <link rel="prev" title="Implemented methods" href="methods.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                0.5.0
+                0.5.1
               </div>
             
           
@@ -96,11 +96,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-phase-amplitude-coupling">The Phase-Amplitude Coupling</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="methods.html">Methods</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">Implemented methods</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#modular-philosophy">Modular philosophy</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="methods.html#pac-methods">Pac methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="methods.html#surrogates-methods">Surrogates methods</a></li>
@@ -108,7 +104,6 @@
 <li class="toctree-l3"><a class="reference internal" href="methods.html#example">Example</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="methods.html#link-with-publications">Link with publications</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Python functions</a><ul>
@@ -116,16 +111,20 @@
 <li class="toctree-l2"><a class="reference internal" href="#filter-the-data">Filter the data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#filter-then-compute-pac">Filter then compute PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#preferred-phase">Preferred-phase</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="utils.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visu.html">Visualization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="visu.html#code-example">Code example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="visu.html#comodulogram-method-description">Comodulogram method description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#comodulogram">Comodulogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#triangular-plot">Triangular plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#polar-plot">Polar plot</a></li>
 </ul>
 </li>
 </ul>
@@ -193,11 +192,12 @@
             
   <div class="section" id="python-functions">
 <span id="id1"></span><h1>Python functions<a class="headerlink" href="#python-functions" title="Permalink to this headline">¶</a></h1>
-<p>The first thing to do is to define a <cite>pacobj</cite>. Then, from this objects, you can use one of the three following methods :</p>
+<p>The first thing to do is to define a <cite>pacobj</cite>. Then, from this objects, you can use one of the following methods :</p>
 <ul class="simple">
 <li><a class="reference internal" href="#filtdata"><span class="std std-ref">Filter the data</span></a> : use this method to extract the phase and the amplitude.</li>
 <li><a class="reference internal" href="#pacfilt"><span class="std std-ref">Compute PAC on filtered data</span></a> : if you already extracted your phase and amplitude, use this method to compute pac directly on it.</li>
 <li><a class="reference internal" href="#filtpac"><span class="std std-ref">Filter then compute PAC</span></a> : this is the all in one method. Starting from fresh data, this method will extract phase and amplitude and return the PAC estimation.</li>
+<li><a class="reference internal" href="#pp"><span class="std std-ref">Preferred-phase</span></a> : compute the preferred-phase.</li>
 </ul>
 <div class="section" id="pac-object">
 <span id="pacobj"></span><h2>PAC object<a class="headerlink" href="#pac-object" title="Permalink to this headline">¶</a></h2>
@@ -470,7 +470,7 @@ the nblocks parameter allow to split into a larger number.</li>
 </div>
 <div class="section" id="filter-then-compute-pac">
 <span id="filtpac"></span><h2>Filter then compute PAC<a class="headerlink" href="#filter-then-compute-pac" title="Permalink to this headline">¶</a></h2>
-<p>Finally, use the following method to filter and compute the PAC directly.</p>
+<p>Use the following method to filter and compute the PAC directly.</p>
 <dl class="method">
 <dt id="tensorpac.pac.Pac.filterfit">
 <code class="descclassname">Pac.</code><code class="descname">filterfit</code><span class="sig-paren">(</span><em>sf</em>, <em>xpha</em>, <em>xamp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimized=True</em>, <em>get_surro=False</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
@@ -539,6 +539,50 @@ the nblocks parameter allow to split into a larger number.</li>
 </dd></dl>
 
 </div>
+<div class="section" id="preferred-phase">
+<span id="pp"></span><h2>Preferred-phase<a class="headerlink" href="#preferred-phase" title="Permalink to this headline">¶</a></h2>
+<p>Compute the preferred-phase (PP, see <a class="reference external" href="https://github.com/EtienneCmb/tensorpac/tree/master/examples/13_PreferredPhase.py">this PP example</a>).</p>
+<dl class="method">
+<dt id="tensorpac.pac.Pac.pp">
+<code class="descclassname">Pac.</code><code class="descname">pp</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>axis=-1</em>, <em>nbins=72</em>, <em>optimized=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.pp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.pp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the preferred-phase.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>pha: np.ndarray</dt>
+<dd>Phase of slower oscillations.</dd>
+<dt>amp: np.ndarray</dt>
+<dd>Amplitude of fastest oscillations.</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>axis: int, optional, (def: -1)</dt>
+<dd>Location of the time axis.</dd>
+<dt>nbins: int, optional, (def: 72)</dt>
+<dd>Number of bins for bining the amplitude according to phase
+slices.</dd>
+<dt>optimized: bool, optional, (def: True)</dt>
+<dd>Optimize argument of the np.einsum function. Use either False,
+True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>ampbin: np.ndarray</dt>
+<dd>The binned amplitude according to the phase of shape
+(nbins, namp, npha...).</dd>
+<dt>pp: np.ndarray</dt>
+<dd>The prefered phase where the amplitude is maximum of shape
+(namp, npha, ...).</dd>
+<dt>polarvec: np.ndarray</dt>
+<dd>The phase vector for the polar plot.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -554,7 +598,7 @@ the nblocks parameter allow to split into a larger number.</li>
         <a href="utils.html" class="btn btn-neutral float-right" title="Utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="methods.html" class="btn btn-neutral" title="Methods" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="methods.html" class="btn btn-neutral" title="Implemented methods" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -585,7 +629,7 @@ the nblocks parameter allow to split into a larger number.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.5.0',
+            VERSION:'0.5.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

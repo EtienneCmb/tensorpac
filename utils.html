@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Utils &mdash; Tensorpac 0.5.0 documentation</title>
+  <title>Utils &mdash; Tensorpac 0.5.1 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.5.0 documentation" href="index.html"/>
+    <link rel="top" title="Tensorpac 0.5.1 documentation" href="index.html"/>
         <link rel="next" title="Visualization" href="visu.html"/>
         <link rel="prev" title="Python functions" href="pyfcn.html"/> 
 
@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                0.5.0
+                0.5.1
               </div>
             
           
@@ -96,11 +96,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-phase-amplitude-coupling">The Phase-Amplitude Coupling</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="methods.html">Methods</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="methods.html">Implemented methods</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="methods.html#modular-philosophy">Modular philosophy</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="methods.html#pac-methods">Pac methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="methods.html#surrogates-methods">Surrogates methods</a></li>
@@ -108,7 +104,6 @@
 <li class="toctree-l3"><a class="reference internal" href="methods.html#example">Example</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="methods.html#link-with-publications">Link with publications</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pyfcn.html">Python functions</a><ul>
@@ -116,16 +111,20 @@
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-the-data">Filter the data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-then-compute-pac">Filter then compute PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyfcn.html#preferred-phase">Preferred-phase</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Utils</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visu.html">Visualization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="visu.html#code-example">Code example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="visu.html#comodulogram-method-description">Comodulogram method description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#comodulogram">Comodulogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#triangular-plot">Triangular plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#polar-plot">Polar plot</a></li>
 </ul>
 </li>
 </ul>
@@ -193,35 +192,6 @@
             
   <div class="section" id="utils">
 <span id="id1"></span><h1>Utils<a class="headerlink" href="#utils" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="generate-phase-and-amplitude-vectors">
-<h2>Generate phase and amplitude vectors<a class="headerlink" href="#generate-phase-and-amplitude-vectors" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="tensorpac.utils.PacVec">
-<code class="descclassname">tensorpac.utils.</code><code class="descname">PacVec</code><span class="sig-paren">(</span><em>fpha=(2</em>, <em>30</em>, <em>2</em>, <em>1)</em>, <em>famp=(60</em>, <em>200</em>, <em>10</em>, <em>5)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#PacVec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PacVec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate cross-frequency coupling vectors.</p>
-<dl class="docutils">
-<dt>Kargs:</dt>
-<dd><dl class="first last docutils">
-<dt>fpha: tuple, optional, [def: (2, 30, 2, 1)]</dt>
-<dd>Frequency parameters for phase. Each argument inside the tuple
-mean (starting fcy, ending fcy, width, step)</dd>
-<dt>famp: tuple, optional, [def: (60, 200, 10, 5)]</dt>
-<dd>Frequency parameters for amplitude. Each argument inside the
-tuple mean (starting fcy, ending fcy, width, step)</dd>
-</dl>
-</dd>
-<dt>Returns:</dt>
-<dd><dl class="first last docutils">
-<dt>pVec: np.ndarray, shape (N, 2)</dt>
-<dd>Array containing the pairs of phase frequencies.</dd>
-<dt>aVec: np.ndarray, shape (N, 2)</dt>
-<dd>Array containing the pairs of amplitude frequencies.</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
 <div class="section" id="generate-artificially-coupled-signals">
 <h2>Generate artificially coupled signals<a class="headerlink" href="#generate-artificially-coupled-signals" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
@@ -265,6 +235,64 @@ signal will be between :
 (ndatasets x npts)</dd>
 <dt>time: array</dt>
 <dd>The corresponding time vector</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="generate-phase-and-amplitude-vectors">
+<h2>Generate phase and amplitude vectors<a class="headerlink" href="#generate-phase-and-amplitude-vectors" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tensorpac.utils.PacVec">
+<code class="descclassname">tensorpac.utils.</code><code class="descname">PacVec</code><span class="sig-paren">(</span><em>fpha=(2</em>, <em>30</em>, <em>2</em>, <em>1)</em>, <em>famp=(60</em>, <em>200</em>, <em>10</em>, <em>5)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#PacVec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PacVec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate cross-frequency coupling vectors.</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>fpha: tuple, optional, [def: (2, 30, 2, 1)]</dt>
+<dd>Frequency parameters for phase. Each argument inside the tuple
+mean (starting fcy, ending fcy, width, step)</dd>
+<dt>famp: tuple, optional, [def: (60, 200, 10, 5)]</dt>
+<dd>Frequency parameters for amplitude. Each argument inside the
+tuple mean (starting fcy, ending fcy, width, step)</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>pVec: np.ndarray, shape (N, 2)</dt>
+<dd>Array containing the pairs of phase frequencies.</dd>
+<dt>aVec: np.ndarray, shape (N, 2)</dt>
+<dd>Array containing the pairs of amplitude frequencies.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="generate-triangular-vectors">
+<h2>Generate triangular vectors<a class="headerlink" href="#generate-triangular-vectors" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tensorpac.utils.PacTriVec">
+<code class="descclassname">tensorpac.utils.</code><code class="descname">PacTriVec</code><span class="sig-paren">(</span><em>fstart=60</em>, <em>fend=160</em>, <em>fwidth=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#PacTriVec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PacTriVec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate triangular vector.</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>fstart: float, optional, (def: 60)</dt>
+<dd>Starting frequency.</dd>
+<dt>fend: float, optional, (def: 160)</dt>
+<dd>Ending frequency.</dd>
+<dt>fwidth: float, optional, (def: 10)</dt>
+<dd>Frequency bandwidth.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>f: np.ndarray</dt>
+<dd>The triangular vector.</dd>
+<dt>tridx: np.ndarray</dt>
+<dd>The triangular index for the reconstruction.</dd>
 </dl>
 </dd>
 </dl>
@@ -317,7 +345,7 @@ signal will be between :
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.5.0',
+            VERSION:'0.5.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
