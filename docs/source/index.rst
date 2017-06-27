@@ -15,15 +15,13 @@ Tensorpac
 Tensorpac is an Python open-source toolbox for computing Phase-Amplitude Coupling (PAC) using tensors and parallel computing. On top of that, we designed a modular implementation with a relatively large amount of parameters.
 We provide a set of `examples <https://github.com/EtienneCmb/tensorpac/tree/master/examples>`_.
 
-This package was developped in collaboration with **Juan L.P. Soto**
-
 .. figure::  picture/tp.png
    :align:   center
 
 Installation:
 *************
 
-Tensorpac is only based on NumPy, SciPy and use `Joblib <https://pythonhosted.org/joblib/>`_ for parallel computing. For the installation, in a terminal run :
+Tensorpac is based on NumPy, SciPy and use `Joblib <https://pythonhosted.org/joblib/>`_ for parallel computing. For the installation, in a terminal run :
 
 .. code-block:: bash
 
@@ -32,8 +30,9 @@ Tensorpac is only based on NumPy, SciPy and use `Joblib <https://pythonhosted.or
 What's new?
 ***********
 
-* New in version v0.4
+* New in version v0.5.1
     
+    * Compute and plot preferred-phase
     * Bug fixing
 
 Todo list
@@ -53,7 +52,6 @@ Contents:
 .. toctree::
    :maxdepth: 3
 
-   tutorial
    methods
    pyfcn
    utils
