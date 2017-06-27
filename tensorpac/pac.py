@@ -394,7 +394,7 @@ class Pac(PacPlot):
                         get_surro, correct, njobs)
 
     def pp(self, pha, amp, axis=-1, nbins=72, optimized=True):
-        """Compute the prefered-phase.
+        """Compute the preferred-phase.
 
         Args:
             pha: np.ndarray

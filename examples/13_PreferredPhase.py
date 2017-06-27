@@ -1,4 +1,4 @@
-"""This example illustrate hox to find the prefered-phase (PP).
+"""This example illustrate hox to find the preferred-phase (PP).
 
 First, the amplitude is binned according to phase slices (360°/nbins). Then,
 the PP is defined as the phase where the amplitude is maximum.
