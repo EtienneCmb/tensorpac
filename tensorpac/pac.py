@@ -5,7 +5,7 @@ from scipy.signal import hilbert
 from .utils import PacVec
 from .pacstr import pacstr
 from .spectral import spectral
-from .methods import ComputePac
+from .methods import ComputePac, _kl_hr
 from .surrogates import ComputeSurogates
 from .normalize import normalize
 from .visu import PacPlot
@@ -273,20 +273,8 @@ class Pac(PacPlot):
               amplitude into two equal parts, then swap those two blocks. But
               the nblocks parameter allow to split into a larger number.
         """
-        # Shape checking :
-        if pha.ndim != amp.ndim:
-            raise ValueError("pha and amp must have the same number of "
-                             "dimensions.")
-        # Force phase / amplitude to be at least (1, N) :
-        if (pha.ndim == 1) and (amp.ndim == 1):
-            pha = pha.reshape(1, -1)
-            amp = amp.reshape(1, -1)
-            axis = 1
-        # Check if the phase is in radians :
-        if np.ptp(pha) > 2 * np.pi:
-            raise ValueError("Your phase is probably in degrees and should be"
-                             " converted in radians using either np.degrees or"
-                             " np.deg2rad.")
+        # Check phase and amplitude :
+        pha, amp, axis = self._phampcheck(pha, amp, axis)
         # For the phase synchrony, extract the phase of the amplitude :
         if self._idpac[0] == 5:
             amp = np.angle(hilbert(amp, axis=axis))
@@ -507,6 +495,26 @@ class Pac(PacPlot):
         # Convert Morlet's width :
         if width is not None:
             self._width = int(width)
+
+    def _phampcheck(self, pha, amp, axis):
+        """Check phase and amplitude values."""
+        # Shape checking :
+        if pha.ndim != amp.ndim:
+            raise ValueError("pha and amp must have the same number of "
+                             "dimensions.")
+        # Force phase / amplitude to be at least (1, N) :
+        if (pha.ndim == 1) and (amp.ndim == 1):
+            pha = pha.reshape(1, -1)
+            amp = amp.reshape(1, -1)
+            axis = 1
+        # Check if the phase is in radians :
+        if np.ptp(pha) > 2 * np.pi:
+            raise ValueError("Your phase is probably in degrees and should be"
+                             " converted in radians using either np.degrees or"
+                             " np.deg2rad.")
+        # Force the phase to be in [-pi, pi] :
+        pha = (pha + np.pi) % (2 * np.pi) - np.pi
+        return pha, amp, axis
 
     ###########################################################################
     #                              PROPERTIES
