@@ -54,3 +54,5 @@ Preferred-phase
 ~~~~~~~~~~~~~~~
 
 Compute the preferred-phase (PP, see `this PP example <https://github.com/EtienneCmb/tensorpac/tree/master/examples/13_PreferredPhase.py>`_). 
+
+.. automethod:: tensorpac.pac.Pac.pp

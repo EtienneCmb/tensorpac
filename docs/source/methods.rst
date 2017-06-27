@@ -88,8 +88,8 @@ Example
 * idpac = (5, 2, 1) => PS + Swap amplitude time blocks + Substraction of the mean of surrogates
 
 
-Link with publications
-----------------------
+.. Link with publications
+.. ----------------------
 
-* Canolty, 2006 : idpac = ()
-* Tort, 2010 : idpac = ()
+.. * Canolty, 2006 : idpac = ()
+.. * Tort, 2010 : idpac = ()
