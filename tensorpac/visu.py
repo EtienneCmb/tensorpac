@@ -8,24 +8,35 @@ __all__ = ['PacPlot']
 class PacPlot(object):
     """Main PAC plotting class."""
 
-    def comodulogram(self, pac, xlabel='Frequency for phase (hz)',
-                     ylabel='Frequency for amplitude (hz)',
-                     cblabel='PAC values', **kwargs):
-        """Plot PAC using comodulogram.
+    def pacplot(self, pac, xvec, yvec, xlabel='', ylabel='', cblabel='',
+                title='', cmap='viridis', vmin=None, vmax=None, under=None,
+                over=None, bad=None, pvalues=None, p=0.05, interp=None,
+                rmaxis=False, dpaxis=False, plotas='imshow', ncontours=5,
+                levels=None, levelcmap='Reds', polar=False, y=1.02,
+                subplot=111):
+        """Main plotting pac function.
+
+        This method can be used to plot any 2D array.
 
         Args:
             pac: np.ndarray
-                PAC array of shape (pha, namp)
+                A 2D array.
+
+            xvec: np.ndarray
+                The vector to use for the x-axis.
+
+            yvec: np.ndarray
+                The vector to use for the y-axis.
 
         Kargs:
-            xlabel: string, optional, (def: 'Frequency for phase (hz)')
-                Label for the phase axis.
+            xlabel: string, optional, (def: '')
+                Label for the x-axis.
 
-            ylabel: string, optional, (def: 'Frequency for amplitude (hz)')
-                Label for the amplitude axis.
+            ylabel: string, optional, (def: '')
+                Label for the y-axis.
 
-            cblabel: string, optional, (def: 'PAC values')
-                Colorbar.
+            cblabel: string, optional, (def: '')
+                Label for the colorbar.
 
             title: string, optional, (def: '')
                 Title of the plot.
@@ -89,155 +100,6 @@ class PacPlot(object):
             gca: axes
                 The current matplotlib axes.
         """
-        xvec, yvec = self.xvec, self.yvec
-        return self._pacplot(pac, xvec, yvec, xlabel, ylabel, cblabel,
-                             **kwargs)
-
-    def triplot(self, pac, fvec, tridx, xlabel='Starting frequency (hz)',
-                ylabel='Ending frequency (hz)', cblabel='PAC values',
-                bad='lightgray', **kwargs):
-        """Triangular plot.
-
-        Kargs:
-            xlabel: string, optional, (def: 'Starting frequency (hz)')
-                Label for the phase axis.
-
-            ylabel: string, optional, (def: 'Ending frequency (hz)')
-                Label for the amplitude axis.
-
-            cblabel: string, optional, (def: 'PAC values')
-                Colorbar.
-
-            title: string, optional, (def: '')
-                Title of the plot.
-
-            y: float, optional, (def: 1.02)
-                Title location.
-
-            cmap: string, optional, (def: 'viridis')
-                Name of one Matplotlib's colomap.
-
-            vmin: float, optional, (def: None)
-                Threshold under which set the color to the uner parameter.
-
-            vmax: float, optional, (def: None)
-                Threshold over which set the color in the over parameter.
-
-            under: string, optional, (def: 'gray')
-                Color for values under the vmin parameter.
-
-            over: string, optional, (def: 'red')
-                Color for values over the vmax parameter.
-
-            bad: string, optional, (def: 'lightgray')
-                Color for non-significant values.
-
-            rmaxis: bool, optional, (def: False)
-                Remove unecessary axis.
-
-            dpaxis: bool, optional, (def: False)
-                Despine axis.
-        """
-        pac, tridx = np.squeeze(pac), np.squeeze(tridx)
-        # ___________________ CHECKING ___________________
-        # Check if pac is a raw vector :
-        if pac.ndim is not 1:
-            raise ValueError("The PAC variable must be a row vector.")
-        if len(pac) != tridx.shape[0]:
-            raise ValueError("PAC and tridx variables must have the same "
-                             "length.")
-
-        # ___________________ RECONSTRUCT ___________________
-        npac = tridx.max() + 2
-        rpac = np.zeros((npac, npac), dtype=float)
-        for num, k in enumerate(tridx):
-            rpac[k[0], k[1]] = pac[num]
-        # Build mask :
-        mask = np.zeros_like(rpac, dtype=bool)
-        mask[np.triu_indices_from(mask)] = True
-        # Mask the lower triangle :
-        rpac = np.ma.masked_array(np.flipud(rpac), mask=mask)
-
-        # ___________________ PLOT ___________________
-        # Define frequency vector :
-        vector = fvec[tridx[:, 0] == 0, 0]
-        xvec = yvec = np.append(vector, [fvec.max()])
-        return self._pacplot(rpac, xvec, yvec, xlabel, ylabel, cblabel,
-                             bad=bad, **kwargs)
-
-    def polar(self, amp, xvec, yvec, interp=None, **kwargs):
-        """Polar representation.
-
-        Args:
-            amp: np.ndarray
-                2D array.
-
-            xvec: np.ndarray
-                Vector for the x-axis.
-
-            yvec: np.ndarray
-                Vector for the y-axis (phases).
-
-        Kargs:
-            interp: float, optional, (def: None)
-                Interplation factor.
-
-            xlabel: string, optional, (def: 'Frequency for phase (hz)')
-                Label for the phase axis.
-
-            ylabel: string, optional, (def: 'Frequency for amplitude (hz)')
-                Label for the amplitude axis.
-
-            cblabel: string, optional, (def: 'PAC values')
-                Colorbar.
-
-            title: string, optional, (def: '')
-                Title of the plot.
-
-            y: float, optional, (def: 1.02)
-                Title location.
-
-            cmap: string, optional, (def: 'viridis')
-                Name of one Matplotlib's colomap.
-
-            vmin: float, optional, (def: None)
-                Threshold under which set the color to the uner parameter.
-
-            vmax: float, optional, (def: None)
-                Threshold over which set the color in the over parameter.
-
-            under: string, optional, (def: 'gray')
-                Color for values under the vmin parameter.
-
-            over: string, optional, (def: 'red')
-                Color for values over the vmax parameter.
-
-            bad: string, optional, (def: None)
-                Color for non-significant values.
-
-            rmaxis: bool, optional, (def: False)
-                Remove unecessary axis.
-
-            dpaxis: bool, optional, (def: False)
-                Despine axis.
-        """
-        # Interpolation :
-        if interp is not None:
-            amp, yvec, xvec = mapinterpolation(amp, yvec, xvec, interp, 1)
-        return self._pacplot(amp, xvec, yvec, polar=True, **kwargs)
-
-    def show(self):
-        """Display the figure."""
-        import matplotlib.pyplot as plt
-        plt.show()
-
-    def _pacplot(self, pac, xvec, yvec, xlabel='', ylabel='', cblabel='',
-                 title='', cmap='viridis', vmin=None, vmax=None, under=None,
-                 over=None, bad=None, pvalues=None, p=0.05, interp=None,
-                 rmaxis=False, dpaxis=False, plotas='imshow', ncontours=5,
-                 levels=None, levelcmap='Reds', polar=False, y=1.02,
-                 subplot=111):
-        """Main plotting pac function."""
         # Check if pac is 2 dimensions :
         if pac.ndim is not 2:
             raise ValueError("The PAC variable must have two dimensions.")
@@ -319,6 +181,153 @@ class PacPlot(object):
 
         return plt.gca()
 
+    def comodulogram(self, pac, xlabel='Frequency for phase (hz)',
+                     ylabel='Frequency for amplitude (hz)',
+                     cblabel='PAC values', **kwargs):
+        """Plot PAC using comodulogram.
+
+        Args:
+            pac: np.ndarray
+                PAC array of shape (namp, pha)
+
+        Kargs:
+            xlabel: string, optional, (def: 'Frequency for phase (hz)')
+                Label for the phase axis.
+
+            ylabel: string, optional, (def: 'Frequency for amplitude (hz)')
+                Label for the amplitude axis.
+
+            cblabel: string, optional, (def: 'PAC values')
+                Colorbar.
+
+            kwargs:
+                Further arguments are passed to the pacplot() method.
+
+        Returns:
+            gca: axes
+                The current matplotlib axes.
+        """
+        xvec, yvec = self.xvec, self.yvec
+        return self.pacplot(pac, xvec, yvec, xlabel, ylabel, cblabel,
+                            **kwargs)
+
+    def triplot(self, pac, fvec, tridx, xlabel='Starting frequency (hz)',
+                ylabel='Ending frequency (hz)', cblabel='PAC values',
+                bad='lightgray', **kwargs):
+        """Triangular plot.
+
+        The triplot method is used to find the [starting, ending] frequency
+        either for the phase or for the amplitude.
+
+        Args:
+            pac: np.ndarray
+                Pac array of shape (namp, npha)
+
+            fvec: np.ndarray
+                The frequency vector returned by the PacTriVec function.
+
+            tridx: np.ndarray
+                The index vector used to build the triangle. This argument is
+                also returned by the PacTriVec function.
+
+        Kargs:
+            xlabel: string, optional, (def: 'Starting frequency (hz)')
+                Label for the phase axis.
+
+            ylabel: string, optional, (def: 'Ending frequency (hz)')
+                Label for the amplitude axis.
+
+            cblabel: string, optional, (def: 'PAC values')
+                Colorbar.
+
+            bad: string, optional, (def: 'lightgray')
+                Color for non-significant values.
+
+            kwargs:
+                Further arguments are passed to the pacplot() method.
+
+        Returns:
+            gca: axes
+                The current matplotlib axes.
+        """
+        pac, tridx = np.squeeze(pac), np.squeeze(tridx)
+        # ___________________ CHECKING ___________________
+        # Check if pac is a raw vector :
+        if pac.ndim is not 1:
+            raise ValueError("The PAC variable must be a row vector.")
+        if len(pac) != tridx.shape[0]:
+            raise ValueError("PAC and tridx variables must have the same "
+                             "length.")
+
+        # ___________________ RECONSTRUCT ___________________
+        npac = tridx.max() + 2
+        rpac = np.zeros((npac, npac), dtype=float)
+        for num, k in enumerate(tridx):
+            rpac[k[0], k[1]] = pac[num]
+        # Build mask :
+        mask = np.zeros_like(rpac, dtype=bool)
+        mask[np.triu_indices_from(mask)] = True
+        # Mask the lower triangle :
+        rpac = np.ma.masked_array(np.flipud(rpac), mask=mask)
+
+        # ___________________ PLOT ___________________
+        # Define frequency vector :
+        vector = fvec[tridx[:, 0] == 0, 0]
+        xvec = yvec = np.append(vector, [fvec.max()])
+        return self.pacplot(rpac, xvec, yvec, xlabel, ylabel, cblabel,
+                            bad=bad, **kwargs)
+
+    def polar(self, amp, xvec, yvec, interp=None, **kwargs):
+        """Polar representation.
+
+        This method is used to visualize amplitude as a function of phase using
+        a polar (circle) representation.
+
+        Args:
+            amp: np.ndarray
+                2D array.
+
+            xvec: np.ndarray
+                Vector for the x-axis.
+
+            yvec: np.ndarray
+                Vector for the y-axis (phases).
+
+        Kargs:
+            interp: float, optional, (def: None)
+                Interplation factor.
+
+            kwargs:
+                Further arguments are passed to the pacplot() method.
+
+        Returns:
+            gca: axes
+                The current matplotlib axes.
+        """
+        # Interpolation :
+        if interp is not None:
+            amp, yvec, xvec = mapinterpolation(amp, yvec, xvec, interp, 1)
+        return self.pacplot(amp, xvec, yvec, polar=True, **kwargs)
+
+    def show(self):
+        """Display the figure."""
+        import matplotlib.pyplot as plt
+        plt.show()
+
+    def savefig(self, filename, dpi=600):
+        """Save the figure.
+
+        Args:
+            filename: string
+                The name of the figure to save.
+
+        Kargs:
+            dpi: int, optional, (def: 600)
+                DPI of the figure.
+        """
+        import matplotlib.pyplot as plt
+        plt.savefig(filename, dpi=dpi, bbox_inches='tight')
+
 
 def mapinterpolation(data, x=None, y=None, interpx=1, interpy=1):
     """Interpolate a 2D map."""
@@ -341,8 +350,8 @@ def mapinterpolation(data, x=None, y=None, interpx=1, interpy=1):
 
 
 def interp2(z, xi, yi, extrapval=0):
-    """
-    Linear interpolation equivalent to interp2(z, xi, yi,'linear') in MATLAB
+    """Linear interpolation equivalent to interp2(z, xi, yi,'linear').
+
     @param z: function defined on square lattice [0..width(z))X[0..height(z))
     @param xi: matrix of x coordinates where interpolation is required
     @param yi: matrix of y coordinates where interpolation is required
@@ -350,7 +359,6 @@ def interp2(z, xi, yi, extrapval=0):
     @return: interpolated values in [xi,yi] points
     @raise Exception:
     """
-
     x = xi.copy()
     y = yi.copy()
     nrows, ncols = z.shape

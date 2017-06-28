@@ -10,12 +10,11 @@ This file include the following methods :
 
 import numpy as np
 from scipy.special import erfinv
-from .stats import circ_corrcc
 
 __all__ = ['ComputePac']
 
 
-def ComputePac(pha, amp, idp, nbins, p, optimized):
+def ComputePac(pha, amp, idp, nbins, p, optimize):
     """Copute real Phase-Amplitude coupling.
 
     Each method take at least a pha and amp array with the respective
@@ -26,35 +25,30 @@ def ComputePac(pha, amp, idp, nbins, p, optimized):
     """
     # Mean Vector Length (Canolty, 2006)
     if idp == 1:
-        return MVL(pha, amp, optimized)
+        return MVL(pha, amp, optimize)
 
     # Kullback-Leiber distance (Tort, 2010)
     elif idp == 2:
-        return klDistance(pha, amp, nbins, optimized)
+        return klDistance(pha, amp, nbins, optimize)
 
     # Heights ratio
     elif idp == 3:
-        return HeightsRatio(pha, amp, nbins, optimized)
+        return HeightsRatio(pha, amp, nbins, optimize)
 
     # ndPac (Ozkurt, 2012)
     elif idp == 4:
-        return ndPac(pha, amp, p, optimized)
+        return ndPac(pha, amp, p, optimize)
 
     # Phase-Synchrony (or adapted PLV)
     elif idp == 5:
-        return PhaseSync(pha, amp, optimized)
-
-    # Event-Related Phase amplitude Coupling
-    elif idp == 6:
-        # return erpac(pha, amp, p)
-        raise(NotImplementedError)
+        return PhaseSync(pha, amp, optimize)
 
     else:
         raise ValueError(str(idp) + " is not recognized as a valid pac "
                          "method.")
 
 
-def MVL(pha, amp, optimized):
+def MVL(pha, amp, optimize):
     """Mean Vector Length (Canolty, 2006).
 
     Args:
@@ -71,10 +65,10 @@ def MVL(pha, amp, optimized):
     # Number of time points :
     npts = pha.shape[-1]
     return np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j*pha),
-                            optimize=optimized)) / npts
+                            optimize=optimize)) / npts
 
 
-def klDistance(pha, amp, nbins, optimized):
+def klDistance(pha, amp, nbins, optimize):
     """Kullback Leibler Distance (Tort, 2010).
 
     Args:
@@ -92,7 +86,7 @@ def klDistance(pha, amp, nbins, optimized):
             PAC of shape (npha, namp, ...)
     """
     # Get the phase locked binarized amplitude :
-    p_j = _kl_hr(pha, amp, nbins, optimized)
+    p_j = _kl_hr(pha, amp, nbins, optimize)
     # Divide the binned amplitude by the mean over the bins :
     p_j /= p_j.sum(axis=0, keepdims=True)
     # Take the log of non-zero values :
@@ -104,7 +98,7 @@ def klDistance(pha, amp, nbins, optimized):
     return pac
 
 
-def HeightsRatio(pha, amp, nbins, optimized):
+def HeightsRatio(pha, amp, nbins, optimize):
     """Pac Heights Ratio.
 
     Args:
@@ -122,7 +116,7 @@ def HeightsRatio(pha, amp, nbins, optimized):
             PAC of shape (npha, namp, ...)
     """
     # Get the phase locked binarized amplitude :
-    p_j = _kl_hr(pha, amp, nbins, optimized)
+    p_j = _kl_hr(pha, amp, nbins, optimize)
     # Divide the binned amplitude by the mean over the bins :
     p_j /= p_j.sum(axis=0, keepdims=True)
     # Find (maxximum, minimum) of the binned distribution :
@@ -132,7 +126,7 @@ def HeightsRatio(pha, amp, nbins, optimized):
     return pac
 
 
-def _kl_hr(pha, amp, nbins, optimized):
+def _kl_hr(pha, amp, nbins, optimize):
     """Binarize the amplitude according to phase values.
 
     This function is shared by the Kullback-Leibler Distance and the
@@ -148,12 +142,12 @@ def _kl_hr(pha, amp, nbins, optimized):
         idx = np.logical_and(pha >= i, pha < i + binsize)
         # Take the sum of amplitude inside the bin :
         abin.append(np.einsum('i...j, k...j->ik...', amp, idx,
-                              optimize=optimized))
+                              optimize=optimize))
 
     return np.array(abin)
 
 
-def ndPac(pha, amp, p, optimized):
+def ndPac(pha, amp, p, optimize):
     """Normalized direct Pac (Ozkurt, 2012).
 
     Args:
@@ -176,7 +170,7 @@ def ndPac(pha, amp, p, optimized):
     np.divide(amp, np.std(amp, axis=-1, keepdims=True), out=amp)
     # Compute pac :
     pac = np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j*pha),
-                           optimize=optimized))
+                           optimize=optimize))
     pac *= pac/npts
     # Set to zero non-significant values:
     xlim = erfinv(1-p)**2
@@ -184,7 +178,7 @@ def ndPac(pha, amp, p, optimized):
     return pac
 
 
-def PhaseSync(pha, amp, optimized):
+def PhaseSync(pha, amp, optimize):
     """Phase Synchrony.
 
     Args:
@@ -201,10 +195,5 @@ def PhaseSync(pha, amp, optimized):
     # Number of time points :
     npts = pha.shape[-1]
     pac = np.einsum('i...j, k...j->ik...', np.exp(-1j*amp), np.exp(1j*pha),
-                    optimize=optimized)
+                    optimize=optimize)
     return np.abs(pac)/npts
-
-def erpac(pha, amp, p):
-    pha = np.swapaxes(pha, -1, -2)
-    amp = np.swapaxes(amp, -1, -2)
-    return circ_corrcc(pha, amp)

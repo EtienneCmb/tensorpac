@@ -1,11 +1,28 @@
+"""Statistic tools."""
 import numpy as np
 from scipy.stats import chi2
 
 
-def pear(x, y, st='i...j, k...j->ik...'):
-    """Pearson correlation for PAC data.
+def pearson(x, y, st='i...j, k...j->ik...', optimize=True):
+    """Pearson correlation for multi-dimensional arrays.
+
+    Args:
+        x, y: np.ndarray
+            Compute pearson correlation between the multi-dimensional arrays
+            x and y.
+
+    Kargs:
+        st: string, optional, (def: 'i..j, k..j->ik...')
+            The string to pass to the np.einsum function.
+
+        optimize: bool, optional, (def: True)
+            Optimize argument of the np.einsum function. Use either False,
+            True, 'greedy' or 'optimal'.
+
+    Returns:
+        cov: np.ndarray
+            The pearson correlation array.
     """
-    # print('XY : ', x.shape, y.shape)
     n = x.shape[-1]
     # Distribution center :
     mu_x = x.mean(-1, keepdims=True)
@@ -14,15 +31,18 @@ def pear(x, y, st='i...j, k...j->ik...'):
     s_x = x.std(-1, ddof=n-1, keepdims=True)
     s_y = y.std(-1, ddof=n-1, keepdims=True)
     # Compute correlation coefficient :
-    cov = np.einsum(st, x, y)
-    mu_xy = np.einsum(st, mu_x, mu_y)
+    cov = np.einsum(st, x, y, optimize=optimize)
+    mu_xy = np.einsum(st, mu_x, mu_y, optimize=optimize)
     cov -= n * mu_xy
-    cov /= np.einsum(st, s_x, s_y)
+    cov /= np.einsum(st, s_x, s_y, optimize=optimize)
     return cov
 
 
-def circ_corrcc(alpha, x):
+def circ_corrcc(alpha, x, optimize=True):
     """Correlation coefficient between a circular and a linear random variable.
+
+    Code from the Circular Statistics Toolbox for Matlab By Philipp Berens 2009
+    and adapted for multi-dimensional arrays.
 
     Args:
         alpha: vector
@@ -31,24 +51,29 @@ def circ_corrcc(alpha, x):
         x: vector
             Sample of linear random variable
 
+        optimize: bool, optional, (def: True)
+            Optimize argument of the np.einsum function. Use either False,
+            True, 'greedy' or 'optimal'.
+
     Returns:
         rho: float
-            Correlation coefficient
+            Correlation coefficient.
 
         pval: float
-            p-value
+            P-value.
     """
-    n = len(alpha)
-    # Compute correlation coefficent for sin and cos independently
+    n = alpha.shape[-1]
+    # Compute correlation coefficient for sin and cos independently
     sa, ca = np.sin(alpha), np.cos(alpha)
-    rxs = pear(x, sa)
-    rxc = pear(x, ca)
-    rcs = pear(sa, ca, st='i...j, k...j->i...')[np.newaxis, ...]
+    rxs = pearson(x, sa, optimize=optimize)
+    rxc = pearson(x, ca, optimize=optimize)
+    rcs = pearson(sa, ca, st='i...j, k...j->i...', optimize=optimize)
+    rcs = rcs[np.newaxis, ...]
 
     # Compute angular-linear correlation (equ. 27.47)
     rho = np.sqrt((rxc**2 + rxs**2 - 2*rxc*rxs*rcs)/(1-rcs**2))
 
-    # Compute pvalue
-    # pval = 1 - chi2.cdf(n*rho**2, 2)
+    # Compute pvalue :
+    pval = 1. - chi2.cdf(n*rho**2, 2)
 
-    return rho#, pval
+    return rho, pval

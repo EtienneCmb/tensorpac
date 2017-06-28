@@ -5,9 +5,12 @@ Visualization
 
 If matplotlib is install on your system, the main Pac class also include several plotting functions :
 
+* :ref:`pltpac` : standard plotting function for 2D arrays.
 * :ref:`pltcomo` : comodulogram plot, for finding the coupling location *PAC(phase, amplitude)*
 * :ref:`plttri` : triangular plot for finding where each band [Start, Stop] and the bandwidth *PAC(Starting frequency, Ending frequency)*
 * :ref:`pltpp` : polar plot for the preferred-phase representation *PP(phase, binned amplitude)*
+* :ref:`pltshow` : show the figure
+* :ref:`pltsave` : save the figure
 
 
 plotting method that rely on Matplotlib. This script is also present in the `example <https://github.com/EtienneCmb/tensorpac/blob/master/examples/9_PlayWithColors.py>`_ folder.
@@ -78,6 +81,13 @@ Code example
     plt.show()
 
 
+.. _pltpac:
+
+2D plot
+-------
+
+.. automethod:: tensorpac.pac.Pac.pacplot
+
 .. _pltcomo:
 
 Comodulogram
@@ -109,3 +119,17 @@ Polar plot
    :align:   center
 
 .. automethod:: tensorpac.pac.Pac.triplot
+
+.. _pltshow:
+
+Show
+----
+
+.. automethod:: tensorpac.pac.Pac.show
+
+.. _pltsave:
+
+Save
+----
+
+.. automethod:: tensorpac.pac.Pac.savefig

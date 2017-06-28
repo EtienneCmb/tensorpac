@@ -34,11 +34,12 @@ def pear(x, y, axis=-1):
     cov = xy - n * mu_xy
     return cov / np.einsum('i...j, k...j->ik...', s_x, s_y)
 
-# p2 = generate_correlation_map(a, b)
+p2 = generate_correlation_map(a, b)
 p3 = pear(a, b)
+print(p3.shape)
 
 # print(p.shape, p2.shape, p3.shape)
-# print(np.allclose(p2, p3))
+print(np.allclose(p, p3))
 
 def circ_corrcc(alpha, x):
     n = alpha.shape[-1]
