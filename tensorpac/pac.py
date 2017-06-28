@@ -9,7 +9,7 @@ from .methods import ComputePac, _kl_hr
 from .surrogates import ComputeSurogates
 from .normalize import normalize
 from .visu import PacPlot
-
+from .stats import circ_corrcc
 
 class Pac(PacPlot):
     """Compute Phase-Amplitude Coupling (PAC) using tensors.
@@ -32,7 +32,6 @@ class Pac(PacPlot):
                 - '3': Heights Ratio (HR) [#f3]_
                 - '4': ndPAC [#f4]_
                 - '5': Phase Synchrony [#f3]_
-                - '6': ERPAC [#f6]_
 
             * Second digit: refer to the method for computing surrogates:
 
@@ -122,8 +121,6 @@ class Pac(PacPlot):
        22531738/>`_
     .. [#f5] `Bahramisharif et al, 2013 <http://www.jneurosci.org/content/33/
        48/18849.short/>`_
-    .. [#f6] `Voytek et al, 2013 <https://www.ncbi.nlm.nih.gov/pubmed/
-       22986076>`_
 
     """
 
@@ -211,7 +208,7 @@ class Pac(PacPlot):
                              "'amplitude.'")
         return xfilt
 
-    def fit(self, pha, amp, axis=1, traxis=0, nperm=200, optimized=True,
+    def fit(self, pha, amp, axis=1, traxis=0, nperm=200, optimize=True,
             get_surro=False, correct=False, njobs=-1):
         """Compute PAC on filtered data.
 
@@ -234,7 +231,7 @@ class Pac(PacPlot):
             nperm: int, optional, (def: 200)
                 Number of surrogates to compute.
 
-            optimized: bool, optional, (def: True)
+            optimize: bool, optional, (def: True)
                 Optimize argument of the np.einsum function. Use either False,
                 True, 'greedy' or 'optimal'.
 
@@ -280,10 +277,10 @@ class Pac(PacPlot):
             amp = np.angle(hilbert(amp, axis=axis))
         suro, pvalues = None, None
         # Compute pac :
-        pacargs = (self.idpac[0], self.nbins, 1/nperm, optimized)
+        pacargs = (self.idpac[0], self.nbins, 1/nperm, optimize)
         pac = ComputePac(pha, amp, *pacargs)
 
-        # Compute surogates (if needed) :
+        # Compute surrogates (if needed) :
         if self._csuro:
             surargs = (self.idpac[1], axis, traxis, self.nblocks)
             suro = ComputeSurogates(pha, amp, surargs, pacargs, nperm, njobs)
@@ -313,7 +310,7 @@ class Pac(PacPlot):
             return pac, pvalues
 
     def filterfit(self, sf, xpha, xamp, axis=1, traxis=0, nperm=200,
-                  optimized=True, get_surro=False, correct=False, njobs=-1):
+                  optimize=True, get_surro=False, correct=False, njobs=-1):
         """Filt the data then compute PAC on it.
 
         Args:
@@ -339,7 +336,7 @@ class Pac(PacPlot):
             nperm: int, optional, (def: 200)
                 Number of surrogates to compute.
 
-            optimized: bool, optional, (def: True)
+            optimize: bool, optional, (def: True)
                 Optimize argument of the np.einsum function. Use either False,
                 True, 'greedy' or 'optimal'.
 
@@ -390,10 +387,10 @@ class Pac(PacPlot):
             amp = np.angle(hilbert(amp, axis=-1))
 
         # Compute pac :
-        return self.fit(pha, amp, axis+1, traxis+1, nperm, optimized,
+        return self.fit(pha, amp, axis+1, traxis+1, nperm, optimize,
                         get_surro, correct, njobs)
 
-    def pp(self, pha, amp, axis=-1, nbins=72, optimized=True):
+    def pp(self, pha, amp, axis=-1, nbins=72, optimize=True):
         """Compute the preferred-phase.
 
         Args:
@@ -411,7 +408,7 @@ class Pac(PacPlot):
                 Number of bins for bining the amplitude according to phase
                 slices.
 
-            optimized: bool, optional, (def: True)
+            optimize: bool, optional, (def: True)
                 Optimize argument of the np.einsum function. Use either False,
                 True, 'greedy' or 'optimal'.
 
@@ -433,17 +430,65 @@ class Pac(PacPlot):
         pha = np.moveaxis(pha, axis, -1)
         amp = np.moveaxis(amp, axis, -1)
         # Bin the amplitude according to the phase :
-        ampbin = _kl_hr(pha, amp, nbins, optimized)
+        ampbin = _kl_hr(pha, amp, nbins, optimize)
         ampbin /= ampbin.sum(axis=0, keepdims=True)
         # Find the index where the amplitude is maximum over the bins :
         idxmax = ampbin.argmax(axis=0)
-        # Find the prefered phase :
+        # Find the preferred phase :
         binsize = (2 * np.pi) / float(nbins)
         vecbin = np.arange(-np.pi, np.pi, binsize) + binsize/2
         pp = vecbin[idxmax]
         # Build the phase vector (polar plot) :
         polarvec = np.linspace(-np.pi, np.pi, ampbin.shape[0])
         return ampbin, pp, polarvec
+
+    def erpac(self, pha, amp, traxis=0, optimize=True):
+        """Compute the Event-Related Phase-Amplitude Coupling (ERPAC).
+
+        The ERPAC [#f6]_ is used to measure PAC across trials and is
+        interesting for real-time estimation.
+
+        Args:
+            pha: np.ndarray
+                Phase of slower oscillations.
+
+            amp: np.ndarray
+                Amplitude of fastest oscillations.
+
+        Kargs:
+            traxis: int, optional, (def: 0)
+                Location of the trial axis.
+
+            optimize: bool, optional, (def: True)
+                Optimize argument of the np.einsum function. Use either False,
+                True, 'greedy' or 'optimal'.
+
+        Returns:
+            erpac: np.ndarray
+                The ERPAC estimation.
+
+            pvalue: np.ndarray
+                The associated p-values.
+
+        .. warning::
+            ERPAC is computed across trials, therefor, the it does not use an
+            *axis* variable but instead, a *traxis* variable which specify
+            where is located the axis to consider as trials.
+
+        .. [#f6] `Voytek et al, 2013 <https://www.ncbi.nlm.nih.gov/pubmed/
+           22986076>`_
+        """
+        # Check the phase/amplitude :
+        if (pha.ndim <= 1) or (amp.ndim <= 1):
+            raise ValueError("The phase and amplitude must have at least two"
+                             " dimensions (trials, time).")
+        pha, amp, _ = self._phampcheck(pha, amp, traxis)
+        # Move the trial axis to the end :
+        pha = np.swapaxes(pha, traxis, -1)
+        amp = np.swapaxes(amp, traxis, -1)
+        # Compute the correlation between the circular phase and le linear
+        # amplitude :
+        return circ_corrcc(pha, amp, optimize=optimize)
 
     ###########################################################################
     #                              CHECKING
@@ -512,6 +557,12 @@ class Pac(PacPlot):
             raise ValueError("Your phase is probably in degrees and should be"
                              " converted in radians using either np.degrees or"
                              " np.deg2rad.")
+        # Check if the phase/amplitude have the same number of points on axis:
+        if pha.shape[axis] != amp.shape[axis]:
+            phan, ampn = pha.shape[axis], amp.shape[axis]
+            raise ValueError("The phase ("+str(phan)+") and the amplitude "
+                             "("+str(ampn)+") do not have the same number of "
+                             "points on the specified axis ("+str(axis)+").")
         # Force the phase to be in [-pi, pi] :
         pha = (pha + np.pi) % (2 * np.pi) - np.pi
         return pha, amp, axis
