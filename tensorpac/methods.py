@@ -3,9 +3,9 @@
 This file include the following methods :
 - Mean Vector Length (Canolty, 2006)
 - Kullback Leibler Distance (Tort, 2010)
-- Heights Ratio (Lakata, 2005)
+- Heights Ratio (Lakatos, 2005)
 - Normalized direct Pac (Ozkurt, 2012)
-- Phase Synchrony
+- Phase Synchrony (Penny, 2008; Cohen, 2008)
 """
 
 import numpy as np
@@ -23,24 +23,19 @@ def ComputePac(pha, amp, idp, nbins, p, optimize):
     amp.shape = (namp, ..., npts)
     And each method should return a (namp, npha, ...)
     """
-    # Mean Vector Length (Canolty, 2006)
-    if idp == 1:
+    if idp == 1:  # Mean Vector Length (Canolty, 2006)
         return MVL(pha, amp, optimize)
 
-    # Kullback-Leiber distance (Tort, 2010)
-    elif idp == 2:
+    elif idp == 2:  # Kullback-Leiber distance (Tort, 2010)
         return klDistance(pha, amp, nbins, optimize)
 
-    # Heights ratio
-    elif idp == 3:
+    elif idp == 3:  # Heights ratio (Lakatos, 2005)
         return HeightsRatio(pha, amp, nbins, optimize)
 
-    # ndPac (Ozkurt, 2012)
-    elif idp == 4:
+    elif idp == 4:  # ndPac (Ozkurt, 2012)
         return ndPac(pha, amp, p, optimize)
 
-    # Phase-Synchrony (or adapted PLV)
-    elif idp == 5:
+    elif idp == 5:  # Phase-Synchrony (Penny, 2008; Cohen, 2008)
         return PhaseSync(pha, amp, optimize)
 
     else:
@@ -99,7 +94,7 @@ def klDistance(pha, amp, nbins, optimize):
 
 
 def HeightsRatio(pha, amp, nbins, optimize):
-    """Pac Heights Ratio.
+    """Pac heights ratio (Lakatos, 2005).
 
     Args:
         pha: np.ndarray
@@ -179,7 +174,7 @@ def ndPac(pha, amp, p, optimize):
 
 
 def PhaseSync(pha, amp, optimize):
-    """Phase Synchrony.
+    """Phase Synchrony (Penny, 2008; Cohen, 2008).
 
     Args:
         pha: np.ndarray
