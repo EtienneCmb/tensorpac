@@ -16,8 +16,6 @@ def pacstr(idpac):
         method = 'ndPac'
     elif idpac[0] == 5:
         method = 'Phase-Synchrony'
-    elif idpac[0] == 6:
-        method = 'Event-Related Phase amplitude Coupling'
     else:
         raise ValueError("No corresponding pac method.")
 
