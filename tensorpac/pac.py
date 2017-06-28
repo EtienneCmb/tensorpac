@@ -477,8 +477,8 @@ class Pac(PacPlot):
                 The associated p-values.
 
         .. warning::
-            ERPAC is computed across trials, therefor, the it does not use an
-            *axis* variable but instead, a *traxis* variable which specify
+            ERPAC is computed across trials, therefor, it does not use an
+            *axis* variable but instead, a **traxis** variable which specify
             where is located the axis to consider as trials.
 
         .. [#f6] `Voytek et al, 2013 <https://www.ncbi.nlm.nih.gov/pubmed/

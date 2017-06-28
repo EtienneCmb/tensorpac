@@ -30,9 +30,14 @@ Tensorpac is based on NumPy, SciPy and use `Joblib <https://pythonhosted.org/job
 What's new?
 ***********
 
+* New in version v0.5.2
+    
+    * :ref:`erpac` (Voytek et al. 2013)
+    * pip installation
+
 * New in version v0.5.1
     
-    * Compute and plot preferred-phase
+    * Compute and plot :ref:`pp`
     * Bug fixing
 
 Todo list
@@ -40,11 +45,9 @@ Todo list
 
 .. todo::
 
-    * Generalized Linear Model (GLM - Lakata, 2005)
-    * Event Related PAC (ERPAC - Voytek, 2013)
-    * Memory tracking
-    * Example Tensorpac Vs pacpy
-    * Installation using *pip install tensorpac*
+    * Generalized Linear Model (GLM - Lakatos, 2005)
+    * PAC using PSD
+    * Morse's wavelets
 
 Contents:
 *********
