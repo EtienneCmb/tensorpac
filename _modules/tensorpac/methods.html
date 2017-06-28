@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>tensorpac.methods &mdash; Tensorpac 0.5.2 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="Tensorpac 0.5.2 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Tensorpac
+          
+
+          
+            
+            <img src="../../_static/ico64.png" class="logo" />
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.5.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../methods.html">Implemented methods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../methods.html#modular-philosophy">Modular philosophy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../methods.html#pac-methods">Pac methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../methods.html#surrogates-methods">Surrogates methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../methods.html#normalization-methods">Normalization methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../methods.html#example">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pyfcn.html">Python functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#pac-object">PAC object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#filter-the-data">Filter the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#filter-then-compute-pac">Filter then compute PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#preferred-phase">Preferred-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#event-related-phase-amplitude-coupling">Event-Related Phase-Amplitude Coupling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../utils.html#generate-triangular-vectors">Generate triangular vectors</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../stats.html">Statistics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../stats.html#pearson-correlation">Pearson correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stats.html#circular-correlation">Circular correlation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../visu.html">Visualization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../visu.html#code-example">Code example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visu.html#d-plot">2D plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visu.html#comodulogram">Comodulogram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visu.html#triangular-plot">Triangular plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visu.html#polar-plot">Polar plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visu.html#show">Show</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visu.html#save">Save</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Tensorpac</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>tensorpac.methods</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for tensorpac.methods</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Main PAC methods.</span>
+
+<span class="sd">This file include the following methods :</span>
+<span class="sd">- Mean Vector Length (Canolty, 2006)</span>
+<span class="sd">- Kullback Leibler Distance (Tort, 2010)</span>
+<span class="sd">- Heights Ratio (Lakatos, 2005)</span>
+<span class="sd">- Normalized direct Pac (Ozkurt, 2012)</span>
+<span class="sd">- Phase Synchrony (Penny, 2008; Cohen, 2008)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="k">import</span> <span class="n">erfinv</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ComputePac&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="ComputePac"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.methods.ComputePac">[docs]</a><span class="k">def</span> <span class="nf">ComputePac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">idp</span><span class="p">,</span> <span class="n">nbins</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">optimize</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Copute real Phase-Amplitude coupling.</span>
+
+<span class="sd">    Each method take at least a pha and amp array with the respective</span>
+<span class="sd">    dimensions:</span>
+<span class="sd">    pha.shape = (npha, ..., npts)</span>
+<span class="sd">    amp.shape = (namp, ..., npts)</span>
+<span class="sd">    And each method should return a (namp, npha, ...)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Mean Vector Length (Canolty, 2006)</span>
+        <span class="k">return</span> <span class="n">MVL</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">optimize</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># Kullback-Leiber distance (Tort, 2010)</span>
+        <span class="k">return</span> <span class="n">klDistance</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">nbins</span><span class="p">,</span> <span class="n">optimize</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># Heights ratio (Lakatos, 2005)</span>
+        <span class="k">return</span> <span class="n">HeightsRatio</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">nbins</span><span class="p">,</span> <span class="n">optimize</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># ndPac (Ozkurt, 2012)</span>
+        <span class="k">return</span> <span class="n">ndPac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">optimize</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>  <span class="c1"># Phase-Synchrony (Penny, 2008; Cohen, 2008)</span>
+        <span class="k">return</span> <span class="n">PhaseSync</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">optimize</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">idp</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; is not recognized as a valid pac &quot;</span>
+                         <span class="s2">&quot;method.&quot;</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">MVL</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">optimize</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mean Vector Length (Canolty, 2006).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pha: np.ndarray</span>
+<span class="sd">            Array of phases of shapes (npha, ..., npts)</span>
+
+<span class="sd">        amp: np.ndarra</span>
+<span class="sd">            Array of amplitudes of shapes (namp, ..., npts)</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        pac: np.ndarray</span>
+<span class="sd">            PAC of shape (npha, namp, ...)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Number of time points :</span>
+    <span class="n">npts</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">pha</span><span class="p">),</span>
+                            <span class="n">optimize</span><span class="o">=</span><span class="n">optimize</span><span class="p">))</span> <span class="o">/</span> <span class="n">npts</span>
+
+
+<span class="k">def</span> <span class="nf">klDistance</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">nbins</span><span class="p">,</span> <span class="n">optimize</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Kullback Leibler Distance (Tort, 2010).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pha: np.ndarray</span>
+<span class="sd">            Array of phases of shapes (npha, ..., npts)</span>
+
+<span class="sd">        amp: np.ndarra</span>
+<span class="sd">            Array of amplitudes of shapes (namp, ..., npts)</span>
+
+<span class="sd">        nbins: int</span>
+<span class="sd">            Number of bins in which the phase in cut in bins.</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        pac: np.ndarray</span>
+<span class="sd">            PAC of shape (npha, namp, ...)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get the phase locked binarized amplitude :</span>
+    <span class="n">p_j</span> <span class="o">=</span> <span class="n">_kl_hr</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">nbins</span><span class="p">,</span> <span class="n">optimize</span><span class="p">)</span>
+    <span class="c1"># Divide the binned amplitude by the mean over the bins :</span>
+    <span class="n">p_j</span> <span class="o">/=</span> <span class="n">p_j</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># Take the log of non-zero values :</span>
+    <span class="n">p_j</span> <span class="o">=</span> <span class="n">p_j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">p_j</span><span class="p">)</span><span class="o">.</span><span class="n">filled</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+    <span class="c1"># Compute the PAC :</span>
+    <span class="n">pac</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">p_j</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">nbins</span><span class="p">)</span>
+    <span class="c1"># Set distribution distances that are really closed to zero :</span>
+    <span class="n">pac</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">pac</span><span class="p">)]</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">return</span> <span class="n">pac</span>
+
+
+<span class="k">def</span> <span class="nf">HeightsRatio</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">nbins</span><span class="p">,</span> <span class="n">optimize</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Pac heights ratio (Lakatos, 2005).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pha: np.ndarray</span>
+<span class="sd">            Array of phases of shapes (npha, ..., npts)</span>
+
+<span class="sd">        amp: np.ndarra</span>
+<span class="sd">            Array of amplitudes of shapes (namp, ..., npts)</span>
+
+<span class="sd">        nbins: int</span>
+<span class="sd">            Number of bins in which the phase in cut in bins.</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        pac: np.ndarray</span>
+<span class="sd">            PAC of shape (npha, namp, ...)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get the phase locked binarized amplitude :</span>
+    <span class="n">p_j</span> <span class="o">=</span> <span class="n">_kl_hr</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">nbins</span><span class="p">,</span> <span class="n">optimize</span><span class="p">)</span>
+    <span class="c1"># Divide the binned amplitude by the mean over the bins :</span>
+    <span class="n">p_j</span> <span class="o">/=</span> <span class="n">p_j</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># Find (maxximum, minimum) of the binned distribution :</span>
+    <span class="n">h_max</span><span class="p">,</span> <span class="n">h_min</span> <span class="o">=</span> <span class="n">p_j</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">p_j</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Compute pac :</span>
+    <span class="n">pac</span> <span class="o">=</span> <span class="p">(</span><span class="n">h_max</span> <span class="o">-</span> <span class="n">h_min</span><span class="p">)</span> <span class="o">/</span> <span class="n">h_max</span>
+    <span class="k">return</span> <span class="n">pac</span>
+
+
+<span class="k">def</span> <span class="nf">_kl_hr</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">nbins</span><span class="p">,</span> <span class="n">optimize</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Binarize the amplitude according to phase values.</span>
+
+<span class="sd">    This function is shared by the Kullback-Leibler Distance and the</span>
+<span class="sd">    Height Ratio.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Build the default binned phase vector :</span>
+    <span class="n">binsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbins</span><span class="p">)</span>
+    <span class="n">vecbin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">binsize</span><span class="p">)</span>
+
+    <span class="n">abin</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">vecbin</span><span class="p">:</span>
+        <span class="c1"># Find where phase take vecbin values :</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">pha</span> <span class="o">&gt;=</span> <span class="n">i</span><span class="p">,</span> <span class="n">pha</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">+</span> <span class="n">binsize</span><span class="p">)</span>
+        <span class="c1"># Take the sum of amplitude inside the bin :</span>
+        <span class="n">abin</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span>
+                              <span class="n">optimize</span><span class="o">=</span><span class="n">optimize</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">abin</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">ndPac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">optimize</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Normalized direct Pac (Ozkurt, 2012).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pha: np.ndarray</span>
+<span class="sd">            Array of phases of shapes (npha, ..., npts)</span>
+
+<span class="sd">        amp: np.ndarra</span>
+<span class="sd">            Array of amplitudes of shapes (namp, ..., npts)</span>
+
+<span class="sd">        p: float</span>
+<span class="sd">            The p-value to use.</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        pac: np.ndarray</span>
+<span class="sd">            PAC of shape (npha, namp, ...)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">npts</span> <span class="o">=</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># Normalize amplitude :</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">out</span><span class="o">=</span><span class="n">amp</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">out</span><span class="o">=</span><span class="n">amp</span><span class="p">)</span>
+    <span class="c1"># Compute pac :</span>
+    <span class="n">pac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">pha</span><span class="p">),</span>
+                           <span class="n">optimize</span><span class="o">=</span><span class="n">optimize</span><span class="p">))</span>
+    <span class="n">pac</span> <span class="o">*=</span> <span class="n">pac</span><span class="o">/</span><span class="n">npts</span>
+    <span class="c1"># Set to zero non-significant values:</span>
+    <span class="n">xlim</span> <span class="o">=</span> <span class="n">erfinv</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">pac</span><span class="p">[</span><span class="n">pac</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">xlim</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">return</span> <span class="n">pac</span>
+
+
+<span class="k">def</span> <span class="nf">PhaseSync</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">optimize</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Phase Synchrony (Penny, 2008; Cohen, 2008).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pha: np.ndarray</span>
+<span class="sd">            Array of phases of shapes (npha, ..., npts)</span>
+
+<span class="sd">        amp: np.ndarra</span>
+<span class="sd">            Array of amplitudes of shapes (namp, ..., npts)</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        pac: np.ndarray</span>
+<span class="sd">            PAC of shape (npha, namp, ...)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Number of time points :</span>
+    <span class="n">npts</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">pac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">amp</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">pha</span><span class="p">),</span>
+                    <span class="n">optimize</span><span class="o">=</span><span class="n">optimize</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pac</span><span class="p">)</span><span class="o">/</span><span class="n">npts</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Etienne Combrisson.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.5.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
