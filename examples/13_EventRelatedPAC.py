@@ -39,7 +39,7 @@ erpac, pval = np.squeeze(erpac), np.squeeze(pval)
 
 # Plot without p-values :
 p.pacplot(erpac, time, p.yvec, xlabel='Time (second)', cmap='Spectral_r',
-          ylabel='Amplitude frequency', title='ERPAC example', cblabel='ERPAC',
+          ylabel='Amplitude frequency', title=str(p), cblabel='ERPAC',
           vmin=0., rmaxis=True)
 
 # Plot with every non-significant values masked in gray :

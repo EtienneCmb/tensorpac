@@ -54,7 +54,7 @@ Use the following method to filter and compute the PAC directly.
 Preferred-phase
 ~~~~~~~~~~~~~~~
 
-Compute the preferred-phase (PP, see `this PP example <https://github.com/EtienneCmb/tensorpac/tree/master/examples/13_PreferredPhase.py>`_). 
+Compute the preferred-phase (PP, see `this PP example <https://github.com/EtienneCmb/tensorpac/tree/master/examples/12_PreferredPhase.py>`_). 
 
 .. figure::  picture/PP_planningVsExec.png
    :align:   center
@@ -68,7 +68,7 @@ Compute the preferred-phase (PP, see `this PP example <https://github.com/Etienn
 Event-Related Phase-Amplitude Coupling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Compute the ERPAC (see `this ERPAC example <https://github.com/EtienneCmb/tensorpac/tree/master/examples/14_EventRelatedPAC.py>`_). 
+Compute the ERPAC (see `this ERPAC example <https://github.com/EtienneCmb/tensorpac/tree/master/examples/13_EventRelatedPAC.py>`_). 
 
 .. figure::  picture/erpac.png
    :align:   center
