@@ -11,6 +11,7 @@ from .normalize import normalize
 from .visu import PacPlot
 from .stats import circ_corrcc
 
+
 class Pac(PacPlot):
     """Compute Phase-Amplitude Coupling (PAC) using tensors.
 
@@ -28,7 +29,7 @@ class Pac(PacPlot):
             * First digit: refer to the pac method:
 
                 - '1': Mean Vector Length (MVL) [#f1]_
-                - '2': Kullback-Leibler Divergence (KLD) [#f2]_
+                - '2': Kullback-Leibler Distance (KLD) [#f2]_
                 - '3': Heights Ratio (HR) [#f3]_
                 - '4': ndPAC [#f4]_
                 - '5': Phase Synchrony [#f3]_
@@ -115,7 +116,7 @@ class Pac(PacPlot):
        PMC2628289/>`_
     .. [#f2] `Tort et al, 2010 <http://www.ncbi.nlm.nih.gov/pmc/articles/
        PMC2941206/>`_
-    .. [#f3] `Lakata et al, 2005 <https://www.ncbi.nlm.nih.gov/pubmed/
+    .. [#f3] `Lakatos et al, 2005 <https://www.ncbi.nlm.nih.gov/pubmed/
        15901760>`_
     .. [#f4] `Ozkurt et al, 2012 <http://www.ncbi.nlm.nih.gov/pubmed/
        22531738/>`_
@@ -146,7 +147,10 @@ class Pac(PacPlot):
 
     def __str__(self):
         """String representation."""
-        pass
+        st = self.method
+        st += '\n' + self.surro if self.surro else ''
+        st += '\n' + self.norm if self.norm else ''
+        return st
 
     ###########################################################################
     #                              METHODS
@@ -426,6 +430,8 @@ class Pac(PacPlot):
         """
         # Check phase and amplitude shapes :
         pha, amp, axis = self._phampcheck(pha, amp, axis)
+        # Define the method name :
+        self.method, self.surro, self.norm = 'Preferred-Phase (PP)', '', ''
         # Move the time axis to the end :
         pha = np.moveaxis(pha, axis, -1)
         amp = np.moveaxis(amp, axis, -1)
@@ -483,6 +489,10 @@ class Pac(PacPlot):
             raise ValueError("The phase and amplitude must have at least two"
                              " dimensions (trials, time).")
         pha, amp, _ = self._phampcheck(pha, amp, traxis)
+        # Get method name :
+        self.method = "Event-Related Phase-Amplitude Coupling (ERPAC, " + \
+                      "Voytek et al. 2013)"
+        self.surro, self.norm = '', ''
         # Move the trial axis to the end :
         pha = np.swapaxes(pha, traxis, -1)
         amp = np.swapaxes(amp, traxis, -1)
