@@ -55,6 +55,7 @@ Contents:
    methods
    pyfcn
    utils
+   stats
    visu
 
 

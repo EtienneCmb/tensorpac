@@ -29,7 +29,7 @@ The first digit refer to the PAC method :
 
 * 1 - Mean Vector Length (MVL - Canolty, 2006)
 * 2 - Kullback-Leibler Divergence (KLD - Tort, 2010)
-* 3 - Heigth-ratio (HR - Lakata, 2005)
+* 3 - Heigth-ratio (HR - Lakatos, 2005)
 * 4 - Normalized Direct PAC (ndPAC - Ozkürt, 2012)
 * 5 - Phase Synchrony (PS - Lakata, 2005)
 * 6 - Generalized Linear Model (GLM - Lakata, 2005) [IN PROGRESS]

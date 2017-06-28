@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Utils &mdash; Tensorpac 0.5.2 documentation</title>
+  <title>Statistics &mdash; Tensorpac 0.5.2 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="Tensorpac 0.5.2 documentation" href="index.html"/>
-        <link rel="next" title="Statistics" href="stats.html"/>
-        <link rel="prev" title="Python functions" href="pyfcn.html"/> 
+        <link rel="next" title="Visualization" href="visu.html"/>
+        <link rel="prev" title="Utils" href="utils.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -115,15 +115,15 @@
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#event-related-phase-amplitude-coupling">Event-Related Phase-Amplitude Coupling</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Utils</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#generate-triangular-vectors">Generate triangular vectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="stats.html">Statistics</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="stats.html#pearson-correlation">Pearson correlation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stats.html#circular-correlation">Circular correlation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Statistics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pearson-correlation">Pearson correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#circular-correlation">Circular correlation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="visu.html">Visualization</a><ul>
@@ -180,13 +180,13 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Utils</li>
+      <li>Statistics</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/utils.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/stats.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -199,109 +199,67 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="utils">
-<span id="id1"></span><h1>Utils<a class="headerlink" href="#utils" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="generate-artificially-coupled-signals">
-<h2>Generate artificially coupled signals<a class="headerlink" href="#generate-artificially-coupled-signals" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="statistics">
+<span id="stats"></span><h1>Statistics<a class="headerlink" href="#statistics" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="pearson-correlation">
+<h2>Pearson correlation<a class="headerlink" href="#pearson-correlation" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="tensorpac.utils.PacSignals">
-<code class="descclassname">tensorpac.utils.</code><code class="descname">PacSignals</code><span class="sig-paren">(</span><em>fpha=10</em>, <em>famp=100</em>, <em>sf=1024</em>, <em>npts=4000</em>, <em>ndatasets=10</em>, <em>chi=0</em>, <em>noise=1</em>, <em>dpha=0</em>, <em>damp=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#PacSignals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PacSignals" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate artificially phase-amplitude coupled signals.</p>
+<dt id="tensorpac.stats.pearson">
+<code class="descclassname">tensorpac.stats.</code><code class="descname">pearson</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>st='i...j</em>, <em>k...j-&gt;ik...'</em>, <em>optimize=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/stats.html#pearson"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.stats.pearson" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pearson correlation for multi-dimensional arrays.</p>
 <dl class="docutils">
-<dt>Kargs:</dt>
+<dt>Args:</dt>
 <dd><dl class="first last docutils">
-<dt>fpha: int/float, optional, [def: 10]</dt>
-<dd>Frequency for phase</dd>
-<dt>famp: int/float, optional, [def: 100]</dt>
-<dd>Frequency for amplitude</dd>
-<dt>sf: int, optional, [def: 1024]</dt>
-<dd>Sampling frequency</dd>
-<dt>ndatasets <span class="classifier-delimiter">:</span> <span class="classifier">int, optional, [def: 10]</span></dt>
-<dd>Number of datasets</dd>
-<dt>npts: int, optional, [def: 4000]</dt>
-<dd>Number of points for each signal.</dd>
-<dt>chi: int/float (0&lt;=chi&lt;=1), optional, [def: 0]</dt>
-<dd>Amount of coupling. If chi=0, signals of phase and amplitude
-are strongly coupled.</dd>
-<dt>noise: int/float (0&lt;=noise&lt;=3), optional, [def: 1]</dt>
-<dd>Amount of noise</dd>
-<dt>dpha: int/float (0&lt;=dpha&lt;=100), optional, [def: 0]</dt>
-<dd>Introduce a random incertitude on the phase frequency.
-If fpha is 2, and dpha is 50, the frequency for the phase signal
-will be between :
-[2-0.5*2, 2+0.5*2]=[1,3]</dd>
-<dt>damp: int/float (0&lt;=damp&lt;=100), optional, [def: 0]</dt>
-<dd>Introduce a random incertitude on the amplitude frequency.
-If famp is 60, and damp is 10, the frequency for the amplitude
-signal will be between :
-[60-0.1*60, 60+0.1*60]=[54,66]</dd>
+<dt>x, y: np.ndarray</dt>
+<dd>Compute pearson correlation between the multi-dimensional arrays
+x and y.</dd>
 </dl>
 </dd>
-<dt>Return:</dt>
+<dt>Kargs:</dt>
 <dd><dl class="first last docutils">
-<dt>data: array</dt>
-<dd>The randomly coupled signals. The shape of data will be
-(ndatasets x npts)</dd>
-<dt>time: array</dt>
-<dd>The corresponding time vector</dd>
+<dt>st: string, optional, (def: &#8216;i..j, k..j-&gt;ik...&#8217;)</dt>
+<dd>The string to pass to the np.einsum function.</dd>
+<dt>optimize: bool, optional, (def: True)</dt>
+<dd>Optimize argument of the np.einsum function. Use either False,
+True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>cov: np.ndarray</dt>
+<dd>The pearson correlation array.</dd>
 </dl>
 </dd>
 </dl>
 </dd></dl>
 
 </div>
-<div class="section" id="generate-phase-and-amplitude-vectors">
-<h2>Generate phase and amplitude vectors<a class="headerlink" href="#generate-phase-and-amplitude-vectors" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="circular-correlation">
+<h2>Circular correlation<a class="headerlink" href="#circular-correlation" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
-<dt id="tensorpac.utils.PacVec">
-<code class="descclassname">tensorpac.utils.</code><code class="descname">PacVec</code><span class="sig-paren">(</span><em>fpha=(2</em>, <em>30</em>, <em>2</em>, <em>1)</em>, <em>famp=(60</em>, <em>200</em>, <em>10</em>, <em>5)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#PacVec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PacVec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate cross-frequency coupling vectors.</p>
+<dt id="tensorpac.stats.circ_corrcc">
+<code class="descclassname">tensorpac.stats.</code><code class="descname">circ_corrcc</code><span class="sig-paren">(</span><em>alpha</em>, <em>x</em>, <em>optimize=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/stats.html#circ_corrcc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.stats.circ_corrcc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Correlation coefficient between a circular and a linear random variable.</p>
+<p>Code from the Circular Statistics Toolbox for Matlab By Philipp Berens 2009
+and adapted for multi-dimensional arrays.</p>
 <dl class="docutils">
-<dt>Kargs:</dt>
+<dt>Args:</dt>
 <dd><dl class="first last docutils">
-<dt>fpha: tuple, optional, [def: (2, 30, 2, 1)]</dt>
-<dd>Frequency parameters for phase. Each argument inside the tuple
-mean (starting fcy, ending fcy, width, step)</dd>
-<dt>famp: tuple, optional, [def: (60, 200, 10, 5)]</dt>
-<dd>Frequency parameters for amplitude. Each argument inside the
-tuple mean (starting fcy, ending fcy, width, step)</dd>
+<dt>alpha: vector</dt>
+<dd>Sample of angles in radians</dd>
+<dt>x: vector</dt>
+<dd>Sample of linear random variable</dd>
+<dt>optimize: bool, optional, (def: True)</dt>
+<dd>Optimize argument of the np.einsum function. Use either False,
+True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</dd>
 </dl>
 </dd>
 <dt>Returns:</dt>
 <dd><dl class="first last docutils">
-<dt>pVec: np.ndarray, shape (N, 2)</dt>
-<dd>Array containing the pairs of phase frequencies.</dd>
-<dt>aVec: np.ndarray, shape (N, 2)</dt>
-<dd>Array containing the pairs of amplitude frequencies.</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-<div class="section" id="generate-triangular-vectors">
-<h2>Generate triangular vectors<a class="headerlink" href="#generate-triangular-vectors" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="tensorpac.utils.PacTriVec">
-<code class="descclassname">tensorpac.utils.</code><code class="descname">PacTriVec</code><span class="sig-paren">(</span><em>fstart=60</em>, <em>fend=160</em>, <em>fwidth=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#PacTriVec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PacTriVec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate triangular vector.</p>
-<dl class="docutils">
-<dt>Kargs:</dt>
-<dd><dl class="first last docutils">
-<dt>fstart: float, optional, (def: 60)</dt>
-<dd>Starting frequency.</dd>
-<dt>fend: float, optional, (def: 160)</dt>
-<dd>Ending frequency.</dd>
-<dt>fwidth: float, optional, (def: 10)</dt>
-<dd>Frequency bandwidth.</dd>
-</dl>
-</dd>
-<dt>Returns:</dt>
-<dd><dl class="first last docutils">
-<dt>f: np.ndarray</dt>
-<dd>The triangular vector.</dd>
-<dt>tridx: np.ndarray</dt>
-<dd>The triangular index for the reconstruction.</dd>
+<dt>rho: float</dt>
+<dd>Correlation coefficient.</dd>
+<dt>pval: float</dt>
+<dd>P-value.</dd>
 </dl>
 </dd>
 </dl>
@@ -320,10 +278,10 @@ tuple mean (starting fcy, ending fcy, width, step)</dd>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="stats.html" class="btn btn-neutral float-right" title="Statistics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="visu.html" class="btn btn-neutral float-right" title="Visualization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="pyfcn.html" class="btn btn-neutral" title="Python functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="utils.html" class="btn btn-neutral" title="Utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

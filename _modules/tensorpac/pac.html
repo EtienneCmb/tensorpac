@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>tensorpac.pac &mdash; Tensorpac 0.5.1 documentation</title>
+  <title>tensorpac.pac &mdash; Tensorpac 0.5.2 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Tensorpac 0.5.1 documentation" href="../../index.html"/>
+    <link rel="top" title="Tensorpac 0.5.2 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.5.1
+                0.5.2
               </div>
             
           
@@ -111,6 +111,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#filter-then-compute-pac">Filter then compute PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#preferred-phase">Preferred-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pyfcn.html#event-related-phase-amplitude-coupling">Event-Related Phase-Amplitude Coupling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../utils.html">Utils</a><ul>
@@ -119,11 +120,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../../utils.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../stats.html">Statistics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../stats.html#pearson-correlation">Pearson correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stats.html#circular-correlation">Circular correlation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../visu.html">Visualization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../visu.html#code-example">Code example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visu.html#d-plot">2D plot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../visu.html#comodulogram">Comodulogram</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../visu.html#triangular-plot">Triangular plot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../visu.html#polar-plot">Polar plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visu.html#show">Show</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visu.html#save">Save</a></li>
 </ul>
 </li>
 </ul>
@@ -201,6 +210,7 @@
 <span class="kn">from</span> <span class="nn">.surrogates</span> <span class="k">import</span> <span class="n">ComputeSurogates</span>
 <span class="kn">from</span> <span class="nn">.normalize</span> <span class="k">import</span> <span class="n">normalize</span>
 <span class="kn">from</span> <span class="nn">.visu</span> <span class="k">import</span> <span class="n">PacPlot</span>
+<span class="kn">from</span> <span class="nn">.stats</span> <span class="k">import</span> <span class="n">circ_corrcc</span>
 
 
 <div class="viewcode-block" id="Pac"><a class="viewcode-back" href="../../pyfcn.html#tensorpac.pac.Pac">[docs]</a><span class="k">class</span> <span class="nc">Pac</span><span class="p">(</span><span class="n">PacPlot</span><span class="p">):</span>
@@ -220,11 +230,10 @@
 <span class="sd">            * First digit: refer to the pac method:</span>
 
 <span class="sd">                - &#39;1&#39;: Mean Vector Length (MVL) [#f1]_</span>
-<span class="sd">                - &#39;2&#39;: Kullback-Leibler Divergence (KLD) [#f2]_</span>
+<span class="sd">                - &#39;2&#39;: Kullback-Leibler Distance (KLD) [#f2]_</span>
 <span class="sd">                - &#39;3&#39;: Heights Ratio (HR) [#f3]_</span>
 <span class="sd">                - &#39;4&#39;: ndPAC [#f4]_</span>
 <span class="sd">                - &#39;5&#39;: Phase Synchrony [#f3]_</span>
-<span class="sd">                - &#39;6&#39;: ERPAC [#f6]_</span>
 
 <span class="sd">            * Second digit: refer to the method for computing surrogates:</span>
 
@@ -308,14 +317,12 @@
 <span class="sd">       PMC2628289/&gt;`_</span>
 <span class="sd">    .. [#f2] `Tort et al, 2010 &lt;http://www.ncbi.nlm.nih.gov/pmc/articles/</span>
 <span class="sd">       PMC2941206/&gt;`_</span>
-<span class="sd">    .. [#f3] `Lakata et al, 2005 &lt;https://www.ncbi.nlm.nih.gov/pubmed/</span>
+<span class="sd">    .. [#f3] `Lakatos et al, 2005 &lt;https://www.ncbi.nlm.nih.gov/pubmed/</span>
 <span class="sd">       15901760&gt;`_</span>
 <span class="sd">    .. [#f4] `Ozkurt et al, 2012 &lt;http://www.ncbi.nlm.nih.gov/pubmed/</span>
 <span class="sd">       22531738/&gt;`_</span>
 <span class="sd">    .. [#f5] `Bahramisharif et al, 2013 &lt;http://www.jneurosci.org/content/33/</span>
 <span class="sd">       48/18849.short/&gt;`_</span>
-<span class="sd">    .. [#f6] `Voytek et al, 2013 &lt;https://www.ncbi.nlm.nih.gov/pubmed/</span>
-<span class="sd">       22986076&gt;`_</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -341,7 +348,10 @@
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;String representation.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
+        <span class="n">st</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">method</span>
+        <span class="n">st</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">surro</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">surro</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">st</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">st</span>
 
     <span class="c1">###########################################################################</span>
     <span class="c1">#                              METHODS</span>
@@ -403,7 +413,7 @@
                              <span class="s2">&quot;&#39;amplitude.&#39;&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">xfilt</span></div>
 
-<div class="viewcode-block" id="Pac.fit"><a class="viewcode-back" href="../../pyfcn.html#tensorpac.pac.Pac.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nperm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">optimized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<div class="viewcode-block" id="Pac.fit"><a class="viewcode-back" href="../../pyfcn.html#tensorpac.pac.Pac.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nperm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">optimize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">get_surro</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute PAC on filtered data.</span>
 
@@ -426,7 +436,7 @@
 <span class="sd">            nperm: int, optional, (def: 200)</span>
 <span class="sd">                Number of surrogates to compute.</span>
 
-<span class="sd">            optimized: bool, optional, (def: True)</span>
+<span class="sd">            optimize: bool, optional, (def: True)</span>
 <span class="sd">                Optimize argument of the np.einsum function. Use either False,</span>
 <span class="sd">                True, &#39;greedy&#39; or &#39;optimal&#39;.</span>
 
@@ -472,10 +482,10 @@
             <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">hilbert</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">))</span>
         <span class="n">suro</span><span class="p">,</span> <span class="n">pvalues</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
         <span class="c1"># Compute pac :</span>
-        <span class="n">pacargs</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbins</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">nperm</span><span class="p">,</span> <span class="n">optimized</span><span class="p">)</span>
+        <span class="n">pacargs</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbins</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">nperm</span><span class="p">,</span> <span class="n">optimize</span><span class="p">)</span>
         <span class="n">pac</span> <span class="o">=</span> <span class="n">ComputePac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="o">*</span><span class="n">pacargs</span><span class="p">)</span>
 
-        <span class="c1"># Compute surogates (if needed) :</span>
+        <span class="c1"># Compute surrogates (if needed) :</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_csuro</span><span class="p">:</span>
             <span class="n">surargs</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span><span class="p">,</span> <span class="n">traxis</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nblocks</span><span class="p">)</span>
             <span class="n">suro</span> <span class="o">=</span> <span class="n">ComputeSurogates</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">surargs</span><span class="p">,</span> <span class="n">pacargs</span><span class="p">,</span> <span class="n">nperm</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span>
@@ -505,7 +515,7 @@
             <span class="k">return</span> <span class="n">pac</span><span class="p">,</span> <span class="n">pvalues</span></div>
 
 <div class="viewcode-block" id="Pac.filterfit"><a class="viewcode-back" href="../../pyfcn.html#tensorpac.pac.Pac.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nperm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
-                  <span class="n">optimized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">get_surro</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+                  <span class="n">optimize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">get_surro</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Filt the data then compute PAC on it.</span>
 
 <span class="sd">        Args:</span>
@@ -531,7 +541,7 @@
 <span class="sd">            nperm: int, optional, (def: 200)</span>
 <span class="sd">                Number of surrogates to compute.</span>
 
-<span class="sd">            optimized: bool, optional, (def: True)</span>
+<span class="sd">            optimize: bool, optional, (def: True)</span>
 <span class="sd">                Optimize argument of the np.einsum function. Use either False,</span>
 <span class="sd">                True, &#39;greedy&#39; or &#39;optimal&#39;.</span>
 
@@ -582,10 +592,10 @@
             <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">hilbert</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
 
         <span class="c1"># Compute pac :</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">nperm</span><span class="p">,</span> <span class="n">optimized</span><span class="p">,</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">nperm</span><span class="p">,</span> <span class="n">optimize</span><span class="p">,</span>
                         <span class="n">get_surro</span><span class="p">,</span> <span class="n">correct</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Pac.pp"><a class="viewcode-back" href="../../pyfcn.html#tensorpac.pac.Pac.pp">[docs]</a>    <span class="k">def</span> <span class="nf">pp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">72</span><span class="p">,</span> <span class="n">optimized</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="Pac.pp"><a class="viewcode-back" href="../../pyfcn.html#tensorpac.pac.Pac.pp">[docs]</a>    <span class="k">def</span> <span class="nf">pp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">72</span><span class="p">,</span> <span class="n">optimize</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute the preferred-phase.</span>
 
 <span class="sd">        Args:</span>
@@ -603,7 +613,7 @@
 <span class="sd">                Number of bins for bining the amplitude according to phase</span>
 <span class="sd">                slices.</span>
 
-<span class="sd">            optimized: bool, optional, (def: True)</span>
+<span class="sd">            optimize: bool, optional, (def: True)</span>
 <span class="sd">                Optimize argument of the np.einsum function. Use either False,</span>
 <span class="sd">                True, &#39;greedy&#39; or &#39;optimal&#39;.</span>
 
@@ -621,21 +631,75 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Check phase and amplitude shapes :</span>
         <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phampcheck</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="p">)</span>
+        <span class="c1"># Define the method name :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">surro</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm</span> <span class="o">=</span> <span class="s1">&#39;Preferred-Phase (PP)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
         <span class="c1"># Move the time axis to the end :</span>
         <span class="n">pha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="c1"># Bin the amplitude according to the phase :</span>
-        <span class="n">ampbin</span> <span class="o">=</span> <span class="n">_kl_hr</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">nbins</span><span class="p">,</span> <span class="n">optimized</span><span class="p">)</span>
+        <span class="n">ampbin</span> <span class="o">=</span> <span class="n">_kl_hr</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">nbins</span><span class="p">,</span> <span class="n">optimize</span><span class="p">)</span>
         <span class="n">ampbin</span> <span class="o">/=</span> <span class="n">ampbin</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="c1"># Find the index where the amplitude is maximum over the bins :</span>
         <span class="n">idxmax</span> <span class="o">=</span> <span class="n">ampbin</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="c1"># Find the prefered phase :</span>
+        <span class="c1"># Find the preferred phase :</span>
         <span class="n">binsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nbins</span><span class="p">)</span>
         <span class="n">vecbin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">binsize</span><span class="p">)</span> <span class="o">+</span> <span class="n">binsize</span><span class="o">/</span><span class="mi">2</span>
         <span class="n">pp</span> <span class="o">=</span> <span class="n">vecbin</span><span class="p">[</span><span class="n">idxmax</span><span class="p">]</span>
         <span class="c1"># Build the phase vector (polar plot) :</span>
         <span class="n">polarvec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">ampbin</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">ampbin</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">polarvec</span></div>
+
+<div class="viewcode-block" id="Pac.erpac"><a class="viewcode-back" href="../../pyfcn.html#tensorpac.pac.Pac.erpac">[docs]</a>    <span class="k">def</span> <span class="nf">erpac</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">traxis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">optimize</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute the Event-Related Phase-Amplitude Coupling (ERPAC).</span>
+
+<span class="sd">        The ERPAC [#f6]_ is used to measure PAC across trials and is</span>
+<span class="sd">        interesting for real-time estimation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pha: np.ndarray</span>
+<span class="sd">                Phase of slower oscillations.</span>
+
+<span class="sd">            amp: np.ndarray</span>
+<span class="sd">                Amplitude of fastest oscillations.</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            traxis: int, optional, (def: 0)</span>
+<span class="sd">                Location of the trial axis.</span>
+
+<span class="sd">            optimize: bool, optional, (def: True)</span>
+<span class="sd">                Optimize argument of the np.einsum function. Use either False,</span>
+<span class="sd">                True, &#39;greedy&#39; or &#39;optimal&#39;.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            erpac: np.ndarray</span>
+<span class="sd">                The ERPAC estimation.</span>
+
+<span class="sd">            pvalue: np.ndarray</span>
+<span class="sd">                The associated p-values.</span>
+
+<span class="sd">        .. warning::</span>
+<span class="sd">            ERPAC is computed across trials, therefor, the it does not use an</span>
+<span class="sd">            *axis* variable but instead, a *traxis* variable which specify</span>
+<span class="sd">            where is located the axis to consider as trials.</span>
+
+<span class="sd">        .. [#f6] `Voytek et al, 2013 &lt;https://www.ncbi.nlm.nih.gov/pubmed/</span>
+<span class="sd">           22986076&gt;`_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check the phase/amplitude :</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pha</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">amp</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The phase and amplitude must have at least two&quot;</span>
+                             <span class="s2">&quot; dimensions (trials, time).&quot;</span><span class="p">)</span>
+        <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phampcheck</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">traxis</span><span class="p">)</span>
+        <span class="c1"># Get method name :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;Event-Related Phase-Amplitude Coupling (ERPAC, &quot;</span> <span class="o">+</span> \
+                      <span class="s2">&quot;Voytek et al. 2013)&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">surro</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+        <span class="c1"># Move the trial axis to the end :</span>
+        <span class="n">pha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">traxis</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">traxis</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Compute the correlation between the circular phase and le linear</span>
+        <span class="c1"># amplitude :</span>
+        <span class="k">return</span> <span class="n">circ_corrcc</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">optimize</span><span class="o">=</span><span class="n">optimize</span><span class="p">)</span></div>
 
     <span class="c1">###########################################################################</span>
     <span class="c1">#                              CHECKING</span>
@@ -704,6 +768,12 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Your phase is probably in degrees and should be&quot;</span>
                              <span class="s2">&quot; converted in radians using either np.degrees or&quot;</span>
                              <span class="s2">&quot; np.deg2rad.&quot;</span><span class="p">)</span>
+        <span class="c1"># Check if the phase/amplitude have the same number of points on axis:</span>
+        <span class="k">if</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">!=</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">]:</span>
+            <span class="n">phan</span><span class="p">,</span> <span class="n">ampn</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">],</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The phase (&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">phan</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;) and the amplitude &quot;</span>
+                             <span class="s2">&quot;(&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ampn</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;) do not have the same number of &quot;</span>
+                             <span class="s2">&quot;points on the specified axis (&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;).&quot;</span><span class="p">)</span>
         <span class="c1"># Force the phase to be in [-pi, pi] :</span>
         <span class="n">pha</span> <span class="o">=</span> <span class="p">(</span><span class="n">pha</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
         <span class="k">return</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span>
@@ -812,7 +882,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.5.1',
+            VERSION:'0.5.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

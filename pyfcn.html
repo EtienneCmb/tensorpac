@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Python functions &mdash; Tensorpac 0.5.1 documentation</title>
+  <title>Python functions &mdash; Tensorpac 0.5.2 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.5.1 documentation" href="index.html"/>
+    <link rel="top" title="Tensorpac 0.5.2 documentation" href="index.html"/>
         <link rel="next" title="Utils" href="utils.html"/>
         <link rel="prev" title="Implemented methods" href="methods.html"/> 
 
@@ -71,7 +71,7 @@
             
             
               <div class="version">
-                0.5.1
+                0.5.2
               </div>
             
           
@@ -112,6 +112,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#filter-then-compute-pac">Filter then compute PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#preferred-phase">Preferred-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#event-related-phase-amplitude-coupling">Event-Related Phase-Amplitude Coupling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
@@ -120,11 +121,19 @@
 <li class="toctree-l2"><a class="reference internal" href="utils.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="stats.html">Statistics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stats.html#pearson-correlation">Pearson correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stats.html#circular-correlation">Circular correlation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="visu.html">Visualization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="visu.html#code-example">Code example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#d-plot">2D plot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visu.html#comodulogram">Comodulogram</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visu.html#triangular-plot">Triangular plot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visu.html#polar-plot">Polar plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#show">Show</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#save">Save</a></li>
 </ul>
 </li>
 </ul>
@@ -198,6 +207,7 @@
 <li><a class="reference internal" href="#pacfilt"><span class="std std-ref">Compute PAC on filtered data</span></a> : if you already extracted your phase and amplitude, use this method to compute pac directly on it.</li>
 <li><a class="reference internal" href="#filtpac"><span class="std std-ref">Filter then compute PAC</span></a> : this is the all in one method. Starting from fresh data, this method will extract phase and amplitude and return the PAC estimation.</li>
 <li><a class="reference internal" href="#pp"><span class="std std-ref">Preferred-phase</span></a> : compute the preferred-phase.</li>
+<li><a class="reference internal" href="#erpac"><span class="std std-ref">Event-Related Phase-Amplitude Coupling</span></a> : compute the Event-Related Phase-Amplitude Coupling (Voytek et al. 2013).</li>
 </ul>
 <div class="section" id="pac-object">
 <span id="pacobj"></span><h2>PAC object<a class="headerlink" href="#pac-object" title="Permalink to this headline">¶</a></h2>
@@ -224,11 +234,10 @@ refer</p>
 <blockquote>
 <div><ul class="simple">
 <li>&#8216;1&#8217;: Mean Vector Length (MVL) <a class="footnote-reference" href="#f1" id="id2">[1]</a></li>
-<li>&#8216;2&#8217;: Kullback-Leibler Divergence (KLD) <a class="footnote-reference" href="#f2" id="id3">[2]</a></li>
+<li>&#8216;2&#8217;: Kullback-Leibler Distance (KLD) <a class="footnote-reference" href="#f2" id="id3">[2]</a></li>
 <li>&#8216;3&#8217;: Heights Ratio (HR) <a class="footnote-reference" href="#f3" id="id4">[3]</a></li>
 <li>&#8216;4&#8217;: ndPAC <a class="footnote-reference" href="#f4" id="id5">[4]</a></li>
 <li>&#8216;5&#8217;: Phase Synchrony <a class="footnote-reference" href="#f3" id="id6">[3]</a></li>
-<li>&#8216;6&#8217;: ERPAC <a class="footnote-reference" href="#f6" id="id7">[6]</a></li>
 </ul>
 </div></blockquote>
 </li>
@@ -236,10 +245,10 @@ refer</p>
 <blockquote>
 <div><ul class="simple">
 <li>&#8216;0&#8217;: No surrogates</li>
-<li>&#8216;1&#8217;: Swap phase/amplitude across trials <a class="footnote-reference" href="#f2" id="id8">[2]</a></li>
-<li>&#8216;2&#8217;: Swap amplitude time blocks <a class="footnote-reference" href="#f5" id="id9">[5]</a></li>
+<li>&#8216;1&#8217;: Swap phase/amplitude across trials <a class="footnote-reference" href="#f2" id="id7">[2]</a></li>
+<li>&#8216;2&#8217;: Swap amplitude time blocks <a class="footnote-reference" href="#f5" id="id8">[5]</a></li>
 <li>&#8216;3&#8217;: Shuffle amplitude time-series</li>
-<li>&#8216;4&#8217;: Time lag <a class="footnote-reference" href="#f1" id="id10">[1]</a></li>
+<li>&#8216;4&#8217;: Time lag <a class="footnote-reference" href="#f1" id="id9">[1]</a></li>
 </ul>
 </div></blockquote>
 </li>
@@ -278,24 +287,24 @@ several forms to define those vectors :</p>
 <dd>Control the number of cycles for filtering (only if dcomplex is
 &#8216;hilbert&#8217;). Should be a tuple of integers where the first one
 refers to the number of cycles for the phase and the second for the
-amplitude <a class="footnote-reference" href="#f5" id="id11">[5]</a>.</dd>
+amplitude <a class="footnote-reference" href="#f5" id="id10">[5]</a>.</dd>
 <dt>filtorder: int, optional, (def: 3)</dt>
 <dd>Filter order for the Butterworth and Bessel filters (only if
 dcomplex is &#8216;hilbert&#8217;).</dd>
 <dt>width: int, optional, (def: 7)</dt>
 <dd>Width of the Morlet&#8217;s wavelet.</dd>
 <dt>nbins: int, optional, (def: 18)</dt>
-<dd>Number of bins for the KLD and HR PAC method <a class="footnote-reference" href="#f2" id="id12">[2]</a> <a class="footnote-reference" href="#f3" id="id13">[3]</a></dd>
+<dd>Number of bins for the KLD and HR PAC method <a class="footnote-reference" href="#f2" id="id11">[2]</a> <a class="footnote-reference" href="#f3" id="id12">[3]</a></dd>
 <dt>nblocks: int, optional, (def: 2)</dt>
 <dd>Number of blocks for splitting the amplitude. Only active is
-the surrogate method is 2 <a class="footnote-reference" href="#f5" id="id14">[5]</a>.</dd>
+the surrogate method is 2 <a class="footnote-reference" href="#f5" id="id13">[5]</a>.</dd>
 </dl>
 </dd>
 </dl>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <ul class="last simple">
-<li>The ndPac <a class="footnote-reference" href="#f4" id="id15">[4]</a> include a fast and reliable statistical test. As a
+<li>The ndPac <a class="footnote-reference" href="#f4" id="id14">[4]</a> include a fast and reliable statistical test. As a
 result, if the ndPAC is choosed as the main PAC method, surrogates
 and normalization will be deactivate.</li>
 <li>The phase in a particular frequency band can either be extracted
@@ -323,37 +332,31 @@ Hilbert.</li>
 <table class="docutils footnote" frame="void" id="f1" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id10">2</a>)</em> <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2628289/">Canolty et al, 2006</a></td></tr>
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id9">2</a>)</em> <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2628289/">Canolty et al, 2006</a></td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="f2" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id8">2</a>, <a class="fn-backref" href="#id12">3</a>, <a class="fn-backref" href="#id16">4</a>, <a class="fn-backref" href="#id18">5</a>)</em> <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2941206/">Tort et al, 2010</a></td></tr>
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id7">2</a>, <a class="fn-backref" href="#id11">3</a>, <a class="fn-backref" href="#id15">4</a>, <a class="fn-backref" href="#id17">5</a>)</em> <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2941206/">Tort et al, 2010</a></td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="f3" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id6">2</a>, <a class="fn-backref" href="#id13">3</a>)</em> <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/15901760">Lakata et al, 2005</a></td></tr>
+<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id6">2</a>, <a class="fn-backref" href="#id12">3</a>)</em> <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/15901760">Lakatos et al, 2005</a></td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="f4" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[4]</td><td><em>(<a class="fn-backref" href="#id5">1</a>, <a class="fn-backref" href="#id15">2</a>)</em> <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/22531738/">Ozkurt et al, 2012</a></td></tr>
+<tr><td class="label">[4]</td><td><em>(<a class="fn-backref" href="#id5">1</a>, <a class="fn-backref" href="#id14">2</a>)</em> <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/22531738/">Ozkurt et al, 2012</a></td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="f5" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[5]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id11">2</a>, <a class="fn-backref" href="#id14">3</a>, <a class="fn-backref" href="#id17">4</a>, <a class="fn-backref" href="#id19">5</a>)</em> <a class="reference external" href="http://www.jneurosci.org/content/33/48/18849.short/">Bahramisharif et al, 2013</a></td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="f6" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id7">[6]</a></td><td><a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/22986076">Voytek et al, 2013</a></td></tr>
+<tr><td class="label">[5]</td><td><em>(<a class="fn-backref" href="#id8">1</a>, <a class="fn-backref" href="#id10">2</a>, <a class="fn-backref" href="#id13">3</a>, <a class="fn-backref" href="#id16">4</a>, <a class="fn-backref" href="#id18">5</a>)</em> <a class="reference external" href="http://www.jneurosci.org/content/33/48/18849.short/">Bahramisharif et al, 2013</a></td></tr>
 </tbody>
 </table>
 </dd></dl>
@@ -405,7 +408,7 @@ is only avaible with dcomplex=&#8217;hilbert&#8217; and not wavelet.</dd>
 <p>For those who already have filtered and computed the phase and amplitude, use this method to compute PAC.</p>
 <dl class="method">
 <dt id="tensorpac.pac.Pac.fit">
-<code class="descclassname">Pac.</code><code class="descname">fit</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimized=True</em>, <em>get_surro=False</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Pac.</code><code class="descname">fit</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimize=True</em>, <em>get_surro=False</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute PAC on filtered data.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -427,7 +430,7 @@ will be consider as well.</dd>
 to-last axis is consider as the trial axis.</dd>
 <dt>nperm: int, optional, (def: 200)</dt>
 <dd>Number of surrogates to compute.</dd>
-<dt>optimized: bool, optional, (def: True)</dt>
+<dt>optimize: bool, optional, (def: True)</dt>
 <dd>Optimize argument of the np.einsum function. Use either False,
 True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</dd>
 <dt>get_surro: bool, optional, (def: False)</dt>
@@ -459,8 +462,8 @@ digits are no 0.</li>
 <li>The ndPAC use a p value and every non-significant PAC estimation
 is set to zero. This p value is computed as 1/nperm.</li>
 <li>The traxis argument is only used if you picked up the surrogates
-method 1: &#8220;swap phase and amplitude trials <a class="footnote-reference" href="#f2" id="id16">[2]</a>&#8220;</li>
-<li>Basically, the surrogate evaluation proposed by <a class="footnote-reference" href="#f5" id="id17">[5]</a> split the
+method 1: &#8220;swap phase and amplitude trials <a class="footnote-reference" href="#f2" id="id15">[2]</a>&#8220;</li>
+<li>Basically, the surrogate evaluation proposed by <a class="footnote-reference" href="#f5" id="id16">[5]</a> split the
 amplitude into two equal parts, then swap those two blocks. But
 the nblocks parameter allow to split into a larger number.</li>
 </ul>
@@ -473,7 +476,7 @@ the nblocks parameter allow to split into a larger number.</li>
 <p>Use the following method to filter and compute the PAC directly.</p>
 <dl class="method">
 <dt id="tensorpac.pac.Pac.filterfit">
-<code class="descclassname">Pac.</code><code class="descname">filterfit</code><span class="sig-paren">(</span><em>sf</em>, <em>xpha</em>, <em>xamp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimized=True</em>, <em>get_surro=False</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Pac.</code><code class="descname">filterfit</code><span class="sig-paren">(</span><em>sf</em>, <em>xpha</em>, <em>xamp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimize=True</em>, <em>get_surro=False</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filt the data then compute PAC on it.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -498,7 +501,7 @@ will be consider as well.</dd>
 to-last axis is consider as the trial axis.</dd>
 <dt>nperm: int, optional, (def: 200)</dt>
 <dd>Number of surrogates to compute.</dd>
-<dt>optimized: bool, optional, (def: True)</dt>
+<dt>optimize: bool, optional, (def: True)</dt>
 <dd>Optimize argument of the np.einsum function. Use either False,
 True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</dd>
 <dt>get_surro: bool, optional, (def: False)</dt>
@@ -530,8 +533,8 @@ digits are no 0.</li>
 <li>The ndPAC use a p value and every non-significant PAC estimation
 is set to zero. This p value is computed as 1/nperm.</li>
 <li>The traxis argument is only used if you picked up the surrogates
-method 1: &#8220;swap phase and amplitude trials <a class="footnote-reference" href="#f2" id="id18">[2]</a>&#8220;</li>
-<li>Basically, the surrogate evaluation proposed by <a class="footnote-reference" href="#f5" id="id19">[5]</a> split the
+method 1: &#8220;swap phase and amplitude trials <a class="footnote-reference" href="#f2" id="id17">[2]</a>&#8220;</li>
+<li>Basically, the surrogate evaluation proposed by <a class="footnote-reference" href="#f5" id="id18">[5]</a> split the
 amplitude into two equal parts, then swap those two blocks. But
 the nblocks parameter allow to split into a larger number.</li>
 </ul>
@@ -541,10 +544,14 @@ the nblocks parameter allow to split into a larger number.</li>
 </div>
 <div class="section" id="preferred-phase">
 <span id="pp"></span><h2>Preferred-phase<a class="headerlink" href="#preferred-phase" title="Permalink to this headline">¶</a></h2>
-<p>Compute the preferred-phase (PP, see <a class="reference external" href="https://github.com/EtienneCmb/tensorpac/tree/master/examples/13_PreferredPhase.py">this PP example</a>).</p>
+<p>Compute the preferred-phase (PP, see <a class="reference external" href="https://github.com/EtienneCmb/tensorpac/tree/master/examples/12_PreferredPhase.py">this PP example</a>).</p>
+<div class="figure align-center" id="id20">
+<img alt="_images/PP_planningVsExec.png" src="_images/PP_planningVsExec.png" />
+<p class="caption"><span class="caption-text">Example of preferred-phase for a motor task. This show how the amplitude is distributed according to phase values during a motor planning phase and a motor execution phase.</span></p>
+</div>
 <dl class="method">
 <dt id="tensorpac.pac.Pac.pp">
-<code class="descclassname">Pac.</code><code class="descname">pp</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>axis=-1</em>, <em>nbins=72</em>, <em>optimized=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.pp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.pp" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Pac.</code><code class="descname">pp</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>axis=-1</em>, <em>nbins=72</em>, <em>optimize=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.pp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.pp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the preferred-phase.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -562,7 +569,7 @@ the nblocks parameter allow to split into a larger number.</li>
 <dt>nbins: int, optional, (def: 72)</dt>
 <dd>Number of bins for bining the amplitude according to phase
 slices.</dd>
-<dt>optimized: bool, optional, (def: True)</dt>
+<dt>optimize: bool, optional, (def: True)</dt>
 <dd>Optimize argument of the np.einsum function. Use either False,
 True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</dd>
 </dl>
@@ -580,6 +587,61 @@ True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</dd>
 </dl>
 </dd>
 </dl>
+</dd></dl>
+
+</div>
+<div class="section" id="event-related-phase-amplitude-coupling">
+<span id="erpac"></span><h2>Event-Related Phase-Amplitude Coupling<a class="headerlink" href="#event-related-phase-amplitude-coupling" title="Permalink to this headline">¶</a></h2>
+<p>Compute the ERPAC (see <a class="reference external" href="https://github.com/EtienneCmb/tensorpac/tree/master/examples/13_EventRelatedPAC.py">this ERPAC example</a>).</p>
+<div class="figure align-center" id="id21">
+<img alt="_images/erpac.png" src="_images/erpac.png" />
+<p class="caption"><span class="caption-text">Example of Event-Related Phase-Amplitude Coupling (ERPAC, Voytek et al. 2013)</span></p>
+</div>
+<dl class="method">
+<dt id="tensorpac.pac.Pac.erpac">
+<code class="descclassname">Pac.</code><code class="descname">erpac</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>traxis=0</em>, <em>optimize=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.erpac"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.erpac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the Event-Related Phase-Amplitude Coupling (ERPAC).</p>
+<p>The ERPAC <a class="footnote-reference" href="#f6" id="id19">[6]</a> is used to measure PAC across trials and is
+interesting for real-time estimation.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>pha: np.ndarray</dt>
+<dd>Phase of slower oscillations.</dd>
+<dt>amp: np.ndarray</dt>
+<dd>Amplitude of fastest oscillations.</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>traxis: int, optional, (def: 0)</dt>
+<dd>Location of the trial axis.</dd>
+<dt>optimize: bool, optional, (def: True)</dt>
+<dd>Optimize argument of the np.einsum function. Use either False,
+True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>erpac: np.ndarray</dt>
+<dd>The ERPAC estimation.</dd>
+<dt>pvalue: np.ndarray</dt>
+<dd>The associated p-values.</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">ERPAC is computed across trials, therefor, the it does not use an
+<em>axis</em> variable but instead, a <em>traxis</em> variable which specify
+where is located the axis to consider as trials.</p>
+</div>
+<table class="docutils footnote" frame="void" id="f6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id19">[6]</a></td><td><a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/22986076">Voytek et al, 2013</a></td></tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -629,7 +691,7 @@ True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.5.1',
+            VERSION:'0.5.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

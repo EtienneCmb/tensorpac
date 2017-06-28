@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Visualization &mdash; Tensorpac 0.5.1 documentation</title>
+  <title>Visualization &mdash; Tensorpac 0.5.2 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.5.1 documentation" href="index.html"/>
-        <link rel="prev" title="Utils" href="utils.html"/> 
+    <link rel="top" title="Tensorpac 0.5.2 documentation" href="index.html"/>
+        <link rel="prev" title="Statistics" href="stats.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.5.1
+                0.5.2
               </div>
             
           
@@ -111,6 +111,7 @@
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-then-compute-pac">Filter then compute PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#preferred-phase">Preferred-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyfcn.html#event-related-phase-amplitude-coupling">Event-Related Phase-Amplitude Coupling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
@@ -119,11 +120,19 @@
 <li class="toctree-l2"><a class="reference internal" href="utils.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="stats.html">Statistics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stats.html#pearson-correlation">Pearson correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stats.html#circular-correlation">Circular correlation</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Visualization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#code-example">Code example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#d-plot">2D plot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#comodulogram">Comodulogram</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#triangular-plot">Triangular plot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#polar-plot">Polar plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#show">Show</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#save">Save</a></li>
 </ul>
 </li>
 </ul>
@@ -193,9 +202,12 @@
 <span id="id1"></span><h1>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h1>
 <p>If matplotlib is install on your system, the main Pac class also include several plotting functions :</p>
 <ul class="simple">
+<li><a class="reference internal" href="#pltpac"><span class="std std-ref">2D plot</span></a> : standard plotting function for 2D arrays.</li>
 <li><a class="reference internal" href="#pltcomo"><span class="std std-ref">Comodulogram</span></a> : comodulogram plot, for finding the coupling location <em>PAC(phase, amplitude)</em></li>
 <li><a class="reference internal" href="#plttri"><span class="std std-ref">Triangular plot</span></a> : triangular plot for finding where each band [Start, Stop] and the bandwidth <em>PAC(Starting frequency, Ending frequency)</em></li>
 <li><a class="reference internal" href="#pltpp"><span class="std std-ref">Polar plot</span></a> : polar plot for the preferred-phase representation <em>PP(phase, binned amplitude)</em></li>
+<li><a class="reference internal" href="#pltshow"><span class="std std-ref">Show</span></a> : show the figure</li>
+<li><a class="reference internal" href="#pltsave"><span class="std std-ref">Save</span></a> : save the figure</li>
 </ul>
 <p>plotting method that rely on Matplotlib. This script is also present in the <a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/examples/9_PlayWithColors.py">example</a> folder.</p>
 <div class="section" id="code-example">
@@ -262,31 +274,32 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="comodulogram">
-<span id="pltcomo"></span><h2>Comodulogram<a class="headerlink" href="#comodulogram" title="Permalink to this headline">¶</a></h2>
-<div class="figure align-center" id="id2">
-<img alt="_images/9_plot.png" src="_images/9_plot.png" />
-<p class="caption"><span class="caption-text">Comodulogram forms.</span></p>
-</div>
+<div class="section" id="d-plot">
+<span id="pltpac"></span><h2>2D plot<a class="headerlink" href="#d-plot" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
-<dt id="tensorpac.pac.Pac.comodulogram">
-<code class="descclassname">Pac.</code><code class="descname">comodulogram</code><span class="sig-paren">(</span><em>pac</em>, <em>xlabel='Frequency for phase (hz)'</em>, <em>ylabel='Frequency for amplitude (hz)'</em>, <em>cblabel='PAC values'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.pac.Pac.comodulogram" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot PAC using comodulogram.</p>
+<dt id="tensorpac.pac.Pac.pacplot">
+<code class="descclassname">Pac.</code><code class="descname">pacplot</code><span class="sig-paren">(</span><em>pac</em>, <em>xvec</em>, <em>yvec</em>, <em>xlabel=''</em>, <em>ylabel=''</em>, <em>cblabel=''</em>, <em>title=''</em>, <em>cmap='viridis'</em>, <em>vmin=None</em>, <em>vmax=None</em>, <em>under=None</em>, <em>over=None</em>, <em>bad=None</em>, <em>pvalues=None</em>, <em>p=0.05</em>, <em>interp=None</em>, <em>rmaxis=False</em>, <em>dpaxis=False</em>, <em>plotas='imshow'</em>, <em>ncontours=5</em>, <em>levels=None</em>, <em>levelcmap='Reds'</em>, <em>polar=False</em>, <em>y=1.02</em>, <em>subplot=111</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.pac.Pac.pacplot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main plotting pac function.</p>
+<p>This method can be used to plot any 2D array.</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd><dl class="first last docutils">
 <dt>pac: np.ndarray</dt>
-<dd>PAC array of shape (pha, namp)</dd>
+<dd>A 2D array.</dd>
+<dt>xvec: np.ndarray</dt>
+<dd>The vector to use for the x-axis.</dd>
+<dt>yvec: np.ndarray</dt>
+<dd>The vector to use for the y-axis.</dd>
 </dl>
 </dd>
 <dt>Kargs:</dt>
 <dd><dl class="first last docutils">
-<dt>xlabel: string, optional, (def: &#8216;Frequency for phase (hz)&#8217;)</dt>
-<dd>Label for the phase axis.</dd>
-<dt>ylabel: string, optional, (def: &#8216;Frequency for amplitude (hz)&#8217;)</dt>
-<dd>Label for the amplitude axis.</dd>
-<dt>cblabel: string, optional, (def: &#8216;PAC values&#8217;)</dt>
-<dd>Colorbar.</dd>
+<dt>xlabel: string, optional, (def: &#8216;&#8217;)</dt>
+<dd>Label for the x-axis.</dd>
+<dt>ylabel: string, optional, (def: &#8216;&#8217;)</dt>
+<dd>Label for the y-axis.</dd>
+<dt>cblabel: string, optional, (def: &#8216;&#8217;)</dt>
+<dd>Label for the colorbar.</dd>
 <dt>title: string, optional, (def: &#8216;&#8217;)</dt>
 <dd>Title of the plot.</dd>
 <dt>y: float, optional, (def: 1.02)</dt>
@@ -340,6 +353,45 @@ of p-values to use as levels.</dd>
 </dd></dl>
 
 </div>
+<div class="section" id="comodulogram">
+<span id="pltcomo"></span><h2>Comodulogram<a class="headerlink" href="#comodulogram" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center" id="id2">
+<img alt="_images/9_plot.png" src="_images/9_plot.png" />
+<p class="caption"><span class="caption-text">Comodulogram forms.</span></p>
+</div>
+<dl class="method">
+<dt id="tensorpac.pac.Pac.comodulogram">
+<code class="descclassname">Pac.</code><code class="descname">comodulogram</code><span class="sig-paren">(</span><em>pac</em>, <em>xlabel='Frequency for phase (hz)'</em>, <em>ylabel='Frequency for amplitude (hz)'</em>, <em>cblabel='PAC values'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.pac.Pac.comodulogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot PAC using comodulogram.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>pac: np.ndarray</dt>
+<dd>PAC array of shape (namp, pha)</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>xlabel: string, optional, (def: &#8216;Frequency for phase (hz)&#8217;)</dt>
+<dd>Label for the phase axis.</dd>
+<dt>ylabel: string, optional, (def: &#8216;Frequency for amplitude (hz)&#8217;)</dt>
+<dd>Label for the amplitude axis.</dd>
+<dt>cblabel: string, optional, (def: &#8216;PAC values&#8217;)</dt>
+<dd>Colorbar.</dd>
+<dt>kwargs:</dt>
+<dd>Further arguments are passed to the pacplot() method.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>gca: axes</dt>
+<dd>The current matplotlib axes.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 <div class="section" id="triangular-plot">
 <span id="plttri"></span><h2>Triangular plot<a class="headerlink" href="#triangular-plot" title="Permalink to this headline">¶</a></h2>
 <div class="figure align-center">
@@ -349,7 +401,20 @@ of p-values to use as levels.</dd>
 <dt id="tensorpac.pac.Pac.triplot">
 <code class="descclassname">Pac.</code><code class="descname">triplot</code><span class="sig-paren">(</span><em>pac</em>, <em>fvec</em>, <em>tridx</em>, <em>xlabel='Starting frequency (hz)'</em>, <em>ylabel='Ending frequency (hz)'</em>, <em>cblabel='PAC values'</em>, <em>bad='lightgray'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.pac.Pac.triplot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Triangular plot.</p>
+<p>The triplot method is used to find the [starting, ending] frequency
+either for the phase or for the amplitude.</p>
 <dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>pac: np.ndarray</dt>
+<dd>Pac array of shape (namp, npha)</dd>
+<dt>fvec: np.ndarray</dt>
+<dd>The frequency vector returned by the PacTriVec function.</dd>
+<dt>tridx: np.ndarray</dt>
+<dd>The index vector used to build the triangle. This argument is
+also returned by the PacTriVec function.</dd>
+</dl>
+</dd>
 <dt>Kargs:</dt>
 <dd><dl class="first last docutils">
 <dt>xlabel: string, optional, (def: &#8216;Starting frequency (hz)&#8217;)</dt>
@@ -358,26 +423,16 @@ of p-values to use as levels.</dd>
 <dd>Label for the amplitude axis.</dd>
 <dt>cblabel: string, optional, (def: &#8216;PAC values&#8217;)</dt>
 <dd>Colorbar.</dd>
-<dt>title: string, optional, (def: &#8216;&#8217;)</dt>
-<dd>Title of the plot.</dd>
-<dt>y: float, optional, (def: 1.02)</dt>
-<dd>Title location.</dd>
-<dt>cmap: string, optional, (def: &#8216;viridis&#8217;)</dt>
-<dd>Name of one Matplotlib&#8217;s colomap.</dd>
-<dt>vmin: float, optional, (def: None)</dt>
-<dd>Threshold under which set the color to the uner parameter.</dd>
-<dt>vmax: float, optional, (def: None)</dt>
-<dd>Threshold over which set the color in the over parameter.</dd>
-<dt>under: string, optional, (def: &#8216;gray&#8217;)</dt>
-<dd>Color for values under the vmin parameter.</dd>
-<dt>over: string, optional, (def: &#8216;red&#8217;)</dt>
-<dd>Color for values over the vmax parameter.</dd>
 <dt>bad: string, optional, (def: &#8216;lightgray&#8217;)</dt>
 <dd>Color for non-significant values.</dd>
-<dt>rmaxis: bool, optional, (def: False)</dt>
-<dd>Remove unecessary axis.</dd>
-<dt>dpaxis: bool, optional, (def: False)</dt>
-<dd>Despine axis.</dd>
+<dt>kwargs:</dt>
+<dd>Further arguments are passed to the pacplot() method.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>gca: axes</dt>
+<dd>The current matplotlib axes.</dd>
 </dl>
 </dd>
 </dl>
@@ -393,7 +448,20 @@ of p-values to use as levels.</dd>
 <dt>
 <code class="descclassname">Pac.</code><code class="descname">triplot</code><span class="sig-paren">(</span><em>pac</em>, <em>fvec</em>, <em>tridx</em>, <em>xlabel='Starting frequency (hz)'</em>, <em>ylabel='Ending frequency (hz)'</em>, <em>cblabel='PAC values'</em>, <em>bad='lightgray'</em>, <em>**kwargs</em><span class="sig-paren">)</span></dt>
 <dd><p>Triangular plot.</p>
+<p>The triplot method is used to find the [starting, ending] frequency
+either for the phase or for the amplitude.</p>
 <dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>pac: np.ndarray</dt>
+<dd>Pac array of shape (namp, npha)</dd>
+<dt>fvec: np.ndarray</dt>
+<dd>The frequency vector returned by the PacTriVec function.</dd>
+<dt>tridx: np.ndarray</dt>
+<dd>The index vector used to build the triangle. This argument is
+also returned by the PacTriVec function.</dd>
+</dl>
+</dd>
 <dt>Kargs:</dt>
 <dd><dl class="first last docutils">
 <dt>xlabel: string, optional, (def: &#8216;Starting frequency (hz)&#8217;)</dt>
@@ -402,26 +470,48 @@ of p-values to use as levels.</dd>
 <dd>Label for the amplitude axis.</dd>
 <dt>cblabel: string, optional, (def: &#8216;PAC values&#8217;)</dt>
 <dd>Colorbar.</dd>
-<dt>title: string, optional, (def: &#8216;&#8217;)</dt>
-<dd>Title of the plot.</dd>
-<dt>y: float, optional, (def: 1.02)</dt>
-<dd>Title location.</dd>
-<dt>cmap: string, optional, (def: &#8216;viridis&#8217;)</dt>
-<dd>Name of one Matplotlib&#8217;s colomap.</dd>
-<dt>vmin: float, optional, (def: None)</dt>
-<dd>Threshold under which set the color to the uner parameter.</dd>
-<dt>vmax: float, optional, (def: None)</dt>
-<dd>Threshold over which set the color in the over parameter.</dd>
-<dt>under: string, optional, (def: &#8216;gray&#8217;)</dt>
-<dd>Color for values under the vmin parameter.</dd>
-<dt>over: string, optional, (def: &#8216;red&#8217;)</dt>
-<dd>Color for values over the vmax parameter.</dd>
 <dt>bad: string, optional, (def: &#8216;lightgray&#8217;)</dt>
 <dd>Color for non-significant values.</dd>
-<dt>rmaxis: bool, optional, (def: False)</dt>
-<dd>Remove unecessary axis.</dd>
-<dt>dpaxis: bool, optional, (def: False)</dt>
-<dd>Despine axis.</dd>
+<dt>kwargs:</dt>
+<dd>Further arguments are passed to the pacplot() method.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>gca: axes</dt>
+<dd>The current matplotlib axes.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="show">
+<span id="pltshow"></span><h2>Show<a class="headerlink" href="#show" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="tensorpac.pac.Pac.show">
+<code class="descclassname">Pac.</code><code class="descname">show</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.pac.Pac.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the figure.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="save">
+<span id="pltsave"></span><h2>Save<a class="headerlink" href="#save" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="tensorpac.pac.Pac.savefig">
+<code class="descclassname">Pac.</code><code class="descname">savefig</code><span class="sig-paren">(</span><em>filename</em>, <em>dpi=600</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.pac.Pac.savefig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the figure.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>filename: string</dt>
+<dd>The name of the figure to save.</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>dpi: int, optional, (def: 600)</dt>
+<dd>DPI of the figure.</dd>
 </dl>
 </dd>
 </dl>
@@ -441,7 +531,7 @@ of p-values to use as levels.</dd>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="utils.html" class="btn btn-neutral" title="Utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="stats.html" class="btn btn-neutral" title="Statistics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -472,7 +562,7 @@ of p-values to use as levels.</dd>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.5.1',
+            VERSION:'0.5.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

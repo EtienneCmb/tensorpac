@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; Tensorpac 0.5.1 documentation</title>
+  <title>Index &mdash; Tensorpac 0.5.2 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
         <link rel="index" title="Index"
               href="#"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.5.1 documentation" href="index.html"/> 
+    <link rel="top" title="Tensorpac 0.5.2 documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                0.5.1
+                0.5.2
               </div>
             
           
@@ -111,6 +111,7 @@
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#filter-then-compute-pac">Filter then compute PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pyfcn.html#preferred-phase">Preferred-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyfcn.html#event-related-phase-amplitude-coupling">Event-Related Phase-Amplitude Coupling</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Utils</a><ul>
@@ -119,11 +120,19 @@
 <li class="toctree-l2"><a class="reference internal" href="utils.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="stats.html">Statistics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stats.html#pearson-correlation">Pearson correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stats.html#circular-correlation">Circular correlation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="visu.html">Visualization</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="visu.html#code-example">Code example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#d-plot">2D plot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visu.html#comodulogram">Comodulogram</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visu.html#triangular-plot">Triangular plot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="visu.html#polar-plot">Polar plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#show">Show</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visu.html#save">Save</a></li>
 </ul>
 </li>
 </ul>
@@ -192,15 +201,29 @@
 
 <div class="genindex-jumpbox">
  <a href="#C"><strong>C</strong></a>
+ | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#P"><strong>P</strong></a>
+ | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
  
 </div>
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="stats.html#tensorpac.stats.circ_corrcc">circ_corrcc() (in module tensorpac.stats)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="visu.html#tensorpac.pac.Pac.comodulogram">comodulogram() (tensorpac.pac.Pac method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pyfcn.html#tensorpac.pac.Pac.erpac">erpac() (tensorpac.pac.Pac method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -224,6 +247,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pyfcn.html#tensorpac.pac.Pac">Pac (class in tensorpac.pac)</a>
 </li>
+      <li><a href="visu.html#tensorpac.pac.Pac.pacplot">pacplot() (tensorpac.pac.Pac method)</a>
+</li>
       <li><a href="utils.html#tensorpac.utils.PacSignals">PacSignals() (in module tensorpac.utils)</a>
 </li>
   </ul></td>
@@ -232,7 +257,21 @@
 </li>
       <li><a href="utils.html#tensorpac.utils.PacVec">PacVec() (in module tensorpac.utils)</a>
 </li>
+      <li><a href="stats.html#tensorpac.stats.pearson">pearson() (in module tensorpac.stats)</a>
+</li>
       <li><a href="pyfcn.html#tensorpac.pac.Pac.pp">pp() (tensorpac.pac.Pac method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="visu.html#tensorpac.pac.Pac.savefig">savefig() (tensorpac.pac.Pac method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="visu.html#tensorpac.pac.Pac.show">show() (tensorpac.pac.Pac method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -281,7 +320,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.5.1',
+            VERSION:'0.5.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
