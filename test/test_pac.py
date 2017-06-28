@@ -1,3 +1,4 @@
+"""Test tensorpac functions."""
 import numpy as np
 from tensorpac import Pac
 from tensorpac.utils import PacTriVec
@@ -5,11 +6,12 @@ from tensorpac.utils import PacTriVec
 
 def test_IdpacDefinition():
     """Test Pac object definition."""
-    nmeth, nsuro, nnorm = 6, 5, 5
+    nmeth, nsuro, nnorm = 5, 5, 5
     for k in range(nmeth):
         for i in range(nsuro):
             for j in range(nnorm):
-                Pac(idpac=(k+1, i, j))
+                p = Pac(idpac=(k+1, i, j))
+                str(p)
 
 
 def test_filteringDefinition():
@@ -63,7 +65,7 @@ def test_compute():
 
 
 def test_properties():
-    """Test Pac properties"""
+    """Test Pac properties."""
     p = Pac()
     # Idpac :
     p.idpac
@@ -86,16 +88,43 @@ def test_properties():
 
 
 def test_pacComodulogram():
-    """Test Pac object definition."""
+    """Test Pac object definition.
+
+    This test works locally but failed on travis...
+    """
     try:
         f, tridx = PacTriVec()
         pac = np.random.rand(20, 10)
+        pval = np.random.rand(20, 10)
         p = Pac(fpha=np.arange(11), famp=np.arange(21))
         print(len(p.xvec), len(p.yvec))
-        p.comodulogram(pac)
-        p.comodulogram(pac, plotas='contour')
+        p.comodulogram(pac, rmaxis=True, dpaxis=True)
+        p.comodulogram(pac, plotas='contour', pvalues=pval)
+        p.comodulogram(pac, plotas='pcolor', pvalues=pval, levels=[.5, .7],
+                       under='gray', over='red', bad='orange')
         p = Pac(fpha=np.arange(11), famp=f)
+        p.polar(pac, np.arange(10), np.arange(20), interp=.8)
         pac = np.random.rand(len(f))
         p.triplot(pac, f, tridx)
+        # p.savefig('file.png', dpi=10)
+        # p.show()
     except:
         pass
+
+
+def test_PreferredPhase():
+    """Test the prefered phase."""
+    data = np.random.rand(2, 1024)
+    p = Pac(idpac=(4, 0, 0))
+    pha = p.filter(1024, data, axis=1, ftype='phase')
+    amp = p.filter(1024, data, axis=1, ftype='amplitude')
+    p.pp(pha, amp, axis=2)
+
+
+def test_ERPAC():
+    """Test the ERPAC."""
+    data = np.random.rand(2, 1024)
+    p = Pac(idpac=(4, 0, 0))
+    pha = p.filter(1024, data, axis=1, ftype='phase')
+    amp = p.filter(1024, data, axis=1, ftype='amplitude')
+    p.erpac(pha, amp, traxis=1)

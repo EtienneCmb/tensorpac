@@ -7,17 +7,15 @@ def pacstr(idpac):
     """Return correspond methods string."""
     # Pac methods :
     if idpac[0] == 1:
-        method = 'Mean Vector Length'
+        method = 'Mean Vector Length (MVL, Canolty, 2006)'
     elif idpac[0] == 2:
-        method = 'Kullback-Leiber divergence'
+        method = 'Kullback-Leiber Distance (KLD, Tort, 2010)'
     elif idpac[0] == 3:
-        method = 'Heights ratio'
+        method = 'Heights ratio (HR, Lakatos, 2005)'
     elif idpac[0] == 4:
-        method = 'ndPac'
+        method = 'ndPac (Ozkürt, 2012)'
     elif idpac[0] == 5:
-        method = 'Phase-Synchrony'
-    elif idpac[0] == 6:
-        method = 'Event-Related Phase amplitude Coupling'
+        method = 'Phase-Synchrony (Cohen, 2008; Penny, 2008)'
     else:
         raise ValueError("No corresponding pac method.")
 

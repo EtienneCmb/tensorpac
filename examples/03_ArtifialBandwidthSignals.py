@@ -15,5 +15,5 @@ p = Pac(idpac=(3, 1, 1), fpha=(1, 15, 1, .2), famp=(40, 100, 5, 2),
         dcomplex='wavelet', width=6)
 pac = np.squeeze(p.filterfit(1024, data, data, axis=1, nperm=10)[0])
 
-p.comodulogram(pac.mean(-1), vmin=0.)
+p.comodulogram(pac.mean(-1), vmin=0., title=str(p))
 plt.show()

@@ -30,7 +30,7 @@ amplitudes = p.filter(sf, data, axis=1, ftype='amplitude')
 for i, k in enumerate([1, 2, 3, 4, 5]):
     # Change the pac method :
     p.idpac = (k, 0, 0)
-    print('-> PAC using '+p.method)
+    print('-> PAC using '+str(p))
     # Compute only the PAC without filtering :
     xpac, _ = p.fit(phases, amplitudes, axis=2)
     # Plot :
