@@ -350,14 +350,27 @@ def mapinterpolation(data, x=None, y=None, interpx=1, interpy=1):
 
 
 def interp2(z, xi, yi, extrapval=0):
-    """Linear interpolation equivalent to interp2(z, xi, yi,'linear').
+    """Linear interpolation.
 
-    @param z: function defined on square lattice [0..width(z))X[0..height(z))
-    @param xi: matrix of x coordinates where interpolation is required
-    @param yi: matrix of y coordinates where interpolation is required
-    @param extrapval: value for out of range positions. default is numpy.nan
-    @return: interpolated values in [xi,yi] points
-    @raise Exception:
+    This function is equivalent to interp2(z, xi, yi,'linear') in Matlab.
+
+    Args:
+        z: np.ndarray
+            Array to interpolate.
+
+        xi: np.ndarray
+            Array of x coordinates where interpolation is required.
+
+        yi: np.ndarray
+            Array of y coordinates where interpolation is required.
+
+    Kargs:
+        extrapval: float, optional, (def: 0.)
+            Value for out of range positions.
+
+    Returns:
+        f: np.ndarray
+            Extrapolated data.
     """
     x = xi.copy()
     y = yi.copy()
