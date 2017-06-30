@@ -1,4 +1,7 @@
-"""Find the preferred phase (PP).
+"""
+=============================
+Find the preferred phase (PP)
+=============================
 
 First, the amplitude is binned according to phase slices (360 degrees/nbins).
 Then, the PP is defined as the phase where the amplitude is maximum.
@@ -36,7 +39,7 @@ pp = np.squeeze(pp).T
 # datasets :
 ambin = np.squeeze(ambin).mean(-1)
 
-# plt.figure(figsize=(20, 35))
+plt.figure(figsize=(20, 35))
 # Plot the prefered phase :
 plt.subplot(221)
 plt.pcolormesh(p.yvec, np.arange(100), np.rad2deg(pp), cmap='Spectral_r')

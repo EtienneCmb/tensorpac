@@ -1,4 +1,12 @@
-"""Search for the optimal [Fmin; Fmax]hz amplitude band."""
+"""
+==========================
+Find the optimal bandwidth
+==========================
+
+Instead of looking for phase and amplitude frequency pairs (as in a
+comodulogram) this example illustrate how it is possible to find starting,
+ending and therefore, bandwith coupling.
+"""
 import matplotlib.pyplot as plt
 
 from tensorpac import Pac, pac_trivec, pac_signals

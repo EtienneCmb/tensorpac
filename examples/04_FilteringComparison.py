@@ -1,4 +1,13 @@
-"""This script illustrate the filtering propoerties and effect."""
+"""
+===============================
+Filtering properties and effect
+===============================
+
+Tensorpac provides two ways for extracting phase and amplitude :
+
+* Using filtering followed by Hilbert transform.
+* Using wavelets.
+"""
 import matplotlib.pyplot as plt
 from tensorpac.utils import pac_signals
 from tensorpac import Pac

@@ -60,7 +60,7 @@ Contents:
    utils
    stats
    visu
-
+   auto_examples/index.rst
 
 Indices and tables
 ##################

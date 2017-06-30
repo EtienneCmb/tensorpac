@@ -1,4 +1,11 @@
-"""This script compare the several surrogates evaluation methods."""
+"""
+====================================================
+Compararison of several surrogate evaluation methods
+====================================================
+
+Surrogates are used to generate a chance ditribution in order to correct the
+PAC estimation.
+"""
 from __future__ import print_function
 import matplotlib.pyplot as plt
 from tensorpac.utils import pac_signals

@@ -1,4 +1,11 @@
-"""This script compare the several normalization methods."""
+"""
+=========================================
+Compare the several normalization methods
+=========================================
+
+The normalization correspond on the method used to correct the PAC estimation
+with the chance distribution.
+"""
 from __future__ import print_function
 import matplotlib.pyplot as plt
 from tensorpac.utils import pac_signals

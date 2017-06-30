@@ -1,4 +1,7 @@
-"""In this example we illustrate how to compute basic phase amplitude coupling.
+"""
+================
+Compute p-values
+================
 
 For the visualization, we used a comodulogram.
 """

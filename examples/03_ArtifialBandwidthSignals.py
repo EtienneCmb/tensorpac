@@ -1,4 +1,12 @@
-"""Generate a coupling between specific bands (i.e. [5, 7] <-> [60, 80] hz)."""
+"""
+==========================================
+Generate a coupling between specific bands
+==========================================
+
+Alternativerly, you can create coupling not between centered frequences, but
+between frequency bands. In this example, we illustrate a [5, 7]<->[60, 80]hz
+coupling.
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 

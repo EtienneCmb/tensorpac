@@ -1,6 +1,10 @@
-"""In this example we illustrate how to compute basic phase amplitude coupling.
+"""
+=============================
+Compare visualization methods
+=============================
 
-For the visualization, we used a comodulogram.
+This script present how to make a 2D comodulogram plot, with all of the
+possible parameters.
 """
 import matplotlib.pyplot as plt
 from tensorpac.utils import pac_signals

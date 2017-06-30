@@ -20,8 +20,10 @@
 import os
 import sys
 import sphinx_rtd_theme
-sys.path.insert(0, os.path.abspath('../'))
-sys.path.insert(0, os.path.abspath('tensorpac'))
+import sphinx_gallery
+
+sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath('tensorpac'))
 
 # -- General configuration ------------------------------------------------
 
@@ -37,7 +39,16 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.viewcode',
     'sphinx.ext.todo',
+    'sphinx_gallery.gen_gallery',
 ]
+
+sphinx_gallery_conf = {
+    # path to your examples scripts
+    'examples_dirs': '../../examples',
+    'default_thumb_file': 'picture/ico64.png',
+    'gallery_dirs': 'auto_examples',
+    'backreferences_dir': 'generated'
+    }
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
