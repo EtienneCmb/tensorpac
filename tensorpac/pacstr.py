@@ -1,6 +1,6 @@
 """Simply get the name of defined methods."""
 
-__all__ = ['pacstr']
+__all__ = ('pacstr')
 
 
 def pacstr(idpac):

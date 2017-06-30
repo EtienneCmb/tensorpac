@@ -3,7 +3,7 @@
 For the visualization, we used a comodulogram.
 """
 import matplotlib.pyplot as plt
-from tensorpac.utils import PacSignals
+from tensorpac.utils import pac_signals
 from tensorpac import Pac
 plt.style.use('seaborn-paper')
 
@@ -12,8 +12,8 @@ plt.style.use('seaborn-paper')
 # npts is the number of time points.
 n = 50  # number of datasets
 npts = 3000  # number of time points
-data, time = PacSignals(fpha=10, famp=100, noise=3., ndatasets=n, npts=npts,
-                        dpha=10, damp=5, chi=.8)
+data, time = pac_signals(fpha=10, famp=100, noise=3., ndatasets=n, npts=npts,
+                         dpha=10, damp=5, chi=.8)
 
 # First, let's use the MVL, without any further correction by surrogates :
 p = Pac(idpac=(1, 0, 0), fpha=(2, 30, 2, 1), famp=(60, 150, 10, 5))

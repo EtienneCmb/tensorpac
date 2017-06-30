@@ -2,11 +2,11 @@
 import numpy as np
 from scipy.signal import hilbert
 
-from .utils import PacVec
+from .utils import pac_vec
 from .pacstr import pacstr
 from .spectral import spectral
-from .methods import ComputePac, _kl_hr
-from .surrogates import ComputeSurogates
+from .methods import compute_pac, _kl_hr
+from .surrogates import compute_surrogates
 from .normalize import normalize
 from .visu import PacPlot
 from .stats import circ_corrcc
@@ -136,7 +136,7 @@ class Pac(PacPlot):
         # Pac methods :
         self._idcheck(idpac)
         # Frequency checking :
-        self.fpha, self.famp = PacVec(fpha, famp)
+        self.fpha, self.famp = pac_vec(fpha, famp)
         self.xvec, self.yvec = self.fpha.mean(1), self.famp.mean(1)
 
         # Check spectral properties :
@@ -281,13 +281,13 @@ class Pac(PacPlot):
             amp = np.angle(hilbert(amp, axis=axis))
         suro, pvalues = None, None
         # Compute pac :
-        pacargs = (self.idpac[0], self.nbins, 1/nperm, optimize)
-        pac = ComputePac(pha, amp, *pacargs)
+        pacargs = (self.idpac[0], self.nbins, 1 / nperm, optimize)
+        pac = compute_pac(pha, amp, *pacargs)
 
         # Compute surrogates (if needed) :
         if self._csuro:
             surargs = (self.idpac[1], axis, traxis, self.nblocks)
-            suro = ComputeSurogates(pha, amp, surargs, pacargs, nperm, njobs)
+            suro = compute_surrogates(pha, amp, surargs, pacargs, nperm, njobs)
 
             # Get the mean / deviation of surrogates :
             m_surro, std_surro = np.mean(suro, axis=0), np.std(suro, axis=0)
@@ -298,12 +298,12 @@ class Pac(PacPlot):
             # Compute statistics :
             suro.sort(0)
             suro -= pac[np.newaxis, ...]
-            pvalues = 1 - np.sum(suro < 0, axis=0)/nperm
-            pvalues[pvalues < 1/nperm] = 1/nperm
+            pvalues = 1 - np.sum(suro < 0, axis=0) / nperm
+            pvalues[pvalues < 1 / nperm] = 1 / nperm
 
         if self._idpac[0] == 4:
             pvalues = np.ones_like(pac)
-            pvalues[np.nonzero(pac)] = 1/nperm
+            pvalues[np.nonzero(pac)] = 1 / nperm
 
         if correct:
             pac[pac < 0.] = 0.
@@ -391,7 +391,7 @@ class Pac(PacPlot):
             amp = np.angle(hilbert(amp, axis=-1))
 
         # Compute pac :
-        return self.fit(pha, amp, axis+1, traxis+1, nperm, optimize,
+        return self.fit(pha, amp, axis + 1, traxis + 1, nperm, optimize,
                         get_surro, correct, njobs)
 
     def pp(self, pha, amp, axis=-1, nbins=72, optimize=True):
@@ -442,7 +442,7 @@ class Pac(PacPlot):
         idxmax = ampbin.argmax(axis=0)
         # Find the preferred phase :
         binsize = (2 * np.pi) / float(nbins)
-        vecbin = np.arange(-np.pi, np.pi, binsize) + binsize/2
+        vecbin = np.arange(-np.pi, np.pi, binsize) + binsize / 2
         pp = vecbin[idxmax]
         # Build the phase vector (polar plot) :
         polarvec = np.linspace(-np.pi, np.pi, ampbin.shape[0])
@@ -570,9 +570,10 @@ class Pac(PacPlot):
         # Check if the phase/amplitude have the same number of points on axis:
         if pha.shape[axis] != amp.shape[axis]:
             phan, ampn = pha.shape[axis], amp.shape[axis]
-            raise ValueError("The phase ("+str(phan)+") and the amplitude "
-                             "("+str(ampn)+") do not have the same number of "
-                             "points on the specified axis ("+str(axis)+").")
+            raise ValueError("The phase (" + str(phan) + ") and the amplitude "
+                             "(" + str(ampn) + ") do not have the same number"
+                             " of points on the specified axis (" +
+                             str(axis) + ").")
         # Force the phase to be in [-pi, pi] :
         pha = (pha + np.pi) % (2 * np.pi) - np.pi
         return pha, amp, axis

@@ -10,14 +10,14 @@ In this example, we generate a signal that have a 10<->100hz coupling the first
 1000 points, then, the 700 following points are noise.
 """
 import numpy as np
-from tensorpac import Pac, PacSignals
+from tensorpac import Pac, pac_signals
 
 # Generate a 10<->100hz coupling :
 ndatasets = 300
 npts = 1000
 sf = 1024.
-x1, tvec = PacSignals(fpha=10, famp=100, ndatasets=ndatasets, noise=2,
-                      npts=npts, dpha=10, damp=10, sf=sf)
+x1, tvec = pac_signals(fpha=10, famp=100, ndatasets=ndatasets, noise=2,
+                       npts=npts, dpha=10, damp=10, sf=sf)
 # Generate noise and concatenate the coupling and the noise :
 x2 = np.random.rand(ndatasets, 700)
 x = np.concatenate((x1, x2), axis=1)  # Shape : (ntrials, npts)
@@ -27,8 +27,8 @@ time = np.arange(x.shape[1]) / sf
 p = Pac(fpha=[9, 11], famp=(60, 140, 5, 1), dcomplex='wavelet', width=12)
 
 # Extract the phase and the amplitude :
-pha = p.filter(sf, x, axis=1, ftype='phase')  # Shape : (npha, ntrials, npts)
-amp = p.filter(sf, x, axis=1, ftype='amplitude')  # Shape : (namp, ntrials, npts)
+pha = p.filter(sf, x, axis=1, ftype='phase')  # Shape (npha, ntrials, npts)
+amp = p.filter(sf, x, axis=1, ftype='amplitude')  # Shape (namp, ntrials, npts)
 
 # Compute the ERPAC and use the traxis to specify that the trial axis is the
 # first one :

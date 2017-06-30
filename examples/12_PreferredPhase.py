@@ -1,19 +1,19 @@
-"""This example illustrate hox to find the preferred-phase (PP).
+"""Find the preferred phase (PP).
 
-First, the amplitude is binned according to phase slices (360°/nbins). Then,
-the PP is defined as the phase where the amplitude is maximum.
+First, the amplitude is binned according to phase slices (360 degrees/nbins).
+Then, the PP is defined as the phase where the amplitude is maximum.
 """
 import numpy as np
 import matplotlib.pyplot as plt
-from tensorpac import PacSignals, Pac
+from tensorpac import pac_signals, Pac
 
 plt.style.use('seaborn-poster')
 
 # Generate 100 datasets with a [5, 7]<->[90, 100]hz coupling :
 sf = 1024.
 ndatasets = 100
-data, time = PacSignals(fpha=[5, 7], famp=[95, 105], ndatasets=ndatasets,
-                        sf=sf, noise=3, chi=.7, npts=2000)
+data, time = pac_signals(fpha=[5, 7], famp=[95, 105], ndatasets=ndatasets,
+                         sf=sf, noise=3, chi=.7, npts=2000)
 
 
 # Define a Pac object. Here, we are not going to use the idpac variable :
@@ -24,7 +24,7 @@ pha = p.filter(sf, data, axis=1, ftype='phase')
 amp = p.filter(sf, data, axis=1, ftype='amplitude')
 
 # Introduce a 2*pi/2 phase shift (equivalent to adding a 90° shift) :
-pha += np.pi/2
+pha += np.pi / 2
 
 # Now, compute the PP :
 ambin, pp, vecbin = p.pp(pha, amp, axis=2, nbins=72)
@@ -56,7 +56,7 @@ h = plt.hist(pp[:, idx100], color='#ab4642')
 plt.xlim((-np.pi, np.pi))
 plt.xlabel('PP')
 plt.title('PP across trials for the 100hz amplitude')
-plt.xticks([-np.pi, -np.pi/2, 0, np.pi/2, np.pi])
+plt.xticks([-np.pi, -np.pi / 2, 0, np.pi / 2, np.pi])
 plt.gca().set_xticklabels([r"$-\pi$", r"$-\frac{\pi}{2}$", "$0$",
                           r"$\frac{\pi}{2}$", r"$\pi$"])
 

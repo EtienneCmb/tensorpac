@@ -35,12 +35,12 @@ Code snippet & illustration
 .. code-block:: python
 
     import matplotlib.pyplot as plt
-    from tensorpac.utils import PacSignals
+    from tensorpac.utils import pac_signals
     from tensorpac import Pac
 
     # Dataset of signals artificially coupled between 10hz and 100hz :
     n = 100  # number of datasets
-    data, time = PacSignals(fpha=10, famp=100, noise=3, ndatasets=n, dpha=10, damp=10)
+    data, time = pac_signals(fpha=10, famp=100, noise=3, ndatasets=n, dpha=10, damp=10)
 
     # Extract PAC :
     p = Pac(idpac=(4, 0, 0), fpha=(2, 30, 1, 1), famp=(60, 150, 5, 5),

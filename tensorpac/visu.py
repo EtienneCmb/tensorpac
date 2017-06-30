@@ -2,7 +2,7 @@
 import numpy as np
 
 
-__all__ = ['PacPlot']
+__all__ = ('PacPlot')
 
 
 class PacPlot(object):
@@ -224,11 +224,11 @@ class PacPlot(object):
                 Pac array of shape (namp, npha)
 
             fvec: np.ndarray
-                The frequency vector returned by the PacTriVec function.
+                The frequency vector returned by the pac_trivec function.
 
             tridx: np.ndarray
                 The index vector used to build the triangle. This argument is
-                also returned by the PacTriVec function.
+                also returned by the pac_trivec function.
 
         Kargs:
             xlabel: string, optional, (def: 'Starting frequency (hz)')
@@ -340,13 +340,13 @@ def mapinterpolation(data, x=None, y=None, interpx=1, interpy=1):
         y = np.arange(0, dim2, interpy)
     # Define the meshgrid :
     Xi, Yi = np.meshgrid(
-        np.arange(0, dim1-1, interpx), np.arange(0, dim2-1, interpy))
+        np.arange(0, dim1 - 1, interpx), np.arange(0, dim2 - 1, interpy))
     # 2D interpolation :
     datainterp = interp2(data, Xi, Yi)
     # Linearly interpolate vectors :
-    xvecI = np.linspace(x[0], x[-1], datainterp.shape[0])
-    yvecI = np.linspace(y[0], y[-1], datainterp.shape[1])
-    return datainterp, xvecI, yvecI
+    xveci = np.linspace(x[0], x[-1], datainterp.shape[0])
+    yveci = np.linspace(y[0], y[-1], datainterp.shape[1])
+    return datainterp, xveci, yveci
 
 
 def interp2(z, xi, yi, extrapval=0):
@@ -383,12 +383,12 @@ def interp2(z, xi, yi, extrapval=0):
         raise Exception("sizes of X indexes and Y-indexes must match")
 
     # find x values out of range
-    x_bad = ((x < 0) | (x > ncols-1))
+    x_bad = ((x < 0) | (x > ncols - 1))
     if x_bad.any():
         x[x_bad] = 0
 
     # find y values out of range
-    y_bad = ((y < 0) | (y > nrows-1))
+    y_bad = ((y < 0) | (y > nrows - 1))
     if y_bad.any():
         y[y_bad] = 0
 

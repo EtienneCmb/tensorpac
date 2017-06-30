@@ -11,10 +11,10 @@ This file include the following methods :
 import numpy as np
 from scipy.special import erfinv
 
-__all__ = ['ComputePac']
+__all__ = ('compute_pac')
 
 
-def ComputePac(pha, amp, idp, nbins, p, optimize):
+def compute_pac(pha, amp, idp, nbins, p, optimize):
     """Copute real Phase-Amplitude coupling.
 
     Each method take at least a pha and amp array with the respective
@@ -24,26 +24,26 @@ def ComputePac(pha, amp, idp, nbins, p, optimize):
     And each method should return a (namp, npha, ...)
     """
     if idp == 1:  # Mean Vector Length (Canolty, 2006)
-        return MVL(pha, amp, optimize)
+        return mvl(pha, amp, optimize)
 
     elif idp == 2:  # Kullback-Leiber distance (Tort, 2010)
-        return klDistance(pha, amp, nbins, optimize)
+        return kld(pha, amp, nbins, optimize)
 
     elif idp == 3:  # Heights ratio (Lakatos, 2005)
-        return HeightsRatio(pha, amp, nbins, optimize)
+        return hr(pha, amp, nbins, optimize)
 
     elif idp == 4:  # ndPac (Ozkurt, 2012)
-        return ndPac(pha, amp, p, optimize)
+        return ndpac(pha, amp, p, optimize)
 
     elif idp == 5:  # Phase-Synchrony (Penny, 2008; Cohen, 2008)
-        return PhaseSync(pha, amp, optimize)
+        return ps(pha, amp, optimize)
 
     else:
         raise ValueError(str(idp) + " is not recognized as a valid pac "
                          "method.")
 
 
-def MVL(pha, amp, optimize):
+def mvl(pha, amp, optimize):
     """Mean Vector Length (Canolty, 2006).
 
     Args:
@@ -59,11 +59,11 @@ def MVL(pha, amp, optimize):
     """
     # Number of time points :
     npts = pha.shape[-1]
-    return np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j*pha),
+    return np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j * pha),
                             optimize=optimize)) / npts
 
 
-def klDistance(pha, amp, nbins, optimize):
+def kld(pha, amp, nbins, optimize):
     """Kullback Leibler Distance (Tort, 2010).
 
     Args:
@@ -87,13 +87,13 @@ def klDistance(pha, amp, nbins, optimize):
     # Take the log of non-zero values :
     p_j = p_j * np.ma.log10(p_j).filled(-np.inf)
     # Compute the PAC :
-    pac = 1 + p_j.sum(axis=0)/np.log10(nbins)
+    pac = 1 + p_j.sum(axis=0) / np.log10(nbins)
     # Set distribution distances that are really closed to zero :
     pac[np.isinf(pac)] = 0.
     return pac
 
 
-def HeightsRatio(pha, amp, nbins, optimize):
+def hr(pha, amp, nbins, optimize):
     """Pac heights ratio (Lakatos, 2005).
 
     Args:
@@ -142,7 +142,7 @@ def _kl_hr(pha, amp, nbins, optimize):
     return np.array(abin)
 
 
-def ndPac(pha, amp, p, optimize):
+def ndpac(pha, amp, p, optimize):
     """Normalized direct Pac (Ozkurt, 2012).
 
     Args:
@@ -164,16 +164,16 @@ def ndPac(pha, amp, p, optimize):
     np.subtract(amp, np.mean(amp, axis=-1, keepdims=True), out=amp)
     np.divide(amp, np.std(amp, axis=-1, keepdims=True), out=amp)
     # Compute pac :
-    pac = np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j*pha),
+    pac = np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j * pha),
                            optimize=optimize))
-    pac *= pac/npts
+    pac *= pac / npts
     # Set to zero non-significant values:
-    xlim = erfinv(1-p)**2
+    xlim = erfinv(1 - p)**2
     pac[pac <= 2 * xlim] = 0.
     return pac
 
 
-def PhaseSync(pha, amp, optimize):
+def ps(pha, amp, optimize):
     """Phase Synchrony (Penny, 2008; Cohen, 2008).
 
     Args:
@@ -189,6 +189,6 @@ def PhaseSync(pha, amp, optimize):
     """
     # Number of time points :
     npts = pha.shape[-1]
-    pac = np.einsum('i...j, k...j->ik...', np.exp(-1j*amp), np.exp(1j*pha),
+    pac = np.einsum('i...j, k...j->ik...', np.exp(-1j * amp), np.exp(1j * pha),
                     optimize=optimize)
-    return np.abs(pac)/npts
+    return np.abs(pac) / npts

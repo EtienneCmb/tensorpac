@@ -9,10 +9,10 @@ This file include the following methods :
             surrogates
 """
 
-__all__ = ['normalize']
+__all__ = ('normalize')
 
 
-def normalize(pac, sMean, sStd, idn):
+def normalize(pac, s_mean, s_std, idn):
     """List of the normalization methods.
 
     Use a normalization to normalize the true cfc value by the surrogates.
@@ -30,16 +30,16 @@ def normalize(pac, sMean, sStd, idn):
         return pac
 
     elif idn == 1:  # Substraction
-        return pac-sMean
+        return pac - s_mean
 
     elif idn == 2:  # Divide
-        return pac/sMean
+        return pac / s_mean
 
     elif idn == 3:  # Substract then divide
-        pac -= sMean
-        pac /= sMean
+        pac -= s_mean
+        pac /= s_mean
         return pac
-        # return (pac-sMean)/sMean
+        # return (pac-s_mean)/s_mean
 
     elif idn == 4:  # Z-score
-        return (pac-sMean)/sStd
+        return (pac - s_mean) / s_std

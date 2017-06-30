@@ -1,11 +1,11 @@
 """Utility PAC functions.
 
-- PacSignals : generate artificially phase-amplitude coupled signals
-- PacVec : generate cross-frequency coupling vectors
+- pac_signals : generate artificially phase-amplitude coupled signals
+- pac_vec : generate cross-frequency coupling vectors
 """
 import numpy as np
 
-__all__ = ['PacSignals', 'PacVec', 'PacTriVec']
+__all__ = ('pac_signals', 'pac_vec', 'pac_trivec')
 
 
 ###############################################################################
@@ -14,8 +14,8 @@ __all__ = ['PacSignals', 'PacVec', 'PacTriVec']
 ###############################################################################
 ###############################################################################
 
-def PacSignals(fpha=10, famp=100, sf=1024, npts=4000, ndatasets=10, chi=0,
-               noise=1, dpha=0, damp=0):
+def pac_signals(fpha=10, famp=100, sf=1024, npts=4000, ndatasets=10, chi=0,
+                noise=1, dpha=0, damp=0):
     """Generate artificially phase-amplitude coupled signals.
 
     Kargs:
@@ -75,23 +75,24 @@ def PacSignals(fpha=10, famp=100, sf=1024, npts=4000, ndatasets=10, chi=0,
     data = np.zeros_like(time)
 
     # Band / Delta parameters :
+    sh = (ndatasets, 1)
     if fpha.ndim == 0:
-        aPha = [fpha*(1-dpha/100), fpha*(1+dpha/100)]
-        deltaPha = aPha[0] + (aPha[1]-aPha[0])*np.random.rand(ndatasets, 1)
+        apha = [fpha * (1 - dpha / 100), fpha * (1 + dpha / 100)]
+        del_pha = apha[0] + (apha[1] - apha[0]) * np.random.rand(*sh)
     elif fpha.ndim == 1:
-        deltaPha = np.random.uniform(fpha[0], fpha[1], ndatasets)
+        del_pha = np.random.uniform(fpha[0], fpha[1], ndatasets)
     if famp.ndim == 0:
-        aAmp = [famp*(1-damp/100), famp*(1+damp/100)]
-        deltaAmp = aAmp[0] + (aAmp[1]-aAmp[0])*np.random.rand(ndatasets, 1)
+        a_amp = [famp * (1 - damp / 100), famp * (1 + damp / 100)]
+        del_amp = a_amp[0] + (a_amp[1] - a_amp[0]) * np.random.rand(*sh)
     elif famp.ndim == 1:
-        deltaAmp = np.random.uniform(famp[0], famp[1], ndatasets)
+        del_amp = np.random.uniform(famp[0], famp[1], ndatasets)
 
     # Reshape phase/amplitude bands :
-    deltaPha, deltaAmp = deltaPha.reshape(-1, 1), deltaAmp.reshape(-1, 1)
+    del_pha, del_amp = del_pha.reshape(-1, 1), del_amp.reshape(-1, 1)
 
     # Create phase and amplitude signals :
-    xl = np.sin(2 * np.pi * deltaPha * time)
-    xh = np.sin(2 * np.pi * deltaAmp * time)
+    xl = np.sin(2 * np.pi * del_pha * time)
+    xh = np.sin(2 * np.pi * del_amp * time)
 
     # Create the coupling :
     ah = .5 * ((1. - chi) * xl + 1. + chi)
@@ -110,7 +111,7 @@ def PacSignals(fpha=10, famp=100, sf=1024, npts=4000, ndatasets=10, chi=0,
 ###############################################################################
 
 
-def PacVec(fpha=(2, 30, 2, 1), famp=(60, 200, 10, 5)):
+def pac_vec(fpha=(2, 30, 2, 1), famp=(60, 200, 10, 5)):
     """Generate cross-frequency coupling vectors.
 
     Kargs:
@@ -129,10 +130,10 @@ def PacVec(fpha=(2, 30, 2, 1), famp=(60, 200, 10, 5)):
         aVec: np.ndarray, shape (N, 2)
             Array containing the pairs of amplitude frequencies.
     """
-    return _CheckFreq(fpha), _CheckFreq(famp)
+    return _check_freq(fpha), _check_freq(famp)
 
 
-def _CheckFreq(f):
+def _check_freq(f):
     """Check the frequency definition."""
     f = np.atleast_2d(np.asarray(f))
     #
@@ -142,7 +143,7 @@ def _CheckFreq(f):
         if f.shape[1] is not 2:
             f = f.T
     elif np.squeeze(f).shape == (4,):  # (fstart, fend, fwidth, fstep)
-        f = _CreatePairsVector(*tuple(np.squeeze(f)))
+        f = _pair_vectors(*tuple(np.squeeze(f)))
     else:  # Sequential
         f = f.reshape(-1)
         f.sort()
@@ -150,14 +151,14 @@ def _CheckFreq(f):
     return f
 
 
-def _CreatePairsVector(fstart, fend, fwidth, fstep):
+def _pair_vectors(fstart, fend, fwidth, fstep):
     # Generate two array for phase and amplitude :
-    fdown = np.arange(fstart, fend-fwidth, fstep)
-    fup = np.arange(fstart+fwidth, fend, fstep)
+    fdown = np.arange(fstart, fend - fwidth, fstep)
+    fup = np.arange(fstart + fwidth, fend, fstep)
     return np.c_[fdown, fup]
 
 
-def PacTriVec(fstart=60, fend=160, fwidth=10):
+def pac_trivec(fstart=60, fend=160, fwidth=10):
     """Generate triangular vector.
 
     Kargs:
@@ -177,13 +178,13 @@ def PacTriVec(fstart=60, fend=160, fwidth=10):
         tridx: np.ndarray
             The triangular index for the reconstruction.
     """
-    starting = np.arange(fstart, fend+fwidth, fwidth)
+    starting = np.arange(fstart, fend + fwidth, fwidth)
     f, tridx = np.array([]), np.array([])
     for num, k in enumerate(starting[0:-1]):
         # Lentgh of the vector to build :
-        L = len(starting) - (num + 1)
+        l = len(starting) - (num + 1)
         # Create the frequency vector for this starting frequency :
-        fst = np.c_[np.full(L, k), starting[num+1::]]
+        fst = np.c_[np.full(l, k), starting[num + 1::]]
         nfst = fst.shape[0]
         # Create the triangular index for this vector of frequencies :
         idx = np.c_[np.flipud(np.arange(nfst)), np.full(nfst, num)]
