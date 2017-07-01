@@ -21,6 +21,7 @@ import os
 import sys
 import sphinx_rtd_theme
 import sphinx_gallery
+import numpydoc
 
 sys.path.append(os.path.abspath('../'))
 sys.path.append(os.path.abspath('tensorpac'))
@@ -40,6 +41,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinx.ext.todo',
     'sphinx_gallery.gen_gallery',
+    'numpydoc',
 ]
 
 sphinx_gallery_conf = {

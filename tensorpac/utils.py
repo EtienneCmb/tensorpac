@@ -15,51 +15,42 @@ __all__ = ('pac_signals', 'pac_vec', 'pac_trivec')
 ###############################################################################
 
 def pac_signals(fpha=10, famp=100, sf=1024, npts=4000, ndatasets=10, chi=0,
-                noise=1, dpha=0, damp=0):
+                noise=1., dpha=0, damp=0):
     """Generate artificially phase-amplitude coupled signals.
 
-    Kargs:
-        fpha: int/float, optional, [def: 10]
-            Frequency for phase
+    Parameters
+    ----------
+    fpha : int/float, optional
+        Frequency for phase
+    famp : int/float, optional
+        Frequency for amplitude
+    sf : int, optional
+        Sampling frequency
+    ndatasets : int, optional
+        Number of datasets
+    npts : int, optional
+        Number of points for each signal.
+    chi : float, optional
+        Amount of coupling. If chi=0, signals of phase and amplitude
+        are strongly coupled (0.<=chi<=1.).
+    noise : float, optional
+        Amount of noise (0<=noise<=3).
+    dpha : float, optional
+        Random incertitude on phase frequences (0<=dpha<=100). If fpha is 2,
+        and dpha is 50, the frequency for the phase signal will be between :
+        [2-0.5*2, 2+0.5*2]=[1,3]
+    damp : float, optional
+        Random incertitude on amplitude frequencies (0<=damp<=100). If famp is
+        60, and damp is 10, the frequency for the amplitude signal will be
+        between : [60-0.1*60, 60+0.1*60]=[54,66]
 
-        famp: int/float, optional, [def: 100]
-            Frequency for amplitude
-
-        sf: int, optional, [def: 1024]
-            Sampling frequency
-
-        ndatasets : int, optional, [def: 10]
-            Number of datasets
-
-        npts: int, optional, [def: 4000]
-            Number of points for each signal.
-
-        chi: int/float (0<=chi<=1), optional, [def: 0]
-            Amount of coupling. If chi=0, signals of phase and amplitude
-            are strongly coupled.
-
-        noise: int/float (0<=noise<=3), optional, [def: 1]
-            Amount of noise
-
-        dpha: int/float (0<=dpha<=100), optional, [def: 0]
-            Introduce a random incertitude on the phase frequency.
-            If fpha is 2, and dpha is 50, the frequency for the phase signal
-            will be between :
-            [2-0.5*2, 2+0.5*2]=[1,3]
-
-        damp: int/float (0<=damp<=100), optional, [def: 0]
-            Introduce a random incertitude on the amplitude frequency.
-            If famp is 60, and damp is 10, the frequency for the amplitude
-            signal will be between :
-            [60-0.1*60, 60+0.1*60]=[54,66]
-
-    Return:
-        data: array
-            The randomly coupled signals. The shape of data will be
-            (ndatasets x npts)
-
-        time: array
-            The corresponding time vector
+    Returns
+    -------
+    data : array_like
+        The randomly coupled signals of shape (ndatasets, npts).
+    time : array_like
+        The corresponding time vector according to the defined number of points
+        and sampling frequency.
     """
     # Check the inputs variables :
     if not 0 <= chi <= 1:
@@ -114,21 +105,17 @@ def pac_signals(fpha=10, famp=100, sf=1024, npts=4000, ndatasets=10, chi=0,
 def pac_vec(fpha=(2, 30, 2, 1), famp=(60, 200, 10, 5)):
     """Generate cross-frequency coupling vectors.
 
-    Kargs:
-        fpha: tuple, optional, [def: (2, 30, 2, 1)]
-            Frequency parameters for phase. Each argument inside the tuple
-            mean (starting fcy, ending fcy, width, step)
+    Parameters
+    ----------
+    fpha, famp : tuple, optional
+        Frequency parameters for phase and amplitude. Each argument inside the
+        tuple mean (starting fcy, ending fcy, bandwidth, step).
 
-        famp: tuple, optional, [def: (60, 200, 10, 5)]
-            Frequency parameters for amplitude. Each argument inside the
-            tuple mean (starting fcy, ending fcy, width, step)
-
-    Returns:
-        pVec: np.ndarray, shape (N, 2)
-            Array containing the pairs of phase frequencies.
-
-        aVec: np.ndarray, shape (N, 2)
-            Array containing the pairs of amplitude frequencies.
+    Returns
+    -------
+    pvec, avec : array_like
+        Arrays containing the pairs of phase and amplitude frequencies. Each
+        vector have a shape of (N, 2).
     """
     return _check_freq(fpha), _check_freq(famp)
 
@@ -158,25 +145,27 @@ def _pair_vectors(fstart, fend, fwidth, fstep):
     return np.c_[fdown, fup]
 
 
-def pac_trivec(fstart=60, fend=160, fwidth=10):
+def pac_trivec(fstart=60., fend=160., fwidth=10.):
     """Generate triangular vector.
 
-    Kargs:
-        fstart: float, optional, (def: 60)
-            Starting frequency.
+    By contrast with the pac_vec function, this function generate frequency
+    vector with an increasing frequency bandwidth.
 
-        fend: float, optional, (def: 160)
-            Ending frequency.
+    Parameters
+    ----------
+    fstart : float, optional
+        Starting frequency.
+    fend : float, optional
+        Ending frequency.
+    fwidth : float, optional
+        Frequency bandwidth increase between each band.
 
-        fwidth: float, optional, (def: 10)
-            Frequency bandwidth.
-
-    Returns:
-        f: np.ndarray
-            The triangular vector.
-
-        tridx: np.ndarray
-            The triangular index for the reconstruction.
+    Returns
+    -------
+    f : array_like
+        The triangular vector.
+    tridx : array_like
+        The triangular index for the reconstruction.
     """
     starting = np.arange(fstart, fend + fwidth, fwidth)
     f, tridx = np.array([]), np.array([])
