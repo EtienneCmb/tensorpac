@@ -196,6 +196,10 @@ class Pac(PacPlot):
                              "not allow to get filtered data only. Set the "
                              "keepfilt parameter to False or set dcomplex to "
                              "'hilbert'.")
+        # 1D signals :
+        if x.ndim == 1:
+            x = x.reshape(1, -1)
+            axis = 1
         # Switch between phase or amplitude :
         if ftype is 'phase':
             tosend = 'pha' if not keepfilt else None
@@ -280,6 +284,11 @@ class Pac(PacPlot):
         if self._idpac[0] == 5:
             amp = np.angle(hilbert(amp, axis=axis))
         suro, pvalues = None, None
+        # Check for 0 permutations :
+        if nperm in [0, None]:
+            self._idpac = (self._idpac[0], 0, 0)
+            nperm = 1
+            self._csuro = False
         # Compute pac :
         pacargs = (self.idpac[0], self.nbins, 1 / nperm, optimize)
         pac = compute_pac(pha, amp, *pacargs)
