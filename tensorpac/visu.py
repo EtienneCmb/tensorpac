@@ -122,13 +122,20 @@ class PacPlot(object):
         if polar:
             plotas = 'pcolor'
             plt.subplot(subplot, projection='polar')
+        # Check vmin / vmax
+        if vmin is None and vmax is None:
+            vmin = min(0, pac.min())
+            vmax = max(0, pac.max())
+            if vmin < 0 and vmax > 0:
+                vmax = max(vmax, -vmin)
+                vmin = -vmax
         # Plot type :
         toplot = pac.data if levels is not None else pac
         if plotas is 'imshow':
-            im = plt.imshow(toplot, aspect='auto', cmap=cmap, origin='lower',
+            im = plt.imshow(toplot, aspect='auto', cmap=cmap, origin='upper',
                             vmin=vmin, vmax=vmax, interpolation='none',
                             extent=[xvec[0], xvec[-1], yvec[-1], yvec[0]])
-            # plt.gca().invert_yaxis()
+            plt.gca().invert_yaxis()
         elif plotas is 'contour':
             im = plt.contourf(xvec, yvec, toplot, ncontours, cmap=cmap,
                               vmin=vmin, vmax=vmax)
