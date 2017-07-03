@@ -127,17 +127,17 @@ def _kl_hr(pha, amp, nbins, optimize):
     This function is shared by the Kullback-Leibler Distance and the
     Height Ratio.
     """
-    # Build the default binned phase vector :
-    binsize = (2 * np.pi) / float(nbins)
-    vecbin = np.arange(-np.pi, np.pi, binsize)
+    vecbin = np.linspace(-np.pi, np.pi, nbins + 1)
+    phad = np.digitize(pha, vecbin) - 1
 
     abin = []
-    for i in vecbin:
+    for i in np.unique(phad):
         # Find where phase take vecbin values :
-        idx = np.logical_and(pha >= i, pha < i + binsize)
+        idx = phad == i
         # Take the sum of amplitude inside the bin :
-        abin.append(np.einsum('i...j, k...j->ik...', amp, idx,
-                              optimize=optimize))
+        abin_pha = np.einsum('i...j, k...j->ik...', amp, idx,
+                             optimize=optimize)
+        abin.append(abin_pha)
 
     return np.array(abin)
 
