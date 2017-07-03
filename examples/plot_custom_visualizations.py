@@ -14,16 +14,17 @@ plt.style.use('seaborn-paper')
 # First, we generate a dataset of signals artificially coupled between 10hz
 # and 100hz. By default, this dataset is organized as (ndatasets, npts) where
 # npts is the number of time points.
-n = 20  # number of datasets
+n = 10  # number of datasets
 data, time = pac_signals(fpha=10, famp=100, noise=2., ndatasets=n, dpha=10,
-                         damp=10)
+                         damp=10, npts=4000)
 
 # First, let's use the MVL, without any further correction by surrogates :
 p = Pac(idpac=(5, 3, 3), fpha=(2, 30, 1, 1), famp=(60, 150, 5, 5),
-        dcomplex='wavelet', width=12)
-xpac, pval = p.filterfit(1024, data, data, axis=1, nperm=100)
+        dcomplex='wavelet', width=7)
+xpac, pval = p.filterfit(1024, data, data, axis=1, nperm=110)
 
 # Now, we plot the result by taking the mean across the dataset dimension.
+plt.figure(figsize=(20, 15))
 plt.subplot(3, 3, 1)
 p.comodulogram(xpac.mean(-1), title='Default plotting')
 

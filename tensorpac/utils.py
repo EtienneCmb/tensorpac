@@ -14,32 +14,42 @@ __all__ = ('pac_signals', 'pac_vec', 'pac_trivec')
 ###############################################################################
 ###############################################################################
 
-def pac_signals(fpha=10, famp=100, sf=1024, npts=4000, ndatasets=10, chi=0,
-                noise=1., dpha=0, damp=0):
+def pac_signals(fpha=10., famp=100., sf=1024, npts=4000, ndatasets=10, chi=0.,
+                noise=1., dpha=0., damp=0.):
     """Generate artificially phase-amplitude coupled signals.
 
     Parameters
     ----------
-    fpha : int/float, optional
-        Frequency for phase
-    famp : int/float, optional
-        Frequency for amplitude
-    sf : int, optional
+    fpha : float | 10
+        Frequency for phase. Use either a float number for a centered frequency
+        of a band (like [5, 7]) for a bandwidth.
+
+    famp : float | 100.
+        Frequency for amplitude. Use either a float number for a centered
+        frequency of a band (like [60, 80]) for a bandwidth.
+
+    sf : int | 1024
         Sampling frequency
-    ndatasets : int, optional
+
+    ndatasets : int | 10
         Number of datasets
-    npts : int, optional
+
+    npts : int | 4000
         Number of points for each signal.
-    chi : float, optional
+
+    chi : float | 0.
         Amount of coupling. If chi=0, signals of phase and amplitude
         are strongly coupled (0.<=chi<=1.).
-    noise : float, optional
+
+    noise : float | 1.
         Amount of noise (0<=noise<=3).
-    dpha : float, optional
+
+    dpha : float | 0.
         Random incertitude on phase frequences (0<=dpha<=100). If fpha is 2,
         and dpha is 50, the frequency for the phase signal will be between :
         [2-0.5*2, 2+0.5*2]=[1,3]
-    damp : float, optional
+
+    damp : float | 0.
         Random incertitude on amplitude frequencies (0<=damp<=100). If famp is
         60, and damp is 10, the frequency for the amplitude signal will be
         between : [60-0.1*60, 60+0.1*60]=[54,66]
@@ -48,6 +58,7 @@ def pac_signals(fpha=10, famp=100, sf=1024, npts=4000, ndatasets=10, chi=0,
     -------
     data : array_like
         The randomly coupled signals of shape (ndatasets, npts).
+
     time : array_like
         The corresponding time vector according to the defined number of points
         and sampling frequency.
@@ -107,7 +118,7 @@ def pac_vec(fpha=(2, 30, 2, 1), famp=(60, 200, 10, 5)):
 
     Parameters
     ----------
-    fpha, famp : tuple, optional
+    fpha, famp : tuple | (2, 30, 2, 1), (60, 200, 10, 5)
         Frequency parameters for phase and amplitude. Each argument inside the
         tuple mean (starting fcy, ending fcy, bandwidth, step).
 
@@ -153,17 +164,20 @@ def pac_trivec(fstart=60., fend=160., fwidth=10.):
 
     Parameters
     ----------
-    fstart : float, optional
+    fstart : float | 60.
         Starting frequency.
-    fend : float, optional
+
+    fend : float | 160.
         Ending frequency.
-    fwidth : float, optional
+
+    fwidth : float | 10.
         Frequency bandwidth increase between each band.
 
     Returns
     -------
     f : array_like
         The triangular vector.
+
     tridx : array_like
         The triangular index for the reconstruction.
     """

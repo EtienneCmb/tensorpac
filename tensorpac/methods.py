@@ -46,16 +46,18 @@ def compute_pac(pha, amp, idp, nbins, p, optimize):
 def mvl(pha, amp, optimize):
     """Mean Vector Length (Canolty, 2006).
 
-    Args:
-        pha: np.ndarray
-            Array of phases of shapes (npha, ..., npts)
+    Parameters
+    ----------
+    pha : array_like
+        Array of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarra
-            Array of amplitudes of shapes (namp, ..., npts)
+    amp : array_like
+        Array of amplitudes of shapes (namp, ..., npts)
 
-    Return:
-        pac: np.ndarray
-            PAC of shape (npha, namp, ...)
+    Returns
+    -------
+    pac : array_like
+        PAC of shape (npha, namp, ...)
     """
     # Number of time points :
     npts = pha.shape[-1]
@@ -66,19 +68,21 @@ def mvl(pha, amp, optimize):
 def kld(pha, amp, nbins, optimize):
     """Kullback Leibler Distance (Tort, 2010).
 
-    Args:
-        pha: np.ndarray
-            Array of phases of shapes (npha, ..., npts)
+    Parameters
+    ----------
+    pha : array_like
+        Array of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarra
-            Array of amplitudes of shapes (namp, ..., npts)
+    amp : array_like
+        Array of amplitudes of shapes (namp, ..., npts)
 
-        nbins: int
-            Number of bins in which the phase in cut in bins.
+    nbins : int
+        Number of bins in which the phase in cut in bins.
 
-    Return:
-        pac: np.ndarray
-            PAC of shape (npha, namp, ...)
+    Returns
+    -------
+    pac : array_like
+        PAC of shape (npha, namp, ...)
     """
     # Get the phase locked binarized amplitude :
     p_j = _kl_hr(pha, amp, nbins, optimize)
@@ -96,19 +100,21 @@ def kld(pha, amp, nbins, optimize):
 def hr(pha, amp, nbins, optimize):
     """Pac heights ratio (Lakatos, 2005).
 
-    Args:
-        pha: np.ndarray
-            Array of phases of shapes (npha, ..., npts)
+    Parameters
+    ----------
+    pha : array_like
+        Array of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarra
-            Array of amplitudes of shapes (namp, ..., npts)
+    amp : array_like
+        Array of amplitudes of shapes (namp, ..., npts)
 
-        nbins: int
-            Number of bins in which the phase in cut in bins.
+    nbins : int
+        Number of bins in which the phase in cut in bins.
 
-    Return:
-        pac: np.ndarray
-            PAC of shape (npha, namp, ...)
+    Returns
+    -------
+    pac : array_like
+        PAC of shape (npha, namp, ...)
     """
     # Get the phase locked binarized amplitude :
     p_j = _kl_hr(pha, amp, nbins, optimize)
@@ -145,19 +151,21 @@ def _kl_hr(pha, amp, nbins, optimize):
 def ndpac(pha, amp, p, optimize):
     """Normalized direct Pac (Ozkurt, 2012).
 
-    Args:
-        pha: np.ndarray
-            Array of phases of shapes (npha, ..., npts)
+    Parameters
+    ----------
+    pha : array_like
+        Array of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarra
-            Array of amplitudes of shapes (namp, ..., npts)
+    amp : array_like
+        Array of amplitudes of shapes (namp, ..., npts)
 
-        p: float
-            The p-value to use.
+    p : float
+        The p-value to use.
 
-    Return:
-        pac: np.ndarray
-            PAC of shape (npha, namp, ...)
+    Returns
+    -------
+    pac : array_like
+        PAC of shape (npha, namp, ...)
     """
     npts = amp.shape[-1]
     # Normalize amplitude :
@@ -176,16 +184,18 @@ def ndpac(pha, amp, p, optimize):
 def ps(pha, amp, optimize):
     """Phase Synchrony (Penny, 2008; Cohen, 2008).
 
-    Args:
-        pha: np.ndarray
-            Array of phases of shapes (npha, ..., npts)
+    Parameters
+    ----------
+    pha : array_like
+        Array of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarra
-            Array of amplitudes of shapes (namp, ..., npts)
+    amp : array_like
+        Array of amplitudes of shapes (namp, ..., npts)
 
-    Return:
-        pac: np.ndarray
-            PAC of shape (npha, namp, ...)
+    Returns
+    -------
+    pac : array_like
+        PAC of shape (npha, namp, ...)
     """
     # Number of time points :
     npts = pha.shape[-1]

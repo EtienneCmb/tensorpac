@@ -20,11 +20,13 @@
 import os
 import sys
 import sphinx_rtd_theme
-import sphinx_gallery
-import numpydoc
+# import sphinx_gallery
+# import numpydoc
 
-sys.path.append(os.path.abspath('../'))
-sys.path.append(os.path.abspath('tensorpac'))
+# sys.path.append(os.path.abspath('../'))
+# sys.path.append(os.path.abspath('tensorpac'))
+# sys.path.insert(0, os.path.abspath('tensorpac'))
+sys.path.insert(0, os.path.abspath('../'))
 
 # -- General configuration ------------------------------------------------
 
@@ -45,12 +47,13 @@ extensions = [
 ]
 
 sphinx_gallery_conf = {
-    # path to your examples scripts
     'examples_dirs': '../../examples',
-    'default_thumb_file': 'picture/ico64.png',
     'gallery_dirs': 'auto_examples',
-    'backreferences_dir': 'generated'
+    'backreferences_dir': 'generated',
+    'default_thumb_file': 'source/picture/ico.png',
     }
+
+numpydoc_show_class_members = False
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

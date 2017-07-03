@@ -12,15 +12,15 @@ and xamp have to be set to data.
 import matplotlib.pyplot as plt
 from tensorpac.utils import pac_signals
 from tensorpac import Pac
-plt.style.use('seaborn-poster')
+# plt.style.use('seaborn-poster')
 
 # First, we generate 2 datasets of signals artificially coupled between 10hz
 # and 100hz. By default, those datasets are organized as (ndatasets, npts)
 # where npts is the number of time points.
 n = 20  # number of datasets
-d1, time = pac_signals(fpha=10, famp=100, noise=1, ndatasets=n)
+d1, time = pac_signals(fpha=10, famp=100, noise=1, ndatasets=n, npts=3000)
 d2, time = pac_signals(fpha=10, famp=100, noise=3, ndatasets=n, dpha=20,
-                       damp=5, chi=.3)
+                       damp=5, chi=.3, npts=3000)
 
 # Define the model of PAC to use :
 p = Pac(idpac=(4, 0, 0), fpha=(2, 30, 1, 1), famp=(60, 150, 5, 5),
@@ -33,15 +33,16 @@ xpac12, _ = p.filterfit(1024, d1, d2, axis=1)
 xpac21, _ = p.filterfit(1024, d2, d1, axis=1)
 
 # Plot signals and PAC :
+plt.figure(figsize=(18, 12))
 plt.subplot(2, 2, 1)
-plt.plot(time, d1.mean(0))
+plt.plot(time, d1.mean(0), color='k')
 plt.xlabel('Time')
 plt.ylabel('Amplitude [uV]')
 plt.title('Mean across trials of the first dataset')
 plt.axis('tight')
 
 plt.subplot(2, 2, 2)
-plt.plot(time, d2.mean(0))
+plt.plot(time, d2.mean(0), color='k')
 plt.xlabel('Time')
 plt.ylabel('Amplitude [uV]')
 plt.title('Mean across trials of the second dataset')
@@ -53,5 +54,5 @@ p.comodulogram(xpac12.mean(-1), title="Phase of the first dataset and "
 
 plt.subplot(2, 2, 4)
 p.comodulogram(xpac21.mean(-1), title="Phase of the second dataset and "
-               "phase of the second", cmap='Reds')
+               "amplitde of the second", cmap='Reds')
 plt.show()

@@ -11,41 +11,42 @@ def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, width,
              njobs):
     """Extract spectral informations from data.
 
-    Args:
-        x: np.ndarray
-            Array of data
+    Parameters
+    ----------
+    x : array_like
+        Array of data
 
-        sf: float
-            Sampling frequency
+    sf : float
+        Sampling frequency
 
-        f: np.ndarray
-            Frequency vector of shape (N, 2)
+    f : array_like
+        Frequency vector of shape (N, 2)
 
-        axis: int
-            Axis where the time is located.
+    axis : int
+        Axis where the time is located.
 
-        stype: string
-            Spectral informations to extract (use either 'pha' or 'amp')
+    stype : string
+        Spectral informations to extract (use either 'pha' or 'amp')
 
-        dcomplex: string
-            Complex decomposition type. Use either 'hilbert' or 'wavelet'
+    dcomplex : string
+        Complex decomposition type. Use either 'hilbert' or 'wavelet'
 
-        filt: string
-            Name of the filter to use (only if dcomplex is 'hilbert'). Use
-            either 'eegfilt', 'butter' or 'bessel'.
+    filt : string
+        Name of the filter to use (only if dcomplex is 'hilbert'). Use
+        either 'eegfilt', 'butter' or 'bessel'.
 
-        filtorder: int
-            Order of the filter (only if dcomplex is 'hilbert')
+    filtorder : int
+        Order of the filter (only if dcomplex is 'hilbert')
 
-        cycle: int
-            Number of cycles to use for fir1 filtering.
+    cycle : int
+        Number of cycles to use for fir1 filtering.
 
-        width: int
-            Width of the wavelet.
+    width : int
+        Width of the wavelet.
 
-        njobs: int
-            Number of jobs to use. If jobs is -1, all of them are going to be
-            used.
+    njobs : int
+        Number of jobs to use. If jobs is -1, all of them are going to be
+        used.
     """
     # Filtering + complex decomposition :
     if dcomplex is 'hilbert':
@@ -72,27 +73,28 @@ def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, width,
 def morlet(x, sf, f, axis=0, width=7.):
     """Complex decomposition of a signal x using the morlet wavelet.
 
-    Args:
-        x: np.ndarray, shape (N,)
-            The signal to use for the complex decomposition. Must be
-            a vector of length N.
+    Parameters
+    ----------
+    x : array_like, shape (N,)
+        The signal to use for the complex decomposition. Must be
+        a vector of length N.
 
-        sf: float
-            Sampling frequency
+    sf : float
+        Sampling frequency
 
-        f: np.ndarray, shape (2,)
-            Frequency vector
+    f : array_like, shape (2,)
+        Frequency vector
 
-    Kargs:
-        width: float, optional, (def: 7.)
-            Width of the wavelet
+    width : float | 7.
+        Width of the wavelet
 
-        axis: int, optional, (def: 0)
-            Axis along performing the convolution.
+    axis : int | 0
+        Axis along performing the convolution.
 
-    Returns:
-        xout: np.ndarray, shape (N,)
-            The complex decomposition of the signal x.
+    Returns
+    -------
+    xout: array_like, shape (N,)
+        The complex decomposition of the signal x.
     """
     dt = 1 / sf
     sf = f / width

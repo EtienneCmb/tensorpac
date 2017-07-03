@@ -20,72 +20,73 @@ class Pac(PacPlot):
     the real PAC by the surrogates. This implementation is modular i.e. it lets
     you choose among a large range of possible combinations.
 
-    Kargs:
-        idpac: tuple/list, optional, (def: (1, 1, 3))
-            Choose the combination of methods to use in order to extract PAC.
-            This tuple must be composed of three integers where each one them
-            refer
+    Parameters
+    ----------
+    idpac: tuple/list | (1, 1, 3)
+        Choose the combination of methods to use in order to extract PAC.
+        This tuple must be composed of three integers where each one them
+        refer
 
-            * First digit: refer to the pac method:
+        * First digit : refer to the pac method
 
-                - '1': Mean Vector Length (MVL) [#f1]_
-                - '2': Kullback-Leibler Distance (KLD) [#f2]_
-                - '3': Heights Ratio (HR) [#f3]_
-                - '4': ndPAC [#f4]_
-                - '5': Phase Synchrony [#f3]_
+            - '1' : Mean Vector Length (MVL) [#f1]_
+            - '2' : Kullback-Leibler Distance (KLD) [#f2]_
+            - '3' : Heights Ratio (HR) [#f3]_
+            - '4' : ndPAC [#f4]_
+            - '5' : Phase Synchrony [#f3]_
 
-            * Second digit: refer to the method for computing surrogates:
+        * Second digit : refer to the method for computing surrogates
 
-                - '0': No surrogates
-                - '1': Swap phase/amplitude across trials [#f2]_
-                - '2': Swap amplitude time blocks [#f5]_
-                - '3': Shuffle amplitude time-series
-                - '4': Time lag [#f1]_
+            - '0' : No surrogates
+            - '1' : Swap phase/amplitude across trials [#f2]_
+            - '2' : Swap amplitude time blocks [#f5]_
+            - '3' : Shuffle amplitude time-series
+            - '4' : Time lag [#f1]_
 
-            * Third digit: refer to the normalization method for correction:
+        * Third digit : refer to the normalization method for correction
 
-                - '0': No normalization
-                - '1': Substract the mean of surrogates
-                - '2': Divide by the mean of surrogates
-                - '3': Substract then divide by the mean of surrogates
-                - '4': Z-score
+            - '0' : No normalization
+            - '1' : Substract the mean of surrogates
+            - '2' : Divide by the mean of surrogates
+            - '3' : Substract then divide by the mean of surrogates
+            - '4' : Z-score
 
-        fpha, famp: list/tuple/array, optional, (def: [2, 4] and [60, 200])
-            Frequency vector for the phase and amplitude. Here you can use
-            several forms to define those vectors :
+    fpha, famp : list/tuple/array | def: [2, 4] and [60, 200]
+        Frequency vector for the phase and amplitude. Here you can use
+        several forms to define those vectors :
 
-                * Basic list/tuple (ex: [2, 4] or [8, 12]...)
-                * List of frequency bands (ex: [[2, 4], [5, 7]]...)
-                * Dynamic definition : (start, stop, width, step)
-                * Range definition (ex : np.arange(3) => [[0, 1], [1, 2]])
+            * Basic list/tuple (ex: [2, 4] or [8, 12]...)
+            * List of frequency bands (ex: [[2, 4], [5, 7]]...)
+            * Dynamic definition : (start, stop, width, step)
+            * Range definition (ex : np.arange(3) => [[0, 1], [1, 2]])
 
-        dcomplex: string, optional, (def: 'hilbert')
-            Method for the complex definition. Use either 'hilbert' or
-            'wavelet'.
+    dcomplex : {'wavelet', 'hilbert'}
+        Method for the complex definition. Use either 'hilbert' or
+        'wavelet'.
 
-        filt: string, optional, (def: 'fir1')
-            Filtering method (only if dcomplex is 'hilbert'). Choose either
-            'fir1', 'butter' or 'bessel'
+    filt : {'fir1', 'butter', 'bessel'}
+        Filtering method (only if dcomplex is 'hilbert'). Choose either
+        'fir1', 'butter' or 'bessel'
 
-        cycle: tuple, optional, (def: (3, 6))
-            Control the number of cycles for filtering (only if dcomplex is
-            'hilbert'). Should be a tuple of integers where the first one
-            refers to the number of cycles for the phase and the second for the
-            amplitude [#f5]_.
+    cycle : tuple | (3, 6)
+        Control the number of cycles for filtering (only if dcomplex is
+        'hilbert'). Should be a tuple of integers where the first one
+        refers to the number of cycles for the phase and the second for the
+        amplitude [#f5]_.
 
-        filtorder: int, optional, (def: 3)
-            Filter order for the Butterworth and Bessel filters (only if
-            dcomplex is 'hilbert').
+    filtorder : int | 3
+        Filter order for the Butterworth and Bessel filters (only if
+        dcomplex is 'hilbert').
 
-        width: int, optional, (def: 7)
-            Width of the Morlet's wavelet.
+    width : int | 7
+        Width of the Morlet's wavelet.
 
-        nbins: int, optional, (def: 18)
-            Number of bins for the KLD and HR PAC method [#f2]_ [#f3]_
+    nbins : int | 18
+        Number of bins for the KLD and HR PAC method [#f2]_ [#f3]_
 
-        nblocks: int, optional, (def: 2)
-            Number of blocks for splitting the amplitude. Only active is
-            the surrogate method is 2 [#f5]_.
+    nblocks : int | 2
+        Number of blocks for splitting the amplitude. Only active is
+        the surrogate method is 2 [#f5]_.
 
     .. warning::
         * The ndPac [#f4]_ include a fast and reliable statistical test. As a
@@ -98,19 +99,51 @@ class Pac(PacPlot):
           filtorder) are going to be active if the complex decomposition is
           Hilbert.
 
-    Methods:
-        self.filt:
-            Filt the data in the specified frequency bands.
+    Attributes
+    ----------
+    xvec, yvec : array_like
+        The x and y-vectors for plotting.
 
-        self.fit:
-            Run the PAC on filtered data.
+    fpha, famp : array_like
+        The phase and amplitude frequency vectors for pac extraction.
 
-        self.filtfit:
-            Filt the data then compute PAC on it.
+    Methods
+    -------
+    filt()
+        Filt the data in the specified frequency bands.
 
-        self.comodulogram:
-            Plot PAC.
+    fit()
+        Run the PAC on filtered data.
 
+    filtfit()
+        Filt the data then compute PAC on it.
+
+    pp()
+        compute the preferred phase
+
+    erpac()
+        compute the Event Related Pac
+
+    pacplot()
+        Plotting method that can more generally be used to plot any 2D array.
+
+    comodulogram()
+        Plotting method dedicated to the comodulogram.
+
+    triplot()
+        Plotting method for the optimal bandwidth search.
+
+    polar()
+        Plotting function for circular preferred-phase visualization.
+
+    show()
+        Show the figure (equivalent to plt.show())
+
+    savefig()
+        Save the figure (equivalent to plt.savefig())
+
+    References
+    ----------
     .. rubric:: Footnotes
     .. [#f1] `Canolty et al, 2006 <http://www.ncbi.nlm.nih.gov/pmc/articles/
        PMC2628289/>`_
@@ -132,6 +165,8 @@ class Pac(PacPlot):
                  dcomplex='hilbert', filt='fir1', cycle=(3, 6), filtorder=3,
                  width=7, nbins=18, nblocks=2):
         """Check and initialize."""
+        # Initialize visualization methods :
+        PacPlot.__init__(self)
         # ----------------- CHECKING -----------------
         # Pac methods :
         self._idcheck(idpac)
@@ -158,32 +193,33 @@ class Pac(PacPlot):
     def filter(self, sf, x, axis=-1, ftype='phase', keepfilt=False, njobs=-1):
         """Filt the data in the specified frequency bands.
 
-        Args:
-            sf: float
-                The sampling frequency.
+        Parameters
+        ----------
+        sf: float
+            The sampling frequency.
 
-            x: np.ndarray
-                Array of data.
+        x: array_like
+            Array of data.
 
-        Kargs:
-            axis: int, optional, (def: -1)
-                Location of the time axis.
+        axis : int | -1
+            Location of the time axis.
 
-            ftype: string, optional, (def: 'phase')
-                Specify if you want to extract phase ('phase') or the amplitude
-                ('amplitude').
+        ftype : {'phase', 'amplitude'}
+            Specify if you want to extract phase ('phase') or the amplitude
+            ('amplitude').
 
-            njobs: int, optional, (def: -1)
-                Number of jobs to compute PAC in parallel. For very large data,
-                set this parameter to 1 in order to prevent large memory usage.
+        njobs : int | -1
+            Number of jobs to compute PAC in parallel. For very large data,
+            set this parameter to 1 in order to prevent large memory usage.
 
-        keepfilt: bool, optional, (def: False)
+        keepfilt : bool | False
             Specify if you only want the filtered data (True). This parameter
             is only avaible with dcomplex='hilbert' and not wavelet.
 
-        Returns:
-            xfilt: np.ndarray
-                The filtered data of shape (n_frequency, ...)
+        Returns
+        -------
+        xfilt : array_like
+            The filtered data of shape (n_frequency, ...)
         """
         # Sampling frequency :
         if not isinstance(sf, (int, float)):
@@ -220,49 +256,50 @@ class Pac(PacPlot):
             get_surro=False, correct=False, njobs=-1):
         """Compute PAC on filtered data.
 
-        Args:
-            pha, amp: np.ndarray
-                Array of filtered data with respectively a shape of (npha, ...)
-                and (namp, ...). If you want to compute PAC locally i.e. on the
-                same electrode, x=pha=amp. For distant coupling, pha and
-                amp could be different but still must to have the same shape.
+        Parameters
+        ----------
+        pha, amp: array_like
+            Array of filtered data with respectively a shape of (npha, ...)
+            and (namp, ...). If you want to compute PAC locally i.e. on the
+            same electrode, x=pha=amp. For distant coupling, pha and
+            amp could be different but still must to have the same shape.
 
-        Kargs:
-            axis: int, optional, (def: 1)
-                Dimension where is located the time axis. By default, the axis
-                will be consider as well.
+        axis : int | 1
+            Dimension where is located the time axis. By default, the axis
+            will be consider as well.
 
-            traxis: int, optional, (def: 0)
-                Dimension where is located the trial axis. By default the next-
-                to-last axis is consider as the trial axis.
+        traxis : int | 0
+            Dimension where is located the trial axis. By default the next-
+            to-last axis is consider as the trial axis.
 
-            nperm: int, optional, (def: 200)
-                Number of surrogates to compute.
+        nperm : int | 200
+            Number of surrogates to compute.
 
-            optimize: bool, optional, (def: True)
-                Optimize argument of the np.einsum function. Use either False,
-                True, 'greedy' or 'optimal'.
+        optimize : {True, False, 'greedy', 'optimal'}
+            Optimize argument of the np.einsum function. Use either False,
+            True, 'greedy' or 'optimal'.
 
-            get_surro: bool, optional, (def: False)
-                Return surrogate chance distribution.
+        get_surro : bool | False
+            Return surrogate chance distribution.
 
-            correct: bool, optional, (def: True)
-                Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        correct : bool | True
+            Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-            njobs: int, optional, (def: -1)
-                Number of jobs to compute PAC in parallel. For very large data,
-                set this parameter to 1 in order to prevent large memory usage.
+        njobs : int | -1
+            Number of jobs to compute PAC in parallel. For very large data,
+            set this parameter to 1 in order to prevent large memory usage.
 
-        Returns:
-            pac: np.ndarray
-                Phase-Amplitude Coupling measure of shape (namp, npha, ...).
+        Returns
+        -------
+        pac: array_like
+            Phase-Amplitude Coupling measure of shape (namp, npha, ...).
 
-            pvalue: np.ndarray
-                P-values (None if no surrogates)
+        pvalue: array_like
+            P-values (None if no surrogates)
 
-            suro: np.ndarray
-                If get_suro is True, get the chance distribution of shape
-                (nperm, namp, npha, ...)
+        suro: array_like
+            If get_suro is True, get the chance distribution of shape
+            (nperm, namp, npha, ...)
 
         .. warning::
             * Surrogates are only going to be computed if the second and third
@@ -326,53 +363,54 @@ class Pac(PacPlot):
                   optimize=True, get_surro=False, correct=False, njobs=-1):
         """Filt the data then compute PAC on it.
 
-        Args:
-            sf: float
-                The sampling frequency.
+        Parameters
+        ----------
+        sf : float
+            The sampling frequency.
 
-            xpha, xamp: np.ndarray
-                Array of data for computing PAC. xpha is the data used for
-                extracting phases and xamp, amplitudes. Both arrays must have
-                the same shapes. If you want to compute PAC locally i.e. on the
-                same electrode, x=xpha=xamp. For distant coupling, xpha and
-                xamp could be different but still must to have the same shape.
+        xpha, xamp : array_like
+            Array of data for computing PAC. xpha is the data used for
+            extracting phases and xamp, amplitudes. Both arrays must have
+            the same shapes. If you want to compute PAC locally i.e. on the
+            same electrode, x=xpha=xamp. For distant coupling, xpha and
+            xamp could be different but still must to have the same shape.
 
-        Kargs:
-            axis: int, optional, (def: 1)
-                Dimension where is located the time axis. By default, the axis
-                will be consider as well.
+        axis : int | 1
+            Dimension where is located the time axis. By default, the axis
+            will be consider as well.
 
-            traxis: int, optional, (def: 0)
-                Dimension where is located the trial axis. By default the next-
-                to-last axis is consider as the trial axis.
+        traxis : int | 0
+            Dimension where is located the trial axis. By default the next-
+            to-last axis is consider as the trial axis.
 
-            nperm: int, optional, (def: 200)
-                Number of surrogates to compute.
+        nperm : int | 200
+            Number of surrogates to compute.
 
-            optimize: bool, optional, (def: True)
-                Optimize argument of the np.einsum function. Use either False,
-                True, 'greedy' or 'optimal'.
+        optimize : {True, False, 'greedy', 'optimal'}
+            Optimize argument of the np.einsum function. Use either False,
+            True, 'greedy' or 'optimal'.
 
-            get_surro: bool, optional, (def: False)
-                Return surrogate chance distribution.
+        get_surro : bool | False
+            Return surrogate chance distribution.
 
-            correct: bool, optional, (def: True)
-                Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        correct : bool | True
+            Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-            njobs: int, optional, (def: -1)
-                Number of jobs to compute PAC in parallel. For very large data,
-                set this parameter to 1 in order to prevent large memory usage.
+        njobs : int | -1
+            Number of jobs to compute PAC in parallel. For very large data,
+            set this parameter to 1 in order to prevent large memory usage.
 
-        Returns:
-            pac: np.ndarray
-                Phase-Amplitude Coupling measure of shape (namp, npha, ...).
+        Returns
+        -------
+        pac : array_like
+            Phase-Amplitude Coupling measure of shape (namp, npha, ...).
 
-            pvalue: np.ndarray
-                P-values (None if no surrogates)
+        pvalue : array_like
+            P-values (None if no surrogates)
 
-            suro: np.ndarray
-                If get_suro is True, get the chance distribution of shape
-                (nperm, namp, npha, ...)
+        suro : array_like
+            If get_suro is True, get the chance distribution of shape
+            (nperm, namp, npha, ...)
 
         .. warning::
             * Surrogates are only going to be computed if the second and third
@@ -406,36 +444,37 @@ class Pac(PacPlot):
     def pp(self, pha, amp, axis=-1, nbins=72, optimize=True):
         """Compute the preferred-phase.
 
-        Args:
-            pha: np.ndarray
-                Phase of slower oscillations.
+        Parameters
+        ----------
+        pha : array_like
+            Phase of slower oscillations.
 
-            amp: np.ndarray
-                Amplitude of fastest oscillations.
+        amp : array_like
+            Amplitude of fastest oscillations.
 
-        Kargs:
-            axis: int, optional, (def: -1)
-                Location of the time axis.
+        axis : int | -1
+            Location of the time axis.
 
-            nbins: int, optional, (def: 72)
-                Number of bins for bining the amplitude according to phase
-                slices.
+        nbins : int | 72
+            Number of bins for bining the amplitude according to phase
+            slices.
 
-            optimize: bool, optional, (def: True)
-                Optimize argument of the np.einsum function. Use either False,
-                True, 'greedy' or 'optimal'.
+        optimize : {True, False, 'greedy', 'optimal'}
+            Optimize argument of the np.einsum function. Use either False,
+            True, 'greedy' or 'optimal'.
 
-        Returns:
-            ampbin: np.ndarray
-                The binned amplitude according to the phase of shape
-                (nbins, namp, npha...).
+        Returns
+        -------
+        ampbin : array_like
+            The binned amplitude according to the phase of shape
+            (nbins, namp, npha...).
 
-            pp: np.ndarray
-                The prefered phase where the amplitude is maximum of shape
-                (namp, npha, ...).
+        pp : array_like
+            The prefered phase where the amplitude is maximum of shape
+            (namp, npha, ...).
 
-            polarvec: np.ndarray
-                The phase vector for the polar plot.
+        polarvec : array_like
+            The phase vector for the polar plot.
         """
         # Check phase and amplitude shapes :
         pha, amp, axis = self._phampcheck(pha, amp, axis)
@@ -463,27 +502,28 @@ class Pac(PacPlot):
         The ERPAC [#f6]_ is used to measure PAC across trials and is
         interesting for real-time estimation.
 
-        Args:
-            pha: np.ndarray
-                Phase of slower oscillations.
+        Parameters
+        ----------
+        pha : array_like
+            Phase of slower oscillations.
 
-            amp: np.ndarray
-                Amplitude of fastest oscillations.
+        amp : array_like
+            Amplitude of fastest oscillations.
 
-        Kargs:
-            traxis: int, optional, (def: 0)
-                Location of the trial axis.
+        traxis : int | 0
+            Location of the trial axis.
 
-            optimize: bool, optional, (def: True)
-                Optimize argument of the np.einsum function. Use either False,
-                True, 'greedy' or 'optimal'.
+        optimize : {True, False, 'greedy', 'optimal'}
+            Optimize argument of the np.einsum function. Use either False,
+            True, 'greedy' or 'optimal'.
 
-        Returns:
-            erpac: np.ndarray
-                The ERPAC estimation.
+        Returns
+        -------
+        erpac : array_like
+            The ERPAC estimation.
 
-            pvalue: np.ndarray
-                The associated p-values.
+        pvalue : array_like
+            The associated p-values.
 
         .. warning::
             ERPAC is computed across trials, therefor, it does not use an

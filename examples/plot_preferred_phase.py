@@ -4,7 +4,9 @@ Find the preferred phase (PP)
 =============================
 
 First, the amplitude is binned according to phase slices (360 degrees/nbins).
-Then, the PP is defined as the phase where the amplitude is maximum.
+Then, the PP is defined as the phase where the amplitude is maximum. We finally
+use the polar representation to display the preferred phase at different
+amplitudes.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -52,7 +54,7 @@ plt.title("PP for each dataset and for several amplitudes.\n100hz amplitudes"
           " are phase locked to 90° (<=> pi/2)")
 cb.set_label('PP (in degrees)')
 
-# Then, we show  the histogram corresponding to an 100he amplitude :
+# Then, we show  the histogram corresponding to an 100hz amplitude :
 idx100 = np.abs(p.yvec - 100.).argmin()
 plt.subplot(222)
 h = plt.hist(pp[:, idx100], color='#ab4642')
