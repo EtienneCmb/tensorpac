@@ -85,9 +85,9 @@ def kld(pha, amp, nbins, optimize):
     # Divide the binned amplitude by the mean over the bins :
     p_j /= p_j.sum(axis=0, keepdims=True)
     # Take the log of non-zero values :
-    p_j = p_j * np.ma.log10(p_j).filled(-np.inf)
+    p_j = p_j * np.ma.log(p_j).filled(-np.inf)
     # Compute the PAC :
-    pac = 1 + p_j.sum(axis=0) / np.log10(nbins)
+    pac = 1 + p_j.sum(axis=0) / np.log(nbins)
     # Set distribution distances that are really closed to zero :
     pac[np.isinf(pac)] = 0.
     return pac
