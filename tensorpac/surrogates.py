@@ -222,7 +222,7 @@ def time_lag(pha, amp, axis):
         pha: np.ndarray
             Shiffted version of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarra
+        amp: np.ndarray
             Original version of amplitudes of shapes (namp, ..., npts)
     """
     npts = pha.shape[-1]
