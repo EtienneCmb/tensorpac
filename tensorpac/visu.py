@@ -125,10 +125,10 @@ class PacPlot(object):
         # Plot type :
         toplot = pac.data if levels is not None else pac
         if plotas is 'imshow':
-            im = plt.imshow(toplot, aspect='auto', cmap=cmap, origin='upper',
+            im = plt.imshow(toplot, aspect='auto', cmap=cmap, origin='lower',
                             vmin=vmin, vmax=vmax, interpolation='none',
                             extent=[xvec[0], xvec[-1], yvec[-1], yvec[0]])
-            plt.gca().invert_yaxis()
+            # plt.gca().invert_yaxis()
         elif plotas is 'contour':
             im = plt.contourf(xvec, yvec, toplot, ncontours, cmap=cmap,
                               vmin=vmin, vmax=vmax)
