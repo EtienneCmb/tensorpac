@@ -1,6 +1,6 @@
 """Simply get the name of defined methods."""
 
-__all__ = ['pacstr']
+__all__ = ('pacstr')
 
 
 def pacstr(idpac):
@@ -13,7 +13,7 @@ def pacstr(idpac):
     elif idpac[0] == 3:
         method = 'Heights ratio (HR, Lakatos, 2005)'
     elif idpac[0] == 4:
-        method = 'ndPac (Ozkürt, 2012)'
+        method = 'ndPac (Ozkurt, 2012)'
     elif idpac[0] == 5:
         method = 'Phase-Synchrony (Cohen, 2008; Penny, 2008)'
     else:

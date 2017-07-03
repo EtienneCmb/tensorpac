@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# License: 3-clause BSD
 import os
 from setuptools import setup, find_packages
 import pip
 from pip.req import parse_requirements
 from optparse import Option
 
-__version__ = "0.5.2"
+__version__ = "0.5.3"
 NAME = 'Tensorpac'
 AUTHOR = "Etienne Combrisson"
 MAINTAINER = "Etienne Combrisson"
@@ -14,7 +15,8 @@ EMAIL = 'e.combrisson@gmail.com'
 KEYWORDS = "phase-amplitude-coupling pac tensor"
 DESCRIPTION = "Tensor-based Phase-Amplitude Coupling"
 URL = 'http://etiennecmb.github.io/tensorpac/'
-DOWNLOAD_URL = 'https://github.com/EtienneCmb/tensorpac/archive/v' + __version__ + '.tar.gz'
+DOWNLOAD_URL = ("https://github.com/EtienneCmb/tensorpac/archive/v" +
+                __version__ + ".tar.gz")
 # Data path :
 PACKAGE_DATA = {}
 

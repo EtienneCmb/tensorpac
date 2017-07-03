@@ -1,20 +1,20 @@
 """Test tensorpac functions."""
 import numpy as np
 from tensorpac import Pac
-from tensorpac.utils import PacTriVec
+from tensorpac.utils import pac_trivec
 
 
-def test_IdpacDefinition():
+def test_id_pac_definition():
     """Test Pac object definition."""
     nmeth, nsuro, nnorm = 5, 5, 5
     for k in range(nmeth):
         for i in range(nsuro):
             for j in range(nnorm):
-                p = Pac(idpac=(k+1, i, j))
+                p = Pac(idpac=(k + 1, i, j))
                 str(p)
 
 
-def test_filteringDefinition():
+def test_filtering_definition():
     """Test filtering defintion."""
     dcomplex = ['hilbert', 'wavelet']
     filt = ['butter', 'fir1', 'bessel']
@@ -40,7 +40,7 @@ def test_spectral():
             p.filter(1024, data, axis=1, njobs=1)
 
 
-def test_pacMeth():
+def test_pac_meth():
     """Test all Pac methods."""
     pha = np.random.rand(2, 7, 1024)
     amp = np.random.rand(3, 7, 1024)
@@ -49,7 +49,7 @@ def test_pacMeth():
     for k in range(nmeth):
         for i in range(nsuro):
             for j in range(nnorm):
-                p.idpac = (k+1, i, j)
+                p.idpac = (k + 1, i, j)
                 p.fit(pha, amp, axis=2, traxis=1, njobs=1, nperm=2)
 
 
@@ -87,13 +87,13 @@ def test_properties():
     p.width = 12
 
 
-def test_pacComodulogram():
+def test_pac_comodulogram():
     """Test Pac object definition.
 
     This test works locally but failed on travis...
     """
     try:
-        f, tridx = PacTriVec()
+        f, tridx = pac_trivec()
         pac = np.random.rand(20, 10)
         pval = np.random.rand(20, 10)
         p = Pac(fpha=np.arange(11), famp=np.arange(21))
@@ -112,7 +112,7 @@ def test_pacComodulogram():
         pass
 
 
-def test_PreferredPhase():
+def test_preferred_phase():
     """Test the prefered phase."""
     data = np.random.rand(2, 1024)
     p = Pac(idpac=(4, 0, 0))
@@ -121,7 +121,7 @@ def test_PreferredPhase():
     p.pp(pha, amp, axis=2)
 
 
-def test_ERPAC():
+def test_erpac():
     """Test the ERPAC."""
     data = np.random.rand(2, 1024)
     p = Pac(idpac=(4, 0, 0))

@@ -4,7 +4,7 @@ from joblib import Parallel, delayed
 from scipy.signal import hilbert
 from .filtering import filtdata
 
-__all__ = ['spectral']
+__all__ = ('spectral')
 
 
 def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, width,
@@ -52,21 +52,21 @@ def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, width,
         # Filt each time series :
         nf = range(f.shape[0])
         xf = Parallel(n_jobs=njobs)(delayed(filtdata)(
-                  x, sf, f[k, :], axis, filt, cycle, filtorder) for k in nf)
+            x, sf, f[k, :], axis, filt, cycle, filtorder) for k in nf)
         # Use hilbert for the complex decomposition :
-        xd = hilbert(xf, axis=axis+1) if stype is not None else np.array(xf)
+        xd = hilbert(xf, axis=axis + 1) if stype is not None else np.array(xf)
     elif dcomplex is 'wavelet':
         f = f.mean(1)  # centered frequencies
         xd = Parallel(n_jobs=njobs)(delayed(morlet)(
-                                            x, sf, k, axis, width) for k in f)
+            x, sf, k, axis, width) for k in f)
 
     # Extract phase / amplitude :
     if stype is 'pha':
-        return np.angle(np.moveaxis(xd, axis+1, -1))
+        return np.angle(np.moveaxis(xd, axis + 1, -1))
     elif stype is 'amp':
-        return np.abs(np.moveaxis(xd, axis+1, -1))
+        return np.abs(np.moveaxis(xd, axis + 1, -1))
     elif stype is None:
-        return np.moveaxis(xd, axis+1, -1)
+        return np.moveaxis(xd, axis + 1, -1)
 
 
 def morlet(x, sf, f, axis=0, width=7.):
@@ -100,13 +100,13 @@ def morlet(x, sf, f, axis=0, width=7.):
 
     # Build morlet's wavelet :
     t = np.arange(-width * st / 2, width * st / 2, dt)
-    A = 1 / np.sqrt((st * np.sqrt(np.pi)))
-    m = A * np.exp(-np.square(t) / (2 * np.square(st))) * np.exp(
-                                                       1j * 2 * np.pi * f * t)
+    a = 1 / np.sqrt((st * np.sqrt(np.pi)))
+    m = a * np.exp(-np.square(t) / (2 * np.square(st))) * np.exp(
+        1j * 2 * np.pi * f * t)
 
     def ndmorlet(xt):
         # Compute morlet :
         y = np.convolve(xt, m)
         return y[int(np.ceil(len(m) / 2)) - 1:int(len(y) - np.floor(
-                                                                len(m) / 2))]
+            len(m) / 2))]
     return np.apply_along_axis(ndmorlet, axis, x)

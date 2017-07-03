@@ -12,12 +12,12 @@ This file include the following methods :
 
 import numpy as np
 from joblib import Parallel, delayed
-from .methods import ComputePac
+from .methods import compute_pac
 
-__all__ = ['ComputeSurogates']
+__all__ = ('compute_surrogates')
 
 
-def ComputeSurogates(pha, amp, surargs, pacargs, nperm, njobs):
+def compute_surrogates(pha, amp, surargs, pacargs, nperm, njobs):
     """Compute surrogates using tensors and parallel computing.
 
     Args:
@@ -28,10 +28,10 @@ def ComputeSurogates(pha, amp, surargs, pacargs, nperm, njobs):
             Array of amplitudes of shapes (namp, ..., npts)
 
         suragrs: tuple
-            Tuple containing the arguments to pass to the suroSwitch function.
+            Tuple containing the arguments to pass to the suro_switch function.
 
         pacargs: tuple
-            Tuple containing the arguments to pass to the ComputePac function.
+            Tuple containing the arguments to pass to the compute_pac function.
 
         nperm: int
             Number of permutations.
@@ -43,18 +43,18 @@ def ComputeSurogates(pha, amp, surargs, pacargs, nperm, njobs):
         suro: np.ndarray
             Array of pac surrogates of shape (nperm, npha, namp, ..., npts)
     """
-    s = Parallel(n_jobs=njobs)(delayed(_computeSur)(
-                            pha, amp, surargs, pacargs) for k in range(nperm))
+    s = Parallel(n_jobs=njobs)(delayed(_compute_sur)(
+        pha, amp, surargs, pacargs) for k in range(nperm))
     return np.array(s)
 
 
-def _computeSur(pha, amp, surargs, pacargs):
+def _compute_sur(pha, amp, surargs, pacargs):
     """Compute surrogates.
 
     This is clearly not the optimal implementation. Indeed, for each loop the
-    suroSwicth and ComputePac have a several "if" that slow down the execution,
-    at least a little bit. And, it's not esthetic but joblib doesn't accept
-    to pickle functions.
+    suroSwicth and compute_pac have a several "if" that slow down the
+    execution, at least a little bit. And, it's not esthetic but joblib doesn't
+    accept to pickle functions.
 
     Args:
         pha: np.ndarray
@@ -64,18 +64,18 @@ def _computeSur(pha, amp, surargs, pacargs):
             Array of amplitudes of shapes (namp, ..., npts)
 
         suragrs: tuple
-            Tuple containing the arguments to pass to the suroSwitch function.
+            Tuple containing the arguments to pass to the suro_switch function.
 
         pacargs: tuple
-            Tuple containing the arguments to pass to the ComputePac function.
+            Tuple containing the arguments to pass to the compute_pac function.
     """
     # Get the surrogates :
-    pha, amp = suroSwitch(pha, amp, *surargs)
+    pha, amp = suro_switch(pha, amp, *surargs)
     # Compute PAC on surrogates :
-    return ComputePac(pha, amp, *pacargs)
+    return compute_pac(pha, amp, *pacargs)
 
 
-def suroSwitch(pha, amp, idn, axis, traxis, nblocks):
+def suro_switch(pha, amp, idn, axis, traxis, nblocks):
     """List of methods to compute surrogates.
 
     The surrogates are used to normalized the cfc value. It help to determine
@@ -94,19 +94,19 @@ def suroSwitch(pha, amp, idn, axis, traxis, nblocks):
 
     # Swap phase/amplitude across trials :
     elif idn == 1:
-        return SwapPhaAmp(pha, amp, traxis)
+        return swap_pha_amp(pha, amp, traxis)
 
     # Swap amplitude :
     elif idn == 2:
-        return SwapBlocks(pha, amp, axis, nblocks)
+        return swap_blocks(pha, amp, axis, nblocks)
 
     # Shuffle amplitude values
     elif idn == 3:
-        return ShuffleAmp(pha, amp, axis)
+        return shuffle_amp(pha, amp, axis)
 
     # Introduce a time lag
     elif idn == 4:
-        return TimeLag(pha, amp, axis)
+        return time_lag(pha, amp, axis)
 
     else:
         raise ValueError(str(idn) + " is not recognized as a valid surrogates"
@@ -120,7 +120,7 @@ def suroSwitch(pha, amp, idn, axis, traxis, nblocks):
 ###############################################################################
 
 
-def SwapPhaAmp(pha, amp, axis):
+def swap_pha_amp(pha, amp, axis):
     """Swap phase/amplitude trials (Tort, 2010).
 
     Args:
@@ -143,7 +143,7 @@ def SwapPhaAmp(pha, amp, axis):
     return _dimswap(pha, axis), _dimswap(amp, axis)
 
 
-def SwapBlocks(pha, amp, axis, nblocks):
+def swap_blocks(pha, amp, axis, nblocks):
     """Swap amplitudes time blocks.
 
     To reproduce (Bahramisharif, 2013), use a number of blocks of 2.
@@ -182,7 +182,7 @@ def SwapBlocks(pha, amp, axis, nblocks):
 ###############################################################################
 
 
-def ShuffleAmp(pha, amp, axis):
+def shuffle_amp(pha, amp, axis):
     """Randomly shuffle amplitudes across time.
 
     Args:
@@ -205,7 +205,7 @@ def ShuffleAmp(pha, amp, axis):
     return pha, _dimswap(amp, axis)
 
 
-def TimeLag(pha, amp, axis):
+def time_lag(pha, amp, axis):
     """Introduce a time lag on phase series..
 
     Args:
@@ -222,7 +222,7 @@ def TimeLag(pha, amp, axis):
         pha: np.ndarray
             Shiffted version of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarra
+        amp: np.ndarray
             Original version of amplitudes of shapes (namp, ..., npts)
     """
     npts = pha.shape[-1]

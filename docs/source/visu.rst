@@ -21,7 +21,7 @@ Code example
 .. code-block:: python
 
     import matplotlib.pyplot as plt
-    from tensorpac.utils import PacSignals
+    from tensorpac.utils import pac_signals
     from tensorpac import Pac
     plt.style.use('seaborn-paper')
 
@@ -29,7 +29,7 @@ Code example
     # and 100hz. By default, this dataset is organized as (ndatasets, npts) where
     # npts is the number of time points.
     n = 20  # number of datasets
-    data, time = PacSignals(fpha=10, famp=100, noise=0, ndatasets=n)
+    data, time = pac_signals(fpha=10, famp=100, noise=0, ndatasets=n)
 
     # First, let's use the MVL, without any further correction by surrogates :
     p = Pac(idpac=(5, 3, 3), fpha=(2, 30, 1, 1), famp=(60, 150, 5, 5),

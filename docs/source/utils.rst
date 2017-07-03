@@ -5,12 +5,12 @@ Utils
 
 Generate artificially coupled signals
 -------------------------------------
-.. autofunction:: tensorpac.utils.PacSignals
+.. autofunction:: tensorpac.utils.pac_signals
 
 Generate phase and amplitude vectors
 ------------------------------------
-.. autofunction:: tensorpac.utils.PacVec
+.. autofunction:: tensorpac.utils.pac_vec
 
 Generate triangular vectors
 ---------------------------
-.. autofunction:: tensorpac.utils.PacTriVec
+.. autofunction:: tensorpac.utils.pac_trivec

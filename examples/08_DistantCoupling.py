@@ -1,4 +1,7 @@
-"""This script illustrate how to compute distant PAC.
+"""
+===================
+Compute distant PAC
+===================
 
 One thing you may have noticed, both the fit() and filterfit() methods take as
 inputs data and again data. The reason is that the first data refer to the
@@ -7,7 +10,7 @@ If you want to extract local coupling (i.e. on a source/electrode) both xpha
 and xamp have to be set to data.
 """
 import matplotlib.pyplot as plt
-from tensorpac.utils import PacSignals
+from tensorpac.utils import pac_signals
 from tensorpac import Pac
 plt.style.use('seaborn-poster')
 
@@ -15,9 +18,9 @@ plt.style.use('seaborn-poster')
 # and 100hz. By default, those datasets are organized as (ndatasets, npts)
 # where npts is the number of time points.
 n = 20  # number of datasets
-d1, time = PacSignals(fpha=10, famp=100, noise=1, ndatasets=n)
-d2, time = PacSignals(fpha=10, famp=100, noise=3, ndatasets=n, dpha=20, damp=5,
-                      chi=.3)
+d1, time = pac_signals(fpha=10, famp=100, noise=1, ndatasets=n)
+d2, time = pac_signals(fpha=10, famp=100, noise=3, ndatasets=n, dpha=20,
+                       damp=5, chi=.3)
 
 # Define the model of PAC to use :
 p = Pac(idpac=(4, 0, 0), fpha=(2, 30, 1, 1), famp=(60, 150, 5, 5),
