@@ -126,7 +126,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#utils">Utils</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#generate-artificially-coupled-signals-using-tort-method">Generate artificially coupled signals using Tort method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#generate-artificially-coupled-signals-using-wavelets">Generate artificially coupled signals using wavelets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
@@ -141,15 +142,16 @@
 <li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Gallery of Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/index.html#general-examples">General examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_readme.html">README example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/09_P-value.html">Compute p-values</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/00_FrequencyVectors.html">Define frequency vectors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_values.html">Compute p-values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_basic_pac.html">Basic phase amplitude coupling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/06_CompareSurrogatesMethods.html">Compararison of several surrogate evaluation methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/07_CompareNormalizationMethods.html">Compare the several normalization methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_compare_surrogates.html">Compararison of several surrogate evaluation methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_compare_filtering.html">Filtering properties and effect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_compare_normalizations.html">Compare the several normalization methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_pac_methods.html">PAC methods comparison</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/04_FilteringComparison.html">Filtering properties and effect</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_distant_coupling.html">Compute distant PAC</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
@@ -534,7 +536,7 @@ you choose among a large range of possible combinations.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>idpac: tuple/list | (1, 1, 3)</strong></p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>idpac</strong> : tuple/list | (1, 1, 3)</p>
 <blockquote>
 <div><p>Choose the combination of methods to use in order to extract PAC.
 This tuple must be composed of three integers where each one them
@@ -543,11 +545,11 @@ refer</p>
 <li><p class="first">First digit : refer to the pac method</p>
 <blockquote>
 <div><ul class="simple">
-<li>&#8216;1&#8217; : Mean Vector Length (MVL) <a href="#id53"><span class="problematic" id="id54"><span id="id1"></span>[#f1]_</span></a></li>
-<li>&#8216;2&#8217; : Kullback-Leibler Distance (KLD) <a href="#id55"><span class="problematic" id="id56"><span id="id2"></span>[#f2]_</span></a></li>
-<li>&#8216;3&#8217; : Heights Ratio (HR) <a href="#id57"><span class="problematic" id="id58"><span id="id3"></span>[#f3]_</span></a></li>
-<li>&#8216;4&#8217; : ndPAC <a href="#id59"><span class="problematic" id="id60"><span id="id4"></span>[#f4]_</span></a></li>
-<li>&#8216;5&#8217; : Phase Synchrony <a href="#id61"><span class="problematic" id="id62"><span id="id5"></span>[#f3]_</span></a></li>
+<li>&#8216;1&#8217; : Mean Vector Length (MVL) <a class="footnote-reference" href="#f1" id="id1">[1]</a></li>
+<li>&#8216;2&#8217; : Kullback-Leibler Distance (KLD) <a class="footnote-reference" href="#f2" id="id2">[2]</a></li>
+<li>&#8216;3&#8217; : Heights Ratio (HR) <a class="footnote-reference" href="#f3" id="id3">[3]</a></li>
+<li>&#8216;4&#8217; : ndPAC <a class="footnote-reference" href="#f4" id="id4">[4]</a></li>
+<li>&#8216;5&#8217; : Phase Synchrony <a class="footnote-reference" href="#f3" id="id5">[3]</a></li>
 </ul>
 </div></blockquote>
 </li>
@@ -555,10 +557,10 @@ refer</p>
 <blockquote>
 <div><ul class="simple">
 <li>&#8216;0&#8217; : No surrogates</li>
-<li>&#8216;1&#8217; : Swap phase/amplitude across trials <a href="#id63"><span class="problematic" id="id64"><span id="id6"></span>[#f2]_</span></a></li>
-<li>&#8216;2&#8217; : Swap amplitude time blocks <a href="#id65"><span class="problematic" id="id66"><span id="id7"></span>[#f5]_</span></a></li>
+<li>&#8216;1&#8217; : Swap phase/amplitude across trials <a class="footnote-reference" href="#f2" id="id6">[2]</a></li>
+<li>&#8216;2&#8217; : Swap amplitude time blocks <a class="footnote-reference" href="#f5" id="id7">[5]</a></li>
 <li>&#8216;3&#8217; : Shuffle amplitude time-series</li>
-<li>&#8216;4&#8217; : Time lag <a href="#id67"><span class="problematic" id="id68"><span id="id8"></span>[#f1]_</span></a></li>
+<li>&#8216;4&#8217; : Time lag <a class="footnote-reference" href="#f1" id="id8">[1]</a></li>
 </ul>
 </div></blockquote>
 </li>
@@ -603,7 +605,7 @@ several forms to define those vectors :</p>
 <div><p>Control the number of cycles for filtering (only if dcomplex is
 &#8216;hilbert&#8217;). Should be a tuple of integers where the first one
 refers to the number of cycles for the phase and the second for the
-amplitude <a href="#id69"><span class="problematic" id="id70"><span id="id9"></span>[#f5]_</span></a>.</p>
+amplitude <a class="footnote-reference" href="#f5" id="id9">[5]</a>.</p>
 </div></blockquote>
 <p><strong>filtorder</strong> : int | 3</p>
 <blockquote>
@@ -616,17 +618,17 @@ dcomplex is &#8216;hilbert&#8217;).</p>
 </div></blockquote>
 <p><strong>nbins</strong> : int | 18</p>
 <blockquote>
-<div><p>Number of bins for the KLD and HR PAC method <a href="#id71"><span class="problematic" id="id72"><span id="id10"></span>[#f2]_</span></a> <a href="#id73"><span class="problematic" id="id74"><span id="id11"></span>[#f3]_</span></a></p>
+<div><p>Number of bins for the KLD and HR PAC method <a class="footnote-reference" href="#f2" id="id10">[2]</a> <a class="footnote-reference" href="#f3" id="id11">[3]</a></p>
 </div></blockquote>
 <p><strong>nblocks</strong> : int | 2</p>
 <blockquote>
 <div><p>Number of blocks for splitting the amplitude. Only active is
-the surrogate method is 2 <a href="#id75"><span class="problematic" id="id76"><span id="id12"></span>[#f5]_</span></a>.</p>
+the surrogate method is 2 <a class="footnote-reference" href="#f5" id="id12">[5]</a>.</p>
 </div></blockquote>
 <p><strong>.. warning::</strong></p>
 <blockquote class="last">
 <div><ul class="simple">
-<li>The ndPac <a href="#id77"><span class="problematic" id="id78"><span id="id13"></span>[#f4]_</span></a> include a fast and reliable statistical test. As a
+<li>The ndPac <a class="footnote-reference" href="#f4" id="id13">[4]</a> include a fast and reliable statistical test. As a
 result, if the ndPAC is choosed as the main PAC method, surrogates
 and normalization will be deactivate.</li>
 <li>The phase in a particular frequency band can either be extracted
@@ -645,31 +647,31 @@ Hilbert.</li>
 <table class="docutils footnote" frame="void" id="f1" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[1]</td><td><a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2628289/">Canolty et al, 2006</a></td></tr>
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id8">2</a>)</em> <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2628289/">Canolty et al, 2006</a></td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="f2" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[2]</td><td><a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2941206/">Tort et al, 2010</a></td></tr>
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id6">2</a>, <a class="fn-backref" href="#id10">3</a>, <a class="fn-backref" href="#id17">4</a>, <a class="fn-backref" href="#id19">5</a>)</em> <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2941206/">Tort et al, 2010</a></td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="f3" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[3]</td><td><a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/15901760">Lakatos et al, 2005</a></td></tr>
+<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id5">2</a>, <a class="fn-backref" href="#id11">3</a>)</em> <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/15901760">Lakatos et al, 2005</a></td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="f4" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[4]</td><td><a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/22531738/">Ozkurt et al, 2012</a></td></tr>
+<tr><td class="label">[4]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id13">2</a>)</em> <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/22531738/">Ozkurt et al, 2012</a></td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="f5" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[5]</td><td><a class="reference external" href="http://www.jneurosci.org/content/33/48/18849.short/">Bahramisharif et al, 2013</a></td></tr>
+<tr><td class="label">[5]</td><td><em>(<a class="fn-backref" href="#id7">1</a>, <a class="fn-backref" href="#id9">2</a>, <a class="fn-backref" href="#id12">3</a>, <a class="fn-backref" href="#id18">4</a>, <a class="fn-backref" href="#id20">5</a>)</em> <a class="reference external" href="http://www.jneurosci.org/content/33/48/18849.short/">Bahramisharif et al, 2013</a></td></tr>
 </tbody>
 </table>
 <p class="rubric">Attributes</p>
@@ -745,7 +747,7 @@ Hilbert.</li>
 <dt id="tensorpac.pac.Pac.erpac">
 <code class="descname">erpac</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>traxis=0</em>, <em>optimize=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.erpac"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.erpac" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Event-Related Phase-Amplitude Coupling (ERPAC).</p>
-<p>The ERPAC <a href="#id79"><span class="problematic" id="id80"><span id="id14"></span>[#f6]_</span></a> is used to measure PAC across trials and is
+<p>The ERPAC <a class="footnote-reference" href="#f6" id="id14">[6]</a> is used to measure PAC across trials and is
 interesting for real-time estimation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -787,7 +789,7 @@ where is located the axis to consider as trials.</p>
 <table class="last docutils footnote" frame="void" id="f6" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[6]</td><td><p class="first"><a href="#id15"><span class="problematic" id="id16">`</span></a>Voytek et al, 2013 &lt;<a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/">https://www.ncbi.nlm.nih.gov/pubmed/</a></p>
+<tr><td class="label"><a class="fn-backref" href="#id14">[6]</a></td><td><p class="first"><a href="#id15"><span class="problematic" id="id16">`</span></a>Voytek et al, 2013 &lt;<a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/">https://www.ncbi.nlm.nih.gov/pubmed/</a></p>
 <p class="last">22986076&gt;`_</p>
 </td></tr>
 </tbody>
@@ -853,7 +855,7 @@ is only avaible with dcomplex=&#8217;hilbert&#8217; and not wavelet.</p>
 
 <dl class="method">
 <dt id="tensorpac.pac.Pac.filterfit">
-<code class="descname">filterfit</code><span class="sig-paren">(</span><em>sf</em>, <em>xpha</em>, <em>xamp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimize=True</em>, <em>get_surro=False</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">filterfit</code><span class="sig-paren">(</span><em>sf</em>, <em>xpha</em>, <em>xamp=None</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimize=True</em>, <em>get_pval=False</em>, <em>get_surro=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filt the data then compute PAC on it.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -890,13 +892,13 @@ to-last axis is consider as the trial axis.</p>
 <div><p>Optimize argument of the np.einsum function. Use either False,
 True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
 </div></blockquote>
+<p><strong>get_pval</strong> : bool | False</p>
+<blockquote>
+<div><p>Get the pvalues. Only avaible if surrogates are computed.</p>
+</div></blockquote>
 <p><strong>get_surro</strong> : bool | False</p>
 <blockquote>
 <div><p>Return surrogate chance distribution.</p>
-</div></blockquote>
-<p><strong>correct</strong> : bool | True</p>
-<blockquote>
-<div><p>Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
 </div></blockquote>
 <p><strong>njobs</strong> : int | -1</p>
 <blockquote>
@@ -905,15 +907,15 @@ set this parameter to 1 in order to prevent large memory usage.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>pac</strong> : array_like</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">pac: array_like</p>
 <blockquote>
 <div><p>Phase-Amplitude Coupling measure of shape (namp, npha, ...).</p>
 </div></blockquote>
-<p><strong>pvalue</strong> : array_like</p>
+<p>pvalue: array_like</p>
 <blockquote>
-<div><p>P-values (None if no surrogates)</p>
+<div><p>P-values of shape (namp, npha, ...) if get_pval is True.</p>
 </div></blockquote>
-<p><strong>suro</strong> : array_like</p>
+<p>suro: array_like</p>
 <blockquote>
 <div><p>If get_suro is True, get the chance distribution of shape
 (nperm, namp, npha, ...)</p>
@@ -926,8 +928,8 @@ digits are no 0.</li>
 <li>The ndPAC use a p value and every non-significant PAC estimation
 is set to zero. This p value is computed as 1/nperm.</li>
 <li>The traxis argument is only used if you picked up the surrogates
-method 1: &#8220;swap phase and amplitude trials <a href="#id81"><span class="problematic" id="id82"><span id="id17"></span>[#f2]_</span></a>&#8220;</li>
-<li>Basically, the surrogate evaluation proposed by <a href="#id83"><span class="problematic" id="id84"><span id="id18"></span>[#f5]_</span></a> split the
+method 1: &#8220;swap phase and amplitude trials <a class="footnote-reference" href="#f2" id="id17">[2]</a>&#8220;</li>
+<li>Basically, the surrogate evaluation proposed by <a class="footnote-reference" href="#f5" id="id18">[5]</a> split the
 amplitude into two equal parts, then swap those two blocks. But
 the nblocks parameter allow to split into a larger number.</li>
 </ul>
@@ -946,7 +948,7 @@ the nblocks parameter allow to split into a larger number.</li>
 
 <dl class="method">
 <dt id="tensorpac.pac.Pac.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimize=True</em>, <em>get_surro=False</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimize=True</em>, <em>get_pval=False</em>, <em>get_surro=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute PAC on filtered data.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -978,13 +980,13 @@ to-last axis is consider as the trial axis.</p>
 <div><p>Optimize argument of the np.einsum function. Use either False,
 True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
 </div></blockquote>
+<p><strong>get_pval</strong> : bool | False</p>
+<blockquote>
+<div><p>Get the pvalues. Only avaible if surrogates are computed.</p>
+</div></blockquote>
 <p><strong>get_surro</strong> : bool | False</p>
 <blockquote>
 <div><p>Return surrogate chance distribution.</p>
-</div></blockquote>
-<p><strong>correct</strong> : bool | True</p>
-<blockquote>
-<div><p>Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
 </div></blockquote>
 <p><strong>njobs</strong> : int | -1</p>
 <blockquote>
@@ -999,7 +1001,7 @@ set this parameter to 1 in order to prevent large memory usage.</p>
 </div></blockquote>
 <p>pvalue: array_like</p>
 <blockquote>
-<div><p>P-values (None if no surrogates)</p>
+<div><p>P-values of shape (namp, npha, ...) if get_pval is True.</p>
 </div></blockquote>
 <p>suro: array_like</p>
 <blockquote>
@@ -1014,8 +1016,8 @@ digits are no 0.</li>
 <li>The ndPAC use a p value and every non-significant PAC estimation
 is set to zero. This p value is computed as 1/nperm.</li>
 <li>The traxis argument is only used if you picked up the surrogates
-method 1: &#8220;swap phase and amplitude trials <a href="#id85"><span class="problematic" id="id86"><span id="id19"></span>[#f2]_</span></a>&#8220;</li>
-<li>Basically, the surrogate evaluation proposed by <a href="#id87"><span class="problematic" id="id88"><span id="id20"></span>[#f5]_</span></a> split the
+method 1: &#8220;swap phase and amplitude trials <a class="footnote-reference" href="#f2" id="id19">[2]</a>&#8220;</li>
+<li>Basically, the surrogate evaluation proposed by <a class="footnote-reference" href="#f5" id="id20">[5]</a> split the
 amplitude into two equal parts, then swap those two blocks. But
 the nblocks parameter allow to split into a larger number.</li>
 </ul>
@@ -1509,18 +1511,79 @@ Here&#8217;s the list of methods to compute surrogates:
 <span id="tensorpac-utils-module"></span><h2>tensorpac.utils module<a class="headerlink" href="#module-tensorpac.utils" title="Permalink to this headline">¶</a></h2>
 <p>Utility PAC functions.</p>
 <ul class="simple">
-<li>pac_signals : generate artificially phase-amplitude coupled signals</li>
+<li>pac_signals_tort : generate artificially phase-amplitude coupled signals</li>
 <li>pac_vec : generate cross-frequency coupling vectors</li>
 </ul>
 <dl class="function">
-<dt id="tensorpac.utils.pac_signals">
-<code class="descclassname">tensorpac.utils.</code><code class="descname">pac_signals</code><span class="sig-paren">(</span><em>fpha=10.0</em>, <em>famp=100.0</em>, <em>sf=1024</em>, <em>npts=4000</em>, <em>ndatasets=10</em>, <em>chi=0.0</em>, <em>noise=1.0</em>, <em>dpha=0.0</em>, <em>damp=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#pac_signals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.pac_signals" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate artificially phase-amplitude coupled signals.</p>
+<dt id="tensorpac.utils.pac_signals_wavelet">
+<code class="descclassname">tensorpac.utils.</code><code class="descname">pac_signals_wavelet</code><span class="sig-paren">(</span><em>fpha=10.0</em>, <em>famp=100.0</em>, <em>sf=1024.0</em>, <em>npts=4000.0</em>, <em>ntrials=10</em>, <em>noise=0.1</em>, <em>pp=0.0</em>, <em>rnd_state=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#pac_signals_wavelet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.pac_signals_wavelet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate artificially phase-amplitude coupled signals using wavelets.</p>
+<p>This function is inspired by the code of the pactools toolbox developped by
+Tom Dupre la Tour.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fpha</strong> : float | 10</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fpha</strong> : float | 10.</p>
+<blockquote>
+<div><p>Frequency for phase. Use either a float number for a centered frequency
+of a band (like [5, 7]) for a bandwidth.</p>
+</div></blockquote>
+<p><strong>famp</strong> : float | 100.</p>
+<blockquote>
+<div><p>Frequency for amplitude. Use either a float number for a centered
+frequency of a band (like [60, 80]) for a bandwidth.</p>
+</div></blockquote>
+<p><strong>sf</strong> : float | 1024.</p>
+<blockquote>
+<div><p>Sampling frequency.</p>
+</div></blockquote>
+<p><strong>npts</strong> : int | 4000</p>
+<blockquote>
+<div><p>Number of time points.</p>
+</div></blockquote>
+<p><strong>ntrials</strong> : int | 10</p>
+<blockquote>
+<div><p>Number of trials in the dataset.</p>
+</div></blockquote>
+<p><strong>noise</strong> : float | .1</p>
+<blockquote>
+<div><p>Amount of white noise.</p>
+</div></blockquote>
+<p><strong>pp</strong> : float | 0.</p>
+<blockquote>
+<div><p>The preferred-phase of the coupling.</p>
+</div></blockquote>
+<p><strong>rnd_state: int | 0</strong></p>
+<blockquote>
+<div><p>Fix random of the machine (for reproducibility)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>data</strong> : array_like</p>
+<blockquote>
+<div><p>Array of pac signals of shape (ntrials, npts).</p>
+</div></blockquote>
+<p><strong>time</strong> : array_like</p>
+<blockquote class="last">
+<div><p>Time vector of shape (npts,).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="tensorpac.utils.pac_signals_tort">
+<code class="descclassname">tensorpac.utils.</code><code class="descname">pac_signals_tort</code><span class="sig-paren">(</span><em>fpha=10.0</em>, <em>famp=100.0</em>, <em>sf=1024</em>, <em>npts=4000</em>, <em>ntrials=10</em>, <em>chi=0.0</em>, <em>noise=1.0</em>, <em>dpha=0.0</em>, <em>damp=0.0</em>, <em>rnd_state=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#pac_signals_tort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.pac_signals_tort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate artificially phase-amplitude coupled signals.</p>
+<p>This function use the definition of Tort et al. 2010.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fpha</strong> : float | 10.</p>
 <blockquote>
 <div><p>Frequency for phase. Use either a float number for a centered frequency
 of a band (like [5, 7]) for a bandwidth.</p>
@@ -1534,7 +1597,7 @@ frequency of a band (like [60, 80]) for a bandwidth.</p>
 <blockquote>
 <div><p>Sampling frequency</p>
 </div></blockquote>
-<p><strong>ndatasets</strong> : int | 10</p>
+<p><strong>ntrials</strong> : int | 10</p>
 <blockquote>
 <div><p>Number of datasets</p>
 </div></blockquote>
@@ -1563,16 +1626,19 @@ and dpha is 50, the frequency for the phase signal will be between :
 60, and damp is 10, the frequency for the amplitude signal will be
 between : [60-0.1*60, 60+0.1*60]=[54,66]</p>
 </div></blockquote>
+<p><strong>rnd_state: int | 0</strong></p>
+<blockquote>
+<div><p>Fix random of the machine (for reproducibility)</p>
+</div></blockquote>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>data</strong> : array_like</p>
 <blockquote>
-<div><p>The randomly coupled signals of shape (ndatasets, npts).</p>
+<div><p>Array of pac signals of shape (ntrials, npts).</p>
 </div></blockquote>
 <p><strong>time</strong> : array_like</p>
 <blockquote class="last">
-<div><p>The corresponding time vector according to the defined number of points
-and sampling frequency.</p>
+<div><p>Time vector of shape (npts,).</p>
 </div></blockquote>
 </td>
 </tr>
@@ -1990,709 +2056,6 @@ also returned by the pac_trivec function.</p>
 <h3>PHASE-AMPLITUDE TOOLBOX<a class="headerlink" href="#phase-amplitude-toolbox" title="Permalink to this headline">¶</a></h3>
 <p>Tensorpac is an open-source Python toolbox designed for computing
 Phase-Amplitude Coupling.</p>
-<dl class="class">
-<dt id="tensorpac.Pac">
-<em class="property">class </em><code class="descclassname">tensorpac.</code><code class="descname">Pac</code><span class="sig-paren">(</span><em>idpac=(1, 1, 3), fpha=[2, 4], famp=[60, 200], dcomplex='hilbert', filt='fir1', cycle=(3, 6), filtorder=3, width=7, nbins=18, nblocks=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#tensorpac.visu.PacPlot" title="tensorpac.visu.PacPlot"><code class="xref py py-class docutils literal"><span class="pre">tensorpac.visu.PacPlot</span></code></a></p>
-<p>Compute Phase-Amplitude Coupling (PAC) using tensors.</p>
-<p>Computing PAC is assessed in three steps : compute the real PAC, compute
-surrogates and finally, because PAC is very sensible to the noise, correct
-the real PAC by the surrogates. This implementation is modular i.e. it lets
-you choose among a large range of possible combinations.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>idpac: tuple/list | (1, 1, 3)</strong></p>
-<blockquote>
-<div><p>Choose the combination of methods to use in order to extract PAC.
-This tuple must be composed of three integers where each one them
-refer</p>
-<ul>
-<li><p class="first">First digit : refer to the pac method</p>
-<blockquote>
-<div><ul class="simple">
-<li>&#8216;1&#8217; : Mean Vector Length (MVL) <a href="#id89"><span class="problematic" id="id90"><span id="id21"></span>[#f1]_</span></a></li>
-<li>&#8216;2&#8217; : Kullback-Leibler Distance (KLD) <a href="#id91"><span class="problematic" id="id92"><span id="id22"></span>[#f2]_</span></a></li>
-<li>&#8216;3&#8217; : Heights Ratio (HR) <a href="#id93"><span class="problematic" id="id94"><span id="id23"></span>[#f3]_</span></a></li>
-<li>&#8216;4&#8217; : ndPAC <a href="#id95"><span class="problematic" id="id96"><span id="id24"></span>[#f4]_</span></a></li>
-<li>&#8216;5&#8217; : Phase Synchrony <a href="#id97"><span class="problematic" id="id98"><span id="id25"></span>[#f3]_</span></a></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p class="first">Second digit : refer to the method for computing surrogates</p>
-<blockquote>
-<div><ul class="simple">
-<li>&#8216;0&#8217; : No surrogates</li>
-<li>&#8216;1&#8217; : Swap phase/amplitude across trials <a href="#id99"><span class="problematic" id="id100"><span id="id26"></span>[#f2]_</span></a></li>
-<li>&#8216;2&#8217; : Swap amplitude time blocks <a href="#id101"><span class="problematic" id="id102"><span id="id27"></span>[#f5]_</span></a></li>
-<li>&#8216;3&#8217; : Shuffle amplitude time-series</li>
-<li>&#8216;4&#8217; : Time lag <a href="#id103"><span class="problematic" id="id104"><span id="id28"></span>[#f1]_</span></a></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p class="first">Third digit : refer to the normalization method for correction</p>
-<blockquote>
-<div><ul class="simple">
-<li>&#8216;0&#8217; : No normalization</li>
-<li>&#8216;1&#8217; : Substract the mean of surrogates</li>
-<li>&#8216;2&#8217; : Divide by the mean of surrogates</li>
-<li>&#8216;3&#8217; : Substract then divide by the mean of surrogates</li>
-<li>&#8216;4&#8217; : Z-score</li>
-</ul>
-</div></blockquote>
-</li>
-</ul>
-</div></blockquote>
-<p><strong>fpha, famp</strong> : list/tuple/array | def: [2, 4] and [60, 200]</p>
-<blockquote>
-<div><p>Frequency vector for the phase and amplitude. Here you can use
-several forms to define those vectors :</p>
-<blockquote>
-<div><ul class="simple">
-<li>Basic list/tuple (ex: [2, 4] or [8, 12]...)</li>
-<li>List of frequency bands (ex: [[2, 4], [5, 7]]...)</li>
-<li>Dynamic definition : (start, stop, width, step)</li>
-<li>Range definition (ex : np.arange(3) =&gt; [[0, 1], [1, 2]])</li>
-</ul>
-</div></blockquote>
-</div></blockquote>
-<p><strong>dcomplex</strong> : {&#8216;wavelet&#8217;, &#8216;hilbert&#8217;}</p>
-<blockquote>
-<div><p>Method for the complex definition. Use either &#8216;hilbert&#8217; or
-&#8216;wavelet&#8217;.</p>
-</div></blockquote>
-<p><strong>filt</strong> : {&#8216;fir1&#8217;, &#8216;butter&#8217;, &#8216;bessel&#8217;}</p>
-<blockquote>
-<div><p>Filtering method (only if dcomplex is &#8216;hilbert&#8217;). Choose either
-&#8216;fir1&#8217;, &#8216;butter&#8217; or &#8216;bessel&#8217;</p>
-</div></blockquote>
-<p><strong>cycle</strong> : tuple | (3, 6)</p>
-<blockquote>
-<div><p>Control the number of cycles for filtering (only if dcomplex is
-&#8216;hilbert&#8217;). Should be a tuple of integers where the first one
-refers to the number of cycles for the phase and the second for the
-amplitude <a href="#id105"><span class="problematic" id="id106"><span id="id29"></span>[#f5]_</span></a>.</p>
-</div></blockquote>
-<p><strong>filtorder</strong> : int | 3</p>
-<blockquote>
-<div><p>Filter order for the Butterworth and Bessel filters (only if
-dcomplex is &#8216;hilbert&#8217;).</p>
-</div></blockquote>
-<p><strong>width</strong> : int | 7</p>
-<blockquote>
-<div><p>Width of the Morlet&#8217;s wavelet.</p>
-</div></blockquote>
-<p><strong>nbins</strong> : int | 18</p>
-<blockquote>
-<div><p>Number of bins for the KLD and HR PAC method <a href="#id107"><span class="problematic" id="id108"><span id="id30"></span>[#f2]_</span></a> <a href="#id109"><span class="problematic" id="id110"><span id="id31"></span>[#f3]_</span></a></p>
-</div></blockquote>
-<p><strong>nblocks</strong> : int | 2</p>
-<blockquote>
-<div><p>Number of blocks for splitting the amplitude. Only active is
-the surrogate method is 2 <a href="#id111"><span class="problematic" id="id112"><span id="id32"></span>[#f5]_</span></a>.</p>
-</div></blockquote>
-<p><strong>.. warning::</strong></p>
-<blockquote class="last">
-<div><ul class="simple">
-<li>The ndPac <a href="#id113"><span class="problematic" id="id114"><span id="id33"></span>[#f4]_</span></a> include a fast and reliable statistical test. As a
-result, if the ndPAC is choosed as the main PAC method, surrogates
-and normalization will be deactivate.</li>
-<li>The phase in a particular frequency band can either be extracted
-using wavelet convolution or filtering followed by the Hilbert
-transform. As a result, every filtering related input (cycle, filt,
-filtorder) are going to be active if the complex decomposition is
-Hilbert.</li>
-</ul>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">References</p>
-<p class="rubric">Footnotes</p>
-<table class="docutils footnote" frame="void" id="id34" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[7]</td><td><a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2628289/">Canolty et al, 2006</a></td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id36" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[8]</td><td><a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2941206/">Tort et al, 2010</a></td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id38" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[9]</td><td><a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/15901760">Lakatos et al, 2005</a></td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id40" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[10]</td><td><a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/22531738/">Ozkurt et al, 2012</a></td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id42" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[11]</td><td><a class="reference external" href="http://www.jneurosci.org/content/33/48/18849.short/">Bahramisharif et al, 2013</a></td></tr>
-</tbody>
-</table>
-<p class="rubric">Attributes</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="16%" />
-<col width="84%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><strong>xvec, yvec</strong></td>
-<td>(array_like) The x and y-vectors for plotting.</td>
-</tr>
-<tr class="row-even"><td><strong>fpha, famp</strong></td>
-<td>(array_like) The phase and amplitude frequency vectors for pac extraction.</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Methods</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="21%" />
-<col width="79%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><strong>filt()</strong></td>
-<td>Filt the data in the specified frequency bands.</td>
-</tr>
-<tr class="row-even"><td><strong>fit()</strong></td>
-<td>Run the PAC on filtered data.</td>
-</tr>
-<tr class="row-odd"><td><strong>filtfit()</strong></td>
-<td>Filt the data then compute PAC on it.</td>
-</tr>
-<tr class="row-even"><td><strong>pp()</strong></td>
-<td>compute the preferred phase</td>
-</tr>
-<tr class="row-odd"><td><strong>erpac()</strong></td>
-<td>compute the Event Related Pac</td>
-</tr>
-<tr class="row-even"><td><strong>pacplot()</strong></td>
-<td>Plotting method that can more generally be used to plot any 2D array.</td>
-</tr>
-<tr class="row-odd"><td><strong>comodulogram()</strong></td>
-<td>Plotting method dedicated to the comodulogram.</td>
-</tr>
-<tr class="row-even"><td><strong>triplot()</strong></td>
-<td>Plotting method for the optimal bandwidth search.</td>
-</tr>
-<tr class="row-odd"><td><strong>polar()</strong></td>
-<td>Plotting function for circular preferred-phase visualization.</td>
-</tr>
-<tr class="row-even"><td><strong>show()</strong></td>
-<td>Show the figure (equivalent to plt.show())</td>
-</tr>
-<tr class="row-odd"><td><strong>savefig()</strong></td>
-<td>Save the figure (equivalent to plt.savefig())</td>
-</tr>
-</tbody>
-</table>
-<dl class="attribute">
-<dt id="tensorpac.Pac.cycle">
-<code class="descname">cycle</code><a class="headerlink" href="#tensorpac.Pac.cycle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the cycle value.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="tensorpac.Pac.dcomplex">
-<code class="descname">dcomplex</code><a class="headerlink" href="#tensorpac.Pac.dcomplex" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the dcomplex value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.erpac">
-<code class="descname">erpac</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>traxis=0</em>, <em>optimize=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.erpac"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.erpac" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the Event-Related Phase-Amplitude Coupling (ERPAC).</p>
-<p>The ERPAC <a href="#id115"><span class="problematic" id="id116"><span id="id44"></span>[#f6]_</span></a> is used to measure PAC across trials and is
-interesting for real-time estimation.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pha</strong> : array_like</p>
-<blockquote>
-<div><p>Phase of slower oscillations.</p>
-</div></blockquote>
-<p><strong>amp</strong> : array_like</p>
-<blockquote>
-<div><p>Amplitude of fastest oscillations.</p>
-</div></blockquote>
-<p><strong>traxis</strong> : int | 0</p>
-<blockquote>
-<div><p>Location of the trial axis.</p>
-</div></blockquote>
-<p><strong>optimize</strong> : {True, False, &#8216;greedy&#8217;, &#8216;optimal&#8217;}</p>
-<blockquote>
-<div><p>Optimize argument of the np.einsum function. Use either False,
-True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>erpac</strong> : array_like</p>
-<blockquote>
-<div><p>The ERPAC estimation.</p>
-</div></blockquote>
-<p><strong>pvalue</strong> : array_like</p>
-<blockquote>
-<div><p>The associated p-values.</p>
-</div></blockquote>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">ERPAC is computed across trials, therefor, it does not use an
-<em>axis</em> variable but instead, a <strong>traxis</strong> variable which specify
-where is located the axis to consider as trials.</p>
-</div>
-<table class="last docutils footnote" frame="void" id="id45" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[12]</td><td><p class="first"><a href="#id46"><span class="problematic" id="id47">`</span></a>Voytek et al, 2013 &lt;<a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/">https://www.ncbi.nlm.nih.gov/pubmed/</a></p>
-<p class="last">22986076&gt;`_</p>
-</td></tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="tensorpac.Pac.filt">
-<code class="descname">filt</code><a class="headerlink" href="#tensorpac.Pac.filt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the filt value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.filter">
-<code class="descname">filter</code><span class="sig-paren">(</span><em>sf</em>, <em>x</em>, <em>axis=-1</em>, <em>ftype='phase'</em>, <em>keepfilt=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.filter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filt the data in the specified frequency bands.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sf: float</strong></p>
-<blockquote>
-<div><p>The sampling frequency.</p>
-</div></blockquote>
-<p><strong>x: array_like</strong></p>
-<blockquote>
-<div><p>Array of data.</p>
-</div></blockquote>
-<p><strong>axis</strong> : int | -1</p>
-<blockquote>
-<div><p>Location of the time axis.</p>
-</div></blockquote>
-<p><strong>ftype</strong> : {&#8216;phase&#8217;, &#8216;amplitude&#8217;}</p>
-<blockquote>
-<div><p>Specify if you want to extract phase (&#8216;phase&#8217;) or the amplitude
-(&#8216;amplitude&#8217;).</p>
-</div></blockquote>
-<p><strong>njobs</strong> : int | -1</p>
-<blockquote>
-<div><p>Number of jobs to compute PAC in parallel. For very large data,
-set this parameter to 1 in order to prevent large memory usage.</p>
-</div></blockquote>
-<p><strong>keepfilt</strong> : bool | False</p>
-<blockquote>
-<div><p>Specify if you only want the filtered data (True). This parameter
-is only avaible with dcomplex=&#8217;hilbert&#8217; and not wavelet.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>xfilt</strong> : array_like</p>
-<blockquote class="last">
-<div><p>The filtered data of shape (n_frequency, ...)</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.filterfit">
-<code class="descname">filterfit</code><span class="sig-paren">(</span><em>sf</em>, <em>xpha</em>, <em>xamp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimize=True</em>, <em>get_surro=False</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filt the data then compute PAC on it.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sf</strong> : float</p>
-<blockquote>
-<div><p>The sampling frequency.</p>
-</div></blockquote>
-<p><strong>xpha, xamp</strong> : array_like</p>
-<blockquote>
-<div><p>Array of data for computing PAC. xpha is the data used for
-extracting phases and xamp, amplitudes. Both arrays must have
-the same shapes. If you want to compute PAC locally i.e. on the
-same electrode, x=xpha=xamp. For distant coupling, xpha and
-xamp could be different but still must to have the same shape.</p>
-</div></blockquote>
-<p><strong>axis</strong> : int | 1</p>
-<blockquote>
-<div><p>Dimension where is located the time axis. By default, the axis
-will be consider as well.</p>
-</div></blockquote>
-<p><strong>traxis</strong> : int | 0</p>
-<blockquote>
-<div><p>Dimension where is located the trial axis. By default the next-
-to-last axis is consider as the trial axis.</p>
-</div></blockquote>
-<p><strong>nperm</strong> : int | 200</p>
-<blockquote>
-<div><p>Number of surrogates to compute.</p>
-</div></blockquote>
-<p><strong>optimize</strong> : {True, False, &#8216;greedy&#8217;, &#8216;optimal&#8217;}</p>
-<blockquote>
-<div><p>Optimize argument of the np.einsum function. Use either False,
-True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
-</div></blockquote>
-<p><strong>get_surro</strong> : bool | False</p>
-<blockquote>
-<div><p>Return surrogate chance distribution.</p>
-</div></blockquote>
-<p><strong>correct</strong> : bool | True</p>
-<blockquote>
-<div><p>Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-</div></blockquote>
-<p><strong>njobs</strong> : int | -1</p>
-<blockquote>
-<div><p>Number of jobs to compute PAC in parallel. For very large data,
-set this parameter to 1 in order to prevent large memory usage.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>pac</strong> : array_like</p>
-<blockquote>
-<div><p>Phase-Amplitude Coupling measure of shape (namp, npha, ...).</p>
-</div></blockquote>
-<p><strong>pvalue</strong> : array_like</p>
-<blockquote>
-<div><p>P-values (None if no surrogates)</p>
-</div></blockquote>
-<p><strong>suro</strong> : array_like</p>
-<blockquote>
-<div><p>If get_suro is True, get the chance distribution of shape
-(nperm, namp, npha, ...)</p>
-</div></blockquote>
-<div class="last admonition warning">
-<p class="first admonition-title">Warning</p>
-<ul class="last simple">
-<li>Surrogates are only going to be computed if the second and third
-digits are no 0.</li>
-<li>The ndPAC use a p value and every non-significant PAC estimation
-is set to zero. This p value is computed as 1/nperm.</li>
-<li>The traxis argument is only used if you picked up the surrogates
-method 1: &#8220;swap phase and amplitude trials <a href="#id117"><span class="problematic" id="id118"><span id="id48"></span>[#f2]_</span></a>&#8220;</li>
-<li>Basically, the surrogate evaluation proposed by <a href="#id119"><span class="problematic" id="id120"><span id="id49"></span>[#f5]_</span></a> split the
-amplitude into two equal parts, then swap those two blocks. But
-the nblocks parameter allow to split into a larger number.</li>
-</ul>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="tensorpac.Pac.filtorder">
-<code class="descname">filtorder</code><a class="headerlink" href="#tensorpac.Pac.filtorder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the filtorder value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.fit">
-<code class="descname">fit</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimize=True</em>, <em>get_surro=False</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.fit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute PAC on filtered data.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pha, amp: array_like</strong></p>
-<blockquote>
-<div><p>Array of filtered data with respectively a shape of (npha, ...)
-and (namp, ...). If you want to compute PAC locally i.e. on the
-same electrode, x=pha=amp. For distant coupling, pha and
-amp could be different but still must to have the same shape.</p>
-</div></blockquote>
-<p><strong>axis</strong> : int | 1</p>
-<blockquote>
-<div><p>Dimension where is located the time axis. By default, the axis
-will be consider as well.</p>
-</div></blockquote>
-<p><strong>traxis</strong> : int | 0</p>
-<blockquote>
-<div><p>Dimension where is located the trial axis. By default the next-
-to-last axis is consider as the trial axis.</p>
-</div></blockquote>
-<p><strong>nperm</strong> : int | 200</p>
-<blockquote>
-<div><p>Number of surrogates to compute.</p>
-</div></blockquote>
-<p><strong>optimize</strong> : {True, False, &#8216;greedy&#8217;, &#8216;optimal&#8217;}</p>
-<blockquote>
-<div><p>Optimize argument of the np.einsum function. Use either False,
-True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
-</div></blockquote>
-<p><strong>get_surro</strong> : bool | False</p>
-<blockquote>
-<div><p>Return surrogate chance distribution.</p>
-</div></blockquote>
-<p><strong>correct</strong> : bool | True</p>
-<blockquote>
-<div><p>Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
-</div></blockquote>
-<p><strong>njobs</strong> : int | -1</p>
-<blockquote>
-<div><p>Number of jobs to compute PAC in parallel. For very large data,
-set this parameter to 1 in order to prevent large memory usage.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">pac: array_like</p>
-<blockquote>
-<div><p>Phase-Amplitude Coupling measure of shape (namp, npha, ...).</p>
-</div></blockquote>
-<p>pvalue: array_like</p>
-<blockquote>
-<div><p>P-values (None if no surrogates)</p>
-</div></blockquote>
-<p>suro: array_like</p>
-<blockquote>
-<div><p>If get_suro is True, get the chance distribution of shape
-(nperm, namp, npha, ...)</p>
-</div></blockquote>
-<div class="last admonition warning">
-<p class="first admonition-title">Warning</p>
-<ul class="last simple">
-<li>Surrogates are only going to be computed if the second and third
-digits are no 0.</li>
-<li>The ndPAC use a p value and every non-significant PAC estimation
-is set to zero. This p value is computed as 1/nperm.</li>
-<li>The traxis argument is only used if you picked up the surrogates
-method 1: &#8220;swap phase and amplitude trials <a href="#id121"><span class="problematic" id="id122"><span id="id50"></span>[#f2]_</span></a>&#8220;</li>
-<li>Basically, the surrogate evaluation proposed by <a href="#id123"><span class="problematic" id="id124"><span id="id51"></span>[#f5]_</span></a> split the
-amplitude into two equal parts, then swap those two blocks. But
-the nblocks parameter allow to split into a larger number.</li>
-</ul>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="tensorpac.Pac.idpac">
-<code class="descname">idpac</code><a class="headerlink" href="#tensorpac.Pac.idpac" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the idpac value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.pp">
-<code class="descname">pp</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>axis=-1</em>, <em>nbins=72</em>, <em>optimize=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.pp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.pp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the preferred-phase.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pha</strong> : array_like</p>
-<blockquote>
-<div><p>Phase of slower oscillations.</p>
-</div></blockquote>
-<p><strong>amp</strong> : array_like</p>
-<blockquote>
-<div><p>Amplitude of fastest oscillations.</p>
-</div></blockquote>
-<p><strong>axis</strong> : int | -1</p>
-<blockquote>
-<div><p>Location of the time axis.</p>
-</div></blockquote>
-<p><strong>nbins</strong> : int | 72</p>
-<blockquote>
-<div><p>Number of bins for bining the amplitude according to phase
-slices.</p>
-</div></blockquote>
-<p><strong>optimize</strong> : {True, False, &#8216;greedy&#8217;, &#8216;optimal&#8217;}</p>
-<blockquote>
-<div><p>Optimize argument of the np.einsum function. Use either False,
-True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ampbin</strong> : array_like</p>
-<blockquote>
-<div><p>The binned amplitude according to the phase of shape
-(nbins, namp, npha...).</p>
-</div></blockquote>
-<p><strong>pp</strong> : array_like</p>
-<blockquote>
-<div><p>The prefered phase where the amplitude is maximum of shape
-(namp, npha, ...).</p>
-</div></blockquote>
-<p><strong>polarvec</strong> : array_like</p>
-<blockquote class="last">
-<div><p>The phase vector for the polar plot.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="tensorpac.Pac.width">
-<code class="descname">width</code><a class="headerlink" href="#tensorpac.Pac.width" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the width value.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="tensorpac.pac_signals">
-<code class="descclassname">tensorpac.</code><code class="descname">pac_signals</code><span class="sig-paren">(</span><em>fpha=10.0</em>, <em>famp=100.0</em>, <em>sf=1024</em>, <em>npts=4000</em>, <em>ndatasets=10</em>, <em>chi=0.0</em>, <em>noise=1.0</em>, <em>dpha=0.0</em>, <em>damp=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#pac_signals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac_signals" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate artificially phase-amplitude coupled signals.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fpha</strong> : float | 10</p>
-<blockquote>
-<div><p>Frequency for phase. Use either a float number for a centered frequency
-of a band (like [5, 7]) for a bandwidth.</p>
-</div></blockquote>
-<p><strong>famp</strong> : float | 100.</p>
-<blockquote>
-<div><p>Frequency for amplitude. Use either a float number for a centered
-frequency of a band (like [60, 80]) for a bandwidth.</p>
-</div></blockquote>
-<p><strong>sf</strong> : int | 1024</p>
-<blockquote>
-<div><p>Sampling frequency</p>
-</div></blockquote>
-<p><strong>ndatasets</strong> : int | 10</p>
-<blockquote>
-<div><p>Number of datasets</p>
-</div></blockquote>
-<p><strong>npts</strong> : int | 4000</p>
-<blockquote>
-<div><p>Number of points for each signal.</p>
-</div></blockquote>
-<p><strong>chi</strong> : float | 0.</p>
-<blockquote>
-<div><p>Amount of coupling. If chi=0, signals of phase and amplitude
-are strongly coupled (0.&lt;=chi&lt;=1.).</p>
-</div></blockquote>
-<p><strong>noise</strong> : float | 1.</p>
-<blockquote>
-<div><p>Amount of noise (0&lt;=noise&lt;=3).</p>
-</div></blockquote>
-<p><strong>dpha</strong> : float | 0.</p>
-<blockquote>
-<div><p>Random incertitude on phase frequences (0&lt;=dpha&lt;=100). If fpha is 2,
-and dpha is 50, the frequency for the phase signal will be between :
-[2-0.5*2, 2+0.5*2]=[1,3]</p>
-</div></blockquote>
-<p><strong>damp</strong> : float | 0.</p>
-<blockquote>
-<div><p>Random incertitude on amplitude frequencies (0&lt;=damp&lt;=100). If famp is
-60, and damp is 10, the frequency for the amplitude signal will be
-between : [60-0.1*60, 60+0.1*60]=[54,66]</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>data</strong> : array_like</p>
-<blockquote>
-<div><p>The randomly coupled signals of shape (ndatasets, npts).</p>
-</div></blockquote>
-<p><strong>time</strong> : array_like</p>
-<blockquote class="last">
-<div><p>The corresponding time vector according to the defined number of points
-and sampling frequency.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="tensorpac.pac_vec">
-<code class="descclassname">tensorpac.</code><code class="descname">pac_vec</code><span class="sig-paren">(</span><em>fpha=(2</em>, <em>30</em>, <em>2</em>, <em>1)</em>, <em>famp=(60</em>, <em>200</em>, <em>10</em>, <em>5)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#pac_vec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac_vec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate cross-frequency coupling vectors.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fpha, famp</strong> : tuple | (2, 30, 2, 1), (60, 200, 10, 5)</p>
-<blockquote>
-<div><p>Frequency parameters for phase and amplitude. Each argument inside the
-tuple mean (starting fcy, ending fcy, bandwidth, step).</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>pvec, avec</strong> : array_like</p>
-<blockquote class="last">
-<div><p>Arrays containing the pairs of phase and amplitude frequencies. Each
-vector have a shape of (N, 2).</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="tensorpac.pac_trivec">
-<code class="descclassname">tensorpac.</code><code class="descname">pac_trivec</code><span class="sig-paren">(</span><em>fstart=60.0</em>, <em>fend=160.0</em>, <em>fwidth=10.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#pac_trivec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac_trivec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate triangular vector.</p>
-<p>By contrast with the pac_vec function, this function generate frequency
-vector with an increasing frequency bandwidth.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fstart</strong> : float | 60.</p>
-<blockquote>
-<div><p>Starting frequency.</p>
-</div></blockquote>
-<p><strong>fend</strong> : float | 160.</p>
-<blockquote>
-<div><p>Ending frequency.</p>
-</div></blockquote>
-<p><strong>fwidth</strong> : float | 10.</p>
-<blockquote>
-<div><p>Frequency bandwidth increase between each band.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>f</strong> : array_like</p>
-<blockquote>
-<div><p>The triangular vector.</p>
-</div></blockquote>
-<p><strong>tridx</strong> : array_like</p>
-<blockquote class="last">
-<div><p>The triangular index for the reconstruction.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </div>
 </div>
 </div>

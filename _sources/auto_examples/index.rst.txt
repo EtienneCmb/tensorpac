@@ -2,16 +2,9 @@
 
 .. _examples-index:
 
-Gallery of Examples
-===================
+Examples
+--------
 
-
-.. _general_examples:
-
-General examples
-----------------
-
-General-purpose and introductory examples from the sphinx-gallery
 
 
 
@@ -34,6 +27,26 @@ General-purpose and introductory examples from the sphinx-gallery
    :hidden:
 
    /auto_examples/plot_bandwidth_signals
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Reproduced the figure in the README. ">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_readme_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_readme.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_readme
 
 .. raw:: html
 
@@ -61,9 +74,9 @@ General-purpose and introductory examples from the sphinx-gallery
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_09_P-value_thumb.png
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_values_thumb.png
 
-        :ref:`sphx_glr_auto_examples_09_P-value.py`
+        :ref:`sphx_glr_auto_examples_plot_values.py`
 
 .. raw:: html
 
@@ -73,7 +86,7 @@ General-purpose and introductory examples from the sphinx-gallery
 .. toctree::
    :hidden:
 
-   /auto_examples/09_P-value
+   /auto_examples/plot_values
 
 .. raw:: html
 
@@ -81,9 +94,9 @@ General-purpose and introductory examples from the sphinx-gallery
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_00_FrequencyVectors_thumb.png
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_frequency_vectors_thumb.png
 
-        :ref:`sphx_glr_auto_examples_00_FrequencyVectors.py`
+        :ref:`sphx_glr_auto_examples_plot_frequency_vectors.py`
 
 .. raw:: html
 
@@ -93,7 +106,7 @@ General-purpose and introductory examples from the sphinx-gallery
 .. toctree::
    :hidden:
 
-   /auto_examples/00_FrequencyVectors
+   /auto_examples/plot_frequency_vectors
 
 .. raw:: html
 
@@ -121,9 +134,9 @@ General-purpose and introductory examples from the sphinx-gallery
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_06_CompareSurrogatesMethods_thumb.png
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_compare_surrogates_thumb.png
 
-        :ref:`sphx_glr_auto_examples_06_CompareSurrogatesMethods.py`
+        :ref:`sphx_glr_auto_examples_plot_compare_surrogates.py`
 
 .. raw:: html
 
@@ -133,7 +146,27 @@ General-purpose and introductory examples from the sphinx-gallery
 .. toctree::
    :hidden:
 
-   /auto_examples/06_CompareSurrogatesMethods
+   /auto_examples/plot_compare_surrogates
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Tensorpac provides two ways for extracting phase and amplitude :">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_compare_filtering_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_compare_filtering.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_compare_filtering
 
 .. raw:: html
 
@@ -141,9 +174,9 @@ General-purpose and introductory examples from the sphinx-gallery
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_07_CompareNormalizationMethods_thumb.png
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_compare_normalizations_thumb.png
 
-        :ref:`sphx_glr_auto_examples_07_CompareNormalizationMethods.py`
+        :ref:`sphx_glr_auto_examples_plot_compare_normalizations.py`
 
 .. raw:: html
 
@@ -153,7 +186,7 @@ General-purpose and introductory examples from the sphinx-gallery
 .. toctree::
    :hidden:
 
-   /auto_examples/07_CompareNormalizationMethods
+   /auto_examples/plot_compare_normalizations
 
 .. raw:: html
 
@@ -177,7 +210,7 @@ General-purpose and introductory examples from the sphinx-gallery
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Use the pac_signals function to generate artificial PAC. ">
+    <div class="sphx-glr-thumbcontainer" tooltip="Use the pac_signals_tort function to generate artificial PAC. ">
 
 .. only:: html
 
@@ -194,26 +227,6 @@ General-purpose and introductory examples from the sphinx-gallery
    :hidden:
 
    /auto_examples/plot_artificially_coupled_signals
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Tensorpac provides two ways for extracting phase and amplitude :">
-
-.. only:: html
-
-    .. figure:: /auto_examples/images/thumb/sphx_glr_04_FilteringComparison_thumb.png
-
-        :ref:`sphx_glr_auto_examples_04_FilteringComparison.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/04_FilteringComparison
 
 .. raw:: html
 

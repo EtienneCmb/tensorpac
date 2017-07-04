@@ -162,9 +162,14 @@ Save
 Utils
 ~~~~~
 
-Generate artificially coupled signals
-+++++++++++++++++++++++++++++++++++++
-.. autofunction:: tensorpac.utils.pac_signals
+Generate artificially coupled signals using Tort method
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. autofunction:: tensorpac.utils.pac_signals_tort
+
+
+Generate artificially coupled signals using wavelets
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+.. autofunction:: tensorpac.utils.pac_signals_wavelet
 
 Generate phase and amplitude vectors
 ++++++++++++++++++++++++++++++++++++

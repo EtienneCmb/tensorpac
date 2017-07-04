@@ -40,7 +40,7 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Tensorpac 0.5.3 documentation" href="../index.html"/>
-        <link rel="up" title="Gallery of Examples" href="index.html"/>
+        <link rel="up" title="Examples" href="index.html"/>
         <link rel="next" title="Find the preferred phase (PP)" href="plot_preferred_phase.html"/>
         <link rel="prev" title="Compute distant PAC" href="plot_distant_coupling.html"/> 
 
@@ -129,7 +129,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#utils">Utils</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../api.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#generate-artificially-coupled-signals-using-tort-method">Generate artificially coupled signals using Tort method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#generate-artificially-coupled-signals-using-wavelets">Generate artificially coupled signals using wavelets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
@@ -141,24 +142,22 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Gallery of Examples</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="index.html#general-examples">General examples</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="09_P-value.html">Compute p-values</a></li>
-<li class="toctree-l3"><a class="reference internal" href="00_FrequencyVectors.html">Define frequency vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_basic_pac.html">Basic phase amplitude coupling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="06_CompareSurrogatesMethods.html">Compararison of several surrogate evaluation methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="07_CompareNormalizationMethods.html">Compare the several normalization methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_pac_methods.html">PAC methods comparison</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="04_FilteringComparison.html">Filtering properties and effect</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_distant_coupling.html">Compute distant PAC</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Compute the ERPAC (Voytek et al 2013)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_custom_visualizations.html">Compare visualization methods</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_readme.html">README example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_values.html">Compute p-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_frequency_vectors.html">Define frequency vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_basic_pac.html">Basic phase amplitude coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_surrogates.html">Compararison of several surrogate evaluation methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Filtering properties and effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare the several normalization methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">PAC methods comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_distant_coupling.html">Compute distant PAC</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Compute the ERPAC (Voytek et al 2013)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_custom_visualizations.html">Compare visualization methods</a></li>
 </ul>
 </li>
 </ul>
@@ -205,7 +204,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">Gallery of Examples</a> &raquo;</li>
+          <li><a href="index.html">Examples</a> &raquo;</li>
         
       <li>Compute the ERPAC (Voytek et al 2013)</li>
     
@@ -237,16 +236,16 @@ significantly slower. Don&#8217;t worry, take a coffee.</p>
 1000 points, then, the 700 following points are noise.</p>
 <img alt="../_images/sphx_glr_plot_erpac_001.png" class="align-center" src="../_images/sphx_glr_plot_erpac_001.png" />
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">tensorpac</span> <span class="kn">import</span> <span class="n">Pac</span><span class="p">,</span> <span class="n">pac_signals</span>
+<span class="kn">from</span> <span class="nn">tensorpac</span> <span class="kn">import</span> <span class="n">Pac</span><span class="p">,</span> <span class="n">pac_signals_tort</span>
 
 <span class="c1"># Generate a 10&lt;-&gt;100hz coupling :</span>
-<span class="n">ndatasets</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">ntrials</span> <span class="o">=</span> <span class="mi">300</span>
 <span class="n">npts</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">sf</span> <span class="o">=</span> <span class="mf">1024.</span>
-<span class="n">x1</span><span class="p">,</span> <span class="n">tvec</span> <span class="o">=</span> <span class="n">pac_signals</span><span class="p">(</span><span class="n">fpha</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">famp</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">ndatasets</span><span class="o">=</span><span class="n">ndatasets</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                       <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span> <span class="n">dpha</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">damp</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="n">sf</span><span class="p">)</span>
+<span class="n">x1</span><span class="p">,</span> <span class="n">tvec</span> <span class="o">=</span> <span class="n">pac_signals_tort</span><span class="p">(</span><span class="n">fpha</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">famp</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">ntrials</span><span class="o">=</span><span class="n">ntrials</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                            <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">,</span> <span class="n">dpha</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">damp</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="n">sf</span><span class="p">)</span>
 <span class="c1"># Generate noise and concatenate the coupling and the noise :</span>
-<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">ndatasets</span><span class="p">,</span> <span class="mi">700</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">ntrials</span><span class="p">,</span> <span class="mi">700</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Shape : (ntrials, npts)</span>
 <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">sf</span>
 
@@ -284,7 +283,7 @@ significantly slower. Don&#8217;t worry, take a coffee.</p>
 <span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  5.141 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  4.499 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_erpac.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_erpac.py</span></code></a></div>

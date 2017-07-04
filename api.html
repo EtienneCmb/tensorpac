@@ -128,7 +128,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#utils">Utils</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generate-artificially-coupled-signals-using-tort-method">Generate artificially coupled signals using Tort method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generate-artificially-coupled-signals-using-wavelets">Generate artificially coupled signals using wavelets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
@@ -143,15 +144,16 @@
 <li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Gallery of Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/index.html#general-examples">General examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_readme.html">README example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/09_P-value.html">Compute p-values</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/00_FrequencyVectors.html">Define frequency vectors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_values.html">Compute p-values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_basic_pac.html">Basic phase amplitude coupling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/06_CompareSurrogatesMethods.html">Compararison of several surrogate evaluation methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/07_CompareNormalizationMethods.html">Compare the several normalization methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_compare_surrogates.html">Compararison of several surrogate evaluation methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_compare_filtering.html">Filtering properties and effect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_compare_normalizations.html">Compare the several normalization methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_pac_methods.html">PAC methods comparison</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/04_FilteringComparison.html">Filtering properties and effect</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_distant_coupling.html">Compute distant PAC</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
@@ -257,7 +259,7 @@ you choose among a large range of possible combinations.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>idpac: tuple/list | (1, 1, 3)</strong></p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>idpac</strong> : tuple/list | (1, 1, 3)</p>
 <blockquote>
 <div><p>Choose the combination of methods to use in order to extract PAC.
 This tuple must be composed of three integers where each one them
@@ -511,7 +513,7 @@ is only avaible with dcomplex=&#8217;hilbert&#8217; and not wavelet.</p>
 <p>For those who already have filtered and computed the phase and amplitude, use this method to compute PAC.</p>
 <dl class="method">
 <dt id="tensorpac.pac.Pac.fit">
-<code class="descclassname">Pac.</code><code class="descname">fit</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimize=True</em>, <em>get_surro=False</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.fit" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Pac.</code><code class="descname">fit</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimize=True</em>, <em>get_pval=False</em>, <em>get_surro=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute PAC on filtered data.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -543,13 +545,13 @@ to-last axis is consider as the trial axis.</p>
 <div><p>Optimize argument of the np.einsum function. Use either False,
 True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
 </div></blockquote>
+<p><strong>get_pval</strong> : bool | False</p>
+<blockquote>
+<div><p>Get the pvalues. Only avaible if surrogates are computed.</p>
+</div></blockquote>
 <p><strong>get_surro</strong> : bool | False</p>
 <blockquote>
 <div><p>Return surrogate chance distribution.</p>
-</div></blockquote>
-<p><strong>correct</strong> : bool | True</p>
-<blockquote>
-<div><p>Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
 </div></blockquote>
 <p><strong>njobs</strong> : int | -1</p>
 <blockquote>
@@ -564,7 +566,7 @@ set this parameter to 1 in order to prevent large memory usage.</p>
 </div></blockquote>
 <p>pvalue: array_like</p>
 <blockquote>
-<div><p>P-values (None if no surrogates)</p>
+<div><p>P-values of shape (namp, npha, ...) if get_pval is True.</p>
 </div></blockquote>
 <p>suro: array_like</p>
 <blockquote>
@@ -597,7 +599,7 @@ the nblocks parameter allow to split into a larger number.</li>
 <p>Use the following method to filter and compute the PAC directly.</p>
 <dl class="method">
 <dt id="tensorpac.pac.Pac.filterfit">
-<code class="descclassname">Pac.</code><code class="descname">filterfit</code><span class="sig-paren">(</span><em>sf</em>, <em>xpha</em>, <em>xamp</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimize=True</em>, <em>get_surro=False</em>, <em>correct=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Pac.</code><code class="descname">filterfit</code><span class="sig-paren">(</span><em>sf</em>, <em>xpha</em>, <em>xamp=None</em>, <em>axis=1</em>, <em>traxis=0</em>, <em>nperm=200</em>, <em>optimize=True</em>, <em>get_pval=False</em>, <em>get_surro=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filt the data then compute PAC on it.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -634,13 +636,13 @@ to-last axis is consider as the trial axis.</p>
 <div><p>Optimize argument of the np.einsum function. Use either False,
 True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
 </div></blockquote>
+<p><strong>get_pval</strong> : bool | False</p>
+<blockquote>
+<div><p>Get the pvalues. Only avaible if surrogates are computed.</p>
+</div></blockquote>
 <p><strong>get_surro</strong> : bool | False</p>
 <blockquote>
 <div><p>Return surrogate chance distribution.</p>
-</div></blockquote>
-<p><strong>correct</strong> : bool | True</p>
-<blockquote>
-<div><p>Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
 </div></blockquote>
 <p><strong>njobs</strong> : int | -1</p>
 <blockquote>
@@ -649,15 +651,15 @@ set this parameter to 1 in order to prevent large memory usage.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>pac</strong> : array_like</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">pac: array_like</p>
 <blockquote>
 <div><p>Phase-Amplitude Coupling measure of shape (namp, npha, ...).</p>
 </div></blockquote>
-<p><strong>pvalue</strong> : array_like</p>
+<p>pvalue: array_like</p>
 <blockquote>
-<div><p>P-values (None if no surrogates)</p>
+<div><p>P-values of shape (namp, npha, ...) if get_pval is True.</p>
 </div></blockquote>
-<p><strong>suro</strong> : array_like</p>
+<p>suro: array_like</p>
 <blockquote>
 <div><p>If get_suro is True, get the chance distribution of shape
 (nperm, namp, npha, ...)</p>
@@ -1150,17 +1152,18 @@ also returned by the pac_trivec function.</p>
 </div>
 <div class="section" id="utils">
 <span id="fcnutils"></span><h2>Utils<a class="headerlink" href="#utils" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="generate-artificially-coupled-signals">
-<h3>Generate artificially coupled signals<a class="headerlink" href="#generate-artificially-coupled-signals" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="generate-artificially-coupled-signals-using-tort-method">
+<h3>Generate artificially coupled signals using Tort method<a class="headerlink" href="#generate-artificially-coupled-signals-using-tort-method" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
-<dt id="tensorpac.utils.pac_signals">
-<code class="descclassname">tensorpac.utils.</code><code class="descname">pac_signals</code><span class="sig-paren">(</span><em>fpha=10.0</em>, <em>famp=100.0</em>, <em>sf=1024</em>, <em>npts=4000</em>, <em>ndatasets=10</em>, <em>chi=0.0</em>, <em>noise=1.0</em>, <em>dpha=0.0</em>, <em>damp=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#pac_signals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.pac_signals" title="Permalink to this definition">¶</a></dt>
+<dt id="tensorpac.utils.pac_signals_tort">
+<code class="descclassname">tensorpac.utils.</code><code class="descname">pac_signals_tort</code><span class="sig-paren">(</span><em>fpha=10.0</em>, <em>famp=100.0</em>, <em>sf=1024</em>, <em>npts=4000</em>, <em>ntrials=10</em>, <em>chi=0.0</em>, <em>noise=1.0</em>, <em>dpha=0.0</em>, <em>damp=0.0</em>, <em>rnd_state=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#pac_signals_tort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.pac_signals_tort" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate artificially phase-amplitude coupled signals.</p>
+<p>This function use the definition of Tort et al. 2010.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fpha</strong> : float | 10</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fpha</strong> : float | 10.</p>
 <blockquote>
 <div><p>Frequency for phase. Use either a float number for a centered frequency
 of a band (like [5, 7]) for a bandwidth.</p>
@@ -1174,7 +1177,7 @@ frequency of a band (like [60, 80]) for a bandwidth.</p>
 <blockquote>
 <div><p>Sampling frequency</p>
 </div></blockquote>
-<p><strong>ndatasets</strong> : int | 10</p>
+<p><strong>ntrials</strong> : int | 10</p>
 <blockquote>
 <div><p>Number of datasets</p>
 </div></blockquote>
@@ -1203,16 +1206,82 @@ and dpha is 50, the frequency for the phase signal will be between :
 60, and damp is 10, the frequency for the amplitude signal will be
 between : [60-0.1*60, 60+0.1*60]=[54,66]</p>
 </div></blockquote>
+<p><strong>rnd_state: int | 0</strong></p>
+<blockquote>
+<div><p>Fix random of the machine (for reproducibility)</p>
+</div></blockquote>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>data</strong> : array_like</p>
 <blockquote>
-<div><p>The randomly coupled signals of shape (ndatasets, npts).</p>
+<div><p>Array of pac signals of shape (ntrials, npts).</p>
 </div></blockquote>
 <p><strong>time</strong> : array_like</p>
 <blockquote class="last">
-<div><p>The corresponding time vector according to the defined number of points
-and sampling frequency.</p>
+<div><p>Time vector of shape (npts,).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="generate-artificially-coupled-signals-using-wavelets">
+<h3>Generate artificially coupled signals using wavelets<a class="headerlink" href="#generate-artificially-coupled-signals-using-wavelets" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="tensorpac.utils.pac_signals_wavelet">
+<code class="descclassname">tensorpac.utils.</code><code class="descname">pac_signals_wavelet</code><span class="sig-paren">(</span><em>fpha=10.0</em>, <em>famp=100.0</em>, <em>sf=1024.0</em>, <em>npts=4000.0</em>, <em>ntrials=10</em>, <em>noise=0.1</em>, <em>pp=0.0</em>, <em>rnd_state=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/utils.html#pac_signals_wavelet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.pac_signals_wavelet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate artificially phase-amplitude coupled signals using wavelets.</p>
+<p>This function is inspired by the code of the pactools toolbox developped by
+Tom Dupre la Tour.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fpha</strong> : float | 10.</p>
+<blockquote>
+<div><p>Frequency for phase. Use either a float number for a centered frequency
+of a band (like [5, 7]) for a bandwidth.</p>
+</div></blockquote>
+<p><strong>famp</strong> : float | 100.</p>
+<blockquote>
+<div><p>Frequency for amplitude. Use either a float number for a centered
+frequency of a band (like [60, 80]) for a bandwidth.</p>
+</div></blockquote>
+<p><strong>sf</strong> : float | 1024.</p>
+<blockquote>
+<div><p>Sampling frequency.</p>
+</div></blockquote>
+<p><strong>npts</strong> : int | 4000</p>
+<blockquote>
+<div><p>Number of time points.</p>
+</div></blockquote>
+<p><strong>ntrials</strong> : int | 10</p>
+<blockquote>
+<div><p>Number of trials in the dataset.</p>
+</div></blockquote>
+<p><strong>noise</strong> : float | .1</p>
+<blockquote>
+<div><p>Amount of white noise.</p>
+</div></blockquote>
+<p><strong>pp</strong> : float | 0.</p>
+<blockquote>
+<div><p>The preferred-phase of the coupling.</p>
+</div></blockquote>
+<p><strong>rnd_state: int | 0</strong></p>
+<blockquote>
+<div><p>Fix random of the machine (for reproducibility)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>data</strong> : array_like</p>
+<blockquote>
+<div><p>Array of pac signals of shape (ntrials, npts).</p>
+</div></blockquote>
+<p><strong>time</strong> : array_like</p>
+<blockquote class="last">
+<div><p>Time vector of shape (npts,).</p>
 </div></blockquote>
 </td>
 </tr>

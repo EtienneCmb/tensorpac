@@ -127,7 +127,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#utils">Utils</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#generate-artificially-coupled-signals-using-tort-method">Generate artificially coupled signals using Tort method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#generate-artificially-coupled-signals-using-wavelets">Generate artificially coupled signals using wavelets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
@@ -139,24 +140,22 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../auto_examples/index.html">Gallery of Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/index.html#general-examples">General examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/09_P-value.html">Compute p-values</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/00_FrequencyVectors.html">Define frequency vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_basic_pac.html">Basic phase amplitude coupling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/06_CompareSurrogatesMethods.html">Compararison of several surrogate evaluation methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/07_CompareNormalizationMethods.html">Compare the several normalization methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_pac_methods.html">PAC methods comparison</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/04_FilteringComparison.html">Filtering properties and effect</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_distant_coupling.html">Compute distant PAC</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_custom_visualizations.html">Compare visualization methods</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../auto_examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_readme.html">README example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_values.html">Compute p-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_frequency_vectors.html">Define frequency vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_basic_pac.html">Basic phase amplitude coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_compare_surrogates.html">Compararison of several surrogate evaluation methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_compare_filtering.html">Filtering properties and effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_compare_normalizations.html">Compare the several normalization methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_pac_methods.html">PAC methods comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_distant_coupling.html">Compute distant PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_custom_visualizations.html">Compare visualization methods</a></li>
 </ul>
 </li>
 </ul>
@@ -225,12 +224,13 @@
   <h1>Source code for tensorpac.utils</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Utility PAC functions.</span>
 
-<span class="sd">- pac_signals : generate artificially phase-amplitude coupled signals</span>
+<span class="sd">- pac_signals_tort : generate artificially phase-amplitude coupled signals</span>
 <span class="sd">- pac_vec : generate cross-frequency coupling vectors</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">.spectral</span> <span class="k">import</span> <span class="n">morlet</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;pac_signals&#39;</span><span class="p">,</span> <span class="s1">&#39;pac_vec&#39;</span><span class="p">,</span> <span class="s1">&#39;pac_trivec&#39;</span><span class="p">)</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;pac_signals_wavelet&#39;</span><span class="p">,</span> <span class="s1">&#39;pac_signals_tort&#39;</span><span class="p">,</span> <span class="s1">&#39;pac_vec&#39;</span><span class="p">,</span> <span class="s1">&#39;pac_trivec&#39;</span><span class="p">)</span>
 
 
 <span class="c1">###############################################################################</span>
@@ -239,13 +239,82 @@
 <span class="c1">###############################################################################</span>
 <span class="c1">###############################################################################</span>
 
-<div class="viewcode-block" id="pac_signals"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.utils.pac_signals">[docs]</a><span class="k">def</span> <span class="nf">pac_signals</span><span class="p">(</span><span class="n">fpha</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">famp</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span> <span class="n">ndatasets</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">chi</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
-                <span class="n">noise</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">dpha</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">damp</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generate artificially phase-amplitude coupled signals.</span>
+
+<div class="viewcode-block" id="pac_signals_wavelet"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.utils.pac_signals_wavelet">[docs]</a><span class="k">def</span> <span class="nf">pac_signals_wavelet</span><span class="p">(</span><span class="n">fpha</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">famp</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="mf">1024.</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mf">4000.</span><span class="p">,</span> <span class="n">ntrials</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                        <span class="n">noise</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">pp</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">rnd_state</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate artificially phase-amplitude coupled signals using wavelets.</span>
+
+<span class="sd">    This function is inspired by the code of the pactools toolbox developped by</span>
+<span class="sd">    Tom Dupre la Tour.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    fpha : float | 10</span>
+<span class="sd">    fpha : float | 10.</span>
+<span class="sd">        Frequency for phase. Use either a float number for a centered frequency</span>
+<span class="sd">        of a band (like [5, 7]) for a bandwidth.</span>
+
+<span class="sd">    famp : float | 100.</span>
+<span class="sd">        Frequency for amplitude. Use either a float number for a centered</span>
+<span class="sd">        frequency of a band (like [60, 80]) for a bandwidth.</span>
+
+<span class="sd">    sf : float | 1024.</span>
+<span class="sd">        Sampling frequency.</span>
+
+<span class="sd">    npts : int | 4000</span>
+<span class="sd">        Number of time points.</span>
+
+<span class="sd">    ntrials : int | 10</span>
+<span class="sd">        Number of trials in the dataset.</span>
+
+<span class="sd">    noise : float | .1</span>
+<span class="sd">        Amount of white noise.</span>
+
+<span class="sd">    pp : float | 0.</span>
+<span class="sd">        The preferred-phase of the coupling.</span>
+
+<span class="sd">    rnd_state: int | 0</span>
+<span class="sd">        Fix random of the machine (for reproducibility)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data : array_like</span>
+<span class="sd">        Array of pac signals of shape (ntrials, npts).</span>
+
+<span class="sd">    time : array_like</span>
+<span class="sd">        Time vector of shape (npts,).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">npts</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">npts</span><span class="p">)</span>
+    <span class="n">sf</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
+    <span class="n">fpha</span><span class="p">,</span> <span class="n">famp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">fpha</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">famp</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">ntrials</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">npts</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">sf</span>
+    <span class="c1"># Random state of the machine :</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">rnd_state</span><span class="p">)</span>
+    <span class="c1"># Get complex decomposition of random points in the phase frequency band :</span>
+    <span class="n">driver</span> <span class="o">=</span> <span class="n">morlet</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">ntrials</span><span class="p">,</span> <span class="n">npts</span><span class="p">),</span> <span class="n">sf</span><span class="p">,</span> <span class="n">fpha</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">driver</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># Create amplitude signals :</span>
+    <span class="n">xh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">famp</span> <span class="o">*</span> <span class="n">time</span><span class="p">)</span>
+    <span class="n">dpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pp</span><span class="p">)</span>
+    <span class="n">modulation</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="mf">6.</span> <span class="o">*</span> <span class="mf">1.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">driver</span> <span class="o">*</span> <span class="n">dpha</span><span class="p">)))</span>
+    <span class="c1"># Modulate the amplitude :</span>
+    <span class="n">xh</span> <span class="o">*=</span> <span class="n">modulation</span>
+    <span class="c1"># Get the phase signal :</span>
+    <span class="n">xl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
+    <span class="c1"># Build the pac signal :</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">xh</span> <span class="o">+</span> <span class="n">xl</span> <span class="o">+</span> <span class="n">noise</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="o">*</span><span class="n">xh</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span></div>
+
+
+<div class="viewcode-block" id="pac_signals_tort"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.utils.pac_signals_tort">[docs]</a><span class="k">def</span> <span class="nf">pac_signals_tort</span><span class="p">(</span><span class="n">fpha</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">famp</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span> <span class="n">ntrials</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                     <span class="n">chi</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">dpha</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">damp</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">rnd_state</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate artificially phase-amplitude coupled signals.</span>
+
+<span class="sd">    This function use the definition of Tort et al. 2010.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpha : float | 10.</span>
 <span class="sd">        Frequency for phase. Use either a float number for a centered frequency</span>
 <span class="sd">        of a band (like [5, 7]) for a bandwidth.</span>
 
@@ -256,7 +325,7 @@
 <span class="sd">    sf : int | 1024</span>
 <span class="sd">        Sampling frequency</span>
 
-<span class="sd">    ndatasets : int | 10</span>
+<span class="sd">    ntrials : int | 10</span>
 <span class="sd">        Number of datasets</span>
 
 <span class="sd">    npts : int | 4000</span>
@@ -279,15 +348,19 @@
 <span class="sd">        60, and damp is 10, the frequency for the amplitude signal will be</span>
 <span class="sd">        between : [60-0.1*60, 60+0.1*60]=[54,66]</span>
 
+<span class="sd">    rnd_state: int | 0</span>
+<span class="sd">        Fix random of the machine (for reproducibility)</span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    data : array_like</span>
-<span class="sd">        The randomly coupled signals of shape (ndatasets, npts).</span>
+<span class="sd">        Array of pac signals of shape (ntrials, npts).</span>
 
 <span class="sd">    time : array_like</span>
-<span class="sd">        The corresponding time vector according to the defined number of points</span>
-<span class="sd">        and sampling frequency.</span>
+<span class="sd">        Time vector of shape (npts,).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">npts</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">npts</span><span class="p">)</span>
+    <span class="n">sf</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
     <span class="c1"># Check the inputs variables :</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">chi</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">chi</span> <span class="o">=</span> <span class="mi">0</span>
@@ -298,21 +371,22 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">damp</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
         <span class="n">damp</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">fpha</span><span class="p">,</span> <span class="n">famp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">fpha</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">famp</span><span class="p">)</span>
-    <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">ndatasets</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">npts</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">sf</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">ntrials</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">npts</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">sf</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
-
+    <span class="c1"># Random state of the machine :</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">rnd_state</span><span class="p">)</span>
     <span class="c1"># Band / Delta parameters :</span>
-    <span class="n">sh</span> <span class="o">=</span> <span class="p">(</span><span class="n">ndatasets</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">sh</span> <span class="o">=</span> <span class="p">(</span><span class="n">ntrials</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">fpha</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">apha</span> <span class="o">=</span> <span class="p">[</span><span class="n">fpha</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">dpha</span> <span class="o">/</span> <span class="mi">100</span><span class="p">),</span> <span class="n">fpha</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">dpha</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)]</span>
-        <span class="n">del_pha</span> <span class="o">=</span> <span class="n">apha</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">apha</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">apha</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="o">*</span><span class="n">sh</span><span class="p">)</span>
+        <span class="n">del_pha</span> <span class="o">=</span> <span class="n">apha</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">apha</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">apha</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="o">*</span><span class="n">sh</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">fpha</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">del_pha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">fpha</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">fpha</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ndatasets</span><span class="p">)</span>
+        <span class="n">del_pha</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">fpha</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">fpha</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ntrials</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">famp</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">a_amp</span> <span class="o">=</span> <span class="p">[</span><span class="n">famp</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">damp</span> <span class="o">/</span> <span class="mi">100</span><span class="p">),</span> <span class="n">famp</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">damp</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)]</span>
-        <span class="n">del_amp</span> <span class="o">=</span> <span class="n">a_amp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">a_amp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a_amp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="o">*</span><span class="n">sh</span><span class="p">)</span>
+        <span class="n">del_amp</span> <span class="o">=</span> <span class="n">a_amp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">a_amp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a_amp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="o">*</span><span class="n">sh</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">famp</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">del_amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">famp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">famp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ndatasets</span><span class="p">)</span>
+        <span class="n">del_amp</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">famp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">famp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ntrials</span><span class="p">)</span>
 
     <span class="c1"># Reshape phase/amplitude bands :</span>
     <span class="n">del_pha</span><span class="p">,</span> <span class="n">del_amp</span> <span class="o">=</span> <span class="n">del_pha</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">del_amp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -327,7 +401,7 @@
 
     <span class="c1"># Generate datasets :</span>
     <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">ah</span> <span class="o">*</span> <span class="n">xh</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">al</span> <span class="o">*</span> <span class="n">xl</span><span class="p">)</span>
-    <span class="n">data</span> <span class="o">+=</span> <span class="n">noise</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># Add noise</span>
+    <span class="n">data</span> <span class="o">+=</span> <span class="n">noise</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># Add noise</span>
 
     <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span></div>
 

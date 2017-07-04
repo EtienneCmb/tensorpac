@@ -127,7 +127,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#utils">Utils</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#generate-artificially-coupled-signals-using-tort-method">Generate artificially coupled signals using Tort method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#generate-artificially-coupled-signals-using-wavelets">Generate artificially coupled signals using wavelets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
@@ -139,24 +140,22 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../auto_examples/index.html">Gallery of Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/index.html#general-examples">General examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/09_P-value.html">Compute p-values</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/00_FrequencyVectors.html">Define frequency vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_basic_pac.html">Basic phase amplitude coupling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/06_CompareSurrogatesMethods.html">Compararison of several surrogate evaluation methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/07_CompareNormalizationMethods.html">Compare the several normalization methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_pac_methods.html">PAC methods comparison</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/04_FilteringComparison.html">Filtering properties and effect</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_distant_coupling.html">Compute distant PAC</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_custom_visualizations.html">Compare visualization methods</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../auto_examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_readme.html">README example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_values.html">Compute p-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_frequency_vectors.html">Define frequency vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_basic_pac.html">Basic phase amplitude coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_compare_surrogates.html">Compararison of several surrogate evaluation methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_compare_filtering.html">Filtering properties and effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_compare_normalizations.html">Compare the several normalization methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_pac_methods.html">PAC methods comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_distant_coupling.html">Compute distant PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_custom_visualizations.html">Compare visualization methods</a></li>
 </ul>
 </li>
 </ul>
@@ -247,7 +246,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    idpac: tuple/list | (1, 1, 3)</span>
+<span class="sd">    idpac : tuple/list | (1, 1, 3)</span>
 <span class="sd">        Choose the combination of methods to use in order to extract PAC.</span>
 <span class="sd">        This tuple must be composed of three integers where each one them</span>
 <span class="sd">        refer</span>
@@ -478,7 +477,7 @@
         <span class="k">return</span> <span class="n">xfilt</span></div>
 
 <div class="viewcode-block" id="Pac.fit"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.pac.Pac.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nperm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">optimize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">get_surro</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">get_pval</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">get_surro</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute PAC on filtered data.</span>
 
 <span class="sd">        Parameters</span>
@@ -504,11 +503,11 @@
 <span class="sd">            Optimize argument of the np.einsum function. Use either False,</span>
 <span class="sd">            True, &#39;greedy&#39; or &#39;optimal&#39;.</span>
 
+<span class="sd">        get_pval : bool | False</span>
+<span class="sd">            Get the pvalues. Only avaible if surrogates are computed.</span>
+
 <span class="sd">        get_surro : bool | False</span>
 <span class="sd">            Return surrogate chance distribution.</span>
-
-<span class="sd">        correct : bool | True</span>
-<span class="sd">            Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
 
 <span class="sd">        njobs : int | -1</span>
 <span class="sd">            Number of jobs to compute PAC in parallel. For very large data,</span>
@@ -520,7 +519,7 @@
 <span class="sd">            Phase-Amplitude Coupling measure of shape (namp, npha, ...).</span>
 
 <span class="sd">        pvalue: array_like</span>
-<span class="sd">            P-values (None if no surrogates)</span>
+<span class="sd">            P-values of shape (namp, npha, ...) if get_pval is True.</span>
 
 <span class="sd">        suro: array_like</span>
 <span class="sd">            If get_suro is True, get the chance distribution of shape</span>
@@ -545,7 +544,7 @@
         <span class="c1"># For the phase synchrony, extract the phase of the amplitude :</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
             <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">hilbert</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">))</span>
-        <span class="n">suro</span><span class="p">,</span> <span class="n">pvalues</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="n">suro</span> <span class="o">=</span> <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">])</span>
         <span class="c1"># Check for 0 permutations :</span>
         <span class="k">if</span> <span class="n">nperm</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_idpac</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -563,29 +562,31 @@
             <span class="c1"># Get the mean / deviation of surrogates :</span>
             <span class="n">m_surro</span><span class="p">,</span> <span class="n">std_surro</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">suro</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">suro</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-            <span class="c1"># Normalize pac by surrogates :</span>
-            <span class="n">pac</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">pac</span><span class="p">,</span> <span class="n">m_surro</span><span class="p">,</span> <span class="n">std_surro</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-
             <span class="c1"># Compute statistics :</span>
-            <span class="n">suro</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="n">suro</span> <span class="o">-=</span> <span class="n">pac</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
-            <span class="n">pvalues</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">suro</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">nperm</span>
+            <span class="n">suro</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">pvalues</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">suro</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">nperm</span>
             <span class="n">pvalues</span><span class="p">[</span><span class="n">pvalues</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">nperm</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">nperm</span>
+
+            <span class="c1"># Normalize pac by surrogates :</span>
+            <span class="n">normalize</span><span class="p">(</span><span class="n">pac</span><span class="p">,</span> <span class="n">m_surro</span><span class="p">,</span> <span class="n">std_surro</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
             <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">pac</span><span class="p">)</span>
             <span class="n">pvalues</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">pac</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">nperm</span>
 
-        <span class="k">if</span> <span class="n">correct</span><span class="p">:</span>
-            <span class="n">pac</span><span class="p">[</span><span class="n">pac</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
-
-        <span class="k">if</span> <span class="n">get_surro</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">pac</span><span class="p">,</span> <span class="n">pvalues</span><span class="p">,</span> <span class="n">suro</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">get_surro</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">get_pval</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pac</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">pac</span><span class="p">,</span> <span class="n">pvalues</span></div>
+            <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">pac</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">get_pval</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_csuro</span><span class="p">:</span>
+                <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pvalues</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">get_surro</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_csuro</span><span class="p">:</span>
+                <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">suro</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">args</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Pac.filterfit"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.pac.Pac.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nperm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
-                  <span class="n">optimize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">get_surro</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">correct</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="Pac.filterfit"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.pac.Pac.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nperm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                  <span class="n">optimize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">get_pval</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">get_surro</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">njobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Filt the data then compute PAC on it.</span>
 
 <span class="sd">        Parameters</span>
@@ -615,11 +616,11 @@
 <span class="sd">            Optimize argument of the np.einsum function. Use either False,</span>
 <span class="sd">            True, &#39;greedy&#39; or &#39;optimal&#39;.</span>
 
+<span class="sd">        get_pval : bool | False</span>
+<span class="sd">            Get the pvalues. Only avaible if surrogates are computed.</span>
+
 <span class="sd">        get_surro : bool | False</span>
 <span class="sd">            Return surrogate chance distribution.</span>
-
-<span class="sd">        correct : bool | True</span>
-<span class="sd">            Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
 
 <span class="sd">        njobs : int | -1</span>
 <span class="sd">            Number of jobs to compute PAC in parallel. For very large data,</span>
@@ -627,13 +628,13 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        pac : array_like</span>
+<span class="sd">        pac: array_like</span>
 <span class="sd">            Phase-Amplitude Coupling measure of shape (namp, npha, ...).</span>
 
-<span class="sd">        pvalue : array_like</span>
-<span class="sd">            P-values (None if no surrogates)</span>
+<span class="sd">        pvalue: array_like</span>
+<span class="sd">            P-values of shape (namp, npha, ...) if get_pval is True.</span>
 
-<span class="sd">        suro : array_like</span>
+<span class="sd">        suro: array_like</span>
 <span class="sd">            If get_suro is True, get the chance distribution of shape</span>
 <span class="sd">            (nperm, namp, npha, ...)</span>
 
@@ -651,6 +652,9 @@
 <span class="sd">              amplitude into two equal parts, then swap those two blocks. But</span>
 <span class="sd">              the nblocks parameter allow to split into a larger number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check if amp is None :</span>
+        <span class="k">if</span> <span class="n">xamp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">xamp</span> <span class="o">=</span> <span class="n">xpha</span>
         <span class="c1"># Shape checking :</span>
         <span class="k">if</span> <span class="n">xpha</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">xamp</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The shape of xpha and xamp must be equals.&quot;</span><span class="p">)</span>
@@ -664,7 +668,7 @@
 
         <span class="c1"># Compute pac :</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">traxis</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nperm</span><span class="p">,</span> <span class="n">optimize</span><span class="p">,</span>
-                        <span class="n">get_surro</span><span class="p">,</span> <span class="n">correct</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span></div>
+                        <span class="n">get_pval</span><span class="p">,</span> <span class="n">get_surro</span><span class="p">,</span> <span class="n">njobs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Pac.pp"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.pac.Pac.pp">[docs]</a>    <span class="k">def</span> <span class="nf">pp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">72</span><span class="p">,</span> <span class="n">optimize</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute the preferred-phase.</span>

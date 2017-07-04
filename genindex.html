@@ -127,7 +127,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#utils">Utils</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#generate-artificially-coupled-signals-using-tort-method">Generate artificially coupled signals using Tort method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#generate-artificially-coupled-signals-using-wavelets">Generate artificially coupled signals using wavelets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
@@ -139,24 +140,22 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Gallery of Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/index.html#general-examples">General examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/09_P-value.html">Compute p-values</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/00_FrequencyVectors.html">Define frequency vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_basic_pac.html">Basic phase amplitude coupling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/06_CompareSurrogatesMethods.html">Compararison of several surrogate evaluation methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/07_CompareNormalizationMethods.html">Compare the several normalization methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_pac_methods.html">PAC methods comparison</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/04_FilteringComparison.html">Filtering properties and effect</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_distant_coupling.html">Compute distant PAC</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_custom_visualizations.html">Compare visualization methods</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_readme.html">README example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_values.html">Compute p-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_frequency_vectors.html">Define frequency vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_basic_pac.html">Basic phase amplitude coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_surrogates.html">Compararison of several surrogate evaluation methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_filtering.html">Filtering properties and effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_normalizations.html">Compare the several normalization methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_pac_methods.html">PAC methods comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_distant_coupling.html">Compute distant PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_custom_visualizations.html">Compare visualization methods</a></li>
 </ul>
 </li>
 </ul>
@@ -265,82 +264,50 @@
 </li>
       <li><a href="tensorpac.html#tensorpac.surrogates.compute_surrogates">compute_surrogates() (in module tensorpac.surrogates)</a>
 </li>
-      <li><a href="tensorpac.html#tensorpac.Pac.cycle">cycle (tensorpac.Pac attribute)</a>
-
-      <ul>
-        <li><a href="tensorpac.html#tensorpac.pac.Pac.cycle">(tensorpac.pac.Pac attribute)</a>
+      <li><a href="tensorpac.html#tensorpac.pac.Pac.cycle">cycle (tensorpac.pac.Pac attribute)</a>
 </li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="tensorpac.html#tensorpac.Pac.dcomplex">dcomplex (tensorpac.Pac attribute)</a>
-
-      <ul>
-        <li><a href="tensorpac.html#tensorpac.pac.Pac.dcomplex">(tensorpac.pac.Pac attribute)</a>
+      <li><a href="tensorpac.html#tensorpac.pac.Pac.dcomplex">dcomplex (tensorpac.pac.Pac attribute)</a>
 </li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="tensorpac.html#tensorpac.Pac.erpac">erpac() (tensorpac.Pac method)</a>
-
-      <ul>
-        <li><a href="api.html#tensorpac.pac.Pac.erpac">(tensorpac.pac.Pac method)</a>, <a href="tensorpac.html#tensorpac.pac.Pac.erpac">[1]</a>
+      <li><a href="api.html#tensorpac.pac.Pac.erpac">erpac() (tensorpac.pac.Pac method)</a>, <a href="tensorpac.html#tensorpac.pac.Pac.erpac">[1]</a>
 </li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="tensorpac.html#tensorpac.Pac.filt">filt (tensorpac.Pac attribute)</a>
-
-      <ul>
-        <li><a href="tensorpac.html#tensorpac.pac.Pac.filt">(tensorpac.pac.Pac attribute)</a>
+      <li><a href="tensorpac.html#tensorpac.pac.Pac.filt">filt (tensorpac.pac.Pac attribute)</a>
 </li>
-      </ul></li>
       <li><a href="tensorpac.html#tensorpac.filtering.filtdata">filtdata() (in module tensorpac.filtering)</a>
 </li>
-      <li><a href="tensorpac.html#tensorpac.Pac.filter">filter() (tensorpac.Pac method)</a>
-
-      <ul>
-        <li><a href="api.html#tensorpac.pac.Pac.filter">(tensorpac.pac.Pac method)</a>, <a href="tensorpac.html#tensorpac.pac.Pac.filter">[1]</a>
+      <li><a href="api.html#tensorpac.pac.Pac.filter">filter() (tensorpac.pac.Pac method)</a>, <a href="tensorpac.html#tensorpac.pac.Pac.filter">[1]</a>
 </li>
-      </ul></li>
-      <li><a href="tensorpac.html#tensorpac.Pac.filterfit">filterfit() (tensorpac.Pac method)</a>
-
-      <ul>
-        <li><a href="api.html#tensorpac.pac.Pac.filterfit">(tensorpac.pac.Pac method)</a>, <a href="tensorpac.html#tensorpac.pac.Pac.filterfit">[1]</a>
+      <li><a href="api.html#tensorpac.pac.Pac.filterfit">filterfit() (tensorpac.pac.Pac method)</a>, <a href="tensorpac.html#tensorpac.pac.Pac.filterfit">[1]</a>
 </li>
-      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="tensorpac.html#tensorpac.Pac.filtorder">filtorder (tensorpac.Pac attribute)</a>
-
-      <ul>
-        <li><a href="tensorpac.html#tensorpac.pac.Pac.filtorder">(tensorpac.pac.Pac attribute)</a>
+      <li><a href="tensorpac.html#tensorpac.pac.Pac.filtorder">filtorder (tensorpac.pac.Pac attribute)</a>
 </li>
-      </ul></li>
       <li><a href="tensorpac.html#tensorpac.filtering.fir1">fir1() (in module tensorpac.filtering)</a>
 </li>
       <li><a href="tensorpac.html#tensorpac.filtering.fir_order">fir_order() (in module tensorpac.filtering)</a>
 </li>
       <li><a href="tensorpac.html#tensorpac.filtering.firls">firls() (in module tensorpac.filtering)</a>
 </li>
-      <li><a href="tensorpac.html#tensorpac.Pac.fit">fit() (tensorpac.Pac method)</a>
-
-      <ul>
-        <li><a href="api.html#tensorpac.pac.Pac.fit">(tensorpac.pac.Pac method)</a>, <a href="tensorpac.html#tensorpac.pac.Pac.fit">[1]</a>
+      <li><a href="api.html#tensorpac.pac.Pac.fit">fit() (tensorpac.pac.Pac method)</a>, <a href="tensorpac.html#tensorpac.pac.Pac.fit">[1]</a>
 </li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -357,14 +324,10 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="tensorpac.html#tensorpac.memory.id">id() (in module tensorpac.memory)</a>
 </li>
-      <li><a href="tensorpac.html#tensorpac.Pac.idpac">idpac (tensorpac.Pac attribute)</a>
-
-      <ul>
-        <li><a href="tensorpac.html#tensorpac.pac.Pac.idpac">(tensorpac.pac.Pac attribute)</a>
-</li>
-      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="tensorpac.html#tensorpac.pac.Pac.idpac">idpac (tensorpac.pac.Pac attribute)</a>
+</li>
       <li><a href="tensorpac.html#tensorpac.visu.interp2">interp2() (in module tensorpac.visu)</a>
 </li>
   </ul></td>
@@ -411,34 +374,20 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="tensorpac.html#tensorpac.Pac">Pac (class in tensorpac)</a>
-
-      <ul>
-        <li><a href="api.html#tensorpac.pac.Pac">(class in tensorpac.pac)</a>, <a href="tensorpac.html#tensorpac.pac.Pac">[1]</a>
+      <li><a href="api.html#tensorpac.pac.Pac">Pac (class in tensorpac.pac)</a>, <a href="tensorpac.html#tensorpac.pac.Pac">[1]</a>
 </li>
-      </ul></li>
-      <li><a href="tensorpac.html#tensorpac.pac_signals">pac_signals() (in module tensorpac)</a>
-
-      <ul>
-        <li><a href="api.html#tensorpac.utils.pac_signals">(in module tensorpac.utils)</a>, <a href="tensorpac.html#tensorpac.utils.pac_signals">[1]</a>
+      <li><a href="api.html#tensorpac.utils.pac_signals_tort">pac_signals_tort() (in module tensorpac.utils)</a>, <a href="tensorpac.html#tensorpac.utils.pac_signals_tort">[1]</a>
 </li>
-      </ul></li>
-      <li><a href="tensorpac.html#tensorpac.pac_trivec">pac_trivec() (in module tensorpac)</a>
-
-      <ul>
-        <li><a href="api.html#tensorpac.utils.pac_trivec">(in module tensorpac.utils)</a>, <a href="tensorpac.html#tensorpac.utils.pac_trivec">[1]</a>
+      <li><a href="api.html#tensorpac.utils.pac_signals_wavelet">pac_signals_wavelet() (in module tensorpac.utils)</a>, <a href="tensorpac.html#tensorpac.utils.pac_signals_wavelet">[1]</a>
 </li>
-      </ul></li>
-      <li><a href="tensorpac.html#tensorpac.pac_vec">pac_vec() (in module tensorpac)</a>
-
-      <ul>
-        <li><a href="api.html#tensorpac.utils.pac_vec">(in module tensorpac.utils)</a>, <a href="tensorpac.html#tensorpac.utils.pac_vec">[1]</a>
+      <li><a href="api.html#tensorpac.utils.pac_trivec">pac_trivec() (in module tensorpac.utils)</a>, <a href="tensorpac.html#tensorpac.utils.pac_trivec">[1]</a>
 </li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#tensorpac.utils.pac_vec">pac_vec() (in module tensorpac.utils)</a>, <a href="tensorpac.html#tensorpac.utils.pac_vec">[1]</a>
+</li>
       <li><a href="tensorpac.html#tensorpac.visu.PacPlot">PacPlot (class in tensorpac.visu)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#tensorpac.pac.Pac.pacplot">pacplot() (tensorpac.pac.Pac method)</a>
 
       <ul>
@@ -451,12 +400,8 @@
 </li>
       <li><a href="tensorpac.html#tensorpac.visu.PacPlot.polar">polar() (tensorpac.visu.PacPlot method)</a>
 </li>
-      <li><a href="tensorpac.html#tensorpac.Pac.pp">pp() (tensorpac.Pac method)</a>
-
-      <ul>
-        <li><a href="api.html#tensorpac.pac.Pac.pp">(tensorpac.pac.Pac method)</a>, <a href="tensorpac.html#tensorpac.pac.Pac.pp">[1]</a>
+      <li><a href="api.html#tensorpac.pac.Pac.pp">pp() (tensorpac.pac.Pac method)</a>, <a href="tensorpac.html#tensorpac.pac.Pac.pp">[1]</a>
 </li>
-      </ul></li>
       <li><a href="tensorpac.html#tensorpac.methods.ps">ps() (in module tensorpac.methods)</a>
 </li>
   </ul></td>
@@ -535,12 +480,8 @@
 <h2 id="W">W</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="tensorpac.html#tensorpac.Pac.width">width (tensorpac.Pac attribute)</a>
-
-      <ul>
-        <li><a href="tensorpac.html#tensorpac.pac.Pac.width">(tensorpac.pac.Pac attribute)</a>
+      <li><a href="tensorpac.html#tensorpac.pac.Pac.width">width (tensorpac.pac.Pac attribute)</a>
 </li>
-      </ul></li>
   </ul></td>
 </tr></table>
 

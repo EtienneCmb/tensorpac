@@ -10,27 +10,27 @@ If you want to extract local coupling (i.e. on a source/electrode) both xpha
 and xamp have to be set to data.
 """
 import matplotlib.pyplot as plt
-from tensorpac.utils import pac_signals
+from tensorpac.utils import pac_signals_tort
 from tensorpac import Pac
 # plt.style.use('seaborn-poster')
 
 # First, we generate 2 datasets of signals artificially coupled between 10hz
-# and 100hz. By default, those datasets are organized as (ndatasets, npts)
+# and 100hz. By default, those datasets are organized as (ntrials, npts)
 # where npts is the number of time points.
 n = 20  # number of datasets
-d1, time = pac_signals(fpha=10, famp=100, noise=1, ndatasets=n, npts=3000)
-d2, time = pac_signals(fpha=10, famp=100, noise=3, ndatasets=n, dpha=20,
-                       damp=5, chi=.3, npts=3000)
+d1, time = pac_signals_tort(fpha=10, famp=100, noise=1, ntrials=n, npts=3000)
+d2, time = pac_signals_tort(fpha=10, famp=100, noise=3, ntrials=n, dpha=20,
+                            damp=5, chi=.3, npts=3000)
 
 # Define the model of PAC to use :
 p = Pac(idpac=(4, 0, 0), fpha=(2, 30, 1, 1), famp=(60, 150, 5, 5),
         dcomplex='wavelet', width=12)
 # Now, compute PAC by taking the phase of the first dataset and the amplitude
 # of the second
-xpac12, _ = p.filterfit(1024, d1, d2, axis=1)
+xpac12 = p.filterfit(1024, d1, d2, axis=1)
 # Invert by taking the phase of the second dataset and the amplitude of the
 #  first one :
-xpac21, _ = p.filterfit(1024, d2, d1, axis=1)
+xpac21 = p.filterfit(1024, d2, d1, axis=1)
 
 # Plot signals and PAC :
 plt.figure(figsize=(18, 12))

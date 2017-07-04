@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Gallery of Examples &mdash; Tensorpac 0.5.3 documentation</title>
+  <title>Examples &mdash; Tensorpac 0.5.3 documentation</title>
   
 
   
@@ -128,7 +128,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#utils">Utils</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../api.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#generate-artificially-coupled-signals-using-tort-method">Generate artificially coupled signals using Tort method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#generate-artificially-coupled-signals-using-wavelets">Generate artificially coupled signals using wavelets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
@@ -140,24 +141,22 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Gallery of Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#general-examples">General examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="09_P-value.html">Compute p-values</a></li>
-<li class="toctree-l3"><a class="reference internal" href="00_FrequencyVectors.html">Define frequency vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_basic_pac.html">Basic phase amplitude coupling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="06_CompareSurrogatesMethods.html">Compararison of several surrogate evaluation methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="07_CompareNormalizationMethods.html">Compare the several normalization methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_pac_methods.html">PAC methods comparison</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="04_FilteringComparison.html">Filtering properties and effect</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_distant_coupling.html">Compute distant PAC</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_custom_visualizations.html">Compare visualization methods</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_readme.html">README example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_values.html">Compute p-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_frequency_vectors.html">Define frequency vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_basic_pac.html">Basic phase amplitude coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_surrogates.html">Compararison of several surrogate evaluation methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Filtering properties and effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare the several normalization methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">PAC methods comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_distant_coupling.html">Compute distant PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_custom_visualizations.html">Compare visualization methods</a></li>
 </ul>
 </li>
 </ul>
@@ -204,7 +203,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Gallery of Examples</li>
+      <li>Examples</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -223,14 +222,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="gallery-of-examples">
-<span id="examples-index"></span><h1>Gallery of Examples<a class="headerlink" href="#gallery-of-examples" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="general-examples">
-<span id="id1"></span><h2>General examples<a class="headerlink" href="#general-examples" title="Permalink to this headline">¶</a></h2>
-<p>General-purpose and introductory examples from the sphinx-gallery</p>
-<div class="sphx-glr-thumbcontainer" tooltip="Alternativerly, you can create coupling not between centered frequences, but between frequency ..."><div class="figure" id="id2">
+  <div class="section" id="examples">
+<span id="examples-index"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
+<div class="sphx-glr-thumbcontainer" tooltip="Alternativerly, you can create coupling not between centered frequences, but between frequency ..."><div class="figure" id="id1">
 <img alt="../_images/sphx_glr_plot_bandwidth_signals_thumb.png" src="../_images/sphx_glr_plot_bandwidth_signals_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="plot_bandwidth_signals.html#sphx-glr-auto-examples-plot-bandwidth-signals-py"><span class="std std-ref">Generate a coupling between specific bands</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Reproduced the figure in the README. "><div class="figure" id="id2">
+<img alt="../_images/sphx_glr_plot_readme_thumb.png" src="../_images/sphx_glr_plot_readme_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_readme.html#sphx-glr-auto-examples-plot-readme-py"><span class="std std-ref">README example</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
@@ -241,14 +243,14 @@
 </div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-thumbcontainer" tooltip="For the visualization, we used a comodulogram. "><div class="figure" id="id4">
-<img alt="../_images/sphx_glr_09_P-value_thumb.png" src="../_images/sphx_glr_09_P-value_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="09_P-value.html#sphx-glr-auto-examples-09-p-value-py"><span class="std std-ref">Compute p-values</span></a></span></p>
+<img alt="../_images/sphx_glr_plot_values_thumb.png" src="../_images/sphx_glr_plot_values_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_values.html#sphx-glr-auto-examples-plot-values-py"><span class="std std-ref">Compute p-values</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-thumbcontainer" tooltip="In Tensorpac, you can define your phase and amplitude vectors in sevral ways :"><div class="figure" id="id5">
-<img alt="../_images/sphx_glr_00_FrequencyVectors_thumb.png" src="../_images/sphx_glr_00_FrequencyVectors_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="00_FrequencyVectors.html#sphx-glr-auto-examples-00-frequencyvectors-py"><span class="std std-ref">Define frequency vectors</span></a></span></p>
+<img alt="../_images/sphx_glr_plot_frequency_vectors_thumb.png" src="../_images/sphx_glr_plot_frequency_vectors_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_frequency_vectors.html#sphx-glr-auto-examples-plot-frequency-vectors-py"><span class="std std-ref">Define frequency vectors</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
@@ -259,32 +261,32 @@
 </div><div class="toctree-wrapper compound">
 </div>
 <div class="sphx-glr-thumbcontainer" tooltip="Surrogates are used to generate a chance ditribution in order to correct the PAC estimation. "><div class="figure" id="id7">
-<img alt="../_images/sphx_glr_06_CompareSurrogatesMethods_thumb.png" src="../_images/sphx_glr_06_CompareSurrogatesMethods_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="06_CompareSurrogatesMethods.html#sphx-glr-auto-examples-06-comparesurrogatesmethods-py"><span class="std std-ref">Compararison of several surrogate evaluation methods</span></a></span></p>
+<img alt="../_images/sphx_glr_plot_compare_surrogates_thumb.png" src="../_images/sphx_glr_plot_compare_surrogates_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_compare_surrogates.html#sphx-glr-auto-examples-plot-compare-surrogates-py"><span class="std std-ref">Compararison of several surrogate evaluation methods</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="The normalization correspond on the method used to correct the PAC estimation with the chance d..."><div class="figure" id="id8">
-<img alt="../_images/sphx_glr_07_CompareNormalizationMethods_thumb.png" src="../_images/sphx_glr_07_CompareNormalizationMethods_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="07_CompareNormalizationMethods.html#sphx-glr-auto-examples-07-comparenormalizationmethods-py"><span class="std std-ref">Compare the several normalization methods</span></a></span></p>
+<div class="sphx-glr-thumbcontainer" tooltip="Tensorpac provides two ways for extracting phase and amplitude :"><div class="figure" id="id8">
+<img alt="../_images/sphx_glr_plot_compare_filtering_thumb.png" src="../_images/sphx_glr_plot_compare_filtering_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_compare_filtering.html#sphx-glr-auto-examples-plot-compare-filtering-py"><span class="std std-ref">Filtering properties and effect</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="Compute PAC on multiple datasets and compare implemented methods. "><div class="figure" id="id9">
+<div class="sphx-glr-thumbcontainer" tooltip="The normalization correspond on the method used to correct the PAC estimation with the chance d..."><div class="figure" id="id9">
+<img alt="../_images/sphx_glr_plot_compare_normalizations_thumb.png" src="../_images/sphx_glr_plot_compare_normalizations_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_compare_normalizations.html#sphx-glr-auto-examples-plot-compare-normalizations-py"><span class="std std-ref">Compare the several normalization methods</span></a></span></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Compute PAC on multiple datasets and compare implemented methods. "><div class="figure" id="id10">
 <img alt="../_images/sphx_glr_plot_pac_methods_thumb.png" src="../_images/sphx_glr_plot_pac_methods_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="plot_pac_methods.html#sphx-glr-auto-examples-plot-pac-methods-py"><span class="std std-ref">PAC methods comparison</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="Use the pac_signals function to generate artificial PAC. "><div class="figure" id="id10">
+<div class="sphx-glr-thumbcontainer" tooltip="Use the pac_signals_tort function to generate artificial PAC. "><div class="figure" id="id11">
 <img alt="../_images/sphx_glr_plot_artificially_coupled_signals_thumb.png" src="../_images/sphx_glr_plot_artificially_coupled_signals_thumb.png" />
 <p class="caption"><span class="caption-text"><a class="reference internal" href="plot_artificially_coupled_signals.html#sphx-glr-auto-examples-plot-artificially-coupled-signals-py"><span class="std std-ref">Generate artificially coupled signals</span></a></span></p>
-</div>
-</div><div class="toctree-wrapper compound">
-</div>
-<div class="sphx-glr-thumbcontainer" tooltip="Tensorpac provides two ways for extracting phase and amplitude :"><div class="figure" id="id11">
-<img alt="../_images/sphx_glr_04_FilteringComparison_thumb.png" src="../_images/sphx_glr_04_FilteringComparison_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="04_FilteringComparison.html#sphx-glr-auto-examples-04-filteringcomparison-py"><span class="std std-ref">Filtering properties and effect</span></a></span></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
@@ -319,7 +321,6 @@
 <a class="reference download internal" href="../_downloads/auto_examples_jupyter.zip" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">all</span> <span class="pre">examples</span> <span class="pre">in</span> <span class="pre">Jupyter</span> <span class="pre">notebooks:</span> <span class="pre">auto_examples_jupyter.zip</span></code></a></div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
-</div>
 </div>
 
 

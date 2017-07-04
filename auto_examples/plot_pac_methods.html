@@ -40,9 +40,9 @@
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Tensorpac 0.5.3 documentation" href="../index.html"/>
-        <link rel="up" title="Gallery of Examples" href="index.html"/>
+        <link rel="up" title="Examples" href="index.html"/>
         <link rel="next" title="Generate artificially coupled signals" href="plot_artificially_coupled_signals.html"/>
-        <link rel="prev" title="Compare the several normalization methods" href="07_CompareNormalizationMethods.html"/> 
+        <link rel="prev" title="Compare the several normalization methods" href="plot_compare_normalizations.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -129,7 +129,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#utils">Utils</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../api.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#generate-artificially-coupled-signals-using-tort-method">Generate artificially coupled signals using Tort method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#generate-artificially-coupled-signals-using-wavelets">Generate artificially coupled signals using wavelets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
@@ -141,24 +142,22 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Gallery of Examples</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="index.html#general-examples">General examples</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="09_P-value.html">Compute p-values</a></li>
-<li class="toctree-l3"><a class="reference internal" href="00_FrequencyVectors.html">Define frequency vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_basic_pac.html">Basic phase amplitude coupling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="06_CompareSurrogatesMethods.html">Compararison of several surrogate evaluation methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="07_CompareNormalizationMethods.html">Compare the several normalization methods</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">PAC methods comparison</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="04_FilteringComparison.html">Filtering properties and effect</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_distant_coupling.html">Compute distant PAC</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_custom_visualizations.html">Compare visualization methods</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_readme.html">README example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_values.html">Compute p-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_frequency_vectors.html">Define frequency vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_basic_pac.html">Basic phase amplitude coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_surrogates.html">Compararison of several surrogate evaluation methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Filtering properties and effect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare the several normalization methods</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">PAC methods comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_distant_coupling.html">Compute distant PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_custom_visualizations.html">Compare visualization methods</a></li>
 </ul>
 </li>
 </ul>
@@ -205,7 +204,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="index.html">Gallery of Examples</a> &raquo;</li>
+          <li><a href="index.html">Examples</a> &raquo;</li>
         
       <li>PAC methods comparison</li>
     
@@ -253,18 +252,18 @@
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">tensorpac.utils</span> <span class="kn">import</span> <span class="n">pac_signals</span>
+<span class="kn">from</span> <span class="nn">tensorpac.utils</span> <span class="kn">import</span> <span class="n">pac_signals_tort</span>
 <span class="kn">from</span> <span class="nn">tensorpac</span> <span class="kn">import</span> <span class="n">Pac</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-paper&#39;</span><span class="p">)</span>
 
 <span class="c1"># First, we generate a dataset of signals artificially coupled between 10hz</span>
-<span class="c1"># and 100hz. By default, this dataset is organized as (ndatasets, npts) where</span>
+<span class="c1"># and 100hz. By default, this dataset is organized as (ntrials, npts) where</span>
 <span class="c1"># npts is the number of time points.</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># number of datasets</span>
 <span class="n">sf</span> <span class="o">=</span> <span class="mf">256.</span>  <span class="c1"># sampling frequency</span>
-<span class="n">npts</span> <span class="o">=</span> <span class="mi">5000</span>  <span class="c1"># Number of time points</span>
-<span class="n">data</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">pac_signals</span><span class="p">(</span><span class="n">sf</span><span class="o">=</span><span class="n">sf</span><span class="p">,</span> <span class="n">fpha</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">famp</span><span class="o">=</span><span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">110</span><span class="p">],</span> <span class="n">noise</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-                         <span class="n">ndatasets</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">dpha</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">damp</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">)</span>
+<span class="n">npts</span> <span class="o">=</span> <span class="mi">3000</span>  <span class="c1"># Number of time points</span>
+<span class="n">data</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">pac_signals_tort</span><span class="p">(</span><span class="n">sf</span><span class="o">=</span><span class="n">sf</span><span class="p">,</span> <span class="n">fpha</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">famp</span><span class="o">=</span><span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">110</span><span class="p">],</span> <span class="n">noise</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                              <span class="n">ntrials</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">dpha</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">damp</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="n">npts</span><span class="p">)</span>
 
 <span class="c1"># First, let&#39;s use the MVL, without any further correction by surrogates :</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">Pac</span><span class="p">(</span><span class="n">fpha</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">famp</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dcomplex</span><span class="o">=</span><span class="s1">&#39;wavelet&#39;</span><span class="p">,</span>
@@ -281,7 +280,7 @@
     <span class="n">p</span><span class="o">.</span><span class="n">idpac</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="s1">&#39;-&gt; PAC using &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
     <span class="c1"># Compute only the PAC without filtering :</span>
-    <span class="n">xpac</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">phases</span><span class="p">,</span> <span class="n">amplitudes</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">xpac</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">phases</span><span class="p">,</span> <span class="n">amplitudes</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="c1"># Plot :</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
     <span class="n">p</span><span class="o">.</span><span class="n">comodulogram</span><span class="p">(</span><span class="n">xpac</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Spectral_r&#39;</span><span class="p">)</span>
@@ -289,7 +288,7 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  27.983 seconds)</p>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  16.960 seconds)</p>
 <div class="sphx-glr-footer container">
 <div class="sphx-glr-download container">
 <a class="reference download internal" href="../_downloads/plot_pac_methods.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_pac_methods.py</span></code></a></div>
@@ -312,7 +311,7 @@
         <a href="plot_artificially_coupled_signals.html" class="btn btn-neutral float-right" title="Generate artificially coupled signals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="07_CompareNormalizationMethods.html" class="btn btn-neutral" title="Compare the several normalization methods" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="plot_compare_normalizations.html" class="btn btn-neutral" title="Compare the several normalization methods" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
