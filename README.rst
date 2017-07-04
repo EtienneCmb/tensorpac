@@ -34,24 +34,28 @@ Code snippet & illustration
 
 .. code-block:: python
 
-    import matplotlib.pyplot as plt
-    from tensorpac.utils import pac_signals
-    from tensorpac import Pac
+from tensorpac.utils import pac_signals_tort
+from tensorpac import Pac
 
     # Dataset of signals artificially coupled between 10hz and 100hz :
-    n = 100  # number of datasets
-    data, time = pac_signals(fpha=10, famp=100, noise=3, ndatasets=n, dpha=10, damp=10)
+    n = 20     # number of datasets
+    sf = 512.  # sampling frequency
 
-    # Extract PAC :
-    p = Pac(idpac=(4, 0, 0), fpha=(2, 30, 1, 1), famp=(60, 150, 5, 5),
+    # Create artificially coupled signals using Tort method :
+    data, time = pac_signals_tort(fpha=10, famp=100, noise=2, ntrials=n,
+                                  dpha=10, damp=10, sf=sf)
+
+    # Define a PAC object :
+    p = Pac(idpac=(4, 0, 0), fpha=(2, 20, 1, 1), famp=(60, 150, 5, 5),
             dcomplex='wavelet', width=12)
-    xpac, pval = p.filterfit(1024, data, data, axis=1, nperm=100)
+    # Filter the data and extract PAC :
+    xpac = p.filterfit(sf, data, axis=1)
 
     # Plot your Phase-Amplitude Coupling :
     p.comodulogram(xpac.mean(-1), title='Contour plot with 5 regions',
-                   cmap='Spectral_r', plotas='contour', ncontours=5, vmin=60, vmax=300)
+                   cmap='Spectral_r', plotas='contour', ncontours=5)
 
-    plt.show()
+    p.show()
 
 
 .. figure::  https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/readme.png

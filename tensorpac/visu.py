@@ -8,6 +8,10 @@ __all__ = ('PacPlot')
 class PacPlot(object):
     """Main PAC plotting class."""
 
+    def __init__(self):
+        """Init."""
+        self._autovmM = True
+
     def pacplot(self, pac, xvec, yvec, xlabel='', ylabel='', cblabel='',
                 title='', cmap='viridis', vmin=None, vmax=None, under=None,
                 over=None, bad=None, pvalues=None, p=0.05, interp=None,
@@ -18,85 +22,86 @@ class PacPlot(object):
 
         This method can be used to plot any 2D array.
 
-        Args:
-            pac: np.ndarray
-                A 2D array.
+        Parameters
+        ----------
+        pac : array_like
+            A 2D array.
 
-            xvec: np.ndarray
-                The vector to use for the x-axis.
+        xvec : array_like
+            The vector to use for the x-axis.
 
-            yvec: np.ndarray
-                The vector to use for the y-axis.
+        yvec : array_like
+            The vector to use for the y-axis.
 
-        Kargs:
-            xlabel: string, optional, (def: '')
-                Label for the x-axis.
+        xlabel : string | ''
+            Label for the x-axis.
 
-            ylabel: string, optional, (def: '')
-                Label for the y-axis.
+        ylabel : string | ''
+            Label for the y-axis.
 
-            cblabel: string, optional, (def: '')
-                Label for the colorbar.
+        cblabel : string | ''
+            Label for the colorbar.
 
-            title: string, optional, (def: '')
-                Title of the plot.
+        title : string | ''
+            Title of the plot.
 
-            y: float, optional, (def: 1.02)
-                Title location.
+        y : float | 1.02
+            Title location.
 
-            cmap: string, optional, (def: 'viridis')
-                Name of one Matplotlib's colomap.
+        cmap : string | 'viridis'
+            Name of one Matplotlib's colomap.
 
-            vmin: float, optional, (def: None)
-                Threshold under which set the color to the uner parameter.
+        vmin : float | None
+            Threshold under which set the color to the uner parameter.
 
-            vmax: float, optional, (def: None)
-                Threshold over which set the color in the over parameter.
+        vmax : float | None
+            Threshold over which set the color in the over parameter.
 
-            under: string, optional, (def: 'gray')
-                Color for values under the vmin parameter.
+        under : string | 'gray'
+            Color for values under the vmin parameter.
 
-            over: string, optional, (def: 'red')
-                Color for values over the vmax parameter.
+        over : string | 'red'
+            Color for values over the vmax parameter.
 
-            bad: string, optional, (def: None)
-                Color for non-significant values.
+        bad : string | None
+            Color for non-significant values.
 
-            pvalues: np.ndarray, optional, (def: None)
-                P-values to use for masking PAC values. The shape of this
-                parameter must be the same as the shape as pac.
+        pvalues : array_like | None
+            P-values to use for masking PAC values. The shape of this
+            parameter must be the same as the shape as pac.
 
-            p: float, optional, (def: .05)
-                If pvalues is pass, use this threshold for masking
-                non-significant PAC.
+        p : float | .05
+            If pvalues is pass, use this threshold for masking
+            non-significant PAC.
 
-            interp: tuple, optional, (def: None)
-                Tuple for controlling the 2D interpolation. For example,
-                (.1, .1) will multiply the number of row and columns by 10.
+        interp : tuple | None
+            Tuple for controlling the 2D interpolation. For example,
+            (.1, .1) will multiply the number of row and columns by 10.
 
-            rmaxis: bool, optional, (def: False)
-                Remove unecessary axis.
+        rmaxis : bool | False
+            Remove unecessary axis.
 
-            dpaxis: bool, optional, (def: False)
-                Despine axis.
+        dpaxis : bool | False
+            Despine axis.
 
-            plotas: string, optional, (def: 'imshow')
-                Choose how to display the comodulogram, either using imshow
-                ('imshow') or contours ('contour'). If you choose 'contour',
-                use the ncontours parameter for controlling the number of
-                contours.
+        plotas : {'imshow', 'contour', 'pcolor'}
+            Choose how to display the comodulogram, either using imshow
+            ('imshow') or contours ('contour'). If you choose 'contour',
+            use the ncontours parameter for controlling the number of
+            contours.
 
-            ncontours: int, optional, (def: 5)
-                Number of contours if plotas is 'contour'.
+        ncontours : int | 5
+            Number of contours if plotas is 'contour'.
 
-            levels: list, optional, (def: None)
-                Add significency levels. This parameter must be a sorted list
-                of p-values to use as levels.
+        levels : list | None
+            Add significency levels. This parameter must be a sorted list
+            of p-values to use as levels.
 
-            levelcmap: string, optional, (def: Reds)
-                Colormap of signifiency levels.
+        levelcmap : string | Reds
+            Colormap of signifiency levels.
 
-        Returns:
+        Returns
+        -------
             gca: axes
                 The current matplotlib axes.
         """
@@ -113,7 +118,7 @@ class PacPlot(object):
             pvalues = np.zeros_like(pac)
         # 2D interpolation (if needed)
         if interp is not None:
-            pac, yvec, xvec = mapinterpolation(pac, xvec, yvec,
+            pac, xvec, yvec = mapinterpolation(pac, xvec, yvec,
                                                interp[0], interp[1])
             pvalues = mapinterpolation(pvalues, self.xvec, self.yvec,
                                        interp[0], interp[1])[0]
@@ -123,7 +128,7 @@ class PacPlot(object):
             plotas = 'pcolor'
             plt.subplot(subplot, projection='polar')
         # Check vmin / vmax
-        if vmin is None and vmax is None:
+        if (vmin is None) and (vmax is None) and self._autovmM:
             vmin = min(0, pac.min())
             vmax = max(0, pac.max())
             if vmin < 0 and vmax > 0:
@@ -193,28 +198,31 @@ class PacPlot(object):
                      cblabel='PAC values', **kwargs):
         """Plot PAC using comodulogram.
 
-        Args:
-            pac: np.ndarray
-                PAC array of shape (namp, pha)
+        Parameters
+        ----------
+        pac : array_like
+            PAC array of shape (namp, pha)
 
-        Kargs:
-            xlabel: string, optional, (def: 'Frequency for phase (hz)')
-                Label for the phase axis.
+        xlabel : string | 'Frequency for phase (hz)'
+            Label for the phase axis.
 
-            ylabel: string, optional, (def: 'Frequency for amplitude (hz)')
-                Label for the amplitude axis.
+        ylabel : string | 'Frequency for amplitude (hz)'
+            Label for the amplitude axis.
 
-            cblabel: string, optional, (def: 'PAC values')
-                Colorbar.
+        cblabel : string | 'PAC values'
+            Colorbar.
 
-            kwargs:
-                Further arguments are passed to the pacplot() method.
+        kwargs : dict
+            Further arguments are passed to the pacplot() method.
 
-        Returns:
-            gca: axes
-                The current matplotlib axes.
+        Returns
+        -------
+        gca : axes
+            The current matplotlib axes.
         """
         xvec, yvec = self.xvec, self.yvec
+        # Disable automatic vmin/vmax :
+        self._autovmM = True
         return self.pacplot(pac, xvec, yvec, xlabel, ylabel, cblabel,
                             **kwargs)
 
@@ -226,36 +234,37 @@ class PacPlot(object):
         The triplot method is used to find the [starting, ending] frequency
         either for the phase or for the amplitude.
 
-        Args:
-            pac: np.ndarray
-                Pac array of shape (namp, npha)
+        Parameters
+        ----------
+        pac : array_like
+            Pac array of shape (namp, npha)
 
-            fvec: np.ndarray
-                The frequency vector returned by the pac_trivec function.
+        fvec : array_like
+            The frequency vector returned by the pac_trivec function.
 
-            tridx: np.ndarray
-                The index vector used to build the triangle. This argument is
-                also returned by the pac_trivec function.
+        tridx : array_like
+            The index vector used to build the triangle. This argument is
+            also returned by the pac_trivec function.
 
-        Kargs:
-            xlabel: string, optional, (def: 'Starting frequency (hz)')
-                Label for the phase axis.
+        xlabel : string | 'Starting frequency (hz)'
+            Label for the phase axis.
 
-            ylabel: string, optional, (def: 'Ending frequency (hz)')
-                Label for the amplitude axis.
+        ylabel : string | 'Ending frequency (hz)'
+            Label for the amplitude axis.
 
-            cblabel: string, optional, (def: 'PAC values')
-                Colorbar.
+        cblabel : string | 'PAC values'
+            Colorbar.
 
-            bad: string, optional, (def: 'lightgray')
-                Color for non-significant values.
+        bad : string | 'lightgray'
+            Color for non-significant values.
 
-            kwargs:
-                Further arguments are passed to the pacplot() method.
+        kwargs : dict
+            Further arguments are passed to the pacplot() method.
 
-        Returns:
-            gca: axes
-                The current matplotlib axes.
+        Returns
+        -------
+        gca : axes
+            The current matplotlib axes.
         """
         pac, tridx = np.squeeze(pac), np.squeeze(tridx)
         # ___________________ CHECKING ___________________
@@ -281,6 +290,8 @@ class PacPlot(object):
         # Define frequency vector :
         vector = fvec[tridx[:, 0] == 0, 0]
         xvec = yvec = np.append(vector, [fvec.max()])
+        # Enable automatic vmin/vmax :
+        self._autovmM = False
         return self.pacplot(rpac, xvec, yvec, xlabel, ylabel, cblabel,
                             bad=bad, **kwargs)
 
@@ -290,30 +301,33 @@ class PacPlot(object):
         This method is used to visualize amplitude as a function of phase using
         a polar (circle) representation.
 
-        Args:
-            amp: np.ndarray
-                2D array.
+        Parameters
+        ----------
+        amp : array_like
+            2D array.
 
-            xvec: np.ndarray
-                Vector for the x-axis.
+        xvec : array_like
+            Vector for the x-axis.
 
-            yvec: np.ndarray
-                Vector for the y-axis (phases).
+        yvec : array_like
+            Vector for the y-axis (phases).
 
-        Kargs:
-            interp: float, optional, (def: None)
-                Interplation factor.
+        interp : float | None
+            Interplation factor.
 
-            kwargs:
-                Further arguments are passed to the pacplot() method.
+        kwargs : dict
+            Further arguments are passed to the pacplot() method.
 
-        Returns:
-            gca: axes
-                The current matplotlib axes.
+        Returns
+        -------
+        gca : axes
+            The current matplotlib axes.
         """
         # Interpolation :
         if interp is not None:
             amp, yvec, xvec = mapinterpolation(amp, yvec, xvec, interp, 1)
+        # Disable automatic vmin/vmax :
+        self._autovmM = False
         return self.pacplot(amp, xvec, yvec, polar=True, **kwargs)
 
     def show(self):
@@ -324,13 +338,13 @@ class PacPlot(object):
     def savefig(self, filename, dpi=600):
         """Save the figure.
 
-        Args:
-            filename: string
-                The name of the figure to save.
+        Parameters
+        ----------
+        filename : string
+            The name of the figure to save.
 
-        Kargs:
-            dpi: int, optional, (def: 600)
-                DPI of the figure.
+        dpi : int | 600
+            DPI of the figure.
         """
         import matplotlib.pyplot as plt
         plt.savefig(filename, dpi=dpi, bbox_inches='tight')
@@ -361,22 +375,23 @@ def interp2(z, xi, yi, extrapval=0):
 
     This function is equivalent to interp2(z, xi, yi,'linear') in Matlab.
 
-    Args:
-        z: np.ndarray
-            Array to interpolate.
+    Parameters
+    ----------
+    z : array_like
+        Array to interpolate.
 
-        xi: np.ndarray
-            Array of x coordinates where interpolation is required.
+    xi : array_like
+        Array of x coordinates where interpolation is required.
 
-        yi: np.ndarray
-            Array of y coordinates where interpolation is required.
+    yi : array_like
+        Array of y coordinates where interpolation is required.
 
-    Kargs:
-        extrapval: float, optional, (def: 0.)
-            Value for out of range positions.
+    extrapval : float | 0.
+        Value for out of range positions.
 
-    Returns:
-        f: np.ndarray
+    Returns
+    -------
+        f: array_like
             Extrapolated data.
     """
     x = xi.copy()

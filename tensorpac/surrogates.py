@@ -20,28 +20,30 @@ __all__ = ('compute_surrogates')
 def compute_surrogates(pha, amp, surargs, pacargs, nperm, njobs):
     """Compute surrogates using tensors and parallel computing.
 
-    Args:
-        pha: np.ndarray
-            Array of phases of shapes (npha, ..., npts)
+    Parameters
+    ----------
+    pha : array_like
+        Array of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarra
-            Array of amplitudes of shapes (namp, ..., npts)
+    amp : array_like
+        Array of amplitudes of shapes (namp, ..., npts)
 
-        suragrs: tuple
-            Tuple containing the arguments to pass to the suro_switch function.
+    suragrs : tuple
+        Tuple containing the arguments to pass to the suro_switch function.
 
-        pacargs: tuple
-            Tuple containing the arguments to pass to the compute_pac function.
+    pacargs : tuple
+        Tuple containing the arguments to pass to the compute_pac function.
 
-        nperm: int
-            Number of permutations.
+    nperm : int
+        Number of permutations.
 
-        njobs: int
-            Number of jos for the parallel computing.
+    njobs : int
+        Number of jos for the parallel computing.
 
-    Returns:
-        suro: np.ndarray
-            Array of pac surrogates of shape (nperm, npha, namp, ..., npts)
+    Returns
+    -------
+    suro : array_like
+        Array of pac surrogates of shape (nperm, npha, namp, ..., npts)
     """
     s = Parallel(n_jobs=njobs)(delayed(_compute_sur)(
         pha, amp, surargs, pacargs) for k in range(nperm))
@@ -56,18 +58,19 @@ def _compute_sur(pha, amp, surargs, pacargs):
     execution, at least a little bit. And, it's not esthetic but joblib doesn't
     accept to pickle functions.
 
-    Args:
-        pha: np.ndarray
-            Array of phases of shapes (npha, ..., npts)
+    Parameters
+    ----------
+    pha : array_like
+        Array of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarra
-            Array of amplitudes of shapes (namp, ..., npts)
+    amp : array_like
+        Array of amplitudes of shapes (namp, ..., npts)
 
-        suragrs: tuple
-            Tuple containing the arguments to pass to the suro_switch function.
+    suragrs : tuple
+        Tuple containing the arguments to pass to the suro_switch function.
 
-        pacargs: tuple
-            Tuple containing the arguments to pass to the compute_pac function.
+    pacargs : tuple
+        Tuple containing the arguments to pass to the compute_pac function.
     """
     # Get the surrogates :
     pha, amp = suro_switch(pha, amp, *surargs)
@@ -123,22 +126,24 @@ def suro_switch(pha, amp, idn, axis, traxis, nblocks):
 def swap_pha_amp(pha, amp, axis):
     """Swap phase/amplitude trials (Tort, 2010).
 
-    Args:
-        pha: np.ndarray
-            Array of phases of shapes (npha, ..., npts)
+    Parameters
+    ----------
+    pha : array_like
+        Array of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarra
-            Array of amplitudes of shapes (namp, ..., npts)
+    amp : array_like
+        Array of amplitudes of shapes (namp, ..., npts)
 
-        axis: int
-            Location of the trial axis.
+    axis : int
+        Location of the trial axis.
 
-    Return:
-        pha: np.ndarray
-            Swapped version of phases of shapes (npha, ..., npts)
+    Returns
+    -------
+    pha : array_like
+        Swapped version of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarra
-            Swapped version of amplitudes of shapes (namp, ..., npts)
+    amp : array_like
+        Swapped version of amplitudes of shapes (namp, ..., npts)
     """
     return _dimswap(pha, axis), _dimswap(amp, axis)
 
@@ -148,25 +153,27 @@ def swap_blocks(pha, amp, axis, nblocks):
 
     To reproduce (Bahramisharif, 2013), use a number of blocks of 2.
 
-    Args:
-        pha: np.ndarray
-            Array of phases of shapes (npha, ..., npts)
+    Parameters
+    ----------
+    pha : array_like
+        Array of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarra
-            Array of amplitudes of shapes (namp, ..., npts)
+    amp : array_like
+        Array of amplitudes of shapes (namp, ..., npts)
 
-        axis: int
-            Location of the time axis.
+    axis : int
+        Location of the time axis.
 
-        nblocks: int
-            Number of blocks to in which the amplitude is splitted.
+    nblocks : int
+        Number of blocks to in which the amplitude is splitted.
 
-    Return:
-        pha: np.ndarray
-            Original version of phases of shapes (npha, ..., npts)
+    Returns
+    -------
+    pha : array_like
+        Original version of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarra
-            Swapped version of amplitudes of shapes (namp, ..., npts)
+    amp : array_like
+        Swapped version of amplitudes of shapes (namp, ..., npts)
     """
     # Split amplitude across time into two parts :
     ampl = np.array_split(amp, nblocks, axis=axis)
@@ -185,22 +192,24 @@ def swap_blocks(pha, amp, axis, nblocks):
 def shuffle_amp(pha, amp, axis):
     """Randomly shuffle amplitudes across time.
 
-    Args:
-        pha: np.ndarray
-            Array of phases of shapes (npha, ..., npts)
+    Parameters
+    ----------
+    pha : array_like
+        Array of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarra
-            Array of amplitudes of shapes (namp, ..., npts)
+    amp : array_like
+        Array of amplitudes of shapes (namp, ..., npts)
 
-        axis: int
-            Location of the time axis.
+    axis : int
+        Location of the time axis.
 
-    Return:
-        pha: np.ndarray
-            Original version of phases of shapes (npha, ..., npts)
+    Returns
+    -------
+    pha : array_like
+        Original version of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarra
-            Shuffled version of amplitudes of shapes (namp, ..., npts)
+    amp : array_like
+        Shuffled version of amplitudes of shapes (namp, ..., npts)
     """
     return pha, _dimswap(amp, axis)
 
@@ -208,22 +217,24 @@ def shuffle_amp(pha, amp, axis):
 def time_lag(pha, amp, axis):
     """Introduce a time lag on phase series..
 
-    Args:
-        pha: np.ndarray
-            Array of phases of shapes (npha, ..., npts)
+    Parameters
+    ----------
+    pha : array_like
+        Array of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarra
-            Array of amplitudes of shapes (namp, ..., npts)
+    amp : array_like
+        Array of amplitudes of shapes (namp, ..., npts)
 
-        axis: int
-            Location of the time axis.
+    axis : int
+        Location of the time axis.
 
-    Return:
-        pha: np.ndarray
-            Shiffted version of phases of shapes (npha, ..., npts)
+    Returns
+    -------
+    pha : array_like
+        Shiffted version of phases of shapes (npha, ..., npts)
 
-        amp: np.ndarray
-            Original version of amplitudes of shapes (namp, ..., npts)
+    amp : array_like
+        Original version of amplitudes of shapes (namp, ..., npts)
     """
     npts = pha.shape[-1]
     return np.roll(pha, np.random.randint(npts), axis=axis), amp
@@ -232,17 +243,18 @@ def time_lag(pha, amp, axis):
 def _dimswap(x, axis=0):
     """Swap values into an array at a specific axis.
 
-    Args:
-        x: np.ndarray
-            Array of data to swap
+    Parameters
+    ----------
+    x : array_like
+        Array of data to swap
 
-    Kargs:
-        axis: int, optional, (def: 0)
-            Axis along which to perform swapping.
+    axis : int | 0
+        Axis along which to perform swapping.
 
-    Returns:
-        x: np.ndarray
-            Swapped version of x.
+    Returns
+    -------
+    x : array_like
+        Swapped version of x.
     """
     # Dimension vector :
     dimvec = [slice(None)] * x.ndim

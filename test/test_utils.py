@@ -1,6 +1,7 @@
 """Test tensorpac utils."""
 import numpy as np
-from tensorpac.utils import pac_vec, pac_signals, pac_trivec
+from tensorpac.utils import (pac_vec, pac_signals_tort, pac_trivec,
+                             pac_signals_wavelet)
 
 
 def test_pac_vec():
@@ -15,19 +16,21 @@ def test_pac_vec():
 
 def test_pac_signals_dtrials():
     """Definition of artificially coupled signals using dPha/dAmp."""
-    assert pac_signals(fpha=5, famp=130, sf=512, ndatasets=23, chi=0.9,
-                       noise=2, dpha=35, damp=46)
+    assert pac_signals_tort(fpha=5, famp=130, sf=512, ntrials=23, chi=0.9,
+                            noise=2, dpha=35, damp=46)
 
 
 def test_pac_signals_bandwidth():
     """Definition of artificially coupled signals using bandwidth."""
-    assert pac_signals(fpha=[5, 7], famp=[30, 60], sf=200., ndatasets=100,
-                       chi=0.5, noise=3., npts=1000)
+    assert pac_signals_tort(fpha=[5, 7], famp=[30, 60], sf=200., ntrials=100,
+                            chi=0.5, noise=3., npts=1000)
+    assert pac_signals_wavelet(fpha=10, famp=57., npts=1240, sf=256, noise=.7,
+                               ntrials=33, pp=np.pi/4, rnd_state=23)
 
 
 def test_default_args():
     """Test default aurguments for pac_vec."""
-    assert pac_signals(chi=2., noise=11., dpha=120., damp=200.)
+    assert pac_signals_tort(chi=2., noise=11., dpha=120., damp=200.)
 
 
 def test_trivec():

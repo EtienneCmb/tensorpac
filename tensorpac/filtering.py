@@ -15,28 +15,29 @@ __all__ = ('filtdata')
 def filtdata(x, sf, f, axis, filt, cycle, filtorder):
     """Filt the data using a forward/backward filter to avoid phase shifting.
 
-    Args:
-        x: np.ndarray
-            Array of data
+    Parameters
+    ----------
+    x : array_like
+        Array of data
 
-        sf: float
-            Sampling frequency
+    sf : float
+        Sampling frequency
 
-        f: np.ndarray
-            Frequency vector of shape (N, 2)
+    f : array_like
+        Frequency vector of shape (N, 2)
 
-        axis: int
-            Axis where the time is located.
+    axis : int
+        Axis where the time is located.
 
-        filt: string
-            Name of the filter to use (only if dcomplex is 'hilbert'). Use
-            either 'eegfilt', 'butter' or 'bessel'.
+    filt : string
+        Name of the filter to use (only if dcomplex is 'hilbert'). Use
+        either 'eegfilt', 'butter' or 'bessel'.
 
-        filtorder: int
-            Order of the filter (only if dcomplex is 'hilbert')
+    filtorder : int
+        Order of the filter (only if dcomplex is 'hilbert')
 
-        cycle: int
-            Number of cycles to use for fir1 filtering.
+    cycle : int
+        Number of cycles to use for fir1 filtering.
     """
     # fir1 filter :
     if filt == 'fir1':

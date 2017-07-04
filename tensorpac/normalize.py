@@ -30,16 +30,15 @@ def normalize(pac, s_mean, s_std, idn):
         return pac
 
     elif idn == 1:  # Substraction
-        return pac - s_mean
+        pac -= s_mean
 
     elif idn == 2:  # Divide
-        return pac / s_mean
+        pac /= s_mean
 
     elif idn == 3:  # Substract then divide
         pac -= s_mean
         pac /= s_mean
-        return pac
-        # return (pac-s_mean)/s_mean
 
     elif idn == 4:  # Z-score
-        return (pac - s_mean) / s_std
+        pac -= s_mean
+        pac /= s_std

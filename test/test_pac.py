@@ -1,5 +1,6 @@
 """Test tensorpac functions."""
 import numpy as np
+import matplotlib.pyplot as plt
 from tensorpac import Pac
 from tensorpac.utils import pac_trivec
 
@@ -57,11 +58,26 @@ def test_compute():
     """Test filtering test computing PAC."""
     data = np.random.rand(2, 1024)
     p = Pac(idpac=(4, 0, 0))
-    p.filterfit(1024, data, data, njobs=1)
+    p.filterfit(1024, data, njobs=1)
     p.idpac = (1, 1, 1)
-    p.filterfit(1024, data, data, njobs=1, nperm=2, correct=True)
+    p.filterfit(1024, data, data, njobs=1, nperm=2)
     p.dcomplex = 'wavelet'
     p.filter(1024, data, axis=1, njobs=1)
+
+
+def test_kargs():
+    """Test filtering test computing PAC."""
+    data = np.random.rand(2, 1024)
+    p = Pac(idpac=(1, 2, 4))
+    karg1 = p.filterfit(1024, data, data, njobs=1)
+    karg2 = p.filterfit(1024, data, data, njobs=1, get_pval=True)
+    karg3 = p.filterfit(1024, data, data, njobs=1, get_surro=True)
+    karg4 = p.filterfit(1024, data, data, njobs=1, get_surro=True,
+                        get_pval=True)
+    assert len(karg1) == 1
+    assert len(karg2) == 2
+    assert len(karg3) == 2
+    assert len(karg4) == 3
 
 
 def test_properties():
@@ -92,24 +108,20 @@ def test_pac_comodulogram():
 
     This test works locally but failed on travis...
     """
-    try:
-        f, tridx = pac_trivec()
-        pac = np.random.rand(20, 10)
-        pval = np.random.rand(20, 10)
-        p = Pac(fpha=np.arange(11), famp=np.arange(21))
-        print(len(p.xvec), len(p.yvec))
-        p.comodulogram(pac, rmaxis=True, dpaxis=True)
-        p.comodulogram(pac, plotas='contour', pvalues=pval)
-        p.comodulogram(pac, plotas='pcolor', pvalues=pval, levels=[.5, .7],
-                       under='gray', over='red', bad='orange')
-        p = Pac(fpha=np.arange(11), famp=f)
-        p.polar(pac, np.arange(10), np.arange(20), interp=.8)
-        pac = np.random.rand(len(f))
-        p.triplot(pac, f, tridx)
-        # p.savefig('file.png', dpi=10)
-        # p.show()
-    except:
-        pass
+    f, tridx = pac_trivec()
+    pac = np.random.rand(20, 10)
+    pval = np.random.rand(20, 10)
+    p = Pac(fpha=np.arange(11), famp=np.arange(21))
+    print(len(p.xvec), len(p.yvec))
+    p.comodulogram(pac, rmaxis=True, dpaxis=True)
+    p.comodulogram(pac, plotas='contour', pvalues=pval)
+    p.comodulogram(pac, plotas='pcolor', pvalues=pval, levels=[.5, .7],
+                   under='gray', over='red', bad='orange')
+    p = Pac(fpha=np.arange(11), famp=f)
+    p.polar(pac, np.arange(10), np.arange(20), interp=.8)
+    pac = np.random.rand(len(f))
+    p.triplot(pac, f, tridx)
+    plt.close('all')
 
 
 def test_preferred_phase():
