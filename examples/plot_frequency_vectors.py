@@ -18,15 +18,19 @@ from tensorpac.utils import pac_vec
 
 def plot(nb, pvec, avec, title):
     """Plotting function."""
+    pvecm = pvec.mean(1)
+    avecm = avec.mean(1)
     plt.subplot(1, 4, nb)
-    x, y = np.ones((pvec.shape[0],)), np.ones((avec.shape[0],))
-    plt.plot(pvec.mean(1), x, 'o', color='red', linewidth=2)
-    plt.plot(y, avec.mean(1), 'o', color='blue', linewidth=2)
+    plt.vlines(pvecm, -10, 500, color='#ab4642')
+    plt.hlines(avecm, -10, 500, color='slateblue')
     plt.xlabel('Frequency for phase (hz')
     plt.ylabel('Frequency for amplitude.mean(1)')
     plt.title(title)
+    plt.xlim([0, 30])
+    plt.ylim([60, 200])
 
 
+plt.figure(figsize=(25, 5))
 # 1 - Manual defintion :
 fpha = [2, 4]
 famp = [60, 160]

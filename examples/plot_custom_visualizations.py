@@ -7,7 +7,7 @@ This script present how to make a 2D comodulogram plot, with all of the
 possible parameters.
 """
 import matplotlib.pyplot as plt
-from tensorpac.utils import pac_signals_tort
+from tensorpac.utils import pac_signals_wavelet
 from tensorpac import Pac
 plt.style.use('seaborn-paper')
 
@@ -15,11 +15,11 @@ plt.style.use('seaborn-paper')
 # and 100hz. By default, this dataset is organized as (ntrials, npts) where
 # npts is the number of time points.
 n = 10  # number of datasets
-data, time = pac_signals_tort(fpha=10, famp=100, noise=2., ntrials=n, dpha=10,
-                              damp=10, npts=4000)
+data, time = pac_signals_wavelet(fpha=10, famp=100, noise=1., ntrials=n,
+                                 npts=4000)
 
 # First, let's use the MVL, without any further correction by surrogates :
-p = Pac(idpac=(5, 3, 3), fpha=(2, 30, 1, 1), famp=(60, 150, 5, 5),
+p = Pac(idpac=(5, 3, 3), fpha=(4, 18, 1, .3), famp=(60, 150, 5, 2),
         dcomplex='wavelet', width=7)
 xpac, pval = p.filterfit(1024, data, axis=1, nperm=110, get_pval=True)
 

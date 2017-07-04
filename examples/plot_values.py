@@ -16,13 +16,13 @@ plt.style.use('seaborn-poster')
 n = 1      # number of datasets
 sf = 512.  # sampling frequency
 data, time = pac_signals_wavelet(fpha=6, famp=90, noise=.8, ntrials=n,
-                                 npts=2000, sf=sf, rnd_state=3)
+                                 npts=6000, sf=sf, rnd_state=3)
 
 
 # First, let's use the MVL, without any further correction by surrogates :
 p = Pac(idpac=(1, 2, 1), fpha=(2, 15, 2, .1), famp=(60, 120, 10, 1),
         dcomplex='wavelet', nblocks=10)
-xpac, pval = p.filterfit(sf, data, axis=1, nperm=110, get_pval=True)
+xpac, pval = p.filterfit(sf, data, axis=1, nperm=200, get_pval=True)
 t1 = p.method + '\n' + p.surro + '\n' + p.norm
 
 xpac, pval = np.squeeze(xpac), np.squeeze(pval)
