@@ -22,7 +22,7 @@ class Pac(PacPlot):
 
     Parameters
     ----------
-    idpac: tuple/list | (1, 1, 3)
+    idpac : tuple/list | (1, 1, 3)
         Choose the combination of methods to use in order to extract PAC.
         This tuple must be composed of three integers where each one them
         refer
@@ -253,7 +253,7 @@ class Pac(PacPlot):
         return xfilt
 
     def fit(self, pha, amp, axis=1, traxis=0, nperm=200, optimize=True,
-            get_surro=False, correct=False, njobs=-1):
+            get_pval=False, get_surro=False, njobs=-1):
         """Compute PAC on filtered data.
 
         Parameters
@@ -279,11 +279,11 @@ class Pac(PacPlot):
             Optimize argument of the np.einsum function. Use either False,
             True, 'greedy' or 'optimal'.
 
+        get_pval : bool | False
+            Get the pvalues. Only avaible if surrogates are computed.
+
         get_surro : bool | False
             Return surrogate chance distribution.
-
-        correct : bool | True
-            Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
         njobs : int | -1
             Number of jobs to compute PAC in parallel. For very large data,
@@ -295,7 +295,7 @@ class Pac(PacPlot):
             Phase-Amplitude Coupling measure of shape (namp, npha, ...).
 
         pvalue: array_like
-            P-values (None if no surrogates)
+            P-values of shape (namp, npha, ...) if get_pval is True.
 
         suro: array_like
             If get_suro is True, get the chance distribution of shape
@@ -320,7 +320,7 @@ class Pac(PacPlot):
         # For the phase synchrony, extract the phase of the amplitude :
         if self._idpac[0] == 5:
             amp = np.angle(hilbert(amp, axis=axis))
-        suro, pvalues = None, None
+        suro = pvalues = np.array([1.])
         # Check for 0 permutations :
         if nperm in [0, None]:
             self._idpac = (self._idpac[0], 0, 0)
@@ -338,29 +338,31 @@ class Pac(PacPlot):
             # Get the mean / deviation of surrogates :
             m_surro, std_surro = np.mean(suro, axis=0), np.std(suro, axis=0)
 
-            # Normalize pac by surrogates :
-            pac = normalize(pac, m_surro, std_surro, self.idpac[2])
-
             # Compute statistics :
-            suro.sort(0)
             suro -= pac[np.newaxis, ...]
-            pvalues = 1 - np.sum(suro < 0, axis=0) / nperm
+            suro.sort(0)
+            pvalues = 1. - np.sum(suro < 0., axis=0) / nperm
             pvalues[pvalues < 1 / nperm] = 1 / nperm
+
+            # Normalize pac by surrogates :
+            normalize(pac, m_surro, std_surro, self.idpac[2])
 
         if self._idpac[0] == 4:
             pvalues = np.ones_like(pac)
             pvalues[np.nonzero(pac)] = 1 / nperm
 
-        if correct:
-            pac[pac < 0.] = 0.
-
-        if get_surro:
-            return pac, pvalues, suro
+        if not get_surro and not get_pval:
+            return pac
         else:
-            return pac, pvalues
+            args = [pac]
+            if get_pval and self._csuro:
+                args.append(pvalues)
+            if get_surro and self._csuro:
+                args.append(suro)
+            return tuple(args)
 
-    def filterfit(self, sf, xpha, xamp, axis=1, traxis=0, nperm=200,
-                  optimize=True, get_surro=False, correct=False, njobs=-1):
+    def filterfit(self, sf, xpha, xamp=None, axis=1, traxis=0, nperm=200,
+                  optimize=True, get_pval=False, get_surro=False, njobs=-1):
         """Filt the data then compute PAC on it.
 
         Parameters
@@ -390,11 +392,11 @@ class Pac(PacPlot):
             Optimize argument of the np.einsum function. Use either False,
             True, 'greedy' or 'optimal'.
 
+        get_pval : bool | False
+            Get the pvalues. Only avaible if surrogates are computed.
+
         get_surro : bool | False
             Return surrogate chance distribution.
-
-        correct : bool | True
-            Correct the PAC estimation XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
         njobs : int | -1
             Number of jobs to compute PAC in parallel. For very large data,
@@ -402,13 +404,13 @@ class Pac(PacPlot):
 
         Returns
         -------
-        pac : array_like
+        pac: array_like
             Phase-Amplitude Coupling measure of shape (namp, npha, ...).
 
-        pvalue : array_like
-            P-values (None if no surrogates)
+        pvalue: array_like
+            P-values of shape (namp, npha, ...) if get_pval is True.
 
-        suro : array_like
+        suro: array_like
             If get_suro is True, get the chance distribution of shape
             (nperm, namp, npha, ...)
 
@@ -426,6 +428,9 @@ class Pac(PacPlot):
               amplitude into two equal parts, then swap those two blocks. But
               the nblocks parameter allow to split into a larger number.
         """
+        # Check if amp is None :
+        if xamp is None:
+            xamp = xpha
         # Shape checking :
         if xpha.shape != xamp.shape:
             raise ValueError("The shape of xpha and xamp must be equals.")
@@ -439,7 +444,7 @@ class Pac(PacPlot):
 
         # Compute pac :
         return self.fit(pha, amp, axis + 1, traxis + 1, nperm, optimize,
-                        get_surro, correct, njobs)
+                        get_pval, get_surro, njobs)
 
     def pp(self, pha, amp, axis=-1, nbins=72, optimize=True):
         """Compute the preferred-phase.

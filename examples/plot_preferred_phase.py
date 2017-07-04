@@ -10,15 +10,15 @@ amplitudes.
 """
 import numpy as np
 import matplotlib.pyplot as plt
-from tensorpac import pac_signals, Pac
+from tensorpac import pac_signals_wavelet, Pac
 
 plt.style.use('seaborn-poster')
 
-# Generate 100 datasets with a [5, 7]<->[90, 100]hz coupling :
+# Generate 100 datasets with a 6<->100hz coupling :
 sf = 1024.
-ndatasets = 100
-data, time = pac_signals(fpha=[5, 7], famp=[95, 105], ndatasets=ndatasets,
-                         sf=sf, noise=3, chi=.7, npts=2000)
+ntrials = 100
+data, time = pac_signals_wavelet(fpha=6, famp=100, ntrials=ntrials, sf=sf,
+                                 noise=.7, npts=2000, pp=np.pi/2)
 
 
 # Define a Pac object. Here, we are not going to use the idpac variable :
@@ -28,16 +28,13 @@ p = Pac(fpha=[5, 7], famp=(60, 200, 10, 1))
 pha = p.filter(sf, data, axis=1, ftype='phase')
 amp = p.filter(sf, data, axis=1, ftype='amplitude')
 
-# Introduce a 2*pi/2 phase shift (equivalent to adding a 90° shift) :
-pha += np.pi / 2
-
 # Now, compute the PP :
 ambin, pp, vecbin = p.pp(pha, amp, axis=2, nbins=72)
 
-# Reshape the PP to be (ndatasets, namp) :
+# Reshape the PP to be (ntrials, namp) :
 pp = np.squeeze(pp).T
 
-# Reshape the amplitude to be (nbins, namp, ndatasets) and take the mean across
+# Reshape the amplitude to be (nbins, namp, ntrials) and take the mean across
 # datasets :
 ambin = np.squeeze(ambin).mean(-1)
 
