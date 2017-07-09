@@ -1,6 +1,6 @@
 """Test tensorpac functions."""
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib
 from tensorpac import Pac
 from tensorpac.utils import pac_trivec
 
@@ -108,6 +108,7 @@ def test_pac_comodulogram():
 
     This test works locally but failed on travis...
     """
+    matplotlib.use('agg')
     f, tridx = pac_trivec()
     pac = np.random.rand(20, 10)
     pval = np.random.rand(20, 10)
@@ -121,7 +122,7 @@ def test_pac_comodulogram():
     p.polar(pac, np.arange(10), np.arange(20), interp=.8)
     pac = np.random.rand(len(f))
     p.triplot(pac, f, tridx)
-    plt.close('all')
+    matplotlib.pyplot.close('all')
 
 
 def test_preferred_phase():
