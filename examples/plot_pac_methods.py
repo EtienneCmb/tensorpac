@@ -1,7 +1,7 @@
 """
-======================
-PAC methods comparison
-======================
+===================
+Compare PAC methods
+===================
 
 Compute PAC on multiple datasets and compare implemented methods.
 """
