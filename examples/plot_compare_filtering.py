@@ -1,7 +1,7 @@
 """
-===============================
-Filtering properties and effect
-===============================
+============================
+Compare filtering properties
+============================
 
 Tensorpac provides two ways for extracting phase and amplitude :
 

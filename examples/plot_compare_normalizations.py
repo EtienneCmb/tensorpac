@@ -1,7 +1,7 @@
 """
-=========================================
-Compare the several normalization methods
-=========================================
+======================
+Compare normalizations
+======================
 
 The normalization correspond on the method used to correct the PAC estimation
 with the chance distribution.

@@ -1,7 +1,7 @@
 """
-====================================================
-Compararison of several surrogate evaluation methods
-====================================================
+=========================
+Compare surrogate methods
+=========================
 
 Surrogates are used to generate a chance ditribution in order to correct the
 PAC estimation.
