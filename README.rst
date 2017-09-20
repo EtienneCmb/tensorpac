@@ -66,5 +66,6 @@ Contributors
 
 * `Etienne Combrisson <http://etiennecmb.github.io>`_
 * Juan L.P. Soto
+* Timothy C. Nest
 * `Karim Jerbi <www.karimjerbi.com>`_
 
