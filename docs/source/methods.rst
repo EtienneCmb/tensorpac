@@ -28,7 +28,7 @@ Tensorpac makes combining methods as simple as defining the **idpac** tuple (or 
 Pac methods
 ~~~~~~~~~~~
 
-The first digit refer to the PAC method :
+The first digit defines the PAC method :
 
 * 1 - Mean Vector Length (MVL - Canolty, 2006)
 * 2 - Kullback-Leibler Divergence (KLD - Tort, 2010)
@@ -48,7 +48,7 @@ The first digit refer to the PAC method :
 Surrogates methods
 ~~~~~~~~~~~~~~~~~~
 
-The second digit refer to the method for evaluating surrogates :
+The second digit defines the method for surrogates computation :
 
 * 0 - No surrogates
 * 1 - Swap phase/amplitude trials (Tort, 2010)
@@ -68,7 +68,7 @@ The second digit refer to the method for evaluating surrogates :
 Normalization methods
 ~~~~~~~~~~~~~~~~~~~~~
 
-The third digit is finally used to define how to normalize (or correct) the real PAC estimation by the properties of the surrogate distribution :
+The third digit is defines the normalization (or correction) procedure :
 
 * 0 - No normalization
 * 1 - Substraction of the mean of surrogates
