@@ -12,7 +12,7 @@ API
 Cross-frequency coupling measures
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The first thing to do is to define a `pacobj`. Then, from this objects, you can use one of the following methods :
+The first step for PAC computation is to define a `pacobj`. From there, we can use one of the following methods :
 
 * :ref:`filtdata` : use this method to extract the phase and the amplitude separately.
 * :ref:`pacfilt` : if you already extracted your phase and amplitude, use this method to compute PAC on it. 
@@ -36,7 +36,7 @@ PAC object
 Filter the data
 +++++++++++++++
 
-This method can be used to filter the data only in order to extract phase and amplitude.
+This method is used to filter the data only in order to extract phase and amplitude.
 
 .. automethod:: tensorpac.pac.Pac.filter
 
@@ -91,7 +91,7 @@ Compute the ERPAC (see `this ERPAC example <https://github.com/EtienneCmb/tensor
 Visualization
 ~~~~~~~~~~~~~
 
-If matplotlib is install on your system, the main Pac class also include several plotting functions :
+If matplotlib is installed on your system, the main Pac class already includes several plotting functions :
 
 * :ref:`pltpac` : standard plotting function for 2D arrays.
 * :ref:`pltcomo` : comodulogram plot, for finding the coupling location *PAC(phase, amplitude)*
@@ -101,7 +101,7 @@ If matplotlib is install on your system, the main Pac class also include several
 * :ref:`pltsave` : save the figure
 
 
-plotting method that rely on Matplotlib. This script is also present in the `example <https://github.com/EtienneCmb/tensorpac/blob/master/examples/9_PlayWithColors.py>`_ folder.
+plotting method that relies on Matplotlib. This script is also present in the `example <https://github.com/EtienneCmb/tensorpac/blob/master/examples/9_PlayWithColors.py>`_ folder.
 
 .. _pltpac:
 
