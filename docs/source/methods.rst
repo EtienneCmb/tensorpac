@@ -3,24 +3,27 @@
 Implemented methods
 ===================
 
-Starting from fresh data, the first thing that need to be assessed is extracting the phase and the amplitude in several frequency bands. There is two ways to doing it :
+Beginning with raw data, the first step to computing PAC is to extract the phase and the amplitude across a range of frequency bands. There are two ways to do this :
 
-* Filter the data in the frequency band, then, use the hilbert transform to pass from the real space, to the complex one. 
+* Filter the data in the frequency band, then use the hilbert transform to pass from real to complex space. 
 * Convolve your data with a wavelet with a width, corresponding to the desired frequency band.
 
-Finally, extract the phase and the amplitude from this complex decomposition. Once you have both signals, you can compute the PAC which rely on three steps :
+Next we will have to extract the phase and the amplitude from the resultant decomposition. 
 
-* **Compute the PAC :**  from the two time series of phase and amplitude, you'll get one value of coupling
-* **Compute surogates :** the PAC measure is really sensible to the noise present in the data. In addition, filtering could occur artefacts. To minimize those effects, we compute surrogates. Basically, the surrogates are obtained by changing a little bit either the phase or the amplitude and re-compute the PAC on it. This procedure is then repeated 50, 100, 200 or 1000 times to get a reliable distribution.
-* **Correct the PAC measurement :** once you have the PAC and the distribution of surrogates, you can, for example, substract the mean of the surrogates. When you take the mean of a distribution only strong events survive hence, noise and artefacts should be reduced.
+Once we have resolved both phase and amplitude signals, we shall derive our PAC value. This is done in three steps :
 
-Across the litterature, a lot of methodologies for those three previous steps have been proposed and compared. But, how is it possible to conclude if a PAC pipeline is more efficient rather than an other if those three steps are different? Maybe taking the PAC method from one paper, combined with another one might be better?
+* **Compute the PAC :**  From the two time series of phase and amplitude, this will give us a single coupling value
+* **Compute surogates :** The PAC measure is quite sensitive to noise present in the data. In addition, filtering may augment artefacts. To minimize these effects, we compute surrogates. Surrogates are obtained by altering slightly either the phase or the amplitude and re-computing the PAC. This procedure is then repeated over 50, 100, 200 or 1000 permutations to produce a reliable distribution.
+* **Correct the PAC measurement :** Once we have the PAC and the distribution of surrogates, we can subtract the mean of the surrogates. By taking the mean of the distribution, we limit our results to those strongest, and mitigate the impact of noise and artefact.
+
+The many existing PAC implemenations nearly always propose some variation on these three steps. How can we be sure, though, that any particular implemenation will outperform any other? 
 
 Modular philosophy
 ------------------
 
-To answer to this question, we propose a modular implementation of the phase amplitude coupling which means that you can mix methods. On top of that, every calculation is assessed using tensor and parallel computing which should provide fast performances.
-To pick methods you want, you'll have to define the **idpac** tuple (or list/array) of three digits, each one referring to one of the implemented methods. 
+To answer to this question, we've developed a modular implementation allowing users to combine methods from existing PAC implementations in novel ways. Until recently, it has been difficult to compare existing and novel combinations of PAC implementations, due to long computation times. By leveraging tensor and parallel computing, however, Tensorpac offers new possibilities for determining the optimal PAC implementation for a given data set.
+
+Tensorpac makes combining methods as simple as defining the **idpac** tuple (or list/array) of three digits, each referring to one of the implemented methods. 
 
 Pac methods
 ~~~~~~~~~~~
