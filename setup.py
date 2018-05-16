@@ -3,9 +3,6 @@
 # License: 3-clause BSD
 import os
 from setuptools import setup, find_packages
-import pip
-from pip.req import parse_requirements
-from optparse import Option
 
 __version__ = "0.5.4"
 NAME = 'Tensorpac'
@@ -26,22 +23,6 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 
-options = Option('--workaround')
-options.skip_requirements_regex = None
-REQ_FILE = './requirements.txt'
-# Hack for old pip versions: Versions greater than 1.x
-# have a required parameter "sessions" in parse_requierements
-if pip.__version__.startswith('1.'):
-    install_reqs = parse_requirements(REQ_FILE, options=options)
-else:
-    from pip.download import PipSession  # pylint:disable=E0611
-    options.isolated_mode = False
-    install_reqs = parse_requirements(REQ_FILE,  # pylint:disable=E1123
-                                      options=options,
-                                      session=PipSession)
-
-REQS = [str(ir.req) for ir in install_reqs]
-
 setup(
     name=NAME,
     version=__version__,
@@ -53,7 +34,11 @@ setup(
     long_description=read('README.rst'),
     platforms='any',
     setup_requires=['numpy', 'joblib'],
-    install_requires=REQS,
+    install_requires=[
+        "numpy>=1.12",
+        "scipy",
+        "joblib"
+    ],
     dependency_links=[],
     author=AUTHOR,
     maintainer=MAINTAINER,

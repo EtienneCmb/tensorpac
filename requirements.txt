@@ -1,3 +1,0 @@
-numpy>=1.12
-scipy
-joblib
