@@ -146,7 +146,7 @@ class PacPlot(object):
                               vmin=vmin, vmax=vmax)
         elif plotas is 'pcolor':
             im = plt.pcolormesh(xvec, yvec, toplot, cmap=cmap, vmin=vmin,
-                                vmax=vmax)
+                                vmax=vmax, antialiased=True)
         else:
             raise ValueError("The plotas parameter must either be 'imshow' or "
                              "'contour'")

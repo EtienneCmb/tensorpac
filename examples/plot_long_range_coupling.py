@@ -1,7 +1,7 @@
 """
-===================
-Compute distant PAC
-===================
+==============
+Long-range PAC
+==============
 
 One thing you may have noticed, both the fit() and filterfit() methods take as
 inputs data and again data. The reason is that the first data refer to the
