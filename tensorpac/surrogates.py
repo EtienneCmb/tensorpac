@@ -45,7 +45,7 @@ def compute_surrogates(pha, amp, surargs, pacargs, nperm, njobs):
     suro : array_like
         Array of pac surrogates of shape (nperm, npha, namp, ..., npts)
     """
-    s = Parallel(n_jobs=njobs)(delayed(_compute_sur)(
+    s = Parallel(n_jobs=njobs, prefer='threads')(delayed(_compute_sur)(
         pha, amp, surargs, pacargs) for k in range(nperm))
     return np.array(s)
 
@@ -263,4 +263,4 @@ def _dimswap(x, axis=0):
     np.random.shuffle(rndvec)
     dimvec[axis] = rndvec
     # Return a swapped version of x :
-    return x[dimvec]
+    return x[tuple(dimvec)]

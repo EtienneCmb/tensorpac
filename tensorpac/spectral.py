@@ -52,13 +52,13 @@ def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, width,
     if dcomplex is 'hilbert':
         # Filt each time series :
         nf = range(f.shape[0])
-        xf = Parallel(n_jobs=njobs)(delayed(filtdata)(
+        xf = Parallel(n_jobs=njobs, prefer='threads')(delayed(filtdata)(
             x, sf, f[k, :], axis, filt, cycle, filtorder) for k in nf)
         # Use hilbert for the complex decomposition :
         xd = hilbert(xf, axis=axis + 1) if stype is not None else np.array(xf)
     elif dcomplex is 'wavelet':
         f = f.mean(1)  # centered frequencies
-        xd = Parallel(n_jobs=njobs)(delayed(morlet)(
+        xd = Parallel(n_jobs=njobs, prefer='threads')(delayed(morlet)(
             x, sf, k, axis, width) for k in f)
 
     # Extract phase / amplitude :
