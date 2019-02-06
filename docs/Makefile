@@ -21,7 +21,7 @@ help:
 
 install:
 	@echo "Deploying the doc of tensorpac"
-	rm -rf _build/doctrees _build/tensorpac.github.io
+	rm -rf build/doctrees build/tensorpac.github.io
 	# Credit to Mainak Jas for this part of code
 	# first clone the EtienneCmb/tensorpac.github.io repo because it may ask
 	# for password and we don't want to delay this long build in
@@ -30,14 +30,13 @@ install:
 	# --depth 1 is a speed optimization since we don't need the
 	# history prior to the last commit
 	# -b gh-pages fetches only the branch for the gh-pages
-	git clone -b gh-pages --single-branch --no-checkout --depth 1 https://github.com/EtienneCmb/tensorpac _build/tensorpac.github.io
-	touch _build/tensorpac.github.io/.nojekyll
+	git clone -b gh-pages --single-branch --no-checkout --depth 1 https://github.com/EtienneCmb/tensorpac build/tensorpac.github.io
+	touch build/tensorpac.github.io/.nojekyll
 	make html
-	cd _build/ && \
+	cd build/ && \
 	cp -r html/* tensorpac.github.io && \
 	cd tensorpac.github.io && \
 	git add * && \
 	git add .nojekyll && \
-	git add CNAME && \
 	git commit -a -m 'Make install' && \
 	git push
