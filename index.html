@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tensorpac &mdash; Tensorpac 0.5.3 documentation</title>
+  <title>Tensorpac &mdash; Tensorpac 0.5.5 documentation</title>
   
 
   
@@ -26,28 +26,19 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.5.3 documentation" href="#"/>
-        <link rel="next" title="Implemented methods" href="methods.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Implemented methods" href="methods.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -64,7 +55,7 @@
 
           
             
-            <img src="_static/ico64.png" class="logo" />
+            <img src="_static/ico64.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -72,7 +63,7 @@
             
             
               <div class="version">
-                0.5.3
+                0.5.5
               </div>
             
           
@@ -147,14 +138,15 @@
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_values.html">Compute p-values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_basic_pac.html">Basic phase amplitude coupling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_surrogates.html">Compararison of several surrogate evaluation methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_filtering.html">Filtering properties and effect</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_normalizations.html">Compare the several normalization methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_pac_methods.html">PAC methods comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_surrogates.html">Compare surrogate methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_distant_coupling.html">Compute distant PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_long_range_coupling.html">Long-range PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_multidimensional_data.html">Compute PAC on multidimensional data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_custom_visualizations.html">Compare visualization methods</a></li>
 </ul>
 </li>
@@ -169,7 +161,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="#">Tensorpac</a>
@@ -177,9 +169,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -226,20 +219,20 @@
 <a class="reference external image-reference" href="https://badge.fury.io/py/Tensorpac"><img alt="https://badge.fury.io/py/Tensorpac.svg" src="https://badge.fury.io/py/Tensorpac.svg" /></a>
 <div class="section" id="tensorpac">
 <h1>Tensorpac<a class="headerlink" href="#tensorpac" title="Permalink to this headline">¶</a></h1>
-<p>Tensorpac is an open-source Python toolbox for computing Phase-Amplitude Coupling (PAC) using tensors and parallel computing. We also designed a modular implementation which let you combine existing methods for measuring Pac and chance distribution.
-We provide a set of <a class="reference external" href="https://github.com/EtienneCmb/tensorpac/tree/master/examples">examples</a>.</p>
+<p>Tensorpac is an open-source Python toolbox for computing Phase-Amplitude Coupling (PAC) using tensors and parallel computing. This software provides a modular implementation which allows one to combine existing methods for measuring PAC and chance distribution.
+To get started, see our <a class="reference external" href="https://github.com/EtienneCmb/tensorpac/tree/master/examples">examples</a>.</p>
 <div class="figure align-center">
 <img alt="_images/tp.png" src="_images/tp.png" />
 </div>
 <div class="section" id="installation">
 <h2>Installation:<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>Tensorpac is based on NumPy (&gt;=1.12), SciPy and use <a class="reference external" href="https://pythonhosted.org/joblib/">Joblib</a> for parallel computing. For the installation, in a terminal run :</p>
-<div class="highlight-bash"><div class="highlight"><pre><span></span>pip install tensorpac
+<p>Tensorpac is based on NumPy (&gt;=1.12), SciPy and uses <a class="reference external" href="https://pythonhosted.org/joblib/">Joblib</a> for parallel computing. To install Tensorpac, just open a terminal and run :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install tensorpac
 </pre></div>
 </div>
 </div>
 <div class="section" id="what-s-new">
-<h2>What&#8217;s new?<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h2>
+<h2>What’s new?<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p class="first">New in version v0.5.2</p>
 <blockquote>
@@ -266,7 +259,7 @@ We provide a set of <a class="reference external" href="https://github.com/Etien
 <ul class="last simple">
 <li>Generalized Linear Model (GLM - Lakatos, 2005)</li>
 <li>PAC using PSD</li>
-<li>Morse&#8217;s wavelets</li>
+<li>Morse’s wavelets</li>
 </ul>
 </div>
 </div>
@@ -335,9 +328,7 @@ We provide a set of <a class="reference external" href="https://github.com/Etien
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -353,11 +344,11 @@ We provide a set of <a class="reference external" href="https://github.com/Etien
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Etienne Combrisson.
+        &copy; Copyright 2017, Etienne Combrisson
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -372,35 +363,24 @@ We provide a set of <a class="reference external" href="https://github.com/Etien
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'0.5.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

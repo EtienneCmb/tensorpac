@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>API &mdash; Tensorpac 0.5.3 documentation</title>
+  <title>API &mdash; Tensorpac 0.5.5 documentation</title>
   
 
   
@@ -26,29 +26,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.5.3 documentation" href="index.html"/>
-        <link rel="next" title="Gallery of Examples" href="auto_examples/index.html"/>
-        <link rel="prev" title="Implemented methods" href="methods.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples" href="auto_examples/index.html" />
+    <link rel="prev" title="Implemented methods" href="methods.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -65,7 +56,7 @@
 
           
             
-            <img src="_static/ico64.png" class="logo" />
+            <img src="_static/ico64.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -73,7 +64,7 @@
             
             
               <div class="version">
-                0.5.3
+                0.5.5
               </div>
             
           
@@ -141,25 +132,23 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Gallery of Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/index.html#general-examples">General examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_readme.html">README example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_values.html">Compute p-values</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_frequency_vectors.html">Define frequency vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_basic_pac.html">Basic phase amplitude coupling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_compare_surrogates.html">Compararison of several surrogate evaluation methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_compare_filtering.html">Filtering properties and effect</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_compare_normalizations.html">Compare the several normalization methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_pac_methods.html">PAC methods comparison</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_distant_coupling.html">Compute distant PAC</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_custom_visualizations.html">Compare visualization methods</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_readme.html">README example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_values.html">Compute p-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_frequency_vectors.html">Define frequency vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_basic_pac.html">Basic phase amplitude coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_surrogates.html">Compare surrogate methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_long_range_coupling.html">Long-range PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_multidimensional_data.html">Compute PAC on multidimensional data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_custom_visualizations.html">Compare visualization methods</a></li>
 </ul>
 </li>
 </ul>
@@ -173,7 +162,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Tensorpac</a>
@@ -181,9 +170,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -234,7 +224,7 @@
 </ul>
 <div class="section" id="cross-frequency-coupling-measures">
 <span id="fcncfc"></span><h2>Cross-frequency coupling measures<a class="headerlink" href="#cross-frequency-coupling-measures" title="Permalink to this headline">¶</a></h2>
-<p>The first thing to do is to define a <cite>pacobj</cite>. Then, from this objects, you can use one of the following methods :</p>
+<p>The first step for PAC computation is to define a <cite>pacobj</cite>. From there, we can use one of the following methods :</p>
 <ul class="simple">
 <li><a class="reference internal" href="#filtdata"><span class="std std-ref">Filter the data</span></a> : use this method to extract the phase and the amplitude separately.</li>
 <li><a class="reference internal" href="#pacfilt"><span class="std std-ref">Compute PAC on filtered data</span></a> : if you already extracted your phase and amplitude, use this method to compute PAC on it.</li>
@@ -244,7 +234,7 @@
 </ul>
 <div class="section" id="pac-object">
 <span id="pacobj"></span><h3>PAC object<a class="headerlink" href="#pac-object" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorpac</span> <span class="kn">import</span> <span class="n">Pac</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorpac</span> <span class="kn">import</span> <span class="n">Pac</span>
 </pre></div>
 </div>
 <dl class="class">
@@ -259,98 +249,89 @@ you choose among a large range of possible combinations.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>idpac</strong> : tuple/list | (1, 1, 3)</p>
-<blockquote>
-<div><p>Choose the combination of methods to use in order to extract PAC.
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>idpac</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple/list | (1, 1, 3)</span></dt>
+<dd><p class="first">Choose the combination of methods to use in order to extract PAC.
 This tuple must be composed of three integers where each one them
 refer</p>
-<ul>
+<ul class="last">
 <li><p class="first">First digit : refer to the pac method</p>
 <blockquote>
 <div><ul class="simple">
-<li>&#8216;1&#8217; : Mean Vector Length (MVL) <a class="footnote-reference" href="#f1" id="id2">[1]</a></li>
-<li>&#8216;2&#8217; : Kullback-Leibler Distance (KLD) <a class="footnote-reference" href="#f2" id="id3">[2]</a></li>
-<li>&#8216;3&#8217; : Heights Ratio (HR) <a class="footnote-reference" href="#f3" id="id4">[3]</a></li>
-<li>&#8216;4&#8217; : ndPAC <a class="footnote-reference" href="#f4" id="id5">[4]</a></li>
-<li>&#8216;5&#8217; : Phase Synchrony <a class="footnote-reference" href="#f3" id="id6">[3]</a></li>
+<li>‘1’ : Mean Vector Length (MVL) <a class="footnote-reference" href="#f1" id="id2">[1]</a></li>
+<li>‘2’ : Kullback-Leibler Distance (KLD) <a class="footnote-reference" href="#f2" id="id3">[2]</a></li>
+<li>‘3’ : Heights Ratio (HR) <a class="footnote-reference" href="#f3" id="id4">[3]</a></li>
+<li>‘4’ : ndPAC <a class="footnote-reference" href="#f4" id="id5">[4]</a></li>
+<li>‘5’ : Phase Synchrony <a class="footnote-reference" href="#f3" id="id6">[3]</a></li>
 </ul>
 </div></blockquote>
 </li>
 <li><p class="first">Second digit : refer to the method for computing surrogates</p>
 <blockquote>
 <div><ul class="simple">
-<li>&#8216;0&#8217; : No surrogates</li>
-<li>&#8216;1&#8217; : Swap phase/amplitude across trials <a class="footnote-reference" href="#f2" id="id7">[2]</a></li>
-<li>&#8216;2&#8217; : Swap amplitude time blocks <a class="footnote-reference" href="#f5" id="id8">[5]</a></li>
-<li>&#8216;3&#8217; : Shuffle amplitude time-series</li>
-<li>&#8216;4&#8217; : Time lag <a class="footnote-reference" href="#f1" id="id9">[1]</a></li>
+<li>‘0’ : No surrogates</li>
+<li>‘1’ : Swap phase/amplitude across trials <a class="footnote-reference" href="#f2" id="id7">[2]</a></li>
+<li>‘2’ : Swap amplitude time blocks <a class="footnote-reference" href="#f5" id="id8">[5]</a></li>
+<li>‘3’ : Shuffle amplitude time-series</li>
+<li>‘4’ : Time lag <a class="footnote-reference" href="#f1" id="id9">[1]</a></li>
 </ul>
 </div></blockquote>
 </li>
 <li><p class="first">Third digit : refer to the normalization method for correction</p>
 <blockquote>
 <div><ul class="simple">
-<li>&#8216;0&#8217; : No normalization</li>
-<li>&#8216;1&#8217; : Substract the mean of surrogates</li>
-<li>&#8216;2&#8217; : Divide by the mean of surrogates</li>
-<li>&#8216;3&#8217; : Substract then divide by the mean of surrogates</li>
-<li>&#8216;4&#8217; : Z-score</li>
+<li>‘0’ : No normalization</li>
+<li>‘1’ : Substract the mean of surrogates</li>
+<li>‘2’ : Divide by the mean of surrogates</li>
+<li>‘3’ : Substract then divide by the mean of surrogates</li>
+<li>‘4’ : Z-score</li>
 </ul>
 </div></blockquote>
 </li>
 </ul>
-</div></blockquote>
-<p><strong>fpha, famp</strong> : list/tuple/array | def: [2, 4] and [60, 200]</p>
-<blockquote>
-<div><p>Frequency vector for the phase and amplitude. Here you can use
+</dd>
+<dt><strong>fpha, famp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list/tuple/array | def: [2, 4] and [60, 200]</span></dt>
+<dd><p class="first">Frequency vector for the phase and amplitude. Here you can use
 several forms to define those vectors :</p>
-<blockquote>
+<blockquote class="last">
 <div><ul class="simple">
-<li>Basic list/tuple (ex: [2, 4] or [8, 12]...)</li>
-<li>List of frequency bands (ex: [[2, 4], [5, 7]]...)</li>
+<li>Basic list/tuple (ex: [2, 4] or [8, 12]…)</li>
+<li>List of frequency bands (ex: [[2, 4], [5, 7]]…)</li>
 <li>Dynamic definition : (start, stop, width, step)</li>
 <li>Range definition (ex : np.arange(3) =&gt; [[0, 1], [1, 2]])</li>
 </ul>
 </div></blockquote>
-</div></blockquote>
-<p><strong>dcomplex</strong> : {&#8216;wavelet&#8217;, &#8216;hilbert&#8217;}</p>
-<blockquote>
-<div><p>Method for the complex definition. Use either &#8216;hilbert&#8217; or
-&#8216;wavelet&#8217;.</p>
-</div></blockquote>
-<p><strong>filt</strong> : {&#8216;fir1&#8217;, &#8216;butter&#8217;, &#8216;bessel&#8217;}</p>
-<blockquote>
-<div><p>Filtering method (only if dcomplex is &#8216;hilbert&#8217;). Choose either
-&#8216;fir1&#8217;, &#8216;butter&#8217; or &#8216;bessel&#8217;</p>
-</div></blockquote>
-<p><strong>cycle</strong> : tuple | (3, 6)</p>
-<blockquote>
-<div><p>Control the number of cycles for filtering (only if dcomplex is
-&#8216;hilbert&#8217;). Should be a tuple of integers where the first one
+</dd>
+<dt><strong>dcomplex</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘wavelet’, ‘hilbert’}</span></dt>
+<dd><p class="first last">Method for the complex definition. Use either ‘hilbert’ or
+‘wavelet’.</p>
+</dd>
+<dt><strong>filt</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘fir1’, ‘butter’, ‘bessel’}</span></dt>
+<dd><p class="first last">Filtering method (only if dcomplex is ‘hilbert’). Choose either
+‘fir1’, ‘butter’ or ‘bessel’</p>
+</dd>
+<dt><strong>cycle</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple | (3, 6)</span></dt>
+<dd><p class="first last">Control the number of cycles for filtering (only if dcomplex is
+‘hilbert’). Should be a tuple of integers where the first one
 refers to the number of cycles for the phase and the second for the
 amplitude <a class="footnote-reference" href="#f5" id="id10">[5]</a>.</p>
-</div></blockquote>
-<p><strong>filtorder</strong> : int | 3</p>
-<blockquote>
-<div><p>Filter order for the Butterworth and Bessel filters (only if
-dcomplex is &#8216;hilbert&#8217;).</p>
-</div></blockquote>
-<p><strong>width</strong> : int | 7</p>
-<blockquote>
-<div><p>Width of the Morlet&#8217;s wavelet.</p>
-</div></blockquote>
-<p><strong>nbins</strong> : int | 18</p>
-<blockquote>
-<div><p>Number of bins for the KLD and HR PAC method <a class="footnote-reference" href="#f2" id="id11">[2]</a> <a class="footnote-reference" href="#f3" id="id12">[3]</a></p>
-</div></blockquote>
-<p><strong>nblocks</strong> : int | 2</p>
-<blockquote>
-<div><p>Number of blocks for splitting the amplitude. Only active is
+</dd>
+<dt><strong>filtorder</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 3</span></dt>
+<dd><p class="first last">Filter order for the Butterworth and Bessel filters (only if
+dcomplex is ‘hilbert’).</p>
+</dd>
+<dt><strong>width</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 7</span></dt>
+<dd><p class="first last">Width of the Morlet’s wavelet.</p>
+</dd>
+<dt><strong>nbins</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 18</span></dt>
+<dd><p class="first last">Number of bins for the KLD and HR PAC method <a class="footnote-reference" href="#f2" id="id11">[2]</a> <a class="footnote-reference" href="#f3" id="id12">[3]</a></p>
+</dd>
+<dt><strong>nblocks</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 2</span></dt>
+<dd><p class="first last">Number of blocks for splitting the amplitude. Only active is
 the surrogate method is 2 <a class="footnote-reference" href="#f5" id="id13">[5]</a>.</p>
-</div></blockquote>
-<p><strong>.. warning::</strong></p>
-<blockquote class="last">
-<div><ul class="simple">
+</dd>
+<dt><strong>.. warning::</strong></dt>
+<dd><ul class="first last simple">
 <li>The ndPac <a class="footnote-reference" href="#f4" id="id14">[4]</a> include a fast and reliable statistical test. As a
 result, if the ndPAC is choosed as the main PAC method, surrogates
 and normalization will be deactivate.</li>
@@ -360,7 +341,8 @@ transform. As a result, every filtering related input (cycle, filt,
 filtorder) are going to be active if the complex decomposition is
 Hilbert.</li>
 </ul>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -397,18 +379,19 @@ Hilbert.</li>
 <tr><td class="label">[5]</td><td><em>(<a class="fn-backref" href="#id8">1</a>, <a class="fn-backref" href="#id10">2</a>, <a class="fn-backref" href="#id13">3</a>, <a class="fn-backref" href="#id16">4</a>, <a class="fn-backref" href="#id18">5</a>)</em> <a class="reference external" href="http://www.jneurosci.org/content/33/48/18849.short/">Bahramisharif et al, 2013</a></td></tr>
 </tbody>
 </table>
-<p class="rubric">Attributes</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="16%" />
-<col width="84%" />
-</colgroup>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
 <tbody valign="top">
-<tr class="row-odd"><td><strong>xvec, yvec</strong></td>
-<td>(array_like) The x and y-vectors for plotting.</td>
-</tr>
-<tr class="row-even"><td><strong>fpha, famp</strong></td>
-<td>(array_like) The phase and amplitude frequency vectors for pac extraction.</td>
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>xvec, yvec</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">The x and y-vectors for plotting.</p>
+</dd>
+<dt><strong>fpha, famp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">The phase and amplitude frequency vectors for pac extraction.</p>
+</dd>
+</dl>
+</td>
 </tr>
 </tbody>
 </table>
@@ -459,7 +442,7 @@ Hilbert.</li>
 </div>
 <div class="section" id="filter-the-data">
 <span id="filtdata"></span><h3>Filter the data<a class="headerlink" href="#filter-the-data" title="Permalink to this headline">¶</a></h3>
-<p>This method can be used to filter the data only in order to extract phase and amplitude.</p>
+<p>This method is used to filter the data only in order to extract phase and amplitude.</p>
 <dl class="method">
 <dt id="tensorpac.pac.Pac.filter">
 <code class="descclassname">Pac.</code><code class="descname">filter</code><span class="sig-paren">(</span><em>sf</em>, <em>x</em>, <em>axis=-1</em>, <em>ftype='phase'</em>, <em>keepfilt=False</em>, <em>njobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.filter" title="Permalink to this definition">¶</a></dt>
@@ -468,39 +451,36 @@ Hilbert.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sf: float</strong></p>
-<blockquote>
-<div><p>The sampling frequency.</p>
-</div></blockquote>
-<p><strong>x: array_like</strong></p>
-<blockquote>
-<div><p>Array of data.</p>
-</div></blockquote>
-<p><strong>axis</strong> : int | -1</p>
-<blockquote>
-<div><p>Location of the time axis.</p>
-</div></blockquote>
-<p><strong>ftype</strong> : {&#8216;phase&#8217;, &#8216;amplitude&#8217;}</p>
-<blockquote>
-<div><p>Specify if you want to extract phase (&#8216;phase&#8217;) or the amplitude
-(&#8216;amplitude&#8217;).</p>
-</div></blockquote>
-<p><strong>njobs</strong> : int | -1</p>
-<blockquote>
-<div><p>Number of jobs to compute PAC in parallel. For very large data,
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>sf: float</strong></dt>
+<dd><p class="first last">The sampling frequency.</p>
+</dd>
+<dt><strong>x: array_like</strong></dt>
+<dd><p class="first last">Array of data.</p>
+</dd>
+<dt><strong>axis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | -1</span></dt>
+<dd><p class="first last">Location of the time axis.</p>
+</dd>
+<dt><strong>ftype</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘phase’, ‘amplitude’}</span></dt>
+<dd><p class="first last">Specify if you want to extract phase (‘phase’) or the amplitude
+(‘amplitude’).</p>
+</dd>
+<dt><strong>njobs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | -1</span></dt>
+<dd><p class="first last">Number of jobs to compute PAC in parallel. For very large data,
 set this parameter to 1 in order to prevent large memory usage.</p>
-</div></blockquote>
-<p><strong>keepfilt</strong> : bool | False</p>
-<blockquote>
-<div><p>Specify if you only want the filtered data (True). This parameter
-is only avaible with dcomplex=&#8217;hilbert&#8217; and not wavelet.</p>
-</div></blockquote>
+</dd>
+<dt><strong>keepfilt</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool | False</span></dt>
+<dd><p class="first last">Specify if you only want the filtered data (True). This parameter
+is only avaible with dcomplex=’hilbert’ and not wavelet.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>xfilt</strong> : array_like</p>
-<blockquote class="last">
-<div><p>The filtered data of shape (n_frequency, ...)</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>xfilt</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">The filtered data of shape (n_frequency, …)</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -519,74 +499,66 @@ is only avaible with dcomplex=&#8217;hilbert&#8217; and not wavelet.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pha, amp: array_like</strong></p>
-<blockquote>
-<div><p>Array of filtered data with respectively a shape of (npha, ...)
-and (namp, ...). If you want to compute PAC locally i.e. on the
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>pha, amp: array_like</strong></dt>
+<dd><p class="first last">Array of filtered data with respectively a shape of (npha, …)
+and (namp, …). If you want to compute PAC locally i.e. on the
 same electrode, x=pha=amp. For distant coupling, pha and
 amp could be different but still must to have the same shape.</p>
-</div></blockquote>
-<p><strong>axis</strong> : int | 1</p>
-<blockquote>
-<div><p>Dimension where is located the time axis. By default, the axis
+</dd>
+<dt><strong>axis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 1</span></dt>
+<dd><p class="first last">Dimension where is located the time axis. By default, the axis
 will be consider as well.</p>
-</div></blockquote>
-<p><strong>traxis</strong> : int | 0</p>
-<blockquote>
-<div><p>Dimension where is located the trial axis. By default the next-
+</dd>
+<dt><strong>traxis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 0</span></dt>
+<dd><p class="first last">Dimension where is located the trial axis. By default the next-
 to-last axis is consider as the trial axis.</p>
-</div></blockquote>
-<p><strong>nperm</strong> : int | 200</p>
-<blockquote>
-<div><p>Number of surrogates to compute.</p>
-</div></blockquote>
-<p><strong>optimize</strong> : {True, False, &#8216;greedy&#8217;, &#8216;optimal&#8217;}</p>
-<blockquote>
-<div><p>Optimize argument of the np.einsum function. Use either False,
-True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
-</div></blockquote>
-<p><strong>get_pval</strong> : bool | False</p>
-<blockquote>
-<div><p>Get the pvalues. Only avaible if surrogates are computed.</p>
-</div></blockquote>
-<p><strong>get_surro</strong> : bool | False</p>
-<blockquote>
-<div><p>Return surrogate chance distribution.</p>
-</div></blockquote>
-<p><strong>njobs</strong> : int | -1</p>
-<blockquote>
-<div><p>Number of jobs to compute PAC in parallel. For very large data,
+</dd>
+<dt><strong>nperm</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 200</span></dt>
+<dd><p class="first last">Number of surrogates to compute.</p>
+</dd>
+<dt><strong>optimize</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{True, False, ‘greedy’, ‘optimal’}</span></dt>
+<dd><p class="first last">Optimize argument of the np.einsum function. Use either False,
+True, ‘greedy’ or ‘optimal’.</p>
+</dd>
+<dt><strong>get_pval</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool | False</span></dt>
+<dd><p class="first last">Get the pvalues. Only avaible if surrogates are computed.</p>
+</dd>
+<dt><strong>get_surro</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool | False</span></dt>
+<dd><p class="first last">Return surrogate chance distribution.</p>
+</dd>
+<dt><strong>njobs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | -1</span></dt>
+<dd><p class="first last">Number of jobs to compute PAC in parallel. For very large data,
 set this parameter to 1 in order to prevent large memory usage.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">pac: array_like</p>
-<blockquote>
-<div><p>Phase-Amplitude Coupling measure of shape (namp, npha, ...).</p>
-</div></blockquote>
-<p>pvalue: array_like</p>
-<blockquote>
-<div><p>P-values of shape (namp, npha, ...) if get_pval is True.</p>
-</div></blockquote>
-<p>suro: array_like</p>
-<blockquote>
-<div><p>If get_suro is True, get the chance distribution of shape
-(nperm, namp, npha, ...)</p>
-</div></blockquote>
-<div class="last admonition warning">
-<p class="first admonition-title">Warning</p>
-<ul class="last simple">
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>pac: array_like</strong></dt>
+<dd><p class="first last">Phase-Amplitude Coupling measure of shape (namp, npha, …).</p>
+</dd>
+<dt><strong>pvalue: array_like</strong></dt>
+<dd><p class="first last">P-values of shape (namp, npha, …) if get_pval is True.</p>
+</dd>
+<dt><strong>suro: array_like</strong></dt>
+<dd><p class="first last">If get_suro is True, get the chance distribution of shape
+(nperm, namp, npha, …)</p>
+</dd>
+<dt><strong>.. warning::</strong></dt>
+<dd><ul class="first last simple">
 <li>Surrogates are only going to be computed if the second and third
 digits are no 0.</li>
 <li>The ndPAC use a p value and every non-significant PAC estimation
 is set to zero. This p value is computed as 1/nperm.</li>
 <li>The traxis argument is only used if you picked up the surrogates
-method 1: &#8220;swap phase and amplitude trials <a class="footnote-reference" href="#f2" id="id15">[2]</a>&#8220;</li>
+method 1: “swap phase and amplitude trials <a class="footnote-reference" href="#f2" id="id15">[2]</a>”</li>
 <li>Basically, the surrogate evaluation proposed by <a class="footnote-reference" href="#f5" id="id16">[5]</a> split the
 amplitude into two equal parts, then swap those two blocks. But
 the nblocks parameter allow to split into a larger number.</li>
 </ul>
-</div>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -605,79 +577,70 @@ the nblocks parameter allow to split into a larger number.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sf</strong> : float</p>
-<blockquote>
-<div><p>The sampling frequency.</p>
-</div></blockquote>
-<p><strong>xpha, xamp</strong> : array_like</p>
-<blockquote>
-<div><p>Array of data for computing PAC. xpha is the data used for
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>sf</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The sampling frequency.</p>
+</dd>
+<dt><strong>xpha, xamp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Array of data for computing PAC. xpha is the data used for
 extracting phases and xamp, amplitudes. Both arrays must have
 the same shapes. If you want to compute PAC locally i.e. on the
 same electrode, x=xpha=xamp. For distant coupling, xpha and
 xamp could be different but still must to have the same shape.</p>
-</div></blockquote>
-<p><strong>axis</strong> : int | 1</p>
-<blockquote>
-<div><p>Dimension where is located the time axis. By default, the axis
+</dd>
+<dt><strong>axis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 1</span></dt>
+<dd><p class="first last">Dimension where is located the time axis. By default, the axis
 will be consider as well.</p>
-</div></blockquote>
-<p><strong>traxis</strong> : int | 0</p>
-<blockquote>
-<div><p>Dimension where is located the trial axis. By default the next-
+</dd>
+<dt><strong>traxis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 0</span></dt>
+<dd><p class="first last">Dimension where is located the trial axis. By default the next-
 to-last axis is consider as the trial axis.</p>
-</div></blockquote>
-<p><strong>nperm</strong> : int | 200</p>
-<blockquote>
-<div><p>Number of surrogates to compute.</p>
-</div></blockquote>
-<p><strong>optimize</strong> : {True, False, &#8216;greedy&#8217;, &#8216;optimal&#8217;}</p>
-<blockquote>
-<div><p>Optimize argument of the np.einsum function. Use either False,
-True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
-</div></blockquote>
-<p><strong>get_pval</strong> : bool | False</p>
-<blockquote>
-<div><p>Get the pvalues. Only avaible if surrogates are computed.</p>
-</div></blockquote>
-<p><strong>get_surro</strong> : bool | False</p>
-<blockquote>
-<div><p>Return surrogate chance distribution.</p>
-</div></blockquote>
-<p><strong>njobs</strong> : int | -1</p>
-<blockquote>
-<div><p>Number of jobs to compute PAC in parallel. For very large data,
+</dd>
+<dt><strong>nperm</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 200</span></dt>
+<dd><p class="first last">Number of surrogates to compute.</p>
+</dd>
+<dt><strong>optimize</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{True, False, ‘greedy’, ‘optimal’}</span></dt>
+<dd><p class="first last">Optimize argument of the np.einsum function. Use either False,
+True, ‘greedy’ or ‘optimal’.</p>
+</dd>
+<dt><strong>get_pval</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool | False</span></dt>
+<dd><p class="first last">Get the pvalues. Only avaible if surrogates are computed.</p>
+</dd>
+<dt><strong>get_surro</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool | False</span></dt>
+<dd><p class="first last">Return surrogate chance distribution.</p>
+</dd>
+<dt><strong>njobs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | -1</span></dt>
+<dd><p class="first last">Number of jobs to compute PAC in parallel. For very large data,
 set this parameter to 1 in order to prevent large memory usage.</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">pac: array_like</p>
-<blockquote>
-<div><p>Phase-Amplitude Coupling measure of shape (namp, npha, ...).</p>
-</div></blockquote>
-<p>pvalue: array_like</p>
-<blockquote>
-<div><p>P-values of shape (namp, npha, ...) if get_pval is True.</p>
-</div></blockquote>
-<p>suro: array_like</p>
-<blockquote>
-<div><p>If get_suro is True, get the chance distribution of shape
-(nperm, namp, npha, ...)</p>
-</div></blockquote>
-<div class="last admonition warning">
-<p class="first admonition-title">Warning</p>
-<ul class="last simple">
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>pac: array_like</strong></dt>
+<dd><p class="first last">Phase-Amplitude Coupling measure of shape (namp, npha, …).</p>
+</dd>
+<dt><strong>pvalue: array_like</strong></dt>
+<dd><p class="first last">P-values of shape (namp, npha, …) if get_pval is True.</p>
+</dd>
+<dt><strong>suro: array_like</strong></dt>
+<dd><p class="first last">If get_suro is True, get the chance distribution of shape
+(nperm, namp, npha, …)</p>
+</dd>
+<dt><strong>.. warning::</strong></dt>
+<dd><ul class="first last simple">
 <li>Surrogates are only going to be computed if the second and third
 digits are no 0.</li>
 <li>The ndPAC use a p value and every non-significant PAC estimation
 is set to zero. This p value is computed as 1/nperm.</li>
 <li>The traxis argument is only used if you picked up the surrogates
-method 1: &#8220;swap phase and amplitude trials <a class="footnote-reference" href="#f2" id="id17">[2]</a>&#8220;</li>
+method 1: “swap phase and amplitude trials <a class="footnote-reference" href="#f2" id="id17">[2]</a>”</li>
 <li>Basically, the surrogate evaluation proposed by <a class="footnote-reference" href="#f5" id="id18">[5]</a> split the
 amplitude into two equal parts, then swap those two blocks. But
 the nblocks parameter allow to split into a larger number.</li>
 </ul>
-</div>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -688,7 +651,7 @@ the nblocks parameter allow to split into a larger number.</li>
 <div class="section" id="preferred-phase">
 <span id="pp"></span><h3>Preferred-phase<a class="headerlink" href="#preferred-phase" title="Permalink to this headline">¶</a></h3>
 <p>Compute the preferred-phase (PP, see <a class="reference external" href="https://github.com/EtienneCmb/tensorpac/tree/master/examples/12_PreferredPhase.py">this PP example</a>).</p>
-<div class="figure align-center" id="id22">
+<div class="figure align-center" id="id20">
 <img alt="_images/PP_planningVsExec.png" src="_images/PP_planningVsExec.png" />
 <p class="caption"><span class="caption-text">Example of preferred-phase for a motor task. This show how the amplitude is distributed according to phase values during a motor planning phase and a motor execution phase.</span></p>
 </div>
@@ -700,44 +663,40 @@ the nblocks parameter allow to split into a larger number.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pha</strong> : array_like</p>
-<blockquote>
-<div><p>Phase of slower oscillations.</p>
-</div></blockquote>
-<p><strong>amp</strong> : array_like</p>
-<blockquote>
-<div><p>Amplitude of fastest oscillations.</p>
-</div></blockquote>
-<p><strong>axis</strong> : int | -1</p>
-<blockquote>
-<div><p>Location of the time axis.</p>
-</div></blockquote>
-<p><strong>nbins</strong> : int | 72</p>
-<blockquote>
-<div><p>Number of bins for bining the amplitude according to phase
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>pha</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Phase of slower oscillations.</p>
+</dd>
+<dt><strong>amp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Amplitude of fastest oscillations.</p>
+</dd>
+<dt><strong>axis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | -1</span></dt>
+<dd><p class="first last">Location of the time axis.</p>
+</dd>
+<dt><strong>nbins</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 72</span></dt>
+<dd><p class="first last">Number of bins for bining the amplitude according to phase
 slices.</p>
-</div></blockquote>
-<p><strong>optimize</strong> : {True, False, &#8216;greedy&#8217;, &#8216;optimal&#8217;}</p>
-<blockquote>
-<div><p>Optimize argument of the np.einsum function. Use either False,
-True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
-</div></blockquote>
+</dd>
+<dt><strong>optimize</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{True, False, ‘greedy’, ‘optimal’}</span></dt>
+<dd><p class="first last">Optimize argument of the np.einsum function. Use either False,
+True, ‘greedy’ or ‘optimal’.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ampbin</strong> : array_like</p>
-<blockquote>
-<div><p>The binned amplitude according to the phase of shape
-(nbins, namp, npha...).</p>
-</div></blockquote>
-<p><strong>pp</strong> : array_like</p>
-<blockquote>
-<div><p>The prefered phase where the amplitude is maximum of shape
-(namp, npha, ...).</p>
-</div></blockquote>
-<p><strong>polarvec</strong> : array_like</p>
-<blockquote class="last">
-<div><p>The phase vector for the polar plot.</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>ampbin</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">The binned amplitude according to the phase of shape
+(nbins, namp, npha…).</p>
+</dd>
+<dt><strong>pp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">The prefered phase where the amplitude is maximum of shape
+(namp, npha, …).</p>
+</dd>
+<dt><strong>polarvec</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">The phase vector for the polar plot.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -748,7 +707,7 @@ True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
 <div class="section" id="event-related-phase-amplitude-coupling">
 <span id="erpac"></span><h3>Event-Related Phase-Amplitude Coupling<a class="headerlink" href="#event-related-phase-amplitude-coupling" title="Permalink to this headline">¶</a></h3>
 <p>Compute the ERPAC (see <a class="reference external" href="https://github.com/EtienneCmb/tensorpac/tree/master/examples/13_EventRelatedPAC.py">this ERPAC example</a>).</p>
-<div class="figure align-center" id="id23">
+<div class="figure align-center" id="id21">
 <img alt="_images/erpac.png" src="_images/erpac.png" />
 <p class="caption"><span class="caption-text">Example of Event-Related Phase-Amplitude Coupling (ERPAC, Voytek et al. 2013)</span></p>
 </div>
@@ -756,53 +715,45 @@ True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
 <dt id="tensorpac.pac.Pac.erpac">
 <code class="descclassname">Pac.</code><code class="descname">erpac</code><span class="sig-paren">(</span><em>pha</em>, <em>amp</em>, <em>traxis=0</em>, <em>optimize=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tensorpac/pac.html#Pac.erpac"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac.Pac.erpac" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Event-Related Phase-Amplitude Coupling (ERPAC).</p>
-<p>The ERPAC <a class="footnote-reference" href="#f6" id="id19">[6]</a> is used to measure PAC across trials and is
+<p>The ERPAC <a href="#id24"><span class="problematic" id="id19">[#f6]_</span></a> is used to measure PAC across trials and is
 interesting for real-time estimation.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pha</strong> : array_like</p>
-<blockquote>
-<div><p>Phase of slower oscillations.</p>
-</div></blockquote>
-<p><strong>amp</strong> : array_like</p>
-<blockquote>
-<div><p>Amplitude of fastest oscillations.</p>
-</div></blockquote>
-<p><strong>traxis</strong> : int | 0</p>
-<blockquote>
-<div><p>Location of the trial axis.</p>
-</div></blockquote>
-<p><strong>optimize</strong> : {True, False, &#8216;greedy&#8217;, &#8216;optimal&#8217;}</p>
-<blockquote>
-<div><p>Optimize argument of the np.einsum function. Use either False,
-True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>pha</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Phase of slower oscillations.</p>
+</dd>
+<dt><strong>amp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Amplitude of fastest oscillations.</p>
+</dd>
+<dt><strong>traxis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 0</span></dt>
+<dd><p class="first last">Location of the trial axis.</p>
+</dd>
+<dt><strong>optimize</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{True, False, ‘greedy’, ‘optimal’}</span></dt>
+<dd><p class="first last">Optimize argument of the np.einsum function. Use either False,
+True, ‘greedy’ or ‘optimal’.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>erpac</strong> : array_like</p>
-<blockquote>
-<div><p>The ERPAC estimation.</p>
-</div></blockquote>
-<p><strong>pvalue</strong> : array_like</p>
-<blockquote>
-<div><p>The associated p-values.</p>
-</div></blockquote>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">ERPAC is computed across trials, therefor, it does not use an
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>erpac</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">The ERPAC estimation.</p>
+</dd>
+<dt><strong>pvalue</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">The associated p-values.</p>
+</dd>
+<dt><strong>.. warning::</strong></dt>
+<dd><p class="first last">ERPAC is computed across trials, therefor, it does not use an
 <em>axis</em> variable but instead, a <strong>traxis</strong> variable which specify
 where is located the axis to consider as trials.</p>
-</div>
-<table class="last docutils footnote" frame="void" id="f6" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id19">[6]</a></td><td><p class="first"><a href="#id20"><span class="problematic" id="id21">`</span></a>Voytek et al, 2013 &lt;<a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/">https://www.ncbi.nlm.nih.gov/pubmed/</a></p>
-<p class="last">22986076&gt;`_</p>
-</td></tr>
-</tbody>
-</table>
+</dd>
+<dt><strong>.. [#f6] `Voytek et al, 2013 &lt;https://www.ncbi.nlm.nih.gov/pubmed/</strong></dt>
+<dd><p class="first last">22986076&gt;`_</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -813,7 +764,7 @@ where is located the axis to consider as trials.</p>
 </div>
 <div class="section" id="visualization">
 <span id="fcnvizu"></span><h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h2>
-<p>If matplotlib is install on your system, the main Pac class also include several plotting functions :</p>
+<p>If matplotlib is installed on your system, the main Pac class already includes several plotting functions :</p>
 <ul class="simple">
 <li><a class="reference internal" href="#pltpac"><span class="std std-ref">2D plot</span></a> : standard plotting function for 2D arrays.</li>
 <li><a class="reference internal" href="#pltcomo"><span class="std std-ref">Comodulogram</span></a> : comodulogram plot, for finding the coupling location <em>PAC(phase, amplitude)</em></li>
@@ -822,7 +773,7 @@ where is located the axis to consider as trials.</p>
 <li><a class="reference internal" href="#pltshow"><span class="std std-ref">Show</span></a> : show the figure</li>
 <li><a class="reference internal" href="#pltsave"><span class="std std-ref">Save</span></a> : save the figure</li>
 </ul>
-<p>plotting method that rely on Matplotlib. This script is also present in the <a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/examples/9_PlayWithColors.py">example</a> folder.</p>
+<p>plotting method that relies on Matplotlib. This script is also present in the <a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/examples/9_PlayWithColors.py">example</a> folder.</p>
 <div class="section" id="d-plot">
 <span id="pltpac"></span><h3>2D plot<a class="headerlink" href="#d-plot" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
@@ -834,111 +785,91 @@ where is located the axis to consider as trials.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pac</strong> : array_like</p>
-<blockquote>
-<div><p>A 2D array.</p>
-</div></blockquote>
-<p><strong>xvec</strong> : array_like</p>
-<blockquote>
-<div><p>The vector to use for the x-axis.</p>
-</div></blockquote>
-<p><strong>yvec</strong> : array_like</p>
-<blockquote>
-<div><p>The vector to use for the y-axis.</p>
-</div></blockquote>
-<p><strong>xlabel</strong> : string | &#8216;&#8217;</p>
-<blockquote>
-<div><p>Label for the x-axis.</p>
-</div></blockquote>
-<p><strong>ylabel</strong> : string | &#8216;&#8217;</p>
-<blockquote>
-<div><p>Label for the y-axis.</p>
-</div></blockquote>
-<p><strong>cblabel</strong> : string | &#8216;&#8217;</p>
-<blockquote>
-<div><p>Label for the colorbar.</p>
-</div></blockquote>
-<p><strong>title</strong> : string | &#8216;&#8217;</p>
-<blockquote>
-<div><p>Title of the plot.</p>
-</div></blockquote>
-<p><strong>y</strong> : float | 1.02</p>
-<blockquote>
-<div><p>Title location.</p>
-</div></blockquote>
-<p><strong>cmap</strong> : string | &#8216;viridis&#8217;</p>
-<blockquote>
-<div><p>Name of one Matplotlib&#8217;s colomap.</p>
-</div></blockquote>
-<p><strong>vmin</strong> : float | None</p>
-<blockquote>
-<div><p>Threshold under which set the color to the uner parameter.</p>
-</div></blockquote>
-<p><strong>vmax</strong> : float | None</p>
-<blockquote>
-<div><p>Threshold over which set the color in the over parameter.</p>
-</div></blockquote>
-<p><strong>under</strong> : string | &#8216;gray&#8217;</p>
-<blockquote>
-<div><p>Color for values under the vmin parameter.</p>
-</div></blockquote>
-<p><strong>over</strong> : string | &#8216;red&#8217;</p>
-<blockquote>
-<div><p>Color for values over the vmax parameter.</p>
-</div></blockquote>
-<p><strong>bad</strong> : string | None</p>
-<blockquote>
-<div><p>Color for non-significant values.</p>
-</div></blockquote>
-<p><strong>pvalues</strong> : array_like | None</p>
-<blockquote>
-<div><p>P-values to use for masking PAC values. The shape of this
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>pac</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">A 2D array.</p>
+</dd>
+<dt><strong>xvec</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">The vector to use for the x-axis.</p>
+</dd>
+<dt><strong>yvec</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">The vector to use for the y-axis.</p>
+</dd>
+<dt><strong>xlabel</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘’</span></dt>
+<dd><p class="first last">Label for the x-axis.</p>
+</dd>
+<dt><strong>ylabel</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘’</span></dt>
+<dd><p class="first last">Label for the y-axis.</p>
+</dd>
+<dt><strong>cblabel</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘’</span></dt>
+<dd><p class="first last">Label for the colorbar.</p>
+</dd>
+<dt><strong>title</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘’</span></dt>
+<dd><p class="first last">Title of the plot.</p>
+</dd>
+<dt><strong>y</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | 1.02</span></dt>
+<dd><p class="first last">Title location.</p>
+</dd>
+<dt><strong>cmap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘viridis’</span></dt>
+<dd><p class="first last">Name of one Matplotlib’s colomap.</p>
+</dd>
+<dt><strong>vmin</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | None</span></dt>
+<dd><p class="first last">Threshold under which set the color to the uner parameter.</p>
+</dd>
+<dt><strong>vmax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | None</span></dt>
+<dd><p class="first last">Threshold over which set the color in the over parameter.</p>
+</dd>
+<dt><strong>under</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘gray’</span></dt>
+<dd><p class="first last">Color for values under the vmin parameter.</p>
+</dd>
+<dt><strong>over</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘red’</span></dt>
+<dd><p class="first last">Color for values over the vmax parameter.</p>
+</dd>
+<dt><strong>bad</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | None</span></dt>
+<dd><p class="first last">Color for non-significant values.</p>
+</dd>
+<dt><strong>pvalues</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like | None</span></dt>
+<dd><p class="first last">P-values to use for masking PAC values. The shape of this
 parameter must be the same as the shape as pac.</p>
-</div></blockquote>
-<p><strong>p</strong> : float | .05</p>
-<blockquote>
-<div><p>If pvalues is pass, use this threshold for masking
+</dd>
+<dt><strong>p</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | .05</span></dt>
+<dd><p class="first last">If pvalues is pass, use this threshold for masking
 non-significant PAC.</p>
-</div></blockquote>
-<p><strong>interp</strong> : tuple | None</p>
-<blockquote>
-<div><p>Tuple for controlling the 2D interpolation. For example,
+</dd>
+<dt><strong>interp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple | None</span></dt>
+<dd><p class="first last">Tuple for controlling the 2D interpolation. For example,
 (.1, .1) will multiply the number of row and columns by 10.</p>
-</div></blockquote>
-<p><strong>rmaxis</strong> : bool | False</p>
-<blockquote>
-<div><p>Remove unecessary axis.</p>
-</div></blockquote>
-<p><strong>dpaxis</strong> : bool | False</p>
-<blockquote>
-<div><p>Despine axis.</p>
-</div></blockquote>
-<p><strong>plotas</strong> : {&#8216;imshow&#8217;, &#8216;contour&#8217;, &#8216;pcolor&#8217;}</p>
-<blockquote>
-<div><p>Choose how to display the comodulogram, either using imshow
-(&#8216;imshow&#8217;) or contours (&#8216;contour&#8217;). If you choose &#8216;contour&#8217;,
+</dd>
+<dt><strong>rmaxis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool | False</span></dt>
+<dd><p class="first last">Remove unecessary axis.</p>
+</dd>
+<dt><strong>dpaxis</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool | False</span></dt>
+<dd><p class="first last">Despine axis.</p>
+</dd>
+<dt><strong>plotas</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{‘imshow’, ‘contour’, ‘pcolor’}</span></dt>
+<dd><p class="first last">Choose how to display the comodulogram, either using imshow
+(‘imshow’) or contours (‘contour’). If you choose ‘contour’,
 use the ncontours parameter for controlling the number of
 contours.</p>
-</div></blockquote>
-<p><strong>ncontours</strong> : int | 5</p>
-<blockquote>
-<div><p>Number of contours if plotas is &#8216;contour&#8217;.</p>
-</div></blockquote>
-<p><strong>levels</strong> : list | None</p>
-<blockquote>
-<div><p>Add significency levels. This parameter must be a sorted list
+</dd>
+<dt><strong>ncontours</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 5</span></dt>
+<dd><p class="first last">Number of contours if plotas is ‘contour’.</p>
+</dd>
+<dt><strong>levels</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list | None</span></dt>
+<dd><p class="first last">Add significency levels. This parameter must be a sorted list
 of p-values to use as levels.</p>
-</div></blockquote>
-<p><strong>levelcmap</strong> : string | Reds</p>
-<blockquote>
-<div><p>Colormap of signifiency levels.</p>
-</div></blockquote>
+</dd>
+<dt><strong>levelcmap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | Reds</span></dt>
+<dd><p class="first last">Colormap of signifiency levels.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">gca: axes</p>
-<blockquote class="last">
-<div><p>The current matplotlib axes.</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>gca: axes</strong></dt>
+<dd><p class="first last">The current matplotlib axes.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -948,7 +879,7 @@ of p-values to use as levels.</p>
 </div>
 <div class="section" id="comodulogram">
 <span id="pltcomo"></span><h3>Comodulogram<a class="headerlink" href="#comodulogram" title="Permalink to this headline">¶</a></h3>
-<div class="figure align-center" id="id24">
+<div class="figure align-center" id="id22">
 <img alt="_images/9_plot.png" src="_images/9_plot.png" />
 <p class="caption"><span class="caption-text">Comodulogram forms.</span></p>
 </div>
@@ -960,32 +891,30 @@ of p-values to use as levels.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pac</strong> : array_like</p>
-<blockquote>
-<div><p>PAC array of shape (namp, pha)</p>
-</div></blockquote>
-<p><strong>xlabel</strong> : string | &#8216;Frequency for phase (hz)&#8217;</p>
-<blockquote>
-<div><p>Label for the phase axis.</p>
-</div></blockquote>
-<p><strong>ylabel</strong> : string | &#8216;Frequency for amplitude (hz)&#8217;</p>
-<blockquote>
-<div><p>Label for the amplitude axis.</p>
-</div></blockquote>
-<p><strong>cblabel</strong> : string | &#8216;PAC values&#8217;</p>
-<blockquote>
-<div><p>Colorbar.</p>
-</div></blockquote>
-<p><strong>kwargs</strong> : dict</p>
-<blockquote>
-<div><p>Further arguments are passed to the pacplot() method.</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>pac</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">PAC array of shape (namp, pha)</p>
+</dd>
+<dt><strong>xlabel</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘Frequency for phase (hz)’</span></dt>
+<dd><p class="first last">Label for the phase axis.</p>
+</dd>
+<dt><strong>ylabel</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘Frequency for amplitude (hz)’</span></dt>
+<dd><p class="first last">Label for the amplitude axis.</p>
+</dd>
+<dt><strong>cblabel</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘PAC values’</span></dt>
+<dd><p class="first last">Colorbar.</p>
+</dd>
+<dt><strong>kwargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Further arguments are passed to the pacplot() method.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>gca</strong> : axes</p>
-<blockquote class="last">
-<div><p>The current matplotlib axes.</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>gca</strong> <span class="classifier-delimiter">:</span> <span class="classifier">axes</span></dt>
+<dd><p class="first last">The current matplotlib axes.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1008,45 +937,40 @@ either for the phase or for the amplitude.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pac</strong> : array_like</p>
-<blockquote>
-<div><p>Pac array of shape (namp, npha)</p>
-</div></blockquote>
-<p><strong>fvec</strong> : array_like</p>
-<blockquote>
-<div><p>The frequency vector returned by the pac_trivec function.</p>
-</div></blockquote>
-<p><strong>tridx</strong> : array_like</p>
-<blockquote>
-<div><p>The index vector used to build the triangle. This argument is
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>pac</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Pac array of shape (namp, npha)</p>
+</dd>
+<dt><strong>fvec</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">The frequency vector returned by the pac_trivec function.</p>
+</dd>
+<dt><strong>tridx</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">The index vector used to build the triangle. This argument is
 also returned by the pac_trivec function.</p>
-</div></blockquote>
-<p><strong>xlabel</strong> : string | &#8216;Starting frequency (hz)&#8217;</p>
-<blockquote>
-<div><p>Label for the phase axis.</p>
-</div></blockquote>
-<p><strong>ylabel</strong> : string | &#8216;Ending frequency (hz)&#8217;</p>
-<blockquote>
-<div><p>Label for the amplitude axis.</p>
-</div></blockquote>
-<p><strong>cblabel</strong> : string | &#8216;PAC values&#8217;</p>
-<blockquote>
-<div><p>Colorbar.</p>
-</div></blockquote>
-<p><strong>bad</strong> : string | &#8216;lightgray&#8217;</p>
-<blockquote>
-<div><p>Color for non-significant values.</p>
-</div></blockquote>
-<p><strong>kwargs</strong> : dict</p>
-<blockquote>
-<div><p>Further arguments are passed to the pacplot() method.</p>
-</div></blockquote>
+</dd>
+<dt><strong>xlabel</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘Starting frequency (hz)’</span></dt>
+<dd><p class="first last">Label for the phase axis.</p>
+</dd>
+<dt><strong>ylabel</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘Ending frequency (hz)’</span></dt>
+<dd><p class="first last">Label for the amplitude axis.</p>
+</dd>
+<dt><strong>cblabel</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘PAC values’</span></dt>
+<dd><p class="first last">Colorbar.</p>
+</dd>
+<dt><strong>bad</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘lightgray’</span></dt>
+<dd><p class="first last">Color for non-significant values.</p>
+</dd>
+<dt><strong>kwargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Further arguments are passed to the pacplot() method.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>gca</strong> : axes</p>
-<blockquote class="last">
-<div><p>The current matplotlib axes.</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>gca</strong> <span class="classifier-delimiter">:</span> <span class="classifier">axes</span></dt>
+<dd><p class="first last">The current matplotlib axes.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1069,45 +993,40 @@ either for the phase or for the amplitude.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pac</strong> : array_like</p>
-<blockquote>
-<div><p>Pac array of shape (namp, npha)</p>
-</div></blockquote>
-<p><strong>fvec</strong> : array_like</p>
-<blockquote>
-<div><p>The frequency vector returned by the pac_trivec function.</p>
-</div></blockquote>
-<p><strong>tridx</strong> : array_like</p>
-<blockquote>
-<div><p>The index vector used to build the triangle. This argument is
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>pac</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Pac array of shape (namp, npha)</p>
+</dd>
+<dt><strong>fvec</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">The frequency vector returned by the pac_trivec function.</p>
+</dd>
+<dt><strong>tridx</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">The index vector used to build the triangle. This argument is
 also returned by the pac_trivec function.</p>
-</div></blockquote>
-<p><strong>xlabel</strong> : string | &#8216;Starting frequency (hz)&#8217;</p>
-<blockquote>
-<div><p>Label for the phase axis.</p>
-</div></blockquote>
-<p><strong>ylabel</strong> : string | &#8216;Ending frequency (hz)&#8217;</p>
-<blockquote>
-<div><p>Label for the amplitude axis.</p>
-</div></blockquote>
-<p><strong>cblabel</strong> : string | &#8216;PAC values&#8217;</p>
-<blockquote>
-<div><p>Colorbar.</p>
-</div></blockquote>
-<p><strong>bad</strong> : string | &#8216;lightgray&#8217;</p>
-<blockquote>
-<div><p>Color for non-significant values.</p>
-</div></blockquote>
-<p><strong>kwargs</strong> : dict</p>
-<blockquote>
-<div><p>Further arguments are passed to the pacplot() method.</p>
-</div></blockquote>
+</dd>
+<dt><strong>xlabel</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘Starting frequency (hz)’</span></dt>
+<dd><p class="first last">Label for the phase axis.</p>
+</dd>
+<dt><strong>ylabel</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘Ending frequency (hz)’</span></dt>
+<dd><p class="first last">Label for the amplitude axis.</p>
+</dd>
+<dt><strong>cblabel</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘PAC values’</span></dt>
+<dd><p class="first last">Colorbar.</p>
+</dd>
+<dt><strong>bad</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘lightgray’</span></dt>
+<dd><p class="first last">Color for non-significant values.</p>
+</dd>
+<dt><strong>kwargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Further arguments are passed to the pacplot() method.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>gca</strong> : axes</p>
-<blockquote class="last">
-<div><p>The current matplotlib axes.</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>gca</strong> <span class="classifier-delimiter">:</span> <span class="classifier">axes</span></dt>
+<dd><p class="first last">The current matplotlib axes.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1134,14 +1053,14 @@ also returned by the pac_trivec function.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>filename</strong> : string</p>
-<blockquote>
-<div><p>The name of the figure to save.</p>
-</div></blockquote>
-<p><strong>dpi</strong> : int | 600</p>
-<blockquote class="last">
-<div><p>DPI of the figure.</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>filename</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">The name of the figure to save.</p>
+</dd>
+<dt><strong>dpi</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 600</span></dt>
+<dd><p class="first last">DPI of the figure.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1163,63 +1082,55 @@ also returned by the pac_trivec function.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fpha</strong> : float | 10.</p>
-<blockquote>
-<div><p>Frequency for phase. Use either a float number for a centered frequency
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>fpha</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | 10.</span></dt>
+<dd><p class="first last">Frequency for phase. Use either a float number for a centered frequency
 of a band (like [5, 7]) for a bandwidth.</p>
-</div></blockquote>
-<p><strong>famp</strong> : float | 100.</p>
-<blockquote>
-<div><p>Frequency for amplitude. Use either a float number for a centered
+</dd>
+<dt><strong>famp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | 100.</span></dt>
+<dd><p class="first last">Frequency for amplitude. Use either a float number for a centered
 frequency of a band (like [60, 80]) for a bandwidth.</p>
-</div></blockquote>
-<p><strong>sf</strong> : int | 1024</p>
-<blockquote>
-<div><p>Sampling frequency</p>
-</div></blockquote>
-<p><strong>ntrials</strong> : int | 10</p>
-<blockquote>
-<div><p>Number of datasets</p>
-</div></blockquote>
-<p><strong>npts</strong> : int | 4000</p>
-<blockquote>
-<div><p>Number of points for each signal.</p>
-</div></blockquote>
-<p><strong>chi</strong> : float | 0.</p>
-<blockquote>
-<div><p>Amount of coupling. If chi=0, signals of phase and amplitude
+</dd>
+<dt><strong>sf</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 1024</span></dt>
+<dd><p class="first last">Sampling frequency</p>
+</dd>
+<dt><strong>ntrials</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 10</span></dt>
+<dd><p class="first last">Number of datasets</p>
+</dd>
+<dt><strong>npts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 4000</span></dt>
+<dd><p class="first last">Number of points for each signal.</p>
+</dd>
+<dt><strong>chi</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | 0.</span></dt>
+<dd><p class="first last">Amount of coupling. If chi=0, signals of phase and amplitude
 are strongly coupled (0.&lt;=chi&lt;=1.).</p>
-</div></blockquote>
-<p><strong>noise</strong> : float | 1.</p>
-<blockquote>
-<div><p>Amount of noise (0&lt;=noise&lt;=3).</p>
-</div></blockquote>
-<p><strong>dpha</strong> : float | 0.</p>
-<blockquote>
-<div><p>Random incertitude on phase frequences (0&lt;=dpha&lt;=100). If fpha is 2,
+</dd>
+<dt><strong>noise</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | 1.</span></dt>
+<dd><p class="first last">Amount of noise (0&lt;=noise&lt;=3).</p>
+</dd>
+<dt><strong>dpha</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | 0.</span></dt>
+<dd><p class="first last">Random incertitude on phase frequences (0&lt;=dpha&lt;=100). If fpha is 2,
 and dpha is 50, the frequency for the phase signal will be between :
 [2-0.5*2, 2+0.5*2]=[1,3]</p>
-</div></blockquote>
-<p><strong>damp</strong> : float | 0.</p>
-<blockquote>
-<div><p>Random incertitude on amplitude frequencies (0&lt;=damp&lt;=100). If famp is
+</dd>
+<dt><strong>damp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | 0.</span></dt>
+<dd><p class="first last">Random incertitude on amplitude frequencies (0&lt;=damp&lt;=100). If famp is
 60, and damp is 10, the frequency for the amplitude signal will be
 between : [60-0.1*60, 60+0.1*60]=[54,66]</p>
-</div></blockquote>
-<p><strong>rnd_state: int | 0</strong></p>
-<blockquote>
-<div><p>Fix random of the machine (for reproducibility)</p>
-</div></blockquote>
+</dd>
+<dt><strong>rnd_state: int | 0</strong></dt>
+<dd><p class="first last">Fix random of the machine (for reproducibility)</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>data</strong> : array_like</p>
-<blockquote>
-<div><p>Array of pac signals of shape (ntrials, npts).</p>
-</div></blockquote>
-<p><strong>time</strong> : array_like</p>
-<blockquote class="last">
-<div><p>Time vector of shape (npts,).</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>data</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Array of pac signals of shape (ntrials, npts).</p>
+</dd>
+<dt><strong>time</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Time vector of shape (npts,).</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1239,50 +1150,44 @@ Tom Dupre la Tour.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fpha</strong> : float | 10.</p>
-<blockquote>
-<div><p>Frequency for phase. Use either a float number for a centered frequency
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>fpha</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | 10.</span></dt>
+<dd><p class="first last">Frequency for phase. Use either a float number for a centered frequency
 of a band (like [5, 7]) for a bandwidth.</p>
-</div></blockquote>
-<p><strong>famp</strong> : float | 100.</p>
-<blockquote>
-<div><p>Frequency for amplitude. Use either a float number for a centered
+</dd>
+<dt><strong>famp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | 100.</span></dt>
+<dd><p class="first last">Frequency for amplitude. Use either a float number for a centered
 frequency of a band (like [60, 80]) for a bandwidth.</p>
-</div></blockquote>
-<p><strong>sf</strong> : float | 1024.</p>
-<blockquote>
-<div><p>Sampling frequency.</p>
-</div></blockquote>
-<p><strong>npts</strong> : int | 4000</p>
-<blockquote>
-<div><p>Number of time points.</p>
-</div></blockquote>
-<p><strong>ntrials</strong> : int | 10</p>
-<blockquote>
-<div><p>Number of trials in the dataset.</p>
-</div></blockquote>
-<p><strong>noise</strong> : float | .1</p>
-<blockquote>
-<div><p>Amount of white noise.</p>
-</div></blockquote>
-<p><strong>pp</strong> : float | 0.</p>
-<blockquote>
-<div><p>The preferred-phase of the coupling.</p>
-</div></blockquote>
-<p><strong>rnd_state: int | 0</strong></p>
-<blockquote>
-<div><p>Fix random of the machine (for reproducibility)</p>
-</div></blockquote>
+</dd>
+<dt><strong>sf</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | 1024.</span></dt>
+<dd><p class="first last">Sampling frequency.</p>
+</dd>
+<dt><strong>npts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 4000</span></dt>
+<dd><p class="first last">Number of time points.</p>
+</dd>
+<dt><strong>ntrials</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int | 10</span></dt>
+<dd><p class="first last">Number of trials in the dataset.</p>
+</dd>
+<dt><strong>noise</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | .1</span></dt>
+<dd><p class="first last">Amount of white noise.</p>
+</dd>
+<dt><strong>pp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | 0.</span></dt>
+<dd><p class="first last">The preferred-phase of the coupling.</p>
+</dd>
+<dt><strong>rnd_state: int | 0</strong></dt>
+<dd><p class="first last">Fix random of the machine (for reproducibility)</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>data</strong> : array_like</p>
-<blockquote>
-<div><p>Array of pac signals of shape (ntrials, npts).</p>
-</div></blockquote>
-<p><strong>time</strong> : array_like</p>
-<blockquote class="last">
-<div><p>Time vector of shape (npts,).</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>data</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Array of pac signals of shape (ntrials, npts).</p>
+</dd>
+<dt><strong>time</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Time vector of shape (npts,).</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1300,18 +1205,20 @@ frequency of a band (like [60, 80]) for a bandwidth.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fpha, famp</strong> : tuple | (2, 30, 2, 1), (60, 200, 10, 5)</p>
-<blockquote>
-<div><p>Frequency parameters for phase and amplitude. Each argument inside the
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>fpha, famp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple | (2, 30, 2, 1), (60, 200, 10, 5)</span></dt>
+<dd><p class="first last">Frequency parameters for phase and amplitude. Each argument inside the
 tuple mean (starting fcy, ending fcy, bandwidth, step).</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>pvec, avec</strong> : array_like</p>
-<blockquote class="last">
-<div><p>Arrays containing the pairs of phase and amplitude frequencies. Each
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>pvec, avec</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Arrays containing the pairs of phase and amplitude frequencies. Each
 vector have a shape of (N, 2).</p>
-</div></blockquote>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1331,28 +1238,27 @@ vector with an increasing frequency bandwidth.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>fstart</strong> : float | 60.</p>
-<blockquote>
-<div><p>Starting frequency.</p>
-</div></blockquote>
-<p><strong>fend</strong> : float | 160.</p>
-<blockquote>
-<div><p>Ending frequency.</p>
-</div></blockquote>
-<p><strong>fwidth</strong> : float | 10.</p>
-<blockquote>
-<div><p>Frequency bandwidth increase between each band.</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>fstart</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | 60.</span></dt>
+<dd><p class="first last">Starting frequency.</p>
+</dd>
+<dt><strong>fend</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | 160.</span></dt>
+<dd><p class="first last">Ending frequency.</p>
+</dd>
+<dt><strong>fwidth</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float | 10.</span></dt>
+<dd><p class="first last">Frequency bandwidth increase between each band.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>f</strong> : array_like</p>
-<blockquote>
-<div><p>The triangular vector.</p>
-</div></blockquote>
-<p><strong>tridx</strong> : array_like</p>
-<blockquote class="last">
-<div><p>The triangular index for the reconstruction.</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>f</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">The triangular vector.</p>
+</dd>
+<dt><strong>tridx</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">The triangular index for the reconstruction.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1373,26 +1279,26 @@ vector with an increasing frequency bandwidth.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x, y</strong> : array_like</p>
-<blockquote>
-<div><p>Compute pearson correlation between the multi-dimensional arrays
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x, y</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Compute pearson correlation between the multi-dimensional arrays
 x and y.</p>
-</div></blockquote>
-<p><strong>st</strong> : string | &#8216;i..j, k..j-&gt;ik...&#8217;</p>
-<blockquote>
-<div><p>The string to pass to the np.einsum function.</p>
-</div></blockquote>
-<p><strong>optimize</strong> : bool | True</p>
-<blockquote>
-<div><p>Optimize argument of the np.einsum function. Use either False,
-True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
-</div></blockquote>
+</dd>
+<dt><strong>st</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string | ‘i..j, k..j-&gt;ik…’</span></dt>
+<dd><p class="first last">The string to pass to the np.einsum function.</p>
+</dd>
+<dt><strong>optimize</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool | True</span></dt>
+<dd><p class="first last">Optimize argument of the np.einsum function. Use either False,
+True, ‘greedy’ or ‘optimal’.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">cov: array_like</p>
-<blockquote class="last">
-<div><p>The pearson correlation array.</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>cov: array_like</strong></dt>
+<dd><p class="first last">The pearson correlation array.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1412,29 +1318,28 @@ and adapted for multi-dimensional arrays.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>alpha</strong> : vector</p>
-<blockquote>
-<div><p>Sample of angles in radians</p>
-</div></blockquote>
-<p><strong>x</strong> : vector</p>
-<blockquote>
-<div><p>Sample of linear random variable</p>
-</div></blockquote>
-<p><strong>optimize</strong> : bool | True</p>
-<blockquote>
-<div><p>Optimize argument of the np.einsum function. Use either False,
-True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
-</div></blockquote>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>alpha</strong> <span class="classifier-delimiter">:</span> <span class="classifier">vector</span></dt>
+<dd><p class="first last">Sample of angles in radians</p>
+</dd>
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">vector</span></dt>
+<dd><p class="first last">Sample of linear random variable</p>
+</dd>
+<dt><strong>optimize</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool | True</span></dt>
+<dd><p class="first last">Optimize argument of the np.einsum function. Use either False,
+True, ‘greedy’ or ‘optimal’.</p>
+</dd>
+</dl>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">rho: float</p>
-<blockquote>
-<div><p>Correlation coefficient.</p>
-</div></blockquote>
-<p>pval: float</p>
-<blockquote class="last">
-<div><p>P-value.</p>
-</div></blockquote>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>rho: float</strong></dt>
+<dd><p class="first last">Correlation coefficient.</p>
+</dd>
+<dt><strong>pval: float</strong></dt>
+<dd><p class="first last">P-value.</p>
+</dd>
+</dl>
 </td>
 </tr>
 </tbody>
@@ -1447,15 +1352,13 @@ True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="auto_examples/index.html" class="btn btn-neutral float-right" title="Gallery of Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="auto_examples/index.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="methods.html" class="btn btn-neutral" title="Implemented methods" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -1467,11 +1370,11 @@ True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Etienne Combrisson.
+        &copy; Copyright 2017, Etienne Combrisson
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1486,35 +1389,24 @@ True, &#8216;greedy&#8217; or &#8216;optimal&#8217;.</p>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'0.5.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

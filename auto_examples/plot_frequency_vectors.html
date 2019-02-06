@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Define frequency vectors &mdash; Tensorpac 0.5.3 documentation</title>
+  <title>Define frequency vectors &mdash; Tensorpac 0.5.5 documentation</title>
   
 
   
@@ -26,30 +26,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="Tensorpac 0.5.3 documentation" href="../index.html"/>
-        <link rel="up" title="Examples" href="index.html"/>
-        <link rel="next" title="Basic phase amplitude coupling" href="plot_basic_pac.html"/>
-        <link rel="prev" title="Compute p-values" href="plot_values.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic phase amplitude coupling" href="plot_basic_pac.html" />
+    <link rel="prev" title="Compute p-values" href="plot_values.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -66,7 +56,7 @@
 
           
             
-            <img src="../_static/ico64.png" class="logo" />
+            <img src="../_static/ico64.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -74,7 +64,7 @@
             
             
               <div class="version">
-                0.5.3
+                0.5.5
               </div>
             
           
@@ -149,14 +139,15 @@
 <li class="toctree-l2"><a class="reference internal" href="plot_values.html">Compute p-values</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Define frequency vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_basic_pac.html">Basic phase amplitude coupling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_compare_surrogates.html">Compararison of several surrogate evaluation methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Filtering properties and effect</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare the several normalization methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">PAC methods comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_surrogates.html">Compare surrogate methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_distant_coupling.html">Compute distant PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_multidimensional_data.html">Compute PAC on multidimensional data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_custom_visualizations.html">Compare visualization methods</a></li>
 </ul>
 </li>
@@ -171,7 +162,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Tensorpac</a>
@@ -179,9 +170,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -225,25 +217,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="define-frequency-vectors">
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-plot-frequency-vectors-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="define-frequency-vectors">
 <span id="sphx-glr-auto-examples-plot-frequency-vectors-py"></span><h1>Define frequency vectors<a class="headerlink" href="#define-frequency-vectors" title="Permalink to this headline">¶</a></h1>
 <p>In Tensorpac, you can define your phase and amplitude vectors in sevral ways :</p>
-<ul>
-<li><p class="first">Manually define one band (ex : [2, 4])</p>
-</li>
-<li><p class="first">Define multiple bands using a list/tuple/array (ex : [[2, 4], [5, 7]])</p>
-</li>
+<ul class="simple">
+<li>Manually define one band (ex : [2, 4])</li>
+<li>Define multiple bands using a list/tuple/array (ex : [[2, 4], [5, 7]])</li>
 <li><dl class="first docutils">
 <dt>Using a (start, stop width step) definition. The latter lets you create regulary spaced bands [[start, start+width], [start+step, start+step+width],</dt>
-<dd><p class="first last">[start+2*step, start+2*step+width], ...]</p>
-</dd>
+<dd>[start+2*step, start+2*step+width], …]</dd>
 </dl>
 </li>
-<li><p class="first">Using a range : np.arange(1, 6) =&gt; [[1, 2], [2, 3], [3, 4], [4, 5]]</p>
-</li>
+<li>Using a range : np.arange(1, 6) =&gt; [[1, 2], [2, 3], [3, 4], [4, 5]]</li>
 </ul>
-<img alt="../_images/sphx_glr_plot_frequency_vectors_001.png" class="align-center" src="../_images/sphx_glr_plot_frequency_vectors_001.png" />
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<img alt="../_images/sphx_glr_plot_frequency_vectors_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_frequency_vectors_001.png" />
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">tensorpac.utils</span> <span class="kn">import</span> <span class="n">pac_vec</span>
 
@@ -290,21 +282,19 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  0.198 seconds)</p>
-<div class="sphx-glr-footer container">
-<div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_frequency_vectors.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_frequency_vectors.py</span></code></a></div>
-<div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_frequency_vectors.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_frequency_vectors.ipynb</span></code></a></div>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.060 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-frequency-vectors-py">
+<div class="sphx-glr-download docutils container">
+<a class="reference download internal" download="" href="../_downloads/755f651efc299ff39f175a84d15cac54/plot_frequency_vectors.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_frequency_vectors.py</span></code></a></div>
+<div class="sphx-glr-download docutils container">
+<a class="reference download internal" download="" href="../_downloads/0ea80379eed7d4b323ee0baad9f0f0fa/plot_frequency_vectors.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_frequency_vectors.ipynb</span></code></a></div>
 </div>
-<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
 </div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -322,11 +312,11 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Etienne Combrisson.
+        &copy; Copyright 2017, Etienne Combrisson
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -341,35 +331,24 @@
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'0.5.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

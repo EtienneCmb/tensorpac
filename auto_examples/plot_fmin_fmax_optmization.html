@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Find the optimal bandwidth &mdash; Tensorpac 0.5.3 documentation</title>
+  <title>Find the optimal bandwidth &mdash; Tensorpac 0.5.5 documentation</title>
   
 
   
@@ -26,30 +26,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="Tensorpac 0.5.3 documentation" href="../index.html"/>
-        <link rel="up" title="Examples" href="index.html"/>
-        <link rel="next" title="Compute p-values" href="plot_values.html"/>
-        <link rel="prev" title="README example" href="plot_readme.html"/> 
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Compute p-values" href="plot_values.html" />
+    <link rel="prev" title="README example" href="plot_readme.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -66,7 +56,7 @@
 
           
             
-            <img src="../_static/ico64.png" class="logo" />
+            <img src="../_static/ico64.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -74,7 +64,7 @@
             
             
               <div class="version">
-                0.5.3
+                0.5.5
               </div>
             
           
@@ -149,14 +139,15 @@
 <li class="toctree-l2"><a class="reference internal" href="plot_values.html">Compute p-values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_basic_pac.html">Basic phase amplitude coupling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_compare_surrogates.html">Compararison of several surrogate evaluation methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Filtering properties and effect</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare the several normalization methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">PAC methods comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_surrogates.html">Compare surrogate methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_distant_coupling.html">Compute distant PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_multidimensional_data.html">Compute PAC on multidimensional data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_custom_visualizations.html">Compare visualization methods</a></li>
 </ul>
 </li>
@@ -171,7 +162,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Tensorpac</a>
@@ -179,9 +170,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -225,13 +217,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="find-the-optimal-bandwidth">
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-plot-fmin-fmax-optmization-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="find-the-optimal-bandwidth">
 <span id="sphx-glr-auto-examples-plot-fmin-fmax-optmization-py"></span><h1>Find the optimal bandwidth<a class="headerlink" href="#find-the-optimal-bandwidth" title="Permalink to this headline">¶</a></h1>
 <p>Instead of looking for phase and amplitude frequency pairs (as in a
 comodulogram) this example illustrate how it is possible to find starting,
 ending and therefore, bandwidth coupling.</p>
-<img alt="../_images/sphx_glr_plot_fmin_fmax_optmization_001.png" class="align-center" src="../_images/sphx_glr_plot_fmin_fmax_optmization_001.png" />
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorpac</span> <span class="kn">import</span> <span class="n">Pac</span><span class="p">,</span> <span class="n">pac_trivec</span><span class="p">,</span> <span class="n">pac_signals_tort</span>
+<img alt="../_images/sphx_glr_plot_fmin_fmax_optmization_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_fmin_fmax_optmization_001.png" />
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorpac</span> <span class="kn">import</span> <span class="n">Pac</span><span class="p">,</span> <span class="n">pac_trivec</span><span class="p">,</span> <span class="n">pac_signals_tort</span>
 
 <span class="n">sf</span> <span class="o">=</span> <span class="mf">256.</span>
 <span class="n">data</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">pac_signals_tort</span><span class="p">(</span><span class="n">fpha</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="n">famp</span><span class="o">=</span><span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span> <span class="n">noise</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ntrials</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
@@ -243,7 +239,7 @@ ending and therefore, bandwidth coupling.</p>
 <span class="n">pac</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filterfit</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">p</span><span class="o">.</span><span class="n">triplot</span><span class="p">(</span><span class="n">pac</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">trif</span><span class="p">,</span> <span class="n">tridx</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Spectral_r&#39;</span><span class="p">,</span> <span class="n">rmaxis</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-          <span class="n">title</span><span class="o">=</span><span class="s1">r&#39;Optimal $[Fmin; Fmax]hz$ band for amplitude&#39;</span><span class="p">)</span>
+          <span class="n">title</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Optimal $[Fmin; Fmax]hz$ band for amplitude&#39;</span><span class="p">)</span>
 
 <span class="c1"># In this example, we generated a coupling with a phase between [5, 7]hz and an</span>
 <span class="c1"># amplitude between [60, 80]hz. To interpret the figure, the best starting</span>
@@ -256,21 +252,19 @@ ending and therefore, bandwidth coupling.</p>
 <span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the script:</strong> ( 0 minutes  1.801 seconds)</p>
-<div class="sphx-glr-footer container">
-<div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_fmin_fmax_optmization.py" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_fmin_fmax_optmization.py</span></code></a></div>
-<div class="sphx-glr-download container">
-<a class="reference download internal" href="../_downloads/plot_fmin_fmax_optmization.ipynb" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_fmin_fmax_optmization.ipynb</span></code></a></div>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  2.717 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-fmin-fmax-optmization-py">
+<div class="sphx-glr-download docutils container">
+<a class="reference download internal" download="" href="../_downloads/ebd5cd596339587b9fddfc08333c8cd4/plot_fmin_fmax_optmization.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_fmin_fmax_optmization.py</span></code></a></div>
+<div class="sphx-glr-download docutils container">
+<a class="reference download internal" download="" href="../_downloads/c3dc6702f18a1b9f842d6df38fbfe8b3/plot_fmin_fmax_optmization.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_fmin_fmax_optmization.ipynb</span></code></a></div>
 </div>
-<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Generated by Sphinx-Gallery</a></p>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
 </div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -288,11 +282,11 @@ ending and therefore, bandwidth coupling.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Etienne Combrisson.
+        &copy; Copyright 2017, Etienne Combrisson
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -307,35 +301,24 @@ ending and therefore, bandwidth coupling.</p>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'0.5.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

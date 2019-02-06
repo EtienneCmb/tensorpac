@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Implemented methods &mdash; Tensorpac 0.5.3 documentation</title>
+  <title>Implemented methods &mdash; Tensorpac 0.5.5 documentation</title>
   
 
   
@@ -26,29 +26,20 @@
 
   
 
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Tensorpac 0.5.3 documentation" href="index.html"/>
-        <link rel="next" title="API" href="api.html"/>
-        <link rel="prev" title="Tensorpac" href="index.html"/> 
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="Tensorpac" href="index.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -65,7 +56,7 @@
 
           
             
-            <img src="_static/ico64.png" class="logo" />
+            <img src="_static/ico64.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -73,7 +64,7 @@
             
             
               <div class="version">
-                0.5.3
+                0.5.5
               </div>
             
           
@@ -128,7 +119,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#utils">Utils</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#generate-artificially-coupled-signals">Generate artificially coupled signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#generate-artificially-coupled-signals-using-tort-method">Generate artificially coupled signals using Tort method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#generate-artificially-coupled-signals-using-wavelets">Generate artificially coupled signals using wavelets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#generate-triangular-vectors">Generate triangular vectors</a></li>
 </ul>
@@ -140,24 +132,23 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Gallery of Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/index.html#general-examples">General examples</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/03_ArtifialBandwidthSignals.html">Generate a coupling between specific bands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/11_Fmin-FmaxOptimisation.html">Find the optimal bandwidth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/09_P-value.html">Compute p-values</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/00_FrequencyVectors.html">Define frequency vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_basic_pac.html">Compute basic phase amplitude coupling</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/06_CompareSurrogatesMethods.html">Compararison of several surrogate evaluation methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/07_CompareNormalizationMethods.html">Compare the several normalization methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_pac_methods.html">PAC methods comparison</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/04_FilteringComparison.html">Filtering properties and effect</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/08_DistantCoupling.html">Compute distant PAC</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/10_PlayWithColors.html">Compare visualization methods</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_readme.html">README example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_values.html">Compute p-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_frequency_vectors.html">Define frequency vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_basic_pac.html">Basic phase amplitude coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_surrogates.html">Compare surrogate methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_long_range_coupling.html">Long-range PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_multidimensional_data.html">Compute PAC on multidimensional data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_custom_visualizations.html">Compare visualization methods</a></li>
 </ul>
 </li>
 </ul>
@@ -171,7 +162,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Tensorpac</a>
@@ -179,9 +170,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -225,25 +217,26 @@
             
   <div class="section" id="implemented-methods">
 <span id="methods"></span><h1>Implemented methods<a class="headerlink" href="#implemented-methods" title="Permalink to this headline">¶</a></h1>
-<p>Starting from fresh data, the first thing that need to be assessed is extracting the phase and the amplitude in several frequency bands. There is two ways to doing it :</p>
+<p>Beginning with raw data, the first step to computing PAC is to extract the phase and the amplitude across a range of frequency bands. There are two ways to do this :</p>
 <ul class="simple">
-<li>Filter the data in the frequency band, then, use the hilbert transform to pass from the real space, to the complex one.</li>
+<li>Filter the data in the frequency band, then use the hilbert transform to pass from real to complex space.</li>
 <li>Convolve your data with a wavelet with a width, corresponding to the desired frequency band.</li>
 </ul>
-<p>Finally, extract the phase and the amplitude from this complex decomposition. Once you have both signals, you can compute the PAC which rely on three steps :</p>
+<p>Next we will have to extract the phase and the amplitude from the resultant decomposition.</p>
+<p>Once we have resolved both phase and amplitude signals, we shall derive our PAC value. This is done in three steps :</p>
 <ul class="simple">
-<li><strong>Compute the PAC :</strong>  from the two time series of phase and amplitude, you&#8217;ll get one value of coupling</li>
-<li><strong>Compute surogates :</strong> the PAC measure is really sensible to the noise present in the data. In addition, filtering could occur artefacts. To minimize those effects, we compute surrogates. Basically, the surrogates are obtained by changing a little bit either the phase or the amplitude and re-compute the PAC on it. This procedure is then repeated 50, 100, 200 or 1000 times to get a reliable distribution.</li>
-<li><strong>Correct the PAC measurement :</strong> once you have the PAC and the distribution of surrogates, you can, for example, substract the mean of the surrogates. When you take the mean of a distribution only strong events survive hence, noise and artefacts should be reduced.</li>
+<li><strong>Compute the PAC :</strong>  From the two time series of phase and amplitude, this will give us a single coupling value</li>
+<li><strong>Compute surogates :</strong> The PAC measure is quite sensitive to noise present in the data. In addition, filtering may augment artefacts. To minimize these effects, we compute surrogates. Surrogates are obtained by altering slightly either the phase or the amplitude and re-computing the PAC. This procedure is then repeated over 50, 100, 200 or 1000 permutations to produce a reliable distribution.</li>
+<li><strong>Correct the PAC measurement :</strong> Once we have the PAC and the distribution of surrogates, we can subtract the mean of the surrogates. By taking the mean of the distribution, we limit our results to those strongest, and mitigate the impact of noise and artefact.</li>
 </ul>
-<p>Across the litterature, a lot of methodologies for those three previous steps have been proposed and compared. But, how is it possible to conclude if a PAC pipeline is more efficient rather than an other if those three steps are different? Maybe taking the PAC method from one paper, combined with another one might be better?</p>
+<p>The many existing PAC implemenations nearly always propose some variation on these three steps. How can we be sure, though, that any particular implemenation will outperform any other?</p>
 <div class="section" id="modular-philosophy">
 <h2>Modular philosophy<a class="headerlink" href="#modular-philosophy" title="Permalink to this headline">¶</a></h2>
-<p>To answer to this question, we propose a modular implementation of the phase amplitude coupling which means that you can mix methods. On top of that, every calculation is assessed using tensor and parallel computing which should provide fast performances.
-To pick methods you want, you&#8217;ll have to define the <strong>idpac</strong> tuple (or list/array) of three digits, each one referring to one of the implemented methods.</p>
+<p>To answer to this question, we’ve developed a modular implementation allowing users to combine methods from existing PAC implementations in novel ways. Until recently, it has been difficult to compare existing and novel combinations of PAC implementations, due to long computation times. By leveraging tensor and parallel computing, however, Tensorpac offers new possibilities for determining the optimal PAC implementation for a given data set.</p>
+<p>Tensorpac makes combining methods as simple as defining the <strong>idpac</strong> tuple (or list/array) of three digits, each referring to one of the implemented methods.</p>
 <div class="section" id="pac-methods">
 <h3>Pac methods<a class="headerlink" href="#pac-methods" title="Permalink to this headline">¶</a></h3>
-<p>The first digit refer to the PAC method :</p>
+<p>The first digit defines the PAC method :</p>
 <ul class="simple">
 <li>1 - Mean Vector Length (MVL - Canolty, 2006)</li>
 <li>2 - Kullback-Leibler Divergence (KLD - Tort, 2010)</li>
@@ -261,7 +254,7 @@ To pick methods you want, you&#8217;ll have to define the <strong>idpac</strong>
 </div>
 <div class="section" id="surrogates-methods">
 <h3>Surrogates methods<a class="headerlink" href="#surrogates-methods" title="Permalink to this headline">¶</a></h3>
-<p>The second digit refer to the method for evaluating surrogates :</p>
+<p>The second digit defines the method for surrogates computation :</p>
 <ul class="simple">
 <li>0 - No surrogates</li>
 <li>1 - Swap phase/amplitude trials (Tort, 2010)</li>
@@ -279,7 +272,7 @@ To pick methods you want, you&#8217;ll have to define the <strong>idpac</strong>
 </div>
 <div class="section" id="normalization-methods">
 <h3>Normalization methods<a class="headerlink" href="#normalization-methods" title="Permalink to this headline">¶</a></h3>
-<p>The third digit is finally used to define how to normalize (or correct) the real PAC estimation by the properties of the surrogate distribution :</p>
+<p>The third digit is defines the normalization (or correction) procedure :</p>
 <ul class="simple">
 <li>0 - No normalization</li>
 <li>1 - Substraction of the mean of surrogates</li>
@@ -306,9 +299,7 @@ To pick methods you want, you&#8217;ll have to define the <strong>idpac</strong>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -326,11 +317,11 @@ To pick methods you want, you&#8217;ll have to define the <strong>idpac</strong>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, Etienne Combrisson.
+        &copy; Copyright 2017, Etienne Combrisson
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -345,35 +336,24 @@ To pick methods you want, you&#8217;ll have to define the <strong>idpac</strong>
 
   
 
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'0.5.3',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
 
   
 
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
+  <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>
