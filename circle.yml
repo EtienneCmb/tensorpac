@@ -39,7 +39,7 @@ jobs:
               conda create -n testenv --yes python=3.6 numpy scipy pip joblib matplotlib;
               source activate testenv;
               pip install -U pip;
-              pip install sphinx sphinx-gallery sphinx_bootstrap_theme lxml;
+              pip install sphinx sphinx-gallery sphinx_rtd_theme;
               pip install numpydoc;
               echo $PATH;
               echo $CIRCLE_BRANCH;
