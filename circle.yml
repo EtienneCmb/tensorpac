@@ -1,0 +1,79 @@
+version: 2
+jobs:
+    build:
+      branches:
+        ignore:
+          - gh-pages
+      docker:
+        - image: circleci/python:3.6-jessie
+      steps:
+        - checkout
+        - run:
+            name: Clean CircleCI
+            command: |
+              rm -rf ~/.pyenv;
+              rm -rf ~/virtualenvs;
+        - restore_cache:
+            keys:
+              - pip-cache
+              - miniconda-cache
+        - run:
+            name: Install miniconda
+            command: |
+              if [ ! -d "~/miniconda3" ]; then
+                wget -q http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh;
+                chmod +x ~/miniconda.sh;
+                ~/miniconda.sh -b -p ~/miniconda3;
+                echo "export PATH=~/miniconda3/bin:$PATH" >> $BASH_ENV;
+              else
+                echo "Miniconda3 already set up.";
+              fi
+        - save_cache:
+            key: miniconda-cache
+            paths:
+              - ~/.cache/miniconda
+        - run:
+            name: Setup Python environment
+            command: |
+              conda update --yes --quiet conda;
+              conda create -n testenv --yes python=3.6 numpy scipy pip joblib matplotlib;
+              source activate testenv;
+              pip install -U pip;
+              pip install sphinx sphinx-gallery sphinx_bootstrap_theme lxml;
+              pip install numpydoc;
+              echo $PATH;
+              echo $CIRCLE_BRANCH;
+              which python;
+              which pip;
+        - save_cache:
+            key: pip-cache
+            paths:
+              - ~/.cache/pip
+        - run:
+            name: Install tensorpac
+            command: |
+              source activate testenv;
+              python setup.py develop;
+        - run:
+            name: Build the documentation
+            command: |
+                source activate testenv;
+                cd docs
+                make html
+            no_output_timeout: 15m
+        - store_artifacts:
+            path: docs/_build/html/
+            destination: html
+        - deploy:
+            name: github pages deployment
+            command: |
+              source activate testenv;
+              if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                echo "Deploying dev docs.";
+                git config --global user.email "e.combrisson@gmail.com";
+                git config --global user.name "EtienneCmb";
+                cd docs;
+                make install;
+              else
+                echo "No deployment (build: ${CIRCLE_BRANCH}).";
+              fi    
