@@ -64,6 +64,9 @@ jobs:
         - store_artifacts:
             path: docs/_build/html/
             destination: html
+        - add_ssh_keys:
+            fingerprints:
+                - "d4:42:9b:fc:bf:8a:a6:e6:55:51:de:c3:f1:de:50:96"
         - deploy:
             name: github pages deployment
             command: |
