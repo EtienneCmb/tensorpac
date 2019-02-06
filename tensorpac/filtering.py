@@ -1,6 +1,5 @@
 """Filtering tools."""
 import numpy as np
-import numpy.matlib as npm
 from scipy.signal import filtfilt, butter, bessel
 
 
@@ -165,8 +164,8 @@ def fir1(n, wn):
     f0 = np.mean(ff[2:4])
     l = n + 1
 
-    mags = np.array(range(nbands)) % 2
-    aa = np.ravel(npm.repmat(mags, 2, 1), order='F')
+    mags = np.array(range(nbands)).reshape(1, -1) % 2
+    aa = np.ravel(np.tile(mags, (2, 1)), order='F')
 
     # Get filter coefficients :
     h = firls(l - 1, ff, aa)
