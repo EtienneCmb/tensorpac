@@ -182,7 +182,7 @@ class PacPlot(object):
             for loc, spine in ax.spines.items():
                 if loc in ['top', 'right']:
                     spine.set_color('none')
-                    ax.tick_params(**{loc: 'off'})
+                    ax.tick_params(**{loc: False})
 
         # Despine axis :
         if dpaxis:
