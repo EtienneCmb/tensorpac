@@ -4,7 +4,7 @@
 import os
 from setuptools import setup, find_packages
 
-__version__ = "0.5.5"
+__version__ = "0.5.6"
 NAME = 'Tensorpac'
 AUTHOR = "Etienne Combrisson"
 MAINTAINER = "Etienne Combrisson"

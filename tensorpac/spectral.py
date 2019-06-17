@@ -2,6 +2,7 @@
 import numpy as np
 from joblib import Parallel, delayed
 from scipy.signal import hilbert
+from scipy import fftpack
 from .filtering import filtdata
 
 __all__ = ('spectral')
@@ -55,7 +56,13 @@ def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, width,
         xf = Parallel(n_jobs=njobs, prefer='threads')(delayed(filtdata)(
             x, sf, f[k, :], axis, filt, cycle, filtorder) for k in nf)
         # Use hilbert for the complex decomposition :
-        xd = hilbert(xf, axis=axis + 1) if stype is not None else np.array(xf)
+        xf = np.asarray(xf)
+        if stype is not None:
+            sl = [slice(None)] * xf.ndim
+            sl[axis + 1] = slice(0, xf.shape[axis + 1])
+            # fourier components
+            fc = fftpack.helper.next_fast_len(xf.shape[axis + 1])
+            xd = hilbert(xf, fc, axis=axis + 1)[tuple(sl)]
     elif dcomplex is 'wavelet':
         f = f.mean(1)  # centered frequencies
         xd = Parallel(n_jobs=njobs, prefer='threads')(delayed(morlet)(
