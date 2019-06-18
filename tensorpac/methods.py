@@ -218,11 +218,11 @@ def gcpac(pha, amp):
     sco = np.stack([np.sin(pha), np.cos(pha)], axis=-2)
     amp = amp[..., np.newaxis, :]
     # copnorm the data
-    amp = np.apply_along_axis(copnorm, -1, amp)
-    sco = np.apply_along_axis(copnorm, -1, sco)
+    # amp = np.apply_along_axis(copnorm, -1, amp)
+    # sco = np.apply_along_axis(copnorm, -1, sco)
     # compute mutual information
     for p in range(n_pha):
         for a in range(n_amp):
             gc[a, p, ...] = nd_mi_gg(sco[p, ...], amp[a, ...], mvaxis=-2,
-                                     traxis=-1, biascorrect=True)
+                                     traxis=-1, biascorrect=False)
     return gc
