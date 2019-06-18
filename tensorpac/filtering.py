@@ -172,8 +172,8 @@ def fir1(n, wn):
 
     # Apply a window to coefficients :
     wind = np.hamming(l)
-    b = np.matrix(h.T * wind)
-    c = np.matrix(np.exp(-1j * 2 * np.pi * (f0 / 2) * np.array(range(l))))
-    b = b / abs(c * b.T)
+    b = h * wind
+    c = np.exp(-1j * 2 * np.pi * (f0 / 2) * np.array(range(l)))
+    b /= abs(c @ b)
 
-    return np.squeeze(np.array(b)), 1
+    return b, 1
