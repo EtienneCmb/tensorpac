@@ -11,6 +11,8 @@ This file include the following methods :
 import numpy as np
 from scipy.special import erfinv
 
+from .gcmi import nd_mi_gg, copnorm
+
 __all__ = ('compute_pac')
 
 
@@ -25,19 +27,16 @@ def compute_pac(pha, amp, idp, nbins, p, optimize):
     """
     if idp == 1:  # Mean Vector Length (Canolty, 2006)
         return mvl(pha, amp, optimize)
-
     elif idp == 2:  # Kullback-Leiber distance (Tort, 2010)
         return kld(pha, amp, nbins, optimize)
-
     elif idp == 3:  # Heights ratio (Lakatos, 2005)
         return hr(pha, amp, nbins, optimize)
-
     elif idp == 4:  # ndPac (Ozkurt, 2012)
         return ndpac(pha, amp, p, optimize)
-
     elif idp == 5:  # Phase-Synchrony (Penny, 2008; Cohen, 2008)
         return ps(pha, amp, optimize)
-
+    elif idp == 6:  # Gaussian-Copula
+        return gcpac(pha, amp)
     else:
         raise ValueError(str(idp) + " is not recognized as a valid pac "
                          "method.")
@@ -50,7 +49,6 @@ def mvl(pha, amp, optimize):
     ----------
     pha : array_like
         Array of phases of shapes (npha, ..., npts)
-
     amp : array_like
         Array of amplitudes of shapes (namp, ..., npts)
 
@@ -72,10 +70,8 @@ def kld(pha, amp, nbins, optimize):
     ----------
     pha : array_like
         Array of phases of shapes (npha, ..., npts)
-
     amp : array_like
         Array of amplitudes of shapes (namp, ..., npts)
-
     nbins : int
         Number of bins in which the phase in cut in bins.
 
@@ -104,10 +100,8 @@ def hr(pha, amp, nbins, optimize):
     ----------
     pha : array_like
         Array of phases of shapes (npha, ..., npts)
-
     amp : array_like
         Array of amplitudes of shapes (namp, ..., npts)
-
     nbins : int
         Number of bins in which the phase in cut in bins.
 
@@ -155,10 +149,8 @@ def ndpac(pha, amp, p, optimize):
     ----------
     pha : array_like
         Array of phases of shapes (npha, ..., npts)
-
     amp : array_like
         Array of amplitudes of shapes (namp, ..., npts)
-
     p : float
         The p-value to use.
 
@@ -188,7 +180,6 @@ def ps(pha, amp, optimize):
     ----------
     pha : array_like
         Array of phases of shapes (npha, ..., npts)
-
     amp : array_like
         Array of amplitudes of shapes (namp, ..., npts)
 
@@ -202,3 +193,36 @@ def ps(pha, amp, optimize):
     pac = np.einsum('i...j, k...j->ik...', np.exp(-1j * amp), np.exp(1j * pha),
                     optimize=optimize)
     return np.abs(pac) / npts
+
+
+def gcpac(pha, amp):
+    """Gaussian Copula.
+
+    Parameters
+    ----------
+    pha : array_like
+        Array of phases of shapes (npha, ..., npts)
+    amp : array_like
+        Array of amplitudes of shapes (namp, ..., npts)
+
+    Returns
+    -------
+    pac : array_like
+        PAC of shape (npha, namp, ...)
+    """
+    # prepare the shape of gcpac
+    n_pha, n_amp = pha.shape[0], amp.shape[0]
+    pha_sh = list(pha.shape[:-1])
+    gc = np.zeros([n_amp] + pha_sh, dtype=float)
+    # concatenate sine and cosine
+    sco = np.stack([np.sin(pha), np.cos(pha)], axis=-2)
+    amp = amp[..., np.newaxis, :]
+    # copnorm the data
+    amp = np.apply_along_axis(copnorm, -1, amp)
+    sco = np.apply_along_axis(copnorm, -1, sco)
+    # compute mutual information
+    for p in range(n_pha):
+        for a in range(n_amp):
+            gc[a, p, ...] = nd_mi_gg(sco[p, ...], amp[a, ...], mvaxis=-2,
+                                     traxis=-1, biascorrect=True)
+    return gc

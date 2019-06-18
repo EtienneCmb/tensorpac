@@ -16,6 +16,8 @@ def pacstr(idpac):
         method = 'ndPac (Ozkurt, 2012)'
     elif idpac[0] == 5:
         method = 'Phase-Synchrony (Cohen, 2008; Penny, 2008)'
+    elif idpac[0] == 6:
+        method = 'Gaussian Copula PAC'
     else:
         raise ValueError("No corresponding pac method.")
 

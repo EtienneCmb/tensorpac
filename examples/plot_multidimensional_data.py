@@ -29,14 +29,17 @@ f_low_pha, f_high_pha = 2., 10.    # lowest/highest centered frq. for phase
 f_low_amp, f_high_amp = 30., 120.  # lowest/highest centered frq. for amplitude
 low_noise, high_noise = .3, 1.5    # lowest/highest level of noise
 
+# random state for reproducibility
+rnd = np.random.RandomState(0)
+
 st = 'S{s}, Elec{e}, Pha {p}hz, Amp {a}hz, Noise {n}'
 data, info = np.zeros((n_subject, n_elec, n_trials, n_pts), dtype=float), []
 for i in range(n_subject):
     for k in range(n_elec):
         # Generate a random centered phase/amplitude/noise level :
-        fpha = np.random.randint(f_low_pha, f_high_pha, 1)[0]
-        famp = np.random.randint(f_low_amp, f_high_amp, 1)[0]
-        noise = np.random.uniform(low_noise, high_noise, 1)[0]
+        fpha = rnd.randint(f_low_pha, f_high_pha, 1)[0]
+        famp = rnd.randint(f_low_amp, f_high_amp, 1)[0]
+        noise = rnd.uniform(low_noise, high_noise, 1)[0]
         # Get dataset informations : :
         inf = st.format(s=str(i + 1), e=str(k + 1), p=str(fpha), a=str(famp),
                         n=str(noise))

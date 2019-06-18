@@ -34,6 +34,7 @@ class Pac(PacPlot):
             - '3' : Heights Ratio (HR) [#f3]_
             - '4' : ndPAC [#f4]_
             - '5' : Phase Synchrony [#f3]_
+            - '6' : Gaussian Copula PAC
 
         * Second digit : refer to the method for computing surrogates
 

@@ -30,7 +30,7 @@ phases = p.filter(sf, data, axis=1, ftype='phase')
 amplitudes = p.filter(sf, data, axis=1, ftype='amplitude')
 
 plt.figure(figsize=(18, 9))
-for i, k in enumerate([1, 2, 3, 4, 5]):
+for i, k in enumerate([1, 2, 3, 4, 5, 6]):
     # Change the pac method :
     p.idpac = (k, 0, 0)
     print('-> PAC using ' + str(p))
