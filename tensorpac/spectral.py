@@ -16,35 +16,25 @@ def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, width,
     ----------
     x : array_like
         Array of data
-
     sf : float
         Sampling frequency
-
     f : array_like
         Frequency vector of shape (N, 2)
-
     axis : int
         Axis where the time is located.
-
     stype : string
         Spectral informations to extract (use either 'pha' or 'amp')
-
     dcomplex : string
         Complex decomposition type. Use either 'hilbert' or 'wavelet'
-
     filt : string
         Name of the filter to use (only if dcomplex is 'hilbert'). Use
         either 'eegfilt', 'butter' or 'bessel'.
-
     filtorder : int
         Order of the filter (only if dcomplex is 'hilbert')
-
     cycle : int
         Number of cycles to use for fir1 filtering.
-
     width : int
         Width of the wavelet.
-
     njobs : int
         Number of jobs to use. If jobs is -1, all of them are going to be
         used.
@@ -85,16 +75,12 @@ def morlet(x, sf, f, axis=0, width=7.):
     x : array_like, shape (N,)
         The signal to use for the complex decomposition. Must be
         a vector of length N.
-
     sf : float
         Sampling frequency
-
     f : array_like, shape (2,)
         Frequency vector
-
     width : float | 7.
         Width of the wavelet
-
     axis : int | 0
         Axis along performing the convolution.
 

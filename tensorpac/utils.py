@@ -4,7 +4,8 @@
 - pac_vec : generate cross-frequency coupling vectors
 """
 import numpy as np
-from .spectral import morlet
+
+from tensorpac.spectral import morlet
 
 __all__ = ('pac_signals_wavelet', 'pac_signals_tort', 'pac_vec', 'pac_trivec')
 
@@ -16,8 +17,9 @@ __all__ = ('pac_signals_wavelet', 'pac_signals_tort', 'pac_vec', 'pac_trivec')
 ###############################################################################
 
 
-def pac_signals_wavelet(fpha=10., famp=100., sf=1024., npts=4000., ntrials=10,
-                        noise=.1, pp=0., rnd_state=0):
+def pac_signals_wavelet(f_pha=10., f_amp=100., sf=1024., n_pts=4000.,
+                        n_trials=10, n_channels=1, noise=.1, pp=0.,
+                        rnd_state=0):
     """Generate artificially phase-amplitude coupled signals using wavelets.
 
     This function is inspired by the code of the pactools toolbox developped by
@@ -25,55 +27,50 @@ def pac_signals_wavelet(fpha=10., famp=100., sf=1024., npts=4000., ntrials=10,
 
     Parameters
     ----------
-    fpha : float | 10.
+    f_pha : float | 10.
         Frequency for phase. Use either a float number for a centered frequency
         of a band (like [5, 7]) for a bandwidth.
-
-    famp : float | 100.
+    f_amp : float | 100.
         Frequency for amplitude. Use either a float number for a centered
         frequency of a band (like [60, 80]) for a bandwidth.
-
     sf : float | 1024.
         Sampling frequency.
-
-    npts : int | 4000
+    n_pts : int | 4000
         Number of time points.
-
-    ntrials : int | 10
+    n_trials : int | 10
         Number of trials in the dataset.
-
+    n_channels : int | 1
+        Number of channels
     noise : float | .1
         Amount of white noise.
-
     pp : float | 0.
         The preferred-phase of the coupling.
-
     rnd_state: int | 0
         Fix random of the machine (for reproducibility)
 
     Returns
     -------
     data : array_like
-        Array of pac signals of shape (ntrials, npts).
-
+        Array of signals of shape (n_trials, n_channels, n_pts).
     time : array_like
-        Time vector of shape (npts,).
+        Time vector of shape (n_pts,).
     """
-    npts = int(npts)
+    n_pts = int(n_pts)
     sf = float(sf)
-    fpha, famp = np.asarray(fpha).mean(), np.asarray(famp).mean()
-    time = np.mgrid[0:ntrials, 0:npts][1] / sf
+    f_pha, f_amp = np.asarray(f_pha).mean(), np.asarray(f_amp).mean()
+    # time = np.mgrid[0:n_trials, 0:n_pts][1] / sf
+    time = np.arange(n_pts).reshape(1, 1, -1) / sf
     # Random state of the machine :
     rng = np.random.RandomState(rnd_state)
     # Get complex decomposition of random points in the phase frequency band :
-    driver = morlet(rng.randn(ntrials, npts), sf, fpha, axis=1)
-    driver /= np.max(driver, axis=1, keepdims=True)
+    driver = morlet(rng.randn(n_trials, n_channels, n_pts), sf, f_pha, axis=2)
+    driver /= np.max(driver, axis=2, keepdims=True)
     # Create amplitude signals :
-    xh = np.sin(2 * np.pi * famp * time)
+    xh = np.sin(2 * np.pi * f_amp * time)
     dpha = np.exp(-1j * pp)
     modulation = 1. / (1. + np.exp(- 6. * 1. * np.real(driver * dpha)))
     # Modulate the amplitude :
-    xh *= modulation
+    xh = xh * modulation
     # Get the phase signal :
     xl = np.real(driver)
     # Build the pac signal :
@@ -93,37 +90,28 @@ def pac_signals_tort(fpha=10., famp=100., sf=1024, npts=4000, ntrials=10,
     fpha : float | 10.
         Frequency for phase. Use either a float number for a centered frequency
         of a band (like [5, 7]) for a bandwidth.
-
     famp : float | 100.
         Frequency for amplitude. Use either a float number for a centered
         frequency of a band (like [60, 80]) for a bandwidth.
-
     sf : int | 1024
         Sampling frequency
-
     ntrials : int | 10
         Number of datasets
-
     npts : int | 4000
         Number of points for each signal.
-
     chi : float | 0.
         Amount of coupling. If chi=0, signals of phase and amplitude
         are strongly coupled (0.<=chi<=1.).
-
     noise : float | 1.
         Amount of noise (0<=noise<=3).
-
     dpha : float | 0.
         Random incertitude on phase frequences (0<=dpha<=100). If fpha is 2,
         and dpha is 50, the frequency for the phase signal will be between :
         [2-0.5*2, 2+0.5*2]=[1,3]
-
     damp : float | 0.
         Random incertitude on amplitude frequencies (0<=damp<=100). If famp is
         60, and damp is 10, the frequency for the amplitude signal will be
         between : [60-0.1*60, 60+0.1*60]=[54,66]
-
     rnd_state: int | 0
         Fix random of the machine (for reproducibility)
 
@@ -131,7 +119,6 @@ def pac_signals_tort(fpha=10., famp=100., sf=1024, npts=4000, ntrials=10,
     -------
     data : array_like
         Array of pac signals of shape (ntrials, npts).
-
     time : array_like
         Time vector of shape (npts,).
     """
@@ -241,10 +228,8 @@ def pac_trivec(fstart=60., fend=160., fwidth=10.):
     ----------
     fstart : float | 60.
         Starting frequency.
-
     fend : float | 160.
         Ending frequency.
-
     fwidth : float | 10.
         Frequency bandwidth increase between each band.
 
@@ -252,7 +237,6 @@ def pac_trivec(fstart=60., fend=160., fwidth=10.):
     -------
     f : array_like
         The triangular vector.
-
     tridx : array_like
         The triangular index for the reconstruction.
     """
@@ -269,3 +253,17 @@ def pac_trivec(fstart=60., fend=160., fwidth=10.):
         tridx = np.concatenate((tridx, idx), axis=0) if tridx.size else idx
         f = np.concatenate((f, fst), axis=0) if f.size else fst
     return f, tridx
+
+
+if __name__ == '__main__':
+    from tensorpac import Pac
+    data, time = pac_signals_wavelet(f_pha=10, f_amp=100, noise=1., n_trials=100,
+                                     n_pts=2000)
+    p = Pac(idpac=(4, 0, 0), fpha=(2, 20, 1, 1), famp=(60, 150, 5, 5),
+            dcomplex='wavelet', width=12)
+    pacmap = p.filterfit(1024, data, axis=2).squeeze()
+    print(pacmap.shape)
+    p.comodulogram(pacmap.mean(-1))
+    import matplotlib.pyplot as plt
+    plt.show()
+    print(data.shape)
