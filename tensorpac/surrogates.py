@@ -24,19 +24,14 @@ def compute_surrogates(pha, amp, surargs, pacargs, nperm, njobs):
     ----------
     pha : array_like
         Array of phases of shapes (npha, ..., npts)
-
     amp : array_like
         Array of amplitudes of shapes (namp, ..., npts)
-
     suragrs : tuple
         Tuple containing the arguments to pass to the suro_switch function.
-
     pacargs : tuple
         Tuple containing the arguments to pass to the compute_pac function.
-
     nperm : int
         Number of permutations.
-
     njobs : int
         Number of jos for the parallel computing.
 
@@ -62,13 +57,10 @@ def _compute_sur(pha, amp, surargs, pacargs):
     ----------
     pha : array_like
         Array of phases of shapes (npha, ..., npts)
-
     amp : array_like
         Array of amplitudes of shapes (namp, ..., npts)
-
     suragrs : tuple
         Tuple containing the arguments to pass to the suro_switch function.
-
     pacargs : tuple
         Tuple containing the arguments to pass to the compute_pac function.
     """
@@ -78,7 +70,7 @@ def _compute_sur(pha, amp, surargs, pacargs):
     return compute_pac(pha, amp, *pacargs)
 
 
-def suro_switch(pha, amp, idn, axis, traxis, nblocks):
+def suro_switch(pha, amp, idn, axis, traxis):
     """List of methods to compute surrogates.
 
     The surrogates are used to normalized the cfc value. It help to determine
@@ -91,24 +83,13 @@ def suro_switch(pha, amp, idn, axis, traxis, nblocks):
     - Shuffle amplitude time-series
     - Time lag
     """
-    # No surrogates
-    if idn == 0:
+    if idn == 0:    # No surrogates
         return None
-
-    # Swap phase/amplitude across trials :
-    elif idn == 1:
+    elif idn == 1:  # Swap phase/amplitude across trials
         return swap_pha_amp(pha, amp, traxis)
-
-    # Swap amplitude :
-    elif idn == 2:
-        return swap_blocks(pha, amp, axis, nblocks)
-
-    # Shuffle amplitude values
-    elif idn == 3:
-        return shuffle_amp(pha, amp, axis)
-
-    # Introduce a time lag
-    elif idn == 4:
+    elif idn == 2:  # Swap amplitude
+        return swap_blocks(pha, amp, axis)
+    elif idn == 3:  # Introduce a time lag
         return time_lag(pha, amp, axis)
 
     else:
@@ -124,16 +105,14 @@ def suro_switch(pha, amp, idn, axis, traxis, nblocks):
 
 
 def swap_pha_amp(pha, amp, axis):
-    """Swap phase/amplitude trials (Tort, 2010).
+    """Swap phase / amplitude trials (Tort, 2010).
 
     Parameters
     ----------
     pha : array_like
         Array of phases of shapes (npha, ..., npts)
-
     amp : array_like
         Array of amplitudes of shapes (namp, ..., npts)
-
     axis : int
         Location of the trial axis.
 
@@ -141,14 +120,13 @@ def swap_pha_amp(pha, amp, axis):
     -------
     pha : array_like
         Swapped version of phases of shapes (npha, ..., npts)
-
     amp : array_like
         Swapped version of amplitudes of shapes (namp, ..., npts)
     """
-    return _dimswap(pha, axis), _dimswap(amp, axis)
+    return pha, _dimswap(amp, axis)
 
 
-def swap_blocks(pha, amp, axis, nblocks):
+def swap_blocks(pha, amp, axis):
     """Swap amplitudes time blocks.
 
     To reproduce (Bahramisharif, 2013), use a number of blocks of 2.
@@ -157,26 +135,22 @@ def swap_blocks(pha, amp, axis, nblocks):
     ----------
     pha : array_like
         Array of phases of shapes (npha, ..., npts)
-
     amp : array_like
         Array of amplitudes of shapes (namp, ..., npts)
-
     axis : int
         Location of the time axis.
-
-    nblocks : int
-        Number of blocks to in which the amplitude is splitted.
 
     Returns
     -------
     pha : array_like
         Original version of phases of shapes (npha, ..., npts)
-
     amp : array_like
         Swapped version of amplitudes of shapes (namp, ..., npts)
     """
+    # random cutting point along time axis
+    cut_at = np.random.randint(1, amp.shape[axis], (1,))
     # Split amplitude across time into two parts :
-    ampl = np.array_split(amp, nblocks, axis=axis)
+    ampl = np.array_split(amp, cut_at, axis=axis)
     # Revered elements :
     ampl.reverse()
     return pha, np.concatenate(ampl, axis=axis)
@@ -189,31 +163,6 @@ def swap_blocks(pha, amp, axis, nblocks):
 ###############################################################################
 
 
-def shuffle_amp(pha, amp, axis):
-    """Randomly shuffle amplitudes across time.
-
-    Parameters
-    ----------
-    pha : array_like
-        Array of phases of shapes (npha, ..., npts)
-
-    amp : array_like
-        Array of amplitudes of shapes (namp, ..., npts)
-
-    axis : int
-        Location of the time axis.
-
-    Returns
-    -------
-    pha : array_like
-        Original version of phases of shapes (npha, ..., npts)
-
-    amp : array_like
-        Shuffled version of amplitudes of shapes (namp, ..., npts)
-    """
-    return pha, _dimswap(amp, axis)
-
-
 def time_lag(pha, amp, axis):
     """Introduce a time lag on phase series..
 
@@ -221,10 +170,8 @@ def time_lag(pha, amp, axis):
     ----------
     pha : array_like
         Array of phases of shapes (npha, ..., npts)
-
     amp : array_like
         Array of amplitudes of shapes (namp, ..., npts)
-
     axis : int
         Location of the time axis.
 
@@ -232,7 +179,6 @@ def time_lag(pha, amp, axis):
     -------
     pha : array_like
         Shiffted version of phases of shapes (npha, ..., npts)
-
     amp : array_like
         Original version of amplitudes of shapes (namp, ..., npts)
     """
@@ -247,7 +193,6 @@ def _dimswap(x, axis=0):
     ----------
     x : array_like
         Array of data to swap
-
     axis : int | 0
         Axis along which to perform swapping.
 

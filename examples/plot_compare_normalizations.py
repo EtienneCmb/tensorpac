@@ -32,10 +32,10 @@ amplitudes = p.filter(sf, data, axis=1, ftype='amplitude')
 plt.figure(figsize=(18, 9))
 for i, k in enumerate(range(5)):
     # Change the pac method :
-    p.idpac = (1, 4, k)
+    p.idpac = (1, 2, k)
     print('-> Normalization using ' + p.norm)
     # Compute only the PAC without filtering :
-    xpac = p.fit(phases, amplitudes, axis=2, nperm=100)
+    xpac = p.fit(phases, amplitudes, traxis=1, axis=2, nperm=100)
     # Plot :
     plt.subplot(2, 3, k + 1)
     p.comodulogram(xpac.mean(-1), title=p.norm, cmap='Spectral_r')

@@ -29,8 +29,6 @@ def pacstr(idpac):
     elif idpac[1] == 2:
         suro = 'Swap amplitude blocks across time'
     elif idpac[1] == 3:
-        suro = 'Shuffle amplitude time-series'
-    elif idpac[1] == 4:
         suro = 'Time lag'
     else:
         raise ValueError("No corresponding surrogate method.")

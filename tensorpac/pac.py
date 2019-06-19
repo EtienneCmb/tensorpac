@@ -39,10 +39,9 @@ class Pac(PacPlot):
         * Second digit : refer to the method for computing surrogates
 
             - '0' : No surrogates
-            - '1' : Swap phase/amplitude across trials [#f2]_
+            - '1' : Swap phase / amplitude across trials [#f2]_
             - '2' : Swap amplitude time blocks [#f5]_
-            - '3' : Shuffle amplitude time-series
-            - '4' : Time lag [#f1]_
+            - '3' : Time lag [#f1]_
 
         * Third digit : refer to the normalization method for correction
 
@@ -64,32 +63,24 @@ class Pac(PacPlot):
     dcomplex : {'wavelet', 'hilbert'}
         Method for the complex definition. Use either 'hilbert' or
         'wavelet'.
-
     filt : {'fir1', 'butter', 'bessel'}
         Filtering method (only if dcomplex is 'hilbert'). Choose either
         'fir1', 'butter' or 'bessel'
-
     cycle : tuple | (3, 6)
         Control the number of cycles for filtering (only if dcomplex is
         'hilbert'). Should be a tuple of integers where the first one
         refers to the number of cycles for the phase and the second for the
         amplitude [#f5]_.
-
     filtorder : int | 3
         Filter order for the Butterworth and Bessel filters (only if
         dcomplex is 'hilbert').
-
     width : int | 7
         Width of the Morlet's wavelet.
-
     nbins : int | 18
         Number of bins for the KLD and HR PAC method [#f2]_ [#f3]_
 
-    nblocks : int | 2
-        Number of blocks for splitting the amplitude. Only active is
-        the surrogate method is 2 [#f5]_.
-
     .. warning::
+
         * The ndPac [#f4]_ include a fast and reliable statistical test. As a
           result, if the ndPAC is choosed as the main PAC method, surrogates
           and normalization will be deactivate.
@@ -104,7 +95,6 @@ class Pac(PacPlot):
     ----------
     xvec, yvec : array_like
         The x and y-vectors for plotting.
-
     fpha, famp : array_like
         The phase and amplitude frequency vectors for pac extraction.
 
@@ -162,9 +152,9 @@ class Pac(PacPlot):
     ###########################################################################
     #                              __FCN__
     ###########################################################################
-    def __init__(self, idpac=(1, 1, 3), fpha=[2, 4], famp=[60, 200],
+    def __init__(self, idpac=(1, 2, 3), fpha=[2, 4], famp=[60, 200],
                  dcomplex='hilbert', filt='fir1', cycle=(3, 6), filtorder=3,
-                 width=7, nbins=18, nblocks=2):
+                 width=7, nbins=18):
         """Check and initialize."""
         # Initialize visualization methods :
         PacPlot.__init__(self)
@@ -179,7 +169,7 @@ class Pac(PacPlot):
         self._speccheck(filt, dcomplex, filtorder, cycle, width)
 
         # ----------------- SELF -----------------
-        self.nbins, self.nblocks = int(nbins), int(nblocks)
+        self.nbins = int(nbins)
 
     def __str__(self):
         """String representation."""
@@ -264,28 +254,21 @@ class Pac(PacPlot):
             and (namp, ...). If you want to compute PAC locally i.e. on the
             same electrode, x=pha=amp. For distant coupling, pha and
             amp could be different but still must to have the same shape.
-
         axis : int | 1
             Dimension where is located the time axis. By default, the axis
             will be consider as well.
-
         traxis : int | 0
             Dimension where is located the trial axis. By default the next-
             to-last axis is consider as the trial axis.
-
         nperm : int | 200
             Number of surrogates to compute.
-
         optimize : {True, False, 'greedy', 'optimal'}
             Optimize argument of the np.einsum function. Use either False,
             True, 'greedy' or 'optimal'.
-
         get_pval : bool | False
             Get the pvalues. Only avaible if surrogates are computed.
-
         get_surro : bool | False
             Return surrogate chance distribution.
-
         njobs : int | -1
             Number of jobs to compute PAC in parallel. For very large data,
             set this parameter to 1 in order to prevent large memory usage.
@@ -294,27 +277,22 @@ class Pac(PacPlot):
         -------
         pac: array_like
             Phase-Amplitude Coupling measure of shape (namp, npha, ...).
-
         pvalue: array_like
             P-values of shape (namp, npha, ...) if get_pval is True.
-
         suro: array_like
             If get_suro is True, get the chance distribution of shape
             (nperm, namp, npha, ...)
 
         .. warning::
+
             * Surrogates are only going to be computed if the second and third
               digits are no 0.
-
             * The ndPAC use a p value and every non-significant PAC estimation
               is set to zero. This p value is computed as 1/nperm.
-
             * The traxis argument is only used if you picked up the surrogates
               method 1: "swap phase and amplitude trials [#f2]_"
-
             * Basically, the surrogate evaluation proposed by [#f5]_ split the
-              amplitude into two equal parts, then swap those two blocks. But
-              the nblocks parameter allow to split into a larger number.
+              amplitude into two equal parts, then swap those two blocks.
         """
         # Check phase and amplitude :
         pha, amp, axis = self._phampcheck(pha, amp, axis)
@@ -333,7 +311,7 @@ class Pac(PacPlot):
 
         # Compute surrogates (if needed) :
         if self._csuro:
-            surargs = (self.idpac[1], axis, traxis, self.nblocks)
+            surargs = (self.idpac[1], axis, traxis)
             suro = compute_surrogates(pha, amp, surargs, pacargs, nperm, njobs)
 
             # Get the mean / deviation of surrogates :
@@ -426,8 +404,7 @@ class Pac(PacPlot):
               method 1: "swap phase and amplitude trials [#f2]_"
 
             * Basically, the surrogate evaluation proposed by [#f5]_ split the
-              amplitude into two equal parts, then swap those two blocks. But
-              the nblocks parameter allow to split into a larger number.
+              amplitude into two equal parts, then swap those two blocks.
         """
         # Check if amp is None :
         if xamp is None:
