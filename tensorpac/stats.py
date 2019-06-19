@@ -11,18 +11,16 @@ def pearson(x, y, st='i...j, k...j->ik...', optimize=True):
     x, y : array_like
         Compute pearson correlation between the multi-dimensional arrays
         x and y.
-
     st : string | 'i..j, k..j->ik...'
         The string to pass to the np.einsum function.
-
     optimize : bool | True
         Optimize argument of the np.einsum function. Use either False,
         True, 'greedy' or 'optimal'.
 
     Returns
     -------
-        cov: array_like
-            The pearson correlation array.
+    cov: array_like
+        The pearson correlation array.
     """
     n = x.shape[-1]
     # Distribution center :
@@ -49,10 +47,8 @@ def circ_corrcc(alpha, x, optimize=True):
     ----------
     alpha : vector
         Sample of angles in radians
-
     x : vector
         Sample of linear random variable
-
     optimize : bool | True
         Optimize argument of the np.einsum function. Use either False,
         True, 'greedy' or 'optimal'.
@@ -61,7 +57,6 @@ def circ_corrcc(alpha, x, optimize=True):
     -------
     rho: float
         Correlation coefficient.
-
     pval: float
         P-value.
     """

@@ -198,7 +198,7 @@ class Pac(PacPlot):
             set this parameter to 1 in order to prevent large memory usage.
         keepfilt : bool | False
             Specify if you only want the filtered data (True). This parameter
-            is only avaible with dcomplex='hilbert' and not wavelet.
+            is only available with dcomplex='hilbert' and not wavelet.
 
         Returns
         -------
