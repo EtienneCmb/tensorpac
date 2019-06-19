@@ -164,12 +164,10 @@ class Pac(PacPlot):
         # Frequency checking :
         self.fpha, self.famp = pac_vec(fpha, famp)
         self.xvec, self.yvec = self.fpha.mean(1), self.famp.mean(1)
+        self.nbins = int(nbins)
 
         # Check spectral properties :
         self._speccheck(filt, dcomplex, filtorder, cycle, width)
-
-        # ----------------- SELF -----------------
-        self.nbins = int(nbins)
 
     def __str__(self):
         """String representation."""
@@ -188,21 +186,16 @@ class Pac(PacPlot):
         ----------
         sf: float
             The sampling frequency.
-
         x: array_like
             Array of data.
-
         axis : int | -1
             Location of the time axis.
-
         ftype : {'phase', 'amplitude'}
             Specify if you want to extract phase ('phase') or the amplitude
             ('amplitude').
-
         njobs : int | -1
             Number of jobs to compute PAC in parallel. For very large data,
             set this parameter to 1 in order to prevent large memory usage.
-
         keepfilt : bool | False
             Specify if you only want the filtered data (True). This parameter
             is only avaible with dcomplex='hilbert' and not wavelet.
@@ -348,35 +341,27 @@ class Pac(PacPlot):
         ----------
         sf : float
             The sampling frequency.
-
         xpha, xamp : array_like
             Array of data for computing PAC. xpha is the data used for
             extracting phases and xamp, amplitudes. Both arrays must have
             the same shapes. If you want to compute PAC locally i.e. on the
             same electrode, x=xpha=xamp. For distant coupling, xpha and
             xamp could be different but still must to have the same shape.
-
         axis : int | 1
             Dimension where is located the time axis. By default, the axis
             will be consider as well.
-
         traxis : int | 0
             Dimension where is located the trial axis. By default the next-
             to-last axis is consider as the trial axis.
-
         nperm : int | 200
             Number of surrogates to compute.
-
         optimize : {True, False, 'greedy', 'optimal'}
             Optimize argument of the np.einsum function. Use either False,
             True, 'greedy' or 'optimal'.
-
         get_pval : bool | False
             Get the pvalues. Only avaible if surrogates are computed.
-
         get_surro : bool | False
             Return surrogate chance distribution.
-
         njobs : int | -1
             Number of jobs to compute PAC in parallel. For very large data,
             set this parameter to 1 in order to prevent large memory usage.
@@ -385,24 +370,20 @@ class Pac(PacPlot):
         -------
         pac: array_like
             Phase-Amplitude Coupling measure of shape (namp, npha, ...).
-
         pvalue: array_like
             P-values of shape (namp, npha, ...) if get_pval is True.
-
         suro: array_like
             If get_suro is True, get the chance distribution of shape
             (nperm, namp, npha, ...)
 
         .. warning::
+
             * Surrogates are only going to be computed if the second and third
               digits are no 0.
-
             * The ndPAC use a p value and every non-significant PAC estimation
               is set to zero. This p value is computed as 1/nperm.
-
             * The traxis argument is only used if you picked up the surrogates
               method 1: "swap phase and amplitude trials [#f2]_"
-
             * Basically, the surrogate evaluation proposed by [#f5]_ split the
               amplitude into two equal parts, then swap those two blocks.
         """
@@ -431,17 +412,13 @@ class Pac(PacPlot):
         ----------
         pha : array_like
             Phase of slower oscillations.
-
         amp : array_like
             Amplitude of fastest oscillations.
-
         axis : int | -1
             Location of the time axis.
-
         nbins : int | 72
             Number of bins for bining the amplitude according to phase
             slices.
-
         optimize : {True, False, 'greedy', 'optimal'}
             Optimize argument of the np.einsum function. Use either False,
             True, 'greedy' or 'optimal'.
@@ -451,11 +428,9 @@ class Pac(PacPlot):
         ampbin : array_like
             The binned amplitude according to the phase of shape
             (nbins, namp, npha...).
-
         pp : array_like
             The prefered phase where the amplitude is maximum of shape
             (namp, npha, ...).
-
         polarvec : array_like
             The phase vector for the polar plot.
         """
@@ -489,13 +464,10 @@ class Pac(PacPlot):
         ----------
         pha : array_like
             Phase of slower oscillations.
-
         amp : array_like
             Amplitude of fastest oscillations.
-
         traxis : int | 0
             Location of the trial axis.
-
         optimize : {True, False, 'greedy', 'optimal'}
             Optimize argument of the np.einsum function. Use either False,
             True, 'greedy' or 'optimal'.
@@ -504,11 +476,11 @@ class Pac(PacPlot):
         -------
         erpac : array_like
             The ERPAC estimation.
-
         pvalue : array_like
             The associated p-values.
 
         .. warning::
+
             ERPAC is computed across trials, therefor, it does not use an
             *axis* variable but instead, a **traxis** variable which specify
             where is located the axis to consider as trials.
