@@ -37,7 +37,8 @@ amp = p.filter(sf, x, ftype='amplitude')  # Shape (namp, n_trials, 1, n_pts)
 
 # Compute the ERPAC and use the traxis to specify that the trial axis is the
 # first one :
-erpac, pval = p.erpac(pha, amp)
+erpac = p.erpac(pha, amp, method='gc')
+pval = p.pvalues_
 
 # Remove unused dimensions :
 erpac, pval = np.squeeze(erpac), np.squeeze(pval)

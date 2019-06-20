@@ -6,6 +6,7 @@ from tensorpac.utils import pac_vec
 from tensorpac.spectral import spectral, hilbertm
 from tensorpac.methods import (get_pac_fcn, _kl_hr, pacstr, compute_surrogates,
                                normalize)
+from tensorpac.gcmi import nd_mi_gg
 from tensorpac.visu import PacPlot
 from tensorpac.stats import circ_corrcc
 from tensorpac.io import set_log_level
@@ -353,7 +354,7 @@ class Pac(PacPlot):
         polarvec = np.linspace(-np.pi, np.pi, ampbin.shape[0])
         return ampbin, pp, polarvec
 
-    def erpac(self, pha, amp):
+    def erpac(self, pha, amp, method='circular'):
         """Compute the Event-Related Phase-Amplitude Coupling (ERPAC).
 
         The ERPAC [#f6]_ is used to measure PAC across trials and is
@@ -365,27 +366,48 @@ class Pac(PacPlot):
             Respectively the phase of slower oscillations of shape
             (n_pha, n_trials, n_channels, n_pts) and the amplitude of faster
             oscillations of shape (n_pha, n_trials, n_channels, n_pts).
+        method : {'circular', 'gc'}
+            Name of the method for computing erpac. Use 'circular' for
+            reproducing [#f6]_ or 'gc' for a Gaussian-Copula based erpac.
 
         Returns
         -------
         erpac : array_like
             The ERPAC estimation.
-        pvalue : array_like
-            The associated p-values.
+
+        Attributes
+        ----------
+        pvalues_ : array_like
+            The associated p-values (only if method='circular')
 
         .. [#f6] `Voytek et al, 2013 <https://www.ncbi.nlm.nih.gov/pubmed/
            22986076>`_
         """
         pha, amp = self._phampcheck(pha, amp)
-        # Get method name :
-        self.method = "Event-Related Phase-Amplitude Coupling (ERPAC, " + \
-                      "Voytek et al. 2013)"
         self.surro, self.norm = '', ''
         # Move the trial axis to the end :
-        pha = np.swapaxes(pha, 1, -1)
-        amp = np.swapaxes(amp, 1, -1)
-        # correlation between the circular phase and linear amplitude :
-        return circ_corrcc(pha, amp)
+        pha = np.moveaxis(pha, 1, -1)
+        amp = np.moveaxis(amp, 1, -1)
+        # method switch
+        if method == 'circular':
+            self.method = "ERPAC (Voytek et al. 2013)"
+            erpac, self.pvalues_ = circ_corrcc(pha, amp)
+        elif method == 'gc':
+            self.method = "Gaussian-Copula ERPAC"
+            # get shapes
+            n_pha, n_chans, n_pts, n_trials = pha.shape
+            n_amp = amp.shape[0]
+            # conversion for computing mi
+            sco = np.stack([np.sin(pha), np.cos(pha)], axis=-2)
+            amp = amp[..., np.newaxis, :]
+            erpac = np.zeros((n_pha, n_amp, n_chans, n_pts))
+            for p in range(n_pha):
+                for a in range(n_amp):
+                    erpac[p, a, ...] = nd_mi_gg(sco[p, ...], amp[a, ...],
+                                                mvaxis=-2, traxis=-1,
+                                                biascorrect=False)
+            self.pvalues_ = None
+        return erpac
 
     ###########################################################################
     #                              CHECKING

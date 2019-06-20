@@ -43,8 +43,7 @@ def copnorm(x):
     return cx
 
 
-def nd_mi_gg(x, y, mvaxis=None, traxis=-1, biascorrect=True, demeaned=False,
-             shape_checking=True):
+def nd_mi_gg(x, y, mvaxis=None, traxis=-1, biascorrect=True, demeaned=False):
     """Multi-dimentional MI between two Gaussian variables in bits.
 
     Parameters
@@ -64,11 +63,6 @@ def nd_mi_gg(x, y, mvaxis=None, traxis=-1, biascorrect=True, demeaned=False,
     demeaned : bool | False
         Specifies whether the input data already has zero mean (true if it has
         been copula-normalized)
-    shape_checking : bool | True
-        Perform a reshape and check that x and y shapes are consistents. For
-        high performances and to avoid extensive memory usage, it's better to
-        already have x and y with a shape of (..., mvaxis, traxis) and to set
-        this parameter to False
 
     Returns
     -------
