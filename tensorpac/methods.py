@@ -3,10 +3,10 @@ import numpy as np
 from scipy.special import erfinv
 
 from functools import partial
+from joblib import Parallel, delayed
 
 from tensorpac.gcmi import nd_mi_gg  # copnorm
-
-from joblib import Parallel, delayed
+from tensorpac.config import JOBLIB_CFG
 
 
 def pacstr(idpac):
@@ -31,9 +31,9 @@ def pacstr(idpac):
     if idpac[1] == 0:
         suro = 'No surrogates'
     elif idpac[1] == 1:
-        suro = 'Swap phase/amplitude across trials'
+        suro = 'Permute phase across trials'
     elif idpac[1] == 2:
-        suro = 'Swap amplitude blocks across time'
+        suro = 'Swap amplitude time blocks'
     elif idpac[1] == 3:
         suro = 'Time lag'
     else:
@@ -190,7 +190,7 @@ def compute_surrogates(pha, amp, ids, fcn, n_perm, n_jobs):
         return None
     else:
         fcn_p = {1: swap_pha_amp, 2: swap_blocks, 3: time_lag}[ids]
-    s = Parallel(n_jobs=n_jobs, prefer='threads')(delayed(fcn)(
+    s = Parallel(n_jobs=n_jobs, **JOBLIB_CFG)(delayed(fcn)(
         *fcn_p(pha, amp)) for k in range(n_perm))
     return np.array(s)
 
@@ -227,9 +227,7 @@ def time_lag(pha, amp):
 
 def normalize(pac, s_mean, s_std, idn):
     """PAC normalization."""
-    if idn == 0:  # No normalisation
-        return pac
-    elif idn == 1:  # Substraction
+    if idn == 1:  # Substraction
         pac -= s_mean
     elif idn == 2:  # Divide
         pac /= s_mean

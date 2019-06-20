@@ -7,25 +7,25 @@ from tensorpac.utils import (pac_vec, pac_signals_tort, pac_trivec,
 def test_pac_vec():
     """Definition of PAC vectors."""
     assert pac_vec()
-    assert pac_vec(fpha=(1, 30, 2, 2), famp=(60, 200, 10, 5))
-    assert pac_vec(fpha=[1, 2], famp=np.arange(50))
-    assert pac_vec(fpha=np.array([[2, 4], [5, 7], [9, 10]]),
-                   famp=np.array([[30, 60], [60, 90], [100, 200]]).T)
-    assert pac_vec(fpha=[[1, 2], [5, 7]], famp=[60, 150])
+    assert pac_vec(f_pha=(1, 30, 2, 2), f_amp=(60, 200, 10, 5))
+    assert pac_vec(f_pha=[1, 2], f_amp=np.arange(50))
+    assert pac_vec(f_pha=np.array([[2, 4], [5, 7], [9, 10]]),
+                   f_amp=np.array([[30, 60], [60, 90], [100, 200]]).T)
+    assert pac_vec(f_pha=[[1, 2], [5, 7]], f_amp=[60, 150])
 
 
 def test_pac_signals_dtrials():
     """Definition of artificially coupled signals using dPha/dAmp."""
-    assert pac_signals_tort(fpha=5, famp=130, sf=512, ntrials=23, chi=0.9,
+    assert pac_signals_tort(f_pha=5, f_amp=130, sf=512, n_trials=23, chi=0.9,
                             noise=2, dpha=35, damp=46)
 
 
 def test_pac_signals_bandwidth():
     """Definition of artificially coupled signals using bandwidth."""
-    assert pac_signals_tort(fpha=[5, 7], famp=[30, 60], sf=200., ntrials=100,
-                            chi=0.5, noise=3., npts=1000)
-    assert pac_signals_wavelet(fpha=10, famp=57., npts=1240, sf=256, noise=.7,
-                               ntrials=33, pp=np.pi/4, rnd_state=23)
+    assert pac_signals_tort(f_pha=[5, 7], f_amp=[30, 60], sf=200.,
+                            n_trials=100, chi=0.5, noise=3., n_pts=1000)
+    assert pac_signals_wavelet(f_pha=10, f_amp=57., n_pts=1240, sf=256,
+                               noise=.7, n_trials=33, pp=np.pi/4, rnd_state=23)
 
 
 def test_default_args():

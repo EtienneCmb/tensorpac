@@ -2,14 +2,15 @@
 import numpy as np
 import logging
 
-from tensorpac.utils import pac_vec
 from tensorpac.spectral import spectral, hilbertm
 from tensorpac.methods import (get_pac_fcn, _kl_hr, pacstr, compute_surrogates,
                                normalize)
 from tensorpac.gcmi import nd_mi_gg
-from tensorpac.visu import PacPlot
 from tensorpac.stats import circ_corrcc
+from tensorpac.utils import pac_vec
+from tensorpac.visu import PacPlot
 from tensorpac.io import set_log_level
+from tensorpac.config import MNE_EPOCHS_TYPE
 
 logger = logging.getLogger('tensorpac')
 
@@ -133,7 +134,7 @@ class Pac(PacPlot):
 
     def __str__(self):
         """String representation."""
-        return f"{self.method} - {self.surro} - {self.norm}"
+        return self.method
 
     ###########################################################################
     #                              METHODS
@@ -172,8 +173,11 @@ class Pac(PacPlot):
                              "not allow to get filtered data only. Set the "
                              "keepfilt parameter to False or set dcomplex to "
                              "'hilbert'.")
-        assert ftype in ['phase', 'amplitude'], ("ftype must either be None, "
-                                                 "'phase' or 'amplitude.'")
+        assert ftype in ['phase', 'amplitude'], ("ftype must either be 'phase'"
+                                                 " or 'amplitude.'")
+        if not isinstance(x, np.ndarray) and type(x) in MNE_EPOCHS_TYPE:
+            x = x.get_data()
+            sf = x.info['sfreq']
         assert x.ndim == 3, ("x should be a 3d array like (n_trials, "
                              "n_channels, n_pts)")
 
@@ -191,7 +195,7 @@ class Pac(PacPlot):
                              self._width, n_jobs)
         return xfilt
 
-    def fit(self, pha, amp, n_perm=200, n_jobs=-1, verbose=None):
+    def fit(self, pha, amp, n_perm=200, p=.05, n_jobs=-1, verbose=None):
         """Compute PAC on filtered data.
 
         Parameters
@@ -203,6 +207,8 @@ class Pac(PacPlot):
             Array of amplitudes of shape (n_amp, n_trials, n_channels, n_pts).
         n_perm : int | 200
             Number of surrogates to compute.
+        p : float | 0.05
+            Statistical threhold
         n_jobs : int | -1
             Number of jobs to compute PAC in parallel. For very large data,
             set this parameter to 1 in order to prevent large memory usage.
@@ -216,7 +222,7 @@ class Pac(PacPlot):
         Attributes
         ----------
         pvalues_ : array_like
-            Array of p-values of shape (n_amp, n_pha, n_trials, n_channels)
+            Array of p-values of shape (n_amp, n_pha, n_channels)
         surrogates_ : array_like
             Array of surrogates of shape (n_perm, n_amp, n_pha, n_trials,
             n_channels)
@@ -229,49 +235,48 @@ class Pac(PacPlot):
         # for the phase synchrony, extract the phase of the amplitude
         if self._idpac[0] == 5:
             amp = np.angle(hilbertm(amp))
-        suro = pvalues = np.array([1.])
-        # check for 0 permutations
-        if n_perm in [0, None]:
+
+        # ---------------------------------------------------------------------
+        # check if permutations should be computed
+        if self._idpac[1] == 0:
+            n_perm = None
+        if not isinstance(n_perm, int) or not (n_perm > 0):
             self._idpac = (self._idpac[0], 0, 0)
-            n_perm = 1
-            self._compute_surro = False
+            compute_surro = False
+        else:
+            compute_surro = True
 
         # ---------------------------------------------------------------------
         # true pac estimation
         logger.info('    true PAC estimation')
-        fcn = get_pac_fcn(self.idpac[0], self.n_bins, 1. / n_perm)
+        fcn = get_pac_fcn(self.idpac[0], self.n_bins, p)
         pac = fcn(pha, amp)
+        self.pac_ = pac
 
         # ---------------------------------------------------------------------
         # compute surrogates (if needed)
-        if self._compute_surro:
-            logger.info(f'    compute {n_perm} permutations')
+        if compute_surro:
+            logger.info(f"    compute surrogates ({self._str_sur}, {n_perm} "
+                        "permutations)")
             suro = compute_surrogates(pha, amp, self.idpac[1], fcn, n_perm,
                                       n_jobs)
-
-            # Get the mean / deviation of surrogates
-            m_surro, std_surro = np.mean(suro, axis=0), np.std(suro, axis=0)
+            self.surrogates_ = suro
 
             # infer pvalues
-            logger.info(f"    infer p-values")
-            suro -= pac[np.newaxis, ...]
-            suro.sort(0)
-            pvalues = 1. - np.sum(suro < 0., axis=0) / n_perm
-            pvalues[pvalues < 1 / n_perm] = 1 / n_perm
+            self.infer_pvalues(p)
 
-            # normalize pac by surrogates
-            logger.info(f"    normalize true PAC estimation by surrogates")
+        # ---------------------------------------------------------------------
+        # normalize (if needed)
+        if self._idpac[2] != 0:
+            # Get the mean / deviation of surrogates
+            m_surro, std_surro = np.mean(suro, axis=0), np.std(suro, axis=0)
+            logger.info("    normalize true PAC estimation by surrogates "
+                        f"({self._str_norm})")
             normalize(pac, m_surro, std_surro, self.idpac[2])
-
-            self.pvalues_, self.surrogates_ = pvalues, suro
-
-        if self._idpac[0] == 4:
-            pvalues = np.ones_like(pac)
-            pvalues[np.nonzero(pac)] = 1 / n_perm
 
         return pac
 
-    def filterfit(self, sf, x_pha, x_amp=None, n_perm=200, n_jobs=-1,
+    def filterfit(self, sf, x_pha, x_amp=None, n_perm=200, p=.05, n_jobs=-1,
                   verbose=None):
         """Filt the data then compute PAC on it.
 
@@ -287,6 +292,8 @@ class Pac(PacPlot):
             x_amp could be different but still must to have the same shape.
         n_perm : int | 200
             Number of surrogates to compute.
+        p : float | 0.05
+            Statistical threhold
         n_jobs : int | -1
             Number of jobs to compute PAC in parallel. For very large data,
             set this parameter to 1 in order to prevent large memory usage.
@@ -303,6 +310,8 @@ class Pac(PacPlot):
         assert x_pha.shape == x_amp.shape, ("Inputs `x_pha` and `x_amp` must "
                                             "have the same shape.")
         # Extract phase (npha, ...) and amplitude (namp, ...) :
+        logger.info(f"    Extract phases (n_pha={len(self.xvec)}) and "
+                    f"amplitudes (n_amps={len(self.yvec)})")
         pha = self.filter(sf, x_pha, 'phase', False, n_jobs)
         amp = self.filter(sf, x_amp, 'amplitude', False, n_jobs)
 
@@ -311,7 +320,42 @@ class Pac(PacPlot):
             amp = np.angle(hilbertm(amp))
 
         # Compute pac :
-        return self.fit(pha, amp, n_perm, n_jobs, verbose)
+        return self.fit(pha, amp, p=p, n_perm=n_perm, n_jobs=n_jobs,
+                        verbose=verbose)
+
+    def infer_pvalues(self, p=0.05):
+        """Infer p-values based on surrogate distribution.
+
+        Parameters
+        ----------
+        p : float | 0.05
+            Statistical threhold
+
+        Returns
+        -------
+        pvalues : array_like
+            Array of p-values of shape (n_amp, n_pha, n_channels)
+        """
+        # ---------------------------------------------------------------------
+        # check that pac and surrogates has already been computed
+        assert hasattr(self, 'pac_'), ("You should compute PAC first. Use the "
+                                       "`fit` method")
+        assert hasattr(self, 'surrogates_'), "No surrogates computed"
+        assert all([isinstance(k, np.ndarray) for k in (
+            self.pac_, self.surrogates_)])
+        n_perm = self.surrogates_.shape[0]
+
+        # ---------------------------------------------------------------------
+        # mean pac and surrogates across trials
+        m_pac, m_surro = self.pac_.mean(2), self.surrogates_.mean(3)
+        self.pvalues_ = np.ones_like(m_pac)
+        # infer pvalues
+        logger.info(f"    infer p-values at p={p}")
+        max_dist = m_surro.reshape(n_perm, -1).max(1)
+        th = np.percentile(max_dist, 100. * (1 - p), axis=0,
+                           interpolation='nearest')
+        self.pvalues_[m_pac > th] = p
+        return self.pvalues_
 
     def pp(self, pha, amp, n_bins=72):
         """Compute the preferred-phase.
@@ -340,7 +384,8 @@ class Pac(PacPlot):
         # Check phase and amplitude shapes :
         pha, amp = self._phampcheck(pha, amp)
         # Define the method name :
-        self.method, self.surro, self.norm = 'Preferred-Phase (PP)', '', ''
+        self.method = 'Preferred-Phase (PP)' 
+        self._str_sur, self._str_norm = '', ''
         # Bin the amplitude according to the phase :
         ampbin = _kl_hr(pha, amp, n_bins)
         ampbin /= ampbin.sum(axis=0, keepdims=True)
@@ -384,7 +429,7 @@ class Pac(PacPlot):
            22986076>`_
         """
         pha, amp = self._phampcheck(pha, amp)
-        self.surro, self.norm = '', ''
+        self._str_sur, self._str_norm = '', ''
         # Move the trial axis to the end :
         pha = np.moveaxis(pha, 1, -1)
         amp = np.moveaxis(amp, 1, -1)
@@ -415,19 +460,19 @@ class Pac(PacPlot):
     def _idcheck(self, idpac):
         """Check the idpac parameter."""
         idpac = np.atleast_1d(idpac)
-        self._compute_surro = True
         if not all([isinstance(k, int) for k in idpac]) and (len(idpac) != 3):
             raise ValueError("idpac must be a tuple/list of 3 integers.")
-        # Ozkurt PAC case :
+        # Ozkurt PAC case (doesn't need surrogates and normalization)
         if idpac[0] == 4:
             idpac = np.array([4, 0, 0])
-            self._compute_surro = False
-        if (idpac[1] == 0) or (idpac[2] == 0):
-            self._compute_surro = False
-            idpac = (idpac[0], 0, 0)
+        if (idpac[2] != 0) and (idpac[1] == 0):
+            logger.warning("If you want to normalize the estimated PAC, you "
+                           "should select a surrogate method (second digit of "
+                           "`idpac`). Normalization ignored.")
+            idpac[2] = 0
         self._idpac = idpac
         # string representation
-        self.method, self.surro, self.norm = pacstr(idpac)
+        self.method, self._str_sur, self._str_norm = pacstr(idpac)
 
     def _speccheck(self, filt=None, dcomplex=None, filtorder=None, cycle=None,
                    width=None):
