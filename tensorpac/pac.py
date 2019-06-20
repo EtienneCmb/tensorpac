@@ -130,7 +130,6 @@ class Pac(PacPlot):
 
         # Check spectral properties :
         self._speccheck(filt, dcomplex, filtorder, cycle, width)
-        logger.info(str(self))
 
     def __str__(self):
         """String representation."""
@@ -248,7 +247,7 @@ class Pac(PacPlot):
 
         # ---------------------------------------------------------------------
         # true pac estimation
-        logger.info('    true PAC estimation')
+        logger.info(f'    true PAC estimation using {self.method}')
         fcn = get_pac_fcn(self.idpac[0], self.n_bins, p)
         pac = fcn(pha, amp)
         self.pac_ = pac

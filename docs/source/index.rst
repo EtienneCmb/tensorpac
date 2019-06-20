@@ -9,6 +9,8 @@
 .. image:: https://badge.fury.io/py/Tensorpac.svg
     :target: https://badge.fury.io/py/Tensorpac
 
+[![Downloads](https://pepy.tech/badge/tensorpac)](https://pepy.tech/project/tensorpac)
+
 Tensorpac
 #########
 
