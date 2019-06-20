@@ -16,25 +16,25 @@ plt.style.use('seaborn-poster')
 
 # Generate 100 datasets with a 6<->100hz coupling :
 sf = 1024.
-ntrials = 100
-data, time = pac_signals_wavelet(fpha=6, famp=100, ntrials=ntrials, sf=sf,
-                                 noise=.7, npts=2000, pp=np.pi/2)
+n_trials = 100
+data, time = pac_signals_wavelet(f_pha=6, f_amp=100, n_trials=n_trials, sf=sf,
+                                 noise=.7, n_pts=2000, pp=np.pi / 2)
 
 
 # Define a Pac object. Here, we are not going to use the idpac variable :
-p = Pac(fpha=[5, 7], famp=(60, 200, 10, 1))
+p = Pac(f_pha=[5, 7], f_amp=(60, 200, 10, 1))
 
 # Extract the phase and the amplitude :
-pha = p.filter(sf, data, axis=1, ftype='phase')
-amp = p.filter(sf, data, axis=1, ftype='amplitude')
+pha = p.filter(sf, data, ftype='phase')
+amp = p.filter(sf, data, ftype='amplitude')
 
 # Now, compute the PP :
-ambin, pp, vecbin = p.pp(pha, amp, axis=2, nbins=72)
+ambin, pp, vecbin = p.pp(pha, amp, n_bins=72)
 
-# Reshape the PP to be (ntrials, namp) :
+# Reshape the PP to be (n_trials, namp) :
 pp = np.squeeze(pp).T
 
-# Reshape the amplitude to be (nbins, namp, ntrials) and take the mean across
+# Reshape the amplitude to be (nbins, namp, n_trials) and take the mean across
 # datasets :
 ambin = np.squeeze(ambin).mean(-1)
 

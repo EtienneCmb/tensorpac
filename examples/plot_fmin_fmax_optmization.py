@@ -10,13 +10,13 @@ ending and therefore, bandwidth coupling.
 from tensorpac import Pac, pac_trivec, pac_signals_tort
 
 sf = 256.
-data, time = pac_signals_tort(fpha=[5, 7], famp=[60, 80], noise=2, ntrials=5,
-                              npts=3000, sf=sf, dpha=10)
+data, time = pac_signals_tort(f_pha=[5, 7], f_amp=[60, 80], noise=2,
+                              n_trials=5, n_pts=3000, sf=sf, dpha=10)
 
-trif, tridx = pac_trivec(fstart=30, fend=140, fwidth=3)
+trif, tridx = pac_trivec(f_start=30, f_end=140, f_width=3)
 
-p = Pac(idpac=(1, 0, 0), fpha=[5, 7], famp=trif)
-pac = p.filterfit(sf, data, axis=1)
+p = Pac(idpac=(1, 0, 0), f_pha=[5, 7], f_amp=trif)
+pac = p.filterfit(sf, data).squeeze()
 
 p.triplot(pac.mean(-1), trif, tridx, cmap='Spectral_r', rmaxis=True,
           title=r'Optimal $[Fmin; Fmax]hz$ band for amplitude')

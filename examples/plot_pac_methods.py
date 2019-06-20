@@ -7,27 +7,25 @@ Compute PAC on multiple datasets and compare implemented methods.
 """
 from __future__ import print_function
 import matplotlib.pyplot as plt
-from tensorpac.utils import pac_signals_tort
-from tensorpac import Pac
+from tensorpac import Pac, pac_signals_tort
 plt.style.use('seaborn-paper')
 
 # First, we generate a dataset of signals artificially coupled between 10hz
-# and 100hz. By default, this dataset is organized as (ntrials, npts) where
-# npts is the number of time points.
+# and 100hz. By default, this dataset is organized as (n_trials, n_pts) where
+# n_pts is the number of time points.
 n = 10  # number of datasets
-sf = 256.  # sampling frequency
-npts = 3000  # Number of time points
-data, time = pac_signals_tort(sf=sf, fpha=[4, 6], famp=[90, 110], noise=3,
-                              ntrials=n, dpha=10, damp=10, npts=npts)
+sf = 512.  # sampling frequency
+n_pts = 4000  # Number of time points
+data, time = pac_signals_tort(sf=sf, f_pha=5, f_amp=100, noise=2.,
+                              n_trials=n, n_pts=n_pts)
 
 # First, let's use the MVL, without any further correction by surrogates :
-p = Pac(fpha=(1, 10, 1, .1), famp=(60, 140, 1, 1), dcomplex='wavelet',
-        width=6)
+p = Pac(f_pha=(2, 20, 1, 1), f_amp=(60, 150, 5, 5))
 
 # Now, we want to compare PAC methods, hence it's useless to systematically
 # filter the data. So we extract the phase and the amplitude only once :
-phases = p.filter(sf, data, axis=1, ftype='phase')
-amplitudes = p.filter(sf, data, axis=1, ftype='amplitude')
+phases = p.filter(sf, data, ftype='phase')
+amplitudes = p.filter(sf, data, ftype='amplitude')
 
 plt.figure(figsize=(18, 9))
 for i, k in enumerate([1, 2, 3, 4, 5, 6]):
@@ -35,7 +33,7 @@ for i, k in enumerate([1, 2, 3, 4, 5, 6]):
     p.idpac = (k, 0, 0)
     print('-> PAC using ' + str(p))
     # Compute only the PAC without filtering :
-    xpac = p.fit(phases, amplitudes, axis=2)
+    xpac = p.fit(phases, amplitudes).squeeze()
     # Plot :
     plt.subplot(2, 3, k)
     p.comodulogram(xpac.mean(-1), title=p.method, cmap='Spectral_r')

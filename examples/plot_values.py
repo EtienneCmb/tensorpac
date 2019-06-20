@@ -11,18 +11,19 @@ from tensorpac import Pac, pac_signals_wavelet
 plt.style.use('seaborn-poster')
 
 # First, we generate a dataset of signals artificially coupled between 10hz
-# and 100hz. By default, this dataset is organized as (ntrials, npts) where
-# npts is the number of time points.
+# and 100hz. By default, this dataset is organized as (n_trials, n_pts) where
+# n_pts is the number of time points.
 n = 1      # number of datasets
 sf = 512.  # sampling frequency
-data, time = pac_signals_wavelet(fpha=6, famp=90, noise=.8, ntrials=n,
-                                 npts=6000, sf=sf, rnd_state=3)
+data, time = pac_signals_wavelet(f_pha=6, f_amp=90, noise=.8, n_trials=n,
+                                 n_pts=6000, sf=sf, rnd_state=3)
 
 
 # First, let's use the MVL, without any further correction by surrogates :
-p = Pac(idpac=(1, 2, 1), fpha=(2, 15, 2, .1), famp=(60, 120, 10, 1),
-        dcomplex='wavelet', nblocks=10)
-xpac, pval = p.filterfit(sf, data, axis=1, nperm=200, get_pval=True)
+p = Pac(idpac=(1, 2, 1), f_pha=(2, 15, 2, .1), f_amp=(60, 120, 10, 1),
+        dcomplex='wavelet')
+xpac = p.filterfit(sf, data, n_perm=200).squeeze()
+pval = p.pvalues_.squeeze()
 t1 = p.method + '\n' + p.surro + '\n' + p.norm
 
 xpac, pval = np.squeeze(xpac), np.squeeze(pval)

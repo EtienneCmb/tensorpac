@@ -61,7 +61,7 @@ def pac_signals_wavelet(f_pha=10., f_amp=100., sf=1024., n_pts=4000.,
     # Random state of the machine :
     rng = np.random.RandomState(rnd_state)
     # Get complex decomposition of random points in the phase frequency band :
-    driver = morlet(rng.randn(n_trials, n_channels, n_pts), sf, f_pha, axis=2)
+    driver = morlet(rng.randn(n_trials, n_channels, n_pts), sf, f_pha)
     driver /= np.max(driver, axis=2, keepdims=True)
     # Create amplitude signals :
     xh = np.sin(2 * np.pi * f_amp * time.reshape(1, 1, -1))

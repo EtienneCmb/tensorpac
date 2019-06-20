@@ -12,51 +12,42 @@ __all__ = ('filtdata')
 ###############################################################################
 
 
-def filtdata(x, sf, f, axis, filt, cycle, filtorder):
+def filtdata(x, sf, f, filt, cycle, filtorder):
     """Filt the data using a forward/backward filter to avoid phase shifting.
 
     Parameters
     ----------
     x : array_like
-        Array of data
-
+        Array of data of shape (n_trials, n_channels, n_pts)
     sf : float
         Sampling frequency
-
     f : array_like
         Frequency vector of shape (N, 2)
-
-    axis : int
-        Axis where the time is located.
-
     filt : string
         Name of the filter to use (only if dcomplex is 'hilbert'). Use
         either 'eegfilt', 'butter' or 'bessel'.
-
     filtorder : int
         Order of the filter (only if dcomplex is 'hilbert')
-
     cycle : int
         Number of cycles to use for fir1 filtering.
     """
-    # fir1 filter :
-    if filt == 'fir1':
-        forder = fir_order(sf, x.shape[axis], f[0], cycle=cycle)
-        b, a = fir1(forder, f / (sf / 2))
-
-    # butterworth filter :
+    if filt == 'mne':
+        from mne.filter import filter_data
+        bandwidth = f[1] - f[0]
+        return filter_data(x, sf, f[0], f[1], method='iir', verbose=False,
+                           n_jobs=1, l_trans_bandwidth=bandwidth / 4.,
+                           h_trans_bandwidth=bandwidth / 4.)
+    elif filt == 'fir1':
+        forder = fir_order(sf, x.shape[-1], f[0], cycle=cycle)
+        b, a = fir1(forder, f / (sf / 2.))
     elif filt == 'butter':
-        b, a = butter(filtorder, [(2 * f[0]) / sf, (2 * f[1]) / sf],
-                      btype='bandpass')
+        b, a = butter(filtorder, f / (sf / 2.), btype='bandpass')
         forder = None
-
-    # bessel filter :
     elif filt == 'bessel':
-        b, a = bessel(filtorder, [(2 * f[0]) / sf, (2 * f[1]) / sf],
-                      btype='bandpass')
+        b, a = bessel(filtorder, f / (sf / 2.), btype='bandpass')
         forder = None
 
-    return filtfilt(b, a, x, padlen=forder, axis=axis)
+    return filtfilt(b, a, x, padlen=forder, axis=-1)
 
 ###############################################################################
 ###############################################################################

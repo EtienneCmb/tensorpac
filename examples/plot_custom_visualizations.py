@@ -12,16 +12,17 @@ from tensorpac import Pac
 plt.style.use('seaborn-paper')
 
 # First, we generate a dataset of signals artificially coupled between 10hz
-# and 100hz. By default, this dataset is organized as (ntrials, npts) where
-# npts is the number of time points.
+# and 100hz. By default, this dataset is organized as (n_trials, n_pts) where
+# n_pts is the number of time points.
 n = 10  # number of datasets
-data, time = pac_signals_wavelet(fpha=10, famp=100, noise=1., ntrials=n,
-                                 npts=4000)
+data, time = pac_signals_wavelet(f_pha=10, f_amp=100, noise=1., n_trials=n,
+                                 n_pts=4000)
 
 # First, let's use the MVL, without any further correction by surrogates :
-p = Pac(idpac=(5, 3, 3), fpha=(4, 18, 1, .3), famp=(60, 150, 5, 2),
+p = Pac(idpac=(5, 3, 3), f_pha=(4, 18, 1, .3), f_amp=(60, 150, 5, 2),
         dcomplex='wavelet', width=7)
-xpac, pval = p.filterfit(1024, data, axis=1, nperm=110, get_pval=True)
+xpac = p.filterfit(1024, data, n_perm=20).squeeze()
+pval = p.pvalues_.squeeze()
 
 # Now, we plot the result by taking the mean across the dataset dimension.
 plt.figure(figsize=(20, 15))

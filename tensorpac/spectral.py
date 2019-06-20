@@ -3,13 +3,22 @@ import numpy as np
 from joblib import Parallel, delayed
 from scipy.signal import hilbert
 from scipy import fftpack
-from .filtering import filtdata
 
-__all__ = ('spectral')
+from tensorpac.filtering import filtdata
 
 
-def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, width,
-             njobs):
+def hilbertm(x):
+    """Faster Hilbert fix.
+
+    x must have a shape of (..., n_pts)
+    """
+    n_pts = x.shape[-1]
+    fc = fftpack.helper.next_fast_len(n_pts)
+    return hilbert(x, fc, axis=-1)[..., 0:n_pts]
+
+
+def spectral(x, sf, f, stype, dcomplex, filt, filtorder, cycle, width,
+             n_jobs):
     """Extract spectral informations from data.
 
     Parameters
@@ -20,8 +29,6 @@ def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, width,
         Sampling frequency
     f : array_like
         Frequency vector of shape (N, 2)
-    axis : int
-        Axis where the time is located.
     stype : string
         Spectral informations to extract (use either 'pha' or 'amp')
     dcomplex : string
@@ -35,7 +42,7 @@ def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, width,
         Number of cycles to use for fir1 filtering.
     width : int
         Width of the wavelet.
-    njobs : int
+    n_jobs : int
         Number of jobs to use. If jobs is -1, all of them are going to be
         used.
     """
@@ -43,31 +50,27 @@ def spectral(x, sf, f, axis, stype, dcomplex, filt, filtorder, cycle, width,
     if dcomplex is 'hilbert':
         # Filt each time series :
         nf = range(f.shape[0])
-        xf = Parallel(n_jobs=njobs, prefer='threads')(delayed(filtdata)(
-            x, sf, f[k, :], axis, filt, cycle, filtorder) for k in nf)
+        xf = Parallel(n_jobs=n_jobs, prefer='threads')(delayed(filtdata)(
+            x, sf, f[k, :], filt, cycle, filtorder) for k in nf)
         # Use hilbert for the complex decomposition :
         xf = np.asarray(xf)
         if stype is not None:
-            sl = [slice(None)] * xf.ndim
-            sl[axis + 1] = slice(0, xf.shape[axis + 1])
-            # fourier components
-            fc = fftpack.helper.next_fast_len(xf.shape[axis + 1])
-            xd = hilbert(xf, fc, axis=axis + 1)[tuple(sl)]
+            xd = hilbertm(xf)
     elif dcomplex is 'wavelet':
         f = f.mean(1)  # centered frequencies
-        xd = Parallel(n_jobs=njobs, prefer='threads')(delayed(morlet)(
-            x, sf, k, axis, width) for k in f)
+        xd = Parallel(n_jobs=n_jobs, prefer='threads')(delayed(morlet)(
+            x, sf, k, width) for k in f)
 
     # Extract phase / amplitude :
     if stype is 'pha':
-        return np.angle(np.moveaxis(xd, axis + 1, -1))
+        return np.angle(xd)
     elif stype is 'amp':
-        return np.abs(np.moveaxis(xd, axis + 1, -1))
+        return np.abs(xd)
     elif stype is None:
-        return np.moveaxis(xd, axis + 1, -1)
+        return xd
 
 
-def morlet(x, sf, f, axis=0, width=7.):
+def morlet(x, sf, f, width=7.):
     """Complex decomposition of a signal x using the morlet wavelet.
 
     Parameters
@@ -81,8 +84,6 @@ def morlet(x, sf, f, axis=0, width=7.):
         Frequency vector
     width : float | 7.
         Width of the wavelet
-    axis : int | 0
-        Axis along performing the convolution.
 
     Returns
     -------
@@ -104,4 +105,4 @@ def morlet(x, sf, f, axis=0, width=7.):
         y = np.convolve(xt, m)
         return y[int(np.ceil(len(m) / 2)) - 1:int(len(y) - np.floor(
             len(m) / 2))]
-    return np.apply_along_axis(ndmorlet, axis, x)
+    return np.apply_along_axis(ndmorlet, -1, x)

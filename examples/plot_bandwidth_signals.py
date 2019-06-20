@@ -10,16 +10,15 @@ coupling.
 import numpy as np
 import matplotlib.pyplot as plt
 
-from tensorpac.utils import pac_signals_tort
-from tensorpac import Pac
+from tensorpac import Pac, pac_signals_tort
 
-data, time = pac_signals_tort(fpha=[5, 7], famp=[60, 80], chi=0.5, ntrials=10,
-                              noise=3., npts=2000)
+data, time = pac_signals_tort(f_pha=[5, 7], f_amp=[60, 80], chi=0.5,
+                              n_trials=10, noise=3., n_pts=2000)
 
 
-p = Pac(idpac=(3, 1, 1), fpha=(1, 15, 1, .2), famp=(40, 100, 5, 2),
+p = Pac(idpac=(3, 1, 1), f_pha=(1, 15, 1, .2), f_amp=(40, 100, 5, 2),
         dcomplex='wavelet', width=6)
-pac = np.squeeze(p.filterfit(1024, data, axis=1, nperm=10))
+pac = p.filterfit(1024, data, n_perm=10).squeeze()
 
 plt.figure(figsize=(12, 9))
 p.comodulogram(pac.mean(-1), title=str(p), plotas='contour', ncontours=10,
