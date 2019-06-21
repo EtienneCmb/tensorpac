@@ -15,9 +15,8 @@ from tensorpac.spectral import morlet
 ###############################################################################
 
 
-def pac_signals_wavelet(f_pha=10., f_amp=100., sf=1024., n_pts=4000.,
-                        n_trials=10, n_channels=1, noise=.1, pp=0.,
-                        rnd_state=0):
+def pac_signals_wavelet(f_pha=10., f_amp=100., sf=1024., n_times=4000.,
+                        n_epochs=10, noise=.1, pp=0., rnd_state=0):
     """Generate artificially phase-amplitude coupled signals using wavelets.
 
     This function is inspired by the code of the pactools toolbox developped by
@@ -33,12 +32,10 @@ def pac_signals_wavelet(f_pha=10., f_amp=100., sf=1024., n_pts=4000.,
         frequency of a band (like [60, 80]) for a bandwidth.
     sf : float | 1024.
         Sampling frequency.
-    n_pts : int | 4000
+    n_times : int | 4000
         Number of time points.
-    n_trials : int | 10
+    n_epochs : int | 10
         Number of trials in the dataset.
-    n_channels : int | 1
-        Number of channels
     noise : float | .1
         Amount of white noise.
     pp : float | 0.
@@ -49,22 +46,22 @@ def pac_signals_wavelet(f_pha=10., f_amp=100., sf=1024., n_pts=4000.,
     Returns
     -------
     data : array_like
-        Array of signals of shape (n_trials, n_channels, n_pts).
+        Array of signals of shape (n_epochs, n_times).
     time : array_like
-        Time vector of shape (n_pts,).
+        Time vector of shape (n_times,).
     """
-    n_pts = int(n_pts)
+    n_times = int(n_times)
     sf = float(sf)
     f_pha, f_amp = np.asarray(f_pha).mean(), np.asarray(f_amp).mean()
-    # time = np.mgrid[0:n_trials, 0:n_pts][1] / sf
-    time = np.arange(n_pts) / sf
+    # time = np.mgrid[0:n_epochs, 0:n_times][1] / sf
+    time = np.arange(n_times) / sf
     # Random state of the machine :
     rng = np.random.RandomState(rnd_state)
     # Get complex decomposition of random points in the phase frequency band :
-    driver = morlet(rng.randn(n_trials, n_channels, n_pts), sf, f_pha)
-    driver /= np.max(driver, axis=2, keepdims=True)
+    driver = morlet(rng.randn(n_epochs, n_times), sf, f_pha)
+    driver /= np.max(driver, axis=1, keepdims=True)
     # Create amplitude signals :
-    xh = np.sin(2 * np.pi * f_amp * time.reshape(1, 1, -1))
+    xh = np.sin(2 * np.pi * f_amp * time.reshape(1, -1))
     dpha = np.exp(-1j * pp)
     modulation = 1. / (1. + np.exp(- 6. * 1. * np.real(driver * dpha)))
     # Modulate the amplitude :
@@ -77,9 +74,8 @@ def pac_signals_wavelet(f_pha=10., f_amp=100., sf=1024., n_pts=4000.,
     return data, time
 
 
-def pac_signals_tort(f_pha=10., f_amp=100., sf=1024, n_pts=4000, n_trials=10,
-                     n_channels=1, chi=0., noise=1., dpha=0., damp=0.,
-                     rnd_state=0):
+def pac_signals_tort(f_pha=10., f_amp=100., sf=1024, n_times=4000, n_epochs=10,
+                     chi=0., noise=1., dpha=0., damp=0., rnd_state=0):
     """Generate artificially phase-amplitude coupled signals.
 
     This function use the definition of Tort et al. 2010.
@@ -94,12 +90,10 @@ def pac_signals_tort(f_pha=10., f_amp=100., sf=1024, n_pts=4000, n_trials=10,
         frequency of a band (like [60, 80]) for a bandwidth.
     sf : int | 1024
         Sampling frequency
-    n_trials : int | 10
+    n_epochs : int | 10
         Number of datasets
-    n_pts : int | 4000
+    n_times : int | 4000
         Number of points for each signal.
-    n_channels : int | 1
-        Number of channels
     chi : float | 0.
         Amount of coupling. If chi=0, signals of phase and amplitude
         are strongly coupled (0.<=chi<=1.).
@@ -119,37 +113,37 @@ def pac_signals_tort(f_pha=10., f_amp=100., sf=1024, n_pts=4000, n_trials=10,
     Returns
     -------
     data : array_like
-        Array of signals of shape (n_trials, n_channels, n_pts).
+        Array of signals of shape (n_epochs, n_channels, n_times).
     time : array_like
-        Time vector of shape (n_pts,).
+        Time vector of shape (n_times,).
     """
-    n_pts, sf = int(n_pts), float(sf)
+    n_times, sf = int(n_times), float(sf)
     # Check the inputs variables :
     chi = 0 if not 0 <= chi <= 1 else chi
     noise = 0 if not 0 <= noise <= 3 else noise
     dpha = 0 if not 0 <= dpha <= 100 else dpha
     damp = 0 if not 0 <= damp <= 100 else damp
     f_pha, f_amp = np.asarray(f_pha), np.asarray(f_amp)
-    # time = np.mgrid[0:n_trials, 0:n_pts][1] / sf
-    time = np.arange(n_pts) / sf
+    # time = np.mgrid[0:n_epochs, 0:n_times][1] / sf
+    time = np.arange(n_times) / sf
     # Random state of the machine :
     rng = np.random.RandomState(rnd_state)
     # Band / Delta parameters :
-    sh = (n_trials, n_channels, 1)
+    sh = (n_epochs, 1)
     if f_pha.ndim == 0:
         apha = [f_pha * (1. - dpha / 100.), f_pha * (1. + dpha / 100.)]
         del_pha = apha[0] + (apha[1] - apha[0]) * rng.rand(*sh)
     elif f_pha.ndim == 1:
-        del_pha = rng.uniform(f_pha[0], f_pha[1], (n_trials, n_channels, 1))
+        del_pha = rng.uniform(f_pha[0], f_pha[1], (n_epochs, 1))
     if f_amp.ndim == 0:
         a_amp = [f_amp * (1. - damp / 100.), f_amp * (1. + damp / 100.)]
         del_amp = a_amp[0] + (a_amp[1] - a_amp[0]) * rng.rand(*sh)
     elif f_amp.ndim == 1:
-        del_amp = rng.uniform(f_amp[0], f_amp[1], (n_trials, n_channels, 1))
+        del_amp = rng.uniform(f_amp[0], f_amp[1], (n_epochs, 1))
 
     # Create phase and amplitude signals :
-    xl = np.sin(2 * np.pi * del_pha * time.reshape(1, 1, -1))
-    xh = np.sin(2 * np.pi * del_amp * time.reshape(1, 1, -1))
+    xl = np.sin(2 * np.pi * del_pha * time.reshape(1, -1))
+    xh = np.sin(2 * np.pi * del_amp * time.reshape(1, -1))
 
     # Create the coupling :
     ah = .5 * ((1. - chi) * xl + 1. + chi)
