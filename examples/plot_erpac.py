@@ -16,32 +16,28 @@ import numpy as np
 from tensorpac import Pac, pac_signals_wavelet
 
 # Generate a 10<->100hz coupling :
-n_trials = 300
-n_pts = 1000
+n_epochs = 300
+n_times = 1000
 sf = 1024.
-x1, tvec = pac_signals_wavelet(f_pha=10, f_amp=100, n_trials=n_trials, noise=2,
-                               n_pts=n_pts, sf=sf)
+x1, tvec = pac_signals_wavelet(f_pha=10, f_amp=100, n_epochs=n_epochs, noise=2,
+                               n_times=n_times, sf=sf)
 
 # Generate noise and concatenate the coupling and the noise :
-x2 = np.random.rand(n_trials, 700)
-x = np.concatenate((x1.squeeze(), x2), axis=1)  # Shape : (n_trials, n_pts)
+x2 = np.random.rand(n_epochs, 700)
+x = np.concatenate((x1.squeeze(), x2), axis=1)  # Shape : (n_epochs, n_times)
 time = np.arange(x.shape[1]) / sf
-x = x[:, np.newaxis, :]
 
 # Define a PAC object :
 p = Pac(f_pha=[9, 11], f_amp=(60, 140, 5, 1))
 
 # Extract the phase and the amplitude :
-pha = p.filter(sf, x, ftype='phase')      # Shape (npha, n_trials, 1, n_pts)
-amp = p.filter(sf, x, ftype='amplitude')  # Shape (namp, n_trials, 1, n_pts)
+pha = p.filter(sf, x, ftype='phase')      # Shape (npha, n_epochs, n_times)
+amp = p.filter(sf, x, ftype='amplitude')  # Shape (namp, n_epochs, n_times)
 
 # Compute the ERPAC and use the traxis to specify that the trial axis is the
 # first one :
-erpac = p.erpac(pha, amp)
-pval = p.pvalues_
-
-# Remove unused dimensions :
-erpac, pval = np.squeeze(erpac), np.squeeze(pval)
+erpac = p.erpac(pha, amp).squeeze()
+pval = p.pvalues_.squeeze()
 
 # Plot without p-values :
 p.pacplot(erpac, time, p.yvec, xlabel='Time (second)', cmap='Spectral_r',

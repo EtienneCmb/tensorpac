@@ -13,11 +13,12 @@ from tensorpac import Pac, pac_signals_wavelet
 plt.style.use('seaborn-paper')
 
 # First, we generate a delta <-> low-gamma coupling. By default, this dataset
-#  is organized as (n_trials, n_pts) where n_pts is the number of time points.
-n = 20     # number of datasets
+#  is organized as (n_epochs, n_times) where n_times is the number of time
+# points.
+n_epochs = 20     # number of datasets
 sf = 512.  # sampling frequency
 data, time = pac_signals_wavelet(sf=sf, f_pha=6, f_amp=70, noise=3.,
-                                 n_trials=n, n_pts=4000)
+                                 n_epochs=n_epochs, n_times=4000)
 
 # First, let's use the MVL, without any further correction by surrogates :
 p = Pac(f_pha=(3, 10, 1, .2), f_amp=(50, 90, 5, 1), dcomplex='wavelet',
@@ -33,7 +34,7 @@ for i, k in enumerate(range(4)):
     # Change the pac method :
     p.idpac = (5, k, 1)
     # Compute only the PAC without filtering :
-    xpac = p.fit(phases, amplitudes, n_perm=10).squeeze()
+    xpac = p.fit(phases, amplitudes, n_perm=10)
     # Plot :
     plt.subplot(2, 2, k + 1)
     p.comodulogram(xpac.mean(-1), title=p.str_surro, cmap='Reds', vmin=0)

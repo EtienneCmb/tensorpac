@@ -16,9 +16,9 @@ plt.style.use('seaborn-poster')
 
 # Generate 100 datasets with a 6<->100hz coupling :
 sf = 1024.
-n_trials = 100
-data, time = pac_signals_wavelet(f_pha=6, f_amp=100, n_trials=n_trials, sf=sf,
-                                 noise=.7, n_pts=2000, pp=np.pi / 2)
+n_epochs = 100
+data, time = pac_signals_wavelet(f_pha=6, f_amp=100, n_epochs=n_epochs, sf=sf,
+                                 noise=.7, n_times=2000, pp=np.pi / 2)
 
 
 # Define a Pac object. Here, we are not going to use the idpac variable :
@@ -31,10 +31,10 @@ amp = p.filter(sf, data, ftype='amplitude')
 # Now, compute the PP :
 ambin, pp, vecbin = p.pp(pha, amp, n_bins=72)
 
-# Reshape the PP to be (n_trials, namp) :
+# Reshape the PP to be (n_epochs, n_amp) :
 pp = np.squeeze(pp).T
 
-# Reshape the amplitude to be (nbins, namp, n_trials) and take the mean across
+# Reshape the amplitude to be (nbins, n_amp, n_epochs) and take the mean across
 # datasets :
 ambin = np.squeeze(ambin).mean(-1)
 

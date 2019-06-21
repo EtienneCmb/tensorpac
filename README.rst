@@ -38,22 +38,21 @@ Code snippet & illustration
 
 .. code-block:: python
 
-  from tensorpac.utils import pac_signals_tort
-  from tensorpac import Pac
+  from tensorpac import Pac, pac_signals_tort
 
   # Dataset of signals artificially coupled between 10hz and 100hz :
-  n = 20     # number of datasets
+  n_epochs = 20
+  n_times = 4000
   sf = 512.  # sampling frequency
 
   # Create artificially coupled signals using Tort method :
-  data, time = pac_signals_tort(fpha=10, famp=100, noise=2, ntrials=n,
-                                dpha=10, damp=10, sf=sf)
+  data, time = pac_signals_tort(f_pha=10, f_amp=100, noise=2, n_epochs=n_epochs,
+                                dpha=10, damp=10, sf=sf, n_times=n_times)
 
   # Define a PAC object :
-  p = Pac(idpac=(4, 0, 0), fpha=(2, 20, 1, 1), famp=(60, 150, 5, 5),
-          dcomplex='wavelet', width=12)
+  p = Pac(idpac=(6, 3, 0), f_pha=(2, 20, 1, 1), f_amp=(60, 150, 5, 5))
   # Filter the data and extract PAC :
-  xpac = p.filterfit(sf, data, axis=1)
+  xpac = p.filterfit(sf, data, n_perm=20)
 
   # Plot your Phase-Amplitude Coupling :
   p.comodulogram(xpac.mean(-1), title='Contour plot with 5 regions',

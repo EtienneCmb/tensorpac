@@ -11,13 +11,13 @@ from tensorpac import Pac, pac_signals_tort
 plt.style.use('seaborn-paper')
 
 # First, we generate a dataset of signals artificially coupled between 10hz
-# and 100hz. By default, this dataset is organized as (n_trials, n_pts) where
-# n_pts is the number of time points.
-n = 10  # number of datasets
+# and 100hz. By default, this dataset is organized as (n_epochs, n_times) where
+# n_times is the number of time points.
+n_epochs = 10  # number of datasets
 sf = 512.  # sampling frequency
-n_pts = 4000  # Number of time points
+n_times = 4000  # Number of time points
 data, time = pac_signals_tort(sf=sf, f_pha=5, f_amp=100, noise=2.,
-                              n_trials=n, n_pts=n_pts)
+                              n_epochs=n_epochs, n_times=n_times)
 
 # First, let's use the MVL, without any further correction by surrogates :
 p = Pac(f_pha=(2, 20, 1, 1), f_amp=(60, 150, 5, 5))
@@ -33,7 +33,7 @@ for i, k in enumerate([1, 2, 3, 4, 5, 6]):
     p.idpac = (k, 0, 0)
     print('-> PAC using ' + str(p))
     # Compute only the PAC without filtering :
-    xpac = p.fit(phases, amplitudes).squeeze()
+    xpac = p.fit(phases, amplitudes)
     # Plot :
     plt.subplot(2, 3, k)
     p.comodulogram(xpac.mean(-1), title=p.method, cmap='Spectral_r')

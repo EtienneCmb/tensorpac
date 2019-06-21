@@ -143,10 +143,10 @@ class Pac(PacPlot):
 
         Parameters
         ----------
-        sf: float
+        sf : float
             The sampling frequency.
-        x: array_like
-            Array of data of shape (n_trials, n_channels, n_pts)
+        x : array_like
+            Array of data of shape (n_epochs, n_times)
         ftype : {'phase', 'amplitude'}
             Specify if you want to extract phase ('phase') or the amplitude
             ('amplitude').
@@ -160,7 +160,7 @@ class Pac(PacPlot):
         Returns
         -------
         xfilt : array_like
-            The filtered data of shape (n_freqs, n_trials, n_channels, n_pts)
+            The filtered data of shape (n_freqs, n_epochs, n_times)
         """
         # ---------------------------------------------------------------------
         # check inputs
@@ -177,8 +177,9 @@ class Pac(PacPlot):
         if not isinstance(x, np.ndarray) and type(x) in MNE_EPOCHS_TYPE:
             x = x.get_data()
             sf = x.info['sfreq']
-        assert x.ndim == 3, ("x should be a 3d array like (n_trials, "
-                             "n_channels, n_pts)")
+        if x.ndim == 1:
+            x = x[np.newaxis, :]
+        assert x.ndim == 2, ("x should be a 2d array like (n_epochs, n_times)")
 
         # ---------------------------------------------------------------------
         # Switch between phase or amplitude :
@@ -200,10 +201,10 @@ class Pac(PacPlot):
         Parameters
         ----------
         pha : array_like
-            Array of phases of shape (n_pha, n_trials, n_channels, n_pts).
+            Array of phases of shape (n_pha, n_epochs, n_times).
             Angles should be in rad.
         amp : array_like
-            Array of amplitudes of shape (n_amp, n_trials, n_channels, n_pts).
+            Array of amplitudes of shape (n_amp, n_epochs, n_times).
         n_perm : int | 200
             Number of surrogates to compute.
         p : float | 0.05
@@ -215,16 +216,14 @@ class Pac(PacPlot):
         Returns
         -------
         pac: array_like
-            Phase-Amplitude Coupling measure of shape (n_amp, n_pha, n_trials,
-            n_channels)
+            Phase-Amplitude Coupling measure of shape (n_amp, n_pha, n_epochs)
 
         Attributes
         ----------
         pvalues_ : array_like
-            Array of p-values of shape (n_amp, n_pha, n_channels)
+            Array of p-values of shape (n_amp, n_pha)
         surrogates_ : array_like
-            Array of surrogates of shape (n_perm, n_amp, n_pha, n_trials,
-            n_channels)
+            Array of surrogates of shape (n_perm, n_amp, n_pha, n_epochs)
         """
         set_log_level(verbose)
         # ---------------------------------------------------------------------
@@ -340,7 +339,7 @@ class Pac(PacPlot):
         Returns
         -------
         pvalues : array_like
-            Array of p-values of shape (n_amp, n_pha, n_channels)
+            Array of p-values of shape (n_amp, n_pha)
         """
         # ---------------------------------------------------------------------
         # check that pac and surrogates has already been computed
@@ -415,8 +414,8 @@ class Pac(PacPlot):
         ----------
         pha, amp : array_like
             Respectively the phase of slower oscillations of shape
-            (n_pha, n_trials, n_channels, n_pts) and the amplitude of faster
-            oscillations of shape (n_pha, n_trials, n_channels, n_pts).
+            (n_pha, n_epochs, n_times) and the amplitude of faster
+            oscillations of shape (n_pha, n_epochs, n_times).
         method : {'circular', 'gc'}
             Name of the method for computing erpac. Use 'circular' for
             reproducing [#f6]_ or 'gc' for a Gaussian-Copula based erpac.
@@ -449,12 +448,12 @@ class Pac(PacPlot):
             self.method = "Gaussian-Copula ERPAC"
             logger.info(f"Compute {self.method}")
             # get shapes
-            n_pha, n_chans, n_pts, n_trials = pha.shape
+            n_pha, n_times, n_epochs = pha.shape
             n_amp = amp.shape[0]
             # conversion for computing mi
             sco = copnorm(np.stack([np.sin(pha), np.cos(pha)], axis=-2))
             amp = copnorm(amp)[..., np.newaxis, :]
-            erpac = np.zeros((n_amp, n_pha, n_chans, n_pts))
+            erpac = np.zeros((n_amp, n_pha, n_times))
             for a in range(n_amp):
                 for p in range(n_pha):
                     erpac[a, p, ...] = nd_mi_gg(sco[p, ...], amp[a, ...],
@@ -517,10 +516,10 @@ class Pac(PacPlot):
     @staticmethod
     def _phampcheck(pha, amp):
         """Check phase and amplitude values."""
-        assert pha.ndim == 4, ("`pha` should have a shape of (n_pha, n_trials,"
-                               " n_channels, n_pts)")
-        assert amp.ndim == 4, ("`amp` should have a shape of (n_pha, n_trials,"
-                               " n_channels, n_pts)")
+        assert pha.ndim == 3, ("`pha` should have a shape of (n_pha, n_epochs,"
+                               " n_times)")
+        assert amp.ndim == 3, ("`amp` should have a shape of (n_pha, n_epochs,"
+                               " n_times)")
         assert pha.shape[1:] == amp.shape[1:], ("`pha` and `amp` must have the"
                                                 " same number of trials, "
                                                 "channels and time points")
