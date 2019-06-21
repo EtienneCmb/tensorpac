@@ -1,0 +1,45 @@
+tensorpac.Pac
+=============
+
+.. currentmodule:: tensorpac
+
+.. autoclass:: Pac
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Pac.__init__
+      ~Pac.comodulogram
+      ~Pac.erpac
+      ~Pac.filter
+      ~Pac.filterfit
+      ~Pac.fit
+      ~Pac.infer_pvalues
+      ~Pac.pacplot
+      ~Pac.polar
+      ~Pac.pp
+      ~Pac.savefig
+      ~Pac.show
+      ~Pac.triplot
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Pac.cycle
+      ~Pac.dcomplex
+      ~Pac.filt
+      ~Pac.filtorder
+      ~Pac.idpac
+      ~Pac.width
+   
+   

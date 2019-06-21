@@ -1,0 +1,6 @@
+tensorpac.methods.time\_lag
+===========================
+
+.. currentmodule:: tensorpac.methods
+
+.. autofunction:: time_lag

@@ -1,0 +1,6 @@
+tensorpac.methods.gcpac
+=======================
+
+.. currentmodule:: tensorpac.methods
+
+.. autofunction:: gcpac

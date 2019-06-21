@@ -1,0 +1,6 @@
+tensorpac.methods.normalize
+===========================
+
+.. currentmodule:: tensorpac.methods
+
+.. autofunction:: normalize

@@ -78,7 +78,7 @@ with the chance distribution.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  19.321 seconds)
+   **Total running time of the script:** ( 0 minutes  18.966 seconds)
 
 
 .. _sphx_glr_download_auto_examples_plot_compare_normalizations.py:

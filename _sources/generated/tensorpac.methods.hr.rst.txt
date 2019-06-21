@@ -1,0 +1,6 @@
+tensorpac.methods.hr
+====================
+
+.. currentmodule:: tensorpac.methods
+
+.. autofunction:: hr

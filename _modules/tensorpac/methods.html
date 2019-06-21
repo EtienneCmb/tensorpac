@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>tensorpac.methods &#8212; Tensorpac 0.5.6 documentation</title>
+    <title>tensorpac.methods &#8212; Tensorpac 0.6.0 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
@@ -37,11 +37,16 @@
         </button>
         <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/ico64.png"></span>
           Tensorpac</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.5.6</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.0</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
           <ul class="nav navbar-nav">
+            
+                <li><a href="../../install.html">Install</a></li>
+                <li><a href="../../tutorial.html">Tutorial</a></li>
+                <li><a href="../../api.html">API</a></li>
+                <li><a href="../../auto_examples/index.html">Examples</a></li>
             
             
               <li class="dropdown globaltoc-container">
@@ -53,45 +58,59 @@
   <ul class="dropdown-menu globaltoc"
       role="menu"
       aria-labelledby="dLabelGlobalToc"><ul>
-<li class="toctree-l1"><a class="reference internal" href="../../methods.html">Implemented methods</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../methods.html#modular-philosophy">Modular philosophy</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../methods.html#pac-methods">Pac methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../methods.html#surrogates-methods">Surrogates methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../methods.html#normalization-methods">Normalization methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../methods.html#example">Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#standard-installation">Standard installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#install-the-most-up-to-date-version">Install the most up-to-date version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Implemented methods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial.html#modular-philosophy">Modular philosophy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial.html#pac-methods">Pac methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial.html#surrogates-methods">Surrogates methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial.html#normalization-methods">Normalization methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../tutorial.html#example">Example</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../api.html#cross-frequency-coupling-measures">Cross-frequency coupling measures</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#pac-object">PAC object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#filter-the-data">Filter the data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#filter-then-compute-pac">Filter then compute PAC</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#preferred-phase">Preferred-phase</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#event-related-phase-amplitude-coupling">Event-Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#compute-phase-amplitude-coupling">Compute phase-amplitude coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.Pac.html">tensorpac.Pac</a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../api.html#visualization">Visualization</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#d-plot">2D plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#comodulogram">Comodulogram</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#triangular-plot">Triangular plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#polar-plot">Polar plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#show">Show</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#save">Save</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../api.html#utils">Utils</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#generate-artificially-coupled-signals-using-tort-method">Generate artificially coupled signals using Tort method</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#generate-artificially-coupled-signals-using-wavelets">Generate artificially coupled signals using wavelets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#generate-triangular-vectors">Generate triangular vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.pac_signals_wavelet.html">tensorpac.pac_signals_wavelet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.pac_signals_tort.html">tensorpac.pac_signals_tort</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../api.html#statistics">Statistics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#pearson-correlation">Pearson correlation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#circular-correlation">Circular correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#individual-methods">Individual methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pac-methods">PAC methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.mvl.html">tensorpac.methods.mvl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.ps.html">tensorpac.methods.ps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#surrogates-methods">Surrogates methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.swap_pha_amp.html">tensorpac.methods.swap_pha_amp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.swap_blocks.html">tensorpac.methods.swap_blocks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.time_lag.html">tensorpac.methods.time_lag</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#normalization">Normalization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.normalize.html">tensorpac.methods.normalize</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#miscellaneous">Miscellaneous</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.pac_vec.html">tensorpac.pac_vec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.pac_trivec.html">tensorpac.pac_trivec</a></li>
 </ul>
 </li>
 </ul>
@@ -99,8 +118,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../../auto_examples/index.html">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_readme.html">README example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_values.html">Compute p-values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_values.html">Compute p-values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_compare_surrogates.html">Compare surrogate methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
@@ -156,7 +175,7 @@
 <span class="kn">from</span> <span class="nn">tensorpac.config</span> <span class="k">import</span> <span class="n">JOBLIB_CFG</span>
 
 
-<div class="viewcode-block" id="pacstr"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.methods.pacstr">[docs]</a><span class="k">def</span> <span class="nf">pacstr</span><span class="p">(</span><span class="n">idpac</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">pacstr</span><span class="p">(</span><span class="n">idpac</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return correspond methods string.&quot;&quot;&quot;</span>
     <span class="c1"># Pac methods :</span>
     <span class="k">if</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -201,7 +220,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No corresponding normalization method.&quot;</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">method</span><span class="p">,</span> <span class="n">suro</span><span class="p">,</span> <span class="n">norm</span></div>
+    <span class="k">return</span> <span class="n">method</span><span class="p">,</span> <span class="n">suro</span><span class="p">,</span> <span class="n">norm</span>
 
 
 <span class="c1">###############################################################################</span>
@@ -211,7 +230,7 @@
 <span class="c1">###############################################################################</span>
 
 
-<div class="viewcode-block" id="get_pac_fcn"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.methods.get_pac_fcn">[docs]</a><span class="k">def</span> <span class="nf">get_pac_fcn</span><span class="p">(</span><span class="n">idp</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get_pac_fcn</span><span class="p">(</span><span class="n">idp</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get the function for computing Phase-Amplitude coupling.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Mean Vector Length (Canolty, 2006)</span>
         <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">mvl</span><span class="p">)</span>
@@ -227,16 +246,16 @@
         <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">gcpac</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">idp</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; is not recognized as a valid pac &quot;</span>
-                         <span class="s2">&quot;method.&quot;</span><span class="p">)</span></div>
+                         <span class="s2">&quot;method.&quot;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="mvl"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.methods.mvl">[docs]</a><span class="k">def</span> <span class="nf">mvl</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
+<div class="viewcode-block" id="mvl"><a class="viewcode-back" href="../../generated/tensorpac.methods.mvl.html#tensorpac.methods.mvl">[docs]</a><span class="k">def</span> <span class="nf">mvl</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Mean Vector Length (Canolty, 2006).&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span>
                             <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha</span><span class="p">)))</span> <span class="o">/</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="kld"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.methods.kld">[docs]</a><span class="k">def</span> <span class="nf">kld</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
+<div class="viewcode-block" id="kld"><a class="viewcode-back" href="../../generated/tensorpac.methods.kld.html#tensorpac.methods.kld">[docs]</a><span class="k">def</span> <span class="nf">kld</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Kullback Leibler Distance (Tort, 2010).&quot;&quot;&quot;</span>
     <span class="c1"># Get the phase locked binarized amplitude :</span>
     <span class="n">p_j</span> <span class="o">=</span> <span class="n">_kl_hr</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">)</span>
@@ -251,7 +270,7 @@
     <span class="k">return</span> <span class="n">pac</span></div>
 
 
-<div class="viewcode-block" id="hr"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.methods.hr">[docs]</a><span class="k">def</span> <span class="nf">hr</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
+<div class="viewcode-block" id="hr"><a class="viewcode-back" href="../../generated/tensorpac.methods.hr.html#tensorpac.methods.hr">[docs]</a><span class="k">def</span> <span class="nf">hr</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Pac heights ratio (Lakatos, 2005).&quot;&quot;&quot;</span>
     <span class="c1"># Get the phase locked binarized amplitude :</span>
     <span class="n">p_j</span> <span class="o">=</span> <span class="n">_kl_hr</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">)</span>
@@ -284,7 +303,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">abin</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="ndpac"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.methods.ndpac">[docs]</a><span class="k">def</span> <span class="nf">ndpac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">):</span>
+<div class="viewcode-block" id="ndpac"><a class="viewcode-back" href="../../generated/tensorpac.methods.ndpac.html#tensorpac.methods.ndpac">[docs]</a><span class="k">def</span> <span class="nf">ndpac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Normalized direct Pac (Ozkurt, 2012).&quot;&quot;&quot;</span>
     <span class="n">npts</span> <span class="o">=</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="c1"># Normalize amplitude :</span>
@@ -299,13 +318,13 @@
     <span class="k">return</span> <span class="n">pac</span></div>
 
 
-<div class="viewcode-block" id="ps"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.methods.ps">[docs]</a><span class="k">def</span> <span class="nf">ps</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
+<div class="viewcode-block" id="ps"><a class="viewcode-back" href="../../generated/tensorpac.methods.ps.html#tensorpac.methods.ps">[docs]</a><span class="k">def</span> <span class="nf">ps</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Phase Synchrony (Penny, 2008; Cohen, 2008).&quot;&quot;&quot;</span>
     <span class="n">pac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">amp</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pac</span><span class="p">)</span> <span class="o">/</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="gcpac"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.methods.gcpac">[docs]</a><span class="k">def</span> <span class="nf">gcpac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
+<div class="viewcode-block" id="gcpac"><a class="viewcode-back" href="../../generated/tensorpac.methods.gcpac.html#tensorpac.methods.gcpac">[docs]</a><span class="k">def</span> <span class="nf">gcpac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Gaussian Copula.&quot;&quot;&quot;</span>
     <span class="c1"># prepare the shape of gcpac</span>
     <span class="n">n_pha</span><span class="p">,</span> <span class="n">n_amp</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -325,7 +344,7 @@
 <span class="c1">###############################################################################</span>
 <span class="c1">###############################################################################</span>
 
-<div class="viewcode-block" id="compute_surrogates"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.methods.compute_surrogates">[docs]</a><span class="k">def</span> <span class="nf">compute_surrogates</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">ids</span><span class="p">,</span> <span class="n">fcn</span><span class="p">,</span> <span class="n">n_perm</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">compute_surrogates</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">ids</span><span class="p">,</span> <span class="n">fcn</span><span class="p">,</span> <span class="n">n_perm</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute surrogates using tensors and parallel computing.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">ids</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
@@ -333,16 +352,16 @@
         <span class="n">fcn_p</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">swap_pha_amp</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="n">swap_blocks</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="n">time_lag</span><span class="p">}[</span><span class="n">ids</span><span class="p">]</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="o">**</span><span class="n">JOBLIB_CFG</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">fcn</span><span class="p">)(</span>
         <span class="o">*</span><span class="n">fcn_p</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_perm</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="swap_pha_amp"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.methods.swap_pha_amp">[docs]</a><span class="k">def</span> <span class="nf">swap_pha_amp</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
+<div class="viewcode-block" id="swap_pha_amp"><a class="viewcode-back" href="../../generated/tensorpac.methods.swap_pha_amp.html#tensorpac.methods.swap_pha_amp">[docs]</a><span class="k">def</span> <span class="nf">swap_pha_amp</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Swap phase / amplitude trials (Tort, 2010).&quot;&quot;&quot;</span>
     <span class="n">tr_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">pha</span><span class="p">[:,</span> <span class="n">tr_</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">amp</span></div>
 
 
-<div class="viewcode-block" id="swap_blocks"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.methods.swap_blocks">[docs]</a><span class="k">def</span> <span class="nf">swap_blocks</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
+<div class="viewcode-block" id="swap_blocks"><a class="viewcode-back" href="../../generated/tensorpac.methods.swap_blocks.html#tensorpac.methods.swap_blocks">[docs]</a><span class="k">def</span> <span class="nf">swap_blocks</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Swap amplitudes time blocks (Bahramisharif, 2013).&quot;&quot;&quot;</span>
     <span class="c1"># random cutting point along time axis</span>
     <span class="n">cut_at</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
@@ -353,7 +372,7 @@
     <span class="k">return</span> <span class="n">pha</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">ampl</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="time_lag"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.methods.time_lag">[docs]</a><span class="k">def</span> <span class="nf">time_lag</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
+<div class="viewcode-block" id="time_lag"><a class="viewcode-back" href="../../generated/tensorpac.methods.time_lag.html#tensorpac.methods.time_lag">[docs]</a><span class="k">def</span> <span class="nf">time_lag</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Introduce a time lag on phase series (Canolty et al. 2006).&quot;&quot;&quot;</span>
     <span class="n">shift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span> <span class="n">amp</span></div>
@@ -366,7 +385,7 @@
 <span class="c1">###############################################################################</span>
 
 
-<div class="viewcode-block" id="normalize"><a class="viewcode-back" href="../../tensorpac.html#tensorpac.methods.normalize">[docs]</a><span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">pac</span><span class="p">,</span> <span class="n">s_mean</span><span class="p">,</span> <span class="n">s_std</span><span class="p">,</span> <span class="n">idn</span><span class="p">):</span>
+<div class="viewcode-block" id="normalize"><a class="viewcode-back" href="../../generated/tensorpac.methods.normalize.html#tensorpac.methods.normalize">[docs]</a><span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">pac</span><span class="p">,</span> <span class="n">s_mean</span><span class="p">,</span> <span class="n">s_std</span><span class="p">,</span> <span class="n">idn</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;PAC normalization.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">idn</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Substraction</span>
         <span class="n">pac</span> <span class="o">-=</span> <span class="n">s_mean</span>

@@ -1,0 +1,6 @@
+tensorpac.pac\_signals\_tort
+============================
+
+.. currentmodule:: tensorpac
+
+.. autofunction:: pac_signals_tort

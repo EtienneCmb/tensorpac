@@ -1,0 +1,6 @@
+tensorpac.methods.swap\_pha\_amp
+================================
+
+.. currentmodule:: tensorpac.methods
+
+.. autofunction:: swap_pha_amp

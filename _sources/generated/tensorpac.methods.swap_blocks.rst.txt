@@ -1,0 +1,6 @@
+tensorpac.methods.swap\_blocks
+==============================
+
+.. currentmodule:: tensorpac.methods
+
+.. autofunction:: swap_blocks

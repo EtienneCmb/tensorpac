@@ -54,26 +54,6 @@ Examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="For the visualization, we used a comodulogram. ">
-
-.. only:: html
-
-    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_values_thumb.png
-
-        :ref:`sphx_glr_auto_examples_plot_values.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/plot_values
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="Instead of looking for phase and amplitude frequency pairs (as in a comodulogram) this example ...">
 
 .. only:: html
@@ -91,6 +71,26 @@ Examples
    :hidden:
 
    /auto_examples/plot_fmin_fmax_optmization
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="For the visualization, we used a comodulogram. ">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_values_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_values.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_values
 
 .. raw:: html
 
