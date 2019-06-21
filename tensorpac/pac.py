@@ -248,7 +248,7 @@ class Pac(PacPlot):
         # ---------------------------------------------------------------------
         # copnorm if gaussian copula is used
         if self._idpac[0] == 6:
-            logger.info(f"    copnorm the data")
+            logger.info(f"    copnorm the phase and the amplitude")
             pha = copnorm(np.stack([np.sin(pha), np.cos(pha)], axis=-2))
             amp = copnorm(amp[..., np.newaxis, :])
 
