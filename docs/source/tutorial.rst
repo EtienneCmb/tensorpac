@@ -1,4 +1,4 @@
-.. _Methods:
+.. _Tutorial:
 
 Implemented methods
 ===================

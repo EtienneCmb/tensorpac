@@ -36,6 +36,11 @@ sys.path.insert(0, os.path.abspath('sphinxext'))
 #
 # needs_sphinx = '1.0'
 
+autosummary_generate = True
+# autodoc_default_flags = ['members']
+autodoc_default_flags = ['members', 'inherited-members', 'no-undoc-members']
+# autodoc_default_flags = ['inherited-members', 'no-undoc-members']
+
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
@@ -44,6 +49,8 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.viewcode',
     'sphinx.ext.todo',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.coverage',
     'sphinx_gallery.gen_gallery',
     'numpydoc',
 ]
@@ -53,9 +60,11 @@ sphinx_gallery_conf = {
     'gallery_dirs': 'auto_examples',
     'backreferences_dir': 'generated',
     'default_thumb_file': 'source/picture/ico.png',
-    }
+}
 
-numpydoc_show_class_members = False
+# numpydoc_show_class_members = False
+# numpydoc_class_members_toctree = False
+# numpydoc_use_blockquotes = False
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -96,7 +105,7 @@ language = None
 exclude_patterns = []
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = None
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
@@ -125,6 +134,12 @@ html_theme_options = {
     'navbar_class': "navbar",
     'bootswatch_theme': "readable",
     'navbar_fixed_top': True,
+    'navbar_links': [
+                        ("Install", "install"),
+                        ("Tutorial", "tutorial"),
+                        ("API", "api"),
+                        ("Examples", "auto_examples/index")
+    ],
 }
 
 # The name of an image file (relative to this directory) to place at the top

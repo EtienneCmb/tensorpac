@@ -3,193 +3,85 @@
 API
 ===
 
-* :ref:`fcncfc` : methods for extracting Phase-Amplitude Coupling (PAC), Preferred phase and Event Related Pac. 
-* :ref:`fcnvizu` : visualization methods
-* :ref:`fcnutils` : utility functions.
+.. contents::
+   :local:
+   :depth: 2
 
 .. _fcncfc:
 
-Cross-frequency coupling measures
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Compute phase-amplitude coupling
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The first step for PAC computation is to define a `pacobj`. From there, we can use one of the following methods :
+.. currentmodule:: tensorpac
 
-* :ref:`filtdata` : use this method to extract the phase and the amplitude separately.
-* :ref:`pacfilt` : if you already extracted your phase and amplitude, use this method to compute PAC on it. 
-* :ref:`filtpac` : all in one method which extract the phase and the amplitude and return the PAC measure.
-* :ref:`pp` : compute the Preferred-Phase (PP).
-* :ref:`erpac` : compute the Event-Related Phase-Amplitude Coupling (ERPAC, Voytek et al. 2013).
+.. autosummary::
+   :toctree: generated/
 
-.. _pacobj:
+   Pac
 
-PAC object
-++++++++++
+Generate synthetic signals
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: python
+.. currentmodule:: tensorpac
 
-    from tensorpac import Pac
+.. autosummary::
+   :toctree: generated/
 
-.. autoclass:: tensorpac.pac.Pac
+   pac_signals_wavelet
+   pac_signals_tort
 
-.. _filtdata:
 
-Filter the data
-+++++++++++++++
+Individual methods
+~~~~~~~~~~~~~~~~~~
 
-This method is used to filter the data only in order to extract phase and amplitude.
+PAC methods
++++++++++++
 
-.. automethod:: tensorpac.pac.Pac.filter
+If you don't want to use the :class:`tensorpac.Pac` class, you can also manually import the method of your choice
+and use it on phase / amplitude to compute PAC.
 
-.. _pacfilt:
+.. currentmodule:: tensorpac.methods
 
-Compute PAC on filtered data
-++++++++++++++++++++++++++++
+.. autosummary::
+   :toctree: generated/
 
-For those who already have filtered and computed the phase and amplitude, use this method to compute PAC.
+   mvl
+   kld
+   hr
+   ndpac
+   ps
+   gcpac
 
-.. automethod:: tensorpac.pac.Pac.fit
+Surrogates methods
+++++++++++++++++++
 
-.. _filtpac:
+.. currentmodule:: tensorpac.methods
 
-Filter then compute PAC
-+++++++++++++++++++++++
+.. autosummary::
+   :toctree: generated/
 
-Use the following method to filter and compute the PAC directly.
+   swap_pha_amp
+   swap_blocks
+   time_lag
 
-.. automethod:: tensorpac.pac.Pac.filterfit
+Normalization
++++++++++++++
 
-.. _pp:
+.. currentmodule:: tensorpac.methods
 
-Preferred-phase
-+++++++++++++++
+.. autosummary::
+   :toctree: generated/
 
-Compute the preferred-phase (PP, see `this PP example <https://github.com/EtienneCmb/tensorpac/tree/master/examples/12_PreferredPhase.py>`_). 
+   normalize
 
-.. figure::  picture/PP_planningVsExec.png
-   :align:   center
 
-   Example of preferred-phase for a motor task. This show how the amplitude is distributed according to phase values during a motor planning phase and a motor execution phase.  
-
-.. automethod:: tensorpac.pac.Pac.pp
-
-.. _erpac:
-
-Event-Related Phase-Amplitude Coupling
-++++++++++++++++++++++++++++++++++++++
-
-Compute the ERPAC (see `this ERPAC example <https://github.com/EtienneCmb/tensorpac/tree/master/examples/13_EventRelatedPAC.py>`_). 
-
-.. figure::  picture/erpac.png
-   :align:   center
-
-   Example of Event-Related Phase-Amplitude Coupling (ERPAC, Voytek et al. 2013)
-
-.. automethod:: tensorpac.pac.Pac.erpac
-
-.. _fcnvizu:
-
-Visualization
+Miscellaneous
 ~~~~~~~~~~~~~
 
-If matplotlib is installed on your system, the main Pac class already includes several plotting functions :
+.. currentmodule:: tensorpac
 
-* :ref:`pltpac` : standard plotting function for 2D arrays.
-* :ref:`pltcomo` : comodulogram plot, for finding the coupling location *PAC(phase, amplitude)*
-* :ref:`plttri` : triangular plot for finding where each band [Start, Stop] and the bandwidth *PAC(Starting frequency, Ending frequency)*
-* :ref:`pltpp` : polar plot for the preferred-phase representation *PP(phase, binned amplitude)*
-* :ref:`pltshow` : show the figure
-* :ref:`pltsave` : save the figure
+.. autosummary::
+   :toctree: generated/
 
-
-plotting method that relies on Matplotlib. This script is also present in the `example <https://github.com/EtienneCmb/tensorpac/blob/master/examples/9_PlayWithColors.py>`_ folder.
-
-.. _pltpac:
-
-2D plot
-+++++++
-
-.. automethod:: tensorpac.pac.Pac.pacplot
-
-.. _pltcomo:
-
-Comodulogram
-++++++++++++
-
-.. figure::  picture/9_plot.png
-   :align:   center
-
-   Comodulogram forms.
-
-.. automethod:: tensorpac.pac.Pac.comodulogram
-
-.. _plttri:
-
-Triangular plot
-+++++++++++++++
-
-.. figure::  picture/fminfmax.png
-   :align:   center
-
-.. automethod:: tensorpac.pac.Pac.triplot
-
-.. _pltpp:
-
-Polar plot
-++++++++++
-
-.. figure::  picture/PP_planningVsExec.png
-   :align:   center
-
-.. automethod:: tensorpac.pac.Pac.triplot
-
-.. _pltshow:
-
-Show
-++++
-
-.. automethod:: tensorpac.pac.Pac.show
-
-.. _pltsave:
-
-Save
-++++
-
-.. automethod:: tensorpac.pac.Pac.savefig
-
-
-.. _fcnutils:
-
-Utils
-~~~~~
-
-Generate artificially coupled signals using Tort method
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. autofunction:: tensorpac.utils.pac_signals_tort
-
-
-Generate artificially coupled signals using wavelets
-++++++++++++++++++++++++++++++++++++++++++++++++++++
-.. autofunction:: tensorpac.utils.pac_signals_wavelet
-
-Generate phase and amplitude vectors
-++++++++++++++++++++++++++++++++++++
-.. autofunction:: tensorpac.utils.pac_vec
-
-Generate triangular vectors
-+++++++++++++++++++++++++++
-.. autofunction:: tensorpac.utils.pac_trivec
-
-
-Statistics
-~~~~~~~~~~
-
-Pearson correlation
-+++++++++++++++++++
-
-.. autofunction:: tensorpac.stats.pearson
-
-
-Circular correlation
-++++++++++++++++++++
-
-.. autofunction:: tensorpac.stats.circ_corrcc
+   pac_vec
+   pac_trivec

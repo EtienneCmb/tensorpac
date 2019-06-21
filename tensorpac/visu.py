@@ -2,9 +2,6 @@
 import numpy as np
 
 
-__all__ = ('PacPlot')
-
-
 class PacPlot(object):
     """Main PAC plotting class."""
 
@@ -26,84 +23,62 @@ class PacPlot(object):
         ----------
         pac : array_like
             A 2D array.
-
         xvec : array_like
             The vector to use for the x-axis.
-
         yvec : array_like
             The vector to use for the y-axis.
-
         xlabel : string | ''
             Label for the x-axis.
-
         ylabel : string | ''
             Label for the y-axis.
-
         cblabel : string | ''
             Label for the colorbar.
-
         title : string | ''
             Title of the plot.
-
         y : float | 1.02
             Title location.
-
         cmap : string | 'viridis'
             Name of one Matplotlib's colomap.
-
         vmin : float | None
             Threshold under which set the color to the uner parameter.
-
         vmax : float | None
             Threshold over which set the color in the over parameter.
-
         under : string | 'gray'
             Color for values under the vmin parameter.
-
         over : string | 'red'
             Color for values over the vmax parameter.
-
         bad : string | None
             Color for non-significant values.
-
         pvalues : array_like | None
             P-values to use for masking PAC values. The shape of this
             parameter must be the same as the shape as pac.
-
         p : float | .05
             If pvalues is pass, use this threshold for masking
             non-significant PAC.
-
         interp : tuple | None
             Tuple for controlling the 2D interpolation. For example,
             (.1, .1) will multiply the number of row and columns by 10.
-
         rmaxis : bool | False
             Remove unecessary axis.
-
         dpaxis : bool | False
             Despine axis.
-
         plotas : {'imshow', 'contour', 'pcolor'}
             Choose how to display the comodulogram, either using imshow
             ('imshow') or contours ('contour'). If you choose 'contour',
             use the ncontours parameter for controlling the number of
             contours.
-
         ncontours : int | 5
             Number of contours if plotas is 'contour'.
-
         levels : list | None
             Add significency levels. This parameter must be a sorted list
             of p-values to use as levels.
-
         levelcmap : string | Reds
             Colormap of signifiency levels.
 
         Returns
         -------
-            gca: axes
-                The current matplotlib axes.
+        gca: axes
+            The current matplotlib axes.
         """
         # Check if pac is 2 dimensions :
         if pac.ndim is not 2:

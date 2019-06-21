@@ -24,33 +24,12 @@ To get started, see our `examples <https://github.com/EtienneCmb/tensorpac/tree/
 Installation:
 *************
 
-Tensorpac is based on NumPy (>=1.12), SciPy and uses `Joblib <https://pythonhosted.org/joblib/>`_ for parallel computing. To install Tensorpac, just open a terminal and run :
+Tensorpac is based on NumPy, SciPy and `Joblib <https://pythonhosted.org/joblib/>`_ for parallel computing. To install Tensorpac, open a terminal and run :
 
 .. code-block:: bash
 
     pip install tensorpac
 
-What's new?
-***********
-
-* New in version v0.5.2
-
-    * :ref:`erpac` (Voytek et al. 2013)
-    * pip installation
-
-* New in version v0.5.1
-
-    * Compute and plot :ref:`pp`
-    * Bug fixing
-
-Todo list
-*********
-
-.. todo::
-
-    * Generalized Linear Model (GLM - Lakatos, 2005)
-    * PAC using PSD
-    * Morse's wavelets
 
 Contents:
 *********
@@ -58,14 +37,7 @@ Contents:
 .. toctree::
    :maxdepth: 3
 
-   methods
+   install
+   tutorial
    api
    auto_examples/index.rst
-
-Indices and tables
-##################
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-

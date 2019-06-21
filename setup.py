@@ -4,7 +4,7 @@
 import os
 from setuptools import setup, find_packages
 
-__version__ = "0.5.6"
+__version__ = "0.6.0"
 NAME = 'Tensorpac'
 AUTHOR = "Etienne Combrisson"
 MAINTAINER = "Etienne Combrisson"
@@ -35,7 +35,7 @@ setup(
     platforms='any',
     setup_requires=['numpy', 'joblib'],
     install_requires=[
-        "numpy>=1.12",
+        "numpy",
         "scipy",
         "joblib"
     ],
