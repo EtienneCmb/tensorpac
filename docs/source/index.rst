@@ -9,7 +9,8 @@
 .. image:: https://badge.fury.io/py/Tensorpac.svg
     :target: https://badge.fury.io/py/Tensorpac
 
-[![Downloads](https://pepy.tech/badge/tensorpac)](https://pepy.tech/project/tensorpac)
+.. image:: https://pepy.tech/badge/tensorpac
+    :target: https://pepy.tech/project/tensorpac
 
 Tensorpac
 #########
@@ -33,12 +34,12 @@ What's new?
 ***********
 
 * New in version v0.5.2
-    
+
     * :ref:`erpac` (Voytek et al. 2013)
     * pip installation
 
 * New in version v0.5.1
-    
+
     * Compute and plot :ref:`pp`
     * Bug fixing
 

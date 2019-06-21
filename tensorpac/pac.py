@@ -444,10 +444,10 @@ class Pac(PacPlot):
             # conversion for computing mi
             sco = np.stack([np.sin(pha), np.cos(pha)], axis=-2)
             amp = amp[..., np.newaxis, :]
-            erpac = np.zeros((n_pha, n_amp, n_chans, n_pts))
-            for p in range(n_pha):
-                for a in range(n_amp):
-                    erpac[p, a, ...] = nd_mi_gg(sco[p, ...], amp[a, ...],
+            erpac = np.zeros((n_amp, n_pha, n_chans, n_pts))
+            for a in range(n_amp):
+                for p in range(n_pha):
+                    erpac[a, p, ...] = nd_mi_gg(sco[p, ...], amp[a, ...],
                                                 mvaxis=-2, traxis=-1,
                                                 biascorrect=False)
             self.pvalues_ = None
