@@ -22,7 +22,6 @@ In this example, we generate a signal that have a 10<->100hz coupling the first
 
 
 
-
 .. image:: /auto_examples/images/sphx_glr_plot_erpac_001.png
     :class: sphx-glr-single-img
 
@@ -30,35 +29,34 @@ In this example, we generate a signal that have a 10<->100hz coupling the first
 
 
 
-.. code-block:: python
+.. code-block:: default
 
     import numpy as np
-    from tensorpac import Pac, pac_signals_tort
+    from tensorpac import Pac, pac_signals_wavelet
 
     # Generate a 10<->100hz coupling :
-    ntrials = 300
-    npts = 1000
+    n_epochs = 300
+    n_times = 1000
     sf = 1024.
-    x1, tvec = pac_signals_tort(fpha=10, famp=100, ntrials=ntrials, noise=2,
-                                npts=npts, dpha=10, damp=10, sf=sf)
+    x1, tvec = pac_signals_wavelet(f_pha=10, f_amp=100, n_epochs=n_epochs, noise=2,
+                                   n_times=n_times, sf=sf)
+
     # Generate noise and concatenate the coupling and the noise :
-    x2 = np.random.rand(ntrials, 700)
-    x = np.concatenate((x1, x2), axis=1)  # Shape : (ntrials, npts)
+    x2 = np.random.rand(n_epochs, 700)
+    x = np.concatenate((x1.squeeze(), x2), axis=1)  # Shape : (n_epochs, n_times)
     time = np.arange(x.shape[1]) / sf
 
     # Define a PAC object :
-    p = Pac(fpha=[9, 11], famp=(60, 140, 5, 1), dcomplex='wavelet', width=12)
+    p = Pac(f_pha=[9, 11], f_amp=(60, 140, 5, 1))
 
     # Extract the phase and the amplitude :
-    pha = p.filter(sf, x, axis=1, ftype='phase')  # Shape (npha, ntrials, npts)
-    amp = p.filter(sf, x, axis=1, ftype='amplitude')  # Shape (namp, ntrials, npts)
+    pha = p.filter(sf, x, ftype='phase')      # Shape (npha, n_epochs, n_times)
+    amp = p.filter(sf, x, ftype='amplitude')  # Shape (namp, n_epochs, n_times)
 
     # Compute the ERPAC and use the traxis to specify that the trial axis is the
     # first one :
-    erpac, pval = p.erpac(pha, amp, traxis=1)
-
-    # Remove unused dimensions :
-    erpac, pval = np.squeeze(erpac), np.squeeze(pval)
+    erpac = p.erpac(pha, amp).squeeze()
+    pval = p.pvalues_.squeeze()
 
     # Plot without p-values :
     p.pacplot(erpac, time, p.yvec, xlabel='Time (second)', cmap='Spectral_r',
@@ -79,7 +77,10 @@ In this example, we generate a signal that have a 10<->100hz coupling the first
     # p.savefig('erpac.png', dpi=300)
     p.show()
 
-**Total running time of the script:** ( 0 minutes  4.933 seconds)
+
+.. rst-class:: sphx-glr-timing
+
+   **Total running time of the script:** ( 0 minutes  7.415 seconds)
 
 
 .. _sphx_glr_download_auto_examples_plot_erpac.py:

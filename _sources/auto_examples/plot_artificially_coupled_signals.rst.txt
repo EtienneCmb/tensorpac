@@ -15,7 +15,6 @@ Use the pac_signals_tort function to generate artificial PAC.
 
 
 
-
 .. image:: /auto_examples/images/sphx_glr_plot_artificially_coupled_signals_001.png
     :class: sphx-glr-single-img
 
@@ -23,27 +22,28 @@ Use the pac_signals_tort function to generate artificial PAC.
 
 
 
-.. code-block:: python
+.. code-block:: default
 
     import matplotlib.pyplot as plt
-    from tensorpac.utils import pac_signals_tort
+    from tensorpac import pac_signals_tort
 
     # Generate one signal containing PAC. By default, this signal present a
     # coupling between a 2hz phase and a 100hz amplitude (2 <-> 100) :
-    sig, time = pac_signals_tort(ntrials=1, npts=1000)
+    sig, time = pac_signals_tort(n_epochs=1, n_times=1000)
 
     # Now, we generate a longer and weaker 4 <-> 60 coupling using the chi
     #  parameter. In addition, we increase the amount of noise :
-    sig2, time2 = pac_signals_tort(fpha=4, famp=60, ntrials=1, chi=.9, noise=3,
-                                   npts=3000)
+    sig2, time2 = pac_signals_tort(f_pha=4, f_amp=60, n_epochs=1, chi=.9,
+                                   noise=3, n_times=3000)
 
     # Alternatively, you can generate multiple coupled signals :
-    sig3, time3 = pac_signals_tort(fpha=10, famp=150, ntrials=3, chi=0.5, noise=2)
+    sig3, time3 = pac_signals_tort(f_pha=10, f_amp=150, n_epochs=3, chi=0.5,
+                                   noise=2)
 
     # Finally, if you want to add variability across generated signals, use the
     # dpha and damp parameters :
-    sig4, time4 = pac_signals_tort(fpha=10, famp=50, ntrials=3, dpha=30,
-                                   damp=70, npts=3000)
+    sig4, time4 = pac_signals_tort(f_pha=10, f_amp=50, n_epochs=3, dpha=30,
+                                   damp=70, n_times=3000)
 
 
     def plot(time, sig, title):
@@ -69,7 +69,10 @@ Use the pac_signals_tort function to generate artificial PAC.
 
     plt.show()
 
-**Total running time of the script:** ( 0 minutes  0.027 seconds)
+
+.. rst-class:: sphx-glr-timing
+
+   **Total running time of the script:** ( 0 minutes  0.264 seconds)
 
 
 .. _sphx_glr_download_auto_examples_plot_artificially_coupled_signals.py:

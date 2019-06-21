@@ -18,7 +18,6 @@ amplitudes.
 
 
 
-
 .. image:: /auto_examples/images/sphx_glr_plot_preferred_phase_001.png
     :class: sphx-glr-single-img
 
@@ -26,7 +25,7 @@ amplitudes.
 
 
 
-.. code-block:: python
+.. code-block:: default
 
     import numpy as np
     import matplotlib.pyplot as plt
@@ -36,25 +35,25 @@ amplitudes.
 
     # Generate 100 datasets with a 6<->100hz coupling :
     sf = 1024.
-    ntrials = 100
-    data, time = pac_signals_wavelet(fpha=6, famp=100, ntrials=ntrials, sf=sf,
-                                     noise=.7, npts=2000, pp=np.pi/2)
+    n_epochs = 100
+    data, time = pac_signals_wavelet(f_pha=6, f_amp=100, n_epochs=n_epochs, sf=sf,
+                                     noise=.7, n_times=2000, pp=np.pi / 2)
 
 
     # Define a Pac object. Here, we are not going to use the idpac variable :
-    p = Pac(fpha=[5, 7], famp=(60, 200, 10, 1))
+    p = Pac(f_pha=[5, 7], f_amp=(60, 200, 10, 1))
 
     # Extract the phase and the amplitude :
-    pha = p.filter(sf, data, axis=1, ftype='phase')
-    amp = p.filter(sf, data, axis=1, ftype='amplitude')
+    pha = p.filter(sf, data, ftype='phase')
+    amp = p.filter(sf, data, ftype='amplitude')
 
     # Now, compute the PP :
-    ambin, pp, vecbin = p.pp(pha, amp, axis=2, nbins=72)
+    ambin, pp, vecbin = p.pp(pha, amp, n_bins=72)
 
-    # Reshape the PP to be (ntrials, namp) :
+    # Reshape the PP to be (n_epochs, n_amp) :
     pp = np.squeeze(pp).T
 
-    # Reshape the amplitude to be (nbins, namp, ntrials) and take the mean across
+    # Reshape the amplitude to be (nbins, n_amp, n_epochs) and take the mean across
     # datasets :
     ambin = np.squeeze(ambin).mean(-1)
 
@@ -89,7 +88,10 @@ amplitudes.
 
     p.show()
 
-**Total running time of the script:** ( 0 minutes  6.388 seconds)
+
+.. rst-class:: sphx-glr-timing
+
+   **Total running time of the script:** ( 0 minutes  7.743 seconds)
 
 
 .. _sphx_glr_download_auto_examples_plot_preferred_phase.py:

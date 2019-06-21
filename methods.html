@@ -1,94 +1,60 @@
-
-
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Implemented methods &mdash; Tensorpac 0.5.6 documentation</title>
-  
 
-  
-  
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Implemented methods &#8212; Tensorpac 0.5.6 documentation</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-  
-  
-  
-
-  
-
-  
-  
-    
-
-  
-
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="API" href="api.html" />
-    <link rel="prev" title="Tensorpac" href="index.html" /> 
+    <link rel="prev" title="Tensorpac" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
 
-  
-  <script src="_static/js/modernizr.min.js"></script>
+  </head><body>
 
-</head>
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><span><img src="_static/ico64.png"></span>
+          Tensorpac</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.5.6</b></span>
+      </div>
 
-<body class="wy-body-for-nav">
-
-   
-  <div class="wy-grid-for-nav">
-
-    
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
-          
-
-          
-            <a href="index.html" class="icon icon-home"> Tensorpac
-          
-
-          
-            
-            <img src="_static/ico64.png" class="logo" alt="Logo"/>
-          
-          </a>
-
-          
-            
-            
-              <div class="version">
-                0.5.6
-              </div>
-            
-          
-
-          
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-
-          
-        </div>
-
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
             
             
-              
-            
-            
-              <ul class="current">
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Implemented methods</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#modular-philosophy">Modular philosophy</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pac-methods">Pac methods</a></li>
@@ -135,99 +101,68 @@
 <li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_readme.html">README example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_values.html">Compute p-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_frequency_vectors.html">Define frequency vectors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_basic_pac.html">Basic phase amplitude coupling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_surrogates.html">Compare surrogate methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_filtering.html">Compare filtering properties</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_normalizations.html">Compare normalizations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_basic_pac.html">Basic phase amplitude coupling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_long_range_coupling.html">Long-range PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_multidimensional_data.html">Compute PAC on multidimensional data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_custom_visualizations.html">Compare visualization methods</a></li>
 </ul>
 </li>
 </ul>
-
+</ul>
+</li>
+              
             
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/methods.rst.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
           
         </div>
-      </div>
-    </nav>
+    </div>
+  </div>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
       
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Tensorpac</a>
-        
-      </nav>
-
-
-      <div class="wy-nav-content">
-        
-        <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
-  <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html">Docs</a> &raquo;</li>
-        
-      <li>Implemented methods</li>
-    
-    
-      <li class="wy-breadcrumbs-aside">
-        
-            
-            <a href="_sources/methods.rst.txt" rel="nofollow"> View page source</a>
-          
-        
-      </li>
-    
-  </ul>
-
-  
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-            
   <div class="section" id="implemented-methods">
 <span id="methods"></span><h1>Implemented methods<a class="headerlink" href="#implemented-methods" title="Permalink to this headline">¶</a></h1>
 <p>Beginning with raw data, the first step to computing PAC is to extract the phase and the amplitude across a range of frequency bands. There are two ways to do this :</p>
 <ul class="simple">
-<li>Filter the data in the frequency band, then use the hilbert transform to pass from real to complex space.</li>
-<li>Convolve your data with a wavelet with a width, corresponding to the desired frequency band.</li>
+<li><p>Filter the data in the frequency band, then use the hilbert transform to pass from real to complex space.</p></li>
+<li><p>Convolve your data with a wavelet with a width, corresponding to the desired frequency band.</p></li>
 </ul>
 <p>Next we will have to extract the phase and the amplitude from the resultant decomposition.</p>
 <p>Once we have resolved both phase and amplitude signals, we shall derive our PAC value. This is done in three steps :</p>
 <ul class="simple">
-<li><strong>Compute the PAC :</strong>  From the two time series of phase and amplitude, this will give us a single coupling value</li>
-<li><strong>Compute surogates :</strong> The PAC measure is quite sensitive to noise present in the data. In addition, filtering may augment artefacts. To minimize these effects, we compute surrogates. Surrogates are obtained by altering slightly either the phase or the amplitude and re-computing the PAC. This procedure is then repeated over 50, 100, 200 or 1000 permutations to produce a reliable distribution.</li>
-<li><strong>Correct the PAC measurement :</strong> Once we have the PAC and the distribution of surrogates, we can subtract the mean of the surrogates. By taking the mean of the distribution, we limit our results to those strongest, and mitigate the impact of noise and artefact.</li>
+<li><p><strong>Compute the PAC :</strong>  From the two time series of phase and amplitude, this will give us a single coupling value</p></li>
+<li><p><strong>Compute surogates :</strong> The PAC measure is quite sensitive to noise present in the data. In addition, filtering may augment artefacts. To minimize these effects, we compute surrogates. Surrogates are obtained by altering slightly either the phase or the amplitude and re-computing the PAC. This procedure is then repeated over 50, 100, 200 or 1000 permutations to produce a reliable distribution.</p></li>
+<li><p><strong>Correct the PAC measurement :</strong> Once we have the PAC and the distribution of surrogates, we can subtract the mean of the surrogates. By taking the mean of the distribution, we limit our results to those strongest, and mitigate the impact of noise and artefact.</p></li>
 </ul>
 <p>The many existing PAC implemenations nearly always propose some variation on these three steps. How can we be sure, though, that any particular implemenation will outperform any other?</p>
 <div class="section" id="modular-philosophy">
@@ -238,122 +173,81 @@
 <h3>Pac methods<a class="headerlink" href="#pac-methods" title="Permalink to this headline">¶</a></h3>
 <p>The first digit defines the PAC method :</p>
 <ul class="simple">
-<li>1 - Mean Vector Length (MVL - Canolty, 2006)</li>
-<li>2 - Kullback-Leibler Divergence (KLD - Tort, 2010)</li>
-<li>3 - Heigth-ratio (HR - Lakatos, 2005)</li>
-<li>4 - Normalized Direct PAC (ndPAC - Ozkürt, 2012)</li>
-<li>5 - Phase Synchrony (PS - Lakata, 2005)</li>
-<li>6 - Generalized Linear Model (GLM - Lakata, 2005) [IN PROGRESS]</li>
-<li>7 - Event Related PAC (ERPAC - Voytek, 2013) [IN PROGRESS]</li>
+<li><p>1 - Mean Vector Length (MVL - Canolty, 2006)</p></li>
+<li><p>2 - Kullback-Leibler Divergence (KLD - Tort, 2010)</p></li>
+<li><p>3 - Heigth-ratio (HR - Lakatos, 2005)</p></li>
+<li><p>4 - Normalized Direct PAC (ndPAC - Ozkürt, 2012)</p></li>
+<li><p>5 - Phase Synchrony (PS - Lakata, 2005)</p></li>
+<li><p>6 - Generalized Linear Model (GLM - Lakata, 2005) [IN PROGRESS]</p></li>
+<li><p>7 - Event Related PAC (ERPAC - Voytek, 2013) [IN PROGRESS]</p></li>
 </ul>
 <p>[<a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/examples/4_ComparePacMethods.py">PAC methods script</a>]</p>
 <div class="figure align-center" id="id1">
 <img alt="_images/4_pacmeth.png" src="_images/4_pacmeth.png" />
-<p class="caption"><span class="caption-text"><a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/4_pacmeth.png">PAC methods comparison</a>.</span></p>
+<p class="caption"><span class="caption-text"><a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/4_pacmeth.png">PAC methods comparison</a>.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="surrogates-methods">
 <h3>Surrogates methods<a class="headerlink" href="#surrogates-methods" title="Permalink to this headline">¶</a></h3>
 <p>The second digit defines the method for surrogates computation :</p>
 <ul class="simple">
-<li>0 - No surrogates</li>
-<li>1 - Swap phase/amplitude trials (Tort, 2010)</li>
-<li>2 - Swap amplitude time blocks (Bahramisharif, 2013)</li>
-<li>3 - Shuffle phase and amplitude time-series</li>
-<li>4 - Shuffle phase time-series</li>
-<li>5 - Shuffle amplitude time-series</li>
-<li>6 - Time-lag (Canolty, 2006)</li>
+<li><p>0 - No surrogates</p></li>
+<li><p>1 - Swap phase/amplitude trials (Tort, 2010)</p></li>
+<li><p>2 - Swap amplitude time blocks (Bahramisharif, 2013)</p></li>
+<li><p>3 - Shuffle phase and amplitude time-series</p></li>
+<li><p>4 - Shuffle phase time-series</p></li>
+<li><p>5 - Shuffle amplitude time-series</p></li>
+<li><p>6 - Time-lag (Canolty, 2006)</p></li>
 </ul>
 <p>[<a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/examples/5_CompareSurrogatesMethods.py">Surrogate methods script</a>]</p>
 <div class="figure align-center" id="id2">
 <img alt="_images/5_surrometh.png" src="_images/5_surrometh.png" />
-<p class="caption"><span class="caption-text"><a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/5_surrometh.png">Surrogate methods comparison</a>.</span></p>
+<p class="caption"><span class="caption-text"><a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/5_surrometh.png">Surrogate methods comparison</a>.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="normalization-methods">
 <h3>Normalization methods<a class="headerlink" href="#normalization-methods" title="Permalink to this headline">¶</a></h3>
 <p>The third digit is defines the normalization (or correction) procedure :</p>
 <ul class="simple">
-<li>0 - No normalization</li>
-<li>1 - Substraction of the mean of surrogates</li>
-<li>2 - Division of the mean of surrogates</li>
-<li>3 - Substraction then division of the mean of surrogates</li>
-<li>4 - Substraction by the mean, then division by the diviation of the surrogates (z-scored)</li>
+<li><p>0 - No normalization</p></li>
+<li><p>1 - Substraction of the mean of surrogates</p></li>
+<li><p>2 - Division of the mean of surrogates</p></li>
+<li><p>3 - Substraction then division of the mean of surrogates</p></li>
+<li><p>4 - Substraction by the mean, then division by the diviation of the surrogates (z-scored)</p></li>
 </ul>
 <p>[<a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/examples/6_CompareNormalizationMethods.py">Normalization methods script</a>]</p>
 <div class="figure align-center" id="id3">
 <img alt="_images/6_normmeth.png" src="_images/6_normmeth.png" />
-<p class="caption"><span class="caption-text"><a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/6_normmeth">Normalization methods comparison</a>.</span></p>
+<p class="caption"><span class="caption-text"><a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/6_normmeth">Normalization methods comparison</a>.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>idpac = (2, 0, 0) =&gt; KLD + No surrogates + No normalization</li>
-<li>idpac = (1, 3, 3) =&gt; MVL + Shuffle phase and amplitude time-series + Substraction then division of the mean of surrogates</li>
-<li>idpac = (5, 2, 1) =&gt; PS + Swap amplitude time blocks + Substraction of the mean of surrogates</li>
+<li><p>idpac = (2, 0, 0) =&gt; KLD + No surrogates + No normalization</p></li>
+<li><p>idpac = (1, 3, 3) =&gt; MVL + Shuffle phase and amplitude time-series + Substraction then division of the mean of surrogates</p></li>
+<li><p>idpac = (5, 2, 1) =&gt; PS + Swap amplitude time blocks + Substraction of the mean of surrogates</p></li>
 </ul>
 </div>
 </div>
 </div>
 
 
-           </div>
-           
-          </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="api.html" class="btn btn-neutral float-right" title="API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral" title="Tensorpac" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
     </div>
-  
-
-  <hr/>
-
-  <div role="contentinfo">
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
     <p>
-        &copy; Copyright 2017, Etienne Combrisson
-
+        &copy; Copyright 2019, Etienne Combrisson.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
-
 </footer>
-
-        </div>
-      </div>
-
-    </section>
-
-  </div>
-  
-
-
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
-  <script type="text/javascript">
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+  </body>
 </html>

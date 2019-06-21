@@ -1,5 +1,9 @@
 :orphan:
 
+
+
+.. _sphx_glr_auto_examples:
+
 .. _examples-index:
 
 Examples
@@ -50,26 +54,6 @@ Examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Instead of looking for phase and amplitude frequency pairs (as in a comodulogram) this example ...">
-
-.. only:: html
-
-    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_fmin_fmax_optmization_thumb.png
-
-        :ref:`sphx_glr_auto_examples_plot_fmin_fmax_optmization.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/plot_fmin_fmax_optmization
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="For the visualization, we used a comodulogram. ">
 
 .. only:: html
@@ -87,6 +71,26 @@ Examples
    :hidden:
 
    /auto_examples/plot_values
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Instead of looking for phase and amplitude frequency pairs (as in a comodulogram) this example ...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_fmin_fmax_optmization_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_fmin_fmax_optmization.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_fmin_fmax_optmization
 
 .. raw:: html
 
@@ -110,26 +114,6 @@ Examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="For the visualization, we used a comodulogram. ">
-
-.. only:: html
-
-    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_basic_pac_thumb.png
-
-        :ref:`sphx_glr_auto_examples_plot_basic_pac.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/plot_basic_pac
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="Surrogates are used to generate a chance ditribution in order to correct the PAC estimation. ">
 
 .. only:: html
@@ -150,13 +134,13 @@ Examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Tensorpac provides two ways for extracting phase and amplitude :">
+    <div class="sphx-glr-thumbcontainer" tooltip="Compute PAC on multiple datasets and compare implemented methods. ">
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_compare_filtering_thumb.png
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_pac_methods_thumb.png
 
-        :ref:`sphx_glr_auto_examples_plot_compare_filtering.py`
+        :ref:`sphx_glr_auto_examples_plot_pac_methods.py`
 
 .. raw:: html
 
@@ -166,7 +150,7 @@ Examples
 .. toctree::
    :hidden:
 
-   /auto_examples/plot_compare_filtering
+   /auto_examples/plot_pac_methods
 
 .. raw:: html
 
@@ -190,13 +174,13 @@ Examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Compute PAC on multiple datasets and compare implemented methods. ">
+    <div class="sphx-glr-thumbcontainer" tooltip="Tensorpac provides two ways for extracting phase and amplitude :">
 
 .. only:: html
 
-    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_pac_methods_thumb.png
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_compare_filtering_thumb.png
 
-        :ref:`sphx_glr_auto_examples_plot_pac_methods.py`
+        :ref:`sphx_glr_auto_examples_plot_compare_filtering.py`
 
 .. raw:: html
 
@@ -206,7 +190,27 @@ Examples
 .. toctree::
    :hidden:
 
-   /auto_examples/plot_pac_methods
+   /auto_examples/plot_compare_filtering
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="For the visualization, we used a comodulogram. ">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_basic_pac_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_basic_pac.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_basic_pac
 
 .. raw:: html
 
@@ -287,46 +291,6 @@ Examples
    :hidden:
 
    /auto_examples/plot_preferred_phase
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="One of the strengths of Tensorpac is the ability to compute PAC on multidimensional data. This ...">
-
-.. only:: html
-
-    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_multidimensional_data_thumb.png
-
-        :ref:`sphx_glr_auto_examples_plot_multidimensional_data.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/plot_multidimensional_data
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="This script present how to make a 2D comodulogram plot, with all of the possible parameters. ">
-
-.. only:: html
-
-    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_custom_visualizations_thumb.png
-
-        :ref:`sphx_glr_auto_examples_plot_custom_visualizations.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/plot_custom_visualizations
 .. raw:: html
 
     <div style='clear:both'></div>
@@ -341,13 +305,13 @@ Examples
 
   .. container:: sphx-glr-download
 
-    :download:`Download all examples in Python source code: auto_examples_python.zip <//run/media/etienne/DATA/Toolbox/tensorpac/docs/source/auto_examples/auto_examples_python.zip>`
+    :download:`Download all examples in Python source code: auto_examples_python.zip <//home/circleci/project/docs/source/auto_examples/auto_examples_python.zip>`
 
 
 
   .. container:: sphx-glr-download
 
-    :download:`Download all examples in Jupyter notebooks: auto_examples_jupyter.zip <//run/media/etienne/DATA/Toolbox/tensorpac/docs/source/auto_examples/auto_examples_jupyter.zip>`
+    :download:`Download all examples in Jupyter notebooks: auto_examples_jupyter.zip <//home/circleci/project/docs/source/auto_examples/auto_examples_jupyter.zip>`
 
 
 .. only:: html

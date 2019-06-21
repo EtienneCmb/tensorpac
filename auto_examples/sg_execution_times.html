@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Computation times &#8212; Tensorpac 0.5.6 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/ico64.png"></span>
+          Tensorpac</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.5.6</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../methods.html">Implemented methods</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../methods.html#modular-philosophy">Modular philosophy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../methods.html#pac-methods">Pac methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../methods.html#surrogates-methods">Surrogates methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../methods.html#normalization-methods">Normalization methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../methods.html#example">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#cross-frequency-coupling-measures">Cross-frequency coupling measures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#pac-object">PAC object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#filter-the-data">Filter the data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#compute-pac-on-filtered-data">Compute PAC on filtered data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#filter-then-compute-pac">Filter then compute PAC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#preferred-phase">Preferred-phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#event-related-phase-amplitude-coupling">Event-Related Phase-Amplitude Coupling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#visualization">Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#d-plot">2D plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#comodulogram">Comodulogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#triangular-plot">Triangular plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#polar-plot">Polar plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#show">Show</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#save">Save</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#utils">Utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#generate-artificially-coupled-signals-using-tort-method">Generate artificially coupled signals using Tort method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#generate-artificially-coupled-signals-using-wavelets">Generate artificially coupled signals using wavelets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#generate-phase-and-amplitude-vectors">Generate phase and amplitude vectors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#generate-triangular-vectors">Generate triangular vectors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#statistics">Statistics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#pearson-correlation">Pearson correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#circular-correlation">Circular correlation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_readme.html">README example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_values.html">Compute p-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_frequency_vectors.html">Define frequency vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_surrogates.html">Compare surrogate methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_basic_pac.html">Basic phase amplitude coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../_sources/auto_examples/sg_execution_times.rst.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="computation-times">
+<span id="sphx-glr-auto-examples-sg-execution-times"></span><h1>Computation times<a class="headerlink" href="#computation-times" title="Permalink to this headline">¶</a></h1>
+<p><strong>02:22.898</strong> total execution time for <strong>auto_examples</strong> files:</p>
+<ul class="simple">
+<li><p><strong>00:45.998</strong>: <a class="reference internal" href="plot_compare_filtering.html#sphx-glr-auto-examples-plot-compare-filtering-py"><span class="std std-ref">Compare filtering properties</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_filtering.py</span></code>)</p></li>
+<li><p><strong>00:19.321</strong>: <a class="reference internal" href="plot_compare_normalizations.html#sphx-glr-auto-examples-plot-compare-normalizations-py"><span class="std std-ref">Compare normalizations</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_normalizations.py</span></code>)</p></li>
+<li><p><strong>00:16.517</strong>: <a class="reference internal" href="plot_compare_surrogates.html#sphx-glr-auto-examples-plot-compare-surrogates-py"><span class="std std-ref">Compare surrogate methods</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_surrogates.py</span></code>)</p></li>
+<li><p><strong>00:12.092</strong>: <a class="reference internal" href="plot_values.html#sphx-glr-auto-examples-plot-values-py"><span class="std std-ref">Compute p-values</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_values.py</span></code>)</p></li>
+<li><p><strong>00:09.857</strong>: <a class="reference internal" href="plot_basic_pac.html#sphx-glr-auto-examples-plot-basic-pac-py"><span class="std std-ref">Basic phase amplitude coupling</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_basic_pac.py</span></code>)</p></li>
+<li><p><strong>00:07.743</strong>: <a class="reference internal" href="plot_preferred_phase.html#sphx-glr-auto-examples-plot-preferred-phase-py"><span class="std std-ref">Find the preferred phase (PP)</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_preferred_phase.py</span></code>)</p></li>
+<li><p><strong>00:07.451</strong>: <a class="reference internal" href="plot_readme.html#sphx-glr-auto-examples-plot-readme-py"><span class="std std-ref">README example</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_readme.py</span></code>)</p></li>
+<li><p><strong>00:07.415</strong>: <a class="reference internal" href="plot_erpac.html#sphx-glr-auto-examples-plot-erpac-py"><span class="std std-ref">Compute the ERPAC (Voytek et al 2013)</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_erpac.py</span></code>)</p></li>
+<li><p><strong>00:05.239</strong>: <a class="reference internal" href="plot_long_range_coupling.html#sphx-glr-auto-examples-plot-long-range-coupling-py"><span class="std std-ref">Long-range PAC</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_long_range_coupling.py</span></code>)</p></li>
+<li><p><strong>00:04.979</strong>: <a class="reference internal" href="plot_pac_methods.html#sphx-glr-auto-examples-plot-pac-methods-py"><span class="std std-ref">Compare PAC methods</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_pac_methods.py</span></code>)</p></li>
+<li><p><strong>00:03.125</strong>: <a class="reference internal" href="plot_bandwidth_signals.html#sphx-glr-auto-examples-plot-bandwidth-signals-py"><span class="std std-ref">Generate a coupling between specific bands</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_bandwidth_signals.py</span></code>)</p></li>
+<li><p><strong>00:02.644</strong>: <a class="reference internal" href="plot_fmin_fmax_optmization.html#sphx-glr-auto-examples-plot-fmin-fmax-optmization-py"><span class="std std-ref">Find the optimal bandwidth</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_fmin_fmax_optmization.py</span></code>)</p></li>
+<li><p><strong>00:00.264</strong>: <a class="reference internal" href="plot_artificially_coupled_signals.html#sphx-glr-auto-examples-plot-artificially-coupled-signals-py"><span class="std std-ref">Generate artificially coupled signals</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_artificially_coupled_signals.py</span></code>)</p></li>
+<li><p><strong>00:00.254</strong>: <a class="reference internal" href="plot_frequency_vectors.html#sphx-glr-auto-examples-plot-frequency-vectors-py"><span class="std std-ref">Define frequency vectors</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_frequency_vectors.py</span></code>)</p></li>
+</ul>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2019, Etienne Combrisson.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
