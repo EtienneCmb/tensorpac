@@ -19,7 +19,7 @@
 #
 import os
 import sys
-import sphinx_rtd_theme
+import sphinx_bootstrap_theme
 import tensorpac
 # import sphinx_gallery
 # import numpydoc
@@ -107,17 +107,24 @@ todo_include_todos = True
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+html_theme = 'bootstrap'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
 html_theme_options = {
-    'collapse_navigation': False,
-    'display_version': True,
-    'navigation_depth': 3,
+    'bootstrap_version': "3",
+    'navbar_sidebarrel': False,
+    'navbar_pagenav': False,
+    'navbar_pagenav_name': "Page",
+    'globaltoc_depth': -1,
+    'globaltoc_includehidden': "true",
+    'source_link_position': "nav",
+    'navbar_class': "navbar",
+    'bootswatch_theme': "readable",
+    'navbar_fixed_top': True,
 }
 
 # The name of an image file (relative to this directory) to place at the top
