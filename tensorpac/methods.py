@@ -162,18 +162,12 @@ def gcpac(pha, amp):
     """Gaussian Copula."""
     # prepare the shape of gcpac
     n_pha, n_amp = pha.shape[0], amp.shape[0]
-    pha_sh = list(pha.shape[:-1])
+    pha_sh = list(pha.shape[:-2])
     gc = np.zeros([n_amp] + pha_sh, dtype=float)
-    # concatenate sine and cosine
-    sco = np.stack([np.sin(pha), np.cos(pha)], axis=-2)
-    amp = amp[..., np.newaxis, :]
-    # copnorm the data
-    # amp = np.apply_along_axis(copnorm, -1, amp)
-    # sco = np.apply_along_axis(copnorm, -1, sco)
     # compute mutual information
     for p in range(n_pha):
         for a in range(n_amp):
-            gc[a, p, ...] = nd_mi_gg(sco[p, ...], amp[a, ...], mvaxis=-2,
+            gc[a, p, ...] = nd_mi_gg(pha[p, ...], amp[a, ...], mvaxis=-2,
                                      traxis=-1, biascorrect=False)
     return gc
 

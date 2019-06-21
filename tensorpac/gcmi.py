@@ -24,6 +24,10 @@ def ctransform(x):
     return xr
 
 
+def _copnorm(x):
+    return ndtri(ctransform(x))
+
+
 def copnorm(x):
     """Copula normalization.
 
@@ -38,9 +42,7 @@ def copnorm(x):
         Standard normal samples with the same empirical CDF value as the input.
         Operates along the last axis
     """
-    cx = ndtri(ctransform(x))
-    # cx = sp.stats.norm.ppf(transform)
-    return cx
+    return np.apply_along_axis(_copnorm, -1, x)
 
 
 def nd_mi_gg(x, y, mvaxis=None, traxis=-1, biascorrect=True, demeaned=False):

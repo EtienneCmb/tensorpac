@@ -13,14 +13,14 @@ In this example, we generate a signal that have a 10<->100hz coupling the first
 1000 points, then, the 700 following points are noise.
 """
 import numpy as np
-from tensorpac import Pac, pac_signals_tort
+from tensorpac import Pac, pac_signals_wavelet
 
 # Generate a 10<->100hz coupling :
 n_trials = 300
 n_pts = 1000
 sf = 1024.
-x1, tvec = pac_signals_tort(f_pha=10, f_amp=100, n_trials=n_trials, noise=2,
-                            n_pts=n_pts, dpha=10, damp=10, sf=sf)
+x1, tvec = pac_signals_wavelet(f_pha=10, f_amp=100, n_trials=n_trials, noise=2,
+                               n_pts=n_pts, sf=sf)
 
 # Generate noise and concatenate the coupling and the noise :
 x2 = np.random.rand(n_trials, 700)
@@ -37,7 +37,7 @@ amp = p.filter(sf, x, ftype='amplitude')  # Shape (namp, n_trials, 1, n_pts)
 
 # Compute the ERPAC and use the traxis to specify that the trial axis is the
 # first one :
-erpac = p.erpac(pha, amp, method='gc')
+erpac = p.erpac(pha, amp)
 pval = p.pvalues_
 
 # Remove unused dimensions :

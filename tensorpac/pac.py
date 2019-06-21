@@ -5,7 +5,7 @@ import logging
 from tensorpac.spectral import spectral, hilbertm
 from tensorpac.methods import (get_pac_fcn, _kl_hr, pacstr, compute_surrogates,
                                normalize)
-from tensorpac.gcmi import nd_mi_gg
+from tensorpac.gcmi import nd_mi_gg, copnorm
 from tensorpac.stats import circ_corrcc
 from tensorpac.utils import pac_vec
 from tensorpac.visu import PacPlot
@@ -246,6 +246,13 @@ class Pac(PacPlot):
             compute_surro = True
 
         # ---------------------------------------------------------------------
+        # copnorm if gaussian copula is used
+        if self._idpac[0] == 6:
+            logger.info(f"    copnorm the data")
+            pha = copnorm(np.stack([np.sin(pha), np.cos(pha)], axis=-2))
+            amp = copnorm(amp[..., np.newaxis, :])
+
+        # ---------------------------------------------------------------------
         # true pac estimation
         logger.info(f'    true PAC estimation using {self.method}')
         fcn = get_pac_fcn(self.idpac[0], self.n_bins, p)
@@ -398,7 +405,7 @@ class Pac(PacPlot):
         polarvec = np.linspace(-np.pi, np.pi, ampbin.shape[0])
         return ampbin, pp, polarvec
 
-    def erpac(self, pha, amp, method='circular'):
+    def erpac(self, pha, amp, method='circular', verbose=None):
         """Compute the Event-Related Phase-Amplitude Coupling (ERPAC).
 
         The ERPAC [#f6]_ is used to measure PAC across trials and is
@@ -427,6 +434,7 @@ class Pac(PacPlot):
         .. [#f6] `Voytek et al, 2013 <https://www.ncbi.nlm.nih.gov/pubmed/
            22986076>`_
         """
+        set_log_level(verbose)
         pha, amp = self._phampcheck(pha, amp)
         self._str_sur, self._str_norm = '', ''
         # Move the trial axis to the end :
@@ -435,15 +443,17 @@ class Pac(PacPlot):
         # method switch
         if method == 'circular':
             self.method = "ERPAC (Voytek et al. 2013)"
+            logger.info(f"Compute {self.method}")
             erpac, self.pvalues_ = circ_corrcc(pha, amp)
         elif method == 'gc':
             self.method = "Gaussian-Copula ERPAC"
+            logger.info(f"Compute {self.method}")
             # get shapes
             n_pha, n_chans, n_pts, n_trials = pha.shape
             n_amp = amp.shape[0]
             # conversion for computing mi
-            sco = np.stack([np.sin(pha), np.cos(pha)], axis=-2)
-            amp = amp[..., np.newaxis, :]
+            sco = copnorm(np.stack([np.sin(pha), np.cos(pha)], axis=-2))
+            amp = copnorm(amp)[..., np.newaxis, :]
             erpac = np.zeros((n_amp, n_pha, n_chans, n_pts))
             for a in range(n_amp):
                 for p in range(n_pha):
