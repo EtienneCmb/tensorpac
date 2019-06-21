@@ -262,7 +262,7 @@ class Pac(PacPlot):
         # ---------------------------------------------------------------------
         # compute surrogates (if needed)
         if compute_surro:
-            logger.info(f"    compute surrogates ({self._str_sur}, {n_perm} "
+            logger.info(f"    compute surrogates ({self.str_surro}, {n_perm} "
                         "permutations)")
             suro = compute_surrogates(pha, amp, self.idpac[1], fcn, n_perm,
                                       n_jobs)
@@ -277,7 +277,7 @@ class Pac(PacPlot):
             # Get the mean / deviation of surrogates
             m_surro, std_surro = np.mean(suro, axis=0), np.std(suro, axis=0)
             logger.info("    normalize true PAC estimation by surrogates "
-                        f"({self._str_norm})")
+                        f"({self.str_norm})")
             normalize(pac, m_surro, std_surro, self.idpac[2])
 
         return pac
@@ -391,7 +391,7 @@ class Pac(PacPlot):
         pha, amp = self._phampcheck(pha, amp)
         # Define the method name :
         self.method = 'Preferred-Phase (PP)' 
-        self._str_sur, self._str_norm = '', ''
+        self.str_surro, self.str_norm = '', ''
         # Bin the amplitude according to the phase :
         ampbin = _kl_hr(pha, amp, n_bins)
         ampbin /= ampbin.sum(axis=0, keepdims=True)
@@ -436,7 +436,7 @@ class Pac(PacPlot):
         """
         set_log_level(verbose)
         pha, amp = self._phampcheck(pha, amp)
-        self._str_sur, self._str_norm = '', ''
+        self.str_surro, self.str_norm = '', ''
         # Move the trial axis to the end :
         pha = np.moveaxis(pha, 1, -1)
         amp = np.moveaxis(amp, 1, -1)
@@ -481,7 +481,7 @@ class Pac(PacPlot):
             idpac[2] = 0
         self._idpac = idpac
         # string representation
-        self.method, self._str_sur, self._str_norm = pacstr(idpac)
+        self.method, self.str_surro, self.str_norm = pacstr(idpac)
 
     def _speccheck(self, filt=None, dcomplex=None, filtorder=None, cycle=None,
                    width=None):

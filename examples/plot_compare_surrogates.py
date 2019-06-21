@@ -28,15 +28,14 @@ p = Pac(f_pha=(3, 10, 1, .2), f_amp=(50, 90, 5, 1), dcomplex='wavelet',
 phases = p.filter(sf, data, ftype='phase')
 amplitudes = p.filter(sf, data, ftype='amplitude')
 
-plt.figure(figsize=(18, 9))
+plt.figure(figsize=(16, 12))
 for i, k in enumerate(range(4)):
     # Change the pac method :
     p.idpac = (5, k, 1)
-    print('-> Surrogates using ' + p.surro)
     # Compute only the PAC without filtering :
     xpac = p.fit(phases, amplitudes, n_perm=10).squeeze()
     # Plot :
     plt.subplot(2, 2, k + 1)
-    p.comodulogram(xpac.mean(-1), title=p.surro, cmap='Reds', vmin=0)
+    p.comodulogram(xpac.mean(-1), title=p.str_surro, cmap='Reds', vmin=0)
 
 plt.show()
