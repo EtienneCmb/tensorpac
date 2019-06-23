@@ -4,18 +4,215 @@ import logging
 
 from tensorpac.spectral import spectral, hilbertm
 from tensorpac.methods import (get_pac_fcn, _kl_hr, pacstr, compute_surrogates,
-                               normalize)
+                               erpac, ergcpac, normalize)
 from tensorpac.gcmi import nd_mi_gg, copnorm
-from tensorpac.stats import circ_corrcc
 from tensorpac.utils import pac_vec
-from tensorpac.visu import PacPlot
+from tensorpac.visu import _PacPlt
 from tensorpac.io import set_log_level
 from tensorpac.config import MNE_EPOCHS_TYPE
 
 logger = logging.getLogger('tensorpac')
 
 
-class Pac(PacPlot):
+
+class _PacObj(object):
+    """Main class for relative PAC objects."""
+
+    def __init__(self, f_pha=[2, 4], f_amp=[60, 200], dcomplex='hilbert',
+                 filt='fir1', cycle=(3, 6), filtorder=3, width=7):
+        # Frequency checking :
+        self._f_pha, self._f_amp = pac_vec(f_pha, f_amp)
+        self._xvec, self._yvec = self.f_pha.mean(1), self.f_amp.mean(1)
+        # Check spectral properties :
+        self._speccheck(filt, dcomplex, filtorder, cycle, width)
+
+    def __str__(self):
+        """String representation."""
+        return self.method
+
+    def filter(self, sf, x, ftype='phase', keepfilt=False, n_jobs=-1):
+        """Filt the data in the specified frequency bands.
+
+        Parameters
+        ----------
+        sf : float
+            The sampling frequency.
+        x : array_like
+            Array of data of shape (n_epochs, n_times)
+        ftype : {'phase', 'amplitude'}
+            Specify if you want to extract phase ('phase') or the amplitude
+            ('amplitude').
+        n_jobs : int | -1
+            Number of jobs to compute PAC in parallel. For very large data,
+            set this parameter to 1 in order to prevent large memory usage.
+        keepfilt : bool | False
+            Specify if you only want the filtered data (True). This parameter
+            is only available with dcomplex='hilbert' and not wavelet.
+
+        Returns
+        -------
+        xfilt : array_like
+            The filtered data of shape (n_freqs, n_epochs, n_times)
+        """
+        # ---------------------------------------------------------------------
+        # check inputs
+        assert isinstance(sf, (int, float)), ("The sampling frequency must be "
+                                              "a float number.")
+        # Compatibility between keepfilt and wavelet :
+        if (keepfilt is True) and (self._dcomplex is 'wavelet'):
+            raise ValueError("Using wavelet for the complex decomposition do "
+                             "not allow to get filtered data only. Set the "
+                             "keepfilt parameter to False or set dcomplex to "
+                             "'hilbert'.")
+        assert ftype in ['phase', 'amplitude'], ("ftype must either be 'phase'"
+                                                 " or 'amplitude.'")
+        if not isinstance(x, np.ndarray) and type(x) in MNE_EPOCHS_TYPE:
+            x = x.get_data()
+            sf = x.info['sfreq']
+        if x.ndim == 1:
+            x = x[np.newaxis, :]
+        assert x.ndim == 2, ("x should be a 2d array like (n_epochs, n_times)")
+
+        # ---------------------------------------------------------------------
+        # Switch between phase or amplitude :
+        if ftype is 'phase':
+            tosend = 'pha' if not keepfilt else None
+            xfilt = spectral(x, sf, self.f_pha, tosend, self._dcomplex,
+                             self._filt, self._filtorder, self._cycle[0],
+                             self._width, n_jobs)
+        elif ftype is 'amplitude':
+            tosend = 'amp' if not keepfilt else None
+            xfilt = spectral(x, sf, self.f_amp, tosend, self._dcomplex,
+                             self._filt, self._filtorder, self._cycle[1],
+                             self._width, n_jobs)
+        return xfilt
+
+    def _speccheck(self, filt=None, dcomplex=None, filtorder=None, cycle=None,
+                   width=None):
+        """Check spectral parameters."""
+        # Check the filter name :
+        if filt is not None:
+            if filt not in ['fir1', 'butter', 'bessel', 'mne']:
+                raise ValueError("filt must either be 'fir1', 'butter' or "
+                                 "'bessel'")
+            else:
+                self._filt = filt
+        # Check cycle :
+        if cycle is not None:
+            cycle = np.asarray(cycle)
+            if (len(cycle) is not 2) or not cycle.dtype == int:
+                raise ValueError("Cycle must be a tuple of two integers.")
+            else:
+                self._cycle = cycle
+        # Check complex decomposition :
+        if dcomplex is not None:
+            if dcomplex not in ['hilbert', 'wavelet']:
+                raise ValueError("dcomplex must either be 'hilbert' or "
+                                 "'wavelet'.")
+            else:
+                self._dcomplex = dcomplex
+        # Convert filtorder :
+        if filtorder is not None:
+            self._filtorder = int(filtorder)
+        # Convert Morlet's width :
+        if width is not None:
+            self._width = int(width)
+
+    @staticmethod
+    def _phampcheck(pha, amp):
+        """Check phase and amplitude values."""
+        assert pha.ndim == 3, ("`pha` should have a shape of (n_pha, n_epochs,"
+                               " n_times)")
+        assert amp.ndim == 3, ("`amp` should have a shape of (n_pha, n_epochs,"
+                               " n_times)")
+        assert pha.shape[1:] == amp.shape[1:], ("`pha` and `amp` must have the"
+                                                " same number of trials, "
+                                                "channels and time points")
+        assert np.ptp(pha) <= 2 * np.pi, ("Your phase is probably in degrees "
+                                          "and should be converted in radians "
+                                          "using either np.degrees or "
+                                          "np.deg2rad.")
+        # Force the phase to be in [-pi, pi] :
+        pha = (pha + np.pi) % (2. * np.pi) - np.pi
+        return pha, amp
+
+    @property
+    def f_pha(self):
+        """Vector of phases of shape (n_pha, 2)."""
+        return self._f_pha
+
+    @property
+    def f_amp(self):
+        """Vector of amplitudes of shape (n_amp, 2)."""
+        return self._f_amp
+
+    @property
+    def xvec(self):
+        """Vector of phases of shape (n_pha,) use for plotting."""
+        return self._xvec
+
+    @property
+    def yvec(self):
+        """Vector of amplitudes of shape (n_amp,) use for plotting."""
+        return self._yvec
+
+    # ----------- FILT -----------
+    @property
+    def filt(self):
+        """Get the filt value."""
+        return self._filt
+
+    @filt.setter
+    def filt(self, value):
+        """Set filt value."""
+        self._speccheck(filt=value)
+
+    # ----------- DCOMPLEX -----------
+    @property
+    def dcomplex(self):
+        """Get the dcomplex value."""
+        return self._dcomplex
+
+    @dcomplex.setter
+    def dcomplex(self, value):
+        """Set dcomplex value."""
+        self._speccheck(dcomplex=value)
+
+    # ----------- CYCLE -----------
+    @property
+    def cycle(self):
+        """Get the cycle value."""
+        return self._cycle
+
+    @cycle.setter
+    def cycle(self, value):
+        """Set cycle value."""
+        self._speccheck(cycle=value)
+
+    # ----------- FILTORDER -----------
+    @property
+    def filtorder(self):
+        """Get the filtorder value."""
+        return self._filtorder
+
+    @filtorder.setter
+    def filtorder(self, value):
+        """Set filtorder value."""
+        self._speccheck(filtorder=value)
+
+    # ----------- WIDTH -----------
+    @property
+    def width(self):
+        """Get the width value."""
+        return self._width
+
+    @width.setter
+    def width(self, value):
+        """Set width value."""
+        self._width = value
+
+
+class Pac(_PacObj, _PacPlt):
     """Compute Phase-Amplitude Coupling (PAC) using tensors.
 
     Computing PAC is assessed in three steps : compute the real PAC, compute
@@ -110,90 +307,18 @@ class Pac(PacPlot):
        48/18849.short/>`_
     """
 
-    ###########################################################################
-    #                              __FCN__
-    ###########################################################################
     def __init__(self, idpac=(1, 2, 3), f_pha=[2, 4], f_amp=[60, 200],
                  dcomplex='hilbert', filt='fir1', cycle=(3, 6), filtorder=3,
                  width=7, n_bins=18, verbose=None):
         """Check and initialize."""
         set_log_level(verbose)
-        # Initialize visualization methods :
-        PacPlot.__init__(self)
-        # ----------------- CHECKING -----------------
-        # Pac methods :
         self._idcheck(idpac)
-        # Frequency checking :
-        self.f_pha, self.f_amp = pac_vec(f_pha, f_amp)
-        self.xvec, self.yvec = self.f_pha.mean(1), self.f_amp.mean(1)
+        _PacObj.__init__(self, f_pha=f_pha, f_amp=f_amp, dcomplex=dcomplex,
+                         filt=filt, cycle=cycle, filtorder=filtorder,
+                         width=width)
+        _PacPlt.__init__(self)
         self.n_bins = int(n_bins)
-
-        # Check spectral properties :
-        self._speccheck(filt, dcomplex, filtorder, cycle, width)
-
-    def __str__(self):
-        """String representation."""
-        return self.method
-
-    ###########################################################################
-    #                              METHODS
-    ###########################################################################
-    def filter(self, sf, x, ftype='phase', keepfilt=False, n_jobs=-1):
-        """Filt the data in the specified frequency bands.
-
-        Parameters
-        ----------
-        sf : float
-            The sampling frequency.
-        x : array_like
-            Array of data of shape (n_epochs, n_times)
-        ftype : {'phase', 'amplitude'}
-            Specify if you want to extract phase ('phase') or the amplitude
-            ('amplitude').
-        n_jobs : int | -1
-            Number of jobs to compute PAC in parallel. For very large data,
-            set this parameter to 1 in order to prevent large memory usage.
-        keepfilt : bool | False
-            Specify if you only want the filtered data (True). This parameter
-            is only available with dcomplex='hilbert' and not wavelet.
-
-        Returns
-        -------
-        xfilt : array_like
-            The filtered data of shape (n_freqs, n_epochs, n_times)
-        """
-        # ---------------------------------------------------------------------
-        # check inputs
-        assert isinstance(sf, (int, float)), ("The sampling frequency must be "
-                                              "a float number.")
-        # Compatibility between keepfilt and wavelet :
-        if (keepfilt is True) and (self._dcomplex is 'wavelet'):
-            raise ValueError("Using wavelet for the complex decomposition do "
-                             "not allow to get filtered data only. Set the "
-                             "keepfilt parameter to False or set dcomplex to "
-                             "'hilbert'.")
-        assert ftype in ['phase', 'amplitude'], ("ftype must either be 'phase'"
-                                                 " or 'amplitude.'")
-        if not isinstance(x, np.ndarray) and type(x) in MNE_EPOCHS_TYPE:
-            x = x.get_data()
-            sf = x.info['sfreq']
-        if x.ndim == 1:
-            x = x[np.newaxis, :]
-        assert x.ndim == 2, ("x should be a 2d array like (n_epochs, n_times)")
-
-        # ---------------------------------------------------------------------
-        # Switch between phase or amplitude :
-        if ftype is 'phase':
-            tosend = 'pha' if not keepfilt else None
-            xfilt = spectral(x, sf, self.f_pha, tosend, self._dcomplex,
-                             self._filt, self._filtorder, self._cycle[0],
-                             self._width, n_jobs)
-        elif ftype is 'amplitude':
-            tosend = 'amp' if not keepfilt else None
-            xfilt = spectral(x, sf, self.f_amp, tosend, self._dcomplex,
-                             self._filt, self._filtorder, self._cycle[1],
-                             self._width, n_jobs)
-        return xfilt
+        logger.info("Phase Amplitude Coupling object defined")
 
     def fit(self, pha, amp, n_perm=200, p=.05, n_jobs=-1, verbose=None):
         """Compute PAC on filtered data.
@@ -263,9 +388,9 @@ class Pac(PacPlot):
         if compute_surro:
             logger.info(f"    compute surrogates ({self.str_surro}, {n_perm} "
                         "permutations)")
-            suro = compute_surrogates(pha, amp, self.idpac[1], fcn, n_perm,
-                                      n_jobs)
-            self.surrogates_ = suro
+            surro = compute_surrogates(pha, amp, self.idpac[1], fcn, n_perm,
+                                       n_jobs)
+            self.surrogates_ = surro
 
             # infer pvalues
             self.infer_pvalues(p)
@@ -274,10 +399,9 @@ class Pac(PacPlot):
         # normalize (if needed)
         if self._idpac[2] != 0:
             # Get the mean / deviation of surrogates
-            m_surro, std_surro = np.mean(suro, axis=0), np.std(suro, axis=0)
             logger.info("    normalize true PAC estimation by surrogates "
                         f"({self.str_norm})")
-            normalize(pac, m_surro, std_surro, self.idpac[2])
+            normalize(self.idpac[2], pac, surro)
 
         return pac
 
@@ -389,7 +513,7 @@ class Pac(PacPlot):
         # Check phase and amplitude shapes :
         pha, amp = self._phampcheck(pha, amp)
         # Define the method name :
-        self.method = 'Preferred-Phase (PP)' 
+        self.method = 'Preferred-Phase (PP)'
         self.str_surro, self.str_norm = '', ''
         # Bin the amplitude according to the phase :
         ampbin = _kl_hr(pha, amp, n_bins)
@@ -404,7 +528,82 @@ class Pac(PacPlot):
         polarvec = np.linspace(-np.pi, np.pi, ampbin.shape[0])
         return ampbin, pp, polarvec
 
-    def erpac(self, pha, amp, method='circular', verbose=None):
+    def _idcheck(self, idpac):
+        """Check the idpac parameter."""
+        idpac = np.atleast_1d(idpac)
+        if not all([isinstance(k, int) for k in idpac]) and (len(idpac) != 3):
+            raise ValueError("idpac must be a tuple/list of 3 integers.")
+        # Ozkurt PAC case (doesn't need surrogates and normalization)
+        if idpac[0] == 4:
+            idpac = np.array([4, 0, 0])
+        if (idpac[2] != 0) and (idpac[1] == 0):
+            logger.warning("If you want to normalize the estimated PAC, you "
+                           "should select a surrogate method (second digit of "
+                           "`idpac`). Normalization ignored.")
+            idpac[2] = 0
+        self._idpac = idpac
+        # string representation
+        self.method, self.str_surro, self.str_norm = pacstr(idpac)
+
+    @property
+    def idpac(self):
+        """Get the idpac value."""
+        return self._idpac
+
+    @idpac.setter
+    def idpac(self, value):
+        """Set idpac value."""
+        self._idcheck(value)
+
+
+class EventRelatedPac(_PacObj, _PacPlt):
+    """Event Related Phase-Amplitude Coupling (ERPAC).
+
+    The traditional PAC approach is computed across time, hence this means that
+    you can't observe PAC changes across time. In contrast, the ERPAC is
+    computed across epochs (or trials) which preserves the time dimension.
+
+    Parameters
+    ----------
+    f_pha, f_amp : list/tuple/array | def: [2, 4] and [60, 200]
+        Frequency vector for the phase and amplitude. Here you can use
+        several forms to define those vectors :
+
+            * Basic list/tuple (ex: [2, 4] or [8, 12]...)
+            * List of frequency bands (ex: [[2, 4], [5, 7]]...)
+            * Dynamic definition : (start, stop, width, step)
+            * Range definition (ex : np.arange(3) => [[0, 1], [1, 2]])
+
+    dcomplex : {'wavelet', 'hilbert'}
+        Method for the complex definition. Use either 'hilbert' or
+        'wavelet'.
+    filt : {'fir1', 'butter', 'bessel'}
+        Filtering method (only if dcomplex is 'hilbert'). Choose either
+        'fir1', 'butter' or 'bessel'
+    cycle : tuple | (3, 6)
+        Control the number of cycles for filtering (only if dcomplex is
+        'hilbert'). Should be a tuple of integers where the first one
+        refers to the number of cycles for the phase and the second for the
+        amplitude [#f5]_.
+    filtorder : int | 3
+        Filter order for the Butterworth and Bessel filters (only if
+        dcomplex is 'hilbert').
+    width : int | 7
+        Width of the Morlet's wavelet.
+    """
+
+    def __init__(self, f_pha=[2, 4], f_amp=[60, 200], dcomplex='hilbert',
+                 filt='fir1', cycle=(3, 6), filtorder=3, width=7,
+                 verbose=None):
+        """Check and initialize."""
+        set_log_level(verbose)
+        _PacObj.__init__(self, f_pha=f_pha, f_amp=f_amp, dcomplex=dcomplex,
+                         filt=filt, cycle=cycle, filtorder=filtorder,
+                         width=width)
+        _PacPlt.__init__(self)
+        logger.info("Event Related PAC object defined")
+
+    def fit(self, pha, amp, method='circular', verbose=None):
         """Compute the Event-Related Phase-Amplitude Coupling (ERPAC).
 
         The ERPAC [#f6]_ is used to measure PAC across trials and is
@@ -425,177 +624,56 @@ class Pac(PacPlot):
         erpac : array_like
             The ERPAC estimation.
 
-        Attributes
+        References
         ----------
-        pvalues_ : array_like
-            The associated p-values (only if method='circular')
-
         .. [#f6] `Voytek et al, 2013 <https://www.ncbi.nlm.nih.gov/pubmed/
            22986076>`_
         """
         set_log_level(verbose)
         pha, amp = self._phampcheck(pha, amp)
-        self.str_surro, self.str_norm = '', ''
-        # Move the trial axis to the end :
-        pha = np.moveaxis(pha, 1, -1)
-        amp = np.moveaxis(amp, 1, -1)
+        self.method = method
         # method switch
         if method == 'circular':
             self.method = "ERPAC (Voytek et al. 2013)"
-            logger.info(f"Compute {self.method}")
-            erpac, self.pvalues_ = circ_corrcc(pha, amp)
+            logger.info(f"    Compute {self.method}")
+            er, self.pvalues_ = erpac(pha, amp)
         elif method == 'gc':
             self.method = "Gaussian-Copula ERPAC"
-            logger.info(f"Compute {self.method}")
-            # get shapes
-            n_pha, n_times, n_epochs = pha.shape
-            n_amp = amp.shape[0]
-            # conversion for computing mi
-            sco = copnorm(np.stack([np.sin(pha), np.cos(pha)], axis=-2))
-            amp = copnorm(amp)[..., np.newaxis, :]
-            erpac = np.zeros((n_amp, n_pha, n_times))
-            for a in range(n_amp):
-                for p in range(n_pha):
-                    erpac[a, p, ...] = nd_mi_gg(sco[p, ...], amp[a, ...],
-                                                mvaxis=-2, traxis=-1,
-                                                biascorrect=False)
+            logger.info(f"    Compute {self.method}")
+            er = ergcpac(pha, amp)
             self.pvalues_ = None
-        return erpac
+        return er
 
-    ###########################################################################
-    #                              CHECKING
-    ###########################################################################
-    def _idcheck(self, idpac):
-        """Check the idpac parameter."""
-        idpac = np.atleast_1d(idpac)
-        if not all([isinstance(k, int) for k in idpac]) and (len(idpac) != 3):
-            raise ValueError("idpac must be a tuple/list of 3 integers.")
-        # Ozkurt PAC case (doesn't need surrogates and normalization)
-        if idpac[0] == 4:
-            idpac = np.array([4, 0, 0])
-        if (idpac[2] != 0) and (idpac[1] == 0):
-            logger.warning("If you want to normalize the estimated PAC, you "
-                           "should select a surrogate method (second digit of "
-                           "`idpac`). Normalization ignored.")
-            idpac[2] = 0
-        self._idpac = idpac
-        # string representation
-        self.method, self.str_surro, self.str_norm = pacstr(idpac)
+    def filterfit(self, sf, x_pha, x_amp=None, method='circular',
+                  verbose=None):
+        """Extract phases, amplitudes and compute ERPAC.
 
-    def _speccheck(self, filt=None, dcomplex=None, filtorder=None, cycle=None,
-                   width=None):
-        """Check spectral parameters."""
-        # Check the filter name :
-        if filt is not None:
-            if filt not in ['fir1', 'butter', 'bessel', 'mne']:
-                raise ValueError("filt must either be 'fir1', 'butter' or "
-                                 "'bessel'")
-            else:
-                self._filt = filt
-        # Check cycle :
-        if cycle is not None:
-            cycle = np.asarray(cycle)
-            if (len(cycle) is not 2) or not cycle.dtype == int:
-                raise ValueError("Cycle must be a tuple of two integers.")
-            else:
-                self._cycle = cycle
-        # Check complex decomposition :
-        if dcomplex is not None:
-            if dcomplex not in ['hilbert', 'wavelet']:
-                raise ValueError("dcomplex must either be 'hilbert' or "
-                                 "'wavelet'.")
-            else:
-                self._dcomplex = dcomplex
-        # Convert filtorder :
-        if filtorder is not None:
-            self._filtorder = int(filtorder)
-        # Convert Morlet's width :
-        if width is not None:
-            self._width = int(width)
+        Parameters
+        ----------
+        sf : float
+            The sampling frequency.
+        x_pha, x_amp : array_like
+            Array of data for computing ERPAC. x_pha is the data used for
+            extracting phases and x_amp, amplitudes. Both arrays must have
+            the same shapes (i.e n_epochs, n_times). If you want to compute
+            local ERPAC i.e. on the same electrode, x=x_pha=x_amp. For distant
+            coupling, x_pha and x_amp could be different but still must to have
+            the same shape.
+        method : {'circular', 'gc'}
+            Name of the method for computing erpac. Use 'circular' for
+            reproducing [#f6]_ or 'gc' for a Gaussian-Copula based erpac.
 
-    @staticmethod
-    def _phampcheck(pha, amp):
-        """Check phase and amplitude values."""
-        assert pha.ndim == 3, ("`pha` should have a shape of (n_pha, n_epochs,"
-                               " n_times)")
-        assert amp.ndim == 3, ("`amp` should have a shape of (n_pha, n_epochs,"
-                               " n_times)")
-        assert pha.shape[1:] == amp.shape[1:], ("`pha` and `amp` must have the"
-                                                " same number of trials, "
-                                                "channels and time points")
-        assert np.ptp(pha) <= 2 * np.pi, ("Your phase is probably in degrees "
-                                          "and should be converted in radians "
-                                          "using either np.degrees or "
-                                          "np.deg2rad.")
-        # Force the phase to be in [-pi, pi] :
-        pha = (pha + np.pi) % (2. * np.pi) - np.pi
-        return pha, amp
+        Returns
+        -------
+        erpac: array_like
+            ERPAC of shape (namp, npha, ...).
+        """
+        x_amp = x_pha if not isinstance(x_amp, np.ndarray) else x_amp
+        # extract phases and amplitudes
+        logger.info(f"    Extract phases (n_pha={len(self.xvec)}) and "
+                    f"amplitudes (n_amps={len(self.yvec)})")
+        pha = self.filter(sf, x_pha, ftype='phase')
+        amp = self.filter(sf, x_amp, ftype='amplitude')
+        # compute erpac
+        return self.fit(pha, amp, method=method, verbose=verbose)
 
-    ###########################################################################
-    #                              PROPERTIES
-    ###########################################################################
-    # ----------- IDPAC -----------
-    @property
-    def idpac(self):
-        """Get the idpac value."""
-        return self._idpac
-
-    @idpac.setter
-    def idpac(self, value):
-        """Set idpac value."""
-        self._idcheck(value)
-
-    # ----------- FILT -----------
-    @property
-    def filt(self):
-        """Get the filt value."""
-        return self._filt
-
-    @filt.setter
-    def filt(self, value):
-        """Set filt value."""
-        self._speccheck(filt=value)
-
-    # ----------- DCOMPLEX -----------
-    @property
-    def dcomplex(self):
-        """Get the dcomplex value."""
-        return self._dcomplex
-
-    @dcomplex.setter
-    def dcomplex(self, value):
-        """Set dcomplex value."""
-        self._speccheck(dcomplex=value)
-
-    # ----------- CYCLE -----------
-    @property
-    def cycle(self):
-        """Get the cycle value."""
-        return self._cycle
-
-    @cycle.setter
-    def cycle(self, value):
-        """Set cycle value."""
-        self._speccheck(cycle=value)
-
-    # ----------- FILTORDER -----------
-    @property
-    def filtorder(self):
-        """Get the filtorder value."""
-        return self._filtorder
-
-    @filtorder.setter
-    def filtorder(self, value):
-        """Set filtorder value."""
-        self._speccheck(filtorder=value)
-
-    # ----------- WIDTH -----------
-    @property
-    def width(self):
-        """Get the width value."""
-        return self._width
-
-    @width.setter
-    def width(self, value):
-        """Set width value."""
-        self._width = value

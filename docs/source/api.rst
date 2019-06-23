@@ -18,6 +18,7 @@ Compute phase-amplitude coupling
    :toctree: generated/
 
    Pac
+   EventRelatedPac
 
 Generate synthetic signals
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -51,6 +52,17 @@ and use it on phase / amplitude to compute PAC.
    ndpac
    ps
    gcpac
+
+Event Related PAC methods
++++++++++++++++++++++++++
+
+.. currentmodule:: tensorpac.methods
+
+.. autosummary::
+   :toctree: generated/
+
+   erpac
+   ergcpac
 
 Surrogates methods
 ++++++++++++++++++

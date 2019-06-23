@@ -1,11 +1,12 @@
 """Main PAC methods."""
 import numpy as np
 from scipy.special import erfinv
+from scipy.stats import chi2
 
 from functools import partial
 from joblib import Parallel, delayed
 
-from tensorpac.gcmi import nd_mi_gg  # copnorm
+from tensorpac.gcmi import nd_mi_gg, copnorm
 from tensorpac.config import JOBLIB_CFG
 
 
@@ -84,13 +85,39 @@ def get_pac_fcn(idp, n_bins, p):
 
 
 def mvl(pha, amp):
-    """Mean Vector Length (Canolty, 2006)."""
+    """Mean Vector Length (Canolty, 2006).
+
+    Parameters
+    ----------
+    pha, amp : array_like
+        Respectively the arrays of phases of shape (n_pha, ..., n_times) and
+        the array of amplitudes of shape (n_amp, ..., n_times).
+
+    Returns
+    -------
+    pac : array_like
+        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+    """
     return np.abs(np.einsum('i...j, k...j->ik...', amp,
                             np.exp(1j * pha))) / pha.shape[-1]
 
 
 def kld(pha, amp, n_bins=18):
-    """Kullback Leibler Distance (Tort, 2010)."""
+    """Kullback Leibler Distance (Tort, 2010).
+
+    Parameters
+    ----------
+    pha, amp : array_like
+        Respectively the arrays of phases of shape (n_pha, ..., n_times) and
+        the array of amplitudes of shape (n_amp, ..., n_times).
+    n_bins : int | 18
+        Number of bins to binarize the amplitude according to phase intervals
+
+    Returns
+    -------
+    pac : array_like
+        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+    """
     # Get the phase locked binarized amplitude :
     p_j = _kl_hr(pha, amp, n_bins)
     # Divide the binned amplitude by the mean over the bins :
@@ -105,7 +132,21 @@ def kld(pha, amp, n_bins=18):
 
 
 def hr(pha, amp, n_bins=18):
-    """Pac heights ratio (Lakatos, 2005)."""
+    """Pac heights ratio (Lakatos, 2005).
+
+    Parameters
+    ----------
+    pha, amp : array_like
+        Respectively the arrays of phases of shape (n_pha, ..., n_times) and
+        the array of amplitudes of shape (n_amp, ..., n_times).
+    n_bins : int | 18
+        Number of bins to binarize the amplitude according to phase intervals
+
+    Returns
+    -------
+    pac : array_like
+        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+    """
     # Get the phase locked binarized amplitude :
     p_j = _kl_hr(pha, amp, n_bins)
     # Divide the binned amplitude by the mean over the bins :
@@ -138,7 +179,21 @@ def _kl_hr(pha, amp, n_bins):
 
 
 def ndpac(pha, amp, p=.05):
-    """Normalized direct Pac (Ozkurt, 2012)."""
+    """Normalized direct Pac (Ozkurt, 2012).
+
+    Parameters
+    ----------
+    pha, amp : array_like
+        Respectively the arrays of phases of shape (n_pha, ..., n_times) and
+        the array of amplitudes of shape (n_amp, ..., n_times).
+    p : float | .05
+        P-value to use for thresholding
+
+    Returns
+    -------
+    pac : array_like
+        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+    """
     npts = amp.shape[-1]
     # Normalize amplitude :
     np.subtract(amp, np.mean(amp, axis=-1, keepdims=True), out=amp)
@@ -153,13 +208,42 @@ def ndpac(pha, amp, p=.05):
 
 
 def ps(pha, amp):
-    """Phase Synchrony (Penny, 2008; Cohen, 2008)."""
+    """Phase Synchrony (Penny, 2008; Cohen, 2008).
+
+    In order to measure the phase synchrony, the phase of the amplitude must be
+    provided.
+
+    Parameters
+    ----------
+    pha, amp : array_like
+        Respectively the arrays of phases of shape (n_pha, ..., n_times) and
+        the array of amplitudes of shape (n_amp, ..., n_times).
+    n_bins : int | 18
+        Number of bins to binarize the amplitude according to phase intervals
+
+    Returns
+    -------
+    pac : array_like
+        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+    """
     pac = np.einsum('i...j, k...j->ik...', np.exp(-1j * amp), np.exp(1j * pha))
     return np.abs(pac) / pha.shape[-1]
 
 
 def gcpac(pha, amp):
-    """Gaussian Copula."""
+    """Gaussian Copula Phase-amplitude coupling.
+
+    Parameters
+    ----------
+    pha, amp : array_like
+        Respectively the arrays of phases of shape (n_pha, ..., n_times) and
+        the array of amplitudes of shape (n_amp, ..., n_times).
+
+    Returns
+    -------
+    pac : array_like
+        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+    """
     # prepare the shape of gcpac
     n_pha, n_amp = pha.shape[0], amp.shape[0]
     pha_sh = list(pha.shape[:-2])
@@ -170,6 +254,115 @@ def gcpac(pha, amp):
             gc[a, p, ...] = nd_mi_gg(pha[p, ...], amp[a, ...], mvaxis=-2,
                                      traxis=-1, biascorrect=False)
     return gc
+
+
+###############################################################################
+###############################################################################
+#                  EVENT RELATED PHASE AMPLITUDE COUPLING
+###############################################################################
+###############################################################################
+
+
+def pearson(x, y, st='i...j, k...j->ik...'):
+    """Pearson correlation for multi-dimensional arrays.
+
+    Parameters
+    ----------
+    x, y : array_like
+        Compute pearson correlation between the multi-dimensional arrays
+        x and y.
+    st : string | 'i..j, k..j->ik...'
+        The string to pass to the np.einsum function.
+
+    Returns
+    -------
+    cov: array_like
+        The pearson correlation array.
+    """
+    n = x.shape[-1]
+    # Distribution center :
+    mu_x = x.mean(-1, keepdims=True)
+    mu_y = y.mean(-1, keepdims=True)
+    # Distribution deviation :
+    s_x = x.std(-1, ddof=n - 1, keepdims=True)
+    s_y = y.std(-1, ddof=n - 1, keepdims=True)
+    # Compute correlation coefficient :
+    cov = np.einsum(st, x, y)
+    mu_xy = np.einsum(st, mu_x, mu_y)
+    cov -= n * mu_xy
+    cov /= np.einsum(st, s_x, s_y)
+    return cov
+
+
+def erpac(pha, amp):
+    """Correlation coefficient between a circular and a linear random variable.
+
+    Adapted from the function circ_corrcc Circular Statistics Toolbox for
+    Matlab By Philipp Berens, 2009.
+
+    Parameters
+    ----------
+    pha, amp : array_like
+        Respectively the arrays of phases of shape (n_pha, ..., n_epochs) and
+        the array of amplitudes of shape (n_amp, ..., n_epochs).
+
+    Returns
+    -------
+    rho : array_like
+        Array of correlation coefficients of shape (n_amp, n_pha, ...)
+    pval : array_like
+        Array of p-values of shape (n_amp, n_pha, ...).
+    """
+    # Move the trial axis to the end :
+    pha = np.moveaxis(pha, 1, -1)
+    amp = np.moveaxis(amp, 1, -1)
+    # Compute correlation coefficient for sin and cos independently
+    n = pha.shape[-1]
+    sa, ca = np.sin(pha), np.cos(pha)
+    rxs = pearson(amp, sa)
+    rxc = pearson(amp, ca)
+    rcs = pearson(sa, ca, st='i...j, k...j->i...')
+    rcs = rcs[np.newaxis, ...]
+
+    # Compute angular-linear correlation (equ. 27.47)
+    rho = np.sqrt((rxc**2 + rxs**2 - 2 * rxc * rxs * rcs) / (1 - rcs**2))
+
+    # Compute pvalue :
+    pval = 1. - chi2.cdf(n * rho**2, 2)
+
+    return rho, pval
+
+
+def ergcpac(pha, amp):
+    """Event Related PAC computed using the Gaussian Copula Mutual Information.
+
+    Parameters
+    ----------
+    pha, amp : array_like
+        Respectively the arrays of phases of shape (n_pha, n_times, n_epochs)
+        and the array of amplitudes of shape (n_amp, n_times, n_epochs).
+
+    Returns
+    -------
+    rho : array_like
+        Array of correlation coefficients of shape (n_amp, n_pha, n_times)
+    """
+    # Move the trial axis to the end :
+    pha = np.moveaxis(pha, 1, -1)
+    amp = np.moveaxis(amp, 1, -1)
+    # get shapes
+    n_pha, n_times, n_epochs = pha.shape
+    n_amp = amp.shape[0]
+    # conversion for computing mi
+    sco = copnorm(np.stack([np.sin(pha), np.cos(pha)], axis=-2))
+    amp = copnorm(amp)[..., np.newaxis, :]
+    # compute mutual information across trials
+    ergcpac = np.zeros((n_amp, n_pha, n_times))
+    for a in range(n_amp):
+        for p in range(n_pha):
+            ergcpac[a, p, ...] = nd_mi_gg(sco[p, ...], amp[a, ...], mvaxis=-2,
+                                          traxis=-1, biascorrect=False)
+    return ergcpac
 
 
 ###############################################################################
@@ -190,13 +383,39 @@ def compute_surrogates(pha, amp, ids, fcn, n_perm, n_jobs):
 
 
 def swap_pha_amp(pha, amp):
-    """Swap phase / amplitude trials (Tort, 2010)."""
+    """Swap phase / amplitude trials (Tort, 2010).
+
+    Parameters
+    ----------
+    pha, amp : array_like
+        Respectively the arrays of phases of shape (n_pha, ..., n_times) and
+        the array of amplitudes of shape (n_amp, ..., n_times).
+
+    Returns
+    -------
+    pha, amp : array_like
+        The phase and amplitude to use to compute the distribution of
+        permutations
+    """
     tr_ = np.random.permutation(pha.shape[1])
     return pha[:, tr_, ...], amp
 
 
 def swap_blocks(pha, amp):
-    """Swap amplitudes time blocks (Bahramisharif, 2013)."""
+    """Swap amplitudes time blocks (Bahramisharif, 2013).
+
+    Parameters
+    ----------
+    pha, amp : array_like
+        Respectively the arrays of phases of shape (n_pha, ..., n_times) and
+        the array of amplitudes of shape (n_amp, ..., n_times).
+
+    Returns
+    -------
+    pha, amp : array_like
+        The phase and amplitude to use to compute the distribution of
+        permutations
+    """
     # random cutting point along time axis
     cut_at = np.random.randint(1, amp.shape[-1], (1,))
     # Split amplitude across time into two parts :
@@ -207,7 +426,20 @@ def swap_blocks(pha, amp):
 
 
 def time_lag(pha, amp):
-    """Introduce a time lag on phase series (Canolty et al. 2006)."""
+    """Introduce a time lag on phase series (Canolty et al. 2006).
+
+    Parameters
+    ----------
+    pha, amp : array_like
+        Respectively the arrays of phases of shape (n_pha, ..., n_times) and
+        the array of amplitudes of shape (n_amp, ..., n_times).
+
+    Returns
+    -------
+    pha, amp : array_like
+        The phase and amplitude to use to compute the distribution of
+        permutations
+    """
     shift = np.random.randint(pha.shape[-1])
     return np.roll(pha, shift, axis=-1), amp
 
@@ -219,8 +451,26 @@ def time_lag(pha, amp):
 ###############################################################################
 
 
-def normalize(pac, s_mean, s_std, idn):
-    """PAC normalization."""
+def normalize(idn, pac, surro):
+    """Normalize the phase amplitude coupling.
+
+    This function performs inplace normalization (i.e. without copy of array)
+
+    Parameters
+    ----------
+    idn : int
+        Normalization method to use :
+
+            * 1 : substract the mean of surrogates
+            * 2 : divide by the mean of surrogates
+            * 3 : substract then divide by the mean of surrogates
+            * 4 : substract the mean then divide by the deviation of surrogates
+    pac : array_like
+        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+    surro : array_like
+        Array of surrogates of shape (n_perm, n_amp, n_pha, ...)
+    """
+    s_mean, s_std = np.mean(surro, axis=0), np.std(surro, axis=0)
     if idn == 1:  # Substraction
         pac -= s_mean
     elif idn == 2:  # Divide

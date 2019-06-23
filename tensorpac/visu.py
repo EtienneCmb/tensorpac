@@ -2,7 +2,7 @@
 import numpy as np
 
 
-class PacPlot(object):
+class _PacPlt(object):
     """Main PAC plotting class."""
 
     def __init__(self):
@@ -177,16 +177,12 @@ class PacPlot(object):
         ----------
         pac : array_like
             PAC array of shape (namp, pha)
-
         xlabel : string | 'Frequency for phase (hz)'
             Label for the phase axis.
-
         ylabel : string | 'Frequency for amplitude (hz)'
             Label for the amplitude axis.
-
         cblabel : string | 'PAC values'
             Colorbar.
-
         kwargs : dict
             Further arguments are passed to the pacplot() method.
 
@@ -213,26 +209,19 @@ class PacPlot(object):
         ----------
         pac : array_like
             Pac array of shape (namp, npha)
-
         fvec : array_like
             The frequency vector returned by the pac_trivec function.
-
         tridx : array_like
             The index vector used to build the triangle. This argument is
             also returned by the pac_trivec function.
-
         xlabel : string | 'Starting frequency (hz)'
             Label for the phase axis.
-
         ylabel : string | 'Ending frequency (hz)'
             Label for the amplitude axis.
-
         cblabel : string | 'PAC values'
             Colorbar.
-
         bad : string | 'lightgray'
             Color for non-significant values.
-
         kwargs : dict
             Further arguments are passed to the pacplot() method.
 
@@ -280,16 +269,12 @@ class PacPlot(object):
         ----------
         amp : array_like
             2D array.
-
         xvec : array_like
             Vector for the x-axis.
-
         yvec : array_like
             Vector for the y-axis (phases).
-
         interp : float | None
             Interplation factor.
-
         kwargs : dict
             Further arguments are passed to the pacplot() method.
 
@@ -317,7 +302,6 @@ class PacPlot(object):
         ----------
         filename : string
             The name of the figure to save.
-
         dpi : int | 600
             DPI of the figure.
         """
