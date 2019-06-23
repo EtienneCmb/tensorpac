@@ -19,6 +19,7 @@ Compute phase-amplitude coupling
 
    Pac
    EventRelatedPac
+   PreferredPhase
 
 Generate synthetic signals
 ~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -10,45 +10,59 @@ amplitudes.
 """
 import numpy as np
 import matplotlib.pyplot as plt
-from tensorpac import pac_signals_wavelet, Pac
+from tensorpac import pac_signals_wavelet, PreferredPhase
 
 plt.style.use('seaborn-poster')
 
-# Generate 100 datasets with a 6<->100hz coupling :
+###############################################################################
+# Generate synthetic signals (sake of illustration)
+###############################################################################
+# to illustrate how does the preferred phase works, we generate synthetic
+# signals where a 6hz phase is coupled with a 100hz amplitude. We also
+# define a maximum amplitude at pi / 2
 sf = 1024.
 n_epochs = 100
+n_times = 2000
+pp = np.pi / 2
 data, time = pac_signals_wavelet(f_pha=6, f_amp=100, n_epochs=n_epochs, sf=sf,
-                                 noise=.7, n_times=2000, pp=np.pi / 2)
+                                 noise=1, n_times=n_times, pp=pp)
 
-
-# Define a Pac object. Here, we are not going to use the idpac variable :
-p = Pac(f_pha=[5, 7], f_amp=(60, 200, 10, 1))
+###############################################################################
+# Extract phases, amplitudes and compute the preferred phase
+###############################################################################
+p = PreferredPhase(f_pha=[5, 7], f_amp=(60, 200, 10, 1))
 
 # Extract the phase and the amplitude :
 pha = p.filter(sf, data, ftype='phase')
 amp = p.filter(sf, data, ftype='amplitude')
 
 # Now, compute the PP :
-ambin, pp, vecbin = p.pp(pha, amp, n_bins=72)
+ampbin, pp, vecbin = p.fit(pha, amp, n_bins=72)
 
-# Reshape the PP to be (n_epochs, n_amp) :
+###############################################################################
+# Plot the preferred phase
+###############################################################################
+# Here, we first plot the preferred phase across trials according to
+# amplitudes. Then, the distribution of 100hz amplitudes is first plotted
+# according to the 72 phase bins and also using a polar representation
+
+# Reshape the PP to be (n_epochs, n_amp) and the amplitude to be
+# (nbins, n_amp, n_epochs). Finally, we take the mean across trials
 pp = np.squeeze(pp).T
-
-# Reshape the amplitude to be (nbins, n_amp, n_epochs) and take the mean across
-# datasets :
-ambin = np.squeeze(ambin).mean(-1)
+ampbin = np.squeeze(ampbin).mean(-1)
 
 plt.figure(figsize=(20, 35))
-# Plot the prefered phase :
+
+# Plot the prefered phase
 plt.subplot(221)
-plt.pcolormesh(p.yvec, np.arange(100), np.rad2deg(pp), cmap='Spectral_r')
+plt.pcolormesh(p.yvec, np.arange(100), np.rad2deg(pp), cmap='RdBu_r')
 cb = plt.colorbar()
 plt.clim(vmin=-180., vmax=180.)
 plt.axis('tight')
-plt.xlabel('Amplitude center frequency (Hz)')
-plt.ylabel('Ndatasets')
-plt.title("PP for each dataset and for several amplitudes.\n100hz amplitudes"
-          " are phase locked to 90° (<=> pi/2)")
+plt.xlabel('Amplitude frequencies (Hz)')
+plt.ylabel('Epochs')
+plt.title("Single trial PP according to amplitudes.\n100hz amplitudes"
+          " are phase locked to 90° (pi/2)")
 cb.set_label('PP (in degrees)')
 
 # Then, we show  the histogram corresponding to an 100hz amplitude :
@@ -62,9 +76,7 @@ plt.xticks([-np.pi, -np.pi / 2, 0, np.pi / 2, np.pi])
 plt.gca().set_xticklabels([r"$-\pi$", r"$-\frac{\pi}{2}$", "$0$",
                           r"$\frac{\pi}{2}$", r"$\pi$"])
 
-p.polar(ambin.T, vecbin, p.yvec, cmap='Spectral_r', interp=.1, subplot=212,
+p.polar(ampbin.T, vecbin, p.yvec, cmap='RdBu_r', interp=.1, subplot=212,
         cblabel='Amplitude bins')
-
-# plt.savefig('pp.png', dpi=300, bbox_inches='tight')
 
 p.show()

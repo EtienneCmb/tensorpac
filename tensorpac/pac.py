@@ -4,7 +4,7 @@ import logging
 
 from tensorpac.spectral import spectral, hilbertm
 from tensorpac.methods import (get_pac_fcn, _kl_hr, pacstr, compute_surrogates,
-                               erpac, ergcpac, normalize)
+                               erpac, ergcpac, preferred_phase, normalize)
 from tensorpac.gcmi import nd_mi_gg, copnorm
 from tensorpac.utils import pac_vec
 from tensorpac.visu import _PacPlt
@@ -213,7 +213,7 @@ class _PacObj(object):
 
 
 class Pac(_PacObj, _PacPlt):
-    """Compute Phase-Amplitude Coupling (PAC) using tensors.
+    """Compute Phase-Amplitude Coupling (PAC).
 
     Computing PAC is assessed in three steps : compute the real PAC, compute
     surrogates and finally, because PAC is very sensible to the noise, correct
@@ -486,48 +486,6 @@ class Pac(_PacObj, _PacPlt):
         self.pvalues_[m_pac > th] = p
         return self.pvalues_
 
-    def pp(self, pha, amp, n_bins=72):
-        """Compute the preferred-phase.
-
-        Parameters
-        ----------
-        pha : array_like
-            Phase of slower oscillations.
-        amp : array_like
-            Amplitude of fastest oscillations.
-        n_bins : int | 72
-            Number of bins for bining the amplitude according to phase
-            slices.
-
-        Returns
-        -------
-        ampbin : array_like
-            The binned amplitude according to the phase of shape
-            (n_bins, namp, npha...).
-        pp : array_like
-            The prefered phase where the amplitude is maximum of shape
-            (namp, npha, ...).
-        polarvec : array_like
-            The phase vector for the polar plot.
-        """
-        # Check phase and amplitude shapes :
-        pha, amp = self._phampcheck(pha, amp)
-        # Define the method name :
-        self.method = 'Preferred-Phase (PP)'
-        self.str_surro, self.str_norm = '', ''
-        # Bin the amplitude according to the phase :
-        ampbin = _kl_hr(pha, amp, n_bins)
-        ampbin /= ampbin.sum(axis=0, keepdims=True)
-        # Find the index where the amplitude is maximum over the bins :
-        idxmax = ampbin.argmax(axis=0)
-        # Find the preferred phase :
-        binsize = (2 * np.pi) / float(n_bins)
-        vecbin = np.arange(-np.pi, np.pi, binsize) + binsize / 2
-        pp = vecbin[idxmax]
-        # Build the phase vector (polar plot) :
-        polarvec = np.linspace(-np.pi, np.pi, ampbin.shape[0])
-        return ampbin, pp, polarvec
-
     def _idcheck(self, idpac):
         """Check the idpac parameter."""
         idpac = np.atleast_1d(idpac)
@@ -677,3 +635,117 @@ class EventRelatedPac(_PacObj, _PacPlt):
         # compute erpac
         return self.fit(pha, amp, method=method, verbose=verbose)
 
+
+class PreferredPhase(_PacObj, _PacPlt):
+    """Evaluate the preferred phase (PP).
+
+    The preferred phase is defined as the phase at which the amplitude is
+    maximum.
+
+    Parameters
+    ----------
+    f_pha, f_amp : list/tuple/array | def: [2, 4] and [60, 200]
+        Frequency vector for the phase and amplitude. Here you can use
+        several forms to define those vectors :
+
+            * Basic list/tuple (ex: [2, 4] or [8, 12]...)
+            * List of frequency bands (ex: [[2, 4], [5, 7]]...)
+            * Dynamic definition : (start, stop, width, step)
+            * Range definition (ex : np.arange(3) => [[0, 1], [1, 2]])
+
+    dcomplex : {'wavelet', 'hilbert'}
+        Method for the complex definition. Use either 'hilbert' or
+        'wavelet'.
+    filt : {'fir1', 'butter', 'bessel'}
+        Filtering method (only if dcomplex is 'hilbert'). Choose either
+        'fir1', 'butter' or 'bessel'
+    cycle : tuple | (3, 6)
+        Control the number of cycles for filtering (only if dcomplex is
+        'hilbert'). Should be a tuple of integers where the first one
+        refers to the number of cycles for the phase and the second for the
+        amplitude [#f5]_.
+    filtorder : int | 3
+        Filter order for the Butterworth and Bessel filters (only if
+        dcomplex is 'hilbert').
+    width : int | 7
+        Width of the Morlet's wavelet.
+    """
+
+    def __init__(self, f_pha=[2, 4], f_amp=[60, 200], dcomplex='hilbert',
+                 filt='fir1', cycle=(3, 6), filtorder=3, width=7,
+                 verbose=None):
+        """Check and initialize."""
+        set_log_level(verbose)
+        _PacObj.__init__(self, f_pha=f_pha, f_amp=f_amp, dcomplex=dcomplex,
+                         filt=filt, cycle=cycle, filtorder=filtorder,
+                         width=width)
+        _PacPlt.__init__(self)
+        logger.info("Preferred phase object defined")
+        self.method = 'Preferred-Phase (PP)'
+
+    def fit(self, pha, amp, n_bins=72):
+        """Compute the preferred-phase.
+
+        Parameters
+        ----------
+        pha, amp : array_like
+            Respectively the phase of slower oscillations of shape
+            (n_pha, n_epochs, n_times) and the amplitude of faster
+            oscillations of shape (n_pha, n_epochs, n_times).
+        n_bins : int | 72
+            Number of bins for bining the amplitude according to phase
+            slices.
+
+        Returns
+        -------
+        binned_amp : array_like
+            The binned amplitude according to the phase of shape
+            (n_bins, n_amp, n_pha, n_epochs)
+        pp : array_like
+            The prefered phase where the amplitude is maximum of shape
+            (namp, npha, n_epochs)
+        polarvec : array_like
+            The phase vector for the polar plot of shape (n_bins,)
+        """
+        # Check phase and amplitude shapes :
+        pha, amp = self._phampcheck(pha, amp)
+        return preferred_phase(pha, amp, n_bins=n_bins)
+
+    def filterfit(self, sf, x_pha, x_amp=None, n_bins=12, verbose=None):
+        """Extract phases, amplitudes and compute the preferred phase (PP).
+
+        Parameters
+        ----------
+        sf : float
+            The sampling frequency.
+        x_pha, x_amp : array_like
+            Array of data for computing PP. x_pha is the data used for
+            extracting phases and x_amp, amplitudes. Both arrays must have
+            the same shapes (i.e n_epochs, n_times). If you want to compute
+            local PP i.e. on the same electrode, x=x_pha=x_amp. For distant
+            coupling, x_pha and x_amp could be different but still must to have
+            the same shape.
+        n_bins : int | 72
+            Number of bins for bining the amplitude according to phase
+            slices.
+
+        Returns
+        -------
+        binned_amp : array_like
+            The binned amplitude according to the phase of shape
+            (n_bins, n_amp, n_pha, n_epochs)
+        pp : array_like
+            The prefered phase where the amplitude is maximum of shape
+            (namp, npha, n_epochs)
+        polarvec : array_like
+            The phase vector for the polar plot of shape (n_bins,)
+        """
+        x_amp = x_pha if not isinstance(x_amp, np.ndarray) else x_amp
+        # extract phases and amplitudes
+        logger.info(f"    Extract phases (n_pha={len(self.xvec)}) and "
+                    f"amplitudes (n_amps={len(self.yvec)})")
+        pha = self.filter(sf, x_pha, ftype='phase')
+        amp = self.filter(sf, x_amp, ftype='amplitude')
+        # compute pp
+        return self.fit(pha, amp, n_bins=n_bins, verbose=verbose)
+        
