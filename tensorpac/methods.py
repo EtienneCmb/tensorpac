@@ -14,17 +14,17 @@ def pacstr(idpac):
     """Return correspond methods string."""
     # Pac methods :
     if idpac[0] == 1:
-        method = 'Mean Vector Length (MVL, Canolty, 2006)'
+        method = 'Mean Vector Length (MVL, Canolty et al. 2006)'
     elif idpac[0] == 2:
-        method = 'Kullback-Leiber Distance (KLD, Tort, 2010)'
+        method = 'Kullback-Leiber Distance (KLD, Tort et al. 2010)'
     elif idpac[0] == 3:
-        method = 'Heights ratio (HR, Lakatos, 2005)'
+        method = 'Heights ratio (HR, Lakatos et al. 2005)'
     elif idpac[0] == 4:
-        method = 'ndPac (Ozkurt, 2012)'
+        method = 'ndPac (Ozkurt et al. 2012)'
     elif idpac[0] == 5:
-        method = 'Phase-Synchrony (Cohen, 2008; Penny, 2008)'
+        method = 'Phase-Synchrony (Cohen et al. 2008; Penny et al. 2008)'
     elif idpac[0] == 6:
-        method = 'Gaussian Copula PAC'
+        method = 'Gaussian Copula PAC (Ince et al. 2017)'
     else:
         raise ValueError("No corresponding pac method.")
 
@@ -32,11 +32,11 @@ def pacstr(idpac):
     if idpac[1] == 0:
         suro = 'No surrogates'
     elif idpac[1] == 1:
-        suro = 'Permute phase across trials'
+        suro = 'Permute phase across trials (Tort et al. 2010)'
     elif idpac[1] == 2:
-        suro = 'Swap amplitude time blocks'
+        suro = 'Swap amplitude time blocks (Bahramisharif et al. 2013)'
     elif idpac[1] == 3:
-        suro = 'Time lag'
+        suro = 'Time lag (Canolty et al. 2006)'
     else:
         raise ValueError("No corresponding surrogate method.")
 
@@ -503,7 +503,7 @@ def swap_pha_amp(pha, amp):
 
 
 def swap_blocks(pha, amp):
-    """Swap amplitudes time blocks (Bahramisharif, 2013).
+    """Swap amplitudes time blocks.
 
     Parameters
     ----------
@@ -534,7 +534,7 @@ def swap_blocks(pha, amp):
 
 
 def time_lag(pha, amp):
-    """Introduce a time lag on phase series (Canolty et al. 2006).
+    """Introduce a time lag on phase series.
 
     Parameters
     ----------

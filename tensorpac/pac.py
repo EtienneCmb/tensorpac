@@ -586,7 +586,7 @@ class EventRelatedPac(_PacObj, _PacVisual):
             logger.info(f"    Compute {self.method}")
             er, self.pvalues_ = erpac(pha, amp)
         elif method == 'gc':
-            self.method = "Gaussian-Copula ERPAC"
+            self.method = "Gaussian-Copula ERPAC (Ince et al. 2017)"
             logger.info(f"    Compute {self.method}")
             er = ergcpac(pha, amp)
             self.pvalues_ = None
