@@ -234,7 +234,7 @@ class Pac(_PacObj, _PacPlt):
             - '3' : Heights Ratio (HR) [#f3]_
             - '4' : ndPAC [#f4]_
             - '5' : Phase Synchrony [#f3]_
-            - '6' : Gaussian Copula PAC
+            - '6' : Gaussian Copula PAC [#f7]_
 
         * Second digit : refer to the method for computing surrogates
 
@@ -281,7 +281,6 @@ class Pac(_PacObj, _PacPlt):
 
     References
     ----------
-    .. rubric:: Footnotes
     .. [#f1] `Canolty et al, 2006 <http://www.ncbi.nlm.nih.gov/pmc/articles/
        PMC2628289/>`_
     .. [#f2] `Tort et al, 2010 <http://www.ncbi.nlm.nih.gov/pmc/articles/
@@ -292,6 +291,8 @@ class Pac(_PacObj, _PacPlt):
        22531738/>`_
     .. [#f5] `Bahramisharif et al, 2013 <http://www.jneurosci.org/content/33/
        48/18849.short/>`_
+    .. [#f7] `Ince et al, 2017 <https://onlinelibrary.wiley.com/doi/full/10.
+       1002/hbm.23471>`_
     """
 
     def __init__(self, idpac=(1, 2, 3), f_pha=[2, 4], f_amp=[60, 200],
@@ -529,7 +530,7 @@ class EventRelatedPac(_PacObj, _PacVisual):
         Control the number of cycles for filtering (only if dcomplex is
         'hilbert'). Should be a tuple of integers where the first one
         refers to the number of cycles for the phase and the second for the
-        amplitude [#f5]_.
+        amplitude.
     filtorder : int | 3
         Filter order for the Butterworth and Bessel filters (only if
         dcomplex is 'hilbert').
@@ -573,6 +574,8 @@ class EventRelatedPac(_PacObj, _PacVisual):
         ----------
         .. [#f6] `Voytek et al, 2013 <https://www.ncbi.nlm.nih.gov/pubmed/
            22986076>`_
+        .. [#f7] `Ince et al, 2017 <https://onlinelibrary.wiley.com/doi/full/10.
+           1002/hbm.23471>`_
         """
         set_log_level(verbose)
         pha, amp = self._phampcheck(pha, amp)
@@ -650,7 +653,7 @@ class PreferredPhase(_PacObj, _PolarPlt):
         Control the number of cycles for filtering (only if dcomplex is
         'hilbert'). Should be a tuple of integers where the first one
         refers to the number of cycles for the phase and the second for the
-        amplitude [#f5]_.
+        amplitude.
     filtorder : int | 3
         Filter order for the Butterworth and Bessel filters (only if
         dcomplex is 'hilbert').

@@ -85,7 +85,7 @@ def get_pac_fcn(idp, n_bins, p):
 
 
 def mvl(pha, amp):
-    """Mean Vector Length (Canolty, 2006).
+    """Mean Vector Length.
 
     Parameters
     ----------
@@ -97,13 +97,18 @@ def mvl(pha, amp):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+
+    References
+    ----------
+    Canolty RT (2006) High Gamma Power Is Phase-Locked to Theta. science
+    1128115:313.
     """
     return np.abs(np.einsum('i...j, k...j->ik...', amp,
                             np.exp(1j * pha))) / pha.shape[-1]
 
 
 def kld(pha, amp, n_bins=18):
-    """Kullback Leibler Distance (Tort, 2010).
+    """Kullback Leibler Distance.
 
     Parameters
     ----------
@@ -117,6 +122,12 @@ def kld(pha, amp, n_bins=18):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+
+    References
+    ----------
+    Tort ABL, Komorowski R, Eichenbaum H, Kopell N (2010) Measuring
+    Phase-Amplitude Coupling Between Neuronal Oscillations of Different
+    Frequencies. Journal of Neurophysiology 104:1195–1210.
     """
     # Get the phase locked binarized amplitude :
     p_j = _kl_hr(pha, amp, n_bins)
@@ -132,7 +143,7 @@ def kld(pha, amp, n_bins=18):
 
 
 def hr(pha, amp, n_bins=18):
-    """Pac heights ratio (Lakatos, 2005).
+    """Heights ratio.
 
     Parameters
     ----------
@@ -146,6 +157,12 @@ def hr(pha, amp, n_bins=18):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+
+    References
+    ----------
+    Lakatos P (2005) An Oscillatory Hierarchy Controlling Neuronal
+    Excitability and Stimulus Processing in the Auditory Cortex. Journal of
+    Neurophysiology 94:1904–1911.
     """
     # Get the phase locked binarized amplitude :
     p_j = _kl_hr(pha, amp, n_bins)
@@ -179,7 +196,7 @@ def _kl_hr(pha, amp, n_bins):
 
 
 def ndpac(pha, amp, p=.05):
-    """Normalized direct Pac (Ozkurt, 2012).
+    """Normalized direct Pac.
 
     Parameters
     ----------
@@ -193,6 +210,12 @@ def ndpac(pha, amp, p=.05):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+
+    References
+    ----------
+    Ozkurt TE (2012) Statistically Reliable and Fast Direct Estimation of
+    Phase-Amplitude Cross-Frequency Coupling. Biomedical Engineering, IEEE
+    Transactions on 59:1943–1950.
     """
     npts = amp.shape[-1]
     # Normalize amplitude :
@@ -225,6 +248,14 @@ def ps(pha, amp):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+
+    References
+    ----------
+    Penny WD, Duzel E, Miller KJ, Ojemann JG (2008) Testing for nested
+    oscillation. Journal of Neuroscience Methods 174:50–61.
+    Cohen MX, Elger CE, Fell J (2008) Oscillatory activity and phase amplitude
+    coupling in the human medial frontal cortex during decision making. Journal
+    of cognitive neuroscience 21:390–402.
     """
     pac = np.einsum('i...j, k...j->ik...', np.exp(-1j * amp), np.exp(1j * pha))
     return np.abs(pac) / pha.shape[-1]
@@ -243,6 +274,13 @@ def gcpac(pha, amp):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+
+    References
+    ----------
+    Ince RAA, Giordano BL, Kayser C, Rousselet GA, Gross J, Schyns PG (2017) A
+    statistical framework for neuroimaging data analysis based on mutual
+    information estimated via a gaussian copula: Gaussian Copula Mutual
+    Information. Human Brain Mapping 38:1541–1573.
     """
     # prepare the shape of gcpac
     n_pha, n_amp = pha.shape[0], amp.shape[0]
@@ -312,6 +350,11 @@ def erpac(pha, amp):
         Array of correlation coefficients of shape (n_amp, n_pha, ...)
     pval : array_like
         Array of p-values of shape (n_amp, n_pha, ...).
+
+    References
+    ----------
+    Voytek B, D’Esposito M, Crone N, Knight RT (2013) A method for
+    event-related phase/amplitude coupling. NeuroImage 64:416–424.
     """
     # Move the trial axis to the end :
     pha = np.moveaxis(pha, 1, -1)
@@ -346,6 +389,13 @@ def ergcpac(pha, amp):
     -------
     rho : array_like
         Array of correlation coefficients of shape (n_amp, n_pha, n_times)
+
+    References
+    ----------
+    Ince RAA, Giordano BL, Kayser C, Rousselet GA, Gross J, Schyns PG (2017) A
+    statistical framework for neuroimaging data analysis based on mutual
+    information estimated via a gaussian copula: Gaussian Copula Mutual
+    Information. Human Brain Mapping 38:1541–1573.
     """
     # Move the trial axis to the end :
     pha = np.moveaxis(pha, 1, -1)
@@ -428,7 +478,7 @@ def compute_surrogates(pha, amp, ids, fcn, n_perm, n_jobs):
 
 
 def swap_pha_amp(pha, amp):
-    """Swap phase / amplitude trials (Tort, 2010).
+    """Swap phase / amplitude trials.
 
     Parameters
     ----------
@@ -441,6 +491,12 @@ def swap_pha_amp(pha, amp):
     pha, amp : array_like
         The phase and amplitude to use to compute the distribution of
         permutations
+
+    References
+    ----------
+    Tort ABL, Komorowski R, Eichenbaum H, Kopell N (2010) Measuring
+    Phase-Amplitude Coupling Between Neuronal Oscillations of Different
+    Frequencies. Journal of Neurophysiology 104:1195–1210.
     """
     tr_ = np.random.permutation(pha.shape[1])
     return pha[:, tr_, ...], amp
@@ -460,6 +516,13 @@ def swap_blocks(pha, amp):
     pha, amp : array_like
         The phase and amplitude to use to compute the distribution of
         permutations
+
+    References
+    ----------
+    Bahramisharif A, van Gerven MAJ, Aarnoutse EJ, Mercier MR, Schwartz TH,
+    Foxe JJ, Ramsey NF, Jensen O (2013) Propagating Neocortical Gamma Bursts
+    Are Coordinated by Traveling Alpha Waves. Journal of Neuroscience
+    33:18849–18854.
     """
     # random cutting point along time axis
     cut_at = np.random.randint(1, amp.shape[-1], (1,))
@@ -484,6 +547,11 @@ def time_lag(pha, amp):
     pha, amp : array_like
         The phase and amplitude to use to compute the distribution of
         permutations
+
+    References
+    ----------
+    Canolty RT (2006) High Gamma Power Is Phase-Locked to Theta. science
+    1128115:313.
     """
     shift = np.random.randint(pha.shape[-1])
     return np.roll(pha, shift, axis=-1), amp
