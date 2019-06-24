@@ -14,26 +14,6 @@ Examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Alternativerly, you can create coupling not between centered frequences, but between frequency ...">
-
-.. only:: html
-
-    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_bandwidth_signals_thumb.png
-
-        :ref:`sphx_glr_auto_examples_plot_bandwidth_signals.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/plot_bandwidth_signals
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="Reproduced the figure in the README. ">
 
 .. only:: html
@@ -54,26 +34,6 @@ Examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Instead of looking for phase and amplitude frequency pairs (as in a comodulogram) this example ...">
-
-.. only:: html
-
-    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_fmin_fmax_optmization_thumb.png
-
-        :ref:`sphx_glr_auto_examples_plot_fmin_fmax_optmization.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/plot_fmin_fmax_optmization
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="For the visualization, we used a comodulogram. ">
 
 .. only:: html
@@ -91,6 +51,26 @@ Examples
    :hidden:
 
    /auto_examples/plot_values
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Instead of looking for phase and amplitude frequency pairs (as in a comodulogram) this example ...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_fmin_fmax_optmization_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_fmin_fmax_optmization.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_fmin_fmax_optmization
 
 .. raw:: html
 
@@ -131,6 +111,26 @@ Examples
    :hidden:
 
    /auto_examples/plot_compare_surrogates
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Event-Related Phase-Amplitude Coupling (ERPAC) do not measure PAC across time cycle but instead...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_erpac_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_erpac.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_erpac
 
 .. raw:: html
 
@@ -194,26 +194,6 @@ Examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="For the visualization, we used a comodulogram. ">
-
-.. only:: html
-
-    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_basic_pac_thumb.png
-
-        :ref:`sphx_glr_auto_examples_plot_basic_pac.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/plot_basic_pac
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="Use the pac_signals_tort function to generate artificial PAC. ">
 
 .. only:: html
@@ -251,26 +231,6 @@ Examples
    :hidden:
 
    /auto_examples/plot_long_range_coupling
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Event-Related Phase-Amplitude Coupling (ERPAC) do not measure PAC across time cycle but instead...">
-
-.. only:: html
-
-    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_erpac_thumb.png
-
-        :ref:`sphx_glr_auto_examples_plot_erpac.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/plot_erpac
 
 .. raw:: html
 

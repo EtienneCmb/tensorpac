@@ -1,0 +1,43 @@
+tensorpac.PreferredPhase
+========================
+
+.. currentmodule:: tensorpac
+
+.. autoclass:: PreferredPhase
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~PreferredPhase.__init__
+      ~PreferredPhase.filter
+      ~PreferredPhase.filterfit
+      ~PreferredPhase.fit
+      ~PreferredPhase.pacplot
+      ~PreferredPhase.polar
+      ~PreferredPhase.savefig
+      ~PreferredPhase.show
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~PreferredPhase.cycle
+      ~PreferredPhase.dcomplex
+      ~PreferredPhase.f_amp
+      ~PreferredPhase.f_pha
+      ~PreferredPhase.filt
+      ~PreferredPhase.filtorder
+      ~PreferredPhase.width
+      ~PreferredPhase.xvec
+      ~PreferredPhase.yvec
+   
+   

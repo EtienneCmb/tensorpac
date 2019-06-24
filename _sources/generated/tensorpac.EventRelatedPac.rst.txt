@@ -1,0 +1,42 @@
+tensorpac.EventRelatedPac
+=========================
+
+.. currentmodule:: tensorpac
+
+.. autoclass:: EventRelatedPac
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~EventRelatedPac.__init__
+      ~EventRelatedPac.filter
+      ~EventRelatedPac.filterfit
+      ~EventRelatedPac.fit
+      ~EventRelatedPac.pacplot
+      ~EventRelatedPac.savefig
+      ~EventRelatedPac.show
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~EventRelatedPac.cycle
+      ~EventRelatedPac.dcomplex
+      ~EventRelatedPac.f_amp
+      ~EventRelatedPac.f_pha
+      ~EventRelatedPac.filt
+      ~EventRelatedPac.filtorder
+      ~EventRelatedPac.width
+      ~EventRelatedPac.xvec
+      ~EventRelatedPac.yvec
+   
+   

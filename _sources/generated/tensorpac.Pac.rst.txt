@@ -15,14 +15,11 @@ tensorpac.Pac
    
       ~Pac.__init__
       ~Pac.comodulogram
-      ~Pac.erpac
       ~Pac.filter
       ~Pac.filterfit
       ~Pac.fit
       ~Pac.infer_pvalues
       ~Pac.pacplot
-      ~Pac.polar
-      ~Pac.pp
       ~Pac.savefig
       ~Pac.show
       ~Pac.triplot
@@ -37,9 +34,13 @@ tensorpac.Pac
    
       ~Pac.cycle
       ~Pac.dcomplex
+      ~Pac.f_amp
+      ~Pac.f_pha
       ~Pac.filt
       ~Pac.filtorder
       ~Pac.idpac
       ~Pac.width
+      ~Pac.xvec
+      ~Pac.yvec
    
    

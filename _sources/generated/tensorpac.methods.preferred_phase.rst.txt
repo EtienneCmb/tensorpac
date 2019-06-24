@@ -1,0 +1,6 @@
+tensorpac.methods.preferred\_phase
+==================================
+
+.. currentmodule:: tensorpac.methods
+
+.. autofunction:: preferred_phase

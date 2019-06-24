@@ -78,9 +78,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#compute-phase-amplitude-coupling">Compute phase-amplitude coupling</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.Pac.html">tensorpac.Pac</a><ul class="simple">
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.Pac.html">tensorpac.Pac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.EventRelatedPac.html">tensorpac.EventRelatedPac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.PreferredPhase.html">tensorpac.PreferredPhase</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
@@ -96,6 +96,15 @@
 <li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.ps.html">tensorpac.methods.ps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#event-related-pac-methods">Event Related PAC methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.erpac.html">tensorpac.methods.erpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.ergcpac.html">tensorpac.methods.ergcpac</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#preferred-phase">Preferred phase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.preferred_phase.html">tensorpac.methods.preferred_phase</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#surrogates-methods">Surrogates methods</a><ul>
@@ -118,20 +127,28 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_readme.html">README example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_values.html">Compute p-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_surrogates.html">Compare surrogate methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_erpac.html">Event-Related Phase Amplitude Coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plot_erpac.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_erpac.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Compare normalizations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Compare filtering properties</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_basic_pac.html">Basic phase amplitude coupling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plot_preferred_phase.html#generate-synthetic-signals-sake-of-illustration">Generate synthetic signals (sake of illustration)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_preferred_phase.html#extract-phases-amplitudes-and-compute-the-preferred-phase">Extract phases, amplitudes and compute the preferred phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_preferred_phase.html#plot-the-preferred-phase">Plot the preferred phase</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -225,7 +242,7 @@ with the chance distribution.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  18.966 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  14.089 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-compare-normalizations-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/55818967bbd314461c736112c9a624d9/plot_compare_normalizations.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_compare_normalizations.py</span></code></a></p>

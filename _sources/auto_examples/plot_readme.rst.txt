@@ -36,9 +36,9 @@ Reproduced the figure in the README.
                                   dpha=10, damp=10, sf=sf, n_times=n_times)
 
     # Define a PAC object :
-    p = Pac(idpac=(6, 3, 0), f_pha=(2, 20, 1, 1), f_amp=(60, 150, 5, 5))
+    p = Pac(idpac=(6, 0, 0), f_pha=(2, 20, 1, 1), f_amp=(60, 150, 5, 5))
     # Filter the data and extract PAC :
-    xpac = p.filterfit(sf, data, n_perm=20)
+    xpac = p.filterfit(sf, data)
 
     # Plot your Phase-Amplitude Coupling :
     p.comodulogram(xpac.mean(-1), title='Contour plot with 5 regions',
@@ -49,7 +49,7 @@ Reproduced the figure in the README.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  6.277 seconds)
+   **Total running time of the script:** ( 0 minutes  3.255 seconds)
 
 
 .. _sphx_glr_download_auto_examples_plot_readme.py:

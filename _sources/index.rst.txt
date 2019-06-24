@@ -21,15 +21,6 @@ To get started, see our `examples <https://github.com/EtienneCmb/tensorpac/tree/
 .. figure::  picture/tp.png
    :align:   center
 
-Installation:
-*************
-
-Tensorpac is based on NumPy, SciPy and `Joblib <https://pythonhosted.org/joblib/>`_ for parallel computing. To install Tensorpac, open a terminal and run :
-
-.. code-block:: bash
-
-    pip install tensorpac
-
 
 Contents:
 *********

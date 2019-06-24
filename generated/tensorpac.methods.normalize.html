@@ -78,9 +78,9 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../api.html#compute-phase-amplitude-coupling">Compute phase-amplitude coupling</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tensorpac.Pac.html">tensorpac.Pac</a><ul class="simple">
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.Pac.html">tensorpac.Pac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.EventRelatedPac.html">tensorpac.EventRelatedPac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.PreferredPhase.html">tensorpac.PreferredPhase</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
@@ -96,6 +96,15 @@
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.ps.html">tensorpac.methods.ps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#event-related-pac-methods">Event Related PAC methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.erpac.html">tensorpac.methods.erpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.ergcpac.html">tensorpac.methods.ergcpac</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#preferred-phase">Preferred phase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.preferred_phase.html">tensorpac.methods.preferred_phase</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#surrogates-methods">Surrogates methods</a><ul>
@@ -118,20 +127,28 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_readme.html">README example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_values.html">Compute p-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_compare_surrogates.html">Compare surrogate methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_erpac.html">Event-Related Phase Amplitude Coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_erpac.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_erpac.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_compare_normalizations.html">Compare normalizations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_compare_filtering.html">Compare filtering properties</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_basic_pac.html">Basic phase amplitude coupling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_long_range_coupling.html">Long-range PAC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_preferred_phase.html#generate-synthetic-signals-sake-of-illustration">Generate synthetic signals (sake of illustration)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_preferred_phase.html#extract-phases-amplitudes-and-compute-the-preferred-phase">Extract phases, amplitudes and compute the preferred phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_preferred_phase.html#plot-the-preferred-phase">Plot the preferred phase</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -173,8 +190,29 @@
 <h1>tensorpac.methods.normalize<a class="headerlink" href="#tensorpac-methods-normalize" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="tensorpac.methods.normalize">
-<code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">normalize</code><span class="sig-paren">(</span><em class="sig-param">pac</em>, <em class="sig-param">s_mean</em>, <em class="sig-param">s_std</em>, <em class="sig-param">idn</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods.html#normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.normalize" title="Permalink to this definition">¶</a></dt>
-<dd><p>PAC normalization.</p>
+<code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">normalize</code><span class="sig-paren">(</span><em class="sig-param">idn</em>, <em class="sig-param">pac</em>, <em class="sig-param">surro</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods.html#normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize the phase amplitude coupling.</p>
+<p>This function performs inplace normalization (i.e. without copy of array)</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>idn</strong><span class="classifier">int</span></dt><dd><p>Normalization method to use :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>1 : substract the mean of surrogates</p></li>
+<li><p>2 : divide by the mean of surrogates</p></li>
+<li><p>3 : substract then divide by the mean of surrogates</p></li>
+<li><p>4 : substract the mean then divide by the deviation of surrogates</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>Array of phase amplitude coupling of shape (n_amp, n_pha, …)</p>
+</dd>
+<dt><strong>surro</strong><span class="classifier">array_like</span></dt><dd><p>Array of surrogates of shape (n_perm, n_amp, n_pha, …)</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

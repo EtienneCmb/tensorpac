@@ -1,0 +1,6 @@
+tensorpac.methods.erpac
+=======================
+
+.. currentmodule:: tensorpac.methods
+
+.. autofunction:: erpac

@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Compute the ERPAC (Voytek et al 2013)" href="plot_erpac.html" />
+    <link rel="prev" title="Long-range PAC" href="plot_long_range_coupling.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -77,9 +77,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#compute-phase-amplitude-coupling">Compute phase-amplitude coupling</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.Pac.html">tensorpac.Pac</a><ul class="simple">
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.Pac.html">tensorpac.Pac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.EventRelatedPac.html">tensorpac.EventRelatedPac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.PreferredPhase.html">tensorpac.PreferredPhase</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
@@ -95,6 +95,15 @@
 <li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.ps.html">tensorpac.methods.ps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#event-related-pac-methods">Event Related PAC methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.erpac.html">tensorpac.methods.erpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.ergcpac.html">tensorpac.methods.ergcpac</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#preferred-phase">Preferred phase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.preferred_phase.html">tensorpac.methods.preferred_phase</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#surrogates-methods">Surrogates methods</a><ul>
@@ -117,20 +126,28 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_readme.html">README example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_values.html">Compute p-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_surrogates.html">Compare surrogate methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_erpac.html">Event-Related Phase Amplitude Coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plot_erpac.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_erpac.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalizations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Compare filtering properties</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_basic_pac.html">Basic phase amplitude coupling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Find the preferred phase (PP)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Find the preferred phase (PP)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#generate-synthetic-signals-sake-of-illustration">Generate synthetic signals (sake of illustration)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extract-phases-amplitudes-and-compute-the-preferred-phase">Extract phases, amplitudes and compute the preferred phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plot-the-preferred-phase">Plot the preferred phase</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -178,48 +195,66 @@
 Then, the PP is defined as the phase where the amplitude is maximum. We finally
 use the polar representation to display the preferred phase at different
 amplitudes.</p>
-<img alt="../_images/sphx_glr_plot_preferred_phase_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_preferred_phase_001.png" />
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">tensorpac</span> <span class="k">import</span> <span class="n">pac_signals_wavelet</span><span class="p">,</span> <span class="n">Pac</span>
+<span class="kn">from</span> <span class="nn">tensorpac</span> <span class="k">import</span> <span class="n">pac_signals_wavelet</span><span class="p">,</span> <span class="n">PreferredPhase</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-poster&#39;</span><span class="p">)</span>
-
-<span class="c1"># Generate 100 datasets with a 6&lt;-&gt;100hz coupling :</span>
-<span class="n">sf</span> <span class="o">=</span> <span class="mf">1024.</span>
+</pre></div>
+</div>
+<div class="section" id="generate-synthetic-signals-sake-of-illustration">
+<h2>Generate synthetic signals (sake of illustration)<a class="headerlink" href="#generate-synthetic-signals-sake-of-illustration" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>to illustrate how does the preferred phase works, we generate synthetic
+signals where a 6hz phase is coupled with a 100hz amplitude. We also
+define a maximum amplitude at pi / 2</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sf</span> <span class="o">=</span> <span class="mf">1024.</span>
 <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">n_times</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">pp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span>
 <span class="n">data</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">pac_signals_wavelet</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="n">sf</span><span class="p">,</span>
-                                 <span class="n">noise</span><span class="o">=.</span><span class="mi">7</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">pp</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
-
-
-<span class="c1"># Define a Pac object. Here, we are not going to use the idpac variable :</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">Pac</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+                                 <span class="n">noise</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="n">n_times</span><span class="p">,</span> <span class="n">pp</span><span class="o">=</span><span class="n">pp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="extract-phases-amplitudes-and-compute-the-preferred-phase">
+<h2>Extract phases, amplitudes and compute the preferred phase<a class="headerlink" href="#extract-phases-amplitudes-and-compute-the-preferred-phase" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">PreferredPhase</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 
 <span class="c1"># Extract the phase and the amplitude :</span>
 <span class="n">pha</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">)</span>
 <span class="n">amp</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;amplitude&#39;</span><span class="p">)</span>
 
 <span class="c1"># Now, compute the PP :</span>
-<span class="n">ambin</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">vecbin</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">pp</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">72</span><span class="p">)</span>
-
-<span class="c1"># Reshape the PP to be (n_epochs, n_amp) :</span>
+<span class="n">ampbin</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">vecbin</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">72</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="plot-the-preferred-phase">
+<h2>Plot the preferred phase<a class="headerlink" href="#plot-the-preferred-phase" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Here, we first plot the preferred phase across trials according to
+amplitudes. Then, the distribution of 100hz amplitudes is first plotted
+according to the 72 phase bins and also using a polar representation</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reshape the PP to be (n_epochs, n_amp) and the amplitude to be</span>
+<span class="c1"># (nbins, n_amp, n_epochs). Finally, we take the mean across trials</span>
 <span class="n">pp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">pp</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
-
-<span class="c1"># Reshape the amplitude to be (nbins, n_amp, n_epochs) and take the mean across</span>
-<span class="c1"># datasets :</span>
-<span class="n">ambin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">ambin</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ampbin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">ampbin</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">35</span><span class="p">))</span>
-<span class="c1"># Plot the prefered phase :</span>
+
+<span class="c1"># Plot the prefered phase</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">221</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">yvec</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">pp</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Spectral_r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">yvec</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">pp</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">)</span>
 <span class="n">cb</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="n">vmin</span><span class="o">=-</span><span class="mf">180.</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">180.</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Amplitude center frequency (Hz)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Ndatasets&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;PP for each dataset and for several amplitudes.</span><span class="se">\n</span><span class="s2">100hz amplitudes&quot;</span>
-          <span class="s2">&quot; are phase locked to 90° (&lt;=&gt; pi/2)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Amplitude frequencies (Hz)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Epochs&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Single trial PP according to amplitudes.</span><span class="se">\n</span><span class="s2">100hz amplitudes&quot;</span>
+          <span class="s2">&quot; are phase locked to 90° (pi/2)&quot;</span><span class="p">)</span>
 <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;PP (in degrees)&#39;</span><span class="p">)</span>
 
 <span class="c1"># Then, we show  the histogram corresponding to an 100hz amplitude :</span>
@@ -233,15 +268,14 @@ amplitudes.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="sa">r</span><span class="s2">&quot;$-\pi$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$-\frac{\pi}</span><span class="si">{2}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="s2">&quot;$0$&quot;</span><span class="p">,</span>
                           <span class="sa">r</span><span class="s2">&quot;$\frac{\pi}</span><span class="si">{2}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\pi$&quot;</span><span class="p">])</span>
 
-<span class="n">p</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="n">ambin</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">vecbin</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">yvec</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Spectral_r&#39;</span><span class="p">,</span> <span class="n">interp</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">subplot</span><span class="o">=</span><span class="mi">212</span><span class="p">,</span>
+<span class="n">p</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="n">ampbin</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">vecbin</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">yvec</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span> <span class="n">interp</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">subplot</span><span class="o">=</span><span class="mi">212</span><span class="p">,</span>
         <span class="n">cblabel</span><span class="o">=</span><span class="s1">&#39;Amplitude bins&#39;</span><span class="p">)</span>
-
-<span class="c1"># plt.savefig(&#39;pp.png&#39;, dpi=300, bbox_inches=&#39;tight&#39;)</span>
 
 <span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.795 seconds)</p>
+<img alt="../_images/sphx_glr_plot_preferred_phase_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_preferred_phase_001.png" />
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.543 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-preferred-phase-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/e3125bac7b79b6a1f1b5363e8bb10d81/plot_preferred_phase.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_preferred_phase.py</span></code></a></p>
@@ -251,6 +285,7 @@ amplitudes.</p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
 </div>
 
 

@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Generate a coupling between specific bands" href="plot_bandwidth_signals.html" />
+    <link rel="next" title="README example" href="plot_readme.html" />
     <link rel="prev" title="tensorpac.pac_trivec" href="../generated/tensorpac.pac_trivec.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -78,9 +78,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#compute-phase-amplitude-coupling">Compute phase-amplitude coupling</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.Pac.html">tensorpac.Pac</a><ul class="simple">
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.Pac.html">tensorpac.Pac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.EventRelatedPac.html">tensorpac.EventRelatedPac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.PreferredPhase.html">tensorpac.PreferredPhase</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
@@ -96,6 +96,15 @@
 <li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.ps.html">tensorpac.methods.ps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#event-related-pac-methods">Event Related PAC methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.erpac.html">tensorpac.methods.erpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.ergcpac.html">tensorpac.methods.ergcpac</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#preferred-phase">Preferred phase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.preferred_phase.html">tensorpac.methods.preferred_phase</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#surrogates-methods">Surrogates methods</a><ul>
@@ -118,20 +127,28 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_readme.html">README example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_values.html">Compute p-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_surrogates.html">Compare surrogate methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_erpac.html">Event-Related Phase Amplitude Coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plot_erpac.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_erpac.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalizations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Compare filtering properties</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_basic_pac.html">Basic phase amplitude coupling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plot_preferred_phase.html#generate-synthetic-signals-sake-of-illustration">Generate synthetic signals (sake of illustration)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_preferred_phase.html#extract-phases-amplitudes-and-compute-the-preferred-phase">Extract phases, amplitudes and compute the preferred phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_preferred_phase.html#plot-the-preferred-phase">Plot the preferred phase</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -171,15 +188,15 @@
       
   <div class="section" id="examples">
 <span id="examples-index"></span><span id="sphx-glr-auto-examples"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
-<div class="sphx-glr-thumbcontainer" tooltip="Alternativerly, you can create coupling not between centered frequences, but between frequency ..."><div class="figure align-default" id="id1">
-<img alt="../_images/sphx_glr_plot_bandwidth_signals_thumb.png" src="../_images/sphx_glr_plot_bandwidth_signals_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_bandwidth_signals.html#sphx-glr-auto-examples-plot-bandwidth-signals-py"><span class="std std-ref">Generate a coupling between specific bands</span></a></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="Reproduced the figure in the README. "><div class="figure align-default" id="id1">
+<img alt="../_images/sphx_glr_plot_readme_thumb.png" src="../_images/sphx_glr_plot_readme_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_readme.html#sphx-glr-auto-examples-plot-readme-py"><span class="std std-ref">README example</span></a></span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="Reproduced the figure in the README. "><div class="figure align-default" id="id2">
-<img alt="../_images/sphx_glr_plot_readme_thumb.png" src="../_images/sphx_glr_plot_readme_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_readme.html#sphx-glr-auto-examples-plot-readme-py"><span class="std std-ref">README example</span></a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="For the visualization, we used a comodulogram. "><div class="figure align-default" id="id2">
+<img alt="../_images/sphx_glr_plot_values_thumb.png" src="../_images/sphx_glr_plot_values_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_values.html#sphx-glr-auto-examples-plot-values-py"><span class="std std-ref">Compute p-values</span></a></span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
@@ -189,21 +206,21 @@
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="For the visualization, we used a comodulogram. "><div class="figure align-default" id="id4">
-<img alt="../_images/sphx_glr_plot_values_thumb.png" src="../_images/sphx_glr_plot_values_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_values.html#sphx-glr-auto-examples-plot-values-py"><span class="std std-ref">Compute p-values</span></a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
-</div>
-</div><div class="toctree-wrapper compound">
-</div>
-<div class="sphx-glr-thumbcontainer" tooltip="In Tensorpac, you can define your phase and amplitude vectors in sevral ways :"><div class="figure align-default" id="id5">
+<div class="sphx-glr-thumbcontainer" tooltip="In Tensorpac, you can define your phase and amplitude vectors in sevral ways :"><div class="figure align-default" id="id4">
 <img alt="../_images/sphx_glr_plot_frequency_vectors_thumb.png" src="../_images/sphx_glr_plot_frequency_vectors_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_frequency_vectors.html#sphx-glr-auto-examples-plot-frequency-vectors-py"><span class="std std-ref">Define frequency vectors</span></a></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_frequency_vectors.html#sphx-glr-auto-examples-plot-frequency-vectors-py"><span class="std std-ref">Define frequency vectors</span></a></span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="Surrogates are used to generate a chance ditribution in order to correct the PAC estimation. "><div class="figure align-default" id="id6">
+<div class="sphx-glr-thumbcontainer" tooltip="Surrogates are used to generate a chance ditribution in order to correct the PAC estimation. "><div class="figure align-default" id="id5">
 <img alt="../_images/sphx_glr_plot_compare_surrogates_thumb.png" src="../_images/sphx_glr_plot_compare_surrogates_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_compare_surrogates.html#sphx-glr-auto-examples-plot-compare-surrogates-py"><span class="std std-ref">Compare surrogate methods</span></a></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_compare_surrogates.html#sphx-glr-auto-examples-plot-compare-surrogates-py"><span class="std std-ref">Compare surrogate methods</span></a></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Event-Related Phase-Amplitude Coupling (ERPAC) do not measure PAC across time cycle but instead..."><div class="figure align-default" id="id6">
+<img alt="../_images/sphx_glr_plot_erpac_thumb.png" src="../_images/sphx_glr_plot_erpac_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_erpac.html#sphx-glr-auto-examples-plot-erpac-py"><span class="std std-ref">Event-Related Phase Amplitude Coupling</span></a></span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
@@ -225,33 +242,21 @@
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="For the visualization, we used a comodulogram. "><div class="figure align-default" id="id10">
-<img alt="../_images/sphx_glr_plot_basic_pac_thumb.png" src="../_images/sphx_glr_plot_basic_pac_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_basic_pac.html#sphx-glr-auto-examples-plot-basic-pac-py"><span class="std std-ref">Basic phase amplitude coupling</span></a></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
-</div>
-</div><div class="toctree-wrapper compound">
-</div>
-<div class="sphx-glr-thumbcontainer" tooltip="Use the pac_signals_tort function to generate artificial PAC. "><div class="figure align-default" id="id11">
+<div class="sphx-glr-thumbcontainer" tooltip="Use the pac_signals_tort function to generate artificial PAC. "><div class="figure align-default" id="id10">
 <img alt="../_images/sphx_glr_plot_artificially_coupled_signals_thumb.png" src="../_images/sphx_glr_plot_artificially_coupled_signals_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_artificially_coupled_signals.html#sphx-glr-auto-examples-plot-artificially-coupled-signals-py"><span class="std std-ref">Generate artificially coupled signals</span></a></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_artificially_coupled_signals.html#sphx-glr-auto-examples-plot-artificially-coupled-signals-py"><span class="std std-ref">Generate artificially coupled signals</span></a></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="One thing you may have noticed, both the fit() and filterfit() methods take as inputs data and ..."><div class="figure align-default" id="id12">
+<div class="sphx-glr-thumbcontainer" tooltip="One thing you may have noticed, both the fit() and filterfit() methods take as inputs data and ..."><div class="figure align-default" id="id11">
 <img alt="../_images/sphx_glr_plot_long_range_coupling_thumb.png" src="../_images/sphx_glr_plot_long_range_coupling_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_long_range_coupling.html#sphx-glr-auto-examples-plot-long-range-coupling-py"><span class="std std-ref">Long-range PAC</span></a></span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_long_range_coupling.html#sphx-glr-auto-examples-plot-long-range-coupling-py"><span class="std std-ref">Long-range PAC</span></a></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="Event-Related Phase-Amplitude Coupling (ERPAC) do not measure PAC across time cycle but instead..."><div class="figure align-default" id="id13">
-<img alt="../_images/sphx_glr_plot_erpac_thumb.png" src="../_images/sphx_glr_plot_erpac_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_erpac.html#sphx-glr-auto-examples-plot-erpac-py"><span class="std std-ref">Compute the ERPAC (Voytek et al 2013)</span></a></span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
-</div>
-</div><div class="toctree-wrapper compound">
-</div>
-<div class="sphx-glr-thumbcontainer" tooltip="First, the amplitude is binned according to phase slices (360 degrees/nbins). Then, the PP is d..."><div class="figure align-default" id="id14">
+<div class="sphx-glr-thumbcontainer" tooltip="First, the amplitude is binned according to phase slices (360 degrees/nbins). Then, the PP is d..."><div class="figure align-default" id="id12">
 <img alt="../_images/sphx_glr_plot_preferred_phase_thumb.png" src="../_images/sphx_glr_plot_preferred_phase_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_preferred_phase.html#sphx-glr-auto-examples-plot-preferred-phase-py"><span class="std std-ref">Find the preferred phase (PP)</span></a></span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_preferred_phase.html#sphx-glr-auto-examples-plot-preferred-phase-py"><span class="std std-ref">Find the preferred phase (PP)</span></a></span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>

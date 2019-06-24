@@ -76,9 +76,9 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#compute-phase-amplitude-coupling">Compute phase-amplitude coupling</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.Pac.html">tensorpac.Pac</a><ul class="simple">
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.Pac.html">tensorpac.Pac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.EventRelatedPac.html">tensorpac.EventRelatedPac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.PreferredPhase.html">tensorpac.PreferredPhase</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
@@ -94,6 +94,15 @@
 <li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.ps.html">tensorpac.methods.ps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#event-related-pac-methods">Event Related PAC methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.erpac.html">tensorpac.methods.erpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.ergcpac.html">tensorpac.methods.ergcpac</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#preferred-phase">Preferred phase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.preferred_phase.html">tensorpac.methods.preferred_phase</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#surrogates-methods">Surrogates methods</a><ul>
@@ -116,20 +125,28 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="plot_bandwidth_signals.html">Generate a coupling between specific bands</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_readme.html">README example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_values.html">Compute p-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_surrogates.html">Compare surrogate methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_erpac.html">Event-Related Phase Amplitude Coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plot_erpac.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_erpac.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalizations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Compare filtering properties</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_basic_pac.html">Basic phase amplitude coupling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_erpac.html">Compute the ERPAC (Voytek et al 2013)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plot_preferred_phase.html#generate-synthetic-signals-sake-of-illustration">Generate synthetic signals (sake of illustration)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_preferred_phase.html#extract-phases-amplitudes-and-compute-the-preferred-phase">Extract phases, amplitudes and compute the preferred phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_preferred_phase.html#plot-the-preferred-phase">Plot the preferred phase</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -169,22 +186,20 @@
       
   <div class="section" id="computation-times">
 <span id="sphx-glr-auto-examples-sg-execution-times"></span><h1>Computation times<a class="headerlink" href="#computation-times" title="Permalink to this headline">¶</a></h1>
-<p><strong>02:11.931</strong> total execution time for <strong>auto_examples</strong> files:</p>
+<p><strong>01:28.954</strong> total execution time for <strong>auto_examples</strong> files:</p>
 <ul class="simple">
-<li><p><strong>00:38.216</strong>: <a class="reference internal" href="plot_compare_filtering.html#sphx-glr-auto-examples-plot-compare-filtering-py"><span class="std std-ref">Compare filtering properties</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_filtering.py</span></code>)</p></li>
-<li><p><strong>00:18.966</strong>: <a class="reference internal" href="plot_compare_normalizations.html#sphx-glr-auto-examples-plot-compare-normalizations-py"><span class="std std-ref">Compare normalizations</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_normalizations.py</span></code>)</p></li>
-<li><p><strong>00:18.324</strong>: <a class="reference internal" href="plot_compare_surrogates.html#sphx-glr-auto-examples-plot-compare-surrogates-py"><span class="std std-ref">Compare surrogate methods</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_surrogates.py</span></code>)</p></li>
-<li><p><strong>00:12.324</strong>: <a class="reference internal" href="plot_values.html#sphx-glr-auto-examples-plot-values-py"><span class="std std-ref">Compute p-values</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_values.py</span></code>)</p></li>
-<li><p><strong>00:08.630</strong>: <a class="reference internal" href="plot_basic_pac.html#sphx-glr-auto-examples-plot-basic-pac-py"><span class="std std-ref">Basic phase amplitude coupling</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_basic_pac.py</span></code>)</p></li>
-<li><p><strong>00:06.860</strong>: <a class="reference internal" href="plot_erpac.html#sphx-glr-auto-examples-plot-erpac-py"><span class="std std-ref">Compute the ERPAC (Voytek et al 2013)</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_erpac.py</span></code>)</p></li>
-<li><p><strong>00:06.795</strong>: <a class="reference internal" href="plot_preferred_phase.html#sphx-glr-auto-examples-plot-preferred-phase-py"><span class="std std-ref">Find the preferred phase (PP)</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_preferred_phase.py</span></code>)</p></li>
-<li><p><strong>00:06.277</strong>: <a class="reference internal" href="plot_readme.html#sphx-glr-auto-examples-plot-readme-py"><span class="std std-ref">README example</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_readme.py</span></code>)</p></li>
-<li><p><strong>00:05.025</strong>: <a class="reference internal" href="plot_pac_methods.html#sphx-glr-auto-examples-plot-pac-methods-py"><span class="std std-ref">Compare PAC methods</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_pac_methods.py</span></code>)</p></li>
-<li><p><strong>00:03.998</strong>: <a class="reference internal" href="plot_long_range_coupling.html#sphx-glr-auto-examples-plot-long-range-coupling-py"><span class="std std-ref">Long-range PAC</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_long_range_coupling.py</span></code>)</p></li>
-<li><p><strong>00:03.357</strong>: <a class="reference internal" href="plot_bandwidth_signals.html#sphx-glr-auto-examples-plot-bandwidth-signals-py"><span class="std std-ref">Generate a coupling between specific bands</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_bandwidth_signals.py</span></code>)</p></li>
-<li><p><strong>00:02.657</strong>: <a class="reference internal" href="plot_fmin_fmax_optmization.html#sphx-glr-auto-examples-plot-fmin-fmax-optmization-py"><span class="std std-ref">Find the optimal bandwidth</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_fmin_fmax_optmization.py</span></code>)</p></li>
-<li><p><strong>00:00.307</strong>: <a class="reference internal" href="plot_frequency_vectors.html#sphx-glr-auto-examples-plot-frequency-vectors-py"><span class="std std-ref">Define frequency vectors</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_frequency_vectors.py</span></code>)</p></li>
-<li><p><strong>00:00.197</strong>: <a class="reference internal" href="plot_artificially_coupled_signals.html#sphx-glr-auto-examples-plot-artificially-coupled-signals-py"><span class="std std-ref">Generate artificially coupled signals</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_artificially_coupled_signals.py</span></code>)</p></li>
+<li><p><strong>00:22.535</strong>: <a class="reference internal" href="plot_compare_filtering.html#sphx-glr-auto-examples-plot-compare-filtering-py"><span class="std std-ref">Compare filtering properties</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_filtering.py</span></code>)</p></li>
+<li><p><strong>00:14.387</strong>: <a class="reference internal" href="plot_compare_surrogates.html#sphx-glr-auto-examples-plot-compare-surrogates-py"><span class="std std-ref">Compare surrogate methods</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_surrogates.py</span></code>)</p></li>
+<li><p><strong>00:14.089</strong>: <a class="reference internal" href="plot_compare_normalizations.html#sphx-glr-auto-examples-plot-compare-normalizations-py"><span class="std std-ref">Compare normalizations</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_normalizations.py</span></code>)</p></li>
+<li><p><strong>00:09.237</strong>: <a class="reference internal" href="plot_values.html#sphx-glr-auto-examples-plot-values-py"><span class="std std-ref">Compute p-values</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_values.py</span></code>)</p></li>
+<li><p><strong>00:08.409</strong>: <a class="reference internal" href="plot_erpac.html#sphx-glr-auto-examples-plot-erpac-py"><span class="std std-ref">Event-Related Phase Amplitude Coupling</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_erpac.py</span></code>)</p></li>
+<li><p><strong>00:06.543</strong>: <a class="reference internal" href="plot_preferred_phase.html#sphx-glr-auto-examples-plot-preferred-phase-py"><span class="std std-ref">Find the preferred phase (PP)</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_preferred_phase.py</span></code>)</p></li>
+<li><p><strong>00:04.085</strong>: <a class="reference internal" href="plot_pac_methods.html#sphx-glr-auto-examples-plot-pac-methods-py"><span class="std std-ref">Compare PAC methods</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_pac_methods.py</span></code>)</p></li>
+<li><p><strong>00:03.390</strong>: <a class="reference internal" href="plot_long_range_coupling.html#sphx-glr-auto-examples-plot-long-range-coupling-py"><span class="std std-ref">Long-range PAC</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_long_range_coupling.py</span></code>)</p></li>
+<li><p><strong>00:03.255</strong>: <a class="reference internal" href="plot_readme.html#sphx-glr-auto-examples-plot-readme-py"><span class="std std-ref">README example</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_readme.py</span></code>)</p></li>
+<li><p><strong>00:02.559</strong>: <a class="reference internal" href="plot_fmin_fmax_optmization.html#sphx-glr-auto-examples-plot-fmin-fmax-optmization-py"><span class="std std-ref">Find the optimal bandwidth</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_fmin_fmax_optmization.py</span></code>)</p></li>
+<li><p><strong>00:00.264</strong>: <a class="reference internal" href="plot_frequency_vectors.html#sphx-glr-auto-examples-plot-frequency-vectors-py"><span class="std std-ref">Define frequency vectors</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_frequency_vectors.py</span></code>)</p></li>
+<li><p><strong>00:00.200</strong>: <a class="reference internal" href="plot_artificially_coupled_signals.html#sphx-glr-auto-examples-plot-artificially-coupled-signals-py"><span class="std std-ref">Generate artificially coupled signals</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_artificially_coupled_signals.py</span></code>)</p></li>
 </ul>
 </div>
 
