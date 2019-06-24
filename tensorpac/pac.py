@@ -737,5 +737,5 @@ class PreferredPhase(_PacObj, _PolarPlt):
         pha = self.filter(sf, x_pha, ftype='phase')
         amp = self.filter(sf, x_amp, ftype='amplitude')
         # compute pp
-        return self.fit(pha, amp, n_bins=n_bins, verbose=verbose)
+        return self.fit(pha, amp, n_bins=n_bins)
         
