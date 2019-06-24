@@ -1,7 +1,7 @@
 """
-=====================================
-Compute the ERPAC (Voytek et al 2013)
-=====================================
+======================================
+Event-Related Phase Amplitude Coupling
+======================================
 
 Event-Related Phase-Amplitude Coupling (ERPAC) do not measure PAC across time
 cycle but instead, across trials (just as proposed JP. Lachaux with the

@@ -7,7 +7,7 @@ from tensorpac.methods import (get_pac_fcn, _kl_hr, pacstr, compute_surrogates,
                                erpac, ergcpac, preferred_phase, normalize)
 from tensorpac.gcmi import nd_mi_gg, copnorm
 from tensorpac.utils import pac_vec
-from tensorpac.visu import _PacPlt
+from tensorpac.visu import _PacVisual, _PacPlt, _PolarPlt
 from tensorpac.io import set_log_level
 from tensorpac.config import MNE_EPOCHS_TYPE
 
@@ -279,19 +279,6 @@ class Pac(_PacObj, _PacPlt):
     n_bins : int | 18
         Number of bins for the KLD and HR PAC method [#f2]_ [#f3]_
 
-    .. warning::
-
-        * The ndPac [#f4]_ include a fast and reliable statistical test. As a
-          result, if the ndPAC is choosed as the main PAC method, surrogates
-          and normalization will be deactivate.
-
-    Attributes
-    ----------
-    xvec, yvec : array_like
-        The x and y-vectors for plotting.
-    f_pha, f_amp : array_like
-        The phase and amplitude frequency vectors for pac extraction.
-
     References
     ----------
     .. rubric:: Footnotes
@@ -514,7 +501,7 @@ class Pac(_PacObj, _PacPlt):
         self._idcheck(value)
 
 
-class EventRelatedPac(_PacObj, _PacPlt):
+class EventRelatedPac(_PacObj, _PacVisual):
     """Event Related Phase-Amplitude Coupling (ERPAC).
 
     The traditional PAC approach is computed across time, hence this means that
@@ -636,7 +623,7 @@ class EventRelatedPac(_PacObj, _PacPlt):
         return self.fit(pha, amp, method=method, verbose=verbose)
 
 
-class PreferredPhase(_PacObj, _PacPlt):
+class PreferredPhase(_PacObj, _PolarPlt):
     """Evaluate the preferred phase (PP).
 
     The preferred phase is defined as the phase at which the amplitude is

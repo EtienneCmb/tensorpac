@@ -1,8 +1,11 @@
 """Visualization functions."""
 import numpy as np
+import logging
+
+logger = logging.getLogger('tensorpac')
 
 
-class _PacPlt(object):
+class _PacVisual(object):
     """Main PAC plotting class."""
 
     def __init__(self):
@@ -168,6 +171,28 @@ class _PacPlt(object):
 
         return plt.gca()
 
+    def show(self):
+        """Display the figure."""
+        import matplotlib.pyplot as plt
+        plt.show()
+
+    def savefig(self, filename, dpi=600):
+        """Save the figure.
+
+        Parameters
+        ----------
+        filename : string
+            The name of the figure to save.
+        dpi : int | 600
+            DPI of the figure.
+        """
+        import matplotlib.pyplot as plt
+        plt.savefig(filename, dpi=dpi, bbox_inches='tight')
+
+
+class _PacPlt(_PacVisual):
+    """Plotting class for :class:`tensorpac.Pac`."""
+
     def comodulogram(self, pac, xlabel='Frequency for phase (hz)',
                      ylabel='Frequency for amplitude (hz)',
                      cblabel='PAC values', **kwargs):
@@ -191,6 +216,11 @@ class _PacPlt(object):
         gca : axes
             The current matplotlib axes.
         """
+        if isinstance(pac, np.ndarray) and (pac.ndim == 3):
+            logger.warning("3d pac array has been given as an input. Only 2d "
+                           "arrays are supported for plotting. Taking the mean"
+                           " across the last dimension")
+            pac = pac.mean(-1)
         xvec, yvec = self.xvec, self.yvec
         # Disable automatic vmin/vmax :
         self._autovmM = True
@@ -259,6 +289,10 @@ class _PacPlt(object):
         return self.pacplot(rpac, xvec, yvec, xlabel, ylabel, cblabel,
                             bad=bad, **kwargs)
 
+
+class _PolarPlt(_PacVisual):
+    """Plotting class for :class:`tensorpac.PreferredPhase`."""
+
     def polar(self, amp, xvec, yvec, interp=None, **kwargs):
         """Polar representation.
 
@@ -290,24 +324,6 @@ class _PacPlt(object):
         self._autovmM = False
         return self.pacplot(amp, xvec, yvec, polar=True, **kwargs)
 
-    def show(self):
-        """Display the figure."""
-        import matplotlib.pyplot as plt
-        plt.show()
-
-    def savefig(self, filename, dpi=600):
-        """Save the figure.
-
-        Parameters
-        ----------
-        filename : string
-            The name of the figure to save.
-        dpi : int | 600
-            DPI of the figure.
-        """
-        import matplotlib.pyplot as plt
-        plt.savefig(filename, dpi=dpi, bbox_inches='tight')
-
 
 def mapinterpolation(data, x=None, y=None, interpx=1, interpy=1):
     """Interpolate a 2D map."""
@@ -338,13 +354,10 @@ def interp2(z, xi, yi, extrapval=0):
     ----------
     z : array_like
         Array to interpolate.
-
     xi : array_like
         Array of x coordinates where interpolation is required.
-
     yi : array_like
         Array of y coordinates where interpolation is required.
-
     extrapval : float | 0.
         Value for out of range positions.
 

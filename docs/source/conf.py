@@ -37,6 +37,7 @@ sys.path.insert(0, os.path.abspath('sphinxext'))
 # needs_sphinx = '1.0'
 
 autosummary_generate = True
+autodoc_member_order = 'groupwise'
 # autodoc_default_flags = ['members']
 autodoc_default_flags = ['members', 'inherited-members', 'no-undoc-members']
 # autodoc_default_flags = ['inherited-members', 'no-undoc-members']
@@ -62,7 +63,7 @@ sphinx_gallery_conf = {
     'default_thumb_file': 'source/picture/ico.png',
 }
 
-# numpydoc_show_class_members = False
+numpydoc_show_class_members = False
 # numpydoc_class_members_toctree = False
 # numpydoc_use_blockquotes = False
 

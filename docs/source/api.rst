@@ -12,6 +12,8 @@ API
 Compute phase-amplitude coupling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+:py:mod:`tensorpac`:
+
 .. currentmodule:: tensorpac
 
 .. autosummary::
@@ -24,6 +26,8 @@ Compute phase-amplitude coupling
 Generate synthetic signals
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+:py:mod:`tensorpac`:
+
 .. currentmodule:: tensorpac
 
 .. autosummary::
@@ -35,6 +39,8 @@ Generate synthetic signals
 
 Individual methods
 ~~~~~~~~~~~~~~~~~~
+
+:py:mod:`tensorpac.methods`:
 
 PAC methods
 +++++++++++
@@ -65,6 +71,16 @@ Event Related PAC methods
    erpac
    ergcpac
 
+Preferred phase
++++++++++++++++
+
+.. currentmodule:: tensorpac.methods
+
+.. autosummary::
+   :toctree: generated/
+
+   preferred_phase
+
 Surrogates methods
 ++++++++++++++++++
 
@@ -90,6 +106,8 @@ Normalization
 
 Miscellaneous
 ~~~~~~~~~~~~~
+
+:py:mod:`tensorpac`:
 
 .. currentmodule:: tensorpac
 
