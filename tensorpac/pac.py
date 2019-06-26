@@ -328,21 +328,24 @@ class Pac(_PacObj, _PacPlt):
 
         Returns
         -------
-        pac: array_like
+        pac : array_like
             Phase-Amplitude Coupling measure of shape (n_amp, n_pha, n_epochs)
 
         Attributes
         ----------
-        pvalues_ : array_like
+        pac : array_like
+            Unormalized Phase-Amplitude Coupling measure of shape (n_amp,
+            n_pha, n_epochs)
+        pvalues : array_like
             Array of p-values of shape (n_amp, n_pha)
-        surrogates_ : array_like
+        surrogates : array_like
             Array of surrogates of shape (n_perm, n_amp, n_pha, n_epochs)
         """
         set_log_level(verbose)
         # ---------------------------------------------------------------------
         # input checking
         pha, amp = self._phampcheck(pha, amp)
-        self.pvalues_, self.surrogates_ = None, None
+        self._pvalues, self._surrogates = None, None
         # for the phase synchrony, extract the phase of the amplitude
         if self._idpac[0] == 5:
             amp = np.angle(hilbertm(amp))
@@ -369,7 +372,7 @@ class Pac(_PacObj, _PacPlt):
         logger.info(f'    true PAC estimation using {self.method}')
         fcn = get_pac_fcn(self.idpac[0], self.n_bins, p)
         pac = fcn(pha, amp)
-        self.pac_ = pac
+        self._pac = pac
 
         # ---------------------------------------------------------------------
         # compute surrogates (if needed)
@@ -378,7 +381,7 @@ class Pac(_PacObj, _PacPlt):
                         "permutations)")
             surro = compute_surrogates(pha, amp, self.idpac[1], fcn, n_perm,
                                        n_jobs)
-            self.surrogates_ = surro
+            self._surrogates = surro
 
             # infer pvalues
             self.infer_pvalues(p)
@@ -417,8 +420,18 @@ class Pac(_PacObj, _PacPlt):
 
         Returns
         -------
-        pac: array_like
+        pac : array_like
             Phase-Amplitude Coupling measure of shape (namp, npha, ...).
+
+        Attributes
+        ----------
+        pac : array_like
+            Unormalized Phase-Amplitude Coupling measure of shape (n_amp,
+            n_pha, n_epochs)
+        pvalues : array_like
+            Array of p-values of shape (n_amp, n_pha)
+        surrogates : array_like
+            Array of surrogates of shape (n_perm, n_amp, n_pha, n_epochs)
         """
         # Check if amp is None :
         if x_amp is None:
@@ -455,24 +468,24 @@ class Pac(_PacObj, _PacPlt):
         """
         # ---------------------------------------------------------------------
         # check that pac and surrogates has already been computed
-        assert hasattr(self, 'pac_'), ("You should compute PAC first. Use the "
+        assert hasattr(self, 'pac'), ("You should compute PAC first. Use the "
                                        "`fit` method")
-        assert hasattr(self, 'surrogates_'), "No surrogates computed"
+        assert hasattr(self, 'surrogates'), "No surrogates computed"
         assert all([isinstance(k, np.ndarray) for k in (
-            self.pac_, self.surrogates_)])
-        n_perm = self.surrogates_.shape[0]
+            self.pac, self.surrogates)])
+        n_perm = self.surrogates.shape[0]
 
         # ---------------------------------------------------------------------
         # mean pac and surrogates across trials
-        m_pac, m_surro = self.pac_.mean(2), self.surrogates_.mean(3)
-        self.pvalues_ = np.ones_like(m_pac)
+        m_pac, m_surro = self.pac.mean(2), self.surrogates.mean(3)
+        self._pvalues = np.ones_like(m_pac)
         # infer pvalues
         logger.info(f"    infer p-values at p={p}")
         max_dist = m_surro.reshape(n_perm, -1).max(1)
         th = np.percentile(max_dist, 100. * (1 - p), axis=0,
                            interpolation='nearest')
-        self.pvalues_[m_pac > th] = p
-        return self.pvalues_
+        self._pvalues[m_pac > th] = p
+        return self.pvalues
 
     def _idcheck(self, idpac):
         """Check the idpac parameter."""
@@ -500,6 +513,21 @@ class Pac(_PacObj, _PacPlt):
     def idpac(self, value):
         """Set idpac value."""
         self._idcheck(value)
+
+    @property
+    def pac(self):
+        """Array of un-normalized PAC of shape (n_amp, n_pha, n_epochs)."""
+        return self._pac
+
+    @property
+    def surrogates(self):
+        """Array of surrogates of shape (n_perm, n_amp, n_pha, n_epochs)."""
+        return self._surrogates
+
+    @property
+    def pvalues(self):
+        """Array of p-values of shape (n_amp, n_pha)."""
+        return self._pvalues
 
 
 class EventRelatedPac(_PacObj, _PacVisual):
@@ -568,14 +596,14 @@ class EventRelatedPac(_PacObj, _PacVisual):
         Returns
         -------
         erpac : array_like
-            The ERPAC estimation.
+            The ERPAC estimation of shape (n_amp, n_pha, n_times)
 
         References
         ----------
         .. [#f6] `Voytek et al, 2013 <https://www.ncbi.nlm.nih.gov/pubmed/
            22986076>`_
-        .. [#f7] `Ince et al, 2017 <https://onlinelibrary.wiley.com/doi/full/10.
-           1002/hbm.23471>`_
+        .. [#f7] `Ince et al, 2017 <https://onlinelibrary.wiley.com/doi/full/10
+           .1002/hbm.23471>`_
         """
         set_log_level(verbose)
         pha, amp = self._phampcheck(pha, amp)
@@ -584,13 +612,14 @@ class EventRelatedPac(_PacObj, _PacVisual):
         if method == 'circular':
             self.method = "ERPAC (Voytek et al. 2013)"
             logger.info(f"    Compute {self.method}")
-            er, self.pvalues_ = erpac(pha, amp)
+            er, self.pvalues = erpac(pha, amp)
         elif method == 'gc':
             self.method = "Gaussian-Copula ERPAC (Ince et al. 2017)"
             logger.info(f"    Compute {self.method}")
             er = ergcpac(pha, amp)
-            self.pvalues_ = None
-        return er
+            self.pvalues = None
+        self._erpac = er
+        return self.erpac
 
     def filterfit(self, sf, x_pha, x_amp=None, method='circular',
                   verbose=None):
@@ -613,8 +642,15 @@ class EventRelatedPac(_PacObj, _PacVisual):
 
         Returns
         -------
-        erpac: array_like
-            ERPAC of shape (namp, npha, ...).
+        erpac : array_like
+            The ERPAC estimation of shape (n_amp, n_pha, n_times)
+
+        References
+        ----------
+        .. [#f6] `Voytek et al, 2013 <https://www.ncbi.nlm.nih.gov/pubmed/
+           22986076>`_
+        .. [#f7] `Ince et al, 2017 <https://onlinelibrary.wiley.com/doi/full/10
+           .1002/hbm.23471>`_
         """
         x_amp = x_pha if not isinstance(x_amp, np.ndarray) else x_amp
         # extract phases and amplitudes
@@ -624,6 +660,12 @@ class EventRelatedPac(_PacObj, _PacVisual):
         amp = self.filter(sf, x_amp, ftype='amplitude')
         # compute erpac
         return self.fit(pha, amp, method=method, verbose=verbose)
+
+    @property
+    def erpac(self):
+        """Array of event-related PAC of shape ()."""
+        return self._erpac
+
 
 
 class PreferredPhase(_PacObj, _PolarPlt):
@@ -738,4 +780,3 @@ class PreferredPhase(_PacObj, _PolarPlt):
         amp = self.filter(sf, x_amp, ftype='amplitude')
         # compute pp
         return self.fit(pha, amp, n_bins=n_bins)
-        
