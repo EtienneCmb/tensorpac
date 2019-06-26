@@ -39,6 +39,9 @@ tensorpac.Pac
       ~Pac.filt
       ~Pac.filtorder
       ~Pac.idpac
+      ~Pac.pac
+      ~Pac.pvalues
+      ~Pac.surrogates
       ~Pac.width
       ~Pac.xvec
       ~Pac.yvec

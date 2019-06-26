@@ -364,13 +364,22 @@ dcomplex is ‘hilbert’).</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.idpac" title="tensorpac.Pac.idpac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idpac</span></code></a></p></td>
 <td><p>Get the idpac value.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.width" title="tensorpac.Pac.width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">width</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.pac" title="tensorpac.Pac.pac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac</span></code></a></p></td>
+<td><p>Array of un-normalized PAC of shape (n_amp, n_pha, n_epochs).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.pvalues" title="tensorpac.Pac.pvalues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pvalues</span></code></a></p></td>
+<td><p>Array of p-values of shape (n_amp, n_pha).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.surrogates" title="tensorpac.Pac.surrogates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">surrogates</span></code></a></p></td>
+<td><p>Array of surrogates of shape (n_perm, n_amp, n_pha, n_epochs).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.width" title="tensorpac.Pac.width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">width</span></code></a></p></td>
 <td><p>Get the width value.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.xvec" title="tensorpac.Pac.xvec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xvec</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.xvec" title="tensorpac.Pac.xvec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xvec</span></code></a></p></td>
 <td><p>Vector of phases of shape (n_pha,) use for plotting.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.yvec" title="tensorpac.Pac.yvec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yvec</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.yvec" title="tensorpac.Pac.yvec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yvec</span></code></a></p></td>
 <td><p>Vector of amplitudes of shape (n_amp,) use for plotting.</p></td>
 </tr>
 </tbody>
@@ -460,7 +469,18 @@ set this parameter to 1 in order to prevent large memory usage.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>pac: array_like</dt><dd><p>Phase-Amplitude Coupling measure of shape (namp, npha, …).</p>
+<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>Phase-Amplitude Coupling measure of shape (namp, npha, …).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>Unormalized Phase-Amplitude Coupling measure of shape (n_amp,
+n_pha, n_epochs)</p>
+</dd>
+<dt><strong>pvalues</strong><span class="classifier">array_like</span></dt><dd><p>Array of p-values of shape (n_amp, n_pha)</p>
+</dd>
+<dt><strong>surrogates</strong><span class="classifier">array_like</span></dt><dd><p>Array of surrogates of shape (n_perm, n_amp, n_pha, n_epochs)</p>
 </dd>
 </dl>
 </dd>
@@ -490,15 +510,18 @@ set this parameter to 1 in order to prevent large memory usage.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>pac: array_like</dt><dd><p>Phase-Amplitude Coupling measure of shape (n_amp, n_pha, n_epochs)</p>
+<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>Phase-Amplitude Coupling measure of shape (n_amp, n_pha, n_epochs)</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>pvalues_</strong><span class="classifier">array_like</span></dt><dd><p>Array of p-values of shape (n_amp, n_pha)</p>
+<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>Unormalized Phase-Amplitude Coupling measure of shape (n_amp,
+n_pha, n_epochs)</p>
 </dd>
-<dt><strong>surrogates_</strong><span class="classifier">array_like</span></dt><dd><p>Array of surrogates of shape (n_perm, n_amp, n_pha, n_epochs)</p>
+<dt><strong>pvalues</strong><span class="classifier">array_like</span></dt><dd><p>Array of p-values of shape (n_amp, n_pha)</p>
+</dd>
+<dt><strong>surrogates</strong><span class="classifier">array_like</span></dt><dd><p>Array of surrogates of shape (n_perm, n_amp, n_pha, n_epochs)</p>
 </dd>
 </dl>
 </dd>
@@ -696,6 +719,24 @@ also returned by the pac_trivec function.</p>
 <dt id="tensorpac.Pac.idpac">
 <em class="property">property </em><code class="sig-name descname">idpac</code><a class="headerlink" href="#tensorpac.Pac.idpac" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the idpac value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.Pac.pac">
+<em class="property">property </em><code class="sig-name descname">pac</code><a class="headerlink" href="#tensorpac.Pac.pac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of un-normalized PAC of shape (n_amp, n_pha, n_epochs).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.Pac.pvalues">
+<em class="property">property </em><code class="sig-name descname">pvalues</code><a class="headerlink" href="#tensorpac.Pac.pvalues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of p-values of shape (n_amp, n_pha).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.Pac.surrogates">
+<em class="property">property </em><code class="sig-name descname">surrogates</code><a class="headerlink" href="#tensorpac.Pac.surrogates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of surrogates of shape (n_perm, n_amp, n_pha, n_epochs).</p>
 </dd></dl>
 
 <dl class="method">

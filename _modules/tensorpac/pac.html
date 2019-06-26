@@ -511,21 +511,24 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        pac: array_like</span>
+<span class="sd">        pac : array_like</span>
 <span class="sd">            Phase-Amplitude Coupling measure of shape (n_amp, n_pha, n_epochs)</span>
 
 <span class="sd">        Attributes</span>
 <span class="sd">        ----------</span>
-<span class="sd">        pvalues_ : array_like</span>
+<span class="sd">        pac : array_like</span>
+<span class="sd">            Unormalized Phase-Amplitude Coupling measure of shape (n_amp,</span>
+<span class="sd">            n_pha, n_epochs)</span>
+<span class="sd">        pvalues : array_like</span>
 <span class="sd">            Array of p-values of shape (n_amp, n_pha)</span>
-<span class="sd">        surrogates_ : array_like</span>
+<span class="sd">        surrogates : array_like</span>
 <span class="sd">            Array of surrogates of shape (n_perm, n_amp, n_pha, n_epochs)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">set_log_level</span><span class="p">(</span><span class="n">verbose</span><span class="p">)</span>
         <span class="c1"># ---------------------------------------------------------------------</span>
         <span class="c1"># input checking</span>
         <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phampcheck</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pvalues_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">surrogates_</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_surrogates</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
         <span class="c1"># for the phase synchrony, extract the phase of the amplitude</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
             <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">hilbertm</span><span class="p">(</span><span class="n">amp</span><span class="p">))</span>
@@ -552,7 +555,7 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;    true PAC estimation using </span><span class="si">{self.method}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fcn</span> <span class="o">=</span> <span class="n">get_pac_fcn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_bins</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
         <span class="n">pac</span> <span class="o">=</span> <span class="n">fcn</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pac_</span> <span class="o">=</span> <span class="n">pac</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pac</span> <span class="o">=</span> <span class="n">pac</span>
 
         <span class="c1"># ---------------------------------------------------------------------</span>
         <span class="c1"># compute surrogates (if needed)</span>
@@ -561,7 +564,7 @@
                         <span class="s2">&quot;permutations)&quot;</span><span class="p">)</span>
             <span class="n">surro</span> <span class="o">=</span> <span class="n">compute_surrogates</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">fcn</span><span class="p">,</span> <span class="n">n_perm</span><span class="p">,</span>
                                        <span class="n">n_jobs</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">surrogates_</span> <span class="o">=</span> <span class="n">surro</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_surrogates</span> <span class="o">=</span> <span class="n">surro</span>
 
             <span class="c1"># infer pvalues</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">infer_pvalues</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
@@ -600,8 +603,18 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        pac: array_like</span>
+<span class="sd">        pac : array_like</span>
 <span class="sd">            Phase-Amplitude Coupling measure of shape (namp, npha, ...).</span>
+
+<span class="sd">        Attributes</span>
+<span class="sd">        ----------</span>
+<span class="sd">        pac : array_like</span>
+<span class="sd">            Unormalized Phase-Amplitude Coupling measure of shape (n_amp,</span>
+<span class="sd">            n_pha, n_epochs)</span>
+<span class="sd">        pvalues : array_like</span>
+<span class="sd">            Array of p-values of shape (n_amp, n_pha)</span>
+<span class="sd">        surrogates : array_like</span>
+<span class="sd">            Array of surrogates of shape (n_perm, n_amp, n_pha, n_epochs)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Check if amp is None :</span>
         <span class="k">if</span> <span class="n">x_amp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -638,24 +651,24 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># ---------------------------------------------------------------------</span>
         <span class="c1"># check that pac and surrogates has already been computed</span>
-        <span class="k">assert</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;pac_&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;You should compute PAC first. Use the &quot;</span>
+        <span class="k">assert</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;pac&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;You should compute PAC first. Use the &quot;</span>
                                        <span class="s2">&quot;`fit` method&quot;</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;surrogates_&#39;</span><span class="p">),</span> <span class="s2">&quot;No surrogates computed&quot;</span>
+        <span class="k">assert</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;surrogates&#39;</span><span class="p">),</span> <span class="s2">&quot;No surrogates computed&quot;</span>
         <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pac_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">surrogates_</span><span class="p">)])</span>
-        <span class="n">n_perm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">surrogates_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pac</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">surrogates</span><span class="p">)])</span>
+        <span class="n">n_perm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">surrogates</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="c1"># ---------------------------------------------------------------------</span>
         <span class="c1"># mean pac and surrogates across trials</span>
-        <span class="n">m_pac</span><span class="p">,</span> <span class="n">m_surro</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pac_</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">surrogates_</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pvalues_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">m_pac</span><span class="p">)</span>
+        <span class="n">m_pac</span><span class="p">,</span> <span class="n">m_surro</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pac</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">surrogates</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">m_pac</span><span class="p">)</span>
         <span class="c1"># infer pvalues</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;    infer p-values at p=</span><span class="si">{p}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">max_dist</span> <span class="o">=</span> <span class="n">m_surro</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_perm</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">max_dist</span><span class="p">,</span> <span class="mf">100.</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                            <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pvalues_</span><span class="p">[</span><span class="n">m_pac</span> <span class="o">&gt;</span> <span class="n">th</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pvalues_</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span><span class="p">[</span><span class="n">m_pac</span> <span class="o">&gt;</span> <span class="n">th</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pvalues</span></div>
 
     <span class="k">def</span> <span class="nf">_idcheck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idpac</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check the idpac parameter.&quot;&quot;&quot;</span>
@@ -682,7 +695,22 @@
     <span class="nd">@idpac</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">idpac</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set idpac value.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_idcheck</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_idcheck</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">pac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Array of un-normalized PAC of shape (n_amp, n_pha, n_epochs).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pac</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">surrogates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Array of surrogates of shape (n_perm, n_amp, n_pha, n_epochs).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_surrogates</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">pvalues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Array of p-values of shape (n_amp, n_pha).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span></div>
 
 
 <div class="viewcode-block" id="EventRelatedPac"><a class="viewcode-back" href="../../generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac">[docs]</a><span class="k">class</span> <span class="nc">EventRelatedPac</span><span class="p">(</span><span class="n">_PacObj</span><span class="p">,</span> <span class="n">_PacVisual</span><span class="p">):</span>
@@ -751,14 +779,14 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        erpac : array_like</span>
-<span class="sd">            The ERPAC estimation.</span>
+<span class="sd">            The ERPAC estimation of shape (n_amp, n_pha, n_times)</span>
 
 <span class="sd">        References</span>
 <span class="sd">        ----------</span>
 <span class="sd">        .. [#f6] `Voytek et al, 2013 &lt;https://www.ncbi.nlm.nih.gov/pubmed/</span>
 <span class="sd">           22986076&gt;`_</span>
-<span class="sd">        .. [#f7] `Ince et al, 2017 &lt;https://onlinelibrary.wiley.com/doi/full/10.</span>
-<span class="sd">           1002/hbm.23471&gt;`_</span>
+<span class="sd">        .. [#f7] `Ince et al, 2017 &lt;https://onlinelibrary.wiley.com/doi/full/10</span>
+<span class="sd">           .1002/hbm.23471&gt;`_</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">set_log_level</span><span class="p">(</span><span class="n">verbose</span><span class="p">)</span>
         <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phampcheck</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">)</span>
@@ -767,13 +795,14 @@
         <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;circular&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;ERPAC (Voytek et al. 2013)&quot;</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;    Compute </span><span class="si">{self.method}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">er</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pvalues_</span> <span class="o">=</span> <span class="n">erpac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">)</span>
+            <span class="n">er</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pvalues</span> <span class="o">=</span> <span class="n">erpac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;gc&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;Gaussian-Copula ERPAC (Ince et al. 2017)&quot;</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;    Compute </span><span class="si">{self.method}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">er</span> <span class="o">=</span> <span class="n">ergcpac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pvalues_</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">return</span> <span class="n">er</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pvalues</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_erpac</span> <span class="o">=</span> <span class="n">er</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">erpac</span></div>
 
 <div class="viewcode-block" id="EventRelatedPac.filterfit"><a class="viewcode-back" href="../../generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">x_amp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;circular&#39;</span><span class="p">,</span>
                   <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -796,8 +825,15 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        erpac: array_like</span>
-<span class="sd">            ERPAC of shape (namp, npha, ...).</span>
+<span class="sd">        erpac : array_like</span>
+<span class="sd">            The ERPAC estimation of shape (n_amp, n_pha, n_times)</span>
+
+<span class="sd">        References</span>
+<span class="sd">        ----------</span>
+<span class="sd">        .. [#f6] `Voytek et al, 2013 &lt;https://www.ncbi.nlm.nih.gov/pubmed/</span>
+<span class="sd">           22986076&gt;`_</span>
+<span class="sd">        .. [#f7] `Ince et al, 2017 &lt;https://onlinelibrary.wiley.com/doi/full/10</span>
+<span class="sd">           .1002/hbm.23471&gt;`_</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">x_amp</span> <span class="o">=</span> <span class="n">x_pha</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x_amp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">else</span> <span class="n">x_amp</span>
         <span class="c1"># extract phases and amplitudes</span>
@@ -806,7 +842,12 @@
         <span class="n">pha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">)</span>
         <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_amp</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;amplitude&#39;</span><span class="p">)</span>
         <span class="c1"># compute erpac</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">erpac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Array of event-related PAC of shape ().&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_erpac</span></div>
 
 
 <div class="viewcode-block" id="PreferredPhase"><a class="viewcode-back" href="../../generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase">[docs]</a><span class="k">class</span> <span class="nc">PreferredPhase</span><span class="p">(</span><span class="n">_PacObj</span><span class="p">,</span> <span class="n">_PolarPlt</span><span class="p">):</span>
@@ -921,7 +962,6 @@
         <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_amp</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;amplitude&#39;</span><span class="p">)</span>
         <span class="c1"># compute pp</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">)</span></div></div>
-        
 </pre></div>
 
     </div>
