@@ -667,7 +667,6 @@ class EventRelatedPac(_PacObj, _PacVisual):
         return self._erpac
 
 
-
 class PreferredPhase(_PacObj, _PolarPlt):
     """Evaluate the preferred phase (PP).
 
