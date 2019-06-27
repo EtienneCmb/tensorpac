@@ -259,6 +259,8 @@ class Pac(_PacObj, _PacPlt):
             * List of frequency bands (ex: [[2, 4], [5, 7]]...)
             * Dynamic definition : (start, stop, width, step)
             * Range definition (ex : np.arange(3) => [[0, 1], [1, 2]])
+            * Using a string. `f_pha` and `f_amp` can be 'lres', 'mres', 'hres'
+              respectively for low, middle and high resolution vectors
 
     dcomplex : {'wavelet', 'hilbert'}
         Method for the complex definition. Use either 'hilbert' or
