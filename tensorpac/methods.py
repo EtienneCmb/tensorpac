@@ -289,8 +289,7 @@ def gcpac(pha, amp):
     # compute mutual information
     for p in range(n_pha):
         for a in range(n_amp):
-            gc[a, p, ...] = nd_mi_gg(pha[p, ...], amp[a, ...], mvaxis=-2,
-                                     traxis=-1, biascorrect=False)
+            gc[a, p, ...] = nd_mi_gg(pha[p, ...], amp[a, ...])
     return gc
 
 
@@ -376,7 +375,7 @@ def erpac(pha, amp):
     return rho, pval
 
 
-def ergcpac(pha, amp):
+def ergcpac(pha, amp, smooth=None, n_jobs=-1):
     """Event Related PAC computed using the Gaussian Copula Mutual Information.
 
     Parameters
@@ -408,10 +407,37 @@ def ergcpac(pha, amp):
     amp = copnorm(amp)[..., np.newaxis, :]
     # compute mutual information across trials
     ergcpac = np.zeros((n_amp, n_pha, n_times))
-    for a in range(n_amp):
-        for p in range(n_pha):
-            ergcpac[a, p, ...] = nd_mi_gg(sco[p, ...], amp[a, ...], mvaxis=-2,
-                                          traxis=-1, biascorrect=False)
+    if isinstance(smooth, int):
+        # define the temporal smoothing vector
+        vec = np.arange(smooth, n_times - smooth, 1)
+        times = [slice(k - smooth, k + smooth + 1) for k in vec]
+        # move time axis to avoid to do it inside parallel
+        sco = np.moveaxis(sco, 1, -2)
+        amp = np.moveaxis(amp, 1, -2)
+        # function to run in parallel across times
+        def _fcn(xp, xa):  # noqa
+            _erpac = np.zeros((n_amp, n_pha), dtype=float)
+            for a in range(n_amp):
+                _xa = xa.reshape(n_amp, 1, -1)
+                for p in range(n_pha):
+                    _xp = xp.reshape(n_pha, 2, -1)
+                    _erpac[a, p] = nd_mi_gg(_xp[p, ...], _xa[a, ...])
+            return _erpac
+        # run the function across time points
+        _ergcpac = Parallel(n_jobs=n_jobs, **JOBLIB_CFG)(delayed(_fcn)(
+            sco[..., t, :], amp[..., t, :]) for t in times)
+        # reconstruct the smoothed ERGCPAC array
+        for a in range(n_amp):
+            for p in range(n_pha):
+                mean_vec = np.zeros((n_times,), dtype=float)
+                for t, _gc in zip(times, _ergcpac):
+                    ergcpac[a, p, t] += _gc[a, p]
+                    mean_vec[t] += 1
+                ergcpac[a, p, :] /= mean_vec
+    else:
+        for a in range(n_amp):
+            for p in range(n_pha):
+                ergcpac[a, p, ...] = nd_mi_gg(sco[p, ...], amp[a, ...])
     return ergcpac
 
 

@@ -45,7 +45,7 @@ def copnorm(x):
     return np.apply_along_axis(_copnorm, -1, x)
 
 
-def nd_mi_gg(x, y, mvaxis=None, traxis=-1, biascorrect=True, demeaned=False):
+def nd_mi_gg(x, y, biascorrect=False):
     """Multi-dimentional MI between two Gaussian variables in bits.
 
     Parameters
@@ -54,23 +54,13 @@ def nd_mi_gg(x, y, mvaxis=None, traxis=-1, biascorrect=True, demeaned=False):
         Arrays to consider for computing the Mutual Information. The two input
         variables x and y should have the same shape except on the mvaxis
         (if needed).
-    mvaxis : int | None
-        Spatial location of the axis to consider if multi-variate analysis
-        is needed
-    traxis : int | -1
-        Spatial location of the trial axis. By default the last axis is
-        considered
-    biascorrect : bool | True
+    biascorrect : bool | False
         Specifies whether bias correction should be applied to the estimated MI
-    demeaned : bool | False
-        Specifies whether the input data already has zero mean (true if it has
-        been copula-normalized)
 
     Returns
     -------
     mi : array_like
-        The mutual information with the same shape as x and y, without the
-        mvaxis and traxis
+        The mutual information between x and y
     """
     # Multi-dimentional shape checking
     # x.shape (..., x_mvaxis, traxis)
@@ -81,8 +71,6 @@ def nd_mi_gg(x, y, mvaxis=None, traxis=-1, biascorrect=True, demeaned=False):
 
     # joint variable along the mvaxis
     xy = np.concatenate((x, y), axis=-2)
-    if not demeaned:
-        xy -= xy.mean(axis=-1, keepdims=True)
     cxy = np.einsum('...ij, ...kj->...ik', xy, xy)
     cxy /= float(ntrl - 1.)
 

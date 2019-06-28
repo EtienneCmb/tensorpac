@@ -579,7 +579,8 @@ class EventRelatedPac(_PacObj, _PacVisual):
         _PacPlt.__init__(self)
         logger.info("Event Related PAC object defined")
 
-    def fit(self, pha, amp, method='circular', verbose=None):
+    def fit(self, pha, amp, method='circular', smooth=None, n_jobs=-1,
+            verbose=None):
         """Compute the Event-Related Phase-Amplitude Coupling (ERPAC).
 
         The ERPAC [#f6]_ is used to measure PAC across trials and is
@@ -594,6 +595,9 @@ class EventRelatedPac(_PacObj, _PacVisual):
         method : {'circular', 'gc'}
             Name of the method for computing erpac. Use 'circular' for
             reproducing [#f6]_ or 'gc' for a Gaussian-Copula based erpac.
+        smooth : int | None
+            Half number of time-points to use to produce a smoothing. Only
+            active with the Gaussian-Copula ('gc') method.
 
         Returns
         -------
@@ -618,13 +622,13 @@ class EventRelatedPac(_PacObj, _PacVisual):
         elif method == 'gc':
             self.method = "Gaussian-Copula ERPAC (Ince et al. 2017)"
             logger.info(f"    Compute {self.method}")
-            er = ergcpac(pha, amp)
+            er = ergcpac(pha, amp, smooth=smooth, n_jobs=n_jobs)
             self.pvalues = None
         self._erpac = er
         return self.erpac
 
-    def filterfit(self, sf, x_pha, x_amp=None, method='circular',
-                  verbose=None):
+    def filterfit(self, sf, x_pha, x_amp=None, method='circular', smooth=None,
+                  n_jobs=-1, verbose=None):
         """Extract phases, amplitudes and compute ERPAC.
 
         Parameters
@@ -641,6 +645,9 @@ class EventRelatedPac(_PacObj, _PacVisual):
         method : {'circular', 'gc'}
             Name of the method for computing erpac. Use 'circular' for
             reproducing [#f6]_ or 'gc' for a Gaussian-Copula based erpac.
+        smooth : int | None
+            Half number of time-points to use to produce a smoothing. Only
+            active with the Gaussian-Copula ('gc') method.
 
         Returns
         -------
@@ -661,7 +668,8 @@ class EventRelatedPac(_PacObj, _PacVisual):
         pha = self.filter(sf, x_pha, ftype='phase')
         amp = self.filter(sf, x_amp, ftype='amplitude')
         # compute erpac
-        return self.fit(pha, amp, method=method, verbose=verbose)
+        return self.fit(pha, amp, method=method, smooth=smooth, n_jobs=n_jobs,
+                        verbose=verbose)
 
     @property
     def erpac(self):
