@@ -250,7 +250,7 @@ dcomplex is ‘hilbert’).</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.filterfit" title="tensorpac.EventRelatedPac.filterfit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filterfit</span></code></a>(self, sf, x_pha[, x_amp, method, …])</p></td>
 <td><p>Extract phases, amplitudes and compute ERPAC.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.fit" title="tensorpac.EventRelatedPac.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(self, pha, amp[, method, verbose])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.fit" title="tensorpac.EventRelatedPac.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(self, pha, amp[, method, smooth, …])</p></td>
 <td><p>Compute the Event-Related Phase-Amplitude Coupling (ERPAC).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.pacplot" title="tensorpac.EventRelatedPac.pacplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pacplot</span></code></a>(self, pac, xvec, yvec[, xlabel, …])</p></td>
@@ -336,7 +336,7 @@ is only available with dcomplex=’hilbert’ and not wavelet.</p>
 
 <dl class="method">
 <dt id="tensorpac.EventRelatedPac.filterfit">
-<code class="sig-name descname">filterfit</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x_pha</em>, <em class="sig-param">x_amp=None</em>, <em class="sig-param">method='circular'</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.filterfit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">filterfit</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x_pha</em>, <em class="sig-param">x_amp=None</em>, <em class="sig-param">method='circular'</em>, <em class="sig-param">smooth=None</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.filterfit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract phases, amplitudes and compute ERPAC.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -352,6 +352,9 @@ the same shape.</p>
 </dd>
 <dt><strong>method</strong><span class="classifier">{‘circular’, ‘gc’}</span></dt><dd><p>Name of the method for computing erpac. Use ‘circular’ for
 reproducing <a href="#id9"><span class="problematic" id="id1">[#f6]_</span></a> or ‘gc’ for a Gaussian-Copula based erpac.</p>
+</dd>
+<dt><strong>smooth</strong><span class="classifier">int | None</span></dt><dd><p>Half number of time-points to use to produce a smoothing. Only
+active with the Gaussian-Copula (‘gc’) method.</p>
 </dd>
 </dl>
 </dd>
@@ -375,7 +378,7 @@ reproducing <a href="#id9"><span class="problematic" id="id1">[#f6]_</span></a> 
 
 <dl class="method">
 <dt id="tensorpac.EventRelatedPac.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">method='circular'</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">method='circular'</em>, <em class="sig-param">smooth=None</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Event-Related Phase-Amplitude Coupling (ERPAC).</p>
 <p>The ERPAC <a href="#id10"><span class="problematic" id="id2">[#f6]_</span></a> is used to measure PAC across trials and is
 interesting for real-time estimation.</p>
@@ -388,6 +391,9 @@ oscillations of shape (n_pha, n_epochs, n_times).</p>
 </dd>
 <dt><strong>method</strong><span class="classifier">{‘circular’, ‘gc’}</span></dt><dd><p>Name of the method for computing erpac. Use ‘circular’ for
 reproducing <a href="#id11"><span class="problematic" id="id3">[#f6]_</span></a> or ‘gc’ for a Gaussian-Copula based erpac.</p>
+</dd>
+<dt><strong>smooth</strong><span class="classifier">int | None</span></dt><dd><p>Half number of time-points to use to produce a smoothing. Only
+active with the Gaussian-Copula (‘gc’) method.</p>
 </dd>
 </dl>
 </dd>
