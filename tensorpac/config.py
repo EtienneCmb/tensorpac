@@ -1,5 +1,6 @@
 """Tensorpac configuration."""
-JOBLIB_CFG = dict(prefer='threads')
+# JOBLIB_CFG = dict(prefer='threads')
+JOBLIB_CFG = dict()
 
 try:
     import mne
