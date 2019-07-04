@@ -186,11 +186,11 @@ def pac_vec(f_pha=(2, 30, 2, 1), f_amp=(60, 200, 10, 5)):
             f_pha = (2, 30, 1, .5)
     if isinstance(f_amp, str):
         if f_amp == 'lres':    # low resolution amplitude
-            f_amp = (30, 160, 10, 10)
+            f_amp = (60, 160, 10, 10)
         elif f_amp == 'mres':  # middle resolution amplitude
-            f_amp = (30, 160, 5, 4)
+            f_amp = (60, 160, 5, 4)
         elif f_amp == 'hres':  # high resolution amplitude
-            f_amp = (30, 160, 4, 2)
+            f_amp = (60, 160, 4, 2)
     return _check_freq(f_pha), _check_freq(f_amp)
 
 
