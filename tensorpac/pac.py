@@ -374,7 +374,7 @@ class Pac(_PacObj, _PacPlt):
         logger.info(f'    true PAC estimation using {self.method}')
         fcn = get_pac_fcn(self.idpac[0], self.n_bins, p)
         pac = fcn(pha, amp)
-        self._pac = pac
+        self._pac = pac.copy()
 
         # ---------------------------------------------------------------------
         # compute surrogates (if needed)
