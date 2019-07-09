@@ -59,7 +59,7 @@ methods = ['circular', 'gc']
 plt.figure(figsize=(16, 8))
 for n_m, m in enumerate(methods):
     # compute the erpac
-    erpac = p.fit(pha, amp, method=m, smooth=100).squeeze()
+    erpac = p.fit(pha, amp, method=m, smooth=100, n_jobs=-1).squeeze()
 
     # plot
     plt.subplot(len(methods), 1, n_m + 1)

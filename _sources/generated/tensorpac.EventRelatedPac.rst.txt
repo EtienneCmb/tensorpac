@@ -17,6 +17,7 @@ tensorpac.EventRelatedPac
       ~EventRelatedPac.filter
       ~EventRelatedPac.filterfit
       ~EventRelatedPac.fit
+      ~EventRelatedPac.infer_pvalues
       ~EventRelatedPac.pacplot
       ~EventRelatedPac.savefig
       ~EventRelatedPac.show
@@ -36,6 +37,8 @@ tensorpac.EventRelatedPac
       ~EventRelatedPac.f_pha
       ~EventRelatedPac.filt
       ~EventRelatedPac.filtorder
+      ~EventRelatedPac.pvalues
+      ~EventRelatedPac.surrogates
       ~EventRelatedPac.width
       ~EventRelatedPac.xvec
       ~EventRelatedPac.yvec

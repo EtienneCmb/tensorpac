@@ -253,13 +253,16 @@ dcomplex is ‘hilbert’).</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.fit" title="tensorpac.EventRelatedPac.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(self, pha, amp[, method, smooth, …])</p></td>
 <td><p>Compute the Event-Related Phase-Amplitude Coupling (ERPAC).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.pacplot" title="tensorpac.EventRelatedPac.pacplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pacplot</span></code></a>(self, pac, xvec, yvec[, xlabel, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.infer_pvalues" title="tensorpac.EventRelatedPac.infer_pvalues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">infer_pvalues</span></code></a>(self[, p])</p></td>
+<td><p>Infer p-values based on surrogate distribution.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.pacplot" title="tensorpac.EventRelatedPac.pacplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pacplot</span></code></a>(self, pac, xvec, yvec[, xlabel, …])</p></td>
 <td><p>Main plotting pac function.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.savefig" title="tensorpac.EventRelatedPac.savefig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">savefig</span></code></a>(self, filename[, dpi])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.savefig" title="tensorpac.EventRelatedPac.savefig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">savefig</span></code></a>(self, filename[, dpi])</p></td>
 <td><p>Save the figure.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.show" title="tensorpac.EventRelatedPac.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>(self)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.show" title="tensorpac.EventRelatedPac.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>(self)</p></td>
 <td><p>Display the figure.</p></td>
 </tr>
 </tbody>
@@ -291,6 +294,12 @@ dcomplex is ‘hilbert’).</p>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.filtorder" title="tensorpac.EventRelatedPac.filtorder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filtorder</span></code></a></p></td>
 <td><p>Get the filtorder value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.pvalues" title="tensorpac.EventRelatedPac.pvalues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pvalues</span></code></a></p></td>
+<td><p>Array of p-values of shape (n_amp, n_pha, n_times).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.surrogates" title="tensorpac.EventRelatedPac.surrogates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">surrogates</span></code></a></p></td>
+<td><p>Array of surrogates of shape (n_perm, n_amp, n_pha, n_times).</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.width" title="tensorpac.EventRelatedPac.width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">width</span></code></a></p></td>
 <td><p>Get the width value.</p></td>
@@ -336,7 +345,7 @@ is only available with dcomplex=’hilbert’ and not wavelet.</p>
 
 <dl class="method">
 <dt id="tensorpac.EventRelatedPac.filterfit">
-<code class="sig-name descname">filterfit</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x_pha</em>, <em class="sig-param">x_amp=None</em>, <em class="sig-param">method='circular'</em>, <em class="sig-param">smooth=None</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.filterfit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">filterfit</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x_pha</em>, <em class="sig-param">x_amp=None</em>, <em class="sig-param">method='circular'</em>, <em class="sig-param">smooth=None</em>, <em class="sig-param">n_perm=None</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.filterfit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract phases, amplitudes and compute ERPAC.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -355,6 +364,12 @@ reproducing <a href="#id9"><span class="problematic" id="id1">[#f6]_</span></a> 
 </dd>
 <dt><strong>smooth</strong><span class="classifier">int | None</span></dt><dd><p>Half number of time-points to use to produce a smoothing. Only
 active with the Gaussian-Copula (‘gc’) method.</p>
+</dd>
+<dt><strong>n_perm</strong><span class="classifier">int | None</span></dt><dd><p>Number of permutations to compute for assessing p-values for the
+gaussian-copula (‘gc’) method. Statistics are performed by randomly
+swapping phase trials</p>
+</dd>
+<dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Statistical threshold for the gaussian-copula (‘gc’) method</p>
 </dd>
 </dl>
 </dd>
@@ -378,7 +393,7 @@ active with the Gaussian-Copula (‘gc’) method.</p>
 
 <dl class="method">
 <dt id="tensorpac.EventRelatedPac.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">method='circular'</em>, <em class="sig-param">smooth=None</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">method='circular'</em>, <em class="sig-param">smooth=None</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">n_perm=None</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Event-Related Phase-Amplitude Coupling (ERPAC).</p>
 <p>The ERPAC <a href="#id10"><span class="problematic" id="id2">[#f6]_</span></a> is used to measure PAC across trials and is
 interesting for real-time estimation.</p>
@@ -394,6 +409,12 @@ reproducing <a href="#id11"><span class="problematic" id="id3">[#f6]_</span></a>
 </dd>
 <dt><strong>smooth</strong><span class="classifier">int | None</span></dt><dd><p>Half number of time-points to use to produce a smoothing. Only
 active with the Gaussian-Copula (‘gc’) method.</p>
+</dd>
+<dt><strong>n_perm</strong><span class="classifier">int | None</span></dt><dd><p>Number of permutations to compute for assessing p-values for the
+gaussian-copula (‘gc’) method. Statistics are performed by randomly
+swapping phase trials</p>
+</dd>
+<dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Statistical threshold for the gaussian-copula (‘gc’) method</p>
 </dd>
 </dl>
 </dd>
@@ -411,6 +432,26 @@ active with the Gaussian-Copula (‘gc’) method.</p>
 </dd>
 <dt class="label" id="id6"><span class="brackets">4</span></dt>
 <dd><p><a class="reference external" href="https://onlinelibrary.wiley.com/doi/full/10.1002/hbm.23471">Ince et al, 2017</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.EventRelatedPac.infer_pvalues">
+<code class="sig-name descname">infer_pvalues</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">p=0.05</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.infer_pvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.infer_pvalues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Infer p-values based on surrogate distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Statistical threshold</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>pvalues</strong><span class="classifier">array_like</span></dt><dd><p>Array of p-values of shape (n_amp, n_pha, n_times)</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -549,6 +590,18 @@ of p-values to use as levels.</p>
 <dt id="tensorpac.EventRelatedPac.filtorder">
 <em class="property">property </em><code class="sig-name descname">filtorder</code><a class="headerlink" href="#tensorpac.EventRelatedPac.filtorder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the filtorder value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.EventRelatedPac.pvalues">
+<em class="property">property </em><code class="sig-name descname">pvalues</code><a class="headerlink" href="#tensorpac.EventRelatedPac.pvalues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of p-values of shape (n_amp, n_pha, n_times).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.EventRelatedPac.surrogates">
+<em class="property">property </em><code class="sig-name descname">surrogates</code><a class="headerlink" href="#tensorpac.EventRelatedPac.surrogates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of surrogates of shape (n_perm, n_amp, n_pha, n_times).</p>
 </dd></dl>
 
 <dl class="method">
