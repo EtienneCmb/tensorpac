@@ -3,10 +3,10 @@ import numpy as np
 import logging
 
 from tensorpac.spectral import spectral, hilbertm
-from tensorpac.methods import (get_pac_fcn, _kl_hr, pacstr, compute_surrogates,
+from tensorpac.methods import (get_pac_fcn, pacstr, compute_surrogates,
                                erpac, ergcpac, _ergcpac_perm, preferred_phase,
                                normalize)
-from tensorpac.gcmi import nd_mi_gg, copnorm
+from tensorpac.gcmi import copnorm
 from tensorpac.utils import pac_vec
 from tensorpac.visu import _PacVisual, _PacPlt, _PolarPlt
 from tensorpac.io import set_log_level
@@ -628,7 +628,7 @@ class EventRelatedPac(_PacObj, _PacVisual):
         if method == 'circular':
             self.method = "ERPAC (Voytek et al. 2013)"
             logger.info(f"    Compute {self.method}")
-            self._erpac, self.pvalues = erpac(pha, amp)
+            self._erpac, self._pvalues = erpac(pha, amp)
         elif method == 'gc':
             self.method = "Gaussian-Copula ERPAC (Ince et al. 2017)"
             logger.info(f"    Compute {self.method}")

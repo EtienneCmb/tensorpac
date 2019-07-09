@@ -43,7 +43,7 @@ time = np.arange(x.shape[1]) / sf
 # amplitudes
 
 # define an ERPAC object
-p = EventRelatedPac(f_pha=[9, 11], f_amp=(60, 140, 10, 10))
+p = EventRelatedPac(f_pha=[9, 11], f_amp=(60, 140, 5, 3))
 
 # extract phases and amplitudes
 pha = p.filter(sf, x, ftype='phase')
@@ -54,23 +54,18 @@ amp = p.filter(sf, x, ftype='amplitude')
 ###############################################################################
 
 # implemented ERPAC methods
-# methods = ['circular', 'gc']
+methods = ['circular', 'gc']
 
-# plt.figure(figsize=(16, 8))
-# for n_m, m in enumerate(methods):
-#     # compute the erpac
-#     erpac = p.fit(pha, amp, method=m, smooth=100).squeeze()
+plt.figure(figsize=(16, 8))
+for n_m, m in enumerate(methods):
+    # compute the erpac
+    erpac = p.fit(pha, amp, method=m, smooth=100, n_jobs=-1).squeeze()
 
-#     # plot
-#     plt.subplot(len(methods), 1, n_m + 1)
-#     p.pacplot(erpac, time, p.yvec, xlabel='Time (second)' * n_m,
-#               cmap='Spectral_r', ylabel='Amplitude frequency', title=p.method,
-#               cblabel='ERPAC', vmin=0., rmaxis=True)
-#     plt.axvline(1., linestyle='--', color='w', linewidth=2)
+    # plot
+    plt.subplot(len(methods), 1, n_m + 1)
+    p.pacplot(erpac, time, p.yvec, xlabel='Time (second)' * n_m,
+              cmap='Spectral_r', ylabel='Amplitude frequency', title=p.method,
+              cblabel='ERPAC', vmin=0., rmaxis=True)
+    plt.axvline(1., linestyle='--', color='w', linewidth=2)
 
-# p.show()
-
-erpac = p.fit(pha, amp, method='gc', n_perm=30)
-erpac[p.pvalues > .05] = np.nan
-p.pacplot(erpac.squeeze(), time, p.yvec)
 p.show()
