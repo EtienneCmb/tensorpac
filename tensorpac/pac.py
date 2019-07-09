@@ -4,7 +4,8 @@ import logging
 
 from tensorpac.spectral import spectral, hilbertm
 from tensorpac.methods import (get_pac_fcn, _kl_hr, pacstr, compute_surrogates,
-                               erpac, ergcpac, preferred_phase, normalize)
+                               erpac, ergcpac, _ergcpac_perm, preferred_phase,
+                               normalize)
 from tensorpac.gcmi import nd_mi_gg, copnorm
 from tensorpac.utils import pac_vec
 from tensorpac.visu import _PacVisual, _PacPlt, _PolarPlt
@@ -77,11 +78,13 @@ class _PacObj(object):
         # Switch between phase or amplitude :
         if ftype is 'phase':
             tosend = 'pha' if not keepfilt else None
+            logger.info(f"    Extract {len(self.f_pha)} phases")
             xfilt = spectral(x, sf, self.f_pha, tosend, self._dcomplex,
                              self._filt, self._filtorder, self._cycle[0],
                              self._width, n_jobs)
         elif ftype is 'amplitude':
             tosend = 'amp' if not keepfilt else None
+            logger.info(f"    Extract {len(self.f_amp)} amplitudes")
             xfilt = spectral(x, sf, self.f_amp, tosend, self._dcomplex,
                              self._filt, self._filtorder, self._cycle[1],
                              self._width, n_jobs)
@@ -323,7 +326,7 @@ class Pac(_PacObj, _PacPlt):
         n_perm : int | 200
             Number of surrogates to compute.
         p : float | 0.05
-            Statistical threhold
+            Statistical threshold
         n_jobs : int | -1
             Number of jobs to compute PAC in parallel. For very large data,
             set this parameter to 1 in order to prevent large memory usage.
@@ -415,7 +418,7 @@ class Pac(_PacObj, _PacPlt):
         n_perm : int | 200
             Number of surrogates to compute.
         p : float | 0.05
-            Statistical threhold
+            Statistical threshold
         n_jobs : int | -1
             Number of jobs to compute PAC in parallel. For very large data,
             set this parameter to 1 in order to prevent large memory usage.
@@ -461,7 +464,7 @@ class Pac(_PacObj, _PacPlt):
         Parameters
         ----------
         p : float | 0.05
-            Statistical threhold
+            Statistical threshold
 
         Returns
         -------
@@ -482,7 +485,7 @@ class Pac(_PacObj, _PacPlt):
         m_pac, m_surro = self.pac.mean(2), self.surrogates.mean(3)
         self._pvalues = np.ones_like(m_pac)
         # infer pvalues
-        logger.info(f"    infer p-values at p={p}")
+        logger.info(f"    Infer p-values at p={p}")
         max_dist = m_surro.reshape(n_perm, -1).max(1)
         th = np.percentile(max_dist, 100. * (1 - p), axis=0,
                            interpolation='nearest')
@@ -580,7 +583,7 @@ class EventRelatedPac(_PacObj, _PacVisual):
         logger.info("Event Related PAC object defined")
 
     def fit(self, pha, amp, method='circular', smooth=None, n_jobs=-1,
-            verbose=None):
+            n_perm=None, p=.05, verbose=None):
         """Compute the Event-Related Phase-Amplitude Coupling (ERPAC).
 
         The ERPAC [#f6]_ is used to measure PAC across trials and is
@@ -598,6 +601,12 @@ class EventRelatedPac(_PacObj, _PacVisual):
         smooth : int | None
             Half number of time-points to use to produce a smoothing. Only
             active with the Gaussian-Copula ('gc') method.
+        n_perm : int | None
+            Number of permutations to compute for assessing p-values for the
+            gaussian-copula ('gc') method. Statistics are performed by randomly
+            swapping phase trials
+        p : float | 0.05
+            Statistical threshold for the gaussian-copula ('gc') method
 
         Returns
         -------
@@ -614,21 +623,25 @@ class EventRelatedPac(_PacObj, _PacVisual):
         set_log_level(verbose)
         pha, amp = self._phampcheck(pha, amp)
         self.method = method
+        self._pvalues = None
         # method switch
         if method == 'circular':
             self.method = "ERPAC (Voytek et al. 2013)"
             logger.info(f"    Compute {self.method}")
-            er, self.pvalues = erpac(pha, amp)
+            self._erpac, self.pvalues = erpac(pha, amp)
         elif method == 'gc':
             self.method = "Gaussian-Copula ERPAC (Ince et al. 2017)"
             logger.info(f"    Compute {self.method}")
-            er = ergcpac(pha, amp, smooth=smooth, n_jobs=n_jobs)
-            self.pvalues = None
-        self._erpac = er
+            self._erpac = ergcpac(pha, amp, smooth=smooth, n_jobs=n_jobs)
+            if isinstance(n_perm, int) and (n_perm > 0):
+                logger.info(f"    Compute {n_perm} permutations")
+                self._surrogates = _ergcpac_perm(pha, amp, smooth=smooth,
+                                                 n_jobs=n_jobs, n_perm=n_perm)
+                self.infer_pvalues(p=p)
         return self.erpac
 
     def filterfit(self, sf, x_pha, x_amp=None, method='circular', smooth=None,
-                  n_jobs=-1, verbose=None):
+                  n_perm=None, p=.05, n_jobs=-1, verbose=None):
         """Extract phases, amplitudes and compute ERPAC.
 
         Parameters
@@ -648,6 +661,12 @@ class EventRelatedPac(_PacObj, _PacVisual):
         smooth : int | None
             Half number of time-points to use to produce a smoothing. Only
             active with the Gaussian-Copula ('gc') method.
+        n_perm : int | None
+            Number of permutations to compute for assessing p-values for the
+            gaussian-copula ('gc') method. Statistics are performed by randomly
+            swapping phase trials
+        p : float | 0.05
+            Statistical threshold for the gaussian-copula ('gc') method
 
         Returns
         -------
@@ -669,12 +688,51 @@ class EventRelatedPac(_PacObj, _PacVisual):
         amp = self.filter(sf, x_amp, ftype='amplitude')
         # compute erpac
         return self.fit(pha, amp, method=method, smooth=smooth, n_jobs=n_jobs,
-                        verbose=verbose)
+                        n_perm=n_perm, p=p, verbose=verbose)
+
+    def infer_pvalues(self, p=0.05):
+        """Infer p-values based on surrogate distribution.
+
+        Parameters
+        ----------
+        p : float | 0.05
+            Statistical threshold
+
+        Returns
+        -------
+        pvalues : array_like
+            Array of p-values of shape (n_amp, n_pha, n_times)
+        """
+        # ---------------------------------------------------------------------
+        # check that pac and surrogates has already been computed
+        assert hasattr(self, 'erpac'), ("You should compute ERPAC first. Use "
+                                        "the `fit` method")
+        assert hasattr(self, 'surrogates'), "No surrogates computed"
+        assert all([isinstance(k, np.ndarray) for k in (
+            self.erpac, self.surrogates)])
+        n_perm = self.surrogates.shape[0]
+
+        logger.info(f"    Infer p-values at p={p}")
+        th = np.percentile(self.surrogates.reshape(n_perm, -1).max(1),
+                           100. * (1 - p), axis=0, interpolation='nearest')
+        self._pvalues = np.ones_like(self.erpac)
+        self._pvalues[self.erpac > th] = p
+        return self.pvalues
 
     @property
     def erpac(self):
         """Array of event-related PAC of shape ()."""
         return self._erpac
+
+    @property
+    def surrogates(self):
+        """Array of surrogates of shape (n_perm, n_amp, n_pha, n_times)."""
+        return self._surrogates
+
+    @property
+    def pvalues(self):
+        """Array of p-values of shape (n_amp, n_pha, n_times)."""
+        return self._pvalues
 
 
 class PreferredPhase(_PacObj, _PolarPlt):

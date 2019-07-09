@@ -386,7 +386,7 @@ def ergcpac(pha, amp, smooth=None, n_jobs=-1):
 
     Returns
     -------
-    rho : array_like
+    erpac : array_like
         Array of correlation coefficients of shape (n_amp, n_pha, n_times)
 
     References
@@ -439,6 +439,15 @@ def ergcpac(pha, amp, smooth=None, n_jobs=-1):
             for p in range(n_pha):
                 ergcpac[a, p, ...] = nd_mi_gg(sco[p, ...], amp[a, ...])
     return ergcpac
+
+
+def _ergcpac_perm(pha, amp, smooth=None, n_jobs=-1, n_perm=200):
+    def _ergcpac_single_perm(p, a):
+        p, a = swap_pha_amp(p, a)
+        return ergcpac(p, a, smooth=smooth, n_jobs=1)
+    out = Parallel(n_jobs=n_jobs)(delayed(
+        _ergcpac_single_perm)(pha, amp) for k in range(n_perm))
+    return np.stack(out)
 
 
 ###############################################################################
