@@ -4,8 +4,8 @@
 import os
 from setuptools import setup, find_packages
 
-__version__ = "0.6.0"
-NAME = 'Tensorpac'
+__version__ = "0.6.1"
+NAME = 'tensorpac'
 AUTHOR = "Etienne Combrisson"
 MAINTAINER = "Etienne Combrisson"
 EMAIL = 'e.combrisson@gmail.com'
@@ -45,7 +45,7 @@ setup(
     author_email=EMAIL,
     url=URL,
     download_url=DOWNLOAD_URL,
-    license=read('LICENSE'),
+    license="BSD 3-Clause License",
     keywords=KEYWORDS,
     classifiers=["Development Status :: 3 - Alpha",
                  'Intended Audience :: Science/Research',

@@ -16,4 +16,4 @@ from tensorpac.utils import (pac_signals_wavelet, pac_signals_tort, pac_vec,  # 
 logger = logging.getLogger('brainets')
 set_log_level('info')
 
-__version__ = "0.6.0"
+__version__ = "0.6.1"
