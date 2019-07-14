@@ -261,6 +261,11 @@ def ps(pha, amp):
 def gcpac(pha, amp):
     """Gaussian Copula Phase-amplitude coupling.
 
+    This function assumes that phases and amplitudes have already been
+    prepared i.e. phases should be represented in a unit circle
+    (np.c_[np.sin(pha), np.cos(pha)]) and both inputs should also have been
+    copnormed.
+
     Parameters
     ----------
     pha, amp : array_like

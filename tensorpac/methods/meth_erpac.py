@@ -4,7 +4,7 @@ from scipy.stats import chi2
 
 from joblib import Parallel, delayed
 
-from tensorpac.gcmi import nd_mi_gg, copnorm
+from tensorpac.gcmi import nd_mi_gg
 from tensorpac.config import JOBLIB_CFG
 from .meth_surrogates import swap_pha_amp
 
@@ -64,9 +64,6 @@ def erpac(pha, amp):
     Voytek B, D’Esposito M, Crone N, Knight RT (2013) A method for
     event-related phase/amplitude coupling. NeuroImage 64:416–424.
     """
-    # Move the trial axis to the end :
-    pha = np.moveaxis(pha, 1, -1)
-    amp = np.moveaxis(amp, 1, -1)
     # Compute correlation coefficient for sin and cos independently
     n = pha.shape[-1]
     sa, ca = np.sin(pha), np.cos(pha)
@@ -87,11 +84,16 @@ def erpac(pha, amp):
 def ergcpac(pha, amp, smooth=None, n_jobs=-1):
     """Event Related PAC computed using the Gaussian Copula Mutual Information.
 
+    This function assumes that phases and amplitudes have already been
+    prepared i.e. phases should be represented in a unit circle
+    (np.c_[np.sin(pha), np.cos(pha)]) and both inputs should also have been
+    copnormed.
+
     Parameters
     ----------
     pha, amp : array_like
-        Respectively the arrays of phases of shape (n_pha, n_times, n_epochs)
-        and the array of amplitudes of shape (n_amp, n_times, n_epochs).
+        Respectively arrays of phases of shape (n_pha, n_times, 2, n_epochs)
+        and the array of amplitudes of shape (n_amp, n_times, 1, n_epochs).
 
     Returns
     -------
@@ -105,15 +107,8 @@ def ergcpac(pha, amp, smooth=None, n_jobs=-1):
     information estimated via a gaussian copula: Gaussian Copula Mutual
     Information. Human Brain Mapping 38:1541–1573.
     """
-    # Move the trial axis to the end :
-    pha = np.moveaxis(pha, 1, -1)
-    amp = np.moveaxis(amp, 1, -1)
     # get shapes
-    n_pha, n_times, n_epochs = pha.shape
-    n_amp = amp.shape[0]
-    # conversion for computing mi
-    sco = copnorm(np.stack([np.sin(pha), np.cos(pha)], axis=-2))
-    amp = copnorm(amp)[..., np.newaxis, :]
+    (n_pha, n_times, _, n_epochs), n_amp = pha.shape, amp.shape[0]  # noqa
     # compute mutual information across trials
     ergcpac = np.zeros((n_amp, n_pha, n_times))
     if isinstance(smooth, int):
@@ -121,12 +116,11 @@ def ergcpac(pha, amp, smooth=None, n_jobs=-1):
         vec = np.arange(smooth, n_times - smooth, 1)
         times = [slice(k - smooth, k + smooth + 1) for k in vec]
         # move time axis to avoid to do it inside parallel
-        sco = np.moveaxis(sco, 1, -2)
-        amp = np.moveaxis(amp, 1, -2)
+        pha, amp = np.moveaxis(pha, 1, -2), np.moveaxis(amp, 1, -2)
         # function to run in parallel across times
         def _fcn(t):  # noqa
             _erpac = np.zeros((n_amp, n_pha), dtype=float)
-            xp, xa = sco[..., t, :], amp[..., t, :]
+            xp, xa = pha[..., t, :], amp[..., t, :]
             for a in range(n_amp):
                 _xa = xa.reshape(n_amp, 1, -1)
                 for p in range(n_pha):
@@ -136,7 +130,7 @@ def ergcpac(pha, amp, smooth=None, n_jobs=-1):
         # run the function across time points
         _ergcpac = Parallel(n_jobs=n_jobs, **JOBLIB_CFG)(delayed(_fcn)(
             t) for t in times)
-        # reconstruct the smoothed ERGCPAC array
+        # reconstruct the smoothed array
         for a in range(n_amp):
             for p in range(n_pha):
                 mean_vec = np.zeros((n_times,), dtype=float)
@@ -147,14 +141,14 @@ def ergcpac(pha, amp, smooth=None, n_jobs=-1):
     else:
         for a in range(n_amp):
             for p in range(n_pha):
-                ergcpac[a, p, ...] = nd_mi_gg(sco[p, ...], amp[a, ...])
+                ergcpac[a, p, ...] = nd_mi_gg(pha[p, ...], amp[a, ...])
     return ergcpac
 
 
 def _ergcpac_perm(pha, amp, smooth=None, n_jobs=-1, n_perm=200):
-    def _ergcpac_single_perm(p, a):
-        p, a = swap_pha_amp(p, a)
+    def _ergcpac_single_perm():
+        p, a = swap_pha_amp(pha, amp)
         return ergcpac(p, a, smooth=smooth, n_jobs=1)
     out = Parallel(n_jobs=n_jobs)(delayed(
-        _ergcpac_single_perm)(pha, amp) for k in range(n_perm))
+        _ergcpac_single_perm)() for _ in range(n_perm))
     return np.stack(out)

@@ -78,13 +78,11 @@ class _PacObj(object):
         # Switch between phase or amplitude :
         if ftype is 'phase':
             tosend = 'pha' if not keepfilt else None
-            logger.info(f"    Extract {len(self.f_pha)} phases")
             xfilt = spectral(x, sf, self.f_pha, tosend, self._dcomplex,
                              self._filt, self._filtorder, self._cycle[0],
                              self._width, n_jobs)
         elif ftype is 'amplitude':
             tosend = 'amp' if not keepfilt else None
-            logger.info(f"    Extract {len(self.f_amp)} amplitudes")
             xfilt = spectral(x, sf, self.f_amp, tosend, self._dcomplex,
                              self._filt, self._filtorder, self._cycle[1],
                              self._width, n_jobs)
@@ -368,7 +366,7 @@ class Pac(_PacObj, _PacPlt):
         # ---------------------------------------------------------------------
         # copnorm if gaussian copula is used
         if self._idpac[0] == 6:
-            logger.info(f"    copnorm the phase and the amplitude")
+            logger.debug(f"    copnorm the phase and the amplitude")
             pha = copnorm(np.stack([np.sin(pha), np.cos(pha)], axis=-2))
             amp = copnorm(amp[..., np.newaxis, :])
 
@@ -624,6 +622,8 @@ class EventRelatedPac(_PacObj, _PacVisual):
         pha, amp = self._phampcheck(pha, amp)
         self.method = method
         self._pvalues = None
+        # move the trial axis to the end (n_freqs, n_times, n_epochs)
+        pha, amp = np.moveaxis(pha, 1, -1), np.moveaxis(amp, 1, -1)
         # method switch
         if method == 'circular':
             self.method = "ERPAC (Voytek et al. 2013)"
@@ -632,10 +632,14 @@ class EventRelatedPac(_PacObj, _PacVisual):
         elif method == 'gc':
             self.method = "Gaussian-Copula ERPAC (Ince et al. 2017)"
             logger.info(f"    Compute {self.method}")
-            self._erpac = ergcpac(pha, amp, smooth=smooth, n_jobs=n_jobs)
+            # copnorm phases and amplitudes then compute erpac
+            sco = copnorm(np.stack([np.sin(pha), np.cos(pha)], axis=-2))
+            amp = copnorm(amp)[..., np.newaxis, :]
+            self._erpac = ergcpac(sco, amp, smooth=smooth, n_jobs=n_jobs)
+            # compute permutations (if needed)
             if isinstance(n_perm, int) and (n_perm > 0):
                 logger.info(f"    Compute {n_perm} permutations")
-                self._surrogates = _ergcpac_perm(pha, amp, smooth=smooth,
+                self._surrogates = _ergcpac_perm(sco, amp, smooth=smooth,
                                                  n_jobs=n_jobs, n_perm=n_perm)
                 self.infer_pvalues(p=p)
         return self.erpac
