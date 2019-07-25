@@ -2,6 +2,8 @@
 import numpy as np
 from scipy.special import psi, ndtri
 
+from tensorpac.config import CONFIG
+
 
 def ctransform(x):
     """Copula transformation (empirical CDF).
@@ -45,7 +47,7 @@ def copnorm(x):
     return np.apply_along_axis(_copnorm, -1, x)
 
 
-def nd_mi_gg(x, y, biascorrect=False):
+def nd_mi_gg(x, y):
     """Multi-dimentional MI between two Gaussian variables in bits.
 
     Parameters
@@ -54,8 +56,6 @@ def nd_mi_gg(x, y, biascorrect=False):
         Arrays to consider for computing the Mutual Information. The two input
         variables x and y should have the same shape except on the mvaxis
         (if needed).
-    biascorrect : bool | False
-        Specifies whether bias correction should be applied to the estimated MI
 
     Returns
     -------
@@ -71,6 +71,8 @@ def nd_mi_gg(x, y, biascorrect=False):
 
     # joint variable along the mvaxis
     xy = np.concatenate((x, y), axis=-2)
+    if CONFIG['MI_DEMEAN']:
+        xy -= xy.mean(axis=-1, keepdims=True)
     cxy = np.einsum('...ij, ...kj->...ik', xy, xy)
     cxy /= float(ntrl - 1.)
 
@@ -90,7 +92,7 @@ def nd_mi_gg(x, y, biascorrect=False):
     hxy = np.log(np.einsum('...ii->...i', chcxy)).sum(-1)
 
     ln2 = np.log(2)
-    if biascorrect:
+    if CONFIG['MI_BIASCORRECT']:
         vec = np.arange(1, nvarxy + 1)
         psiterms = psi((ntrl - vec).astype(np.float) / 2.0) / 2.0
         dterm = (ln2 - np.log(ntrl - 1.0)) / 2.0

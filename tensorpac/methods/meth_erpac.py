@@ -5,7 +5,7 @@ from scipy.stats import chi2
 from joblib import Parallel, delayed
 
 from tensorpac.gcmi import nd_mi_gg
-from tensorpac.config import JOBLIB_CFG
+from tensorpac.config import CONFIG
 
 
 def pearson(x, y, st='i...j, k...j->ik...'):
@@ -127,8 +127,8 @@ def ergcpac(pha, amp, smooth=None, n_jobs=-1):
                     _erpac[a, p] = nd_mi_gg(_xp[p, ...], _xa[a, ...])
             return _erpac
         # run the function across time points
-        _ergcpac = Parallel(n_jobs=n_jobs, **JOBLIB_CFG)(delayed(_fcn)(
-            t) for t in times)
+        _ergcpac = Parallel(n_jobs=n_jobs, **CONFIG['JOBLIB_CFG'])(delayed(
+            _fcn)(t) for t in times)
         # reconstruct the smoothed array
         for a in range(n_amp):
             for p in range(n_pha):
@@ -154,6 +154,6 @@ def _ergcpac_perm(pha, amp, smooth=None, n_jobs=-1, n_perm=200):
     def _ergcpac_single_perm():
         p = swap_erpac_trials(pha)
         return ergcpac(p, amp, smooth=smooth, n_jobs=1)
-    out = Parallel(n_jobs=n_jobs)(delayed(
+    out = Parallel(n_jobs=n_jobs, **CONFIG['JOBLIB_CFG'])(delayed(
         _ergcpac_single_perm)() for _ in range(n_perm))
     return np.stack(out)

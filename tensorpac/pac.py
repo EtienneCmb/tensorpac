@@ -10,7 +10,7 @@ from tensorpac.gcmi import copnorm
 from tensorpac.utils import pac_vec
 from tensorpac.visu import _PacVisual, _PacPlt, _PolarPlt
 from tensorpac.io import set_log_level
-from tensorpac.config import MNE_EPOCHS_TYPE
+from tensorpac.config import CONFIG
 
 logger = logging.getLogger('tensorpac')
 
@@ -67,6 +67,7 @@ class _PacObj(object):
                              "'hilbert'.")
         assert ftype in ['phase', 'amplitude'], ("ftype must either be 'phase'"
                                                  " or 'amplitude.'")
+        MNE_EPOCHS_TYPE = CONFIG['MNE_EPOCHS_TYPE']
         if not isinstance(x, np.ndarray) and type(x) in MNE_EPOCHS_TYPE:
             x = x.get_data()
             sf = x.info['sfreq']

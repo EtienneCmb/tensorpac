@@ -2,7 +2,7 @@
 import numpy as np
 from joblib import Parallel, delayed
 
-from tensorpac.config import JOBLIB_CFG
+from tensorpac.config import CONFIG
 
 
 def compute_surrogates(pha, amp, ids, fcn, n_perm, n_jobs):
@@ -11,7 +11,7 @@ def compute_surrogates(pha, amp, ids, fcn, n_perm, n_jobs):
         return None
     else:
         fcn_p = {1: swap_pha_amp, 2: swap_blocks, 3: time_lag}[ids]
-    s = Parallel(n_jobs=n_jobs, **JOBLIB_CFG)(delayed(fcn)(
+    s = Parallel(n_jobs=n_jobs, **CONFIG['JOBLIB_CFG'])(delayed(fcn)(
         *fcn_p(pha, amp)) for k in range(n_perm))
     return np.array(s)
 

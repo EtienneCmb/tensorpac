@@ -5,7 +5,7 @@ from scipy.signal import hilbert
 from scipy import fftpack
 
 from tensorpac.filtering import filtdata
-from tensorpac.config import JOBLIB_CFG
+from tensorpac.config import CONFIG
 
 
 def hilbertm(x):
@@ -51,7 +51,7 @@ def spectral(x, sf, f, stype, dcomplex, filt, filtorder, cycle, width,
     if dcomplex is 'hilbert':
         # Filt each time series :
         nf = range(f.shape[0])
-        xf = Parallel(n_jobs=n_jobs, **JOBLIB_CFG)(delayed(filtdata)(
+        xf = Parallel(n_jobs=n_jobs, **CONFIG['JOBLIB_CFG'])(delayed(filtdata)(
             x, sf, f[k, :], filt, cycle, filtorder) for k in nf)
         # Use hilbert for the complex decomposition :
         xf = np.asarray(xf)
@@ -59,7 +59,7 @@ def spectral(x, sf, f, stype, dcomplex, filt, filtorder, cycle, width,
             xd = hilbertm(xf)
     elif dcomplex is 'wavelet':
         f = f.mean(1)  # centered frequencies
-        xd = Parallel(n_jobs=n_jobs, **JOBLIB_CFG)(delayed(morlet)(
+        xd = Parallel(n_jobs=n_jobs, **CONFIG['JOBLIB_CFG'])(delayed(morlet)(
             x, sf, k, width) for k in f)
 
     # Extract phase / amplitude :
