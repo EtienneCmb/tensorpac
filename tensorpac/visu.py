@@ -107,8 +107,7 @@ class _PacVisual(object):
             plt.subplot(subplot, projection='polar')
         # Check vmin / vmax
         if (vmin is None) and (vmax is None) and self._autovmM:
-            vmin = min(0, pac.min())
-            vmax = max(0, pac.max())
+            vmin, vmax = min(0, np.nanmin(pac)), max(0, np.nanmax(pac))
             if vmin < 0 and vmax > 0:
                 vmax = max(vmax, -vmin)
                 vmin = -vmax

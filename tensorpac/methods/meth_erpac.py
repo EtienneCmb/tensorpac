@@ -6,7 +6,6 @@ from joblib import Parallel, delayed
 
 from tensorpac.gcmi import nd_mi_gg
 from tensorpac.config import JOBLIB_CFG
-from .meth_surrogates import swap_pha_amp
 
 
 def pearson(x, y, st='i...j, k...j->ik...'):
@@ -145,10 +144,16 @@ def ergcpac(pha, amp, smooth=None, n_jobs=-1):
     return ergcpac
 
 
+def swap_erpac_trials(pha):
+    """Swap trials across the last dimension."""
+    tr_ = np.random.permutation(pha.shape[-1])
+    return pha[..., tr_]
+
+
 def _ergcpac_perm(pha, amp, smooth=None, n_jobs=-1, n_perm=200):
     def _ergcpac_single_perm():
-        p, a = swap_pha_amp(pha, amp)
-        return ergcpac(p, a, smooth=smooth, n_jobs=1)
+        p = swap_erpac_trials(pha)
+        return ergcpac(p, amp, smooth=smooth, n_jobs=1)
     out = Parallel(n_jobs=n_jobs)(delayed(
         _ergcpac_single_perm)() for _ in range(n_perm))
     return np.stack(out)

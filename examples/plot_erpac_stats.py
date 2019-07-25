@@ -43,30 +43,19 @@ time = np.arange(x.shape[1]) / sf
 # amplitudes
 
 # define an ERPAC object
-p = EventRelatedPac(f_pha=[9, 11], f_amp=(60, 140, 5, 5))
+p = EventRelatedPac(f_pha=[9, 11], f_amp=(60, 140, 5, 1))
 
 # extract phases and amplitudes
-erpac = p.filterfit(sf, x, method='gc', n_perm=20).squeeze()
+erpac = p.filterfit(sf, x, method='gc', n_perm=20,).squeeze()
 
-# erpac = p.pvalues.squeeze()
-surro = p.surrogates.squeeze()
-print(surro.shape)
+pvalues = p.pvalues.squeeze()
+erpac[pvalues > .05] = np.nan
 
-plt.subplot(131)
-plt.hist(erpac.ravel(), color='red', alpha=.5)
-plt.hist(surro.ravel(), color='blue', alpha=.5)
-plt.subplot(132)
-plt.pcolormesh(erpac)
-plt.subplot(133)
-plt.pcolormesh(surro.mean(0))
-plt.show()
-0/0
-# erpac[pvalues > .05] = np.nan
-
+vmin, vmax = np.nanmin(erpac), np.nanmax(erpac)
 
 p.pacplot(erpac, time, p.yvec, xlabel='Time (second)',
           cmap='Spectral_r', ylabel='Amplitude frequency', title=p.method,
-          cblabel='ERPAC', vmin=0., rmaxis=True)
-plt.axvline(1., linestyle='--', color='w', linewidth=2)
+          cblabel='ERPAC', rmaxis=True, vmin=vmin, vmax=vmax)
+plt.axvline(1., linestyle='--', color='k', linewidth=2)
 
 p.show()

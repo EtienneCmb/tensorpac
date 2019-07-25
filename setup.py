@@ -9,7 +9,7 @@ NAME = 'tensorpac'
 AUTHOR = "Etienne Combrisson"
 MAINTAINER = "Etienne Combrisson"
 EMAIL = 'e.combrisson@gmail.com'
-KEYWORDS = "phase-amplitude-coupling pac tensor"
+KEYWORDS = "phase-amplitude coupling pac tensor oscillation meg eeg python"
 DESCRIPTION = "Tensor-based Phase-Amplitude Coupling"
 URL = 'http://etiennecmb.github.io/tensorpac/'
 DOWNLOAD_URL = ("https://github.com/EtienneCmb/tensorpac/archive/v" +
@@ -47,10 +47,11 @@ setup(
     download_url=DOWNLOAD_URL,
     license="BSD 3-Clause License",
     keywords=KEYWORDS,
-    classifiers=["Development Status :: 3 - Alpha",
+    classifiers=["Development Status :: 5 - Production/Stable",
                  'Intended Audience :: Science/Research',
                  'Intended Audience :: Education',
                  'Intended Audience :: Developers',
-                 'Topic :: Scientific/Engineering :: Visualization',
-                 "Programming Language :: Python :: 3.5"
+                 "Programming Language :: Python :: 3.5",
+                 "Programming Language :: Python :: 3.6",
+                 "Programming Language :: Python :: 3.7"
                  ])

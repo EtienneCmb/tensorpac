@@ -8,8 +8,8 @@ Tensorpac
 .. image:: https://codecov.io/gh/EtienneCmb/tensorpac/branch/master/graph/badge.svg
   :target: https://codecov.io/gh/EtienneCmb/tensorpac
 
-.. image:: https://badge.fury.io/py/Tensorpac.svg
-    :target: https://badge.fury.io/py/Tensorpac
+.. image:: https://badge.fury.io/py/tensorpac.svg
+    :target: https://badge.fury.io/py/tensorpac
 
 .. image:: https://pepy.tech/badge/tensorpac
     :target: https://pepy.tech/project/tensorpac
