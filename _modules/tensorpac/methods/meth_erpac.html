@@ -128,6 +128,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/plot_readme.html">README example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/plot_values.html">Compute p-values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/plot_erpac_stats.html">Event-Related Phase Amplitude Coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/plot_erpac_stats.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/plot_erpac_stats.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/plot_compare_surrogates.html">Compare surrogate methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/plot_erpac.html">Event-Related Phase Amplitude Coupling</a><ul>
@@ -187,9 +192,8 @@
 
 <span class="kn">from</span> <span class="nn">joblib</span> <span class="k">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
 
-<span class="kn">from</span> <span class="nn">tensorpac.gcmi</span> <span class="k">import</span> <span class="n">nd_mi_gg</span><span class="p">,</span> <span class="n">copnorm</span>
+<span class="kn">from</span> <span class="nn">tensorpac.gcmi</span> <span class="k">import</span> <span class="n">nd_mi_gg</span>
 <span class="kn">from</span> <span class="nn">tensorpac.config</span> <span class="k">import</span> <span class="n">JOBLIB_CFG</span>
-<span class="kn">from</span> <span class="nn">.meth_surrogates</span> <span class="k">import</span> <span class="n">swap_pha_amp</span>
 
 
 <span class="k">def</span> <span class="nf">pearson</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">st</span><span class="o">=</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">):</span>
@@ -247,9 +251,6 @@
 <span class="sd">    Voytek B, D’Esposito M, Crone N, Knight RT (2013) A method for</span>
 <span class="sd">    event-related phase/amplitude coupling. NeuroImage 64:416–424.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Move the trial axis to the end :</span>
-    <span class="n">pha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
     <span class="c1"># Compute correlation coefficient for sin and cos independently</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">sa</span><span class="p">,</span> <span class="n">ca</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">pha</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">pha</span><span class="p">)</span>
@@ -270,11 +271,16 @@
 <div class="viewcode-block" id="ergcpac"><a class="viewcode-back" href="../../../generated/tensorpac.methods.ergcpac.html#tensorpac.methods.ergcpac">[docs]</a><span class="k">def</span> <span class="nf">ergcpac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Event Related PAC computed using the Gaussian Copula Mutual Information.</span>
 
+<span class="sd">    This function assumes that phases and amplitudes have already been</span>
+<span class="sd">    prepared i.e. phases should be represented in a unit circle</span>
+<span class="sd">    (np.c_[np.sin(pha), np.cos(pha)]) and both inputs should also have been</span>
+<span class="sd">    copnormed.</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    pha, amp : array_like</span>
-<span class="sd">        Respectively the arrays of phases of shape (n_pha, n_times, n_epochs)</span>
-<span class="sd">        and the array of amplitudes of shape (n_amp, n_times, n_epochs).</span>
+<span class="sd">        Respectively arrays of phases of shape (n_pha, n_times, 2, n_epochs)</span>
+<span class="sd">        and the array of amplitudes of shape (n_amp, n_times, 1, n_epochs).</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -288,15 +294,8 @@
 <span class="sd">    information estimated via a gaussian copula: Gaussian Copula Mutual</span>
 <span class="sd">    Information. Human Brain Mapping 38:1541–1573.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Move the trial axis to the end :</span>
-    <span class="n">pha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
     <span class="c1"># get shapes</span>
-    <span class="n">n_pha</span><span class="p">,</span> <span class="n">n_times</span><span class="p">,</span> <span class="n">n_epochs</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span>
-    <span class="n">n_amp</span> <span class="o">=</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="c1"># conversion for computing mi</span>
-    <span class="n">sco</span> <span class="o">=</span> <span class="n">copnorm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">pha</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">pha</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">2</span><span class="p">))</span>
-    <span class="n">amp</span> <span class="o">=</span> <span class="n">copnorm</span><span class="p">(</span><span class="n">amp</span><span class="p">)[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="p">(</span><span class="n">n_pha</span><span class="p">,</span> <span class="n">n_times</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">),</span> <span class="n">n_amp</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># noqa</span>
     <span class="c1"># compute mutual information across trials</span>
     <span class="n">ergcpac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_amp</span><span class="p">,</span> <span class="n">n_pha</span><span class="p">,</span> <span class="n">n_times</span><span class="p">))</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">smooth</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
@@ -304,12 +303,11 @@
         <span class="n">vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">smooth</span><span class="p">,</span> <span class="n">n_times</span> <span class="o">-</span> <span class="n">smooth</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="n">smooth</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="n">smooth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">vec</span><span class="p">]</span>
         <span class="c1"># move time axis to avoid to do it inside parallel</span>
-        <span class="n">sco</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">sco</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">moveaxis</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
         <span class="c1"># function to run in parallel across times</span>
         <span class="k">def</span> <span class="nf">_fcn</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>  <span class="c1"># noqa</span>
             <span class="n">_erpac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_amp</span><span class="p">,</span> <span class="n">n_pha</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-            <span class="n">xp</span><span class="p">,</span> <span class="n">xa</span> <span class="o">=</span> <span class="n">sco</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="p">:],</span> <span class="n">amp</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="n">xp</span><span class="p">,</span> <span class="n">xa</span> <span class="o">=</span> <span class="n">pha</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="p">:],</span> <span class="n">amp</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="p">:]</span>
             <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_amp</span><span class="p">):</span>
                 <span class="n">_xa</span> <span class="o">=</span> <span class="n">xa</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_amp</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pha</span><span class="p">):</span>
@@ -319,7 +317,7 @@
         <span class="c1"># run the function across time points</span>
         <span class="n">_ergcpac</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="o">**</span><span class="n">JOBLIB_CFG</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">_fcn</span><span class="p">)(</span>
             <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">times</span><span class="p">)</span>
-        <span class="c1"># reconstruct the smoothed ERGCPAC array</span>
+        <span class="c1"># reconstruct the smoothed array</span>
         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_amp</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pha</span><span class="p">):</span>
                 <span class="n">mean_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_times</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -330,16 +328,22 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_amp</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pha</span><span class="p">):</span>
-                <span class="n">ergcpac</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">nd_mi_gg</span><span class="p">(</span><span class="n">sco</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">amp</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span>
+                <span class="n">ergcpac</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">nd_mi_gg</span><span class="p">(</span><span class="n">pha</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">amp</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">ergcpac</span></div>
 
 
+<span class="k">def</span> <span class="nf">swap_erpac_trials</span><span class="p">(</span><span class="n">pha</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Swap trials across the last dimension.&quot;&quot;&quot;</span>
+    <span class="n">tr_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">pha</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">tr_</span><span class="p">]</span>
+
+
 <span class="k">def</span> <span class="nf">_ergcpac_perm</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">_ergcpac_single_perm</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="n">p</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">swap_pha_amp</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ergcpac</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="n">smooth</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_ergcpac_single_perm</span><span class="p">():</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">swap_erpac_trials</span><span class="p">(</span><span class="n">pha</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ergcpac</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="n">smooth</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span>
-        <span class="n">_ergcpac_single_perm</span><span class="p">)(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_perm</span><span class="p">))</span>
+        <span class="n">_ergcpac_single_perm</span><span class="p">)()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_perm</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
 </pre></div>
 

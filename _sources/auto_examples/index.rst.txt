@@ -74,6 +74,26 @@ Examples
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Event-Related Phase-Amplitude Coupling (ERPAC) do not measure PAC across time cycle but instead...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_erpac_stats_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_erpac_stats.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_erpac_stats
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="In Tensorpac, you can define your phase and amplitude vectors in sevral ways :">
 
 .. only:: html

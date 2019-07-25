@@ -1,10 +1,10 @@
 .. note::
     :class: sphx-glr-download-link-note
 
-    Click :ref:`here <sphx_glr_download_auto_examples_plot_erpac.py>` to download the full example code
+    Click :ref:`here <sphx_glr_download_auto_examples_plot_erpac_stats.py>` to download the full example code
 .. rst-class:: sphx-glr-example-title
 
-.. _sphx_glr_auto_examples_plot_erpac.py:
+.. _sphx_glr_auto_examples_plot_erpac_stats.py:
 
 
 ======================================
@@ -72,45 +72,26 @@ Define an ERPAC object and extract the phase and the amplitude
 
 
     # define an ERPAC object
-    p = EventRelatedPac(f_pha=[9, 11], f_amp=(60, 140, 5, 3))
+    p = EventRelatedPac(f_pha=[9, 11], f_amp=(60, 140, 5, 1))
 
     # extract phases and amplitudes
-    pha = p.filter(sf, x, ftype='phase')
-    amp = p.filter(sf, x, ftype='amplitude')
+    erpac = p.filterfit(sf, x, method='gc', n_perm=20,).squeeze()
 
+    pvalues = p.pvalues.squeeze()
+    erpac[pvalues > .05] = np.nan
 
+    vmin, vmax = np.nanmin(erpac), np.nanmax(erpac)
 
-
-
-
-
-Compute the ERPAC using the two implemented methods and plot it
-##############################################################################
-
-
-.. code-block:: default
-
-
-    # implemented ERPAC methods
-    methods = ['circular', 'gc']
-
-    plt.figure(figsize=(16, 8))
-    for n_m, m in enumerate(methods):
-        # compute the erpac
-        erpac = p.fit(pha, amp, method=m, smooth=100, n_jobs=-1).squeeze()
-
-        # plot
-        plt.subplot(len(methods), 1, n_m + 1)
-        p.pacplot(erpac, time, p.yvec, xlabel='Time (second)' * n_m,
-                  cmap='Spectral_r', ylabel='Amplitude frequency', title=p.method,
-                  cblabel='ERPAC', vmin=0., rmaxis=True)
-        plt.axvline(1., linestyle='--', color='w', linewidth=2)
+    p.pacplot(erpac, time, p.yvec, xlabel='Time (second)',
+              cmap='Spectral_r', ylabel='Amplitude frequency', title=p.method,
+              cblabel='ERPAC', rmaxis=True, vmin=vmin, vmax=vmax)
+    plt.axvline(1., linestyle='--', color='k', linewidth=2)
 
     p.show()
 
 
 
-.. image:: /auto_examples/images/sphx_glr_plot_erpac_001.png
+.. image:: /auto_examples/images/sphx_glr_plot_erpac_stats_001.png
     :class: sphx-glr-single-img
 
 
@@ -119,10 +100,10 @@ Compute the ERPAC using the two implemented methods and plot it
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  10.326 seconds)
+   **Total running time of the script:** ( 0 minutes  25.881 seconds)
 
 
-.. _sphx_glr_download_auto_examples_plot_erpac.py:
+.. _sphx_glr_download_auto_examples_plot_erpac_stats.py:
 
 
 .. only :: html
@@ -134,13 +115,13 @@ Compute the ERPAC using the two implemented methods and plot it
 
   .. container:: sphx-glr-download
 
-     :download:`Download Python source code: plot_erpac.py <plot_erpac.py>`
+     :download:`Download Python source code: plot_erpac_stats.py <plot_erpac_stats.py>`
 
 
 
   .. container:: sphx-glr-download
 
-     :download:`Download Jupyter notebook: plot_erpac.ipynb <plot_erpac.ipynb>`
+     :download:`Download Jupyter notebook: plot_erpac_stats.ipynb <plot_erpac_stats.ipynb>`
 
 
 .. only:: html
