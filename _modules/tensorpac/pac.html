@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tp_style.css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
@@ -64,16 +65,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../install.html#install-the-most-up-to-date-version">Install the most up-to-date version</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Implemented methods</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../tutorial.html#modular-philosophy">Modular philosophy</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorial.html#pac-methods">Pac methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorial.html#surrogates-methods">Surrogates methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorial.html#normalization-methods">Normalization methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../tutorial.html#example">Example</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#compute-phase-amplitude-coupling">Compute phase-amplitude coupling</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.Pac.html">tensorpac.Pac</a></li>
@@ -154,6 +146,8 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../citation.html">Authors and contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../citation.html#cite-tensorpac">Cite Tensorpac</a></li>
 </ul>
 </ul>
 </li>
@@ -198,7 +192,7 @@
 <span class="kn">from</span> <span class="nn">tensorpac.utils</span> <span class="k">import</span> <span class="n">pac_vec</span>
 <span class="kn">from</span> <span class="nn">tensorpac.visu</span> <span class="k">import</span> <span class="n">_PacVisual</span><span class="p">,</span> <span class="n">_PacPlt</span><span class="p">,</span> <span class="n">_PolarPlt</span>
 <span class="kn">from</span> <span class="nn">tensorpac.io</span> <span class="k">import</span> <span class="n">set_log_level</span>
-<span class="kn">from</span> <span class="nn">tensorpac.config</span> <span class="k">import</span> <span class="n">MNE_EPOCHS_TYPE</span>
+<span class="kn">from</span> <span class="nn">tensorpac.config</span> <span class="k">import</span> <span class="n">CONFIG</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;tensorpac&#39;</span><span class="p">)</span>
 
@@ -255,6 +249,7 @@
                              <span class="s2">&quot;&#39;hilbert&#39;.&quot;</span><span class="p">)</span>
         <span class="k">assert</span> <span class="n">ftype</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="s1">&#39;amplitude&#39;</span><span class="p">],</span> <span class="p">(</span><span class="s2">&quot;ftype must either be &#39;phase&#39;&quot;</span>
                                                  <span class="s2">&quot; or &#39;amplitude.&#39;&quot;</span><span class="p">)</span>
+        <span class="n">MNE_EPOCHS_TYPE</span> <span class="o">=</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;MNE_EPOCHS_TYPE&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">in</span> <span class="n">MNE_EPOCHS_TYPE</span><span class="p">:</span>
             <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
             <span class="n">sf</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;sfreq&#39;</span><span class="p">]</span>
@@ -1045,17 +1040,24 @@
       
   </div>
 </div>
-<footer class="footer">
-  <div class="container">
-    <p class="pull-right">
-      <a href="#">Back to top</a>
-      
-    </p>
-    <p>
-        &copy; Copyright 2019, Etienne Combrisson.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
-    </p>
-  </div>
-</footer>
+    <hr>
+    <footer>
+        <div class="container">
+            <img src="../../_static/baniere.png" alt="Ban" height="80">
+        </div>
+        <br>
+        <div class="container">
+            <ul class="list-inline">
+                <li style="font-weight:bold"><a href="../../genindex.html">Index</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="https://github.com/EtienneCmb/tensorpac">Github</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../../citation.html">Authors and citation</a></li>
+            </ul>
+         </div>
+        <!-- <br> -->
+        <p>&copy; Copyright 2019, Etienne Combrisson.</p>
+    </footer>
+
   </body>
 </html>

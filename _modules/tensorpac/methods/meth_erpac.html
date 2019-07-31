@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tp_style.css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../../_static/underscore.js"></script>
@@ -64,16 +65,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../install.html#install-the-most-up-to-date-version">Install the most up-to-date version</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Implemented methods</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../tutorial.html#modular-philosophy">Modular philosophy</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../tutorial.html#pac-methods">Pac methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../tutorial.html#surrogates-methods">Surrogates methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../tutorial.html#normalization-methods">Normalization methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../tutorial.html#example">Example</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../api.html#compute-phase-amplitude-coupling">Compute phase-amplitude coupling</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.Pac.html">tensorpac.Pac</a></li>
@@ -154,6 +146,8 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citation.html">Authors and contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../citation.html#cite-tensorpac">Cite Tensorpac</a></li>
 </ul>
 </ul>
 </li>
@@ -193,7 +187,7 @@
 <span class="kn">from</span> <span class="nn">joblib</span> <span class="k">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
 
 <span class="kn">from</span> <span class="nn">tensorpac.gcmi</span> <span class="k">import</span> <span class="n">nd_mi_gg</span>
-<span class="kn">from</span> <span class="nn">tensorpac.config</span> <span class="k">import</span> <span class="n">JOBLIB_CFG</span>
+<span class="kn">from</span> <span class="nn">tensorpac.config</span> <span class="k">import</span> <span class="n">CONFIG</span>
 
 
 <span class="k">def</span> <span class="nf">pearson</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">st</span><span class="o">=</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">):</span>
@@ -315,8 +309,8 @@
                     <span class="n">_erpac</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">nd_mi_gg</span><span class="p">(</span><span class="n">_xp</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">_xa</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span>
             <span class="k">return</span> <span class="n">_erpac</span>
         <span class="c1"># run the function across time points</span>
-        <span class="n">_ergcpac</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="o">**</span><span class="n">JOBLIB_CFG</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">_fcn</span><span class="p">)(</span>
-            <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">times</span><span class="p">)</span>
+        <span class="n">_ergcpac</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="o">**</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;JOBLIB_CFG&#39;</span><span class="p">])(</span><span class="n">delayed</span><span class="p">(</span>
+            <span class="n">_fcn</span><span class="p">)(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">times</span><span class="p">)</span>
         <span class="c1"># reconstruct the smoothed array</span>
         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_amp</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pha</span><span class="p">):</span>
@@ -342,7 +336,7 @@
     <span class="k">def</span> <span class="nf">_ergcpac_single_perm</span><span class="p">():</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">swap_erpac_trials</span><span class="p">(</span><span class="n">pha</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ergcpac</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="n">smooth</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="o">**</span><span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;JOBLIB_CFG&#39;</span><span class="p">])(</span><span class="n">delayed</span><span class="p">(</span>
         <span class="n">_ergcpac_single_perm</span><span class="p">)()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_perm</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
 </pre></div>
@@ -351,17 +345,24 @@
       
   </div>
 </div>
-<footer class="footer">
-  <div class="container">
-    <p class="pull-right">
-      <a href="#">Back to top</a>
-      
-    </p>
-    <p>
-        &copy; Copyright 2019, Etienne Combrisson.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
-    </p>
-  </div>
-</footer>
+    <hr>
+    <footer>
+        <div class="container">
+            <img src="../../../_static/baniere.png" alt="Ban" height="80">
+        </div>
+        <br>
+        <div class="container">
+            <ul class="list-inline">
+                <li style="font-weight:bold"><a href="../../../genindex.html">Index</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="https://github.com/EtienneCmb/tensorpac">Github</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../../../citation.html">Authors and citation</a></li>
+            </ul>
+         </div>
+        <!-- <br> -->
+        <p>&copy; Copyright 2019, Etienne Combrisson.</p>
+    </footer>
+
   </body>
 </html>

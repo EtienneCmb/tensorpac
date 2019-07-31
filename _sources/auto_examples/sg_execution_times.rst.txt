@@ -5,18 +5,18 @@
 
 Computation times
 =================
-**01:19.989** total execution time for **auto_examples** files:
+**01:28.454** total execution time for **auto_examples** files:
 
-- **00:25.881**: :ref:`sphx_glr_auto_examples_plot_erpac_stats.py` (``plot_erpac_stats.py``)
-- **00:12.769**: :ref:`sphx_glr_auto_examples_plot_compare_normalizations.py` (``plot_compare_normalizations.py``)
-- **00:10.326**: :ref:`sphx_glr_auto_examples_plot_erpac.py` (``plot_erpac.py``)
-- **00:08.392**: :ref:`sphx_glr_auto_examples_plot_compare_surrogates.py` (``plot_compare_surrogates.py``)
-- **00:06.690**: :ref:`sphx_glr_auto_examples_plot_preferred_phase.py` (``plot_preferred_phase.py``)
-- **00:04.129**: :ref:`sphx_glr_auto_examples_plot_readme.py` (``plot_readme.py``)
-- **00:02.875**: :ref:`sphx_glr_auto_examples_plot_compare_filtering.py` (``plot_compare_filtering.py``)
-- **00:02.633**: :ref:`sphx_glr_auto_examples_plot_pac_methods.py` (``plot_pac_methods.py``)
-- **00:02.286**: :ref:`sphx_glr_auto_examples_plot_values.py` (``plot_values.py``)
-- **00:02.030**: :ref:`sphx_glr_auto_examples_plot_long_range_coupling.py` (``plot_long_range_coupling.py``)
-- **00:01.506**: :ref:`sphx_glr_auto_examples_plot_fmin_fmax_optmization.py` (``plot_fmin_fmax_optmization.py``)
-- **00:00.265**: :ref:`sphx_glr_auto_examples_plot_frequency_vectors.py` (``plot_frequency_vectors.py``)
-- **00:00.208**: :ref:`sphx_glr_auto_examples_plot_artificially_coupled_signals.py` (``plot_artificially_coupled_signals.py``)
+- **00:29.062**: :ref:`sphx_glr_auto_examples_plot_erpac_stats.py` (``plot_erpac_stats.py``)
+- **00:13.787**: :ref:`sphx_glr_auto_examples_plot_compare_normalizations.py` (``plot_compare_normalizations.py``)
+- **00:10.551**: :ref:`sphx_glr_auto_examples_plot_erpac.py` (``plot_erpac.py``)
+- **00:09.339**: :ref:`sphx_glr_auto_examples_plot_compare_surrogates.py` (``plot_compare_surrogates.py``)
+- **00:08.155**: :ref:`sphx_glr_auto_examples_plot_preferred_phase.py` (``plot_preferred_phase.py``)
+- **00:04.427**: :ref:`sphx_glr_auto_examples_plot_readme.py` (``plot_readme.py``)
+- **00:03.428**: :ref:`sphx_glr_auto_examples_plot_compare_filtering.py` (``plot_compare_filtering.py``)
+- **00:02.729**: :ref:`sphx_glr_auto_examples_plot_pac_methods.py` (``plot_pac_methods.py``)
+- **00:02.502**: :ref:`sphx_glr_auto_examples_plot_values.py` (``plot_values.py``)
+- **00:02.336**: :ref:`sphx_glr_auto_examples_plot_long_range_coupling.py` (``plot_long_range_coupling.py``)
+- **00:01.541**: :ref:`sphx_glr_auto_examples_plot_fmin_fmax_optmization.py` (``plot_fmin_fmax_optmization.py``)
+- **00:00.338**: :ref:`sphx_glr_auto_examples_plot_frequency_vectors.py` (``plot_frequency_vectors.py``)
+- **00:00.261**: :ref:`sphx_glr_auto_examples_plot_artificially_coupled_signals.py` (``plot_artificially_coupled_signals.py``)

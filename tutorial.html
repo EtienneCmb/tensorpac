@@ -3,10 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Implemented methods &#8212; Tensorpac 0.6.1 documentation</title>
+    <title>Tutorial &#8212; Tensorpac 0.6.1 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tp_style.css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
@@ -66,16 +67,7 @@
 <li class="toctree-l2"><a class="reference internal" href="install.html#install-the-most-up-to-date-version">Install the most up-to-date version</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Implemented methods</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#modular-philosophy">Modular philosophy</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pac-methods">Pac methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#surrogates-methods">Surrogates methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#normalization-methods">Normalization methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#compute-phase-amplitude-coupling">Compute phase-amplitude coupling</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.Pac.html">tensorpac.Pac</a></li>
@@ -156,6 +148,8 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="citation.html">Authors and contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citation.html#cite-tensorpac">Cite Tensorpac</a></li>
 </ul>
 </ul>
 </li>
@@ -191,86 +185,9 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="implemented-methods">
-<span id="tutorial"></span><h1>Implemented methods<a class="headerlink" href="#implemented-methods" title="Permalink to this headline">¶</a></h1>
-<p>Beginning with raw data, the first step to computing PAC is to extract the phase and the amplitude across a range of frequency bands. There are two ways to do this :</p>
-<ul class="simple">
-<li><p>Filter the data in the frequency band, then use the hilbert transform to pass from real to complex space.</p></li>
-<li><p>Convolve your data with a wavelet with a width, corresponding to the desired frequency band.</p></li>
-</ul>
-<p>Next we will have to extract the phase and the amplitude from the resultant decomposition.</p>
-<p>Once we have resolved both phase and amplitude signals, we shall derive our PAC value. This is done in three steps :</p>
-<ul class="simple">
-<li><p><strong>Compute the PAC :</strong>  From the two time series of phase and amplitude, this will give us a single coupling value</p></li>
-<li><p><strong>Compute surogates :</strong> The PAC measure is quite sensitive to noise present in the data. In addition, filtering may augment artefacts. To minimize these effects, we compute surrogates. Surrogates are obtained by altering slightly either the phase or the amplitude and re-computing the PAC. This procedure is then repeated over 50, 100, 200 or 1000 permutations to produce a reliable distribution.</p></li>
-<li><p><strong>Correct the PAC measurement :</strong> Once we have the PAC and the distribution of surrogates, we can subtract the mean of the surrogates. By taking the mean of the distribution, we limit our results to those strongest, and mitigate the impact of noise and artefact.</p></li>
-</ul>
-<p>The many existing PAC implemenations nearly always propose some variation on these three steps. How can we be sure, though, that any particular implemenation will outperform any other?</p>
-<div class="section" id="modular-philosophy">
-<h2>Modular philosophy<a class="headerlink" href="#modular-philosophy" title="Permalink to this headline">¶</a></h2>
-<p>To answer to this question, we’ve developed a modular implementation allowing users to combine methods from existing PAC implementations in novel ways. Until recently, it has been difficult to compare existing and novel combinations of PAC implementations, due to long computation times. By leveraging tensor and parallel computing, however, Tensorpac offers new possibilities for determining the optimal PAC implementation for a given data set.</p>
-<p>Tensorpac makes combining methods as simple as defining the <strong>idpac</strong> tuple (or list/array) of three digits, each referring to one of the implemented methods.</p>
-<div class="section" id="pac-methods">
-<h3>Pac methods<a class="headerlink" href="#pac-methods" title="Permalink to this headline">¶</a></h3>
-<p>The first digit defines the PAC method :</p>
-<ul class="simple">
-<li><p>1 - Mean Vector Length (MVL - Canolty, 2006)</p></li>
-<li><p>2 - Kullback-Leibler Divergence (KLD - Tort, 2010)</p></li>
-<li><p>3 - Heigth-ratio (HR - Lakatos, 2005)</p></li>
-<li><p>4 - Normalized Direct PAC (ndPAC - Ozkürt, 2012)</p></li>
-<li><p>5 - Phase Synchrony (PS - Lakata, 2005)</p></li>
-<li><p>6 - Generalized Linear Model (GLM - Lakata, 2005) [IN PROGRESS]</p></li>
-<li><p>7 - Event Related PAC (ERPAC - Voytek, 2013) [IN PROGRESS]</p></li>
-</ul>
-<p>[<a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/examples/4_ComparePacMethods.py">PAC methods script</a>]</p>
-<div class="figure align-center" id="id1">
-<img alt="_images/4_pacmeth.png" src="_images/4_pacmeth.png" />
-<p class="caption"><span class="caption-text"><a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/4_pacmeth.png">PAC methods comparison</a>.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="surrogates-methods">
-<h3>Surrogates methods<a class="headerlink" href="#surrogates-methods" title="Permalink to this headline">¶</a></h3>
-<p>The second digit defines the method for surrogates computation :</p>
-<ul class="simple">
-<li><p>0 - No surrogates</p></li>
-<li><p>1 - Swap phase/amplitude trials (Tort, 2010)</p></li>
-<li><p>2 - Swap amplitude time blocks (Bahramisharif, 2013)</p></li>
-<li><p>3 - Shuffle phase and amplitude time-series</p></li>
-<li><p>4 - Shuffle phase time-series</p></li>
-<li><p>5 - Shuffle amplitude time-series</p></li>
-<li><p>6 - Time-lag (Canolty, 2006)</p></li>
-</ul>
-<p>[<a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/examples/5_CompareSurrogatesMethods.py">Surrogate methods script</a>]</p>
-<div class="figure align-center" id="id2">
-<img alt="_images/5_surrometh.png" src="_images/5_surrometh.png" />
-<p class="caption"><span class="caption-text"><a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/5_surrometh.png">Surrogate methods comparison</a>.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="normalization-methods">
-<h3>Normalization methods<a class="headerlink" href="#normalization-methods" title="Permalink to this headline">¶</a></h3>
-<p>The third digit is defines the normalization (or correction) procedure :</p>
-<ul class="simple">
-<li><p>0 - No normalization</p></li>
-<li><p>1 - Substraction of the mean of surrogates</p></li>
-<li><p>2 - Division of the mean of surrogates</p></li>
-<li><p>3 - Substraction then division of the mean of surrogates</p></li>
-<li><p>4 - Substraction by the mean, then division by the diviation of the surrogates (z-scored)</p></li>
-</ul>
-<p>[<a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/examples/6_CompareNormalizationMethods.py">Normalization methods script</a>]</p>
-<div class="figure align-center" id="id3">
-<img alt="_images/6_normmeth.png" src="_images/6_normmeth.png" />
-<p class="caption"><span class="caption-text"><a class="reference external" href="https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/6_normmeth">Normalization methods comparison</a>.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="example">
-<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>idpac = (2, 0, 0) =&gt; KLD + No surrogates + No normalization</p></li>
-<li><p>idpac = (1, 3, 3) =&gt; MVL + Shuffle phase and amplitude time-series + Substraction then division of the mean of surrogates</p></li>
-<li><p>idpac = (5, 2, 1) =&gt; PS + Swap amplitude time blocks + Substraction of the mean of surrogates</p></li>
-</ul>
-</div>
-</div>
+  <iframe src="https://giphy.com/embed/X8zEerXZaq3Rk5Vqy9" width="480" height="434" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/daskochrezept-under-construction-offline-X8zEerXZaq3Rk5Vqy9"></a></p><div class="section" id="id1">
+<h1>Tutorial<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>[soon]</p>
 </div>
 
 
@@ -278,17 +195,24 @@
       
   </div>
 </div>
-<footer class="footer">
-  <div class="container">
-    <p class="pull-right">
-      <a href="#">Back to top</a>
-      
-    </p>
-    <p>
-        &copy; Copyright 2019, Etienne Combrisson.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.<br/>
-    </p>
-  </div>
-</footer>
+    <hr>
+    <footer>
+        <div class="container">
+            <img src="_static/baniere.png" alt="Ban" height="80">
+        </div>
+        <br>
+        <div class="container">
+            <ul class="list-inline">
+                <li style="font-weight:bold"><a href="genindex.html">Index</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="https://github.com/EtienneCmb/tensorpac">Github</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="citation.html">Authors and citation</a></li>
+            </ul>
+         </div>
+        <!-- <br> -->
+        <p>&copy; Copyright 2019, Etienne Combrisson.</p>
+    </footer>
+
   </body>
 </html>
