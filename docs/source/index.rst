@@ -32,3 +32,4 @@ Contents:
    tutorial
    api
    auto_examples/index.rst
+   citation

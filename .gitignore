@@ -104,3 +104,4 @@ dvp/
 docs/source/generated/
 docs/source/auto_examples/
 *.fuse_*
+*.svg

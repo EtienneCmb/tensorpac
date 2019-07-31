@@ -213,3 +213,8 @@ texinfo_documents = [
      author, 'Tensorpac', 'One line description of project.',
      'Miscellaneous'),
 ]
+
+
+def setup(app):
+    print('OKIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII')
+    app.add_stylesheet("tp_style.css")
