@@ -14,6 +14,26 @@ Examples
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="This example illustrate how to compute and plot the Power Spectrum Density (PSD) of an electrop...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_psd_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_psd.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_psd
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Reproduced the figure in the README. ">
 
 .. only:: html

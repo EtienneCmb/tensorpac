@@ -23,6 +23,18 @@ Compute phase-amplitude coupling
    EventRelatedPac
    PreferredPhase
 
+Utility functions
+~~~~~~~~~~~~~~~~~
+
+:py:mod:`tensorpac.utils`:
+
+.. currentmodule:: tensorpac.utils
+
+.. autosummary::
+   :toctree: generated/
+
+   PSD
+
 Generate synthetic signals
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 

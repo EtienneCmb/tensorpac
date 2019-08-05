@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>tensorpac.methods.swap_pha_amp &#8212; Tensorpac 0.6.1 documentation</title>
+    <title>tensorpac.utils.PSD &#8212; Tensorpac 0.6.1 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
@@ -16,8 +16,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="tensorpac.methods.swap_blocks" href="tensorpac.methods.swap_blocks.html" />
-    <link rel="prev" title="tensorpac.methods.preferred_phase" href="tensorpac.methods.preferred_phase.html" />
+    <link rel="next" title="tensorpac.pac_signals_wavelet" href="tensorpac.pac_signals_wavelet.html" />
+    <link rel="prev" title="tensorpac.PreferredPhase" href="tensorpac.PreferredPhase.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -75,8 +75,8 @@
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.PreferredPhase.html">tensorpac.PreferredPhase</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../api.html#utility-functions">Utility functions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../api.html#utility-functions">Utility functions</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tensorpac.utils.PSD</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
@@ -84,7 +84,7 @@
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.pac_signals_tort.html">tensorpac.pac_signals_tort</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="reference internal" href="../api.html#individual-methods">Individual methods</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api.html#individual-methods">Individual methods</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#pac-methods">PAC methods</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.mvl.html">tensorpac.methods.mvl</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
@@ -103,8 +103,8 @@
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.preferred_phase.html">tensorpac.methods.preferred_phase</a></li>
 </ul>
 </li>
-<li class="toctree-l3 current"><a class="reference internal" href="../api.html#surrogates-methods">Surrogates methods</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">tensorpac.methods.swap_pha_amp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#surrogates-methods">Surrogates methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.swap_pha_amp.html">tensorpac.methods.swap_pha_amp</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.swap_blocks.html">tensorpac.methods.swap_blocks</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.time_lag.html">tensorpac.methods.time_lag</a></li>
 </ul>
@@ -166,7 +166,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="../_sources/generated/tensorpac.methods.swap_pha_amp.rst.txt"
+  <a href="../_sources/generated/tensorpac.utils.PSD.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -190,32 +190,75 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="tensorpac-methods-swap-pha-amp">
-<h1>tensorpac.methods.swap_pha_amp<a class="headerlink" href="#tensorpac-methods-swap-pha-amp" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
-<dt id="tensorpac.methods.swap_pha_amp">
-<code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">swap_pha_amp</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_surrogates.html#swap_pha_amp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.swap_pha_amp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Swap phase / amplitude trials.</p>
+  <div class="section" id="tensorpac-utils-psd">
+<h1>tensorpac.utils.PSD<a class="headerlink" href="#tensorpac-utils-psd" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="tensorpac.utils.PSD">
+<em class="property">class </em><code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">PSD</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">sf</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Power Spectrum Density for electrophysiological brain data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>pha, amp</strong><span class="classifier">array_like</span></dt><dd><p>Respectively the arrays of phases of shape (n_pha, …, n_times) and
-the array of amplitudes of shape (n_amp, …, n_times).</p>
+<dt><strong>sf</strong><span class="classifier">float</span></dt><dd><p>The sampling frequency.</p>
+</dd>
+<dt><strong>x</strong><span class="classifier">array_like</span></dt><dd><p>Array of data of shape (n_epochs, n_times)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="tensorpac.utils.PSD.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">x</em>, <em class="sig-param">sf</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Init.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.__init__" title="tensorpac.utils.PSD.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self, x, sf)</p></td>
+<td><p>Init.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.plot" title="tensorpac.utils.PSD.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(self[, f_min, f_max, confidence])</p></td>
+<td><p>Plot the PSD.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.show" title="tensorpac.utils.PSD.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>(self)</p></td>
+<td><p>Display the PSD figure.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="tensorpac.utils.PSD.plot">
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">f_min=None</em>, <em class="sig-param">f_max=None</em>, <em class="sig-param">confidence=95</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the PSD.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>f_min, f_max</strong><span class="classifier">(int, float) | None</span></dt><dd><p>Frequency bounds to use for plotting</p>
+</dd>
+<dt><strong>confidence</strong><span class="classifier">(int, float) | None</span></dt><dd><p>Light gray confidence interval. If None, no interval will be
+displayed</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>pha, amp</strong><span class="classifier">array_like</span></dt><dd><p>The phase and amplitude to use to compute the distribution of
-permutations</p>
+<dt><strong>ax</strong><span class="classifier">Matplotlib axis</span></dt><dd><p>The matplotlib axis that contains the figure</p>
 </dd>
 </dl>
 </dd>
 </dl>
-<p class="rubric">References</p>
-<p>Tort ABL, Komorowski R, Eichenbaum H, Kopell N (2010) Measuring
-Phase-Amplitude Coupling Between Neuronal Oscillations of Different
-Frequencies. Journal of Neurophysiology 104:1195–1210.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.PSD.show">
+<code class="sig-name descname">show</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD.show"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the PSD figure.</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
