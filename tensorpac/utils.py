@@ -3,9 +3,14 @@
 - pac_signals_tort : generate artificially phase-amplitude coupled signals
 - pac_vec : generate cross-frequency coupling vectors
 """
+import logging
+
 import numpy as np
+from scipy.signal import periodogram
 
 from tensorpac.spectral import morlet
+
+logger = logging.getLogger('tensorpac')
 
 
 ###############################################################################
@@ -254,3 +259,77 @@ def pac_trivec(f_start=60., f_end=160., f_width=10.):
         tridx = np.concatenate((tridx, idx), axis=0) if tridx.size else idx
         f = np.concatenate((f, fst), axis=0) if f.size else fst
     return f, tridx
+
+
+class PSD(object):
+    """Power Spectrum Density for electrophysiological brain data.
+
+    Parameters
+    ----------
+    sf : float
+        The sampling frequency.
+    x : array_like
+        Array of data of shape (n_epochs, n_times)
+    """
+
+    def __init__(self, x, sf):
+        """Init."""
+        assert isinstance(x, np.ndarray) and (x.ndim == 2), (
+            "x should be a 2d array of shape (n_epochs, n_times)")
+        self._n_trials, self._n_times = x.shape
+        logger.info(f"Compute PSD over {self._n_trials} trials and "
+                    f"{self._n_times} time points")
+        self.freqs, self.psd = periodogram(x, fs=sf, window=None,
+                                           nfft=self._n_times,
+                                           detrend='constant',
+                                           return_onesided=True,
+                                           scaling='density', axis=1)
+
+    def plot(self, f_min=None, f_max=None, confidence=95):
+        """Plot the PSD.
+
+        Parameters
+        ----------
+        f_min, f_max : (int, float) | None
+            Frequency bounds to use for plotting
+        confidence : (int, float) | None
+            Light gray confidence interval. If None, no interval will be
+            displayed
+
+        Returns
+        -------
+        ax : Matplotlib axis
+            The matplotlib axis that contains the figure
+        """
+        import matplotlib.pyplot as plt
+        f_types = (int, float)
+        # psd mean and deviation
+        psd_mean = self.psd.mean(0)
+
+        # (f_min, f_max)
+        f_min = self.freqs[0] if not isinstance(f_min, f_types) else f_min
+        f_max = self.freqs[-1] if not isinstance(f_max, f_types) else f_max
+        # plot main psd
+        plt.plot(self.freqs, self.psd.mean(0), color='black',
+                 label='mean PSD over trials')
+        # plot confidence interval
+        if isinstance(confidence, (int, float)) and (0 < confidence < 100):
+            logger.info(f"    Add {confidence}th confidence interval")
+            interval = (100. - confidence) / 2
+            kw = dict(axis=0, interpolation='nearest')
+            psd_min = np.percentile(self.psd, interval, **kw)
+            psd_max = np.percentile(self.psd, 100. - interval, **kw)
+            plt.fill_between(self.freqs, psd_max, psd_min, color='lightgray',
+                             alpha=0.5,
+                             label=f"{confidence}th confidence interval")
+            plt.legend()
+        plt.xlabel("Frequencies (Hz)"), plt.ylabel("Power (V**2/Hz)")  # noqa
+        plt.title(f"PSD mean over {self._n_trials} trials")
+        plt.xlim(f_min, f_max)
+
+        return plt.gca()
+
+    def show(self):
+        """Display the PSD figure."""
+        import matplotlib.pyplot as plt
+        plt.show()
