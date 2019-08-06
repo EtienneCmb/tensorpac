@@ -5,6 +5,8 @@ import numpy as np
 from scipy.signal import periodogram
 
 from tensorpac.spectral import morlet
+from tensorpac.methods.meth_pac import _kl_hr
+from tensorpac.pac import _PacObj
 
 logger = logging.getLogger('tensorpac')
 
@@ -108,10 +110,10 @@ class PSD(object):
 
     Parameters
     ----------
-    sf : float
-        The sampling frequency.
     x : array_like
         Array of data of shape (n_epochs, n_times)
+    sf : float
+        The sampling frequency.
     """
 
     def __init__(self, x, sf):
@@ -184,5 +186,104 @@ class PSD(object):
 
     def show(self):
         """Display the PSD figure."""
+        import matplotlib.pyplot as plt
+        plt.show()
+
+
+class BinAmplitude(_PacObj):
+    """Bin the amplitude according to the phase.
+
+    Parameters
+    ----------
+    x : array_like
+        Array of data of shape (n_epochs, n_times)
+    sf : float
+        The sampling frequency
+    f_pha : tuple, list | [2, 4]
+        List of two floats describing the frequency bounds for extracting the
+        phase
+    f_amp : tuple, list | [60, 80]
+        List of two floats describing the frequency bounds for extracting the
+        amplitude
+    n_bins : int | 18
+        Number of bins to use to binarize the phase and the amplitude
+    dcomplex : {'wavelet', 'hilbert'}
+        Method for the complex definition. Use either 'hilbert' or
+        'wavelet'.
+    filt : {'fir1', 'butter', 'bessel'}
+        Filtering method (only if dcomplex is 'hilbert'). Choose either
+        'fir1', 'butter' or 'bessel'
+    cycle : tuple | (3, 6)
+        Control the number of cycles for filtering (only if dcomplex is
+        'hilbert'). Should be a tuple of integers where the first one
+        refers to the number of cycles for the phase and the second for the
+        amplitude [#f5]_.
+    filtorder : int | 3
+        Filter order for the Butterworth and Bessel filters (only if
+        dcomplex is 'hilbert').
+    width : int | 7
+        Width of the Morlet's wavelet.
+    edges : int | None
+        Number of samples to discard to avoid edge effects due to filtering
+    """
+
+    def __init__(self, x, sf, f_pha=[2, 4], f_amp=[60, 80], n_bins=18,
+                 dcomplex='hilbert', filt='fir1', cycle=(3, 6), filtorder=3,
+                 width=7, edges=None, n_jobs=-1):
+        """Init."""
+        _PacObj.__init__(self, f_pha=f_pha, f_amp=f_amp, dcomplex=dcomplex,
+                         filt=filt, cycle=cycle, filtorder=filtorder,
+                         width=width)
+        # check
+        x = np.atleast_2d(x)
+        assert x.ndim <= 2, ("`x` input should be an array of shape "
+                             "(n_epochs, n_times)")
+        assert isinstance(sf, (int, float)), ("`sf` input should be a integer "
+                                              "or a float")
+        assert all([isinstance(k, (int, float)) for k in f_pha]), (
+            "`f_pha` input should be a list of two integers / floats")
+        assert all([isinstance(k, (int, float)) for k in f_amp]), (
+            "`f_amp` input should be a list of two integers / floats")
+        assert isinstance(n_bins, int), "`n_bins` should be an integer"
+        # extract phase and amplitude
+        kw = dict(keepfilt=False, edges=edges, n_jobs=n_jobs)
+        pha = self.filter(sf, x, 'phase', **kw)
+        amp = self.filter(sf, x, 'amplitude', **kw)
+        # binarize amplitude according to phase
+        self.amplitude = _kl_hr(pha, amp, n_bins).squeeze()
+        self.n_bins = n_bins
+
+    def plot(self, unit='rad', **kw):
+        """Plot the amplitude.
+
+        Parameters
+        ----------
+        unit : {'rad', 'deg'}
+            The unit to use for the phase. Use either 'deg' for degree or 'rad'
+            for radians
+        kw : dict | {}
+            Additional inputs are passed to the matplotlib.pyplot.bar function
+
+        Returns
+        -------
+        ax : Matplotlib axis
+            The matplotlib axis that contains the figure
+        """
+        import matplotlib.pyplot as plt
+        assert unit in ['rad', 'deg']
+        if unit == 'rad':
+            self.phase = np.linspace(-np.pi, np.pi, self.n_bins)
+            width = 2 * np.pi / self.n_bins
+        elif unit == 'deg':
+            self.phase = np.linspace(-180, 180, self.n_bins)
+            width = 360 / self.n_bins
+        plt.bar(self.phase, self.amplitude.mean(1), width=width, **kw)
+        plt.xlabel(f"Frequency phase ({self.n_bins} bins)")
+        plt.ylabel("Amplitude")
+        plt.title("Binned amplitude")
+        plt.autoscale(enable=True, axis='x', tight=True)
+
+    def show(self):
+        """Show the figure."""
         import matplotlib.pyplot as plt
         plt.show()

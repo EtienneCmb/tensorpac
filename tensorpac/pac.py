@@ -7,7 +7,6 @@ from tensorpac.methods import (get_pac_fcn, pacstr, compute_surrogates,
                                erpac, ergcpac, _ergcpac_perm, preferred_phase,
                                normalize)
 from tensorpac.gcmi import copnorm
-from tensorpac.utils import pac_vec
 from tensorpac.visu import _PacVisual, _PacPlt, _PolarPlt
 from tensorpac.io import set_log_level
 from tensorpac.config import CONFIG
@@ -22,6 +21,7 @@ class _PacObj(object):
     def __init__(self, f_pha=[2, 4], f_amp=[60, 200], dcomplex='hilbert',
                  filt='fir1', cycle=(3, 6), filtorder=3, width=7):
         # Frequency checking :
+        from tensorpac.utils import pac_vec
         self._f_pha, self._f_amp = pac_vec(f_pha, f_amp)
         self._xvec, self._yvec = self.f_pha.mean(1), self.f_amp.mean(1)
         # Check spectral properties :
