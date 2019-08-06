@@ -547,7 +547,7 @@ class Pac(_PacObj, _PacPlt):
 
 
 class EventRelatedPac(_PacObj, _PacVisual):
-    """Event Related Phase-Amplitude Coupling (ERPAC).
+    """Compute the Event Related Phase-Amplitude Coupling (ERPAC).
 
     The traditional PAC approach is computed across time, hence this means that
     you can't observe PAC changes across time. In contrast, the ERPAC is
@@ -756,7 +756,7 @@ class EventRelatedPac(_PacObj, _PacVisual):
 
 
 class PreferredPhase(_PacObj, _PolarPlt):
-    """Evaluate the preferred phase (PP).
+    """Compute the Preferred Phase (PP).
 
     The preferred phase is defined as the phase at which the amplitude is
     maximum.
