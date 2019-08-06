@@ -285,7 +285,8 @@ class PSD(object):
                                            return_onesided=True,
                                            scaling='density', axis=1)
 
-    def plot(self, f_min=None, f_max=None, confidence=95):
+    def plot(self, f_min=None, f_max=None, confidence=95, log=False,
+             grid=True):
         """Plot the PSD.
 
         Parameters
@@ -326,6 +327,16 @@ class PSD(object):
         plt.xlabel("Frequencies (Hz)"), plt.ylabel("Power (V**2/Hz)")  # noqa
         plt.title(f"PSD mean over {self._n_trials} trials")
         plt.xlim(f_min, f_max)
+        if log:
+            from matplotlib.ticker import ScalarFormatter
+            plt.xscale('log', basex=10)
+            plt.gca().xaxis.set_major_formatter(ScalarFormatter())
+        if grid:
+            # plt.grid(True, which='both')
+            plt.grid(color='grey', which='major', linestyle='-',
+                     linewidth=1., alpha=0.5)
+            plt.grid(color='lightgrey', which='minor', linestyle='--',
+                     linewidth=0.5, alpha=0.5)
 
         return plt.gca()
 
