@@ -38,7 +38,8 @@ Code snippet & illustration
 
 .. code-block:: python
 
-  from tensorpac import Pac, pac_signals_tort
+  from tensorpac import Pac
+  from tensorpac.signals import pac_signals_tort
 
   # Dataset of signals artificially coupled between 10hz and 100hz :
   n_epochs = 20

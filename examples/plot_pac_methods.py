@@ -6,8 +6,11 @@ Compare PAC methods
 Compute PAC on multiple datasets and compare implemented methods.
 """
 from __future__ import print_function
+
+from tensorpac import Pac
+from tensorpac.signals import pac_signals_tort
+
 import matplotlib.pyplot as plt
-from tensorpac import Pac, pac_signals_tort
 plt.style.use('seaborn-paper')
 
 # First, we generate a dataset of signals artificially coupled between 10hz
@@ -24,8 +27,8 @@ p = Pac(f_pha=(2, 20, 1, 1), f_amp=(60, 150, 5, 5))
 
 # Now, we want to compare PAC methods, hence it's useless to systematically
 # filter the data. So we extract the phase and the amplitude only once :
-phases = p.filter(sf, data, ftype='phase')
-amplitudes = p.filter(sf, data, ftype='amplitude')
+phases = p.filter(sf, data, ftype='phase', n_jobs=1)
+amplitudes = p.filter(sf, data, ftype='amplitude', n_jobs=1)
 
 plt.figure(figsize=(18, 9))
 for i, k in enumerate([1, 2, 3, 4, 5, 6]):

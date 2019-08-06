@@ -1,7 +1,8 @@
 """Test tensorpac utils."""
 import numpy as np
-from tensorpac.utils import (pac_vec, pac_signals_tort, pac_trivec,
-                             pac_signals_wavelet)
+
+from tensorpac.signals import pac_signals_wavelet, pac_signals_tort
+from tensorpac.utils import pac_vec, pac_trivec
 
 
 def test_pac_vec():

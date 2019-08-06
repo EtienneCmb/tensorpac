@@ -7,8 +7,8 @@ This example illustrate how to compute and plot the Power Spectrum Density
 (PSD) of an electrophysiological dataset. The PSD should be used to check that
 there is the presence of a clear peak, espacially for frequency phase.
 """
-from tensorpac import pac_signals_tort
 from tensorpac.utils import PSD
+from tensorpac.signals import pac_signals_tort
 
 # Dataset of signals artificially coupled between 10hz and 100hz :
 n_epochs = 20

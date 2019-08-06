@@ -10,8 +10,8 @@ Tensorpac provides two ways for extracting phase and amplitude :
 """
 from __future__ import print_function
 import matplotlib.pyplot as plt
-from tensorpac import pac_signals_wavelet
 from tensorpac import Pac
+from tensorpac.signals import pac_signals_wavelet
 plt.style.use('seaborn-paper')
 
 # First, we generate a dataset of signals artificially coupled between 10hz
@@ -32,7 +32,7 @@ p.filt = 'fir1'
 print('Filtering with fir1 filter')
 for i, k in enumerate([(1, 3), (2, 4), (3, 6)]):
     p.cycle = k
-    xpac = p.filterfit(1024, data)
+    xpac = p.filterfit(1024, data, n_jobs=1)
     plt.subplot(2, 3, i + 1)
     p.comodulogram(xpac.mean(-1), title='Fir1 - cycle ' + str(k))
 

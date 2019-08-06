@@ -40,9 +40,9 @@ Utility functions
 Generate synthetic signals
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:py:mod:`tensorpac`:
+:py:mod:`tensorpac.signals`:
 
-.. currentmodule:: tensorpac
+.. currentmodule:: tensorpac.signals
 
 .. autosummary::
    :toctree: generated/

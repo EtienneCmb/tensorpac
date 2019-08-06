@@ -9,7 +9,8 @@ PAC estimation.
 from __future__ import print_function
 import matplotlib.pyplot as plt
 
-from tensorpac import Pac, pac_signals_wavelet
+from tensorpac import Pac
+from tensorpac.signals import pac_signals_wavelet
 plt.style.use('seaborn-paper')
 
 # First, we generate a delta <-> low-gamma coupling. By default, this dataset
@@ -26,8 +27,8 @@ p = Pac(f_pha=(3, 10, 1, .2), f_amp=(50, 90, 5, 1), dcomplex='wavelet',
 
 # Now, we want to compare PAC methods, hence it's useless to systematically
 # filter the data. So we extract the phase and the amplitude only once :
-phases = p.filter(sf, data, ftype='phase')
-amplitudes = p.filter(sf, data, ftype='amplitude')
+phases = p.filter(sf, data, ftype='phase', n_jobs=1)
+amplitudes = p.filter(sf, data, ftype='amplitude', n_jobs=1)
 
 plt.figure(figsize=(16, 12))
 for i, k in enumerate(range(4)):

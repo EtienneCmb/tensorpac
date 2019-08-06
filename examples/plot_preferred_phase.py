@@ -9,8 +9,11 @@ use the polar representation to display the preferred phase at different
 amplitudes.
 """
 import numpy as np
+
+from tensorpac import PreferredPhase
+from tensorpac.signals import pac_signals_wavelet
+
 import matplotlib.pyplot as plt
-from tensorpac import pac_signals_wavelet, PreferredPhase
 
 plt.style.use('seaborn-poster')
 
@@ -33,8 +36,8 @@ data, time = pac_signals_wavelet(f_pha=6, f_amp=100, n_epochs=n_epochs, sf=sf,
 p = PreferredPhase(f_pha=[5, 7], f_amp=(60, 200, 10, 1))
 
 # Extract the phase and the amplitude :
-pha = p.filter(sf, data, ftype='phase')
-amp = p.filter(sf, data, ftype='amplitude')
+pha = p.filter(sf, data, ftype='phase', n_jobs=1)
+amp = p.filter(sf, data, ftype='amplitude', n_jobs=1)
 
 # Now, compute the PP :
 ampbin, pp, vecbin = p.fit(pha, amp, n_bins=72)
