@@ -80,8 +80,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.pac_signals_wavelet.html">tensorpac.pac_signals_wavelet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.pac_signals_tort.html">tensorpac.pac_signals_tort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.signals.pac_signals_wavelet.html">tensorpac.signals.pac_signals_wavelet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.signals.pac_signals_tort.html">tensorpac.signals.pac_signals_tort</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#individual-methods">Individual methods</a><ul>
@@ -135,8 +135,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_compare_filtering.html">Compare filtering properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_long_range_coupling.html">Long-range PAC</a></li>
@@ -731,7 +731,7 @@
 
 
 <div class="viewcode-block" id="EventRelatedPac"><a class="viewcode-back" href="../../generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac">[docs]</a><span class="k">class</span> <span class="nc">EventRelatedPac</span><span class="p">(</span><span class="n">_PacObj</span><span class="p">,</span> <span class="n">_PacVisual</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Event Related Phase-Amplitude Coupling (ERPAC).</span>
+    <span class="sd">&quot;&quot;&quot;Compute the Event Related Phase-Amplitude Coupling (ERPAC).</span>
 
 <span class="sd">    The traditional PAC approach is computed across time, hence this means that</span>
 <span class="sd">    you can&#39;t observe PAC changes across time. In contrast, the ERPAC is</span>
@@ -940,7 +940,7 @@
 
 
 <div class="viewcode-block" id="PreferredPhase"><a class="viewcode-back" href="../../generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase">[docs]</a><span class="k">class</span> <span class="nc">PreferredPhase</span><span class="p">(</span><span class="n">_PacObj</span><span class="p">,</span> <span class="n">_PolarPlt</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluate the preferred phase (PP).</span>
+    <span class="sd">&quot;&quot;&quot;Compute the Preferred Phase (PP).</span>
 
 <span class="sd">    The preferred phase is defined as the phase at which the amplitude is</span>
 <span class="sd">    maximum.</span>

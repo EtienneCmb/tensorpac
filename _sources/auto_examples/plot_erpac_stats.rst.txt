@@ -22,7 +22,10 @@ amplitude coupling first followed by a random noise.
 .. code-block:: default
 
     import numpy as np
-    from tensorpac import EventRelatedPac, pac_signals_wavelet
+
+    from tensorpac import EventRelatedPac
+    from tensorpac.signals import pac_signals_wavelet
+
     import matplotlib.pyplot as plt
 
 
@@ -75,7 +78,7 @@ Define an ERPAC object and extract the phase and the amplitude
     p = EventRelatedPac(f_pha=[9, 11], f_amp=(60, 140, 5, 1))
 
     # extract phases and amplitudes
-    erpac = p.filterfit(sf, x, method='gc', n_perm=20,).squeeze()
+    erpac = p.filterfit(sf, x, method='gc', n_perm=20, n_jobs=-1).squeeze()
 
     pvalues = p.pvalues.squeeze()
     erpac[pvalues > .05] = np.nan
@@ -100,7 +103,7 @@ Define an ERPAC object and extract the phase and the amplitude
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  24.718 seconds)
+   **Total running time of the script:** ( 0 minutes  40.657 seconds)
 
 
 .. _sphx_glr_download_auto_examples_plot_erpac_stats.py:

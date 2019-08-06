@@ -5,9 +5,10 @@ Compute p-values
 
 For the visualization, we used a comodulogram.
 """
-import numpy as np
+from tensorpac import Pac
+from tensorpac.signals import pac_signals_wavelet
+
 import matplotlib.pyplot as plt
-from tensorpac import Pac, pac_signals_wavelet
 plt.style.use('seaborn-poster')
 
 # First, we generate a dataset of signals artificially coupled between 10hz
@@ -21,7 +22,7 @@ data, time = pac_signals_wavelet(f_pha=6, f_amp=90, noise=.8,
 
 # First, let's use the MVL, without any further correction by surrogates :
 p = Pac(idpac=(1, 2, 0), f_pha=(2, 15, 2, .2), f_amp=(60, 120, 10, 1))
-xpac = p.filterfit(sf, data, n_perm=200, p=.05)
+xpac = p.filterfit(sf, data, n_perm=200, p=.05, n_jobs=1)
 pval = p.pvalues
 
 p.comodulogram(xpac.mean(-1), title=str(p), cmap='Spectral_r', vmin=0.,

@@ -11,7 +11,10 @@ In this example, we generate a signal that have a 10hz phase <->100 hz
 amplitude coupling first followed by a random noise.
 """
 import numpy as np
-from tensorpac import EventRelatedPac, pac_signals_wavelet
+
+from tensorpac import EventRelatedPac
+from tensorpac.signals import pac_signals_wavelet
+
 import matplotlib.pyplot as plt
 
 ###############################################################################
@@ -46,8 +49,8 @@ time = np.arange(x.shape[1]) / sf
 p = EventRelatedPac(f_pha=[9, 11], f_amp=(60, 140, 5, 3))
 
 # extract phases and amplitudes
-pha = p.filter(sf, x, ftype='phase')
-amp = p.filter(sf, x, ftype='amplitude')
+pha = p.filter(sf, x, ftype='phase', n_jobs=1)
+amp = p.filter(sf, x, ftype='amplitude', n_jobs=1)
 
 ###############################################################################
 # Compute the ERPAC using the two implemented methods and plot it

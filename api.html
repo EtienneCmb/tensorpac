@@ -82,8 +82,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#generate-synthetic-signals">Generate synthetic signals</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.pac_signals_wavelet.html">tensorpac.pac_signals_wavelet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.pac_signals_tort.html">tensorpac.pac_signals_tort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.signals.pac_signals_wavelet.html">tensorpac.signals.pac_signals_wavelet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.signals.pac_signals_tort.html">tensorpac.signals.pac_signals_tort</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#individual-methods">Individual methods</a><ul>
@@ -137,8 +137,8 @@
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_filtering.html">Compare filtering properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_long_range_coupling.html">Long-range PAC</a></li>
@@ -218,10 +218,10 @@
 <td><p>Compute Phase-Amplitude Coupling (PAC).</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac" title="tensorpac.EventRelatedPac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EventRelatedPac</span></code></a>([f_pha, f_amp, dcomplex, …])</p></td>
-<td><p>Event Related Phase-Amplitude Coupling (ERPAC).</p></td>
+<td><p>Compute the Event Related Phase-Amplitude Coupling (ERPAC).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase" title="tensorpac.PreferredPhase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PreferredPhase</span></code></a>([f_pha, f_amp, dcomplex, …])</p></td>
-<td><p>Evaluate the preferred phase (PP).</p></td>
+<td><p>Compute the Preferred Phase (PP).</p></td>
 </tr>
 </tbody>
 </table>
@@ -249,17 +249,17 @@
 </div>
 <div class="section" id="generate-synthetic-signals">
 <h2><a class="toc-backref" href="#id4">Generate synthetic signals</a><a class="headerlink" href="#generate-synthetic-signals" title="Permalink to this headline">¶</a></h2>
-<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">tensorpac</span></code>:</p>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">tensorpac.signals</span></code>:</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.pac_signals_wavelet.html#tensorpac.pac_signals_wavelet" title="tensorpac.pac_signals_wavelet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac_signals_wavelet</span></code></a>([f_pha, f_amp, sf, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.signals.pac_signals_wavelet.html#tensorpac.signals.pac_signals_wavelet" title="tensorpac.signals.pac_signals_wavelet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac_signals_wavelet</span></code></a>([f_pha, f_amp, sf, …])</p></td>
 <td><p>Generate artificially phase-amplitude coupled signals using wavelets.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.pac_signals_tort.html#tensorpac.pac_signals_tort" title="tensorpac.pac_signals_tort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac_signals_tort</span></code></a>([f_pha, f_amp, sf, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.signals.pac_signals_tort.html#tensorpac.signals.pac_signals_tort" title="tensorpac.signals.pac_signals_tort"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac_signals_tort</span></code></a>([f_pha, f_amp, sf, …])</p></td>
 <td><p>Generate artificially phase-amplitude coupled signals.</p></td>
 </tr>
 </tbody>

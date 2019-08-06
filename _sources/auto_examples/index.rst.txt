@@ -174,26 +174,6 @@ Examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Compute PAC on multiple datasets and compare implemented methods. ">
-
-.. only:: html
-
-    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_pac_methods_thumb.png
-
-        :ref:`sphx_glr_auto_examples_plot_pac_methods.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/plot_pac_methods
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="The normalization correspond on the method used to correct the PAC estimation with the chance d...">
 
 .. only:: html
@@ -211,6 +191,26 @@ Examples
    :hidden:
 
    /auto_examples/plot_compare_normalizations
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Compute PAC on multiple datasets and compare implemented methods. ">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_pac_methods_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_pac_methods.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_pac_methods
 
 .. raw:: html
 

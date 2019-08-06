@@ -1,0 +1,6 @@
+tensorpac.signals.pac\_signals\_wavelet
+=======================================
+
+.. currentmodule:: tensorpac.signals
+
+.. autofunction:: pac_signals_wavelet

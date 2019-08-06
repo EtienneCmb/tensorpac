@@ -9,10 +9,11 @@ signal to extract the phase (xpha) and the second, the amplitude (xamp).
 If you want to extract local coupling (i.e. on a source/electrode) both xpha
 and xamp have to be set to data.
 """
-import matplotlib.pyplot as plt
-from tensorpac.utils import pac_signals_tort
 from tensorpac import Pac
-# plt.style.use('seaborn-poster')
+from tensorpac.signals import pac_signals_tort
+
+import matplotlib.pyplot as plt
+plt.style.use('seaborn-poster')
 
 # First, we generate 2 datasets of signals artificially coupled between 10hz
 # and 100hz. By default, those datasets are organized as (n_epochs, n_times)
@@ -28,10 +29,10 @@ p = Pac(idpac=(4, 0, 0), f_pha=(2, 30, 1, 1), f_amp=(60, 150, 5, 5),
         dcomplex='wavelet', width=12)
 # Now, compute PAC by taking the phase of the first dataset and the amplitude
 # of the second
-xpac12 = p.filterfit(1024, d1, d2)
+xpac12 = p.filterfit(1024, d1, d2, n_jobs=1)
 # Invert by taking the phase of the second dataset and the amplitude of the
 #  first one :
-xpac21 = p.filterfit(1024, d2, d1)
+xpac21 = p.filterfit(1024, d2, d1, n_jobs=1)
 
 # Plot signals and PAC :
 plt.figure(figsize=(18, 12))

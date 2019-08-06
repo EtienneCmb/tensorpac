@@ -80,8 +80,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.pac_signals_wavelet.html">tensorpac.pac_signals_wavelet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.pac_signals_tort.html">tensorpac.pac_signals_tort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.signals.pac_signals_wavelet.html">tensorpac.signals.pac_signals_wavelet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.signals.pac_signals_tort.html">tensorpac.signals.pac_signals_tort</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#individual-methods">Individual methods</a><ul>
@@ -135,8 +135,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_compare_filtering.html">Compare filtering properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_long_range_coupling.html">Long-range PAC</a></li>
@@ -182,11 +182,7 @@
     <div class="body col-md-12 content" role="main">
       
   <h1>Source code for tensorpac.utils</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Utility PAC functions.</span>
-
-<span class="sd">- pac_signals_tort : generate artificially phase-amplitude coupled signals</span>
-<span class="sd">- pac_vec : generate cross-frequency coupling vectors</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot;Utility functions.&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -197,161 +193,7 @@
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;tensorpac&#39;</span><span class="p">)</span>
 
 
-<span class="c1">###############################################################################</span>
-<span class="c1">###############################################################################</span>
-<span class="c1">#                             SIGNALS</span>
-<span class="c1">###############################################################################</span>
-<span class="c1">###############################################################################</span>
-
-
-<div class="viewcode-block" id="pac_signals_wavelet"><a class="viewcode-back" href="../../generated/tensorpac.pac_signals_wavelet.html#tensorpac.pac_signals_wavelet">[docs]</a><span class="k">def</span> <span class="nf">pac_signals_wavelet</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="mf">1024.</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="mf">4000.</span><span class="p">,</span>
-                        <span class="n">n_epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">noise</span><span class="o">=.</span><span class="mi">1</span><span class="p">,</span> <span class="n">pp</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">rnd_state</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generate artificially phase-amplitude coupled signals using wavelets.</span>
-
-<span class="sd">    This function is inspired by the code of the pactools toolbox developped by</span>
-<span class="sd">    Tom Dupre la Tour.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    f_pha : float | 10.</span>
-<span class="sd">        Frequency for phase. Use either a float number for a centered frequency</span>
-<span class="sd">        of a band (like [5, 7]) for a bandwidth.</span>
-<span class="sd">    f_amp : float | 100.</span>
-<span class="sd">        Frequency for amplitude. Use either a float number for a centered</span>
-<span class="sd">        frequency of a band (like [60, 80]) for a bandwidth.</span>
-<span class="sd">    sf : float | 1024.</span>
-<span class="sd">        Sampling frequency.</span>
-<span class="sd">    n_times : int | 4000</span>
-<span class="sd">        Number of time points.</span>
-<span class="sd">    n_epochs : int | 10</span>
-<span class="sd">        Number of trials in the dataset.</span>
-<span class="sd">    noise : float | .1</span>
-<span class="sd">        Amount of white noise.</span>
-<span class="sd">    pp : float | 0.</span>
-<span class="sd">        The preferred-phase of the coupling.</span>
-<span class="sd">    rnd_state: int | 0</span>
-<span class="sd">        Fix random of the machine (for reproducibility)</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    data : array_like</span>
-<span class="sd">        Array of signals of shape (n_epochs, n_times).</span>
-<span class="sd">    time : array_like</span>
-<span class="sd">        Time vector of shape (n_times,).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">n_times</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_times</span><span class="p">)</span>
-    <span class="n">sf</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
-    <span class="n">f_pha</span><span class="p">,</span> <span class="n">f_amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">f_pha</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">f_amp</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-    <span class="c1"># time = np.mgrid[0:n_epochs, 0:n_times][1] / sf</span>
-    <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_times</span><span class="p">)</span> <span class="o">/</span> <span class="n">sf</span>
-    <span class="c1"># Random state of the machine :</span>
-    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">rnd_state</span><span class="p">)</span>
-    <span class="c1"># Get complex decomposition of random points in the phase frequency band :</span>
-    <span class="n">driver</span> <span class="o">=</span> <span class="n">morlet</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_times</span><span class="p">),</span> <span class="n">sf</span><span class="p">,</span> <span class="n">f_pha</span><span class="p">)</span>
-    <span class="n">driver</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="c1"># Create amplitude signals :</span>
-    <span class="n">xh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">f_amp</span> <span class="o">*</span> <span class="n">time</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">dpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pp</span><span class="p">)</span>
-    <span class="n">modulation</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="mf">6.</span> <span class="o">*</span> <span class="mf">1.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">driver</span> <span class="o">*</span> <span class="n">dpha</span><span class="p">)))</span>
-    <span class="c1"># Modulate the amplitude :</span>
-    <span class="n">xh</span> <span class="o">=</span> <span class="n">xh</span> <span class="o">*</span> <span class="n">modulation</span>
-    <span class="c1"># Get the phase signal :</span>
-    <span class="n">xl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">driver</span><span class="p">)</span>
-    <span class="c1"># Build the pac signal :</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">xh</span> <span class="o">+</span> <span class="n">xl</span> <span class="o">+</span> <span class="n">noise</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="o">*</span><span class="n">xh</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">time</span></div>
-
-
-<div class="viewcode-block" id="pac_signals_tort"><a class="viewcode-back" href="../../generated/tensorpac.pac_signals_tort.html#tensorpac.pac_signals_tort">[docs]</a><span class="k">def</span> <span class="nf">pac_signals_tort</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-                     <span class="n">chi</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">dpha</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">damp</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">rnd_state</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generate artificially phase-amplitude coupled signals.</span>
-
-<span class="sd">    This function use the definition of Tort et al. 2010.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    f_pha : float | 10.</span>
-<span class="sd">        Frequency for phase. Use either a float number for a centered frequency</span>
-<span class="sd">        of a band (like [5, 7]) for a bandwidth.</span>
-<span class="sd">    f_amp : float | 100.</span>
-<span class="sd">        Frequency for amplitude. Use either a float number for a centered</span>
-<span class="sd">        frequency of a band (like [60, 80]) for a bandwidth.</span>
-<span class="sd">    sf : int | 1024</span>
-<span class="sd">        Sampling frequency</span>
-<span class="sd">    n_epochs : int | 10</span>
-<span class="sd">        Number of datasets</span>
-<span class="sd">    n_times : int | 4000</span>
-<span class="sd">        Number of points for each signal.</span>
-<span class="sd">    chi : float | 0.</span>
-<span class="sd">        Amount of coupling. If chi=0, signals of phase and amplitude</span>
-<span class="sd">        are strongly coupled (0.&lt;=chi&lt;=1.).</span>
-<span class="sd">    noise : float | 1.</span>
-<span class="sd">        Amount of noise (0&lt;=noise&lt;=3).</span>
-<span class="sd">    dpha : float | 0.</span>
-<span class="sd">        Random incertitude on phase frequences (0&lt;=dpha&lt;=100). If f_pha is 2,</span>
-<span class="sd">        and dpha is 50, the frequency for the phase signal will be between :</span>
-<span class="sd">        [2-0.5*2, 2+0.5*2]=[1,3]</span>
-<span class="sd">    damp : float | 0.</span>
-<span class="sd">        Random incertitude on amplitude frequencies (0&lt;=damp&lt;=100). If f_amp is</span>
-<span class="sd">        60, and damp is 10, the frequency for the amplitude signal will be</span>
-<span class="sd">        between : [60-0.1*60, 60+0.1*60]=[54,66]</span>
-<span class="sd">    rnd_state: int | 0</span>
-<span class="sd">        Fix random of the machine (for reproducibility)</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    data : array_like</span>
-<span class="sd">        Array of signals of shape (n_epochs, n_channels, n_times).</span>
-<span class="sd">    time : array_like</span>
-<span class="sd">        Time vector of shape (n_times,).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">n_times</span><span class="p">,</span> <span class="n">sf</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_times</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">sf</span><span class="p">)</span>
-    <span class="c1"># Check the inputs variables :</span>
-    <span class="n">chi</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">chi</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">chi</span>
-    <span class="n">noise</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">noise</span> <span class="o">&lt;=</span> <span class="mi">3</span> <span class="k">else</span> <span class="n">noise</span>
-    <span class="n">dpha</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">dpha</span> <span class="o">&lt;=</span> <span class="mi">100</span> <span class="k">else</span> <span class="n">dpha</span>
-    <span class="n">damp</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">damp</span> <span class="o">&lt;=</span> <span class="mi">100</span> <span class="k">else</span> <span class="n">damp</span>
-    <span class="n">f_pha</span><span class="p">,</span> <span class="n">f_amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">f_pha</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">f_amp</span><span class="p">)</span>
-    <span class="c1"># time = np.mgrid[0:n_epochs, 0:n_times][1] / sf</span>
-    <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_times</span><span class="p">)</span> <span class="o">/</span> <span class="n">sf</span>
-    <span class="c1"># Random state of the machine :</span>
-    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">rnd_state</span><span class="p">)</span>
-    <span class="c1"># Band / Delta parameters :</span>
-    <span class="n">sh</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">f_pha</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">apha</span> <span class="o">=</span> <span class="p">[</span><span class="n">f_pha</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">dpha</span> <span class="o">/</span> <span class="mf">100.</span><span class="p">),</span> <span class="n">f_pha</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">dpha</span> <span class="o">/</span> <span class="mf">100.</span><span class="p">)]</span>
-        <span class="n">del_pha</span> <span class="o">=</span> <span class="n">apha</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">apha</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">apha</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="o">*</span><span class="n">sh</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">f_pha</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">del_pha</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">f_pha</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">f_pha</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">f_amp</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">a_amp</span> <span class="o">=</span> <span class="p">[</span><span class="n">f_amp</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">damp</span> <span class="o">/</span> <span class="mf">100.</span><span class="p">),</span> <span class="n">f_amp</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">damp</span> <span class="o">/</span> <span class="mf">100.</span><span class="p">)]</span>
-        <span class="n">del_amp</span> <span class="o">=</span> <span class="n">a_amp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">a_amp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a_amp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="o">*</span><span class="n">sh</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">f_amp</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">del_amp</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">f_amp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">f_amp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-
-    <span class="c1"># Create phase and amplitude signals :</span>
-    <span class="n">xl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">del_pha</span> <span class="o">*</span> <span class="n">time</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-    <span class="n">xh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">del_amp</span> <span class="o">*</span> <span class="n">time</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-
-    <span class="c1"># Create the coupling :</span>
-    <span class="n">ah</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span> <span class="o">*</span> <span class="p">((</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">chi</span><span class="p">)</span> <span class="o">*</span> <span class="n">xl</span> <span class="o">+</span> <span class="mf">1.</span> <span class="o">+</span> <span class="n">chi</span><span class="p">)</span>
-    <span class="n">al</span> <span class="o">=</span> <span class="mf">1.</span>
-
-    <span class="c1"># Generate datasets :</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">ah</span> <span class="o">*</span> <span class="n">xh</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">al</span> <span class="o">*</span> <span class="n">xl</span><span class="p">)</span>
-    <span class="n">data</span> <span class="o">+=</span> <span class="n">noise</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># Add noise</span>
-
-    <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">time</span></div>
-
-<span class="c1">###############################################################################</span>
-<span class="c1">###############################################################################</span>
-<span class="c1">#                             FREQUENCY VECTOR</span>
-<span class="c1">###############################################################################</span>
-<span class="c1">###############################################################################</span>
-
-
-<div class="viewcode-block" id="pac_vec"><a class="viewcode-back" href="../../generated/tensorpac.utils.pac_vec.html#tensorpac.pac_vec">[docs]</a><span class="k">def</span> <span class="nf">pac_vec</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)):</span>
+<div class="viewcode-block" id="pac_vec"><a class="viewcode-back" href="../../generated/tensorpac.utils.pac_vec.html#tensorpac.utils.pac_vec">[docs]</a><span class="k">def</span> <span class="nf">pac_vec</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)):</span>
     <span class="sd">&quot;&quot;&quot;Generate cross-frequency coupling vectors.</span>
 
 <span class="sd">    Parameters</span>
@@ -408,7 +250,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">fdown</span><span class="p">,</span> <span class="n">fup</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="pac_trivec"><a class="viewcode-back" href="../../generated/tensorpac.utils.pac_trivec.html#tensorpac.pac_trivec">[docs]</a><span class="k">def</span> <span class="nf">pac_trivec</span><span class="p">(</span><span class="n">f_start</span><span class="o">=</span><span class="mf">60.</span><span class="p">,</span> <span class="n">f_end</span><span class="o">=</span><span class="mf">160.</span><span class="p">,</span> <span class="n">f_width</span><span class="o">=</span><span class="mf">10.</span><span class="p">):</span>
+<div class="viewcode-block" id="pac_trivec"><a class="viewcode-back" href="../../generated/tensorpac.utils.pac_trivec.html#tensorpac.utils.pac_trivec">[docs]</a><span class="k">def</span> <span class="nf">pac_trivec</span><span class="p">(</span><span class="n">f_start</span><span class="o">=</span><span class="mf">60.</span><span class="p">,</span> <span class="n">f_end</span><span class="o">=</span><span class="mf">160.</span><span class="p">,</span> <span class="n">f_width</span><span class="o">=</span><span class="mf">10.</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generate triangular vector.</span>
 
 <span class="sd">    By contrast with the pac_vec function, this function generate frequency</span>
@@ -445,7 +287,7 @@
     <span class="k">return</span> <span class="n">f</span><span class="p">,</span> <span class="n">tridx</span></div>
 
 
-<div class="viewcode-block" id="PSD"><a class="viewcode-back" href="../../generated/tensorpac.utils.PSD.html#tensorpac.PSD">[docs]</a><span class="k">class</span> <span class="nc">PSD</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="PSD"><a class="viewcode-back" href="../../generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD">[docs]</a><span class="k">class</span> <span class="nc">PSD</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Power Spectrum Density for electrophysiological brain data.</span>
 
 <span class="sd">    Parameters</span>
@@ -456,7 +298,7 @@
 <span class="sd">        Array of data of shape (n_epochs, n_times)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="PSD.__init__"><a class="viewcode-back" href="../../generated/tensorpac.utils.PSD.html#tensorpac.PSD.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">sf</span><span class="p">):</span>
+<div class="viewcode-block" id="PSD.__init__"><a class="viewcode-back" href="../../generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">sf</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Init.&quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span>
             <span class="s2">&quot;x should be a 2d array of shape (n_epochs, n_times)&quot;</span><span class="p">)</span>
@@ -469,7 +311,7 @@
                                            <span class="n">return_onesided</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                            <span class="n">scaling</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PSD.plot"><a class="viewcode-back" href="../../generated/tensorpac.utils.PSD.html#tensorpac.PSD.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f_min</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">f_max</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mi">95</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<div class="viewcode-block" id="PSD.plot"><a class="viewcode-back" href="../../generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f_min</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">f_max</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mi">95</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
              <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Plot the PSD.</span>
 
@@ -524,7 +366,7 @@
 
         <span class="k">return</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="PSD.show"><a class="viewcode-back" href="../../generated/tensorpac.utils.PSD.html#tensorpac.PSD.show">[docs]</a>    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PSD.show"><a class="viewcode-back" href="../../generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD.show">[docs]</a>    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Display the PSD figure.&quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div></div>

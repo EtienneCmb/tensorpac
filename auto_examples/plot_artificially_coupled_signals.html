@@ -82,8 +82,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.pac_signals_wavelet.html">tensorpac.pac_signals_wavelet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.pac_signals_tort.html">tensorpac.pac_signals_tort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.signals.pac_signals_wavelet.html">tensorpac.signals.pac_signals_wavelet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.signals.pac_signals_tort.html">tensorpac.signals.pac_signals_tort</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#individual-methods">Individual methods</a><ul>
@@ -137,8 +137,8 @@
 <li class="toctree-l3"><a class="reference internal" href="plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Compare filtering properties</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
@@ -195,8 +195,8 @@
 <span id="sphx-glr-auto-examples-plot-artificially-coupled-signals-py"></span><h1>Generate artificially coupled signals<a class="headerlink" href="#generate-artificially-coupled-signals" title="Permalink to this headline">¶</a></h1>
 <p>Use the pac_signals_tort function to generate artificial PAC.</p>
 <img alt="../_images/sphx_glr_plot_artificially_coupled_signals_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_artificially_coupled_signals_001.png" />
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">tensorpac</span> <span class="k">import</span> <span class="n">pac_signals_tort</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorpac.signals</span> <span class="k">import</span> <span class="n">pac_signals_tort</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># Generate one signal containing PAC. By default, this signal present a</span>
 <span class="c1"># coupling between a 2hz phase and a 100hz amplitude (2 &lt;-&gt; 100) :</span>
@@ -241,7 +241,7 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.201 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.292 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-artificially-coupled-signals-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/7ad3040719b785de0c548941ff33429c/plot_artificially_coupled_signals.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_artificially_coupled_signals.py</span></code></a></p>

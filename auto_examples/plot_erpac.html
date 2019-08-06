@@ -16,7 +16,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Compare PAC methods" href="plot_pac_methods.html" />
+    <link rel="next" title="Compare normalizations" href="plot_compare_normalizations.html" />
     <link rel="prev" title="Compare surrogate methods" href="plot_compare_surrogates.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -82,8 +82,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.pac_signals_wavelet.html">tensorpac.pac_signals_wavelet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.pac_signals_tort.html">tensorpac.pac_signals_tort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.signals.pac_signals_wavelet.html">tensorpac.signals.pac_signals_wavelet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.signals.pac_signals_tort.html">tensorpac.signals.pac_signals_tort</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#individual-methods">Individual methods</a><ul>
@@ -137,8 +137,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Compare filtering properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
@@ -199,7 +199,10 @@ PLV/PLS). Measuring across trials enable to have a real-time estimation of PAC.<
 <p>In this example, we generate a signal that have a 10hz phase &lt;-&gt;100 hz
 amplitude coupling first followed by a random noise.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">tensorpac</span> <span class="k">import</span> <span class="n">EventRelatedPac</span><span class="p">,</span> <span class="n">pac_signals_wavelet</span>
+
+<span class="kn">from</span> <span class="nn">tensorpac</span> <span class="k">import</span> <span class="n">EventRelatedPac</span>
+<span class="kn">from</span> <span class="nn">tensorpac.signals</span> <span class="k">import</span> <span class="n">pac_signals_wavelet</span>
+
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
@@ -236,8 +239,8 @@ amplitudes</p>
 <span class="n">p</span> <span class="o">=</span> <span class="n">EventRelatedPac</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 
 <span class="c1"># extract phases and amplitudes</span>
-<span class="n">pha</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">)</span>
-<span class="n">amp</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;amplitude&#39;</span><span class="p">)</span>
+<span class="n">pha</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">amp</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -262,7 +265,7 @@ amplitudes</p>
 </pre></div>
 </div>
 <img alt="../_images/sphx_glr_plot_erpac_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_erpac_001.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  10.720 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  12.689 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-erpac-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/09c36e6bd1db6263a4ecc6ba7ca5e077/plot_erpac.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_erpac.py</span></code></a></p>

@@ -82,8 +82,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.pac_signals_wavelet.html">tensorpac.pac_signals_wavelet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.pac_signals_tort.html">tensorpac.pac_signals_tort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.signals.pac_signals_wavelet.html">tensorpac.signals.pac_signals_wavelet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.signals.pac_signals_tort.html">tensorpac.signals.pac_signals_tort</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#individual-methods">Individual methods</a><ul>
@@ -137,8 +137,8 @@
 <li class="toctree-l3"><a class="reference internal" href="plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Compare filtering properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
@@ -197,8 +197,8 @@
 (PSD) of an electrophysiological dataset. The PSD should be used to check that
 there is the presence of a clear peak, espacially for frequency phase.</p>
 <img alt="../_images/sphx_glr_plot_psd_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_psd_001.png" />
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorpac</span> <span class="k">import</span> <span class="n">pac_signals_tort</span>
-<span class="kn">from</span> <span class="nn">tensorpac.utils</span> <span class="k">import</span> <span class="n">PSD</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorpac.utils</span> <span class="k">import</span> <span class="n">PSD</span>
+<span class="kn">from</span> <span class="nn">tensorpac.signals</span> <span class="k">import</span> <span class="n">pac_signals_tort</span>
 
 <span class="c1"># Dataset of signals artificially coupled between 10hz and 100hz :</span>
 <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">20</span>
@@ -220,7 +220,7 @@ there is the presence of a clear peak, espacially for frequency phase.</p>
 <span class="n">psd</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.259 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.318 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-psd-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/96ce4859824f2ed391a0d841d9a106d2/plot_psd.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_psd.py</span></code></a></p>

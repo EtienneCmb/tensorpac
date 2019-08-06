@@ -24,7 +24,8 @@ Reproduced the figure in the README.
 
 .. code-block:: default
 
-    from tensorpac import Pac, pac_signals_tort
+    from tensorpac import Pac
+    from tensorpac.signals import pac_signals_tort
 
     # Dataset of signals artificially coupled between 10hz and 100hz :
     n_epochs = 20
@@ -38,7 +39,7 @@ Reproduced the figure in the README.
     # Define a PAC object :
     p = Pac(idpac=(6, 0, 0), f_pha=(2, 20, 1, 1), f_amp=(60, 150, 5, 5))
     # Filter the data and extract PAC :
-    xpac = p.filterfit(sf, data)
+    xpac = p.filterfit(sf, data, n_jobs=1)
 
     # Plot your Phase-Amplitude Coupling :
     p.comodulogram(xpac.mean(-1), title='Contour plot with 5 regions',
@@ -49,7 +50,7 @@ Reproduced the figure in the README.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.749 seconds)
+   **Total running time of the script:** ( 0 minutes  2.912 seconds)
 
 
 .. _sphx_glr_download_auto_examples_plot_readme.py:

@@ -82,8 +82,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tensorpac.pac_signals_wavelet.html">tensorpac.pac_signals_wavelet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tensorpac.pac_signals_tort.html">tensorpac.pac_signals_tort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.signals.pac_signals_wavelet.html">tensorpac.signals.pac_signals_wavelet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.signals.pac_signals_tort.html">tensorpac.signals.pac_signals_tort</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#individual-methods">Individual methods</a><ul>
@@ -137,8 +137,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_compare_filtering.html">Compare filtering properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_long_range_coupling.html">Long-range PAC</a></li>
@@ -192,7 +192,7 @@
 <dl class="class">
 <dt id="tensorpac.EventRelatedPac">
 <em class="property">class </em><code class="sig-prename descclassname">tensorpac.</code><code class="sig-name descname">EventRelatedPac</code><span class="sig-paren">(</span><em class="sig-param">f_pha=[2, 4], f_amp=[60, 200], dcomplex='hilbert', filt='fir1', cycle=(3, 6), filtorder=3, width=7, verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac" title="Permalink to this definition">¶</a></dt>
-<dd><p>Event Related Phase-Amplitude Coupling (ERPAC).</p>
+<dd><p>Compute the Event Related Phase-Amplitude Coupling (ERPAC).</p>
 <p>The traditional PAC approach is computed across time, hence this means that
 you can’t observe PAC changes across time. In contrast, the ERPAC is
 computed across epochs (or trials) which preserves the time dimension.</p>

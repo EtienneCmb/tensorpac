@@ -37,9 +37,10 @@ For the visualization, we used a comodulogram.
 
 .. code-block:: default
 
-    import numpy as np
+    from tensorpac import Pac
+    from tensorpac.signals import pac_signals_wavelet
+
     import matplotlib.pyplot as plt
-    from tensorpac import Pac, pac_signals_wavelet
     plt.style.use('seaborn-poster')
 
     # First, we generate a dataset of signals artificially coupled between 10hz
@@ -53,7 +54,7 @@ For the visualization, we used a comodulogram.
 
     # First, let's use the MVL, without any further correction by surrogates :
     p = Pac(idpac=(1, 2, 0), f_pha=(2, 15, 2, .2), f_amp=(60, 120, 10, 1))
-    xpac = p.filterfit(sf, data, n_perm=200, p=.05)
+    xpac = p.filterfit(sf, data, n_perm=200, p=.05, n_jobs=1)
     pval = p.pvalues
 
     p.comodulogram(xpac.mean(-1), title=str(p), cmap='Spectral_r', vmin=0.,
@@ -64,7 +65,7 @@ For the visualization, we used a comodulogram.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.978 seconds)
+   **Total running time of the script:** ( 0 minutes  10.643 seconds)
 
 
 .. _sphx_glr_download_auto_examples_plot_values.py:

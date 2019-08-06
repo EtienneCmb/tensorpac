@@ -82,8 +82,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.pac_signals_wavelet.html">tensorpac.pac_signals_wavelet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.pac_signals_tort.html">tensorpac.pac_signals_tort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.signals.pac_signals_wavelet.html">tensorpac.signals.pac_signals_wavelet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.signals.pac_signals_tort.html">tensorpac.signals.pac_signals_tort</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#individual-methods">Individual methods</a><ul>
@@ -137,8 +137,8 @@
 <li class="toctree-l3"><a class="reference internal" href="plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Compare filtering properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
@@ -197,7 +197,8 @@
 comodulogram) this example illustrate how it is possible to find starting,
 ending and therefore, bandwidth coupling.</p>
 <img alt="../_images/sphx_glr_plot_fmin_fmax_optmization_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_fmin_fmax_optmization_001.png" />
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorpac</span> <span class="k">import</span> <span class="n">Pac</span><span class="p">,</span> <span class="n">pac_signals_tort</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorpac</span> <span class="k">import</span> <span class="n">Pac</span>
+<span class="kn">from</span> <span class="nn">tensorpac.signals</span> <span class="k">import</span> <span class="n">pac_signals_tort</span>
 <span class="kn">from</span> <span class="nn">tensorpac.utils</span> <span class="k">import</span> <span class="n">pac_trivec</span>
 
 <span class="n">sf</span> <span class="o">=</span> <span class="mf">256.</span>
@@ -207,7 +208,7 @@ ending and therefore, bandwidth coupling.</p>
 <span class="n">trif</span><span class="p">,</span> <span class="n">tridx</span> <span class="o">=</span> <span class="n">pac_trivec</span><span class="p">(</span><span class="n">f_start</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">f_end</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span> <span class="n">f_width</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
 <span class="n">p</span> <span class="o">=</span> <span class="n">Pac</span><span class="p">(</span><span class="n">idpac</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">f_pha</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="n">f_amp</span><span class="o">=</span><span class="n">trif</span><span class="p">)</span>
-<span class="n">pac</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filterfit</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="n">pac</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filterfit</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">p</span><span class="o">.</span><span class="n">triplot</span><span class="p">(</span><span class="n">pac</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">trif</span><span class="p">,</span> <span class="n">tridx</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Spectral_r&#39;</span><span class="p">,</span> <span class="n">rmaxis</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
           <span class="n">title</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Optimal $[Fmin; Fmax]hz$ band for amplitude&#39;</span><span class="p">)</span>
@@ -223,7 +224,7 @@ ending and therefore, bandwidth coupling.</p>
 <span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.423 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.296 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-fmin-fmax-optmization-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/d4073bb881dd33dd6df9ed1270af60ad/plot_fmin_fmax_optmization.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_fmin_fmax_optmization.py</span></code></a></p>

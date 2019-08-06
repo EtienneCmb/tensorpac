@@ -26,8 +26,8 @@ there is the presence of a clear peak, espacially for frequency phase.
 
 .. code-block:: default
 
-    from tensorpac import pac_signals_tort
     from tensorpac.utils import PSD
+    from tensorpac.signals import pac_signals_tort
 
     # Dataset of signals artificially coupled between 10hz and 100hz :
     n_epochs = 20
@@ -51,7 +51,7 @@ there is the presence of a clear peak, espacially for frequency phase.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.259 seconds)
+   **Total running time of the script:** ( 0 minutes  0.318 seconds)
 
 
 .. _sphx_glr_download_auto_examples_plot_psd.py:

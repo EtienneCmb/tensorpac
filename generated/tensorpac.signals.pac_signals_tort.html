@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>tensorpac.pac_signals_wavelet &#8212; Tensorpac 0.6.1 documentation</title>
+    <title>tensorpac.signals.pac_signals_tort &#8212; Tensorpac 0.6.1 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
@@ -16,8 +16,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="tensorpac.pac_signals_tort" href="tensorpac.pac_signals_tort.html" />
-    <link rel="prev" title="tensorpac.utils.pac_trivec" href="tensorpac.utils.pac_trivec.html" />
+    <link rel="next" title="tensorpac.methods.mvl" href="tensorpac.methods.mvl.html" />
+    <link rel="prev" title="tensorpac.signals.pac_signals_wavelet" href="tensorpac.signals.pac_signals_wavelet.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -82,8 +82,8 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">tensorpac.pac_signals_wavelet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tensorpac.pac_signals_tort.html">tensorpac.pac_signals_tort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.signals.pac_signals_wavelet.html">tensorpac.signals.pac_signals_wavelet</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tensorpac.signals.pac_signals_tort</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#individual-methods">Individual methods</a><ul>
@@ -137,8 +137,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_compare_filtering.html">Compare filtering properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_long_range_coupling.html">Long-range PAC</a></li>
@@ -163,7 +163,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="../_sources/generated/tensorpac.pac_signals_wavelet.rst.txt"
+  <a href="../_sources/generated/tensorpac.signals.pac_signals_tort.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -187,14 +187,13 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="tensorpac-pac-signals-wavelet">
-<h1>tensorpac.pac_signals_wavelet<a class="headerlink" href="#tensorpac-pac-signals-wavelet" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="tensorpac-signals-pac-signals-tort">
+<h1>tensorpac.signals.pac_signals_tort<a class="headerlink" href="#tensorpac-signals-pac-signals-tort" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
-<dt id="tensorpac.pac_signals_wavelet">
-<code class="sig-prename descclassname">tensorpac.</code><code class="sig-name descname">pac_signals_wavelet</code><span class="sig-paren">(</span><em class="sig-param">f_pha=10.0</em>, <em class="sig-param">f_amp=100.0</em>, <em class="sig-param">sf=1024.0</em>, <em class="sig-param">n_times=4000.0</em>, <em class="sig-param">n_epochs=10</em>, <em class="sig-param">noise=0.1</em>, <em class="sig-param">pp=0.0</em>, <em class="sig-param">rnd_state=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#pac_signals_wavelet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac_signals_wavelet" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate artificially phase-amplitude coupled signals using wavelets.</p>
-<p>This function is inspired by the code of the pactools toolbox developped by
-Tom Dupre la Tour.</p>
+<dt id="tensorpac.signals.pac_signals_tort">
+<code class="sig-prename descclassname">tensorpac.signals.</code><code class="sig-name descname">pac_signals_tort</code><span class="sig-paren">(</span><em class="sig-param">f_pha=10.0</em>, <em class="sig-param">f_amp=100.0</em>, <em class="sig-param">sf=1024</em>, <em class="sig-param">n_times=4000</em>, <em class="sig-param">n_epochs=10</em>, <em class="sig-param">chi=0.0</em>, <em class="sig-param">noise=1.0</em>, <em class="sig-param">dpha=0.0</em>, <em class="sig-param">damp=0.0</em>, <em class="sig-param">rnd_state=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/signals.html#pac_signals_tort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.signals.pac_signals_tort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate artificially phase-amplitude coupled signals.</p>
+<p>This function use the definition of Tort et al. 2010.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
@@ -204,15 +203,24 @@ of a band (like [5, 7]) for a bandwidth.</p>
 <dt><strong>f_amp</strong><span class="classifier">float | 100.</span></dt><dd><p>Frequency for amplitude. Use either a float number for a centered
 frequency of a band (like [60, 80]) for a bandwidth.</p>
 </dd>
-<dt><strong>sf</strong><span class="classifier">float | 1024.</span></dt><dd><p>Sampling frequency.</p>
+<dt><strong>sf</strong><span class="classifier">int | 1024</span></dt><dd><p>Sampling frequency</p>
 </dd>
-<dt><strong>n_times</strong><span class="classifier">int | 4000</span></dt><dd><p>Number of time points.</p>
+<dt><strong>n_epochs</strong><span class="classifier">int | 10</span></dt><dd><p>Number of datasets</p>
 </dd>
-<dt><strong>n_epochs</strong><span class="classifier">int | 10</span></dt><dd><p>Number of trials in the dataset.</p>
+<dt><strong>n_times</strong><span class="classifier">int | 4000</span></dt><dd><p>Number of points for each signal.</p>
 </dd>
-<dt><strong>noise</strong><span class="classifier">float | .1</span></dt><dd><p>Amount of white noise.</p>
+<dt><strong>chi</strong><span class="classifier">float | 0.</span></dt><dd><p>Amount of coupling. If chi=0, signals of phase and amplitude
+are strongly coupled (0.&lt;=chi&lt;=1.).</p>
 </dd>
-<dt><strong>pp</strong><span class="classifier">float | 0.</span></dt><dd><p>The preferred-phase of the coupling.</p>
+<dt><strong>noise</strong><span class="classifier">float | 1.</span></dt><dd><p>Amount of noise (0&lt;=noise&lt;=3).</p>
+</dd>
+<dt><strong>dpha</strong><span class="classifier">float | 0.</span></dt><dd><p>Random incertitude on phase frequences (0&lt;=dpha&lt;=100). If f_pha is 2,
+and dpha is 50, the frequency for the phase signal will be between :
+[2-0.5*2, 2+0.5*2]=[1,3]</p>
+</dd>
+<dt><strong>damp</strong><span class="classifier">float | 0.</span></dt><dd><p>Random incertitude on amplitude frequencies (0&lt;=damp&lt;=100). If f_amp is
+60, and damp is 10, the frequency for the amplitude signal will be
+between : [60-0.1*60, 60+0.1*60]=[54,66]</p>
 </dd>
 <dt><strong>rnd_state: int | 0</strong></dt><dd><p>Fix random of the machine (for reproducibility)</p>
 </dd>
@@ -220,7 +228,7 @@ frequency of a band (like [60, 80]) for a bandwidth.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>data</strong><span class="classifier">array_like</span></dt><dd><p>Array of signals of shape (n_epochs, n_times).</p>
+<dt><strong>data</strong><span class="classifier">array_like</span></dt><dd><p>Array of signals of shape (n_epochs, n_channels, n_times).</p>
 </dd>
 <dt><strong>time</strong><span class="classifier">array_like</span></dt><dd><p>Time vector of shape (n_times,).</p>
 </dd>

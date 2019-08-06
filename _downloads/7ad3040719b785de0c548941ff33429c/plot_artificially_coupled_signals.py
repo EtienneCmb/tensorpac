@@ -5,8 +5,8 @@ Generate artificially coupled signals
 
 Use the pac_signals_tort function to generate artificial PAC.
 """
+from tensorpac.signals import pac_signals_tort
 import matplotlib.pyplot as plt
-from tensorpac import pac_signals_tort
 
 # Generate one signal containing PAC. By default, this signal present a
 # coupling between a 2hz phase and a 100hz amplitude (2 <-> 100) :
