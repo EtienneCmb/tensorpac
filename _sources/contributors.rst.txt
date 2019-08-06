@@ -1,4 +1,4 @@
-.. _authors_and_cite:
+.. _contributors:
 
 Authors and contributors
 ========================
@@ -10,8 +10,3 @@ Authors and contributors
 * `Robin Ince <http://www.robinince.net/about.html>`_
 * `Andrea Brovelli <http://andrea-brovelli.net/>`_
 * `Aymeric Guillot <https://libm.univ-st-etienne.fr/fr/les-membres-du-libm/les-enseignants-chercheurs/guillot-aymeric.html>`_
-
-Cite Tensorpac
-==============
-
-*in prep*
