@@ -203,8 +203,6 @@ there is the presence of a clear peak, espacially for frequency phase.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorpac</span> <span class="k">import</span> <span class="n">pac_signals_tort</span>
 <span class="kn">from</span> <span class="nn">tensorpac.utils</span> <span class="k">import</span> <span class="n">PSD</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
 <span class="c1"># Dataset of signals artificially coupled between 10hz and 100hz :</span>
 <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">n_times</span> <span class="o">=</span> <span class="mi">4000</span>
@@ -218,14 +216,14 @@ there is the presence of a clear peak, espacially for frequency phase.</p>
 <span class="n">psd</span> <span class="o">=</span> <span class="n">PSD</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sf</span><span class="p">)</span>
 
 <span class="c1"># plot the mean PSD across trials between [5, 150]Hz with a 95th confidence</span>
-<span class="c1"># interval</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">psd</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">confidence</span><span class="o">=</span><span class="mi">95</span><span class="p">,</span> <span class="n">f_min</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">f_max</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="c1"># interval. Also, use a log x-scale</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">psd</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">confidence</span><span class="o">=</span><span class="mi">95</span><span class="p">,</span> <span class="n">f_min</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">f_max</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># finally display the figure</span>
 <span class="n">psd</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.233 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.243 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-psd-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/96ce4859824f2ed391a0d841d9a106d2/plot_psd.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_psd.py</span></code></a></p>

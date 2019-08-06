@@ -248,7 +248,7 @@ dcomplex is ‘hilbert’).</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.__init__" title="tensorpac.EventRelatedPac.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self[, f_pha, f_amp, dcomplex, …])</p></td>
 <td><p>Check and initialize.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.filter" title="tensorpac.EventRelatedPac.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(self, sf, x[, ftype, keepfilt, n_jobs])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.filter" title="tensorpac.EventRelatedPac.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(self, sf, x[, ftype, keepfilt, …])</p></td>
 <td><p>Filt the data in the specified frequency bands.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.filterfit" title="tensorpac.EventRelatedPac.filterfit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filterfit</span></code></a>(self, sf, x_pha[, x_amp, method, …])</p></td>
@@ -318,7 +318,7 @@ dcomplex is ‘hilbert’).</p>
 </table>
 <dl class="method">
 <dt id="tensorpac.EventRelatedPac.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x</em>, <em class="sig-param">ftype='phase'</em>, <em class="sig-param">keepfilt=False</em>, <em class="sig-param">n_jobs=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.EventRelatedPac.filter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x</em>, <em class="sig-param">ftype='phase'</em>, <em class="sig-param">keepfilt=False</em>, <em class="sig-param">edges=None</em>, <em class="sig-param">n_jobs=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.EventRelatedPac.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filt the data in the specified frequency bands.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -336,6 +336,8 @@ set this parameter to 1 in order to prevent large memory usage.</p>
 <dt><strong>keepfilt</strong><span class="classifier">bool | False</span></dt><dd><p>Specify if you only want the filtered data (True). This parameter
 is only available with dcomplex=’hilbert’ and not wavelet.</p>
 </dd>
+<dt><strong>edges</strong><span class="classifier">int | None</span></dt><dd><p>Number of samples to discard to avoid edge effects due to filtering</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -349,7 +351,7 @@ is only available with dcomplex=’hilbert’ and not wavelet.</p>
 
 <dl class="method">
 <dt id="tensorpac.EventRelatedPac.filterfit">
-<code class="sig-name descname">filterfit</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x_pha</em>, <em class="sig-param">x_amp=None</em>, <em class="sig-param">method='circular'</em>, <em class="sig-param">smooth=None</em>, <em class="sig-param">n_perm=None</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.filterfit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">filterfit</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x_pha</em>, <em class="sig-param">x_amp=None</em>, <em class="sig-param">method='circular'</em>, <em class="sig-param">smooth=None</em>, <em class="sig-param">n_perm=None</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">edges=None</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.filterfit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract phases, amplitudes and compute ERPAC.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -374,6 +376,8 @@ gaussian-copula (‘gc’) method. Statistics are performed by randomly
 swapping phase trials</p>
 </dd>
 <dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Statistical threshold for the gaussian-copula (‘gc’) method</p>
+</dd>
+<dt><strong>edges</strong><span class="classifier">int | None</span></dt><dd><p>Number of samples to discard to avoid edge effects due to filtering</p>
 </dd>
 </dl>
 </dd>

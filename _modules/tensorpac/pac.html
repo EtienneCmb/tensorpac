@@ -218,7 +218,8 @@
         <span class="sd">&quot;&quot;&quot;String representation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">method</span>
 
-    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">keepfilt</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">keepfilt</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Filt the data in the specified frequency bands.</span>
 
 <span class="sd">        Parameters</span>
@@ -236,6 +237,8 @@
 <span class="sd">        keepfilt : bool | False</span>
 <span class="sd">            Specify if you only want the filtered data (True). This parameter</span>
 <span class="sd">            is only available with dcomplex=&#39;hilbert&#39; and not wavelet.</span>
+<span class="sd">        edges : int | None</span>
+<span class="sd">            Number of samples to discard to avoid edge effects due to filtering</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -261,6 +264,12 @@
         <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
         <span class="k">assert</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;x should be a 2d array like (n_epochs, n_times)&quot;</span><span class="p">)</span>
+        <span class="c1"># check edges</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">edges</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;    Edges </span><span class="si">{edges}</span><span class="s2"> time samples ignored&quot;</span><span class="p">)</span>
+            <span class="n">edges</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="o">-</span><span class="n">edges</span><span class="p">)</span>
 
         <span class="c1"># ---------------------------------------------------------------------</span>
         <span class="c1"># Switch between phase or amplitude :</span>
@@ -274,7 +283,7 @@
             <span class="n">xfilt</span> <span class="o">=</span> <span class="n">spectral</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_amp</span><span class="p">,</span> <span class="n">tosend</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dcomplex</span><span class="p">,</span>
                              <span class="bp">self</span><span class="o">.</span><span class="n">_filt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filtorder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cycle</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
                              <span class="bp">self</span><span class="o">.</span><span class="n">_width</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">xfilt</span>
+        <span class="k">return</span> <span class="n">xfilt</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">edges</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">_speccheck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dcomplex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filtorder</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cycle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -588,7 +597,7 @@
         <span class="k">return</span> <span class="n">pac</span></div>
 
 <div class="viewcode-block" id="Pac.filterfit"><a class="viewcode-back" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">x_amp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
-                  <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                  <span class="n">edges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Filt the data then compute PAC on it.</span>
 
 <span class="sd">        Parameters</span>
@@ -605,6 +614,8 @@
 <span class="sd">            Number of surrogates to compute.</span>
 <span class="sd">        p : float | 0.05</span>
 <span class="sd">            Statistical threshold</span>
+<span class="sd">        edges : int | None</span>
+<span class="sd">            Number of samples to discard to avoid edge effects due to filtering</span>
 <span class="sd">        n_jobs : int | -1</span>
 <span class="sd">            Number of jobs to compute PAC in parallel. For very large data,</span>
 <span class="sd">            set this parameter to 1 in order to prevent large memory usage.</span>
@@ -633,8 +644,9 @@
         <span class="c1"># Extract phase (npha, ...) and amplitude (namp, ...) :</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;    Extract phases (n_pha={len(self.xvec)}) and &quot;</span>
                     <span class="n">f</span><span class="s2">&quot;amplitudes (n_amps={len(self.yvec)})&quot;</span><span class="p">)</span>
-        <span class="n">pha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">)</span>
-        <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_amp</span><span class="p">,</span> <span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">)</span>
+        <span class="n">kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">keepfilt</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="n">edges</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)</span>
+        <span class="n">pha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_amp</span><span class="p">,</span> <span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
 
         <span class="c1"># Special cases :</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
@@ -833,7 +845,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">erpac</span></div>
 
 <div class="viewcode-block" id="EventRelatedPac.filterfit"><a class="viewcode-back" href="../../generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">x_amp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;circular&#39;</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                  <span class="n">n_perm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                  <span class="n">n_perm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Extract phases, amplitudes and compute ERPAC.</span>
 
 <span class="sd">        Parameters</span>
@@ -859,6 +871,8 @@
 <span class="sd">            swapping phase trials</span>
 <span class="sd">        p : float | 0.05</span>
 <span class="sd">            Statistical threshold for the gaussian-copula (&#39;gc&#39;) method</span>
+<span class="sd">        edges : int | None</span>
+<span class="sd">            Number of samples to discard to avoid edge effects due to filtering</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -876,8 +890,9 @@
         <span class="c1"># extract phases and amplitudes</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;    Extract phases (n_pha={len(self.xvec)}) and &quot;</span>
                     <span class="n">f</span><span class="s2">&quot;amplitudes (n_amps={len(self.yvec)})&quot;</span><span class="p">)</span>
-        <span class="n">pha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">)</span>
-        <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_amp</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;amplitude&#39;</span><span class="p">)</span>
+        <span class="n">kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">keepfilt</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="n">edges</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)</span>
+        <span class="n">pha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_amp</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
         <span class="c1"># compute erpac</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="n">smooth</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
                         <span class="n">n_perm</span><span class="o">=</span><span class="n">n_perm</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
@@ -1002,7 +1017,8 @@
         <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phampcheck</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">preferred_phase</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PreferredPhase.filterfit"><a class="viewcode-back" href="../../generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">x_amp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PreferredPhase.filterfit"><a class="viewcode-back" href="../../generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">x_amp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+                  <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Extract phases, amplitudes and compute the preferred phase (PP).</span>
 
 <span class="sd">        Parameters</span>
@@ -1019,6 +1035,8 @@
 <span class="sd">        n_bins : int | 72</span>
 <span class="sd">            Number of bins for bining the amplitude according to phase</span>
 <span class="sd">            slices.</span>
+<span class="sd">        edges : int | None</span>
+<span class="sd">            Number of samples to discard to avoid edge effects due to filtering</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1035,8 +1053,9 @@
         <span class="c1"># extract phases and amplitudes</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;    Extract phases (n_pha={len(self.xvec)}) and &quot;</span>
                     <span class="n">f</span><span class="s2">&quot;amplitudes (n_amps={len(self.yvec)})&quot;</span><span class="p">)</span>
-        <span class="n">pha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">)</span>
-        <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_amp</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;amplitude&#39;</span><span class="p">)</span>
+        <span class="n">kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">keepfilt</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="n">edges</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)</span>
+        <span class="n">pha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_amp</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
         <span class="c1"># compute pp</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">)</span></div></div>
 </pre></div>

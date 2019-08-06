@@ -316,7 +316,7 @@ dcomplex is ‘hilbert’).</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.comodulogram" title="tensorpac.Pac.comodulogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">comodulogram</span></code></a>(self, pac[, xlabel, ylabel, …])</p></td>
 <td><p>Plot PAC using comodulogram.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.filter" title="tensorpac.Pac.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(self, sf, x[, ftype, keepfilt, n_jobs])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.filter" title="tensorpac.Pac.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(self, sf, x[, ftype, keepfilt, …])</p></td>
 <td><p>Filt the data in the specified frequency bands.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.filterfit" title="tensorpac.Pac.filterfit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filterfit</span></code></a>(self, sf, x_pha[, x_amp, n_perm, …])</p></td>
@@ -420,7 +420,7 @@ dcomplex is ‘hilbert’).</p>
 
 <dl class="method">
 <dt id="tensorpac.Pac.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x</em>, <em class="sig-param">ftype='phase'</em>, <em class="sig-param">keepfilt=False</em>, <em class="sig-param">n_jobs=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.Pac.filter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x</em>, <em class="sig-param">ftype='phase'</em>, <em class="sig-param">keepfilt=False</em>, <em class="sig-param">edges=None</em>, <em class="sig-param">n_jobs=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.Pac.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filt the data in the specified frequency bands.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -438,6 +438,8 @@ set this parameter to 1 in order to prevent large memory usage.</p>
 <dt><strong>keepfilt</strong><span class="classifier">bool | False</span></dt><dd><p>Specify if you only want the filtered data (True). This parameter
 is only available with dcomplex=’hilbert’ and not wavelet.</p>
 </dd>
+<dt><strong>edges</strong><span class="classifier">int | None</span></dt><dd><p>Number of samples to discard to avoid edge effects due to filtering</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -451,7 +453,7 @@ is only available with dcomplex=’hilbert’ and not wavelet.</p>
 
 <dl class="method">
 <dt id="tensorpac.Pac.filterfit">
-<code class="sig-name descname">filterfit</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x_pha</em>, <em class="sig-param">x_amp=None</em>, <em class="sig-param">n_perm=200</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">filterfit</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x_pha</em>, <em class="sig-param">x_amp=None</em>, <em class="sig-param">n_perm=200</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">edges=None</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filt the data then compute PAC on it.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -467,6 +469,8 @@ x_amp could be different but still must to have the same shape.</p>
 <dt><strong>n_perm</strong><span class="classifier">int | 200</span></dt><dd><p>Number of surrogates to compute.</p>
 </dd>
 <dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Statistical threshold</p>
+</dd>
+<dt><strong>edges</strong><span class="classifier">int | None</span></dt><dd><p>Number of samples to discard to avoid edge effects due to filtering</p>
 </dd>
 <dt><strong>n_jobs</strong><span class="classifier">int | -1</span></dt><dd><p>Number of jobs to compute PAC in parallel. For very large data,
 set this parameter to 1 in order to prevent large memory usage.</p>
