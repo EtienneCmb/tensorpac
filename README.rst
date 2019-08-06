@@ -14,6 +14,9 @@ Tensorpac
 .. image:: https://pepy.tech/badge/tensorpac
     :target: https://pepy.tech/project/tensorpac
 
+.. image:: https://badges.gitter.im/EtienneCmb/tensorpac.svg
+    :target: https://gitter.im/EtienneCmb/tensorpac?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
+
 
 .. figure::  https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/tp.png
    :align:   center

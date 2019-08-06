@@ -12,11 +12,13 @@
 .. image:: https://pepy.tech/badge/tensorpac
     :target: https://pepy.tech/project/tensorpac
 
+.. image:: https://badges.gitter.im/EtienneCmb/tensorpac.svg
+    :target: https://gitter.im/EtienneCmb/tensorpac?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
+
 Tensorpac
 #########
 
 Tensorpac is an open-source Python toolbox for computing Phase-Amplitude Coupling (PAC) using tensors and parallel computing. This software provides a modular implementation which allows one to combine existing methods for measuring PAC and chance distribution.
-To get started, see our `examples <https://github.com/EtienneCmb/tensorpac/tree/master/examples>`_.
 
 .. figure::  picture/tp.png
    :align:   center
@@ -26,10 +28,12 @@ Contents:
 *********
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    install
    tutorial
    api
    auto_examples/index.rst
-   citation
+   contributors
+   cite
+   community
