@@ -1,0 +1,39 @@
+tensorpac.utils.BinAmplitude
+============================
+
+.. currentmodule:: tensorpac.utils
+
+.. autoclass:: BinAmplitude
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BinAmplitude.__init__
+      ~BinAmplitude.filter
+      ~BinAmplitude.plot
+      ~BinAmplitude.show
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BinAmplitude.cycle
+      ~BinAmplitude.dcomplex
+      ~BinAmplitude.f_amp
+      ~BinAmplitude.f_pha
+      ~BinAmplitude.filt
+      ~BinAmplitude.filtorder
+      ~BinAmplitude.width
+      ~BinAmplitude.xvec
+      ~BinAmplitude.yvec
+   
+   

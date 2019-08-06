@@ -75,6 +75,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
 </ul>
@@ -122,6 +123,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_readme.html">README example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_values.html">Compute p-values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/plot_erpac_stats.html">Event-Related Phase Amplitude Coupling</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_erpac_stats.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../auto_examples/plot_erpac_stats.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
@@ -196,7 +198,6 @@
                                <span class="n">erpac</span><span class="p">,</span> <span class="n">ergcpac</span><span class="p">,</span> <span class="n">_ergcpac_perm</span><span class="p">,</span> <span class="n">preferred_phase</span><span class="p">,</span>
                                <span class="n">normalize</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">tensorpac.gcmi</span> <span class="k">import</span> <span class="n">copnorm</span>
-<span class="kn">from</span> <span class="nn">tensorpac.utils</span> <span class="k">import</span> <span class="n">pac_vec</span>
 <span class="kn">from</span> <span class="nn">tensorpac.visu</span> <span class="k">import</span> <span class="n">_PacVisual</span><span class="p">,</span> <span class="n">_PacPlt</span><span class="p">,</span> <span class="n">_PolarPlt</span>
 <span class="kn">from</span> <span class="nn">tensorpac.io</span> <span class="k">import</span> <span class="n">set_log_level</span>
 <span class="kn">from</span> <span class="nn">tensorpac.config</span> <span class="k">import</span> <span class="n">CONFIG</span>
@@ -211,6 +212,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f_pha</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">dcomplex</span><span class="o">=</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span>
                  <span class="n">filt</span><span class="o">=</span><span class="s1">&#39;fir1&#39;</span><span class="p">,</span> <span class="n">cycle</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">filtorder</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
         <span class="c1"># Frequency checking :</span>
+        <span class="kn">from</span> <span class="nn">tensorpac.utils</span> <span class="k">import</span> <span class="n">pac_vec</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_f_pha</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_f_amp</span> <span class="o">=</span> <span class="n">pac_vec</span><span class="p">(</span><span class="n">f_pha</span><span class="p">,</span> <span class="n">f_amp</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_xvec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_yvec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_pha</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_amp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
         <span class="c1"># Check spectral properties :</span>

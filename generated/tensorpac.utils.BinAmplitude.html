@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>tensorpac.utils.PSD &#8212; Tensorpac 0.6.1 documentation</title>
+    <title>tensorpac.utils.BinAmplitude &#8212; Tensorpac 0.6.1 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
@@ -16,8 +16,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="tensorpac.utils.BinAmplitude" href="tensorpac.utils.BinAmplitude.html" />
-    <link rel="prev" title="tensorpac.PreferredPhase" href="tensorpac.PreferredPhase.html" />
+    <link rel="next" title="tensorpac.utils.pac_vec" href="tensorpac.utils.pac_vec.html" />
+    <link rel="prev" title="tensorpac.utils.PSD" href="tensorpac.utils.PSD.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -76,8 +76,8 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../api.html#utility-functions">Utility functions</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">tensorpac.utils.PSD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
 </ul>
@@ -170,7 +170,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="../_sources/generated/tensorpac.utils.PSD.rst.txt"
+  <a href="../_sources/generated/tensorpac.utils.BinAmplitude.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -194,25 +194,51 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="tensorpac-utils-psd">
-<h1>tensorpac.utils.PSD<a class="headerlink" href="#tensorpac-utils-psd" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="tensorpac-utils-binamplitude">
+<h1>tensorpac.utils.BinAmplitude<a class="headerlink" href="#tensorpac-utils-binamplitude" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="tensorpac.utils.PSD">
-<em class="property">class </em><code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">PSD</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">sf</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD" title="Permalink to this definition">¶</a></dt>
-<dd><p>Power Spectrum Density for electrophysiological brain data.</p>
+<dt id="tensorpac.utils.BinAmplitude">
+<em class="property">class </em><code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">BinAmplitude</code><span class="sig-paren">(</span><em class="sig-param">x, sf, f_pha=[2, 4], f_amp=[60, 80], n_bins=18, dcomplex='hilbert', filt='fir1', cycle=(3, 6), filtorder=3, width=7, edges=None, n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#BinAmplitude"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.BinAmplitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bin the amplitude according to the phase.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>x</strong><span class="classifier">array_like</span></dt><dd><p>Array of data of shape (n_epochs, n_times)</p>
 </dd>
-<dt><strong>sf</strong><span class="classifier">float</span></dt><dd><p>The sampling frequency.</p>
+<dt><strong>sf</strong><span class="classifier">float</span></dt><dd><p>The sampling frequency</p>
+</dd>
+<dt><strong>f_pha</strong><span class="classifier">tuple, list | [2, 4]</span></dt><dd><p>List of two floats describing the frequency bounds for extracting the
+phase</p>
+</dd>
+<dt><strong>f_amp</strong><span class="classifier">tuple, list | [60, 80]</span></dt><dd><p>List of two floats describing the frequency bounds for extracting the
+amplitude</p>
+</dd>
+<dt><strong>n_bins</strong><span class="classifier">int | 18</span></dt><dd><p>Number of bins to use to binarize the phase and the amplitude</p>
+</dd>
+<dt><strong>dcomplex</strong><span class="classifier">{‘wavelet’, ‘hilbert’}</span></dt><dd><p>Method for the complex definition. Use either ‘hilbert’ or
+‘wavelet’.</p>
+</dd>
+<dt><strong>filt</strong><span class="classifier">{‘fir1’, ‘butter’, ‘bessel’}</span></dt><dd><p>Filtering method (only if dcomplex is ‘hilbert’). Choose either
+‘fir1’, ‘butter’ or ‘bessel’</p>
+</dd>
+<dt><strong>cycle</strong><span class="classifier">tuple | (3, 6)</span></dt><dd><p>Control the number of cycles for filtering (only if dcomplex is
+‘hilbert’). Should be a tuple of integers where the first one
+refers to the number of cycles for the phase and the second for the
+amplitude <a href="#id3"><span class="problematic" id="id1">[#f5]_</span></a>.</p>
+</dd>
+<dt><strong>filtorder</strong><span class="classifier">int | 3</span></dt><dd><p>Filter order for the Butterworth and Bessel filters (only if
+dcomplex is ‘hilbert’).</p>
+</dd>
+<dt><strong>width</strong><span class="classifier">int | 7</span></dt><dd><p>Width of the Morlet’s wavelet.</p>
+</dd>
+<dt><strong>edges</strong><span class="classifier">int | None</span></dt><dd><p>Number of samples to discard to avoid edge effects due to filtering</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <dl class="method">
-<dt id="tensorpac.utils.PSD.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">x</em>, <em class="sig-param">sf</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD.__init__" title="Permalink to this definition">¶</a></dt>
+<dt id="tensorpac.utils.BinAmplitude.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">self, x, sf, f_pha=[2, 4], f_amp=[60, 80], n_bins=18, dcomplex='hilbert', filt='fir1', cycle=(3, 6), filtorder=3, width=7, edges=None, n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#BinAmplitude.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.BinAmplitude.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Init.</p>
 </dd></dl>
 
@@ -223,28 +249,100 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.__init__" title="tensorpac.utils.PSD.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self, x, sf)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.__init__" title="tensorpac.utils.BinAmplitude.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self, x, sf[, f_pha, f_amp, …])</p></td>
 <td><p>Init.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.plot" title="tensorpac.utils.PSD.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(self[, f_min, f_max, confidence, log, grid])</p></td>
-<td><p>Plot the PSD.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.filter" title="tensorpac.utils.BinAmplitude.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(self, sf, x[, ftype, keepfilt, …])</p></td>
+<td><p>Filt the data in the specified frequency bands.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.show" title="tensorpac.utils.PSD.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>(self)</p></td>
-<td><p>Display the PSD figure.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.plot" title="tensorpac.utils.BinAmplitude.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(self[, unit])</p></td>
+<td><p>Plot the amplitude.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.show" title="tensorpac.utils.BinAmplitude.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>(self)</p></td>
+<td><p>Show the figure.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.cycle" title="tensorpac.utils.BinAmplitude.cycle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cycle</span></code></a></p></td>
+<td><p>Get the cycle value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.dcomplex" title="tensorpac.utils.BinAmplitude.dcomplex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dcomplex</span></code></a></p></td>
+<td><p>Get the dcomplex value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.f_amp" title="tensorpac.utils.BinAmplitude.f_amp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_amp</span></code></a></p></td>
+<td><p>Vector of amplitudes of shape (n_amp, 2).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.f_pha" title="tensorpac.utils.BinAmplitude.f_pha"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_pha</span></code></a></p></td>
+<td><p>Vector of phases of shape (n_pha, 2).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.filt" title="tensorpac.utils.BinAmplitude.filt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filt</span></code></a></p></td>
+<td><p>Get the filt value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.filtorder" title="tensorpac.utils.BinAmplitude.filtorder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filtorder</span></code></a></p></td>
+<td><p>Get the filtorder value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.width" title="tensorpac.utils.BinAmplitude.width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">width</span></code></a></p></td>
+<td><p>Get the width value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.xvec" title="tensorpac.utils.BinAmplitude.xvec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xvec</span></code></a></p></td>
+<td><p>Vector of phases of shape (n_pha,) use for plotting.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.yvec" title="tensorpac.utils.BinAmplitude.yvec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yvec</span></code></a></p></td>
+<td><p>Vector of amplitudes of shape (n_amp,) use for plotting.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="method">
-<dt id="tensorpac.utils.PSD.plot">
-<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">f_min=None</em>, <em class="sig-param">f_max=None</em>, <em class="sig-param">confidence=95</em>, <em class="sig-param">log=False</em>, <em class="sig-param">grid=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD.plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot the PSD.</p>
+<dt id="tensorpac.utils.BinAmplitude.filter">
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x</em>, <em class="sig-param">ftype='phase'</em>, <em class="sig-param">keepfilt=False</em>, <em class="sig-param">edges=None</em>, <em class="sig-param">n_jobs=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.utils.BinAmplitude.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filt the data in the specified frequency bands.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>f_min, f_max</strong><span class="classifier">(int, float) | None</span></dt><dd><p>Frequency bounds to use for plotting</p>
+<dt><strong>sf</strong><span class="classifier">float</span></dt><dd><p>The sampling frequency.</p>
 </dd>
-<dt><strong>confidence</strong><span class="classifier">(int, float) | None</span></dt><dd><p>Light gray confidence interval. If None, no interval will be
-displayed</p>
+<dt><strong>x</strong><span class="classifier">array_like</span></dt><dd><p>Array of data of shape (n_epochs, n_times)</p>
+</dd>
+<dt><strong>ftype</strong><span class="classifier">{‘phase’, ‘amplitude’}</span></dt><dd><p>Specify if you want to extract phase (‘phase’) or the amplitude
+(‘amplitude’).</p>
+</dd>
+<dt><strong>n_jobs</strong><span class="classifier">int | -1</span></dt><dd><p>Number of jobs to compute PAC in parallel. For very large data,
+set this parameter to 1 in order to prevent large memory usage.</p>
+</dd>
+<dt><strong>keepfilt</strong><span class="classifier">bool | False</span></dt><dd><p>Specify if you only want the filtered data (True). This parameter
+is only available with dcomplex=’hilbert’ and not wavelet.</p>
+</dd>
+<dt><strong>edges</strong><span class="classifier">int | None</span></dt><dd><p>Number of samples to discard to avoid edge effects due to filtering</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>xfilt</strong><span class="classifier">array_like</span></dt><dd><p>The filtered data of shape (n_freqs, n_epochs, n_times)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.BinAmplitude.plot">
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">unit='rad'</em>, <em class="sig-param">**kw</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#BinAmplitude.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.BinAmplitude.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the amplitude.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>unit</strong><span class="classifier">{‘rad’, ‘deg’}</span></dt><dd><p>The unit to use for the phase. Use either ‘deg’ for degree or ‘rad’
+for radians</p>
+</dd>
+<dt><strong>kw</strong><span class="classifier">dict | {}</span></dt><dd><p>Additional inputs are passed to the matplotlib.pyplot.bar function</p>
 </dd>
 </dl>
 </dd>
@@ -258,9 +356,63 @@ displayed</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="tensorpac.utils.PSD.show">
-<code class="sig-name descname">show</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD.show"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD.show" title="Permalink to this definition">¶</a></dt>
-<dd><p>Display the PSD figure.</p>
+<dt id="tensorpac.utils.BinAmplitude.show">
+<code class="sig-name descname">show</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#BinAmplitude.show"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.BinAmplitude.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show the figure.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.BinAmplitude.cycle">
+<em class="property">property </em><code class="sig-name descname">cycle</code><a class="headerlink" href="#tensorpac.utils.BinAmplitude.cycle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the cycle value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.BinAmplitude.dcomplex">
+<em class="property">property </em><code class="sig-name descname">dcomplex</code><a class="headerlink" href="#tensorpac.utils.BinAmplitude.dcomplex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the dcomplex value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.BinAmplitude.f_amp">
+<em class="property">property </em><code class="sig-name descname">f_amp</code><a class="headerlink" href="#tensorpac.utils.BinAmplitude.f_amp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector of amplitudes of shape (n_amp, 2).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.BinAmplitude.f_pha">
+<em class="property">property </em><code class="sig-name descname">f_pha</code><a class="headerlink" href="#tensorpac.utils.BinAmplitude.f_pha" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector of phases of shape (n_pha, 2).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.BinAmplitude.filt">
+<em class="property">property </em><code class="sig-name descname">filt</code><a class="headerlink" href="#tensorpac.utils.BinAmplitude.filt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the filt value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.BinAmplitude.filtorder">
+<em class="property">property </em><code class="sig-name descname">filtorder</code><a class="headerlink" href="#tensorpac.utils.BinAmplitude.filtorder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the filtorder value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.BinAmplitude.width">
+<em class="property">property </em><code class="sig-name descname">width</code><a class="headerlink" href="#tensorpac.utils.BinAmplitude.width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the width value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.BinAmplitude.xvec">
+<em class="property">property </em><code class="sig-name descname">xvec</code><a class="headerlink" href="#tensorpac.utils.BinAmplitude.xvec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector of phases of shape (n_pha,) use for plotting.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.BinAmplitude.yvec">
+<em class="property">property </em><code class="sig-name descname">yvec</code><a class="headerlink" href="#tensorpac.utils.BinAmplitude.yvec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector of amplitudes of shape (n_amp,) use for plotting.</p>
 </dd></dl>
 
 </dd></dl>

@@ -76,6 +76,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
 </ul>
@@ -123,6 +124,7 @@
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_readme.html">README example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_values.html">Compute p-values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_erpac_stats.html">Event-Related Phase Amplitude Coupling</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_erpac_stats.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_erpac_stats.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
@@ -192,6 +194,7 @@
 
 <div class="genindex-jumpbox">
  <a href="#_"><strong>_</strong></a>
+ | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
@@ -220,9 +223,19 @@
 </li>
         <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.__init__">(tensorpac.PreferredPhase method)</a>
 </li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.__init__">(tensorpac.utils.BinAmplitude method)</a>
+</li>
         <li><a href="generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD.__init__">(tensorpac.utils.PSD method)</a>
 </li>
       </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude">BinAmplitude (class in tensorpac.utils)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -238,6 +251,8 @@
 </li>
         <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.cycle">(tensorpac.PreferredPhase property)</a>
 </li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.cycle">(tensorpac.utils.BinAmplitude property)</a>
+</li>
       </ul></li>
   </ul></td>
 </tr></table>
@@ -251,6 +266,8 @@
         <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.dcomplex">(tensorpac.Pac property)</a>
 </li>
         <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.dcomplex">(tensorpac.PreferredPhase property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.dcomplex">(tensorpac.utils.BinAmplitude property)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -284,6 +301,8 @@
 </li>
         <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.f_amp">(tensorpac.PreferredPhase property)</a>
 </li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.f_amp">(tensorpac.utils.BinAmplitude property)</a>
+</li>
       </ul></li>
       <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.f_pha">f_pha() (tensorpac.EventRelatedPac property)</a>
 
@@ -291,6 +310,8 @@
         <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.f_pha">(tensorpac.Pac property)</a>
 </li>
         <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.f_pha">(tensorpac.PreferredPhase property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.f_pha">(tensorpac.utils.BinAmplitude property)</a>
 </li>
       </ul></li>
       <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.filt">filt() (tensorpac.EventRelatedPac property)</a>
@@ -300,6 +321,8 @@
 </li>
         <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.filt">(tensorpac.PreferredPhase property)</a>
 </li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.filt">(tensorpac.utils.BinAmplitude property)</a>
+</li>
       </ul></li>
       <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.filter">filter() (tensorpac.EventRelatedPac method)</a>
 
@@ -307,6 +330,8 @@
         <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.filter">(tensorpac.Pac method)</a>
 </li>
         <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.filter">(tensorpac.PreferredPhase method)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.filter">(tensorpac.utils.BinAmplitude method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -325,6 +350,8 @@
         <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.filtorder">(tensorpac.Pac property)</a>
 </li>
         <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.filtorder">(tensorpac.PreferredPhase property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.filtorder">(tensorpac.utils.BinAmplitude property)</a>
 </li>
       </ul></li>
       <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.fit">fit() (tensorpac.EventRelatedPac method)</a>
@@ -423,8 +450,12 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD.plot">plot() (tensorpac.utils.PSD method)</a>
+      <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.plot">plot() (tensorpac.utils.BinAmplitude method)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD.plot">(tensorpac.utils.PSD method)</a>
 </li>
+      </ul></li>
       <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.polar">polar() (tensorpac.PreferredPhase method)</a>
 </li>
       <li><a href="generated/tensorpac.methods.preferred_phase.html#tensorpac.methods.preferred_phase">preferred_phase() (in module tensorpac.methods)</a>
@@ -461,6 +492,8 @@
         <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.show">(tensorpac.Pac method)</a>
 </li>
         <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.show">(tensorpac.PreferredPhase method)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.show">(tensorpac.utils.BinAmplitude method)</a>
 </li>
         <li><a href="generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD.show">(tensorpac.utils.PSD method)</a>
 </li>
@@ -502,6 +535,8 @@
 </li>
         <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.width">(tensorpac.PreferredPhase property)</a>
 </li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.width">(tensorpac.utils.BinAmplitude property)</a>
+</li>
       </ul></li>
   </ul></td>
 </tr></table>
@@ -516,6 +551,8 @@
 </li>
         <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.xvec">(tensorpac.PreferredPhase property)</a>
 </li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.xvec">(tensorpac.utils.BinAmplitude property)</a>
+</li>
       </ul></li>
   </ul></td>
 </tr></table>
@@ -529,6 +566,8 @@
         <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.yvec">(tensorpac.Pac property)</a>
 </li>
         <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.yvec">(tensorpac.PreferredPhase property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.yvec">(tensorpac.utils.BinAmplitude property)</a>
 </li>
       </ul></li>
   </ul></td>

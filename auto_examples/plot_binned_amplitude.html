@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Compare normalizations &#8212; Tensorpac 0.6.1 documentation</title>
+    <title>Bin amplitude according to the phase &#8212; Tensorpac 0.6.1 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
@@ -16,8 +16,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Compare PAC methods" href="plot_pac_methods.html" />
-    <link rel="prev" title="Event-Related Phase Amplitude Coupling" href="plot_erpac.html" />
+    <link rel="next" title="Event-Related Phase Amplitude Coupling" href="plot_erpac_stats.html" />
+    <link rel="prev" title="Find the optimal bandwidth" href="plot_fmin_fmax_optmization.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -125,7 +125,7 @@
 <li class="toctree-l2"><a class="reference internal" href="plot_readme.html">README example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_values.html">Compute p-values</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Bin amplitude according to the phase</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_erpac_stats.html">Event-Related Phase Amplitude Coupling</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="plot_erpac_stats.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_erpac_stats.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
@@ -139,7 +139,7 @@
 <li class="toctree-l3"><a class="reference internal" href="plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalizations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Compare filtering properties</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
@@ -170,7 +170,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="../_sources/auto_examples/plot_compare_normalizations.rst.txt"
+  <a href="../_sources/auto_examples/plot_binned_amplitude.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -196,67 +196,52 @@
       
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-plot-compare-normalizations-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-plot-binned-amplitude-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="compare-normalizations">
-<span id="sphx-glr-auto-examples-plot-compare-normalizations-py"></span><h1>Compare normalizations<a class="headerlink" href="#compare-normalizations" title="Permalink to this headline">¶</a></h1>
-<p>The normalization correspond on the method used to correct the PAC estimation
-with the chance distribution.</p>
-<img alt="../_images/sphx_glr_plot_compare_normalizations_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_compare_normalizations_001.png" />
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>-&gt; Normalization using No normalization
--&gt; Normalization using Substract the mean of surrogates
--&gt; Normalization using Divide by the mean of surrogates
--&gt; Normalization using Substract then divide by the mean of surrogates
--&gt; Normalization using Substract the mean and divide by the deviation of the surrogates
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+<div class="sphx-glr-example-title section" id="bin-amplitude-according-to-the-phase">
+<span id="sphx-glr-auto-examples-plot-binned-amplitude-py"></span><h1>Bin amplitude according to the phase<a class="headerlink" href="#bin-amplitude-according-to-the-phase" title="Permalink to this headline">¶</a></h1>
+<p>This example illustrate how to bin the amplitude according to the phase.</p>
+<img alt="../_images/sphx_glr_plot_binned_amplitude_001.png" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_binned_amplitude_001.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorpac.signals</span> <span class="k">import</span> <span class="n">pac_signals_tort</span>
+<span class="kn">from</span> <span class="nn">tensorpac.utils</span> <span class="k">import</span> <span class="n">BinAmplitude</span>
+
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">tensorpac</span> <span class="k">import</span> <span class="n">Pac</span>
-<span class="kn">from</span> <span class="nn">tensorpac.signals</span> <span class="k">import</span> <span class="n">pac_signals_wavelet</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-paper&#39;</span><span class="p">)</span>
 
-<span class="c1"># First, we generate a dataset of signals artificially coupled between 10hz</span>
-<span class="c1"># and 100hz. By default, this dataset is organized as (n_epochs, n_times) where</span>
-<span class="c1"># n_times is the number of time points.</span>
-<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># number of datasets</span>
+<span class="c1"># Dataset of signals artificially coupled between 10hz and 100hz :</span>
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">n_times</span> <span class="o">=</span> <span class="mi">4000</span>
 <span class="n">sf</span> <span class="o">=</span> <span class="mf">512.</span>  <span class="c1"># sampling frequency</span>
-<span class="n">data</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">pac_signals_wavelet</span><span class="p">(</span><span class="n">sf</span><span class="o">=</span><span class="n">sf</span><span class="p">,</span> <span class="n">f_pha</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
-                                 <span class="n">n_epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
 
-<span class="c1"># First, let&#39;s use the MVL, without any further correction by surrogates :</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">Pac</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="c1"># Create artificially coupled signals using Tort method :</span>
+<span class="n">data</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">pac_signals_tort</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span>
+                              <span class="n">dpha</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">damp</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="n">sf</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="n">n_times</span><span class="p">)</span>
 
-<span class="c1"># Now, we want to compare PAC methods, hence it&#39;s useless to systematically</span>
-<span class="c1"># filter the data. So we extract the phase and the amplitude only once :</span>
-<span class="n">phases</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">amplitudes</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)):</span>
-    <span class="c1"># Change the pac method :</span>
-    <span class="n">p</span><span class="o">.</span><span class="n">idpac</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&gt; Normalization using &#39;</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">str_norm</span><span class="p">)</span>
-    <span class="c1"># Compute only the PAC without filtering :</span>
-    <span class="n">xpac</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">phases</span><span class="p">,</span> <span class="n">amplitudes</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-    <span class="c1"># Plot :</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">p</span><span class="o">.</span><span class="n">comodulogram</span><span class="p">(</span><span class="n">xpac</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">str_norm</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Spectral_r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">b_obj</span> <span class="o">=</span> <span class="n">BinAmplitude</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">f_pha</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">110</span><span class="p">],</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                     <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">b_obj</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;deg&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Binned amplitude (phase=[9, 11])&quot;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">b_obj</span> <span class="o">=</span> <span class="n">BinAmplitude</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">f_pha</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">110</span><span class="p">],</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                     <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">b_obj</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;deg&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Binned amplitude (phase=[2, 4])&quot;</span><span class="p">)</span>
+
+<span class="n">b_obj</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  14.460 seconds)</p>
-<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-compare-normalizations-py">
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.349 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-binned-amplitude-py">
 <div class="sphx-glr-download docutils container">
-<p><a class="reference download internal" download="" href="../_downloads/55818967bbd314461c736112c9a624d9/plot_compare_normalizations.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_compare_normalizations.py</span></code></a></p>
+<p><a class="reference download internal" download="" href="../_downloads/1142c2487acbb8766ae5b1205ea6b9c0/plot_binned_amplitude.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_binned_amplitude.py</span></code></a></p>
 </div>
 <div class="sphx-glr-download docutils container">
-<p><a class="reference download internal" download="" href="../_downloads/362c782368f063472a55e0c78d00ae64/plot_compare_normalizations.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_compare_normalizations.ipynb</span></code></a></p>
+<p><a class="reference download internal" download="" href="../_downloads/1f433c40e9c7d75eb7fa0dbf4f0bb3b4/plot_binned_amplitude.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_binned_amplitude.ipynb</span></code></a></p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
