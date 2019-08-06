@@ -31,7 +31,8 @@ class _PacObj(object):
         """String representation."""
         return self.method
 
-    def filter(self, sf, x, ftype='phase', keepfilt=False, n_jobs=-1):
+    def filter(self, sf, x, ftype='phase', keepfilt=False, edges=None,
+               n_jobs=-1):
         """Filt the data in the specified frequency bands.
 
         Parameters
@@ -49,6 +50,8 @@ class _PacObj(object):
         keepfilt : bool | False
             Specify if you only want the filtered data (True). This parameter
             is only available with dcomplex='hilbert' and not wavelet.
+        edges : int | None
+            Number of samples to discard to avoid edge effects due to filtering
 
         Returns
         -------
@@ -74,6 +77,12 @@ class _PacObj(object):
         if x.ndim == 1:
             x = x[np.newaxis, :]
         assert x.ndim == 2, ("x should be a 2d array like (n_epochs, n_times)")
+        # check edges
+        if not isinstance(edges, int):
+            edges = slice(None)
+        else:
+            logger.debug(f"    Edges {edges} time samples ignored")
+            edges = slice(edges, -edges)
 
         # ---------------------------------------------------------------------
         # Switch between phase or amplitude :
@@ -87,7 +96,7 @@ class _PacObj(object):
             xfilt = spectral(x, sf, self.f_amp, tosend, self._dcomplex,
                              self._filt, self._filtorder, self._cycle[1],
                              self._width, n_jobs)
-        return xfilt
+        return xfilt[..., edges]
 
     def _speccheck(self, filt=None, dcomplex=None, filtorder=None, cycle=None,
                    width=None):
@@ -401,7 +410,7 @@ class Pac(_PacObj, _PacPlt):
         return pac
 
     def filterfit(self, sf, x_pha, x_amp=None, n_perm=200, p=.05, n_jobs=-1,
-                  verbose=None):
+                  edges=None, verbose=None):
         """Filt the data then compute PAC on it.
 
         Parameters
@@ -418,6 +427,8 @@ class Pac(_PacObj, _PacPlt):
             Number of surrogates to compute.
         p : float | 0.05
             Statistical threshold
+        edges : int | None
+            Number of samples to discard to avoid edge effects due to filtering
         n_jobs : int | -1
             Number of jobs to compute PAC in parallel. For very large data,
             set this parameter to 1 in order to prevent large memory usage.
@@ -446,8 +457,9 @@ class Pac(_PacObj, _PacPlt):
         # Extract phase (npha, ...) and amplitude (namp, ...) :
         logger.info(f"    Extract phases (n_pha={len(self.xvec)}) and "
                     f"amplitudes (n_amps={len(self.yvec)})")
-        pha = self.filter(sf, x_pha, 'phase', False, n_jobs)
-        amp = self.filter(sf, x_amp, 'amplitude', False, n_jobs)
+        kw = dict(keepfilt=False, edges=edges, n_jobs=n_jobs)
+        pha = self.filter(sf, x_pha, 'phase', **kw)
+        amp = self.filter(sf, x_amp, 'amplitude', **kw)
 
         # Special cases :
         if self._idpac[0] == 5:
@@ -646,7 +658,7 @@ class EventRelatedPac(_PacObj, _PacVisual):
         return self.erpac
 
     def filterfit(self, sf, x_pha, x_amp=None, method='circular', smooth=None,
-                  n_perm=None, p=.05, n_jobs=-1, verbose=None):
+                  n_perm=None, p=.05, edges=None, n_jobs=-1, verbose=None):
         """Extract phases, amplitudes and compute ERPAC.
 
         Parameters
@@ -672,6 +684,8 @@ class EventRelatedPac(_PacObj, _PacVisual):
             swapping phase trials
         p : float | 0.05
             Statistical threshold for the gaussian-copula ('gc') method
+        edges : int | None
+            Number of samples to discard to avoid edge effects due to filtering
 
         Returns
         -------
@@ -689,8 +703,9 @@ class EventRelatedPac(_PacObj, _PacVisual):
         # extract phases and amplitudes
         logger.info(f"    Extract phases (n_pha={len(self.xvec)}) and "
                     f"amplitudes (n_amps={len(self.yvec)})")
-        pha = self.filter(sf, x_pha, ftype='phase')
-        amp = self.filter(sf, x_amp, ftype='amplitude')
+        kw = dict(keepfilt=False, edges=edges, n_jobs=n_jobs)
+        pha = self.filter(sf, x_pha, ftype='phase', **kw)
+        amp = self.filter(sf, x_amp, ftype='amplitude', **kw)
         # compute erpac
         return self.fit(pha, amp, method=method, smooth=smooth, n_jobs=n_jobs,
                         n_perm=n_perm, p=p, verbose=verbose)
@@ -815,7 +830,8 @@ class PreferredPhase(_PacObj, _PolarPlt):
         pha, amp = self._phampcheck(pha, amp)
         return preferred_phase(pha, amp, n_bins=n_bins)
 
-    def filterfit(self, sf, x_pha, x_amp=None, n_bins=12, verbose=None):
+    def filterfit(self, sf, x_pha, x_amp=None, edges=None, n_bins=12,
+                  verbose=None):
         """Extract phases, amplitudes and compute the preferred phase (PP).
 
         Parameters
@@ -832,6 +848,8 @@ class PreferredPhase(_PacObj, _PolarPlt):
         n_bins : int | 72
             Number of bins for bining the amplitude according to phase
             slices.
+        edges : int | None
+            Number of samples to discard to avoid edge effects due to filtering
 
         Returns
         -------
@@ -848,7 +866,8 @@ class PreferredPhase(_PacObj, _PolarPlt):
         # extract phases and amplitudes
         logger.info(f"    Extract phases (n_pha={len(self.xvec)}) and "
                     f"amplitudes (n_amps={len(self.yvec)})")
-        pha = self.filter(sf, x_pha, ftype='phase')
-        amp = self.filter(sf, x_amp, ftype='amplitude')
+        kw = dict(keepfilt=False, edges=edges, n_jobs=n_jobs)
+        pha = self.filter(sf, x_pha, ftype='phase', **kw)
+        amp = self.filter(sf, x_amp, ftype='amplitude', **kw)
         # compute pp
         return self.fit(pha, amp, n_bins=n_bins)
