@@ -1,7 +1,9 @@
 """Test tensorpac functions."""
 import numpy as np
 import matplotlib
-from tensorpac import Pac, EventRelatedPac, PreferredPhase, pac_trivec
+
+from tensorpac import Pac, EventRelatedPac, PreferredPhase
+from tensorpac.utils import pac_trivec
 
 
 class TestPac(object):

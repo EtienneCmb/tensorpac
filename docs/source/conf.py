@@ -216,5 +216,4 @@ texinfo_documents = [
 
 
 def setup(app):
-    print('OKIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII')
     app.add_stylesheet("tp_style.css")
