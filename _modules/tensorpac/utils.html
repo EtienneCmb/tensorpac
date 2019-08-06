@@ -75,6 +75,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
@@ -111,11 +113,6 @@
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.normalize.html">tensorpac.methods.normalize</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../api.html#miscellaneous">Miscellaneous</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.pac_vec.html">tensorpac.pac_vec</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.pac_trivec.html">tensorpac.pac_trivec</a></li>
 </ul>
 </li>
 </ul>
@@ -354,7 +351,7 @@
 <span class="c1">###############################################################################</span>
 
 
-<div class="viewcode-block" id="pac_vec"><a class="viewcode-back" href="../../generated/tensorpac.pac_vec.html#tensorpac.pac_vec">[docs]</a><span class="k">def</span> <span class="nf">pac_vec</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)):</span>
+<div class="viewcode-block" id="pac_vec"><a class="viewcode-back" href="../../generated/tensorpac.utils.pac_vec.html#tensorpac.pac_vec">[docs]</a><span class="k">def</span> <span class="nf">pac_vec</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)):</span>
     <span class="sd">&quot;&quot;&quot;Generate cross-frequency coupling vectors.</span>
 
 <span class="sd">    Parameters</span>
@@ -411,7 +408,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">fdown</span><span class="p">,</span> <span class="n">fup</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="pac_trivec"><a class="viewcode-back" href="../../generated/tensorpac.pac_trivec.html#tensorpac.pac_trivec">[docs]</a><span class="k">def</span> <span class="nf">pac_trivec</span><span class="p">(</span><span class="n">f_start</span><span class="o">=</span><span class="mf">60.</span><span class="p">,</span> <span class="n">f_end</span><span class="o">=</span><span class="mf">160.</span><span class="p">,</span> <span class="n">f_width</span><span class="o">=</span><span class="mf">10.</span><span class="p">):</span>
+<div class="viewcode-block" id="pac_trivec"><a class="viewcode-back" href="../../generated/tensorpac.utils.pac_trivec.html#tensorpac.pac_trivec">[docs]</a><span class="k">def</span> <span class="nf">pac_trivec</span><span class="p">(</span><span class="n">f_start</span><span class="o">=</span><span class="mf">60.</span><span class="p">,</span> <span class="n">f_end</span><span class="o">=</span><span class="mf">160.</span><span class="p">,</span> <span class="n">f_width</span><span class="o">=</span><span class="mf">10.</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generate triangular vector.</span>
 
 <span class="sd">    By contrast with the pac_vec function, this function generate frequency</span>

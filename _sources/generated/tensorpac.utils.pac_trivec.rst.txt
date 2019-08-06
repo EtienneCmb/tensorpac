@@ -1,0 +1,6 @@
+tensorpac.utils.pac\_trivec
+===========================
+
+.. currentmodule:: tensorpac.utils
+
+.. autofunction:: pac_trivec

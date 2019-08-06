@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>tensorpac.pac_vec &#8212; Tensorpac 0.6.1 documentation</title>
+    <title>tensorpac.utils.pac_vec &#8212; Tensorpac 0.6.1 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
@@ -16,8 +16,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="tensorpac.pac_trivec" href="tensorpac.pac_trivec.html" />
-    <link rel="prev" title="tensorpac.methods.normalize" href="tensorpac.methods.normalize.html" />
+    <link rel="next" title="tensorpac.utils.pac_trivec" href="tensorpac.utils.pac_trivec.html" />
+    <link rel="prev" title="tensorpac.utils.PSD" href="tensorpac.utils.PSD.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -75,8 +75,10 @@
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.PreferredPhase.html">tensorpac.PreferredPhase</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../api.html#utility-functions">Utility functions</a><ul>
+<li class="toctree-l2 current"><a class="reference internal" href="../api.html#utility-functions">Utility functions</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tensorpac.utils.pac_vec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
@@ -113,11 +115,6 @@
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.normalize.html">tensorpac.methods.normalize</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l2 current"><a class="reference internal" href="../api.html#miscellaneous">Miscellaneous</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">tensorpac.pac_vec</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tensorpac.pac_trivec.html">tensorpac.pac_trivec</a></li>
 </ul>
 </li>
 </ul>
@@ -166,7 +163,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="../_sources/generated/tensorpac.pac_vec.rst.txt"
+  <a href="../_sources/generated/tensorpac.utils.pac_vec.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -190,11 +187,11 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="tensorpac-pac-vec">
-<h1>tensorpac.pac_vec<a class="headerlink" href="#tensorpac-pac-vec" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="tensorpac-utils-pac-vec">
+<h1>tensorpac.utils.pac_vec<a class="headerlink" href="#tensorpac-utils-pac-vec" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
-<dt id="tensorpac.pac_vec">
-<code class="sig-prename descclassname">tensorpac.</code><code class="sig-name descname">pac_vec</code><span class="sig-paren">(</span><em class="sig-param">f_pha=(2</em>, <em class="sig-param">30</em>, <em class="sig-param">2</em>, <em class="sig-param">1)</em>, <em class="sig-param">f_amp=(60</em>, <em class="sig-param">200</em>, <em class="sig-param">10</em>, <em class="sig-param">5)</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#pac_vec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.pac_vec" title="Permalink to this definition">¶</a></dt>
+<dt id="tensorpac.utils.pac_vec">
+<code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">pac_vec</code><span class="sig-paren">(</span><em class="sig-param">f_pha=(2</em>, <em class="sig-param">30</em>, <em class="sig-param">2</em>, <em class="sig-param">1)</em>, <em class="sig-param">f_amp=(60</em>, <em class="sig-param">200</em>, <em class="sig-param">10</em>, <em class="sig-param">5)</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#pac_vec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.pac_vec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate cross-frequency coupling vectors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

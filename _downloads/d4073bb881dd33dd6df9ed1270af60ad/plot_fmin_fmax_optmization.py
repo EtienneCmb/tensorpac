@@ -7,7 +7,8 @@ Instead of looking for phase and amplitude frequency pairs (as in a
 comodulogram) this example illustrate how it is possible to find starting,
 ending and therefore, bandwidth coupling.
 """
-from tensorpac import Pac, pac_trivec, pac_signals_tort
+from tensorpac import Pac, pac_signals_tort
+from tensorpac.utils import pac_trivec
 
 sf = 256.
 data, time = pac_signals_tort(f_pha=[5, 7], f_amp=[60, 80], noise=2,

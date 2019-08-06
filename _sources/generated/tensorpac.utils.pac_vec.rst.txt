@@ -1,0 +1,6 @@
+tensorpac.utils.pac\_vec
+========================
+
+.. currentmodule:: tensorpac.utils
+
+.. autofunction:: pac_vec

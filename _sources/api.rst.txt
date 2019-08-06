@@ -34,6 +34,8 @@ Utility functions
    :toctree: generated/
 
    PSD
+   pac_vec
+   pac_trivec
 
 Generate synthetic signals
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -114,17 +116,3 @@ Normalization
    :toctree: generated/
 
    normalize
-
-
-Miscellaneous
-~~~~~~~~~~~~~
-
-:py:mod:`tensorpac`:
-
-.. currentmodule:: tensorpac
-
-.. autosummary::
-   :toctree: generated/
-
-   pac_vec
-   pac_trivec
