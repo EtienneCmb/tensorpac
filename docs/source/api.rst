@@ -34,6 +34,7 @@ Utility functions
    :toctree: generated/
 
    PSD
+   PLV
    BinAmplitude
    pac_vec
    pac_trivec

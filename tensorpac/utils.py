@@ -123,14 +123,14 @@ class PSD(object):
         self._n_trials, self._n_times = x.shape
         logger.info(f"Compute PSD over {self._n_trials} trials and "
                     f"{self._n_times} time points")
-        self.freqs, self.psd = periodogram(x, fs=sf, window=None,
-                                           nfft=self._n_times,
-                                           detrend='constant',
-                                           return_onesided=True,
-                                           scaling='density', axis=1)
+        self._freqs, self._psd = periodogram(x, fs=sf, window=None,
+                                             nfft=self._n_times,
+                                             detrend='constant',
+                                             return_onesided=True,
+                                             scaling='density', axis=1)
 
-    def plot(self, f_min=None, f_max=None, confidence=95, log=False,
-             grid=True):
+    def plot(self, f_min=None, f_max=None, confidence=95, interp=None,
+             log=False, grid=True):
         """Plot the PSD.
 
         Parameters
@@ -140,6 +140,13 @@ class PSD(object):
         confidence : (int, float) | None
             Light gray confidence interval. If None, no interval will be
             displayed
+        interp : int | None
+            Line interpolation integer. For example, if interp is 10 the number
+            of points is going to be multiply by 10
+        log : bool | False
+            Use a log scale representation
+        grid : bool | True
+            Add a grid to the plot
 
         Returns
         -------
@@ -148,23 +155,29 @@ class PSD(object):
         """
         import matplotlib.pyplot as plt
         f_types = (int, float)
-        # psd mean and deviation
-        psd_mean = self.psd.mean(0)
-
+        # interpolation
+        xvec, yvec = self._freqs, self._psd
+        if isinstance(interp, int) and (interp > 1):
+            # from scipy.interpolate import make_interp_spline, BSpline
+            from scipy.interpolate import interp1d
+            xnew = np.linspace(xvec[0], xvec[-1], len(xvec) * interp)
+            f = interp1d(xvec, yvec, kind='quadratic', axis=1)
+            yvec = f(xnew)
+            xvec = xnew
         # (f_min, f_max)
-        f_min = self.freqs[0] if not isinstance(f_min, f_types) else f_min
-        f_max = self.freqs[-1] if not isinstance(f_max, f_types) else f_max
+        f_min = xvec[0] if not isinstance(f_min, f_types) else f_min
+        f_max = xvec[-1] if not isinstance(f_max, f_types) else f_max
         # plot main psd
-        plt.plot(self.freqs, self.psd.mean(0), color='black',
+        plt.plot(xvec, yvec.mean(0), color='black',
                  label='mean PSD over trials')
         # plot confidence interval
         if isinstance(confidence, (int, float)) and (0 < confidence < 100):
             logger.info(f"    Add {confidence}th confidence interval")
             interval = (100. - confidence) / 2
             kw = dict(axis=0, interpolation='nearest')
-            psd_min = np.percentile(self.psd, interval, **kw)
-            psd_max = np.percentile(self.psd, 100. - interval, **kw)
-            plt.fill_between(self.freqs, psd_max, psd_min, color='lightgray',
+            psd_min = np.percentile(yvec, interval, **kw)
+            psd_max = np.percentile(yvec, 100. - interval, **kw)
+            plt.fill_between(xvec, psd_max, psd_min, color='lightgray',
                              alpha=0.5,
                              label=f"{confidence}th confidence interval")
             plt.legend()
@@ -176,7 +189,6 @@ class PSD(object):
             plt.xscale('log', basex=10)
             plt.gca().xaxis.set_major_formatter(ScalarFormatter())
         if grid:
-            # plt.grid(True, which='both')
             plt.grid(color='grey', which='major', linestyle='-',
                      linewidth=1., alpha=0.5)
             plt.grid(color='lightgrey', which='minor', linestyle='--',
@@ -188,6 +200,16 @@ class PSD(object):
         """Display the PSD figure."""
         import matplotlib.pyplot as plt
         plt.show()
+
+    @property
+    def freqs(self):
+        """Get the frequency vector."""
+        return self._freqs
+
+    @property
+    def psd(self):
+        """Get the psd value."""
+        return self._psd
 
 
 class BinAmplitude(_PacObj):
@@ -250,7 +272,7 @@ class BinAmplitude(_PacObj):
         pha = self.filter(sf, x, 'phase', **kw)
         amp = self.filter(sf, x, 'amplitude', **kw)
         # binarize amplitude according to phase
-        self.amplitude = _kl_hr(pha, amp, n_bins).squeeze()
+        self._amplitude = _kl_hr(pha, amp, n_bins).squeeze()
         self.n_bins = n_bins
 
     def plot(self, unit='rad', **kw):
@@ -272,12 +294,12 @@ class BinAmplitude(_PacObj):
         import matplotlib.pyplot as plt
         assert unit in ['rad', 'deg']
         if unit == 'rad':
-            self.phase = np.linspace(-np.pi, np.pi, self.n_bins)
+            self._phase = np.linspace(-np.pi, np.pi, self.n_bins)
             width = 2 * np.pi / self.n_bins
         elif unit == 'deg':
-            self.phase = np.linspace(-180, 180, self.n_bins)
+            self._phase = np.linspace(-180, 180, self.n_bins)
             width = 360 / self.n_bins
-        plt.bar(self.phase, self.amplitude.mean(1), width=width, **kw)
+        plt.bar(self._phase, self._amplitude.mean(1), width=width, **kw)
         plt.xlabel(f"Frequency phase ({self.n_bins} bins)")
         plt.ylabel("Amplitude")
         plt.title("Binned amplitude")
@@ -287,3 +309,117 @@ class BinAmplitude(_PacObj):
         """Show the figure."""
         import matplotlib.pyplot as plt
         plt.show()
+
+    @property
+    def amplitude(self):
+        """Get the amplitude value."""
+        return self._amplitude
+
+    @property
+    def phase(self):
+        """Get the phase value."""
+        return self._phase    
+
+
+class PLV(_PacObj):
+    """Compute the Phase Locking Value (PLV).
+
+    The Phase Locking Value (PLV) can be used to measure the phase synchrony
+    across trials [#f1]_
+
+    Parameters
+    ----------
+    x : array_like
+        Array of data of shape (n_epochs, n_times)
+    sf : float
+        The sampling frequency
+    f_pha : tuple, list | [2, 4]
+        List of two floats describing the frequency bounds for extracting the
+        phase
+    dcomplex : {'wavelet', 'hilbert'}
+        Method for the complex definition. Use either 'hilbert' or
+        'wavelet'.
+    filt : {'fir1', 'butter', 'bessel'}
+        Filtering method (only if dcomplex is 'hilbert'). Choose either
+        'fir1', 'butter' or 'bessel'
+    cycle : tuple | 3
+        Control the number of cycles for filtering the phase (only if dcomplex
+        is 'hilbert').
+    filtorder : int | 3
+        Filter order for the Butterworth and Bessel filters (only if
+        dcomplex is 'hilbert').
+    width : int | 7
+        Width of the Morlet's wavelet.
+    edges : int | None
+        Number of samples to discard to avoid edge effects due to filtering
+
+    References
+    ----------
+    .. [#f1] `Lachaux et al, 1999 <https://onlinelibrary.wiley.com/doi/abs/10.
+       1002/(SICI)1097-0193(1999)8:4%3C194::AID-HBM4%3E3.0.CO;2-C>`_
+    """
+
+    def __init__(self, x, sf, f_pha=[2, 4], dcomplex='hilbert', filt='fir1',
+                 cycle=3, filtorder=3, width=7, edges=None, n_jobs=-1):
+        """Init."""
+        _PacObj.__init__(self, f_pha=f_pha, f_amp=[60, 80], dcomplex=dcomplex,
+                         filt=filt, cycle=(cycle, 6), filtorder=filtorder,
+                         width=width)
+        # check
+        x = np.atleast_2d(x)
+        assert x.ndim <= 2, ("`x` input should be an array of shape "
+                             "(n_epochs, n_times)")
+        self._n_trials = x.shape[0]
+        # extract phase and amplitude
+        kw = dict(keepfilt=False, edges=edges, n_jobs=n_jobs)
+        pha = self.filter(sf, x, 'phase', **kw)
+        # compute plv
+        self._plv = np.abs(np.exp(1j * pha).mean(1)).squeeze()
+        self._sf = sf
+
+    def plot(self, time=None, **kw):
+        """Plot the Phase Locking Value.
+
+        Parameters
+        ----------
+        time : array_like | None
+            Custom time vector to use
+        kw : dict | {}
+            Additional inputs are either pass to the matplotlib.pyplot.plot
+            function if a single phase band is used, otherwise to the
+            matplotlib.pyplot.pcolormesh function
+
+        Returns
+        -------
+        ax : Matplotlib axis
+            The matplotlib axis that contains the figure
+        """
+        import matplotlib.pyplot as plt
+        n_pts = self._plv.shape[-1]
+        if not isinstance(time, np.ndarray):
+            time = np.arange(n_pts) / self._sf
+        time = time[self._edges]
+        assert len(time) == n_pts, ("The length of the time vector should be "
+                                    "{n_pts}")
+        if self._plv.ndim == 1:
+            plt.plot(time, self._plv, **kw)
+        elif self._plv.ndim == 2:
+            vmin = kw.get('vmin', np.percentile(self._plv, 1))
+            vmax = kw.get('vmax', np.percentile(self._plv, 99))
+            plt.pcolormesh(time, self.xvec, self._plv, vmin=vmin, vmax=vmax,
+                           **kw)
+            plt.colorbar()
+            plt.ylabel("Frequency for phase (Hz)")
+        plt.xlabel('Time')
+        plt.title(f"Phase Locking Value across {self._n_trials} trials")
+        return plt.gca()
+
+    def show(self):
+        """Show the figure."""
+        import matplotlib.pyplot as plt
+        plt.show()
+
+    @property
+    def plv(self):
+        """Get the plv value."""
+        return self._plv

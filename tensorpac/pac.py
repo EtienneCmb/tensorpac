@@ -83,6 +83,7 @@ class _PacObj(object):
         else:
             logger.debug(f"    Edges {edges} time samples ignored")
             edges = slice(edges, -edges)
+        self._edges = edges
 
         # ---------------------------------------------------------------------
         # Switch between phase or amplitude :
