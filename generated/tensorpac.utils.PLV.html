@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>tensorpac.utils.PLV &#8212; Tensorpac 0.6.1 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tp_style.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tensorpac.utils.BinAmplitude" href="tensorpac.utils.BinAmplitude.html" />
+    <link rel="prev" title="tensorpac.utils.PSD" href="tensorpac.utils.PSD.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/ico64.png"></span>
+          Tensorpac</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.1</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../install.html">Install</a></li>
+                <li><a href="../tutorial.html">Tutorial</a></li>
+                <li><a href="../api.html">API</a></li>
+                <li><a href="../auto_examples/index.html">Examples</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#standard-installation">Standard installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install-the-most-up-to-date-version">Install the most up-to-date version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api.html#compute-phase-amplitude-coupling">Compute phase-amplitude coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.Pac.html">tensorpac.Pac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.EventRelatedPac.html">tensorpac.EventRelatedPac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.PreferredPhase.html">tensorpac.PreferredPhase</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../api.html#utility-functions">Utility functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tensorpac.utils.PLV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.signals.pac_signals_wavelet.html">tensorpac.signals.pac_signals_wavelet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.signals.pac_signals_tort.html">tensorpac.signals.pac_signals_tort</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#individual-methods">Individual methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#pac-methods">PAC methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.mvl.html">tensorpac.methods.mvl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.ps.html">tensorpac.methods.ps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#event-related-pac-methods">Event Related PAC methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.erpac.html">tensorpac.methods.erpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.ergcpac.html">tensorpac.methods.ergcpac</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#preferred-phase">Preferred phase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.preferred_phase.html">tensorpac.methods.preferred_phase</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#surrogates-methods">Surrogates methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.swap_pha_amp.html">tensorpac.methods.swap_pha_amp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.swap_blocks.html">tensorpac.methods.swap_blocks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.time_lag.html">tensorpac.methods.time_lag</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#normalization">Normalization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.normalize.html">tensorpac.methods.normalize</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_psd.html">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_readme.html">README example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_values.html">Compute p-values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_erpac_stats.html">Event-Related Phase Amplitude Coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_erpac_stats.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_erpac_stats.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_frequency_vectors.html">Define frequency vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_compare_surrogates.html">Compare surrogate methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_erpac.html">Event-Related Phase Amplitude Coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_erpac.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_erpac.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_plv.html">Compute and plot the Phase Locking Value (PLV)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_plv.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_plv.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_plv.html#compute-and-plot-the-phase-locking-value">Compute and plot the Phase Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_long_range_coupling.html">Long-range PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_preferred_phase.html#generate-synthetic-signals-sake-of-illustration">Generate synthetic signals (sake of illustration)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_preferred_phase.html#extract-phases-amplitudes-and-compute-the-preferred-phase">Extract phases, amplitudes and compute the preferred phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_preferred_phase.html#plot-the-preferred-phase">Plot the preferred phase</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contributors.html">Authors and contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cite.html">Cite Tensorpac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community.html">Community</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#report-an-issue">Report an issue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../community.html#chat">Chat</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../_sources/generated/tensorpac.utils.PLV.rst.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="tensorpac-utils-plv">
+<h1>tensorpac.utils.PLV<a class="headerlink" href="#tensorpac-utils-plv" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="tensorpac.utils.PLV">
+<em class="property">class </em><code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">PLV</code><span class="sig-paren">(</span><em class="sig-param">x, sf, f_pha=[2, 4], dcomplex='hilbert', filt='fir1', cycle=3, filtorder=3, width=7, edges=None, n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PLV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PLV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the Phase Locking Value (PLV).</p>
+<p>The Phase Locking Value (PLV) can be used to measure the phase synchrony
+across trials <a class="footnote-reference brackets" href="#f1" id="id1">1</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">array_like</span></dt><dd><p>Array of data of shape (n_epochs, n_times)</p>
+</dd>
+<dt><strong>sf</strong><span class="classifier">float</span></dt><dd><p>The sampling frequency</p>
+</dd>
+<dt><strong>f_pha</strong><span class="classifier">tuple, list | [2, 4]</span></dt><dd><p>List of two floats describing the frequency bounds for extracting the
+phase</p>
+</dd>
+<dt><strong>dcomplex</strong><span class="classifier">{‘wavelet’, ‘hilbert’}</span></dt><dd><p>Method for the complex definition. Use either ‘hilbert’ or
+‘wavelet’.</p>
+</dd>
+<dt><strong>filt</strong><span class="classifier">{‘fir1’, ‘butter’, ‘bessel’}</span></dt><dd><p>Filtering method (only if dcomplex is ‘hilbert’). Choose either
+‘fir1’, ‘butter’ or ‘bessel’</p>
+</dd>
+<dt><strong>cycle</strong><span class="classifier">tuple | 3</span></dt><dd><p>Control the number of cycles for filtering the phase (only if dcomplex
+is ‘hilbert’).</p>
+</dd>
+<dt><strong>filtorder</strong><span class="classifier">int | 3</span></dt><dd><p>Filter order for the Butterworth and Bessel filters (only if
+dcomplex is ‘hilbert’).</p>
+</dd>
+<dt><strong>width</strong><span class="classifier">int | 7</span></dt><dd><p>Width of the Morlet’s wavelet.</p>
+</dd>
+<dt><strong>edges</strong><span class="classifier">int | None</span></dt><dd><p>Number of samples to discard to avoid edge effects due to filtering</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/(SICI)1097-0193(1999)8:4%3C194::AID-HBM4%3E3.0.CO;2-C">Lachaux et al, 1999</a></p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="tensorpac.utils.PLV.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">self, x, sf, f_pha=[2, 4], dcomplex='hilbert', filt='fir1', cycle=3, filtorder=3, width=7, edges=None, n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PLV.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PLV.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Init.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.__init__" title="tensorpac.utils.PLV.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self, x, sf[, f_pha, dcomplex, …])</p></td>
+<td><p>Init.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.filter" title="tensorpac.utils.PLV.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(self, sf, x[, ftype, keepfilt, …])</p></td>
+<td><p>Filt the data in the specified frequency bands.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.plot" title="tensorpac.utils.PLV.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(self[, time])</p></td>
+<td><p>Plot the Phase Locking Value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.show" title="tensorpac.utils.PLV.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>(self)</p></td>
+<td><p>Show the figure.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.cycle" title="tensorpac.utils.PLV.cycle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cycle</span></code></a></p></td>
+<td><p>Get the cycle value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.dcomplex" title="tensorpac.utils.PLV.dcomplex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dcomplex</span></code></a></p></td>
+<td><p>Get the dcomplex value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.f_amp" title="tensorpac.utils.PLV.f_amp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_amp</span></code></a></p></td>
+<td><p>Vector of amplitudes of shape (n_amp, 2).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.f_pha" title="tensorpac.utils.PLV.f_pha"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_pha</span></code></a></p></td>
+<td><p>Vector of phases of shape (n_pha, 2).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.filt" title="tensorpac.utils.PLV.filt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filt</span></code></a></p></td>
+<td><p>Get the filt value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.filtorder" title="tensorpac.utils.PLV.filtorder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filtorder</span></code></a></p></td>
+<td><p>Get the filtorder value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.plv" title="tensorpac.utils.PLV.plv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plv</span></code></a></p></td>
+<td><p>Get the plv value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.width" title="tensorpac.utils.PLV.width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">width</span></code></a></p></td>
+<td><p>Get the width value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.xvec" title="tensorpac.utils.PLV.xvec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xvec</span></code></a></p></td>
+<td><p>Vector of phases of shape (n_pha,) use for plotting.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.yvec" title="tensorpac.utils.PLV.yvec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yvec</span></code></a></p></td>
+<td><p>Vector of amplitudes of shape (n_amp,) use for plotting.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="tensorpac.utils.PLV.filter">
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x</em>, <em class="sig-param">ftype='phase'</em>, <em class="sig-param">keepfilt=False</em>, <em class="sig-param">edges=None</em>, <em class="sig-param">n_jobs=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.utils.PLV.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filt the data in the specified frequency bands.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sf</strong><span class="classifier">float</span></dt><dd><p>The sampling frequency.</p>
+</dd>
+<dt><strong>x</strong><span class="classifier">array_like</span></dt><dd><p>Array of data of shape (n_epochs, n_times)</p>
+</dd>
+<dt><strong>ftype</strong><span class="classifier">{‘phase’, ‘amplitude’}</span></dt><dd><p>Specify if you want to extract phase (‘phase’) or the amplitude
+(‘amplitude’).</p>
+</dd>
+<dt><strong>n_jobs</strong><span class="classifier">int | -1</span></dt><dd><p>Number of jobs to compute PAC in parallel. For very large data,
+set this parameter to 1 in order to prevent large memory usage.</p>
+</dd>
+<dt><strong>keepfilt</strong><span class="classifier">bool | False</span></dt><dd><p>Specify if you only want the filtered data (True). This parameter
+is only available with dcomplex=’hilbert’ and not wavelet.</p>
+</dd>
+<dt><strong>edges</strong><span class="classifier">int | None</span></dt><dd><p>Number of samples to discard to avoid edge effects due to filtering</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>xfilt</strong><span class="classifier">array_like</span></dt><dd><p>The filtered data of shape (n_freqs, n_epochs, n_times)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.PLV.plot">
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">time=None</em>, <em class="sig-param">**kw</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PLV.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PLV.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the Phase Locking Value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>time</strong><span class="classifier">array_like | None</span></dt><dd><p>Custom time vector to use</p>
+</dd>
+<dt><strong>kw</strong><span class="classifier">dict | {}</span></dt><dd><p>Additional inputs are either pass to the matplotlib.pyplot.plot
+function if a single phase band is used, otherwise to the
+matplotlib.pyplot.pcolormesh function</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>ax</strong><span class="classifier">Matplotlib axis</span></dt><dd><p>The matplotlib axis that contains the figure</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.PLV.show">
+<code class="sig-name descname">show</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PLV.show"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PLV.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show the figure.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.PLV.cycle">
+<em class="property">property </em><code class="sig-name descname">cycle</code><a class="headerlink" href="#tensorpac.utils.PLV.cycle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the cycle value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.PLV.dcomplex">
+<em class="property">property </em><code class="sig-name descname">dcomplex</code><a class="headerlink" href="#tensorpac.utils.PLV.dcomplex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the dcomplex value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.PLV.f_amp">
+<em class="property">property </em><code class="sig-name descname">f_amp</code><a class="headerlink" href="#tensorpac.utils.PLV.f_amp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector of amplitudes of shape (n_amp, 2).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.PLV.f_pha">
+<em class="property">property </em><code class="sig-name descname">f_pha</code><a class="headerlink" href="#tensorpac.utils.PLV.f_pha" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector of phases of shape (n_pha, 2).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.PLV.filt">
+<em class="property">property </em><code class="sig-name descname">filt</code><a class="headerlink" href="#tensorpac.utils.PLV.filt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the filt value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.PLV.filtorder">
+<em class="property">property </em><code class="sig-name descname">filtorder</code><a class="headerlink" href="#tensorpac.utils.PLV.filtorder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the filtorder value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.PLV.plv">
+<em class="property">property </em><code class="sig-name descname">plv</code><a class="headerlink" href="#tensorpac.utils.PLV.plv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the plv value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.PLV.width">
+<em class="property">property </em><code class="sig-name descname">width</code><a class="headerlink" href="#tensorpac.utils.PLV.width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the width value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.PLV.xvec">
+<em class="property">property </em><code class="sig-name descname">xvec</code><a class="headerlink" href="#tensorpac.utils.PLV.xvec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector of phases of shape (n_pha,) use for plotting.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.PLV.yvec">
+<em class="property">property </em><code class="sig-name descname">yvec</code><a class="headerlink" href="#tensorpac.utils.PLV.yvec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector of amplitudes of shape (n_amp,) use for plotting.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+    <hr>
+    <footer>
+        <div class="container">
+            <img src="../_static/baniere.png" alt="Ban" height="80">
+        </div>
+        <br>
+        <div class="container">
+            <ul class="list-inline">
+                <li style="font-weight:bold"><a href="../genindex.html">Index</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="https://github.com/EtienneCmb/tensorpac">Github</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../contributors.html">Contributors</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../community.html">Community</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../cite.html">Citation</a></li>
+            </ul>
+         </div>
+        <!-- <br> -->
+        <p>&copy; Copyright 2019, Etienne Combrisson.</p>
+    </footer>
+
+  </body>
+</html>

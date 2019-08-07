@@ -26,12 +26,14 @@ tensorpac.utils.BinAmplitude
 
    .. autosummary::
    
+      ~BinAmplitude.amplitude
       ~BinAmplitude.cycle
       ~BinAmplitude.dcomplex
       ~BinAmplitude.f_amp
       ~BinAmplitude.f_pha
       ~BinAmplitude.filt
       ~BinAmplitude.filtorder
+      ~BinAmplitude.phase
       ~BinAmplitude.width
       ~BinAmplitude.xvec
       ~BinAmplitude.yvec

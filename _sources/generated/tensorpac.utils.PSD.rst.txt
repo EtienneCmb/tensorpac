@@ -21,4 +21,11 @@ tensorpac.utils.PSD
 
    
    
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~PSD.freqs
+      ~PSD.psd
+   
    

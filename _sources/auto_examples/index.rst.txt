@@ -254,6 +254,26 @@ Examples
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="This example illustrate how to compute and plot the Phase Locking Value (PLV). The PLV can be u...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/images/thumb/sphx_glr_plot_plv_thumb.png
+
+        :ref:`sphx_glr_auto_examples_plot_plv.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/plot_plv
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Use the pac_signals_tort function to generate artificial PAC. ">
 
 .. only:: html

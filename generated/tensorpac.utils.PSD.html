@@ -16,7 +16,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="tensorpac.utils.BinAmplitude" href="tensorpac.utils.BinAmplitude.html" />
+    <link rel="next" title="tensorpac.utils.PLV" href="tensorpac.utils.PLV.html" />
     <link rel="prev" title="tensorpac.PreferredPhase" href="tensorpac.PreferredPhase.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -77,6 +77,7 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../api.html#utility-functions">Utility functions</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">tensorpac.utils.PSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.PLV.html">tensorpac.utils.PLV</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
@@ -142,6 +143,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_compare_normalizations.html">Compare normalizations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_plv.html">Compute and plot the Phase Locking Value (PLV)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_plv.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_plv.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_plv.html#compute-and-plot-the-phase-locking-value">Compute and plot the Phase Locking Value</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_long_range_coupling.html">Long-range PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a><ul>
@@ -226,7 +233,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.__init__" title="tensorpac.utils.PSD.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self, x, sf)</p></td>
 <td><p>Init.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.plot" title="tensorpac.utils.PSD.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(self[, f_min, f_max, confidence, log, grid])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.plot" title="tensorpac.utils.PSD.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(self[, f_min, f_max, confidence, …])</p></td>
 <td><p>Plot the PSD.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.show" title="tensorpac.utils.PSD.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>(self)</p></td>
@@ -234,9 +241,24 @@
 </tr>
 </tbody>
 </table>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.freqs" title="tensorpac.utils.PSD.freqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freqs</span></code></a></p></td>
+<td><p>Get the frequency vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.psd" title="tensorpac.utils.PSD.psd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">psd</span></code></a></p></td>
+<td><p>Get the psd value.</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="tensorpac.utils.PSD.plot">
-<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">f_min=None</em>, <em class="sig-param">f_max=None</em>, <em class="sig-param">confidence=95</em>, <em class="sig-param">log=False</em>, <em class="sig-param">grid=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD.plot" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">f_min=None</em>, <em class="sig-param">f_max=None</em>, <em class="sig-param">confidence=95</em>, <em class="sig-param">interp=None</em>, <em class="sig-param">log=False</em>, <em class="sig-param">grid=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD.plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plot the PSD.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -245,6 +267,13 @@
 </dd>
 <dt><strong>confidence</strong><span class="classifier">(int, float) | None</span></dt><dd><p>Light gray confidence interval. If None, no interval will be
 displayed</p>
+</dd>
+<dt><strong>interp</strong><span class="classifier">int | None</span></dt><dd><p>Line interpolation integer. For example, if interp is 10 the number
+of points is going to be multiply by 10</p>
+</dd>
+<dt><strong>log</strong><span class="classifier">bool | False</span></dt><dd><p>Use a log scale representation</p>
+</dd>
+<dt><strong>grid</strong><span class="classifier">bool | True</span></dt><dd><p>Add a grid to the plot</p>
 </dd>
 </dl>
 </dd>
@@ -261,6 +290,18 @@ displayed</p>
 <dt id="tensorpac.utils.PSD.show">
 <code class="sig-name descname">show</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD.show"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD.show" title="Permalink to this definition">¶</a></dt>
 <dd><p>Display the PSD figure.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.PSD.freqs">
+<em class="property">property </em><code class="sig-name descname">freqs</code><a class="headerlink" href="#tensorpac.utils.PSD.freqs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the frequency vector.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.PSD.psd">
+<em class="property">property </em><code class="sig-name descname">psd</code><a class="headerlink" href="#tensorpac.utils.PSD.psd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the psd value.</p>
 </dd></dl>
 
 </dd></dl>

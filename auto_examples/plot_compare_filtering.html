@@ -16,7 +16,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Generate artificially coupled signals" href="plot_artificially_coupled_signals.html" />
+    <link rel="next" title="Compute and plot the Phase Locking Value (PLV)" href="plot_plv.html" />
     <link rel="prev" title="Compare PAC methods" href="plot_pac_methods.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -77,6 +77,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.PLV.html">tensorpac.utils.PLV</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
@@ -142,6 +143,12 @@
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalizations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Compare filtering properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_plv.html">Compute and plot the Phase Locking Value (PLV)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plot_plv.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_plv.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_plv.html#compute-and-plot-the-phase-locking-value">Compute and plot the Phase Locking Value</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a><ul>
@@ -254,7 +261,7 @@ Filtering with wavelets
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.965 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  4.342 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-compare-filtering-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../_downloads/e65dc544e6c71d8bce6343fb3d86be10/plot_compare_filtering.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_compare_filtering.py</span></code></a></p>

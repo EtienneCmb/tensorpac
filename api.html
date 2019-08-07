@@ -77,6 +77,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.PLV.html">tensorpac.utils.PLV</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
@@ -142,6 +143,12 @@
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_normalizations.html">Compare normalizations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_plv.html">Compute and plot the Phase Locking Value (PLV)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_plv.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_plv.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_plv.html#compute-and-plot-the-phase-locking-value">Compute and plot the Phase Locking Value</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_long_range_coupling.html">Long-range PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a><ul>
@@ -245,13 +252,16 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD" title="tensorpac.utils.PSD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PSD</span></code></a>(x, sf)</p></td>
 <td><p>Power Spectrum Density for electrophysiological brain data.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude" title="tensorpac.utils.BinAmplitude"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BinAmplitude</span></code></a>(x, sf[, f_pha, f_amp, n_bins, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.utils.PLV.html#tensorpac.utils.PLV" title="tensorpac.utils.PLV"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PLV</span></code></a>(x, sf[, f_pha, dcomplex, filt, cycle, …])</p></td>
+<td><p>Compute the Phase Locking Value (PLV).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude" title="tensorpac.utils.BinAmplitude"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BinAmplitude</span></code></a>(x, sf[, f_pha, f_amp, n_bins, …])</p></td>
 <td><p>Bin the amplitude according to the phase.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.utils.pac_vec.html#tensorpac.utils.pac_vec" title="tensorpac.utils.pac_vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac_vec</span></code></a>([f_pha, f_amp])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.utils.pac_vec.html#tensorpac.utils.pac_vec" title="tensorpac.utils.pac_vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac_vec</span></code></a>([f_pha, f_amp])</p></td>
 <td><p>Generate cross-frequency coupling vectors.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.utils.pac_trivec.html#tensorpac.utils.pac_trivec" title="tensorpac.utils.pac_trivec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac_trivec</span></code></a>([f_start, f_end, f_width])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.utils.pac_trivec.html#tensorpac.utils.pac_trivec" title="tensorpac.utils.pac_trivec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac_trivec</span></code></a>([f_start, f_end, f_width])</p></td>
 <td><p>Generate triangular vector.</p></td>
 </tr>
 </tbody>

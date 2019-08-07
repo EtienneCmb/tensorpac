@@ -17,7 +17,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="tensorpac.utils.pac_vec" href="tensorpac.utils.pac_vec.html" />
-    <link rel="prev" title="tensorpac.utils.PSD" href="tensorpac.utils.PSD.html" />
+    <link rel="prev" title="tensorpac.utils.PLV" href="tensorpac.utils.PLV.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -77,6 +77,7 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../api.html#utility-functions">Utility functions</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.PLV.html">tensorpac.utils.PLV</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
@@ -142,6 +143,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_compare_normalizations.html">Compare normalizations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_plv.html">Compute and plot the Phase Locking Value (PLV)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_plv.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_plv.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/plot_plv.html#compute-and-plot-the-phase-locking-value">Compute and plot the Phase Locking Value</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_long_range_coupling.html">Long-range PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a><ul>
@@ -270,23 +277,29 @@ dcomplex is ‘hilbert’).</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.cycle" title="tensorpac.utils.BinAmplitude.cycle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cycle</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.amplitude" title="tensorpac.utils.BinAmplitude.amplitude"><code class="xref py py-obj docutils literal notranslate"><span class="pre">amplitude</span></code></a></p></td>
+<td><p>Get the amplitude value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.cycle" title="tensorpac.utils.BinAmplitude.cycle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cycle</span></code></a></p></td>
 <td><p>Get the cycle value.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.dcomplex" title="tensorpac.utils.BinAmplitude.dcomplex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dcomplex</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.dcomplex" title="tensorpac.utils.BinAmplitude.dcomplex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dcomplex</span></code></a></p></td>
 <td><p>Get the dcomplex value.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.f_amp" title="tensorpac.utils.BinAmplitude.f_amp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_amp</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.f_amp" title="tensorpac.utils.BinAmplitude.f_amp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_amp</span></code></a></p></td>
 <td><p>Vector of amplitudes of shape (n_amp, 2).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.f_pha" title="tensorpac.utils.BinAmplitude.f_pha"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_pha</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.f_pha" title="tensorpac.utils.BinAmplitude.f_pha"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_pha</span></code></a></p></td>
 <td><p>Vector of phases of shape (n_pha, 2).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.filt" title="tensorpac.utils.BinAmplitude.filt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filt</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.filt" title="tensorpac.utils.BinAmplitude.filt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filt</span></code></a></p></td>
 <td><p>Get the filt value.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.filtorder" title="tensorpac.utils.BinAmplitude.filtorder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filtorder</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.filtorder" title="tensorpac.utils.BinAmplitude.filtorder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filtorder</span></code></a></p></td>
 <td><p>Get the filtorder value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.phase" title="tensorpac.utils.BinAmplitude.phase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phase</span></code></a></p></td>
+<td><p>Get the phase value.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.BinAmplitude.width" title="tensorpac.utils.BinAmplitude.width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">width</span></code></a></p></td>
 <td><p>Get the width value.</p></td>
@@ -362,6 +375,12 @@ for radians</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="tensorpac.utils.BinAmplitude.amplitude">
+<em class="property">property </em><code class="sig-name descname">amplitude</code><a class="headerlink" href="#tensorpac.utils.BinAmplitude.amplitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the amplitude value.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="tensorpac.utils.BinAmplitude.cycle">
 <em class="property">property </em><code class="sig-name descname">cycle</code><a class="headerlink" href="#tensorpac.utils.BinAmplitude.cycle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the cycle value.</p>
@@ -395,6 +414,12 @@ for radians</p>
 <dt id="tensorpac.utils.BinAmplitude.filtorder">
 <em class="property">property </em><code class="sig-name descname">filtorder</code><a class="headerlink" href="#tensorpac.utils.BinAmplitude.filtorder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the filtorder value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.BinAmplitude.phase">
+<em class="property">property </em><code class="sig-name descname">phase</code><a class="headerlink" href="#tensorpac.utils.BinAmplitude.phase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the phase value.</p>
 </dd></dl>
 
 <dl class="method">

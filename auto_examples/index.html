@@ -77,6 +77,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.PLV.html">tensorpac.utils.PLV</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
@@ -142,6 +143,12 @@
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalizations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_plv.html">Compute and plot the Phase Locking Value (PLV)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plot_plv.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_plv.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_plv.html#compute-and-plot-the-phase-locking-value">Compute and plot the Phase Locking Value</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
 <li class="toctree-l2"><a class="reference internal" href="plot_preferred_phase.html">Find the preferred phase (PP)</a><ul>
@@ -268,21 +275,27 @@
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="Use the pac_signals_tort function to generate artificial PAC. "><div class="figure align-default" id="id13">
+<div class="sphx-glr-thumbcontainer" tooltip="This example illustrate how to compute and plot the Phase Locking Value (PLV). The PLV can be u..."><div class="figure align-default" id="id13">
+<img alt="../_images/sphx_glr_plot_plv_thumb.png" src="../_images/sphx_glr_plot_plv_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_plv.html#sphx-glr-auto-examples-plot-plv-py"><span class="std std-ref">Compute and plot the Phase Locking Value (PLV)</span></a></span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="Use the pac_signals_tort function to generate artificial PAC. "><div class="figure align-default" id="id14">
 <img alt="../_images/sphx_glr_plot_artificially_coupled_signals_thumb.png" src="../_images/sphx_glr_plot_artificially_coupled_signals_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_artificially_coupled_signals.html#sphx-glr-auto-examples-plot-artificially-coupled-signals-py"><span class="std std-ref">Generate artificially coupled signals</span></a></span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_artificially_coupled_signals.html#sphx-glr-auto-examples-plot-artificially-coupled-signals-py"><span class="std std-ref">Generate artificially coupled signals</span></a></span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="One thing you may have noticed, both the fit() and filterfit() methods take as inputs data and ..."><div class="figure align-default" id="id14">
+<div class="sphx-glr-thumbcontainer" tooltip="One thing you may have noticed, both the fit() and filterfit() methods take as inputs data and ..."><div class="figure align-default" id="id15">
 <img alt="../_images/sphx_glr_plot_long_range_coupling_thumb.png" src="../_images/sphx_glr_plot_long_range_coupling_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_long_range_coupling.html#sphx-glr-auto-examples-plot-long-range-coupling-py"><span class="std std-ref">Long-range PAC</span></a></span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_long_range_coupling.html#sphx-glr-auto-examples-plot-long-range-coupling-py"><span class="std std-ref">Long-range PAC</span></a></span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="First, the amplitude is binned according to phase slices (360 degrees/nbins). Then, the PP is d..."><div class="figure align-default" id="id15">
+<div class="sphx-glr-thumbcontainer" tooltip="First, the amplitude is binned according to phase slices (360 degrees/nbins). Then, the PP is d..."><div class="figure align-default" id="id16">
 <img alt="../_images/sphx_glr_plot_preferred_phase_thumb.png" src="../_images/sphx_glr_plot_preferred_phase_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_preferred_phase.html#sphx-glr-auto-examples-plot-preferred-phase-py"><span class="std std-ref">Find the preferred phase (PP)</span></a></span><a class="headerlink" href="#id15" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="plot_preferred_phase.html#sphx-glr-auto-examples-plot-preferred-phase-py"><span class="std std-ref">Find the preferred phase (PP)</span></a></span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
