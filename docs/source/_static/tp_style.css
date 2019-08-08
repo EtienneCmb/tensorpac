@@ -3,3 +3,9 @@ footer {
     margin-left: auto;
     margin-right: auto;
 }
+
+blockquote {
+    padding: 11px 22px;
+    margin: 0 0 22px;
+    font-size: 20px;
+}

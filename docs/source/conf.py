@@ -21,6 +21,7 @@ import os
 import sys
 import sphinx_bootstrap_theme
 import tensorpac
+from sphinx_gallery.sorting import FileNameSortKey, ExplicitOrder
 # import sphinx_gallery
 # import numpydoc
 
@@ -61,6 +62,10 @@ sphinx_gallery_conf = {
     'gallery_dirs': 'auto_examples',
     'backreferences_dir': 'generated',
     'default_thumb_file': 'source/picture/ico.png',
+    'subsection_order': ExplicitOrder(['../../examples/pac',
+                                       '../../examples/erpac',
+                                       '../../examples/stats',
+                                       '../../examples/misc']),
 }
 
 numpydoc_show_class_members = False

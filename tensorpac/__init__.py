@@ -7,7 +7,7 @@ Phase-Amplitude Coupling.
 """
 import logging
 
-from tensorpac import methods, signals, utils  # noqa
+from tensorpac import methods, signals, utils, stats  # noqa
 from tensorpac.pac import (Pac, EventRelatedPac, PreferredPhase)  # noqa
 from tensorpac.io import set_log_level
 # Set 'info' as the default logging level

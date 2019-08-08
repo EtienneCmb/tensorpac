@@ -150,3 +150,21 @@ def progress_bar(value, endvalue, bar_length=20, pre_st=None):
     sys.stdout.write("\r{0} [{1}] {2}%".format(pre_st, arrow + spaces,
                                                int(round(percent * 100))))
     sys.stdout.flush()
+
+
+def is_pandas_installed():
+    """Test if pandas is installed."""
+    try:
+        import pandas  # noqa
+    except:
+        raise IOError("pandas not installed. See https://pandas.pydata.org/"
+                      "pandas-docs/stable/install.html")
+
+
+def is_statsmodels_installed():
+    """Test if statsmodels is installed."""
+    try:
+        import statsmodels  # noqa
+    except:
+        raise IOError("statsmodels not installed. See http://www.statsmodels."
+                      "org/stable/install.html")
