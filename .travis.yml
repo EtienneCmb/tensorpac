@@ -26,7 +26,7 @@ install:
   # Replace dep1 dep2 ... with your dependencies
   - conda create -q -n testenv python=$TRAVIS_PYTHON_VERSION numpy scipy joblib matplotlib
   - source activate testenv
-  - pip install setuptools mne
+  - pip install setuptools mne pandas statsmodels
   - pip install codecov
   - pip install pytest pytest-cov
   - pip install .
