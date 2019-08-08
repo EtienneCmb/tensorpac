@@ -1,0 +1,10 @@
+
+:orphan:
+
+.. _sphx_glr_auto_examples_stats_sg_execution_times:
+
+Computation times
+=================
+**00:01.312** total execution time for **auto_examples_stats** files:
+
+- **00:01.312**: :ref:`sphx_glr_auto_examples_stats_plot_stats_stationary.py` (``plot_stats_stationary.py``)

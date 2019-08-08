@@ -1,0 +1,6 @@
+tensorpac.stats.test\_stationarity
+==================================
+
+.. currentmodule:: tensorpac.stats
+
+.. autofunction:: test_stationarity

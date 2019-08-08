@@ -52,6 +52,18 @@ Generate synthetic signals
    pac_signals_wavelet
    pac_signals_tort
 
+Statistics
+~~~~~~~~~~
+
+:py:mod:`tensorpac.stats`:
+
+.. currentmodule:: tensorpac.stats
+
+.. autosummary::
+   :toctree: generated/
+
+   test_stationarity
+
 
 Individual methods
 ~~~~~~~~~~~~~~~~~~

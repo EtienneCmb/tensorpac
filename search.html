@@ -92,6 +92,10 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.signals.pac_signals_tort.html">tensorpac.signals.pac_signals_tort</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#statistics">Statistics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.stats.test_stationarity.html">tensorpac.stats.test_stationarity</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#individual-methods">Individual methods</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api.html#pac-methods">PAC methods</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.mvl.html">tensorpac.methods.mvl</a></li>
@@ -126,39 +130,57 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_psd.html">Compute and plot the Power Spectrum Density (PSD)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_readme.html">README example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_values.html">Compute p-values</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_erpac_stats.html">Event-Related Phase Amplitude Coupling</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_erpac_stats.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_erpac_stats.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/index.html#phase-amplitude-coupling">Phase-Amplitude coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/pac/plot_readme.html">README example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/pac/plot_pvalues.html">Compute p-values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/pac/plot_compare_surrogates.html">Compare surrogate methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/pac/plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/pac/plot_pac_methods.html">Compare PAC methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/pac/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/pac/plot_long_range_coupling.html">Long-range PAC</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_frequency_vectors.html">Define frequency vectors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_surrogates.html">Compare surrogate methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_erpac.html">Event-Related Phase Amplitude Coupling</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_erpac.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_erpac.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/index.html#event-related-phase-amplitude-coupling">Event-Related Phase-Amplitude coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/erpac/plot_erpac_stats.html">Event-Related Phase Amplitude Coupling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/erpac/plot_erpac_stats.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/erpac/plot_erpac_stats.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_normalizations.html">Compare normalizations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_pac_methods.html">Compare PAC methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_compare_filtering.html">Compare filtering properties</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_plv.html">Compute and plot the Phase Locking Value (PLV)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_plv.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_plv.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_plv.html#compute-and-plot-the-phase-locking-value">Compute and plot the Phase Locking Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/erpac/plot_erpac.html">Event-Related Phase Amplitude Coupling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/erpac/plot_erpac.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/erpac/plot_erpac.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/erpac/plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_long_range_coupling.html">Long-range PAC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="auto_examples/plot_preferred_phase.html">Find the preferred phase (PP)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_preferred_phase.html#generate-synthetic-signals-sake-of-illustration">Generate synthetic signals (sake of illustration)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_preferred_phase.html#extract-phases-amplitudes-and-compute-the-preferred-phase">Extract phases, amplitudes and compute the preferred phase</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/plot_preferred_phase.html#plot-the-preferred-phase">Plot the preferred phase</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/index.html#statistics">Statistics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/stats/plot_stats_stationary.html">Identify stationary time-series using unit root test</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/stats/plot_stats_stationary.html#define-a-random-dataset">Define a random dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/stats/plot_stats_stationary.html#compute-the-statistical-test">Compute the statistical test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/stats/plot_stats_stationary.html#plot-each-trial">Plot each trial</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/index.html#miscellaneous">Miscellaneous</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_psd.html">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_frequency_vectors.html">Define frequency vectors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_plv.html">Compute and plot the Phase Locking Value (PLV)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_plv.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_plv.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_plv.html#compute-and-plot-the-phase-locking-value">Compute and plot the Phase Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_preferred_phase.html">Find the preferred phase (PP)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_preferred_phase.html#generate-synthetic-signals-sake-of-illustration">Generate synthetic signals (sake of illustration)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_preferred_phase.html#extract-phases-amplitudes-and-compute-the-preferred-phase">Extract phases, amplitudes and compute the preferred phase</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_preferred_phase.html#plot-the-preferred-phase">Plot the preferred phase</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
