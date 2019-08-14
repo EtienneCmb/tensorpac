@@ -30,8 +30,6 @@ tensorpac.utils.PLV
       ~PLV.dcomplex
       ~PLV.f_amp
       ~PLV.f_pha
-      ~PLV.filt
-      ~PLV.filtorder
       ~PLV.plv
       ~PLV.width
       ~PLV.xvec

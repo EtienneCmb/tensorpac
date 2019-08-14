@@ -34,8 +34,6 @@ tensorpac.PreferredPhase
       ~PreferredPhase.dcomplex
       ~PreferredPhase.f_amp
       ~PreferredPhase.f_pha
-      ~PreferredPhase.filt
-      ~PreferredPhase.filtorder
       ~PreferredPhase.width
       ~PreferredPhase.xvec
       ~PreferredPhase.yvec

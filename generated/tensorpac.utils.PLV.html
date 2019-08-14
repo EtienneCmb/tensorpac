@@ -227,7 +227,7 @@
 <h1>tensorpac.utils.PLV<a class="headerlink" href="#tensorpac-utils-plv" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="tensorpac.utils.PLV">
-<em class="property">class </em><code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">PLV</code><span class="sig-paren">(</span><em class="sig-param">x, sf, f_pha=[2, 4], dcomplex='hilbert', filt='fir1', cycle=3, filtorder=3, width=7, edges=None, n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PLV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PLV" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">PLV</code><span class="sig-paren">(</span><em class="sig-param">x, sf, f_pha=[2, 4], dcomplex='hilbert', cycle=3, width=7, edges=None, n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PLV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PLV" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Phase Locking Value (PLV).</p>
 <p>The Phase Locking Value (PLV) can be used to measure the phase synchrony
 across trials <a class="footnote-reference brackets" href="#f1" id="id1">1</a></p>
@@ -244,14 +244,8 @@ phase</p>
 <dt><strong>dcomplex</strong><span class="classifier">{‘wavelet’, ‘hilbert’}</span></dt><dd><p>Method for the complex definition. Use either ‘hilbert’ or
 ‘wavelet’.</p>
 </dd>
-<dt><strong>filt</strong><span class="classifier">{‘fir1’, ‘butter’, ‘bessel’}</span></dt><dd><p>Filtering method (only if dcomplex is ‘hilbert’). Choose either
-‘fir1’, ‘butter’ or ‘bessel’</p>
-</dd>
 <dt><strong>cycle</strong><span class="classifier">tuple | 3</span></dt><dd><p>Control the number of cycles for filtering the phase (only if dcomplex
 is ‘hilbert’).</p>
-</dd>
-<dt><strong>filtorder</strong><span class="classifier">int | 3</span></dt><dd><p>Filter order for the Butterworth and Bessel filters (only if
-dcomplex is ‘hilbert’).</p>
 </dd>
 <dt><strong>width</strong><span class="classifier">int | 7</span></dt><dd><p>Width of the Morlet’s wavelet.</p>
 </dd>
@@ -268,7 +262,7 @@ dcomplex is ‘hilbert’).</p>
 </dl>
 <dl class="method">
 <dt id="tensorpac.utils.PLV.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">self, x, sf, f_pha=[2, 4], dcomplex='hilbert', filt='fir1', cycle=3, filtorder=3, width=7, edges=None, n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PLV.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PLV.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">self, x, sf, f_pha=[2, 4], dcomplex='hilbert', cycle=3, width=7, edges=None, n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PLV.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PLV.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Init.</p>
 </dd></dl>
 
@@ -311,12 +305,6 @@ dcomplex is ‘hilbert’).</p>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.f_pha" title="tensorpac.utils.PLV.f_pha"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_pha</span></code></a></p></td>
 <td><p>Vector of phases of shape (n_pha, 2).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.filt" title="tensorpac.utils.PLV.filt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filt</span></code></a></p></td>
-<td><p>Get the filt value.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.filtorder" title="tensorpac.utils.PLV.filtorder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filtorder</span></code></a></p></td>
-<td><p>Get the filtorder value.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.plv" title="tensorpac.utils.PLV.plv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plv</span></code></a></p></td>
 <td><p>Get the plv value.</p></td>
@@ -417,18 +405,6 @@ matplotlib.pyplot.pcolormesh function</p>
 <dt id="tensorpac.utils.PLV.f_pha">
 <em class="property">property </em><code class="sig-name descname">f_pha</code><a class="headerlink" href="#tensorpac.utils.PLV.f_pha" title="Permalink to this definition">¶</a></dt>
 <dd><p>Vector of phases of shape (n_pha, 2).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.utils.PLV.filt">
-<em class="property">property </em><code class="sig-name descname">filt</code><a class="headerlink" href="#tensorpac.utils.PLV.filt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the filt value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.utils.PLV.filtorder">
-<em class="property">property </em><code class="sig-name descname">filtorder</code><a class="headerlink" href="#tensorpac.utils.PLV.filtorder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the filtorder value.</p>
 </dd></dl>
 
 <dl class="method">

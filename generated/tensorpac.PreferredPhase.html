@@ -227,7 +227,7 @@
 <h1>tensorpac.PreferredPhase<a class="headerlink" href="#tensorpac-preferredphase" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="tensorpac.PreferredPhase">
-<em class="property">class </em><code class="sig-prename descclassname">tensorpac.</code><code class="sig-name descname">PreferredPhase</code><span class="sig-paren">(</span><em class="sig-param">f_pha=[2, 4], f_amp=[60, 200], dcomplex='hilbert', filt='fir1', cycle=(3, 6), filtorder=3, width=7, verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#PreferredPhase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.PreferredPhase" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">tensorpac.</code><code class="sig-name descname">PreferredPhase</code><span class="sig-paren">(</span><em class="sig-param">f_pha=[2, 4], f_amp=[60, 200], dcomplex='hilbert', cycle=(3, 6), width=7, verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#PreferredPhase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.PreferredPhase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Preferred Phase (PP).</p>
 <p>The preferred phase is defined as the phase at which the amplitude is
 maximum.</p>
@@ -248,16 +248,10 @@ several forms to define those vectors :</p>
 <dt><strong>dcomplex</strong><span class="classifier">{‘wavelet’, ‘hilbert’}</span></dt><dd><p>Method for the complex definition. Use either ‘hilbert’ or
 ‘wavelet’.</p>
 </dd>
-<dt><strong>filt</strong><span class="classifier">{‘fir1’, ‘butter’, ‘bessel’}</span></dt><dd><p>Filtering method (only if dcomplex is ‘hilbert’). Choose either
-‘fir1’, ‘butter’ or ‘bessel’</p>
-</dd>
 <dt><strong>cycle</strong><span class="classifier">tuple | (3, 6)</span></dt><dd><p>Control the number of cycles for filtering (only if dcomplex is
 ‘hilbert’). Should be a tuple of integers where the first one
 refers to the number of cycles for the phase and the second for the
 amplitude.</p>
-</dd>
-<dt><strong>filtorder</strong><span class="classifier">int | 3</span></dt><dd><p>Filter order for the Butterworth and Bessel filters (only if
-dcomplex is ‘hilbert’).</p>
 </dd>
 <dt><strong>width</strong><span class="classifier">int | 7</span></dt><dd><p>Width of the Morlet’s wavelet.</p>
 </dd>
@@ -266,7 +260,7 @@ dcomplex is ‘hilbert’).</p>
 </dl>
 <dl class="method">
 <dt id="tensorpac.PreferredPhase.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">self, f_pha=[2, 4], f_amp=[60, 200], dcomplex='hilbert', filt='fir1', cycle=(3, 6), filtorder=3, width=7, verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#PreferredPhase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.PreferredPhase.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">self, f_pha=[2, 4], f_amp=[60, 200], dcomplex='hilbert', cycle=(3, 6), width=7, verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#PreferredPhase.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.PreferredPhase.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check and initialize.</p>
 </dd></dl>
 
@@ -321,12 +315,6 @@ dcomplex is ‘hilbert’).</p>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.PreferredPhase.f_pha" title="tensorpac.PreferredPhase.f_pha"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_pha</span></code></a></p></td>
 <td><p>Vector of phases of shape (n_pha, 2).</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.PreferredPhase.filt" title="tensorpac.PreferredPhase.filt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filt</span></code></a></p></td>
-<td><p>Get the filt value.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.PreferredPhase.filtorder" title="tensorpac.PreferredPhase.filtorder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filtorder</span></code></a></p></td>
-<td><p>Get the filtorder value.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.PreferredPhase.width" title="tensorpac.PreferredPhase.width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">width</span></code></a></p></td>
 <td><p>Get the width value.</p></td>
@@ -443,7 +431,7 @@ slices.</p>
 
 <dl class="method">
 <dt id="tensorpac.PreferredPhase.pacplot">
-<code class="sig-name descname">pacplot</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">pac</em>, <em class="sig-param">xvec</em>, <em class="sig-param">yvec</em>, <em class="sig-param">xlabel=''</em>, <em class="sig-param">ylabel=''</em>, <em class="sig-param">cblabel=''</em>, <em class="sig-param">title=''</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">vmin=None</em>, <em class="sig-param">vmax=None</em>, <em class="sig-param">under=None</em>, <em class="sig-param">over=None</em>, <em class="sig-param">bad=None</em>, <em class="sig-param">pvalues=None</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">interp=None</em>, <em class="sig-param">rmaxis=False</em>, <em class="sig-param">dpaxis=False</em>, <em class="sig-param">plotas='imshow'</em>, <em class="sig-param">ncontours=5</em>, <em class="sig-param">levels=None</em>, <em class="sig-param">levelcmap='Reds'</em>, <em class="sig-param">polar=False</em>, <em class="sig-param">y=1.02</em>, <em class="sig-param">subplot=111</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.PreferredPhase.pacplot" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">pacplot</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">pac</em>, <em class="sig-param">xvec</em>, <em class="sig-param">yvec</em>, <em class="sig-param">xlabel=''</em>, <em class="sig-param">ylabel=''</em>, <em class="sig-param">cblabel=''</em>, <em class="sig-param">title=''</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">vmin=None</em>, <em class="sig-param">vmax=None</em>, <em class="sig-param">under=None</em>, <em class="sig-param">over=None</em>, <em class="sig-param">bad=None</em>, <em class="sig-param">pvalues=None</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">interp=None</em>, <em class="sig-param">rmaxis=False</em>, <em class="sig-param">dpaxis=False</em>, <em class="sig-param">plotas='imshow'</em>, <em class="sig-param">ncontours=5</em>, <em class="sig-param">levels=None</em>, <em class="sig-param">levelcmap='Reds'</em>, <em class="sig-param">polar=False</em>, <em class="sig-param">colorbar=True</em>, <em class="sig-param">y=1.02</em>, <em class="sig-param">subplot=111</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.PreferredPhase.pacplot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Main plotting pac function.</p>
 <p>This method can be used to plot any 2D array.</p>
 <dl class="field-list simple">
@@ -587,18 +575,6 @@ a polar (circle) representation.</p>
 <dt id="tensorpac.PreferredPhase.f_pha">
 <em class="property">property </em><code class="sig-name descname">f_pha</code><a class="headerlink" href="#tensorpac.PreferredPhase.f_pha" title="Permalink to this definition">¶</a></dt>
 <dd><p>Vector of phases of shape (n_pha, 2).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.PreferredPhase.filt">
-<em class="property">property </em><code class="sig-name descname">filt</code><a class="headerlink" href="#tensorpac.PreferredPhase.filt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the filt value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.PreferredPhase.filtorder">
-<em class="property">property </em><code class="sig-name descname">filtorder</code><a class="headerlink" href="#tensorpac.PreferredPhase.filtorder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the filtorder value.</p>
 </dd></dl>
 
 <dl class="method">

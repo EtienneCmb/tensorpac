@@ -35,8 +35,6 @@ tensorpac.EventRelatedPac
       ~EventRelatedPac.erpac
       ~EventRelatedPac.f_amp
       ~EventRelatedPac.f_pha
-      ~EventRelatedPac.filt
-      ~EventRelatedPac.filtorder
       ~EventRelatedPac.pvalues
       ~EventRelatedPac.surrogates
       ~EventRelatedPac.width

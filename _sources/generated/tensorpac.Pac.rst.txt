@@ -36,8 +36,6 @@ tensorpac.Pac
       ~Pac.dcomplex
       ~Pac.f_amp
       ~Pac.f_pha
-      ~Pac.filt
-      ~Pac.filtorder
       ~Pac.idpac
       ~Pac.pac
       ~Pac.pvalues
