@@ -3,7 +3,7 @@ import numpy as np
 from tensorpac.methods.meth_pac import get_pac_fcn, pacstr
 from tensorpac.methods.meth_surrogates import compute_surrogates, normalize
 from tensorpac.methods.meth_pp import preferred_phase
-from tensorpac.methods.meth_erpac import erpac, ergcpac
+from tensorpac.methods.meth_erpac import erpac, ergcpac, _ergcpac_perm
 
 n_pac_range = range(1, 7)
 n_sur_range = range(4)
@@ -96,6 +96,9 @@ class TestMethods(object):
         ergc_circ = ergcpac(_pha, _amp, smooth=None)
         assert ergc_circ.shape == (n_amp_freqs, n_pha_freqs, n_times)
         ergcpac(_pha, _amp, smooth=5)
+        # test erpac permutations
+        ergc_perm = _ergcpac_perm(_pha, _amp, smooth=None, n_perm=n_perm)
+        assert ergc_perm.shape == (n_perm, n_amp_freqs, n_pha_freqs, n_times)
 
     def test_preferred_phase(self):
         """Test preferred phase method."""
