@@ -1,1 +1,0 @@
-"""Illustrative PAC example."""

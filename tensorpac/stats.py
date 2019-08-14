@@ -73,12 +73,3 @@ def test_stationarity(x, p=.05):
     logger.info(f"    {n_signi}/{n_epochs} epochs were found as significantly "
                 f"stationary at p={p}")
     return df
-
-
-if __name__ == '__main__':
-    x = np.random.rand(10, 1000)
-    x[4:7, 100:200] *= 100
-    x[1, :] += 2
-    x[0, :] += np.arange(1000) / 1000
-    df = test_stationarity(x, p=.01)
-    print(df)

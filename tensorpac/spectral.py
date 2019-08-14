@@ -54,9 +54,9 @@ def spectral(x, sf, f, stype, dcomplex, filt, filtorder, cycle, width,
         xf = Parallel(n_jobs=n_jobs, **CONFIG['JOBLIB_CFG'])(delayed(filtdata)(
             x, sf, f[k, :], filt, cycle, filtorder) for k in nf)
         # Use hilbert for the complex decomposition :
-        xf = np.asarray(xf)
+        xd = np.asarray(xf)
         if stype is not None:
-            xd = hilbertm(xf)
+            xd = hilbertm(xd)
     elif dcomplex is 'wavelet':
         f = f.mean(1)  # centered frequencies
         xd = Parallel(n_jobs=n_jobs, **CONFIG['JOBLIB_CFG'])(delayed(morlet)(
