@@ -28,7 +28,6 @@ p = Pac(idpac=(4, 0, 0), f_pha=(5, 14, 2, .3), f_amp=(80, 120, 2, 1),
 
 plt.figure(figsize=(18, 9))
 # Define several cycle options for the fir1 (eegfilt like) filter :
-p.filt = 'fir1'
 print('Filtering with fir1 filter')
 for i, k in enumerate([(1, 3), (2, 4), (3, 6)]):
     p.cycle = k

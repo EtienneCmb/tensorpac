@@ -232,17 +232,11 @@ class BinAmplitude(_PacObj):
     dcomplex : {'wavelet', 'hilbert'}
         Method for the complex definition. Use either 'hilbert' or
         'wavelet'.
-    filt : {'fir1', 'butter', 'bessel'}
-        Filtering method (only if dcomplex is 'hilbert'). Choose either
-        'fir1', 'butter' or 'bessel'
     cycle : tuple | (3, 6)
         Control the number of cycles for filtering (only if dcomplex is
         'hilbert'). Should be a tuple of integers where the first one
         refers to the number of cycles for the phase and the second for the
         amplitude [#f5]_.
-    filtorder : int | 3
-        Filter order for the Butterworth and Bessel filters (only if
-        dcomplex is 'hilbert').
     width : int | 7
         Width of the Morlet's wavelet.
     edges : int | None
@@ -250,12 +244,11 @@ class BinAmplitude(_PacObj):
     """
 
     def __init__(self, x, sf, f_pha=[2, 4], f_amp=[60, 80], n_bins=18,
-                 dcomplex='hilbert', filt='fir1', cycle=(3, 6), filtorder=3,
-                 width=7, edges=None, n_jobs=-1):
+                 dcomplex='hilbert', cycle=(3, 6), width=7, edges=None,
+                 n_jobs=-1):
         """Init."""
         _PacObj.__init__(self, f_pha=f_pha, f_amp=f_amp, dcomplex=dcomplex,
-                         filt=filt, cycle=cycle, filtorder=filtorder,
-                         width=width)
+                         cycle=cycle, width=width)
         # check
         x = np.atleast_2d(x)
         assert x.ndim <= 2, ("`x` input should be an array of shape "
@@ -339,15 +332,9 @@ class PLV(_PacObj):
     dcomplex : {'wavelet', 'hilbert'}
         Method for the complex definition. Use either 'hilbert' or
         'wavelet'.
-    filt : {'fir1', 'butter', 'bessel'}
-        Filtering method (only if dcomplex is 'hilbert'). Choose either
-        'fir1', 'butter' or 'bessel'
     cycle : tuple | 3
         Control the number of cycles for filtering the phase (only if dcomplex
         is 'hilbert').
-    filtorder : int | 3
-        Filter order for the Butterworth and Bessel filters (only if
-        dcomplex is 'hilbert').
     width : int | 7
         Width of the Morlet's wavelet.
     edges : int | None
@@ -359,12 +346,11 @@ class PLV(_PacObj):
        1002/(SICI)1097-0193(1999)8:4%3C194::AID-HBM4%3E3.0.CO;2-C>`_
     """
 
-    def __init__(self, x, sf, f_pha=[2, 4], dcomplex='hilbert', filt='fir1',
-                 cycle=3, filtorder=3, width=7, edges=None, n_jobs=-1):
+    def __init__(self, x, sf, f_pha=[2, 4], dcomplex='hilbert', cycle=3,
+                 width=7, edges=None, n_jobs=-1):
         """Init."""
         _PacObj.__init__(self, f_pha=f_pha, f_amp=[60, 80], dcomplex=dcomplex,
-                         filt=filt, cycle=(cycle, 6), filtorder=filtorder,
-                         width=width)
+                         cycle=(cycle, 6), width=width)
         # check
         x = np.atleast_2d(x)
         assert x.ndim <= 2, ("`x` input should be an array of shape "

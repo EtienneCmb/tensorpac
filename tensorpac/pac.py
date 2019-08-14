@@ -19,13 +19,13 @@ class _PacObj(object):
     """Main class for relative PAC objects."""
 
     def __init__(self, f_pha=[2, 4], f_amp=[60, 200], dcomplex='hilbert',
-                 filt='fir1', cycle=(3, 6), filtorder=3, width=7):
+                 cycle=(3, 6), width=7):
         # Frequency checking :
         from tensorpac.utils import pac_vec
         self._f_pha, self._f_amp = pac_vec(f_pha, f_amp)
         self._xvec, self._yvec = self.f_pha.mean(1), self.f_amp.mean(1)
         # Check spectral properties :
-        self._speccheck(filt, dcomplex, filtorder, cycle, width)
+        self._speccheck(dcomplex, cycle, width)
 
     def __str__(self):
         """String representation."""
@@ -90,25 +90,15 @@ class _PacObj(object):
         if ftype is 'phase':
             tosend = 'pha' if not keepfilt else None
             xfilt = spectral(x, sf, self.f_pha, tosend, self._dcomplex,
-                             self._filt, self._filtorder, self._cycle[0],
-                             self._width, n_jobs)
+                             self._cycle[0], self._width, n_jobs)
         elif ftype is 'amplitude':
             tosend = 'amp' if not keepfilt else None
             xfilt = spectral(x, sf, self.f_amp, tosend, self._dcomplex,
-                             self._filt, self._filtorder, self._cycle[1],
-                             self._width, n_jobs)
+                             self._cycle[1], self._width, n_jobs)
         return xfilt[..., edges]
 
-    def _speccheck(self, filt=None, dcomplex=None, filtorder=None, cycle=None,
-                   width=None):
+    def _speccheck(self, dcomplex=None, cycle=None, width=None):
         """Check spectral parameters."""
-        # Check the filter name :
-        if filt is not None:
-            if filt not in ['fir1', 'butter', 'bessel', 'mne']:
-                raise ValueError("filt must either be 'fir1', 'butter' or "
-                                 "'bessel'")
-            else:
-                self._filt = filt
         # Check cycle :
         if cycle is not None:
             cycle = np.asarray(cycle)
@@ -123,9 +113,6 @@ class _PacObj(object):
                                  "'wavelet'.")
             else:
                 self._dcomplex = dcomplex
-        # Convert filtorder :
-        if filtorder is not None:
-            self._filtorder = int(filtorder)
         # Convert Morlet's width :
         if width is not None:
             self._width = int(width)
@@ -168,17 +155,6 @@ class _PacObj(object):
         """Vector of amplitudes of shape (n_amp,) use for plotting."""
         return self._yvec
 
-    # ----------- FILT -----------
-    @property
-    def filt(self):
-        """Get the filt value."""
-        return self._filt
-
-    @filt.setter
-    def filt(self, value):
-        """Set filt value."""
-        self._speccheck(filt=value)
-
     # ----------- DCOMPLEX -----------
     @property
     def dcomplex(self):
@@ -200,17 +176,6 @@ class _PacObj(object):
     def cycle(self, value):
         """Set cycle value."""
         self._speccheck(cycle=value)
-
-    # ----------- FILTORDER -----------
-    @property
-    def filtorder(self):
-        """Get the filtorder value."""
-        return self._filtorder
-
-    @filtorder.setter
-    def filtorder(self, value):
-        """Set filtorder value."""
-        self._speccheck(filtorder=value)
 
     # ----------- WIDTH -----------
     @property
@@ -277,17 +242,11 @@ class Pac(_PacObj, _PacPlt):
     dcomplex : {'wavelet', 'hilbert'}
         Method for the complex definition. Use either 'hilbert' or
         'wavelet'.
-    filt : {'fir1', 'butter', 'bessel'}
-        Filtering method (only if dcomplex is 'hilbert'). Choose either
-        'fir1', 'butter' or 'bessel'
     cycle : tuple | (3, 6)
         Control the number of cycles for filtering (only if dcomplex is
         'hilbert'). Should be a tuple of integers where the first one
         refers to the number of cycles for the phase and the second for the
         amplitude [#f5]_.
-    filtorder : int | 3
-        Filter order for the Butterworth and Bessel filters (only if
-        dcomplex is 'hilbert').
     width : int | 7
         Width of the Morlet's wavelet.
     n_bins : int | 18
@@ -310,14 +269,13 @@ class Pac(_PacObj, _PacPlt):
     """
 
     def __init__(self, idpac=(1, 2, 3), f_pha=[2, 4], f_amp=[60, 200],
-                 dcomplex='hilbert', filt='fir1', cycle=(3, 6), filtorder=3,
-                 width=7, n_bins=18, verbose=None):
+                 dcomplex='hilbert', cycle=(3, 6), width=7, n_bins=18,
+                 verbose=None):
         """Check and initialize."""
         set_log_level(verbose)
         self._idcheck(idpac)
         _PacObj.__init__(self, f_pha=f_pha, f_amp=f_amp, dcomplex=dcomplex,
-                         filt=filt, cycle=cycle, filtorder=filtorder,
-                         width=width)
+                         cycle=cycle, width=width)
         _PacPlt.__init__(self)
         self.n_bins = int(n_bins)
         logger.info("Phase Amplitude Coupling object defined")
@@ -568,29 +526,21 @@ class EventRelatedPac(_PacObj, _PacVisual):
     dcomplex : {'wavelet', 'hilbert'}
         Method for the complex definition. Use either 'hilbert' or
         'wavelet'.
-    filt : {'fir1', 'butter', 'bessel'}
-        Filtering method (only if dcomplex is 'hilbert'). Choose either
-        'fir1', 'butter' or 'bessel'
     cycle : tuple | (3, 6)
         Control the number of cycles for filtering (only if dcomplex is
         'hilbert'). Should be a tuple of integers where the first one
         refers to the number of cycles for the phase and the second for the
         amplitude.
-    filtorder : int | 3
-        Filter order for the Butterworth and Bessel filters (only if
-        dcomplex is 'hilbert').
     width : int | 7
         Width of the Morlet's wavelet.
     """
 
     def __init__(self, f_pha=[2, 4], f_amp=[60, 200], dcomplex='hilbert',
-                 filt='fir1', cycle=(3, 6), filtorder=3, width=7,
-                 verbose=None):
+                 cycle=(3, 6), width=7, verbose=None):
         """Check and initialize."""
         set_log_level(verbose)
         _PacObj.__init__(self, f_pha=f_pha, f_amp=f_amp, dcomplex=dcomplex,
-                         filt=filt, cycle=cycle, filtorder=filtorder,
-                         width=width)
+                         cycle=cycle, width=width)
         _PacPlt.__init__(self)
         logger.info("Event Related PAC object defined")
 
@@ -776,29 +726,21 @@ class PreferredPhase(_PacObj, _PolarPlt):
     dcomplex : {'wavelet', 'hilbert'}
         Method for the complex definition. Use either 'hilbert' or
         'wavelet'.
-    filt : {'fir1', 'butter', 'bessel'}
-        Filtering method (only if dcomplex is 'hilbert'). Choose either
-        'fir1', 'butter' or 'bessel'
     cycle : tuple | (3, 6)
         Control the number of cycles for filtering (only if dcomplex is
         'hilbert'). Should be a tuple of integers where the first one
         refers to the number of cycles for the phase and the second for the
         amplitude.
-    filtorder : int | 3
-        Filter order for the Butterworth and Bessel filters (only if
-        dcomplex is 'hilbert').
     width : int | 7
         Width of the Morlet's wavelet.
     """
 
     def __init__(self, f_pha=[2, 4], f_amp=[60, 200], dcomplex='hilbert',
-                 filt='fir1', cycle=(3, 6), filtorder=3, width=7,
-                 verbose=None):
+                 cycle=(3, 6), width=7, verbose=None):
         """Check and initialize."""
         set_log_level(verbose)
         _PacObj.__init__(self, f_pha=f_pha, f_amp=f_amp, dcomplex=dcomplex,
-                         filt=filt, cycle=cycle, filtorder=filtorder,
-                         width=width)
+                         cycle=cycle, width=width)
         _PacPlt.__init__(self)
         logger.info("Preferred phase object defined")
         self.method = 'Preferred-Phase (PP)'

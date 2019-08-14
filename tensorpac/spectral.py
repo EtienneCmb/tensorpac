@@ -18,8 +18,7 @@ def hilbertm(x):
     return hilbert(x, fc, axis=-1)[..., 0:n_pts]
 
 
-def spectral(x, sf, f, stype, dcomplex, filt, filtorder, cycle, width,
-             n_jobs):
+def spectral(x, sf, f, stype, dcomplex, cycle, width, n_jobs):
     """Extract spectral informations from data.
 
     Parameters
@@ -34,11 +33,6 @@ def spectral(x, sf, f, stype, dcomplex, filt, filtorder, cycle, width,
         Spectral informations to extract (use either 'pha' or 'amp')
     dcomplex : string
         Complex decomposition type. Use either 'hilbert' or 'wavelet'
-    filt : string
-        Name of the filter to use (only if dcomplex is 'hilbert'). Use
-        either 'eegfilt', 'butter' or 'bessel'.
-    filtorder : int
-        Order of the filter (only if dcomplex is 'hilbert')
     cycle : int
         Number of cycles to use for fir1 filtering.
     width : int
@@ -52,7 +46,7 @@ def spectral(x, sf, f, stype, dcomplex, filt, filtorder, cycle, width,
         # Filt each time series :
         nf = range(f.shape[0])
         xf = Parallel(n_jobs=n_jobs, **CONFIG['JOBLIB_CFG'])(delayed(filtdata)(
-            x, sf, f[k, :], filt, cycle, filtorder) for k in nf)
+            x, sf, f[k, :], cycle) for k in nf)
         # Use hilbert for the complex decomposition :
         xd = np.asarray(xf)
         if stype is not None:

@@ -10,7 +10,7 @@ from scipy.signal import filtfilt, butter, bessel
 ###############################################################################
 
 
-def filtdata(x, sf, f, filt, cycle, filtorder):
+def filtdata(x, sf, f, cycle):
     """Filt the data using a forward/backward filter to avoid phase shifting.
 
     Parameters
@@ -21,30 +21,11 @@ def filtdata(x, sf, f, filt, cycle, filtorder):
         Sampling frequency
     f : array_like
         Frequency vector of shape (N, 2)
-    filt : string
-        Name of the filter to use (only if dcomplex is 'hilbert'). Use
-        either 'eegfilt', 'butter' or 'bessel'.
-    filtorder : int
-        Order of the filter (only if dcomplex is 'hilbert')
     cycle : int
         Number of cycles to use for fir1 filtering.
     """
-    if filt == 'mne':
-        from mne.filter import filter_data
-        bandwidth = f[1] - f[0]
-        return filter_data(x, sf, f[0], f[1], method='iir', verbose=False,
-                           n_jobs=1, l_trans_bandwidth=bandwidth / 4.,
-                           h_trans_bandwidth=bandwidth / 4.)
-    elif filt == 'fir1':
-        forder = fir_order(sf, x.shape[-1], f[0], cycle=cycle)
-        b, a = fir1(forder, f / (sf / 2.))
-    elif filt == 'butter':
-        b, a = butter(filtorder, f / (sf / 2.), btype='bandpass')
-        forder = None
-    elif filt == 'bessel':
-        b, a = bessel(filtorder, f / (sf / 2.), btype='bandpass')
-        forder = None
-
+    forder = fir_order(sf, x.shape[-1], f[0], cycle=cycle)
+    b, a = fir1(forder, f / (sf / 2.))
     return filtfilt(b, a, x, padlen=forder, axis=-1)
 
 ###############################################################################

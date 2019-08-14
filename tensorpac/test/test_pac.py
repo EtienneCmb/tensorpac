@@ -21,26 +21,19 @@ class TestPac(object):
     def test_filtering_definition(self):
         """Test filtering defintion."""
         dcomplex = ['hilbert', 'wavelet']
-        filt = ['butter', 'fir1', 'bessel']
         cycle = (12, 24)
-        filtorder = 4
         width = 12
         for k in dcomplex:
-            for i in filt:
-                Pac(dcomplex=k, filt=i, filtorder=filtorder, cycle=cycle,
-                    width=width)
+            Pac(dcomplex=k, cycle=cycle, width=width)
 
     def test_spectral(self):
         """Test filtering using the provided filters."""
         data = np.random.rand(3, 1000)
         p = Pac()
         dcomplex = ['hilbert', 'wavelet']
-        filt = ['butter', 'fir1', 'bessel']
         for k in dcomplex:
-            for i in filt:
-                p.dcomplex = k
-                p.filt = i
-                p.filter(1024, data, n_jobs=1)
+            p.dcomplex = k
+            p.filter(1024, data, n_jobs=1)
 
     def test_filter(self):
         """Test filter method."""
@@ -77,18 +70,12 @@ class TestPac(object):
         # Idpac :
         p.idpac
         p.idpac = (2, 1, 1)
-        # Filt :
-        p.filt
-        p.filt = 'butter'
         # Dcomplex :
         p.dcomplex
         p.dcomplex = 'wavelet'
         # Cycle :
         p.cycle
         p.cycle = (12, 24)
-        # Filtorder :
-        p.filtorder
-        p.filtorder = 6
         # Width :
         p.width
         p.width = 12
