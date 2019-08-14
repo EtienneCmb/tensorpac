@@ -40,10 +40,12 @@ install:
 
 script:
     - if [[ "${TEST}" == "standard" ]]; then
-          py.test --cov;
+          pytest --cov;
       elif [[ "${TEST}" == "flake" ]]; then
           flake8;
       fi;
 
 after_success:
-  - codecov
+    - if [ "${TEST}" == "standard" ]; then
+        codecov;
+      fi

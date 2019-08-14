@@ -1,6 +1,7 @@
 """Test PAC methods."""
 import numpy as np
 from tensorpac.methods.meth_pac import get_pac_fcn, pacstr
+from tensorpac.methods.meth_surrogates import compute_surrogates, normalize
 from tensorpac.methods.meth_pp import preferred_phase
 
 n_pac_range = range(1, 7)
@@ -13,6 +14,7 @@ n_pha_freqs = 2
 n_amp_freqs = 3
 n_bins = 18
 pval = .05
+n_perm = 2
 
 pha = np.random.uniform(-np.pi, np.pi, (n_pha_freqs, n_epochs, n_times))
 amp = np.random.rand(n_amp_freqs, n_epochs, n_times)
@@ -64,6 +66,15 @@ class TestMethods(object):
             else:
                 pac = meth(pha, amp)
             assert pac.shape == (n_amp_freqs, n_pha_freqs, n_epochs)
+
+    def test_surrogates(self):
+        """Test computing surrogates."""
+        fcn = get_pac_fcn(1, n_bins, pval)
+        s_shape = (n_perm, n_amp_freqs, n_pha_freqs, n_epochs)
+        for s in n_sur_range:
+            surro = compute_surrogates(pha, amp, s, fcn, n_perm, 1)
+            print(s)
+            assert (surro is None) or (surro.shape == s_shape)
 
     def test_preferred_phase(self):
         """Test preferred phase method."""
