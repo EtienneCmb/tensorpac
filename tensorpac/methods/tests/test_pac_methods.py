@@ -3,10 +3,11 @@ import numpy as np
 from tensorpac.methods.meth_pac import get_pac_fcn, pacstr
 from tensorpac.methods.meth_surrogates import compute_surrogates, normalize
 from tensorpac.methods.meth_pp import preferred_phase
+from tensorpac.methods.meth_erpac import erpac, ergcpac
 
 n_pac_range = range(1, 7)
 n_sur_range = range(4)
-n_norm_range = range(5)
+n_norm_range = range(1, 5)
 
 n_epochs = 5
 n_times = 1000
@@ -73,8 +74,28 @@ class TestMethods(object):
         s_shape = (n_perm, n_amp_freqs, n_pha_freqs, n_epochs)
         for s in n_sur_range:
             surro = compute_surrogates(pha, amp, s, fcn, n_perm, 1)
-            print(s)
             assert (surro is None) or (surro.shape == s_shape)
+
+    def test_normalize(self):
+        """Test normalization."""
+        for k in n_norm_range:
+            true_pac = np.random.rand(n_amp_freqs, n_pha_freqs)
+            perm_pac = np.random.rand(n_perm, n_amp_freqs, n_pha_freqs)
+            normalize(k, true_pac, perm_pac)
+
+    def test_erpac(self):
+        """Test event-related PAC."""
+        er_pha, er_amp = np.moveaxis(pha, -2, -1), np.moveaxis(amp, -2, -1)
+        # circular
+        er_circ, pv_circ = erpac(er_pha, er_amp)
+        assert er_circ.shape == pv_circ.shape
+        assert er_circ.shape == (n_amp_freqs, n_pha_freqs, n_times)
+        # gaussian copula
+        _pha = np.stack([np.sin(er_pha), np.cos(er_pha)], axis=-2)
+        _amp = er_amp[..., np.newaxis, :]
+        ergc_circ = ergcpac(_pha, _amp, smooth=None)
+        assert ergc_circ.shape == (n_amp_freqs, n_pha_freqs, n_times)
+        ergcpac(_pha, _amp, smooth=5)
 
     def test_preferred_phase(self):
         """Test preferred phase method."""
