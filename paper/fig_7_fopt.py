@@ -29,6 +29,7 @@ p = Pac(idpac=(6, 0, 0), f_pha=[5, 7], f_amp=trif)
 pha = p.filter(sf, data, ftype='phase', n_jobs=1)
 amp = p.filter(sf, data, ftype='amplitude', n_jobs=1)
 pac = p.fit(pha, amp, n_jobs=-1).mean(-1).squeeze()
+0/0
 
 best_f = trif[pac.argmax()]
 
@@ -50,7 +51,7 @@ ax = plt.gca()
 ax.text(*tuple(cfg["nb_pos"]), 'B', transform=ax.transAxes, **cfg["nb_cfg"])
 
 plt.tight_layout()
-plt.savefig(f"{cfg['path']}/Fig7.png", dpi=300, bbox_inches='tight')
+# plt.savefig(f"{cfg['path']}/Fig7.png", dpi=300, bbox_inches='tight')
 
 print("*" * 79)
 print(f"BEST FREQUENCY RANGE : {trif[pac.argmax()]}")
