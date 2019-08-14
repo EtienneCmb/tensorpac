@@ -255,10 +255,10 @@ and xamp have to be set to data.</p>
         <span class="n">dcomplex</span><span class="o">=</span><span class="s1">&#39;wavelet&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="c1"># Now, compute PAC by taking the phase of the first dataset and the amplitude</span>
 <span class="c1"># of the second</span>
-<span class="n">xpac12</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filterfit</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">xpac12</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filterfit</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
 <span class="c1"># Invert by taking the phase of the second dataset and the amplitude of the</span>
 <span class="c1">#  first one :</span>
-<span class="n">xpac21</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filterfit</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">xpac21</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filterfit</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">d1</span><span class="p">)</span>
 
 <span class="c1"># Plot signals and PAC :</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
@@ -286,7 +286,7 @@ and xamp have to be set to data.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  4.575 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  5.885 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-pac-plot-long-range-coupling-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/1f868e2202885182299b633a3152df5a/plot_long_range_coupling.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_long_range_coupling.py</span></code></a></p>

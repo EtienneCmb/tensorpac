@@ -78,7 +78,7 @@ Define an ERPAC object and extract the phase and the amplitude
     p = EventRelatedPac(f_pha=[9, 11], f_amp=(60, 140, 5, 1))
 
     # extract phases and amplitudes
-    erpac = p.filterfit(sf, x, method='gc', n_perm=20, n_jobs=-1).squeeze()
+    erpac = p.filterfit(sf, x, method='gc', n_perm=20).squeeze()
 
     pvalues = p.pvalues.squeeze()
     erpac[pvalues > .05] = np.nan
@@ -103,7 +103,7 @@ Define an ERPAC object and extract the phase and the amplitude
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  28.694 seconds)
+   **Total running time of the script:** ( 0 minutes  33.960 seconds)
 
 
 .. _sphx_glr_download_auto_examples_erpac_plot_erpac_stats.py:

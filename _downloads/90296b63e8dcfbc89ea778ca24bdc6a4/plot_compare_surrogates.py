@@ -27,8 +27,8 @@ p = Pac(f_pha=(3, 10, 1, .2), f_amp=(50, 90, 5, 1), dcomplex='wavelet',
 
 # Now, we want to compare PAC methods, hence it's useless to systematically
 # filter the data. So we extract the phase and the amplitude only once :
-phases = p.filter(sf, data, ftype='phase', n_jobs=1)
-amplitudes = p.filter(sf, data, ftype='amplitude', n_jobs=1)
+phases = p.filter(sf, data, ftype='phase')
+amplitudes = p.filter(sf, data, ftype='amplitude')
 
 plt.figure(figsize=(16, 12))
 for i, k in enumerate(range(4)):

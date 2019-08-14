@@ -49,7 +49,7 @@ time = np.arange(x.shape[1]) / sf
 p = EventRelatedPac(f_pha=[9, 11], f_amp=(60, 140, 5, 1))
 
 # extract phases and amplitudes
-erpac = p.filterfit(sf, x, method='gc', n_perm=20, n_jobs=-1).squeeze()
+erpac = p.filterfit(sf, x, method='gc', n_perm=20).squeeze()
 
 pvalues = p.pvalues.squeeze()
 erpac[pvalues > .05] = np.nan
