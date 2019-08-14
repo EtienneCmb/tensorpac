@@ -31,7 +31,8 @@ install:
   - pip install pytest pytest-cov
   - pip install .
 
-script: bash build_install.sh
+script:
+  - py.test --cov
 
 after_success:
   - codecov
