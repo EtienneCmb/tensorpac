@@ -1,13 +1,14 @@
 """Test PAC methods."""
 import numpy as np
 from tensorpac.methods.meth_pac import get_pac_fcn, pacstr
+from tensorpac.methods.meth_pp import preferred_phase
 
 n_pac_range = range(1, 7)
 n_sur_range = range(4)
 n_norm_range = range(5)
 
 n_epochs = 5
-n_times = 100
+n_times = 1000
 n_pha_freqs = 2
 n_amp_freqs = 3
 n_bins = 18
@@ -63,3 +64,10 @@ class TestMethods(object):
             else:
                 pac = meth(pha, amp)
             assert pac.shape == (n_amp_freqs, n_pha_freqs, n_epochs)
+
+    def test_preferred_phase(self):
+        """Test preferred phase method."""
+        bin_amp, pp, fvec = preferred_phase(pha, amp, n_bins)
+        assert bin_amp.shape == (n_bins, n_amp_freqs, n_pha_freqs, n_epochs)
+        assert pp.shape == (n_amp_freqs, n_pha_freqs, n_epochs)
+        assert fvec.shape == (n_bins,)
