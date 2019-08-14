@@ -36,7 +36,7 @@ install:
   - pip install codecov
   - pip install pytest pytest-cov
   - pip install flake8 pep8-naming;
-  - pip install .
+  - pip install -e .
 
 script:
     - if [[ "${TEST}" == "standard" ]]; then
