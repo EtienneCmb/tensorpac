@@ -16,8 +16,8 @@ class _PacVisual(object):
                 title='', cmap='viridis', vmin=None, vmax=None, under=None,
                 over=None, bad=None, pvalues=None, p=0.05, interp=None,
                 rmaxis=False, dpaxis=False, plotas='imshow', ncontours=5,
-                levels=None, levelcmap='Reds', polar=False, y=1.02,
-                subplot=111):
+                levels=None, levelcmap='Reds', polar=False, colorbar=True,
+                y=1.02, subplot=111):
         """Main plotting pac function.
 
         This method can be used to plot any 2D array.
@@ -149,9 +149,10 @@ class _PacVisual(object):
         plt.clim(vmin=vmin, vmax=vmax)
 
         # Colorbar
-        cb = plt.colorbar(im, shrink=0.7, pad=0.01, aspect=10)
-        cb.set_label(cblabel)
-        cb.outline.set_visible(False)
+        if colorbar:
+            cb = plt.colorbar(im, shrink=0.7, pad=0.01, aspect=10)
+            cb.set_label(cblabel)
+            cb.outline.set_visible(False)
         ax = plt.gca()
 
         # Remove axis :
@@ -167,6 +168,12 @@ class _PacVisual(object):
                 if loc in ['left', 'bottom']:
                     spine.set_position(('outward', 10))
                     spine.set_smart_bounds(True)
+
+        if polar:
+            ax.grid(True)
+            ax.set_rlabel_position(0)
+            ax.set_thetamin(0)
+            ax.set_thetamax(360)
 
         return plt.gca()
 
