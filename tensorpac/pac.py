@@ -416,7 +416,7 @@ class Pac(_PacObj, _PacPlt):
         # Extract phase (npha, ...) and amplitude (namp, ...) :
         logger.info(f"    Extract phases (n_pha={len(self.xvec)}) and "
                     f"amplitudes (n_amps={len(self.yvec)})")
-        kw = dict(keepfilt=False, edges=edges, n_jobs=n_jobs)
+        kw = dict(keepfilt=False, edges=edges, n_jobs=1)
         pha = self.filter(sf, x_pha, 'phase', **kw)
         amp = self.filter(sf, x_amp, 'amplitude', **kw)
 
@@ -654,7 +654,7 @@ class EventRelatedPac(_PacObj, _PacVisual):
         # extract phases and amplitudes
         logger.info(f"    Extract phases (n_pha={len(self.xvec)}) and "
                     f"amplitudes (n_amps={len(self.yvec)})")
-        kw = dict(keepfilt=False, edges=edges, n_jobs=n_jobs)
+        kw = dict(keepfilt=False, edges=edges, n_jobs=1)
         pha = self.filter(sf, x_pha, ftype='phase', **kw)
         amp = self.filter(sf, x_amp, ftype='amplitude', **kw)
         # compute erpac
@@ -809,7 +809,7 @@ class PreferredPhase(_PacObj, _PolarPlt):
         # extract phases and amplitudes
         logger.info(f"    Extract phases (n_pha={len(self.xvec)}) and "
                     f"amplitudes (n_amps={len(self.yvec)})")
-        kw = dict(keepfilt=False, edges=edges, n_jobs=n_jobs)
+        kw = dict(keepfilt=False, edges=edges, n_jobs=1)
         pha = self.filter(sf, x_pha, ftype='phase', **kw)
         amp = self.filter(sf, x_amp, ftype='amplitude', **kw)
         # compute pp
