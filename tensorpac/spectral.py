@@ -4,8 +4,6 @@ from joblib import Parallel, delayed
 from scipy.signal import hilbert, filtfilt
 from scipy import fftpack
 
-from functools import partial
-
 from tensorpac.config import CONFIG
 
 
@@ -53,11 +51,9 @@ def spectral(x, sf, f, stype, dcomplex, cycle, width, n_jobs):
             forder[k] = fir_order(sf, x.shape[-1], f[k, 0], cycle=cycle)
             _b, a[k] = fir1(forder[k], f[k, :] / (sf / 2.))
             b += [_b]
-        def para(k):
-            return filtfilt(b[k], a[k], x, padlen=forder[k], axis=-1)
         # Filt each time series :
-        xf = Parallel(n_jobs=n_jobs, **CONFIG['JOBLIB_CFG'])(delayed(para)(
-            k) for k in range(n_freqs))
+        xf = Parallel(n_jobs=n_jobs, **CONFIG['JOBLIB_CFG'])(delayed(filtfilt)(
+            b[k], a[k], x, padlen=forder[k], axis=-1) for k in range(n_freqs))
         # Use hilbert for the complex decomposition :
         xd = np.asarray(xf)
         if stype is not None:
@@ -74,32 +70,6 @@ def spectral(x, sf, f, stype, dcomplex, cycle, width, n_jobs):
         return np.abs(xd)
     elif stype is None:
         return xd
-
-###############################################################################
-###############################################################################
-#                                FILT DATA
-###############################################################################
-###############################################################################
-
-
-def filtdata(x, sf, f, cycle):
-    """Filt the data using a forward/backward filter to avoid phase shifting.
-
-    Parameters
-    ----------
-    x : array_like
-        Array of data of shape (n_trials, n_channels, n_pts)
-    sf : float
-        Sampling frequency
-    f : array_like
-        Frequency vector of shape (N, 2)
-    cycle : int
-        Number of cycles to use for fir1 filtering.
-    """
-    forder = fir_order(sf, x.shape[-1], f[0], cycle=cycle)
-    b, a = fir1(forder, f / (sf / 2.))
-    return filtfilt(b, a, x, padlen=forder, axis=-1)
-
 
 ###############################################################################
 ###############################################################################

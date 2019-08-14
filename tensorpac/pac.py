@@ -774,7 +774,7 @@ class PreferredPhase(_PacObj, _PolarPlt):
         return preferred_phase(pha, amp, n_bins=n_bins)
 
     def filterfit(self, sf, x_pha, x_amp=None, edges=None, n_bins=12,
-                  n_jobs=-1, verbose=None):
+                  verbose=None):
         """Extract phases, amplitudes and compute the preferred phase (PP).
 
         Parameters

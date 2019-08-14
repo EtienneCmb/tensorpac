@@ -27,9 +27,8 @@ data, time = pac_signals_wavelet(sf=sf, f_pha=10, f_amp=100, noise=3.,
 p = Pac(idpac=(1, 2, 3), f_pha=cfg["phres"], f_amp=cfg["ahres"])
 # p = Pac(idpac=(1, 2, 3), f_pha=(1, 30, 1, 1), f_amp=(60, 160, 5, 5))
 # p = Pac(idpac=(1, 2, 3), f_pha='lres', f_amp='lres')
-pha = p.filter(sf, data, ftype='phase', n_jobs=1)
-amp = p.filter(sf, data, ftype='amplitude', n_jobs=1)
-xpac = p.fit(pha, amp, n_perm=n_perm, p=.05, n_jobs=-1)
+xpac = p.filterfit(sf, data, n_perm=n_perm, p=.05, n_jobs=-1)
+
 pacn = p.pac.mean(-1)
 pac = xpac.mean(-1)
 surro = p.surrogates.mean(0).max(-1)  # mean(perm).max(epochs)
@@ -60,7 +59,6 @@ ax.text(*tuple(cfg["nb_pos"]), 'C', transform=ax.transAxes, **cfg["nb_cfg"])
 
 
 plt.tight_layout()
-plt.savefig(f"{cfg['path']}/Fig4.png", dpi=300,
-            bbox_inches='tight')
+# plt.savefig(f"{cfg['path']}/Fig4.png", dpi=300, bbox_inches='tight')
 
 p.show()

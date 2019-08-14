@@ -6,6 +6,8 @@ from tensorpac import Pac
 from tensorpac.signals import pac_signals_tort, pac_signals_wavelet
 from tensorpac.utils import pac_trivec, PSD
 
+from time import sleep
+
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -26,10 +28,9 @@ psd = PSD(data, sf)
 trif, tridx = pac_trivec(f_start=40, f_end=100, f_width=3)
 
 p = Pac(idpac=(6, 0, 0), f_pha=[5, 7], f_amp=trif)
-pha = p.filter(sf, data, ftype='phase', n_jobs=1)
-amp = p.filter(sf, data, ftype='amplitude', n_jobs=1)
+pha = p.filter(sf, data, ftype='phase')
+amp = p.filter(sf, data, ftype='amplitude')
 pac = p.fit(pha, amp, n_jobs=-1).mean(-1).squeeze()
-0/0
 
 best_f = trif[pac.argmax()]
 

@@ -29,10 +29,10 @@ p = Pac(idpac=(4, 0, 0), f_pha=(2, 30, 1, 1), f_amp=(60, 150, 5, 5),
         dcomplex='wavelet', width=12)
 # Now, compute PAC by taking the phase of the first dataset and the amplitude
 # of the second
-xpac12 = p.filterfit(1024, d1, d2, n_jobs=1)
+xpac12 = p.filterfit(1024, d1, d2)
 # Invert by taking the phase of the second dataset and the amplitude of the
 #  first one :
-xpac21 = p.filterfit(1024, d2, d1, n_jobs=1)
+xpac21 = p.filterfit(1024, d2, d1)
 
 # Plot signals and PAC :
 plt.figure(figsize=(18, 12))
