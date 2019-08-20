@@ -224,7 +224,6 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="k">import</span> <span class="n">periodogram</span>
 
-<span class="kn">from</span> <span class="nn">tensorpac.spectral</span> <span class="k">import</span> <span class="n">morlet</span>
 <span class="kn">from</span> <span class="nn">tensorpac.methods.meth_pac</span> <span class="k">import</span> <span class="n">_kl_hr</span>
 <span class="kn">from</span> <span class="nn">tensorpac.pac</span> <span class="k">import</span> <span class="n">_PacObj</span>
 
@@ -314,9 +313,9 @@
     <span class="n">f</span><span class="p">,</span> <span class="n">tridx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
     <span class="k">for</span> <span class="n">num</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">starting</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
         <span class="c1"># Lentgh of the vector to build :</span>
-        <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">starting</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">le</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">starting</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="c1"># Create the frequency vector for this starting frequency :</span>
-        <span class="n">fst</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">starting</span><span class="p">[</span><span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">::]]</span>
+        <span class="n">fst</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">le</span><span class="p">,</span> <span class="n">k</span><span class="p">),</span> <span class="n">starting</span><span class="p">[</span><span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">::]]</span>
         <span class="n">nfst</span> <span class="o">=</span> <span class="n">fst</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="c1"># Create the triangular index for this vector of frequencies :</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nfst</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nfst</span><span class="p">,</span> <span class="n">num</span><span class="p">)]</span>
@@ -531,7 +530,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">phase</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the phase value.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phase</span>    </div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phase</span></div>
 
 
 <div class="viewcode-block" id="PLV"><a class="viewcode-back" href="../../generated/tensorpac.utils.PLV.html#tensorpac.utils.PLV">[docs]</a><span class="k">class</span> <span class="nc">PLV</span><span class="p">(</span><span class="n">_PacObj</span><span class="p">):</span>
