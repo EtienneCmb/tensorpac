@@ -341,10 +341,10 @@ def mapinterpolation(data, x=None, y=None, interpx=1, interpy=1):
     if y is None:
         y = np.arange(0, dim2, interpy)
     # Define the meshgrid :
-    Xi, Yi = np.meshgrid(
+    xi, yi = np.meshgrid(
         np.arange(0, dim1 - 1, interpx), np.arange(0, dim2 - 1, interpy))
     # 2D interpolation :
-    datainterp = interp2(data, Xi, Yi)
+    datainterp = interp2(data, xi, yi)
     # Linearly interpolate vectors :
     xveci = np.linspace(x[0], x[-1], datainterp.shape[0])
     yveci = np.linspace(y[0], y[-1], datainterp.shape[1])

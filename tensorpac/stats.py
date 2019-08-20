@@ -69,7 +69,8 @@ def test_stationarity(x, p=.05):
     df = pd.DataFrame({cols[0]: epochs, cols[1]: pvalues, cols[2]: stationary,
                        cols[3]: adf_stat, cols[4]: cv_5, cols[5]: cv_1},
                       columns=cols)
-    n_signi, n_not_signi = stationary.sum(), (~stationary.sum())
+    n_signi = stationary.sum()
+    # n_not_signi = (~stationary.sum())
     logger.info(f"    {n_signi}/{n_epochs} epochs were found as significantly "
                 f"stationary at p={p}")
     return df

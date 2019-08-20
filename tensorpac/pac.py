@@ -14,7 +14,6 @@ from tensorpac.config import CONFIG
 logger = logging.getLogger('tensorpac')
 
 
-
 class _PacObj(object):
     """Main class for relative PAC objects."""
 
@@ -70,8 +69,8 @@ class _PacObj(object):
                              "'hilbert'.")
         assert ftype in ['phase', 'amplitude'], ("ftype must either be 'phase'"
                                                  " or 'amplitude.'")
-        MNE_EPOCHS_TYPE = CONFIG['MNE_EPOCHS_TYPE']
-        if not isinstance(x, np.ndarray) and type(x) in MNE_EPOCHS_TYPE:
+        mne_epochs_type = CONFIG['MNE_EPOCHS_TYPE']
+        if not isinstance(x, np.ndarray) and type(x) in mne_epochs_type:
             x = x.get_data()
             sf = x.info['sfreq']
         if x.ndim == 1:
@@ -444,7 +443,7 @@ class Pac(_PacObj, _PacPlt):
         # ---------------------------------------------------------------------
         # check that pac and surrogates has already been computed
         assert hasattr(self, 'pac'), ("You should compute PAC first. Use the "
-                                       "`fit` method")
+                                      "`fit` method")
         assert hasattr(self, 'surrogates'), "No surrogates computed"
         assert all([isinstance(k, np.ndarray) for k in (
             self.pac, self.surrogates)])

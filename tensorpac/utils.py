@@ -4,7 +4,6 @@ import logging
 import numpy as np
 from scipy.signal import periodogram
 
-from tensorpac.spectral import morlet
 from tensorpac.methods.meth_pac import _kl_hr
 from tensorpac.pac import _PacObj
 
@@ -94,9 +93,9 @@ def pac_trivec(f_start=60., f_end=160., f_width=10.):
     f, tridx = np.array([]), np.array([])
     for num, k in enumerate(starting[0:-1]):
         # Lentgh of the vector to build :
-        l = len(starting) - (num + 1)
+        le = len(starting) - (num + 1)
         # Create the frequency vector for this starting frequency :
-        fst = np.c_[np.full(l, k), starting[num + 1::]]
+        fst = np.c_[np.full(le, k), starting[num + 1::]]
         nfst = fst.shape[0]
         # Create the triangular index for this vector of frequencies :
         idx = np.c_[np.flipud(np.arange(nfst)), np.full(nfst, num)]
@@ -311,7 +310,7 @@ class BinAmplitude(_PacObj):
     @property
     def phase(self):
         """Get the phase value."""
-        return self._phase    
+        return self._phase
 
 
 class PLV(_PacObj):

@@ -77,6 +77,7 @@ def spectral(x, sf, f, stype, dcomplex, cycle, width, n_jobs):
 ###############################################################################
 ###############################################################################
 
+
 def fir_order(fs, sizevec, flow, cycle=3):
     filtorder = cycle * (fs // flow)
 
@@ -146,14 +147,14 @@ def firls(n, f, o):
     w = np.ones(round(len(f) / 2))
     n += 1
     f /= 2
-    l = (n - 1) / 2
+    lo = (n - 1) / 2
 
     nodd = bool(n % 2)
 
     if nodd:  # Odd case
-        h = n_odd_fcn(f, o, w, l)
+        h = n_odd_fcn(f, o, w, lo)
     else:  # Even case
-        h = n_even_fcn(f, o, w, l)
+        h = n_even_fcn(f, o, w, lo)
 
     return h
 
@@ -164,18 +165,18 @@ def fir1(n, wn):
     ff = np.array((0, wn[0], wn[0], wn[1], wn[1], 1))
 
     f0 = np.mean(ff[2:4])
-    l = n + 1
+    lo = n + 1
 
     mags = np.array(range(nbands)).reshape(1, -1) % 2
     aa = np.ravel(np.tile(mags, (2, 1)), order='F')
 
     # Get filter coefficients :
-    h = firls(l - 1, ff, aa)
+    h = firls(lo - 1, ff, aa)
 
     # Apply a window to coefficients :
-    wind = np.hamming(l)
+    wind = np.hamming(lo)
     b = h * wind
-    c = np.exp(-1j * 2 * np.pi * (f0 / 2) * np.array(range(l)))
+    c = np.exp(-1j * 2 * np.pi * (f0 / 2) * np.array(range(lo)))
     b /= abs(c @ b)
 
     return b, 1

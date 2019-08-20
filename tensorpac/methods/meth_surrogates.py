@@ -11,10 +11,11 @@ def compute_surrogates(pha, amp, ids, fcn, n_perm, n_jobs):
         return None
     else:
         fcn_p = {1: swap_pha_amp, 2: swap_blocks, 3: time_lag}[ids]
+
     def para_surr():  # noqa
         return fcn(*fcn_p(pha, amp))
     s = Parallel(n_jobs=n_jobs, **CONFIG['JOBLIB_CFG'])(delayed(para_surr)(
-        ) for k in range(n_perm))
+    ) for k in range(n_perm))
     return np.array(s)
 
 
