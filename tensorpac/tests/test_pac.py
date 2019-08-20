@@ -99,6 +99,7 @@ class TestPac(object):
         p = Pac(f_pha=np.arange(11), f_amp=f)
         pac = np.random.rand(len(f))
         p.triplot(pac, f, tridx)
+        p.savefig('test_savefig.png')
         p.show()
         matplotlib.pyplot.close('all')
 
