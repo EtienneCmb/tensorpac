@@ -15,8 +15,9 @@ class TestGcmi(object):
 
     def test_mi(self):
         """Test computing MI."""
-        x = np.random.rand(10, 20)
-        y = np.random.rand(10, 20)
+        rng = np.random.RandomState(0)
+        x = rng.rand(100, 1, 100)
+        y = rng.rand(100, 1, 100)
         # basic config
         nd_mi_gg(x, y)
         # modified config

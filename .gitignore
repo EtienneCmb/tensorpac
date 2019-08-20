@@ -106,3 +106,4 @@ docs/source/auto_examples/
 *.fuse_*
 *.svg
 *.pdf
+test_savefig.png
