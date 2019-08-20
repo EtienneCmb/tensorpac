@@ -1,39 +1,68 @@
 """Test tensorpac utils."""
 import numpy as np
+import matplotlib
 
-from tensorpac.signals import pac_signals_wavelet, pac_signals_tort
-from tensorpac.utils import pac_vec, pac_trivec
-
-
-def test_pac_vec():
-    """Definition of PAC vectors."""
-    assert pac_vec()
-    assert pac_vec(f_pha=(1, 30, 2, 2), f_amp=(60, 200, 10, 5))
-    assert pac_vec(f_pha=[1, 2], f_amp=np.arange(50))
-    assert pac_vec(f_pha=np.array([[2, 4], [5, 7], [9, 10]]),
-                   f_amp=np.array([[30, 60], [60, 90], [100, 200]]).T)
-    assert pac_vec(f_pha=[[1, 2], [5, 7]], f_amp=[60, 150])
+from tensorpac.utils import pac_vec, pac_trivec, PSD, BinAmplitude, PLV
 
 
-def test_pac_signals_dtrials():
-    """Definition of artificially coupled signals using dPha/dAmp."""
-    assert pac_signals_tort(f_pha=5, f_amp=130, sf=512, n_epochs=23, chi=0.9,
-                            noise=2, dpha=35, damp=46)
+class TestUtils(object):
+    """Test utility functions."""
 
+    def test_pac_vec(self):
+        """Definition of PAC vectors."""
+        assert pac_vec()
+        assert pac_vec(f_pha=(1, 30, 2, 2), f_amp=(60, 200, 10, 5))
+        assert pac_vec(f_pha=[1, 2], f_amp=np.arange(50))
+        assert pac_vec(f_pha=np.array([[2, 4], [5, 7], [9, 10]]),
+                       f_amp=np.array([[30, 60], [60, 90], [100, 200]]).T)
+        assert pac_vec(f_pha=[[1, 2], [5, 7]], f_amp=[60, 150])
+        assert pac_vec(f_pha='lres', f_amp='lres')
+        assert pac_vec(f_pha='mres', f_amp='mres')
+        assert pac_vec(f_pha='hres', f_amp='hres')
 
-def test_pac_signals_bandwidth():
-    """Definition of artificially coupled signals using bandwidth."""
-    assert pac_signals_tort(f_pha=[5, 7], f_amp=[30, 60], sf=200.,
-                            n_epochs=100, chi=0.5, noise=3., n_times=1000)
-    assert pac_signals_wavelet(f_pha=10, f_amp=57., n_times=1240, sf=256,
-                               noise=.7, n_epochs=33, pp=np.pi/4, rnd_state=23)
+    def test_trivec(self):
+        """Definition of triangular vectors."""
+        assert pac_trivec(2, 200, 10)
 
+    def test_psd(self):
+        """Test PSD."""
+        # test definition
+        x = np.random.rand(10, 200)
+        psd = PSD(x, 128)
+        # test properties
+        psd.freqs
+        psd.psd
+        # test plotting
+        matplotlib.use('agg')
+        psd.plot(confidence=None, log=True, grid=True, interp=.1)
+        psd.plot(confidence=.95, log=False, grid=False, interp=None)
+        psd.show()
+        matplotlib.pyplot.close('all')
 
-def test_default_args():
-    """Test default aurguments for pac_vec."""
-    assert pac_signals_tort(chi=2., noise=11., dpha=120., damp=200.)
+    def test_binned_amplitude(self):
+        """Test binned amplitude."""
+        # test definition
+        x = np.random.rand(10, 200)
+        binamp = BinAmplitude(x, 128)
+        # test plot
+        binamp.plot(unit='rad')
+        binamp.plot(unit='deg')
+        binamp.show()
+        matplotlib.pyplot.close('all')
+        # test properties
+        binamp.phase
+        binamp.amplitude
 
-
-def test_trivec():
-    """Definition of triangular vectors."""
-    assert pac_trivec(2, 200, 10)
+    def test_plv(self):
+        """Test Phase-locking Value."""
+        # test definition
+        x = np.random.rand(10, 200)
+        plv_1d = PLV(x, 128, f_pha=[2, 4])
+        plv_2d = PLV(x, 128, f_pha=[[2, 4], [5, 7]])
+        # test properties
+        plv_1d.plv
+        # test plot
+        plv_1d.plot()
+        plv_2d.plot()
+        plv_1d.show()
+        matplotlib.pyplot.close('all')

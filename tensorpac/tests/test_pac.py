@@ -91,13 +91,15 @@ class TestPac(object):
         pac = np.random.rand(20, 10)
         pval = np.random.rand(20, 10)
         p = Pac(f_pha=np.arange(11), f_amp=np.arange(21))
-        p.comodulogram(pac, rmaxis=True, dpaxis=True)
+        p.comodulogram(np.random.rand(10, 10, 20))
+        p.comodulogram(pac, rmaxis=True, dpaxis=True, interp=(.1, .1))
         p.comodulogram(pac, plotas='contour', pvalues=pval)
         p.comodulogram(pac, plotas='pcolor', pvalues=pval, levels=[.5, .7],
                        under='gray', over='red', bad='orange')
         p = Pac(f_pha=np.arange(11), f_amp=f)
         pac = np.random.rand(len(f))
         p.triplot(pac, f, tridx)
+        p.show()
         matplotlib.pyplot.close('all')
 
 
@@ -159,6 +161,7 @@ class TestPreferredPhase(object):
 
     def test_polar_plot(self):
         """Test the polar plot."""
+        matplotlib.use('agg')
         p = PreferredPhase(f_pha=[5, 7], f_amp=(60, 200, 10, 1))
         x_pha = np.random.rand(100, 1000)
         x_amp = np.random.rand(100, 1000)
@@ -167,3 +170,4 @@ class TestPreferredPhase(object):
         ampbin = np.squeeze(ampbin).mean(-1)
         p.polar(ampbin.T, vecbin, p.yvec, cmap='RdBu_r', interp=.1,
                 cblabel='Amplitude bins')
+        matplotlib.pyplot.close('all')
