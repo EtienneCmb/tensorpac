@@ -17,11 +17,15 @@ class TestIO(object):
         """Test setting the log level."""
         for l in levels:
             set_log_level(l)
-        set_log_level(True)
         set_log_level(False)
+        set_log_level(True)
+        set_log_level(match="ok")
+        logger.info("show me ok")
+        logger.info("show me")
 
     def test_logger(self):
         """Test logger levels."""
+        set_log_level("profiler")
         logger.profiler("profiler")
         logger.debug("debug")
         logger.info("info")
