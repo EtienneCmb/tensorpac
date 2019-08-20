@@ -11,7 +11,7 @@ class TestPac(object):
 
     def test_id_pac_definition(self):
         """Test Pac object definition."""
-        nmeth, nsuro, nnorm = 5, 4, 5
+        nmeth, nsuro, nnorm = 6, 4, 5
         for k in range(nmeth):
             for i in range(nsuro):
                 for j in range(nnorm):
@@ -40,6 +40,7 @@ class TestPac(object):
         data = np.random.rand(2, 1000)
         p = Pac()
         p.filter(256, data, 'phase')
+        p.filter(256, data, 'phase', edges=2)
         p.filter(256, data, 'amplitude')
 
     def test_fit(self):
@@ -118,6 +119,9 @@ class TestErpac(object):
         amp = p.filter(256, data, 'amplitude')
         p.fit(pha, amp, method='circular')
         p.fit(pha, amp, method='gc')
+        p.fit(pha, amp, method='gc', n_perm=2)
+        p.fit(pha, amp, method='gc', smooth=5)
+        p.surrogates, p.pvalues
 
     def test_filterfit(self):
         """Test function filterfit."""
@@ -152,3 +156,14 @@ class TestPreferredPhase(object):
         x_pha = np.random.rand(100, 1000)
         x_amp = np.random.rand(100, 1000)
         p.filterfit(256, x_pha, x_amp=x_amp)
+
+    def test_polar_plot(self):
+        """Test the polar plot."""
+        p = PreferredPhase(f_pha=[5, 7], f_amp=(60, 200, 10, 1))
+        x_pha = np.random.rand(100, 1000)
+        x_amp = np.random.rand(100, 1000)
+        ampbin, pp, vecbin = p.filterfit(256, x_pha, x_amp=x_amp)
+        pp = np.squeeze(pp).T
+        ampbin = np.squeeze(ampbin).mean(-1)
+        p.polar(ampbin.T, vecbin, p.yvec, cmap='RdBu_r', interp=.1,
+                cblabel='Amplitude bins')
