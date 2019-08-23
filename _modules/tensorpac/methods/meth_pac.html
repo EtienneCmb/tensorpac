@@ -406,7 +406,7 @@
         <span class="c1"># Find where phase take vecbin values :</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="n">phad</span> <span class="o">==</span> <span class="n">i</span>
         <span class="c1"># Take the sum of amplitude inside the bin :</span>
-        <span class="n">abin_pha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+        <span class="n">abin_pha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span> <span class="o">/</span> <span class="n">idx</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
         <span class="n">abin</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">abin_pha</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">abin</span><span class="p">)</span>
