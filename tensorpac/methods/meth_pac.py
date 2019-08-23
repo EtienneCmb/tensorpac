@@ -186,7 +186,7 @@ def _kl_hr(pha, amp, n_bins):
         # Find where phase take vecbin values :
         idx = phad == i
         # Take the sum of amplitude inside the bin :
-        abin_pha = np.einsum('i...j, k...j->ik...', amp, idx)
+        abin_pha = np.einsum('i...j, k...j->ik...', amp, idx) / idx.sum()
         abin.append(abin_pha)
 
     return np.array(abin)
