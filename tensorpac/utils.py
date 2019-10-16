@@ -264,7 +264,7 @@ class BinAmplitude(_PacObj):
         pha = self.filter(sf, x, 'phase', **kw)
         amp = self.filter(sf, x, 'amplitude', **kw)
         # binarize amplitude according to phase
-        self._amplitude = _kl_hr(pha, amp, n_bins).squeeze()
+        self._amplitude = _kl_hr(pha, amp, n_bins, mean_bins=False).squeeze()
         self.n_bins = n_bins
 
     def plot(self, unit='rad', **kw):

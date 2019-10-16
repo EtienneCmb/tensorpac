@@ -172,8 +172,9 @@ class _PacVisual(object):
         if polar:
             ax.grid(True)
             ax.set_rlabel_position(0)
-            ax.set_thetamin(0)
-            ax.set_thetamax(360)
+            ax.set_thetamin(-180)
+            ax.set_thetamax(180)
+            ax.set_thetagrids([-135, -90, -45, 0, 45, 90, 135, 180])
 
         return plt.gca()
 

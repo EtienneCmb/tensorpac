@@ -172,7 +172,7 @@ def hr(pha, amp, n_bins=18):
     return pac
 
 
-def _kl_hr(pha, amp, n_bins):
+def _kl_hr(pha, amp, n_bins, mean_bins=True):
     """Binarize the amplitude according to phase values.
 
     This function is shared by the Kullback-Leibler Distance and the
@@ -185,8 +185,9 @@ def _kl_hr(pha, amp, n_bins):
     for i in np.unique(phad):
         # Find where phase take vecbin values :
         idx = phad == i
+        m = idx.sum() if mean_bins else 1.
         # Take the sum of amplitude inside the bin :
-        abin_pha = np.einsum('i...j, k...j->ik...', amp, idx) / idx.sum()
+        abin_pha = np.einsum('i...j, k...j->ik...', amp, idx) / m
         abin.append(abin_pha)
 
     return np.array(abin)

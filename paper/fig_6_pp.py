@@ -60,6 +60,6 @@ ax.text(*tuple(cfg["nb_pos"]), 'B', transform=ax.transAxes, **cfg["nb_cfg"])
 # plt.title("Preferred Phase of 45° of a 6hz <-> 100hz coupling")
 
 plt.tight_layout()
-plt.savefig(f"{cfg['path']}/Fig6.png", dpi=300, bbox_inches='tight')
+# plt.savefig(f"{cfg['path']}/Fig6.png", dpi=300, bbox_inches='tight')
 
 p.show()
