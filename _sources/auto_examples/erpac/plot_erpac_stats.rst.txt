@@ -34,6 +34,7 @@ amplitude coupling first followed by a random noise.
 
 
 
+
 Generate a synthetic signal
 ##############################################################################
  in order to illustrate how the ERPAC does works, we are going to concatenate
@@ -57,6 +58,7 @@ Generate a synthetic signal
     # now, concatenate the two signals across the time axis
     x = np.concatenate((x1, x2), axis=1)
     time = np.arange(x.shape[1]) / sf
+
 
 
 
@@ -98,12 +100,24 @@ Define an ERPAC object and extract the phase and the amplitude
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    /home/circleci/miniconda3/envs/testenv/lib/python3.6/site-packages/joblib/externals/loky/backend/utils.py:55: UserWarning: Failed to kill subprocesses on this platform. Pleaseinstall psutil: https://github.com/giampaolo/psutil
+      warnings.warn("Failed to kill subprocesses on this platform. Please"
+    /home/circleci/miniconda3/envs/testenv/lib/python3.6/site-packages/joblib/externals/loky/backend/utils.py:55: UserWarning: Failed to kill subprocesses on this platform. Pleaseinstall psutil: https://github.com/giampaolo/psutil
+      warnings.warn("Failed to kill subprocesses on this platform. Please"
+
+
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  27.552 seconds)
+   **Total running time of the script:** ( 0 minutes  32.380 seconds)
 
 
 .. _sphx_glr_download_auto_examples_erpac_plot_erpac_stats.py:

@@ -29,6 +29,7 @@ The PLV can be used to inspect if phases are aligned across trials.
 
 
 
+
 Generate a random data of shape (n_epochs, n_times)
 ##############################################################################
  the dataset used in this example is composed of pure sines and noise. All
@@ -65,6 +66,15 @@ Generate a random data of shape (n_epochs, n_times)
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    (Text(0.5, 0, 'Time (secondes)'), Text(0, 0.5, 'Amplitude (V)'))
+
 
 
 Compute and plot the Power Spectrum Density (PSD)
@@ -86,6 +96,15 @@ Compute and plot the Power Spectrum Density (PSD)
 .. image:: /auto_examples/misc/images/sphx_glr_plot_plv_002.png
     :class: sphx-glr-single-img
 
+
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+
+    <matplotlib.axes._subplots.AxesSubplot object at 0x7f4f44017278>
 
 
 
@@ -125,9 +144,10 @@ Compute and plot the Phase Locking Value
 
 
 
+
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.748 seconds)
+   **Total running time of the script:** ( 0 minutes  3.250 seconds)
 
 
 .. _sphx_glr_download_auto_examples_misc_plot_plv.py:

@@ -34,6 +34,7 @@ amplitudes.
 
 
 
+
 Generate synthetic signals (sake of illustration)
 ##############################################################################
  to illustrate how does the preferred phase works, we generate synthetic
@@ -56,6 +57,7 @@ Generate synthetic signals (sake of illustration)
 
 
 
+
 Extract phases, amplitudes and compute the preferred phase
 ##############################################################################
 
@@ -70,6 +72,7 @@ Extract phases, amplitudes and compute the preferred phase
 
     # Now, compute the PP :
     ampbin, pp, vecbin = p.fit(pha, amp, n_bins=72)
+
 
 
 
@@ -131,9 +134,10 @@ Plot the preferred phase
 
 
 
+
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  7.350 seconds)
+   **Total running time of the script:** ( 0 minutes  6.901 seconds)
 
 
 .. _sphx_glr_download_auto_examples_misc_plot_preferred_phase.py:

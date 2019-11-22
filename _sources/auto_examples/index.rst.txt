@@ -15,7 +15,7 @@ Examples
 
 .. raw:: html
 
-    <div style='clear:both'></div>
+    <div class="sphx-glr-clear"></div>
 
 
 
@@ -45,9 +45,9 @@ Phase-Amplitude coupling
 
 .. only:: html
 
-    .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_readme_thumb.png
+ .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_readme_thumb.png
 
-        :ref:`sphx_glr_auto_examples_pac_plot_readme.py`
+     :ref:`sphx_glr_auto_examples_pac_plot_readme.py`
 
 .. raw:: html
 
@@ -65,9 +65,9 @@ Phase-Amplitude coupling
 
 .. only:: html
 
-    .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_pvalues_thumb.png
+ .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_pvalues_thumb.png
 
-        :ref:`sphx_glr_auto_examples_pac_plot_pvalues.py`
+     :ref:`sphx_glr_auto_examples_pac_plot_pvalues.py`
 
 .. raw:: html
 
@@ -85,9 +85,9 @@ Phase-Amplitude coupling
 
 .. only:: html
 
-    .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_compare_surrogates_thumb.png
+ .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_compare_surrogates_thumb.png
 
-        :ref:`sphx_glr_auto_examples_pac_plot_compare_surrogates.py`
+     :ref:`sphx_glr_auto_examples_pac_plot_compare_surrogates.py`
 
 .. raw:: html
 
@@ -105,9 +105,9 @@ Phase-Amplitude coupling
 
 .. only:: html
 
-    .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_compare_normalizations_thumb.png
+ .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_compare_normalizations_thumb.png
 
-        :ref:`sphx_glr_auto_examples_pac_plot_compare_normalizations.py`
+     :ref:`sphx_glr_auto_examples_pac_plot_compare_normalizations.py`
 
 .. raw:: html
 
@@ -125,9 +125,9 @@ Phase-Amplitude coupling
 
 .. only:: html
 
-    .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_pac_methods_thumb.png
+ .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_pac_methods_thumb.png
 
-        :ref:`sphx_glr_auto_examples_pac_plot_pac_methods.py`
+     :ref:`sphx_glr_auto_examples_pac_plot_pac_methods.py`
 
 .. raw:: html
 
@@ -145,9 +145,9 @@ Phase-Amplitude coupling
 
 .. only:: html
 
-    .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_compare_filtering_thumb.png
+ .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_compare_filtering_thumb.png
 
-        :ref:`sphx_glr_auto_examples_pac_plot_compare_filtering.py`
+     :ref:`sphx_glr_auto_examples_pac_plot_compare_filtering.py`
 
 .. raw:: html
 
@@ -165,9 +165,9 @@ Phase-Amplitude coupling
 
 .. only:: html
 
-    .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_long_range_coupling_thumb.png
+ .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_long_range_coupling_thumb.png
 
-        :ref:`sphx_glr_auto_examples_pac_plot_long_range_coupling.py`
+     :ref:`sphx_glr_auto_examples_pac_plot_long_range_coupling.py`
 
 .. raw:: html
 
@@ -180,7 +180,7 @@ Phase-Amplitude coupling
    /auto_examples/pac/plot_long_range_coupling
 .. raw:: html
 
-    <div style='clear:both'></div>
+    <div class="sphx-glr-clear"></div>
 
 
 
@@ -208,9 +208,9 @@ Event-Related Phase-Amplitude coupling
 
 .. only:: html
 
-    .. figure:: /auto_examples/erpac/images/thumb/sphx_glr_plot_erpac_stats_thumb.png
+ .. figure:: /auto_examples/erpac/images/thumb/sphx_glr_plot_erpac_stats_thumb.png
 
-        :ref:`sphx_glr_auto_examples_erpac_plot_erpac_stats.py`
+     :ref:`sphx_glr_auto_examples_erpac_plot_erpac_stats.py`
 
 .. raw:: html
 
@@ -228,9 +228,9 @@ Event-Related Phase-Amplitude coupling
 
 .. only:: html
 
-    .. figure:: /auto_examples/erpac/images/thumb/sphx_glr_plot_erpac_thumb.png
+ .. figure:: /auto_examples/erpac/images/thumb/sphx_glr_plot_erpac_thumb.png
 
-        :ref:`sphx_glr_auto_examples_erpac_plot_erpac.py`
+     :ref:`sphx_glr_auto_examples_erpac_plot_erpac.py`
 
 .. raw:: html
 
@@ -243,7 +243,7 @@ Event-Related Phase-Amplitude coupling
    /auto_examples/erpac/plot_erpac
 .. raw:: html
 
-    <div style='clear:both'></div>
+    <div class="sphx-glr-clear"></div>
 
 
 
@@ -270,9 +270,9 @@ Statistics
 
 .. only:: html
 
-    .. figure:: /auto_examples/stats/images/thumb/sphx_glr_plot_stats_stationary_thumb.png
+ .. figure:: /auto_examples/stats/images/thumb/sphx_glr_plot_stats_stationary_thumb.png
 
-        :ref:`sphx_glr_auto_examples_stats_plot_stats_stationary.py`
+     :ref:`sphx_glr_auto_examples_stats_plot_stats_stationary.py`
 
 .. raw:: html
 
@@ -285,7 +285,7 @@ Statistics
    /auto_examples/stats/plot_stats_stationary
 .. raw:: html
 
-    <div style='clear:both'></div>
+    <div class="sphx-glr-clear"></div>
 
 
 
@@ -315,9 +315,9 @@ Miscellaneous
 
 .. only:: html
 
-    .. figure:: /auto_examples/misc/images/thumb/sphx_glr_plot_psd_thumb.png
+ .. figure:: /auto_examples/misc/images/thumb/sphx_glr_plot_psd_thumb.png
 
-        :ref:`sphx_glr_auto_examples_misc_plot_psd.py`
+     :ref:`sphx_glr_auto_examples_misc_plot_psd.py`
 
 .. raw:: html
 
@@ -335,9 +335,9 @@ Miscellaneous
 
 .. only:: html
 
-    .. figure:: /auto_examples/misc/images/thumb/sphx_glr_plot_fmin_fmax_optmization_thumb.png
+ .. figure:: /auto_examples/misc/images/thumb/sphx_glr_plot_fmin_fmax_optmization_thumb.png
 
-        :ref:`sphx_glr_auto_examples_misc_plot_fmin_fmax_optmization.py`
+     :ref:`sphx_glr_auto_examples_misc_plot_fmin_fmax_optmization.py`
 
 .. raw:: html
 
@@ -355,9 +355,9 @@ Miscellaneous
 
 .. only:: html
 
-    .. figure:: /auto_examples/misc/images/thumb/sphx_glr_plot_binned_amplitude_thumb.png
+ .. figure:: /auto_examples/misc/images/thumb/sphx_glr_plot_binned_amplitude_thumb.png
 
-        :ref:`sphx_glr_auto_examples_misc_plot_binned_amplitude.py`
+     :ref:`sphx_glr_auto_examples_misc_plot_binned_amplitude.py`
 
 .. raw:: html
 
@@ -375,9 +375,9 @@ Miscellaneous
 
 .. only:: html
 
-    .. figure:: /auto_examples/misc/images/thumb/sphx_glr_plot_frequency_vectors_thumb.png
+ .. figure:: /auto_examples/misc/images/thumb/sphx_glr_plot_frequency_vectors_thumb.png
 
-        :ref:`sphx_glr_auto_examples_misc_plot_frequency_vectors.py`
+     :ref:`sphx_glr_auto_examples_misc_plot_frequency_vectors.py`
 
 .. raw:: html
 
@@ -395,9 +395,9 @@ Miscellaneous
 
 .. only:: html
 
-    .. figure:: /auto_examples/misc/images/thumb/sphx_glr_plot_plv_thumb.png
+ .. figure:: /auto_examples/misc/images/thumb/sphx_glr_plot_plv_thumb.png
 
-        :ref:`sphx_glr_auto_examples_misc_plot_plv.py`
+     :ref:`sphx_glr_auto_examples_misc_plot_plv.py`
 
 .. raw:: html
 
@@ -415,9 +415,9 @@ Miscellaneous
 
 .. only:: html
 
-    .. figure:: /auto_examples/misc/images/thumb/sphx_glr_plot_artificially_coupled_signals_thumb.png
+ .. figure:: /auto_examples/misc/images/thumb/sphx_glr_plot_artificially_coupled_signals_thumb.png
 
-        :ref:`sphx_glr_auto_examples_misc_plot_artificially_coupled_signals.py`
+     :ref:`sphx_glr_auto_examples_misc_plot_artificially_coupled_signals.py`
 
 .. raw:: html
 
@@ -435,9 +435,9 @@ Miscellaneous
 
 .. only:: html
 
-    .. figure:: /auto_examples/misc/images/thumb/sphx_glr_plot_preferred_phase_thumb.png
+ .. figure:: /auto_examples/misc/images/thumb/sphx_glr_plot_preferred_phase_thumb.png
 
-        :ref:`sphx_glr_auto_examples_misc_plot_preferred_phase.py`
+     :ref:`sphx_glr_auto_examples_misc_plot_preferred_phase.py`
 
 .. raw:: html
 
@@ -450,7 +450,7 @@ Miscellaneous
    /auto_examples/misc/plot_preferred_phase
 .. raw:: html
 
-    <div style='clear:both'></div>
+    <div class="sphx-glr-clear"></div>
 
 
 

@@ -22,6 +22,7 @@ Reproduced the figure in the README.
 
 
 
+
 .. code-block:: default
 
     from tensorpac import Pac
@@ -50,7 +51,7 @@ Reproduced the figure in the README.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.937 seconds)
+   **Total running time of the script:** ( 0 minutes  4.600 seconds)
 
 
 .. _sphx_glr_download_auto_examples_pac_plot_readme.py:
