@@ -15,7 +15,7 @@ __all__ = ('compute_pac')
 
 
 def compute_pac(pha, amp, idp, nbins, p, optimize):
-    """Copute real Phase-Amplitude coupling.
+    """Compute real Phase-Amplitude coupling.
 
     Each method take at least a pha and amp array with the respective
     dimensions:
@@ -169,8 +169,8 @@ def ndpac(pha, amp, p, optimize):
     """
     npts = amp.shape[-1]
     # Normalize amplitude :
-    np.subtract(amp, np.mean(amp, axis=-1, keepdims=True), out=amp)
-    np.divide(amp, np.std(amp, axis=-1, keepdims=True), out=amp)
+    amp = np.subtract(amp, np.mean(amp, axis=-1, keepdims=True))
+    amp = np.divide(amp, np.std(amp, axis=-1, keepdims=True))
     # Compute pac :
     pac = np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j * pha),
                            optimize=optimize))

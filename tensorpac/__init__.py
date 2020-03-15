@@ -8,4 +8,4 @@ Phase-Amplitude Coupling.
 from .pac import Pac
 from .utils import *
 
-__version__ = "0.5.4"
+__version__ = "0.5.5"
