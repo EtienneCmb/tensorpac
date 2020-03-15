@@ -5,20 +5,20 @@
 
 Computation times
 =================
-**00:13.442** total execution time for **auto_examples_misc** files:
+**00:13.682** total execution time for **auto_examples_misc** files:
 
 +--------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_misc_plot_preferred_phase.py` (``plot_preferred_phase.py``)                           | 00:06.901 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_misc_plot_preferred_phase.py` (``plot_preferred_phase.py``)                           | 00:07.035 | 0.0 MB |
 +--------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_misc_plot_plv.py` (``plot_plv.py``)                                                   | 00:03.250 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_misc_plot_plv.py` (``plot_plv.py``)                                                   | 00:03.517 | 0.0 MB |
 +--------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_misc_plot_fmin_fmax_optmization.py` (``plot_fmin_fmax_optmization.py``)               | 00:02.350 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_misc_plot_fmin_fmax_optmization.py` (``plot_fmin_fmax_optmization.py``)               | 00:02.077 | 0.0 MB |
 +--------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_misc_plot_binned_amplitude.py` (``plot_binned_amplitude.py``)                         | 00:00.361 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_misc_plot_binned_amplitude.py` (``plot_binned_amplitude.py``)                         | 00:00.489 | 0.0 MB |
 +--------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_misc_plot_frequency_vectors.py` (``plot_frequency_vectors.py``)                       | 00:00.224 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_misc_plot_frequency_vectors.py` (``plot_frequency_vectors.py``)                       | 00:00.237 | 0.0 MB |
 +--------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_misc_plot_psd.py` (``plot_psd.py``)                                                   | 00:00.197 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_misc_plot_artificially_coupled_signals.py` (``plot_artificially_coupled_signals.py``) | 00:00.166 | 0.0 MB |
 +--------------------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_misc_plot_artificially_coupled_signals.py` (``plot_artificially_coupled_signals.py``) | 00:00.159 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_misc_plot_psd.py` (``plot_psd.py``)                                                   | 00:00.162 | 0.0 MB |
 +--------------------------------------------------------------------------------------------------------------------+-----------+--------+
