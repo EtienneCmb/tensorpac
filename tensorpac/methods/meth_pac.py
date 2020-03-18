@@ -201,7 +201,9 @@ def ndpac(pha, amp, p=.05):
         Respectively the arrays of phases of shape (n_pha, ..., n_times) and
         the array of amplitudes of shape (n_amp, ..., n_times).
     p : float | .05
-        P-value to use for thresholding
+        P-value to use for thresholding. Sub-threshold PAC values
+        will be set to 0. To disable this behavior (no masking), use ``p=1`` or
+        ``p=None``.
 
     Returns
     -------
@@ -220,6 +222,11 @@ def ndpac(pha, amp, p=.05):
     amp = np.divide(amp, np.std(amp, axis=-1, keepdims=True))
     # Compute pac :
     pac = np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j * pha)))
+
+    if p == 1. or p is None:
+        # No thresholding
+        return pac / npts
+
     s = pac**2
     pac /= npts
     # Set to zero non-significant values:
