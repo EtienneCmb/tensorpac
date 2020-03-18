@@ -217,8 +217,8 @@ def ndpac(pha, amp, p=.05):
     """
     npts = amp.shape[-1]
     # Normalize amplitude :
-    np.subtract(amp, np.mean(amp, axis=-1, keepdims=True), out=amp)
-    np.divide(amp, np.std(amp, axis=-1, keepdims=True), out=amp)
+    amp = np.subtract(amp, np.mean(amp, axis=-1, keepdims=True))
+    amp = np.divide(amp, np.std(amp, axis=-1, keepdims=True))
     # Compute pac :
     pac = np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j * pha)))
     pac *= pac / npts
