@@ -218,8 +218,9 @@ def ndpac(pha, amp, p=.05):
     """
     npts = amp.shape[-1]
     # Normalize amplitude :
+    # Use the sample standard deviation, as in original Matlab code from author
     amp = np.subtract(amp, np.mean(amp, axis=-1, keepdims=True))
-    amp = np.divide(amp, np.std(amp, axis=-1, keepdims=True))
+    amp = np.divide(amp, np.std(amp, ddof=1, axis=-1, keepdims=True))
     # Compute pac :
     pac = np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j * pha)))
 
