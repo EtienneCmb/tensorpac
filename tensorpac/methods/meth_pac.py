@@ -228,23 +228,24 @@ def ndpac(pha, amp, p=.05):
     return pac
 
 
-def ps(pha_lo, pha_hi):
+def ps(pha, pha_amp):
     """Phase Synchrony (Penny, 2008; Cohen, 2008).
 
-    In order to measure the phase synchrony, the PHASE of the higher-frequency
-    signal must be provided, and not the amplitude as in most other
-    PAC functions.
+    In order to measure the phase synchrony, the phase of the amplitude of the
+    higher-frequency signal must be provided, and not the amplitude as in most
+    other PAC functions.
 
     Parameters
     ----------
-    pha_lo, pha_hi : array_like
+    pha, pha_amp : array_like
         Respectively the arrays of phases of shape (n_pha, ..., n_times) for
-        the lower and upper frequency bands.
+        the lower frequency and the array of phase of the amplitude signal of
+        shape (n_pha_amp, ..., n_times) for the higher frequency.
 
     Returns
     -------
     pac : array_like
-        Array of phase amplitude coupling of shape (n_pha_hi, n_pha_lo, ...)
+        Array of phase amplitude coupling of shape (n_pha_amp, n_pha, ...)
 
     References
     ----------
@@ -254,9 +255,9 @@ def ps(pha_lo, pha_hi):
     coupling in the human medial frontal cortex during decision making. Journal
     of cognitive neuroscience 21:390–402.
     """
-    pac = np.einsum('i...j, k...j->ik...', np.exp(-1j * pha_hi),
-                    np.exp(1j * pha_lo))
-    return np.abs(pac) / pha_lo.shape[-1]
+    pac = np.einsum('i...j, k...j->ik...', np.exp(-1j * pha_amp),
+                    np.exp(1j * pha))
+    return np.abs(pac) / pha.shape[-1]
 
 
 def gcpac(pha, amp):
