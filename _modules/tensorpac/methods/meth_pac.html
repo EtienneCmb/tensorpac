@@ -441,31 +441,32 @@
     <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
     <span class="c1"># Compute pac :</span>
     <span class="n">pac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha</span><span class="p">)))</span>
-    <span class="n">pac</span> <span class="o">*=</span> <span class="n">pac</span> <span class="o">/</span> <span class="n">npts</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pac</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">pac</span> <span class="o">/=</span> <span class="n">npts</span>
     <span class="c1"># Set to zero non-significant values:</span>
-    <span class="n">xlim</span> <span class="o">=</span> <span class="n">erfinv</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
-    <span class="n">pac</span><span class="p">[</span><span class="n">pac</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">xlim</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">xlim</span> <span class="o">=</span> <span class="n">npts</span> <span class="o">*</span> <span class="n">erfinv</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">pac</span><span class="p">[</span><span class="n">s</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">xlim</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
     <span class="k">return</span> <span class="n">pac</span></div>
 
 
-<div class="viewcode-block" id="ps"><a class="viewcode-back" href="../../../generated/tensorpac.methods.ps.html#tensorpac.methods.ps">[docs]</a><span class="k">def</span> <span class="nf">ps</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
+<div class="viewcode-block" id="ps"><a class="viewcode-back" href="../../../generated/tensorpac.methods.ps.html#tensorpac.methods.ps">[docs]</a><span class="k">def</span> <span class="nf">ps</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">pha_amp</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Phase Synchrony (Penny, 2008; Cohen, 2008).</span>
 
-<span class="sd">    In order to measure the phase synchrony, the phase of the amplitude must be</span>
-<span class="sd">    provided.</span>
+<span class="sd">    In order to measure the phase synchrony, the phase of the amplitude of the</span>
+<span class="sd">    higher-frequency signal must be provided, and not the amplitude as in most</span>
+<span class="sd">    other PAC functions.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    pha, amp : array_like</span>
-<span class="sd">        Respectively the arrays of phases of shape (n_pha, ..., n_times) and</span>
-<span class="sd">        the array of amplitudes of shape (n_amp, ..., n_times).</span>
-<span class="sd">    n_bins : int | 18</span>
-<span class="sd">        Number of bins to binarize the amplitude according to phase intervals</span>
+<span class="sd">    pha, pha_amp : array_like</span>
+<span class="sd">        Respectively the arrays of phases of shape (n_pha, ..., n_times) for</span>
+<span class="sd">        the lower frequency and the array of phase of the amplitude signal of</span>
+<span class="sd">        shape (n_pha_amp, ..., n_times) for the higher frequency.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    pac : array_like</span>
-<span class="sd">        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)</span>
+<span class="sd">        Array of phase amplitude coupling of shape (n_pha_amp, n_pha, ...)</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
@@ -475,7 +476,8 @@
 <span class="sd">    coupling in the human medial frontal cortex during decision making. Journal</span>
 <span class="sd">    of cognitive neuroscience 21:390–402.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">pac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">amp</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha</span><span class="p">))</span>
+    <span class="n">pac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha_amp</span><span class="p">),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pac</span><span class="p">)</span> <span class="o">/</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 

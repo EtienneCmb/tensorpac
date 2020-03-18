@@ -228,23 +228,23 @@
 <h1>tensorpac.methods.ps<a class="headerlink" href="#tensorpac-methods-ps" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="tensorpac.methods.ps">
-<code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">ps</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_pac.html#ps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.ps" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">ps</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">pha_amp</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_pac.html#ps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.ps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Phase Synchrony (Penny, 2008; Cohen, 2008).</p>
-<p>In order to measure the phase synchrony, the phase of the amplitude must be
-provided.</p>
+<p>In order to measure the phase synchrony, the phase of the amplitude of the
+higher-frequency signal must be provided, and not the amplitude as in most
+other PAC functions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>pha, amp</strong><span class="classifier">array_like</span></dt><dd><p>Respectively the arrays of phases of shape (n_pha, …, n_times) and
-the array of amplitudes of shape (n_amp, …, n_times).</p>
-</dd>
-<dt><strong>n_bins</strong><span class="classifier">int | 18</span></dt><dd><p>Number of bins to binarize the amplitude according to phase intervals</p>
+<dt><strong>pha, pha_amp</strong><span class="classifier">array_like</span></dt><dd><p>Respectively the arrays of phases of shape (n_pha, …, n_times) for
+the lower frequency and the array of phase of the amplitude signal of
+shape (n_pha_amp, …, n_times) for the higher frequency.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>Array of phase amplitude coupling of shape (n_amp, n_pha, …)</p>
+<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>Array of phase amplitude coupling of shape (n_pha_amp, n_pha, …)</p>
 </dd>
 </dl>
 </dd>
