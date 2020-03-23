@@ -64,6 +64,10 @@ class TestMethods(object):
                 _pha = np.stack([np.sin(pha), np.cos(pha)], axis=-2)
                 _amp = amp[..., np.newaxis, :]
                 pac = meth(_pha, _amp)
+            elif n + 1 == 4:  # Try with different values of p for coverage
+                pac = meth(pha, amp, p=0.5)
+                pac = meth(pha, amp, p=1)
+                pac = meth(pha, amp, p=None)
             else:
                 pac = meth(pha, amp)
             assert pac.shape == (n_amp_freqs, n_pha_freqs, n_epochs)

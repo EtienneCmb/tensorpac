@@ -202,7 +202,9 @@ def ndpac(pha, amp, p=.05):
         Respectively the arrays of phases of shape (n_pha, ..., n_times) and
         the array of amplitudes of shape (n_amp, ..., n_times).
     p : float | .05
-        P-value to use for thresholding
+        P-value to use for thresholding. Sub-threshold PAC values
+        will be set to 0. To disable this behavior (no masking), use ``p=1`` or
+        ``p=None``.
 
     Returns
     -------
@@ -217,35 +219,42 @@ def ndpac(pha, amp, p=.05):
     """
     npts = amp.shape[-1]
     # Normalize amplitude :
+    # Use the sample standard deviation, as in original Matlab code from author
     amp = np.subtract(amp, np.mean(amp, axis=-1, keepdims=True))
-    amp = np.divide(amp, np.std(amp, axis=-1, keepdims=True))
+    amp = np.divide(amp, np.std(amp, ddof=1, axis=-1, keepdims=True))
     # Compute pac :
     pac = np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j * pha)))
-    pac *= pac / npts
+
+    if p == 1. or p is None:
+        # No thresholding
+        return pac / npts
+
+    s = pac**2
+    pac /= npts
     # Set to zero non-significant values:
-    xlim = erfinv(1 - p)**2
-    pac[pac <= 2 * xlim] = 0.
+    xlim = npts * erfinv(1 - p)**2
+    pac[s <= 2 * xlim] = 0.
     return pac
 
 
-def ps(pha, amp):
+def ps(pha, pha_amp):
     """Phase Synchrony (Penny, 2008; Cohen, 2008).
 
-    In order to measure the phase synchrony, the phase of the amplitude must be
-    provided.
+    In order to measure the phase synchrony, the phase of the amplitude of the
+    higher-frequency signal must be provided, and not the amplitude as in most
+    other PAC functions.
 
     Parameters
     ----------
-    pha, amp : array_like
-        Respectively the arrays of phases of shape (n_pha, ..., n_times) and
-        the array of amplitudes of shape (n_amp, ..., n_times).
-    n_bins : int | 18
-        Number of bins to binarize the amplitude according to phase intervals
+    pha, pha_amp : array_like
+        Respectively the arrays of phases of shape (n_pha, ..., n_times) for
+        the lower frequency and the array of phase of the amplitude signal of
+        shape (n_pha_amp, ..., n_times) for the higher frequency.
 
     Returns
     -------
     pac : array_like
-        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+        Array of phase amplitude coupling of shape (n_pha_amp, n_pha, ...)
 
     References
     ----------
@@ -255,7 +264,8 @@ def ps(pha, amp):
     coupling in the human medial frontal cortex during decision making. Journal
     of cognitive neuroscience 21:390–402.
     """
-    pac = np.einsum('i...j, k...j->ik...', np.exp(-1j * amp), np.exp(1j * pha))
+    pac = np.einsum('i...j, k...j->ik...', np.exp(-1j * pha_amp),
+                    np.exp(1j * pha))
     return np.abs(pac) / pha.shape[-1]
 
 
