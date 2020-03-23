@@ -236,7 +236,9 @@
 <dt><strong>pha, amp</strong><span class="classifier">array_like</span></dt><dd><p>Respectively the arrays of phases of shape (n_pha, …, n_times) and
 the array of amplitudes of shape (n_amp, …, n_times).</p>
 </dd>
-<dt><strong>p</strong><span class="classifier">float | .05</span></dt><dd><p>P-value to use for thresholding</p>
+<dt><strong>p</strong><span class="classifier">float | .05</span></dt><dd><p>P-value to use for thresholding. Sub-threshold PAC values
+will be set to 0. To disable this behavior (no masking), use <code class="docutils literal notranslate"><span class="pre">p=1</span></code> or
+<code class="docutils literal notranslate"><span class="pre">p=None</span></code>.</p>
 </dd>
 </dl>
 </dd>
