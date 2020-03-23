@@ -78,4 +78,4 @@ Contributors
 * `Robin Ince <http://www.robinince.net/about.html>`_
 * `Andrea Brovelli <http://andrea-brovelli.net/>`_
 * `Aymeric Guillot <https://libm.univ-st-etienne.fr/fr/les-membres-du-libm/les-enseignants-chercheurs/guillot-aymeric.html>`_
-
+* `Raphael Vallat <https://raphaelvallat.com/>`_
