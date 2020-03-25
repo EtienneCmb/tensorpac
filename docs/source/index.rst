@@ -4,11 +4,15 @@
 
   <br>
 
+
 .. image:: https://github.com/EtienneCmb/tensorpac/workflows/Tensorpac/badge.svg
-  :target: https://github.com/EtienneCmb/tensorpac/workflows/Tensorpac
+    :target: https://github.com/EtienneCmb/tensorpac/workflows/Tensorpac
 
 .. image:: https://travis-ci.org/EtienneCmb/tensorpac.svg?branch=master
     :target: https://travis-ci.org/EtienneCmb/tensorpac
+
+.. image:: https://circleci.com/gh/EtienneCmb/tensorpac/tree/master.svg?style=svg
+    :target: https://circleci.com/gh/EtienneCmb/tensorpac/tree/master
 
 .. image:: https://codecov.io/gh/EtienneCmb/tensorpac/branch/master/graph/badge.svg
   :target: https://codecov.io/gh/EtienneCmb/tensorpac

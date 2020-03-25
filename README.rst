@@ -11,6 +11,9 @@ Tensorpac
 .. image:: https://codecov.io/gh/EtienneCmb/tensorpac/branch/master/graph/badge.svg
   :target: https://codecov.io/gh/EtienneCmb/tensorpac
 
+.. image:: https://circleci.com/gh/EtienneCmb/tensorpac/tree/master.svg?style=svg
+    :target: https://circleci.com/gh/EtienneCmb/tensorpac/tree/master
+
 .. image:: https://badge.fury.io/py/tensorpac.svg
     :target: https://badge.fury.io/py/tensorpac
 
