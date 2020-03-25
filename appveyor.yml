@@ -1,0 +1,35 @@
+build: false
+
+cache:
+  #- packages
+
+platform:
+    -x64
+
+environment:
+  matrix:
+    - PYTHON_VERSION: 3.6
+      MINICONDA: C:\Miniconda36-x64
+      PYTHON_ARCH: 64
+
+init:
+  - "ECHO %PYTHON_VERSION% %MINICONDA% %PYTHON_ARCH%"
+
+install:
+  # ------------------- PYTHON ENVIRONNEMENT -------------------
+  - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+  - "conda config --set always_yes yes --set changeps1 no"
+  - "conda update -q conda"
+  - "conda info -a"
+  - "conda create -q -n testenv python=%PYTHON_VERSION% numpy scipy matplotlib"
+  # activate testing environnement
+  - "activate testenv"
+  - "python -m pip install --upgrade pip"
+  # install additional dependencies
+  - "pip install setuptools mne pandas statsmodels pytest"
+  - "dir"
+  # ------------------- TENSORPAC -------------------
+  - "python setup.py develop"
+
+test_script:
+  - "pytest"
