@@ -13,4 +13,5 @@ Authors
 
 Contributors
 ============
+* `Raphael Vallat <https://raphaelvallat.com/>`_
 * Jordan O'Byrne
