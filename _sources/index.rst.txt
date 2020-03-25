@@ -4,8 +4,8 @@
 
   <br>
 
-.. image:: https://github.com/EtienneCmb/tensorpac/workflows/tensorpac/badge.svg
-  :target: https://github.com/EtienneCmb/tensorpac/workflows/tensorpac
+.. image:: https://github.com/EtienneCmb/tensorpac/workflows/Tensorpac/badge.svg
+  :target: https://github.com/EtienneCmb/tensorpac/workflows/Tensorpac
 
 .. image:: https://travis-ci.org/EtienneCmb/tensorpac.svg?branch=master
     :target: https://travis-ci.org/EtienneCmb/tensorpac
