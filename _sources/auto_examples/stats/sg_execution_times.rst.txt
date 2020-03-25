@@ -5,8 +5,8 @@
 
 Computation times
 =================
-**00:04.293** total execution time for **auto_examples_stats** files:
+**00:03.758** total execution time for **auto_examples_stats** files:
 
 +---------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_stats_plot_stats_stationary.py` (``plot_stats_stationary.py``) | 00:04.293 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_stats_plot_stats_stationary.py` (``plot_stats_stationary.py``) | 00:03.758 | 0.0 MB |
 +---------------------------------------------------------------------------------------------+-----------+--------+
