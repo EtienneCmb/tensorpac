@@ -8,11 +8,14 @@ Tensorpac
 .. image:: https://travis-ci.org/EtienneCmb/tensorpac.svg?branch=master
     :target: https://travis-ci.org/EtienneCmb/tensorpac
 
-.. image:: https://codecov.io/gh/EtienneCmb/tensorpac/branch/master/graph/badge.svg
-  :target: https://codecov.io/gh/EtienneCmb/tensorpac
-
 .. image:: https://circleci.com/gh/EtienneCmb/tensorpac/tree/master.svg?style=svg
     :target: https://circleci.com/gh/EtienneCmb/tensorpac/tree/master
+
+.. image:: https://ci.appveyor.com/api/projects/status/0arxtw05583gc3e2/branch/master?svg=true
+    :target: https://ci.appveyor.com/project/EtienneCmb/tensorpac/branch/master
+
+.. image:: https://codecov.io/gh/EtienneCmb/tensorpac/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/EtienneCmb/tensorpac
 
 .. image:: https://badge.fury.io/py/tensorpac.svg
     :target: https://badge.fury.io/py/tensorpac
