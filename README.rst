@@ -2,6 +2,9 @@
 Tensorpac
 =========
 
+.. image:: https://github.com/EtienneCmb/tensorpac/workflows/tensorpac/badge.svg
+    :target: https://github.com/EtienneCmb/tensorpac/workflows/tensorpac
+
 .. image:: https://travis-ci.org/EtienneCmb/tensorpac.svg?branch=master
     :target: https://travis-ci.org/EtienneCmb/tensorpac
 
