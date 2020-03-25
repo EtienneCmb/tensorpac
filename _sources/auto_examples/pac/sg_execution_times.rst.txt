@@ -5,20 +5,20 @@
 
 Computation times
 =================
-**00:38.796** total execution time for **auto_examples_pac** files:
+**00:41.611** total execution time for **auto_examples_pac** files:
 
 +-------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_pac_plot_compare_surrogates.py` (``plot_compare_surrogates.py``)         | 00:12.627 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_pac_plot_compare_surrogates.py` (``plot_compare_surrogates.py``)         | 00:12.964 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_pac_plot_compare_normalizations.py` (``plot_compare_normalizations.py``) | 00:08.084 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_pac_plot_compare_normalizations.py` (``plot_compare_normalizations.py``) | 00:08.520 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_pac_plot_long_range_coupling.py` (``plot_long_range_coupling.py``)       | 00:04.995 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_pac_plot_long_range_coupling.py` (``plot_long_range_coupling.py``)       | 00:05.381 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_pac_plot_pvalues.py` (``plot_pvalues.py``)                               | 00:04.685 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_pac_plot_pvalues.py` (``plot_pvalues.py``)                               | 00:05.218 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_pac_plot_compare_filtering.py` (``plot_compare_filtering.py``)           | 00:04.346 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_pac_plot_compare_filtering.py` (``plot_compare_filtering.py``)           | 00:04.698 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_pac_plot_pac_methods.py` (``plot_pac_methods.py``)                       | 00:02.335 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_pac_plot_pac_methods.py` (``plot_pac_methods.py``)                       | 00:02.662 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_auto_examples_pac_plot_readme.py` (``plot_readme.py``)                                 | 00:01.724 | 0.0 MB |
+| :ref:`sphx_glr_auto_examples_pac_plot_readme.py` (``plot_readme.py``)                                 | 00:02.168 | 0.0 MB |
 +-------------------------------------------------------------------------------------------------------+-----------+--------+
