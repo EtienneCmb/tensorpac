@@ -87,7 +87,7 @@ plt.subplot(122)
 sns.barplot(x="Method", y="Computing time ratio", data=df_ratio,
             palette=["#34495e"])
 plt.grid()
-plt.title("Computing time ratio\n(tensor / vector)")
+plt.title("Computing time ratio\n(vector / tensor)")
 ax = plt.gca()
 ax.text(*tuple(cfg["nb_pos"]), 'B', transform=ax.transAxes, **cfg["nb_cfg"])
 

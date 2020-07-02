@@ -3,7 +3,8 @@
     "cmap": "viridis",
     "phres": [1, 30, 1, 0.5],
     "ahres": [60, 160, 5, 2],
-    "path": "/home/etienne/Dropbox/Paper/Papier 8 - Tensorpac/figures",
+    "path": "/home/etienne/Dropbox/Paper/P5_SOFT_tensorpac/figures",
+    "rpath": "/home/etienne/Dropbox/Paper/P5_SOFT_tensorpac/rew_figures",
     "nb_pos": [-0.1, 1.05],
     "nb_cfg": {
         "size": 25,
