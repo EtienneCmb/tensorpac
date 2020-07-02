@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tensorpac.methods.meth_surrogates &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/tp_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/gallery-dataframe.css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
@@ -243,6 +246,8 @@
 <div class="viewcode-block" id="swap_pha_amp"><a class="viewcode-back" href="../../../generated/tensorpac.methods.swap_pha_amp.html#tensorpac.methods.swap_pha_amp">[docs]</a><span class="k">def</span> <span class="nf">swap_pha_amp</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Swap phase / amplitude trials.</span>
 
+<span class="sd">    Taken from :cite:`tort2010measuring`</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    pha, amp : array_like</span>
@@ -254,12 +259,6 @@
 <span class="sd">    pha, amp : array_like</span>
 <span class="sd">        The phase and amplitude to use to compute the distribution of</span>
 <span class="sd">        permutations</span>
-
-<span class="sd">    References</span>
-<span class="sd">    ----------</span>
-<span class="sd">    Tort ABL, Komorowski R, Eichenbaum H, Kopell N (2010) Measuring</span>
-<span class="sd">    Phase-Amplitude Coupling Between Neuronal Oscillations of Different</span>
-<span class="sd">    Frequencies. Journal of Neurophysiology 104:1195–1210.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">tr_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">pha</span><span class="p">[:,</span> <span class="n">tr_</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">amp</span></div>
@@ -268,6 +267,8 @@
 <div class="viewcode-block" id="swap_blocks"><a class="viewcode-back" href="../../../generated/tensorpac.methods.swap_blocks.html#tensorpac.methods.swap_blocks">[docs]</a><span class="k">def</span> <span class="nf">swap_blocks</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Swap amplitudes time blocks.</span>
 
+<span class="sd">    Taken from :cite:`bahramisharif2013propagating`</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    pha, amp : array_like</span>
@@ -279,13 +280,6 @@
 <span class="sd">    pha, amp : array_like</span>
 <span class="sd">        The phase and amplitude to use to compute the distribution of</span>
 <span class="sd">        permutations</span>
-
-<span class="sd">    References</span>
-<span class="sd">    ----------</span>
-<span class="sd">    Bahramisharif A, van Gerven MAJ, Aarnoutse EJ, Mercier MR, Schwartz TH,</span>
-<span class="sd">    Foxe JJ, Ramsey NF, Jensen O (2013) Propagating Neocortical Gamma Bursts</span>
-<span class="sd">    Are Coordinated by Traveling Alpha Waves. Journal of Neuroscience</span>
-<span class="sd">    33:18849–18854.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># random cutting point along time axis</span>
     <span class="n">cut_at</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
@@ -299,6 +293,8 @@
 <div class="viewcode-block" id="time_lag"><a class="viewcode-back" href="../../../generated/tensorpac.methods.time_lag.html#tensorpac.methods.time_lag">[docs]</a><span class="k">def</span> <span class="nf">time_lag</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Introduce a time lag on phase series.</span>
 
+<span class="sd">    Taken from :cite:`canolty2006high`</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    pha, amp : array_like</span>
@@ -310,11 +306,6 @@
 <span class="sd">    pha, amp : array_like</span>
 <span class="sd">        The phase and amplitude to use to compute the distribution of</span>
 <span class="sd">        permutations</span>
-
-<span class="sd">    References</span>
-<span class="sd">    ----------</span>
-<span class="sd">    Canolty RT (2006) High Gamma Power Is Phase-Locked to Theta. science</span>
-<span class="sd">    1128115:313.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">shift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span> <span class="n">amp</span></div>
@@ -373,6 +364,8 @@
                 <li style="font-weight:bold"><a href="../../../community.html">Community</a></li>
                 <li>·</li>
                 <li style="font-weight:bold"><a href="../../../cite.html">Citation</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../../../references.html">References</a></li>
             </ul>
          </div>
         <!-- <br> -->

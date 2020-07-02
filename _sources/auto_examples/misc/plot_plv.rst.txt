@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_auto_examples_misc_plot_plv.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_auto_examples_misc_plot_plv.py:
+        Click :ref:`here <sphx_glr_download_auto_examples_misc_plot_plv.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_auto_examples_misc_plot_plv.py:
 
 
 ==============================================
@@ -63,6 +65,7 @@ Generate a random data of shape (n_epochs, n_times)
 
 
 .. image:: /auto_examples/misc/images/sphx_glr_plot_plv_001.png
+    :alt: plot plv
     :class: sphx-glr-single-img
 
 
@@ -94,6 +97,7 @@ Compute and plot the Power Spectrum Density (PSD)
 
 
 .. image:: /auto_examples/misc/images/sphx_glr_plot_plv_002.png
+    :alt: PSD mean over 100 trials
     :class: sphx-glr-single-img
 
 
@@ -104,7 +108,7 @@ Compute and plot the Power Spectrum Density (PSD)
  .. code-block:: none
 
 
-    <matplotlib.axes._subplots.AxesSubplot object at 0x7f559c4749e8>
+    <matplotlib.axes._subplots.AxesSubplot object at 0x7f9d65853978>
 
 
 
@@ -138,6 +142,7 @@ Compute and plot the Phase Locking Value
 
 
 .. image:: /auto_examples/misc/images/sphx_glr_plot_plv_003.png
+    :alt: Phase Locking Value across 100 trials, Phase Locking Value across 100 trials
     :class: sphx-glr-single-img
 
 
@@ -147,7 +152,7 @@ Compute and plot the Phase Locking Value
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  4.184 seconds)
+   **Total running time of the script:** ( 0 minutes  5.238 seconds)
 
 
 .. _sphx_glr_download_auto_examples_misc_plot_plv.py:
@@ -160,13 +165,13 @@ Compute and plot the Phase Locking Value
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: plot_plv.py <plot_plv.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: plot_plv.ipynb <plot_plv.ipynb>`
 

@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tensorpac.methods.meth_erpac &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/tp_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/gallery-dataframe.css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
@@ -264,7 +267,8 @@
     <span class="sd">&quot;&quot;&quot;Correlation coefficient between a circular and a linear random variable.</span>
 
 <span class="sd">    Adapted from the function circ_corrcc Circular Statistics Toolbox for</span>
-<span class="sd">    Matlab By Philipp Berens, 2009.</span>
+<span class="sd">    Matlab By Philipp Berens, 2009 :cite:`berens2009circstat`. This function is</span>
+<span class="sd">    an adaptation of Voytek, 2013 :cite:`voytek2013method` for tensors.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -278,11 +282,6 @@
 <span class="sd">        Array of correlation coefficients of shape (n_amp, n_pha, ...)</span>
 <span class="sd">    pval : array_like</span>
 <span class="sd">        Array of p-values of shape (n_amp, n_pha, ...).</span>
-
-<span class="sd">    References</span>
-<span class="sd">    ----------</span>
-<span class="sd">    Voytek B, D’Esposito M, Crone N, Knight RT (2013) A method for</span>
-<span class="sd">    event-related phase/amplitude coupling. NeuroImage 64:416–424.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Compute correlation coefficient for sin and cos independently</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -307,7 +306,7 @@
 <span class="sd">    This function assumes that phases and amplitudes have already been</span>
 <span class="sd">    prepared i.e. phases should be represented in a unit circle</span>
 <span class="sd">    (np.c_[np.sin(pha), np.cos(pha)]) and both inputs should also have been</span>
-<span class="sd">    copnormed.</span>
+<span class="sd">    copnormed :cite:`ince2017statistical`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -319,13 +318,6 @@
 <span class="sd">    -------</span>
 <span class="sd">    erpac : array_like</span>
 <span class="sd">        Array of correlation coefficients of shape (n_amp, n_pha, n_times)</span>
-
-<span class="sd">    References</span>
-<span class="sd">    ----------</span>
-<span class="sd">    Ince RAA, Giordano BL, Kayser C, Rousselet GA, Gross J, Schyns PG (2017) A</span>
-<span class="sd">    statistical framework for neuroimaging data analysis based on mutual</span>
-<span class="sd">    information estimated via a gaussian copula: Gaussian Copula Mutual</span>
-<span class="sd">    Information. Human Brain Mapping 38:1541–1573.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># get shapes</span>
     <span class="p">(</span><span class="n">n_pha</span><span class="p">,</span> <span class="n">n_times</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">),</span> <span class="n">n_amp</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># noqa</span>
@@ -401,6 +393,8 @@
                 <li style="font-weight:bold"><a href="../../../community.html">Community</a></li>
                 <li>·</li>
                 <li style="font-weight:bold"><a href="../../../cite.html">Citation</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../../../references.html">References</a></li>
             </ul>
          </div>
         <!-- <br> -->

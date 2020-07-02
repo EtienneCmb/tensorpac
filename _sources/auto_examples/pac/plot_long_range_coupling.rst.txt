@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_auto_examples_pac_plot_long_range_coupling.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_auto_examples_pac_plot_long_range_coupling.py:
+        Click :ref:`here <sphx_glr_download_auto_examples_pac_plot_long_range_coupling.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_auto_examples_pac_plot_long_range_coupling.py:
 
 
 ==============
@@ -20,6 +22,7 @@ and xamp have to be set to data.
 
 
 .. image:: /auto_examples/pac/images/sphx_glr_plot_long_range_coupling_001.png
+    :alt: Mean across trials of the first dataset, Mean across trials of the second dataset, Phase of the first dataset and amplitude of the second, Phase of the second dataset and amplitde of the second
     :class: sphx-glr-single-img
 
 
@@ -82,7 +85,7 @@ and xamp have to be set to data.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  5.067 seconds)
+   **Total running time of the script:** ( 0 minutes  6.073 seconds)
 
 
 .. _sphx_glr_download_auto_examples_pac_plot_long_range_coupling.py:
@@ -95,13 +98,13 @@ and xamp have to be set to data.
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: plot_long_range_coupling.py <plot_long_range_coupling.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: plot_long_range_coupling.ipynb <plot_long_range_coupling.ipynb>`
 

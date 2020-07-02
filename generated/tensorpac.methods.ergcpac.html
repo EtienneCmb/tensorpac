@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tensorpac.methods.ergcpac &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tp_style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -226,14 +229,14 @@
       
   <div class="section" id="tensorpac-methods-ergcpac">
 <h1>tensorpac.methods.ergcpac<a class="headerlink" href="#tensorpac-methods-ergcpac" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="py function">
 <dt id="tensorpac.methods.ergcpac">
-<code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">ergcpac</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">smooth=None</em>, <em class="sig-param">n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_erpac.html#ergcpac"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.ergcpac" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">ergcpac</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pha</span></em>, <em class="sig-param"><span class="n">amp</span></em>, <em class="sig-param"><span class="n">smooth</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_jobs</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_erpac.html#ergcpac"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.ergcpac" title="Permalink to this definition">¶</a></dt>
 <dd><p>Event Related PAC computed using the Gaussian Copula Mutual Information.</p>
 <p>This function assumes that phases and amplitudes have already been
 prepared i.e. phases should be represented in a unit circle
 (np.c_[np.sin(pha), np.cos(pha)]) and both inputs should also have been
-copnormed.</p>
+copnormed <a class="bibtex reference internal" href="../references.html#ince2017statistical" id="id1">[4]</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
@@ -249,11 +252,6 @@ and the array of amplitudes of shape (n_amp, n_times, 1, n_epochs).</p>
 </dl>
 </dd>
 </dl>
-<p class="rubric">References</p>
-<p>Ince RAA, Giordano BL, Kayser C, Rousselet GA, Gross J, Schyns PG (2017) A
-statistical framework for neuroimaging data analysis based on mutual
-information estimated via a gaussian copula: Gaussian Copula Mutual
-Information. Human Brain Mapping 38:1541–1573.</p>
 </dd></dl>
 
 </div>
@@ -280,6 +278,8 @@ Information. Human Brain Mapping 38:1541–1573.</p>
                 <li style="font-weight:bold"><a href="../community.html">Community</a></li>
                 <li>·</li>
                 <li style="font-weight:bold"><a href="../cite.html">Citation</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../references.html">References</a></li>
             </ul>
          </div>
         <!-- <br> -->

@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tensorpac.Pac &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tp_style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -226,9 +229,9 @@
       
   <div class="section" id="tensorpac-pac">
 <h1>tensorpac.Pac<a class="headerlink" href="#tensorpac-pac" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
+<dl class="py class">
 <dt id="tensorpac.Pac">
-<em class="property">class </em><code class="sig-prename descclassname">tensorpac.</code><code class="sig-name descname">Pac</code><span class="sig-paren">(</span><em class="sig-param">idpac=(1, 2, 3), f_pha=[2, 4], f_amp=[60, 200], dcomplex='hilbert', cycle=(3, 6), width=7, n_bins=18, verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">tensorpac.</code><code class="sig-name descname">Pac</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">idpac</span><span class="o">=</span><span class="default_value">1, 2, 3</span></em>, <em class="sig-param"><span class="n">f_pha</span><span class="o">=</span><span class="default_value">[2, 4]</span></em>, <em class="sig-param"><span class="n">f_amp</span><span class="o">=</span><span class="default_value">[60, 200]</span></em>, <em class="sig-param"><span class="n">dcomplex</span><span class="o">=</span><span class="default_value">'hilbert'</span></em>, <em class="sig-param"><span class="n">cycle</span><span class="o">=</span><span class="default_value">3, 6</span></em>, <em class="sig-param"><span class="n">width</span><span class="o">=</span><span class="default_value">7</span></em>, <em class="sig-param"><span class="n">n_bins</span><span class="o">=</span><span class="default_value">18</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute Phase-Amplitude Coupling (PAC).</p>
 <p>Computing PAC is assessed in three steps : compute the real PAC, compute
 surrogates and finally, because PAC is very sensible to the noise, correct
@@ -244,33 +247,35 @@ refer</p>
 <li><p>First digit : refer to the pac method</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>‘1’ : Mean Vector Length (MVL) <a class="footnote-reference brackets" href="#f1" id="id1">1</a></p></li>
-<li><p>‘2’ : Kullback-Leibler Distance (KLD) <a class="footnote-reference brackets" href="#f2" id="id2">2</a></p></li>
-<li><p>‘3’ : Heights Ratio (HR) <a class="footnote-reference brackets" href="#f3" id="id3">3</a></p></li>
-<li><p>‘4’ : ndPAC <a class="footnote-reference brackets" href="#f4" id="id4">4</a></p></li>
-<li><p>‘5’ : Phase Synchrony <a class="footnote-reference brackets" href="#f3" id="id5">3</a></p></li>
-<li><p>‘6’ : Gaussian Copula PAC <a class="footnote-reference brackets" href="#f7" id="id6">6</a></p></li>
+<li><p>1 : Mean Vector Length (MVL) <a class="bibtex reference internal" href="../references.html#canolty2006high" id="id1">[3]</a></p></li>
+<li><p>2 : Kullback-Leibler Distance (KLD) <a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id2">[8]</a></p></li>
+<li><p>3 : Heights Ratio (HR) <a class="bibtex reference internal" href="../references.html#lakatos2005oscillatory" id="id3">[7]</a></p></li>
+<li><p>4 : ndPAC <a class="bibtex reference internal" href="../references.html#ozkurt2012statistically" id="id4">[10]</a></p></li>
+<li><p>5 : Phase-Locking Value <a class="bibtex reference internal" href="../references.html#lachaux1999measuring" id="id5">[6]</a></p></li>
+<li><p>6 : Gaussian Copula PAC <a class="bibtex reference internal" href="../references.html#ince2017statistical" id="id6">[4]</a></p></li>
 </ul>
 </div></blockquote>
 </li>
 <li><p>Second digit : refer to the method for computing surrogates</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>‘0’ : No surrogates</p></li>
-<li><p>‘1’ : Swap phase / amplitude across trials <a class="footnote-reference brackets" href="#f2" id="id7">2</a></p></li>
-<li><p>‘2’ : Swap amplitude time blocks <a class="footnote-reference brackets" href="#f5" id="id8">5</a></p></li>
-<li><p>‘3’ : Time lag <a class="footnote-reference brackets" href="#f1" id="id9">1</a></p></li>
+<li><p>0 : No surrogates</p></li>
+<li><p>1 : Swap phase / amplitude across trials
+<a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id7">[8]</a></p></li>
+<li><p>2 : Swap amplitude time blocks
+<a class="bibtex reference internal" href="../references.html#bahramisharif2013propagating" id="id8">[1]</a></p></li>
+<li><p>3 : Time lag <a class="bibtex reference internal" href="../references.html#canolty2006high" id="id9">[3]</a></p></li>
 </ul>
 </div></blockquote>
 </li>
 <li><p>Third digit : refer to the normalization method for correction</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>‘0’ : No normalization</p></li>
-<li><p>‘1’ : Substract the mean of surrogates</p></li>
-<li><p>‘2’ : Divide by the mean of surrogates</p></li>
-<li><p>‘3’ : Substract then divide by the mean of surrogates</p></li>
-<li><p>‘4’ : Z-score</p></li>
+<li><p>0 : No normalization</p></li>
+<li><p>1 : Substract the mean of surrogates</p></li>
+<li><p>2 : Divide by the mean of surrogates</p></li>
+<li><p>3 : Substract then divide by the mean of surrogates</p></li>
+<li><p>4 : Z-score</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -295,39 +300,19 @@ respectively for low, middle and high resolution vectors</p></li>
 <dt><strong>cycle</strong><span class="classifier">tuple | (3, 6)</span></dt><dd><p>Control the number of cycles for filtering (only if dcomplex is
 ‘hilbert’). Should be a tuple of integers where the first one
 refers to the number of cycles for the phase and the second for the
-amplitude <a class="footnote-reference brackets" href="#f5" id="id10">5</a>.</p>
+amplitude <a class="bibtex reference internal" href="../references.html#bahramisharif2013propagating" id="id10">[1]</a>.</p>
 </dd>
 <dt><strong>width</strong><span class="classifier">int | 7</span></dt><dd><p>Width of the Morlet’s wavelet.</p>
 </dd>
-<dt><strong>n_bins</strong><span class="classifier">int | 18</span></dt><dd><p>Number of bins for the KLD and HR PAC method <a class="footnote-reference brackets" href="#f2" id="id11">2</a> <a class="footnote-reference brackets" href="#f3" id="id12">3</a></p>
+<dt><strong>n_bins</strong><span class="classifier">int | 18</span></dt><dd><p>Number of bins for the KLD and HR PAC method
+<a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id11">[8]</a><a class="bibtex reference internal" href="../references.html#lakatos2005oscillatory" id="id12">[7]</a></p>
 </dd>
 </dl>
 </dd>
 </dl>
-<p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="f1"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id9">2</a>)</span></dt>
-<dd><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2628289/">Canolty et al, 2006</a></p>
-</dd>
-<dt class="label" id="f2"><span class="brackets">2</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id7">2</a>,<a href="#id11">3</a>)</span></dt>
-<dd><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2941206/">Tort et al, 2010</a></p>
-</dd>
-<dt class="label" id="f3"><span class="brackets">3</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id5">2</a>,<a href="#id12">3</a>)</span></dt>
-<dd><p><a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/15901760">Lakatos et al, 2005</a></p>
-</dd>
-<dt class="label" id="f4"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
-<dd><p><a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/22531738/">Ozkurt et al, 2012</a></p>
-</dd>
-<dt class="label" id="f5"><span class="brackets">5</span><span class="fn-backref">(<a href="#id8">1</a>,<a href="#id10">2</a>)</span></dt>
-<dd><p><a class="reference external" href="http://www.jneurosci.org/content/33/48/18849.short/">Bahramisharif et al, 2013</a></p>
-</dd>
-<dt class="label" id="f7"><span class="brackets"><a class="fn-backref" href="#id6">6</a></span></dt>
-<dd><p><a class="reference external" href="https://onlinelibrary.wiley.com/doi/full/10.1002/hbm.23471">Ince et al, 2017</a></p>
-</dd>
-</dl>
-<dl class="method">
+<dl class="py method">
 <dt id="tensorpac.Pac.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">self, idpac=(1, 2, 3), f_pha=[2, 4], f_amp=[60, 200], dcomplex='hilbert', cycle=(3, 6), width=7, n_bins=18, verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">idpac</span><span class="o">=</span><span class="default_value">1, 2, 3</span></em>, <em class="sig-param"><span class="n">f_pha</span><span class="o">=</span><span class="default_value">[2, 4]</span></em>, <em class="sig-param"><span class="n">f_amp</span><span class="o">=</span><span class="default_value">[60, 200]</span></em>, <em class="sig-param"><span class="n">dcomplex</span><span class="o">=</span><span class="default_value">'hilbert'</span></em>, <em class="sig-param"><span class="n">cycle</span><span class="o">=</span><span class="default_value">3, 6</span></em>, <em class="sig-param"><span class="n">width</span><span class="o">=</span><span class="default_value">7</span></em>, <em class="sig-param"><span class="n">n_bins</span><span class="o">=</span><span class="default_value">18</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check and initialize.</p>
 </dd></dl>
 
@@ -338,34 +323,34 @@ amplitude <a class="footnote-reference brackets" href="#f5" id="id10">5</a>.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.__init__" title="tensorpac.Pac.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self[, idpac, f_pha, f_amp, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.__init__" title="tensorpac.Pac.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([idpac, f_pha, f_amp, dcomplex, …])</p></td>
 <td><p>Check and initialize.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.comodulogram" title="tensorpac.Pac.comodulogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">comodulogram</span></code></a>(self, pac[, xlabel, ylabel, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">comodulogram</span></code>(pac[, xlabel, ylabel, cblabel])</p></td>
 <td><p>Plot PAC using comodulogram.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.filter" title="tensorpac.Pac.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(self, sf, x[, ftype, keepfilt, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code>(sf, x[, ftype, keepfilt, edges, n_jobs])</p></td>
 <td><p>Filt the data in the specified frequency bands.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.filterfit" title="tensorpac.Pac.filterfit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filterfit</span></code></a>(self, sf, x_pha[, x_amp, n_perm, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">filterfit</span></code>(sf, x_pha[, x_amp, n_perm, p, …])</p></td>
 <td><p>Filt the data then compute PAC on it.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.fit" title="tensorpac.Pac.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(self, pha, amp[, n_perm, p, n_jobs, verbose])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(pha, amp[, n_perm, p, n_jobs, verbose])</p></td>
 <td><p>Compute PAC on filtered data.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.infer_pvalues" title="tensorpac.Pac.infer_pvalues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">infer_pvalues</span></code></a>(self[, p])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">infer_pvalues</span></code>([p])</p></td>
 <td><p>Infer p-values based on surrogate distribution.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.pacplot" title="tensorpac.Pac.pacplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pacplot</span></code></a>(self, pac, xvec, yvec[, xlabel, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pacplot</span></code>(pac, xvec, yvec[, xlabel, ylabel, …])</p></td>
 <td><p>Main plotting pac function.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.savefig" title="tensorpac.Pac.savefig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">savefig</span></code></a>(self, filename[, dpi])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">savefig</span></code>(filename[, dpi])</p></td>
 <td><p>Save the figure.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.show" title="tensorpac.Pac.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>(self)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code>()</p></td>
 <td><p>Display the figure.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.triplot" title="tensorpac.Pac.triplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">triplot</span></code></a>(self, pac, fvec, tridx[, xlabel, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">triplot</span></code>(pac, fvec, tridx[, xlabel, ylabel, …])</p></td>
 <td><p>Triangular plot.</p></td>
 </tr>
 </tbody>
@@ -377,406 +362,41 @@ amplitude <a class="footnote-reference brackets" href="#f5" id="id10">5</a>.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.cycle" title="tensorpac.Pac.cycle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cycle</span></code></a></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cycle</span></code></p></td>
 <td><p>Get the cycle value.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.dcomplex" title="tensorpac.Pac.dcomplex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dcomplex</span></code></a></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dcomplex</span></code></p></td>
 <td><p>Get the dcomplex value.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.f_amp" title="tensorpac.Pac.f_amp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_amp</span></code></a></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_amp</span></code></p></td>
 <td><p>Vector of amplitudes of shape (n_amp, 2).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.f_pha" title="tensorpac.Pac.f_pha"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_pha</span></code></a></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_pha</span></code></p></td>
 <td><p>Vector of phases of shape (n_pha, 2).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.idpac" title="tensorpac.Pac.idpac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">idpac</span></code></a></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">idpac</span></code></p></td>
 <td><p>Get the idpac value.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.pac" title="tensorpac.Pac.pac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac</span></code></a></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac</span></code></p></td>
 <td><p>Array of un-normalized PAC of shape (n_amp, n_pha, n_epochs).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.pvalues" title="tensorpac.Pac.pvalues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pvalues</span></code></a></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pvalues</span></code></p></td>
 <td><p>Array of p-values of shape (n_amp, n_pha).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.surrogates" title="tensorpac.Pac.surrogates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">surrogates</span></code></a></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">surrogates</span></code></p></td>
 <td><p>Array of surrogates of shape (n_perm, n_amp, n_pha, n_epochs).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.width" title="tensorpac.Pac.width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">width</span></code></a></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">width</span></code></p></td>
 <td><p>Get the width value.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.xvec" title="tensorpac.Pac.xvec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xvec</span></code></a></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">xvec</span></code></p></td>
 <td><p>Vector of phases of shape (n_pha,) use for plotting.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.yvec" title="tensorpac.Pac.yvec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yvec</span></code></a></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">yvec</span></code></p></td>
 <td><p>Vector of amplitudes of shape (n_amp,) use for plotting.</p></td>
 </tr>
 </tbody>
 </table>
-<dl class="method">
-<dt id="tensorpac.Pac.comodulogram">
-<code class="sig-name descname">comodulogram</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">pac</em>, <em class="sig-param">xlabel='Frequency for phase (hz)'</em>, <em class="sig-param">ylabel='Frequency for amplitude (hz)'</em>, <em class="sig-param">cblabel='PAC values'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.Pac.comodulogram" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot PAC using comodulogram.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>PAC array of shape (namp, pha)</p>
-</dd>
-<dt><strong>xlabel</strong><span class="classifier">string | ‘Frequency for phase (hz)’</span></dt><dd><p>Label for the phase axis.</p>
-</dd>
-<dt><strong>ylabel</strong><span class="classifier">string | ‘Frequency for amplitude (hz)’</span></dt><dd><p>Label for the amplitude axis.</p>
-</dd>
-<dt><strong>cblabel</strong><span class="classifier">string | ‘PAC values’</span></dt><dd><p>Colorbar.</p>
-</dd>
-<dt><strong>kwargs</strong><span class="classifier">dict</span></dt><dd><p>Further arguments are passed to the pacplot() method.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>gca</strong><span class="classifier">axes</span></dt><dd><p>The current matplotlib axes.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x</em>, <em class="sig-param">ftype='phase'</em>, <em class="sig-param">keepfilt=False</em>, <em class="sig-param">edges=None</em>, <em class="sig-param">n_jobs=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.Pac.filter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filt the data in the specified frequency bands.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>sf</strong><span class="classifier">float</span></dt><dd><p>The sampling frequency.</p>
-</dd>
-<dt><strong>x</strong><span class="classifier">array_like</span></dt><dd><p>Array of data of shape (n_epochs, n_times)</p>
-</dd>
-<dt><strong>ftype</strong><span class="classifier">{‘phase’, ‘amplitude’}</span></dt><dd><p>Specify if you want to extract phase (‘phase’) or the amplitude
-(‘amplitude’).</p>
-</dd>
-<dt><strong>n_jobs</strong><span class="classifier">int | -1</span></dt><dd><p>Number of jobs to compute PAC in parallel. For very large data,
-set this parameter to 1 in order to prevent large memory usage.</p>
-</dd>
-<dt><strong>keepfilt</strong><span class="classifier">bool | False</span></dt><dd><p>Specify if you only want the filtered data (True). This parameter
-is only available with dcomplex=’hilbert’ and not wavelet.</p>
-</dd>
-<dt><strong>edges</strong><span class="classifier">int | None</span></dt><dd><p>Number of samples to discard to avoid edge effects due to filtering</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>xfilt</strong><span class="classifier">array_like</span></dt><dd><p>The filtered data of shape (n_freqs, n_epochs, n_times)</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.filterfit">
-<code class="sig-name descname">filterfit</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x_pha</em>, <em class="sig-param">x_amp=None</em>, <em class="sig-param">n_perm=200</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">edges=None</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filt the data then compute PAC on it.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>sf</strong><span class="classifier">float</span></dt><dd><p>The sampling frequency.</p>
-</dd>
-<dt><strong>x_pha, x_amp</strong><span class="classifier">array_like</span></dt><dd><p>Array of data for computing PAC. x_pha is the data used for
-extracting phases and x_amp, amplitudes. Both arrays must have
-the same shapes. If you want to compute PAC locally i.e. on the
-same electrode, x=x_pha=x_amp. For distant coupling, x_pha and
-x_amp could be different but still must to have the same shape.</p>
-</dd>
-<dt><strong>n_perm</strong><span class="classifier">int | 200</span></dt><dd><p>Number of surrogates to compute.</p>
-</dd>
-<dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Statistical threshold</p>
-</dd>
-<dt><strong>edges</strong><span class="classifier">int | None</span></dt><dd><p>Number of samples to discard to avoid edge effects due to filtering</p>
-</dd>
-<dt><strong>n_jobs</strong><span class="classifier">int | -1</span></dt><dd><p>Number of jobs to compute PAC in parallel. For very large data,
-set this parameter to 1 in order to prevent large memory usage.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>Phase-Amplitude Coupling measure of shape (namp, npha, …).</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-odd">Attributes</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>Unormalized Phase-Amplitude Coupling measure of shape (n_amp,
-n_pha, n_epochs)</p>
-</dd>
-<dt><strong>pvalues</strong><span class="classifier">array_like</span></dt><dd><p>Array of p-values of shape (n_amp, n_pha)</p>
-</dd>
-<dt><strong>surrogates</strong><span class="classifier">array_like</span></dt><dd><p>Array of surrogates of shape (n_perm, n_amp, n_pha, n_epochs)</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">n_perm=200</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.fit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute PAC on filtered data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>pha</strong><span class="classifier">array_like</span></dt><dd><p>Array of phases of shape (n_pha, n_epochs, n_times).
-Angles should be in rad.</p>
-</dd>
-<dt><strong>amp</strong><span class="classifier">array_like</span></dt><dd><p>Array of amplitudes of shape (n_amp, n_epochs, n_times).</p>
-</dd>
-<dt><strong>n_perm</strong><span class="classifier">int | 200</span></dt><dd><p>Number of surrogates to compute.</p>
-</dd>
-<dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Statistical threshold</p>
-</dd>
-<dt><strong>n_jobs</strong><span class="classifier">int | -1</span></dt><dd><p>Number of jobs to compute PAC in parallel. For very large data,
-set this parameter to 1 in order to prevent large memory usage.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>Phase-Amplitude Coupling measure of shape (n_amp, n_pha, n_epochs)</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-odd">Attributes</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>Unormalized Phase-Amplitude Coupling measure of shape (n_amp,
-n_pha, n_epochs)</p>
-</dd>
-<dt><strong>pvalues</strong><span class="classifier">array_like</span></dt><dd><p>Array of p-values of shape (n_amp, n_pha)</p>
-</dd>
-<dt><strong>surrogates</strong><span class="classifier">array_like</span></dt><dd><p>Array of surrogates of shape (n_perm, n_amp, n_pha, n_epochs)</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.infer_pvalues">
-<code class="sig-name descname">infer_pvalues</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">p=0.05</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.infer_pvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.infer_pvalues" title="Permalink to this definition">¶</a></dt>
-<dd><p>Infer p-values based on surrogate distribution.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Statistical threshold</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>pvalues</strong><span class="classifier">array_like</span></dt><dd><p>Array of p-values of shape (n_amp, n_pha)</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.pacplot">
-<code class="sig-name descname">pacplot</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">pac</em>, <em class="sig-param">xvec</em>, <em class="sig-param">yvec</em>, <em class="sig-param">xlabel=''</em>, <em class="sig-param">ylabel=''</em>, <em class="sig-param">cblabel=''</em>, <em class="sig-param">title=''</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">vmin=None</em>, <em class="sig-param">vmax=None</em>, <em class="sig-param">under=None</em>, <em class="sig-param">over=None</em>, <em class="sig-param">bad=None</em>, <em class="sig-param">pvalues=None</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">interp=None</em>, <em class="sig-param">rmaxis=False</em>, <em class="sig-param">dpaxis=False</em>, <em class="sig-param">plotas='imshow'</em>, <em class="sig-param">ncontours=5</em>, <em class="sig-param">levels=None</em>, <em class="sig-param">levelcmap='Reds'</em>, <em class="sig-param">polar=False</em>, <em class="sig-param">colorbar=True</em>, <em class="sig-param">y=1.02</em>, <em class="sig-param">subplot=111</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.Pac.pacplot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Main plotting pac function.</p>
-<p>This method can be used to plot any 2D array.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>A 2D array.</p>
-</dd>
-<dt><strong>xvec</strong><span class="classifier">array_like</span></dt><dd><p>The vector to use for the x-axis.</p>
-</dd>
-<dt><strong>yvec</strong><span class="classifier">array_like</span></dt><dd><p>The vector to use for the y-axis.</p>
-</dd>
-<dt><strong>xlabel</strong><span class="classifier">string | ‘’</span></dt><dd><p>Label for the x-axis.</p>
-</dd>
-<dt><strong>ylabel</strong><span class="classifier">string | ‘’</span></dt><dd><p>Label for the y-axis.</p>
-</dd>
-<dt><strong>cblabel</strong><span class="classifier">string | ‘’</span></dt><dd><p>Label for the colorbar.</p>
-</dd>
-<dt><strong>title</strong><span class="classifier">string | ‘’</span></dt><dd><p>Title of the plot.</p>
-</dd>
-<dt><strong>y</strong><span class="classifier">float | 1.02</span></dt><dd><p>Title location.</p>
-</dd>
-<dt><strong>cmap</strong><span class="classifier">string | ‘viridis’</span></dt><dd><p>Name of one Matplotlib’s colomap.</p>
-</dd>
-<dt><strong>vmin</strong><span class="classifier">float | None</span></dt><dd><p>Threshold under which set the color to the uner parameter.</p>
-</dd>
-<dt><strong>vmax</strong><span class="classifier">float | None</span></dt><dd><p>Threshold over which set the color in the over parameter.</p>
-</dd>
-<dt><strong>under</strong><span class="classifier">string | ‘gray’</span></dt><dd><p>Color for values under the vmin parameter.</p>
-</dd>
-<dt><strong>over</strong><span class="classifier">string | ‘red’</span></dt><dd><p>Color for values over the vmax parameter.</p>
-</dd>
-<dt><strong>bad</strong><span class="classifier">string | None</span></dt><dd><p>Color for non-significant values.</p>
-</dd>
-<dt><strong>pvalues</strong><span class="classifier">array_like | None</span></dt><dd><p>P-values to use for masking PAC values. The shape of this
-parameter must be the same as the shape as pac.</p>
-</dd>
-<dt><strong>p</strong><span class="classifier">float | .05</span></dt><dd><p>If pvalues is pass, use this threshold for masking
-non-significant PAC.</p>
-</dd>
-<dt><strong>interp</strong><span class="classifier">tuple | None</span></dt><dd><p>Tuple for controlling the 2D interpolation. For example,
-(.1, .1) will multiply the number of row and columns by 10.</p>
-</dd>
-<dt><strong>rmaxis</strong><span class="classifier">bool | False</span></dt><dd><p>Remove unecessary axis.</p>
-</dd>
-<dt><strong>dpaxis</strong><span class="classifier">bool | False</span></dt><dd><p>Despine axis.</p>
-</dd>
-<dt><strong>plotas</strong><span class="classifier">{‘imshow’, ‘contour’, ‘pcolor’}</span></dt><dd><p>Choose how to display the comodulogram, either using imshow
-(‘imshow’) or contours (‘contour’). If you choose ‘contour’,
-use the ncontours parameter for controlling the number of
-contours.</p>
-</dd>
-<dt><strong>ncontours</strong><span class="classifier">int | 5</span></dt><dd><p>Number of contours if plotas is ‘contour’.</p>
-</dd>
-<dt><strong>levels</strong><span class="classifier">list | None</span></dt><dd><p>Add significency levels. This parameter must be a sorted list
-of p-values to use as levels.</p>
-</dd>
-<dt><strong>levelcmap</strong><span class="classifier">string | Reds</span></dt><dd><p>Colormap of signifiency levels.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>gca: axes</dt><dd><p>The current matplotlib axes.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.savefig">
-<code class="sig-name descname">savefig</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filename</em>, <em class="sig-param">dpi=600</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.Pac.savefig" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save the figure.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>filename</strong><span class="classifier">string</span></dt><dd><p>The name of the figure to save.</p>
-</dd>
-<dt><strong>dpi</strong><span class="classifier">int | 600</span></dt><dd><p>DPI of the figure.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.show">
-<code class="sig-name descname">show</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.Pac.show" title="Permalink to this definition">¶</a></dt>
-<dd><p>Display the figure.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.triplot">
-<code class="sig-name descname">triplot</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">pac</em>, <em class="sig-param">fvec</em>, <em class="sig-param">tridx</em>, <em class="sig-param">xlabel='Starting frequency (hz)'</em>, <em class="sig-param">ylabel='Ending frequency (hz)'</em>, <em class="sig-param">cblabel='PAC values'</em>, <em class="sig-param">bad='lightgray'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.Pac.triplot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Triangular plot.</p>
-<p>The triplot method is used to find the [starting, ending] frequency
-either for the phase or for the amplitude.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>Pac array of shape (namp, npha)</p>
-</dd>
-<dt><strong>fvec</strong><span class="classifier">array_like</span></dt><dd><p>The frequency vector returned by the pac_trivec function.</p>
-</dd>
-<dt><strong>tridx</strong><span class="classifier">array_like</span></dt><dd><p>The index vector used to build the triangle. This argument is
-also returned by the pac_trivec function.</p>
-</dd>
-<dt><strong>xlabel</strong><span class="classifier">string | ‘Starting frequency (hz)’</span></dt><dd><p>Label for the phase axis.</p>
-</dd>
-<dt><strong>ylabel</strong><span class="classifier">string | ‘Ending frequency (hz)’</span></dt><dd><p>Label for the amplitude axis.</p>
-</dd>
-<dt><strong>cblabel</strong><span class="classifier">string | ‘PAC values’</span></dt><dd><p>Colorbar.</p>
-</dd>
-<dt><strong>bad</strong><span class="classifier">string | ‘lightgray’</span></dt><dd><p>Color for non-significant values.</p>
-</dd>
-<dt><strong>kwargs</strong><span class="classifier">dict</span></dt><dd><p>Further arguments are passed to the pacplot() method.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>gca</strong><span class="classifier">axes</span></dt><dd><p>The current matplotlib axes.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.cycle">
-<em class="property">property </em><code class="sig-name descname">cycle</code><a class="headerlink" href="#tensorpac.Pac.cycle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the cycle value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.dcomplex">
-<em class="property">property </em><code class="sig-name descname">dcomplex</code><a class="headerlink" href="#tensorpac.Pac.dcomplex" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the dcomplex value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.f_amp">
-<em class="property">property </em><code class="sig-name descname">f_amp</code><a class="headerlink" href="#tensorpac.Pac.f_amp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vector of amplitudes of shape (n_amp, 2).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.f_pha">
-<em class="property">property </em><code class="sig-name descname">f_pha</code><a class="headerlink" href="#tensorpac.Pac.f_pha" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vector of phases of shape (n_pha, 2).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.idpac">
-<em class="property">property </em><code class="sig-name descname">idpac</code><a class="headerlink" href="#tensorpac.Pac.idpac" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the idpac value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.pac">
-<em class="property">property </em><code class="sig-name descname">pac</code><a class="headerlink" href="#tensorpac.Pac.pac" title="Permalink to this definition">¶</a></dt>
-<dd><p>Array of un-normalized PAC of shape (n_amp, n_pha, n_epochs).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.pvalues">
-<em class="property">property </em><code class="sig-name descname">pvalues</code><a class="headerlink" href="#tensorpac.Pac.pvalues" title="Permalink to this definition">¶</a></dt>
-<dd><p>Array of p-values of shape (n_amp, n_pha).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.surrogates">
-<em class="property">property </em><code class="sig-name descname">surrogates</code><a class="headerlink" href="#tensorpac.Pac.surrogates" title="Permalink to this definition">¶</a></dt>
-<dd><p>Array of surrogates of shape (n_perm, n_amp, n_pha, n_epochs).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.width">
-<em class="property">property </em><code class="sig-name descname">width</code><a class="headerlink" href="#tensorpac.Pac.width" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the width value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.xvec">
-<em class="property">property </em><code class="sig-name descname">xvec</code><a class="headerlink" href="#tensorpac.Pac.xvec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vector of phases of shape (n_pha,) use for plotting.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.Pac.yvec">
-<em class="property">property </em><code class="sig-name descname">yvec</code><a class="headerlink" href="#tensorpac.Pac.yvec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vector of amplitudes of shape (n_amp,) use for plotting.</p>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -803,6 +423,8 @@ also returned by the pac_trivec function.</p>
                 <li style="font-weight:bold"><a href="../community.html">Community</a></li>
                 <li>·</li>
                 <li style="font-weight:bold"><a href="../cite.html">Citation</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../references.html">References</a></li>
             </ul>
          </div>
         <!-- <br> -->

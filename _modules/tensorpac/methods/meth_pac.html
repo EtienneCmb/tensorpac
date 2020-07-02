@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tensorpac.methods.meth_pac &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/tp_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/gallery-dataframe.css" />
     <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
@@ -285,17 +288,17 @@
 
 <span class="k">def</span> <span class="nf">get_pac_fcn</span><span class="p">(</span><span class="n">idp</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get the function for computing Phase-Amplitude coupling.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Mean Vector Length (Canolty, 2006)</span>
+    <span class="k">if</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>    <span class="c1"># MVL</span>
         <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">mvl</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># Kullback-Leiber distance (Tort, 2010)</span>
+    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># KLD</span>
         <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">kld</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># Heights ratio (Lakatos, 2005)</span>
+    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># HR</span>
         <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">hr</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># ndPac (Ozkurt, 2012)</span>
+    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># ndPAC</span>
         <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">ndpac</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>  <span class="c1"># Phase-Synchrony (Penny, 2008; Cohen, 2008)</span>
+    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>  <span class="c1"># PLV</span>
         <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">ps</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>  <span class="c1"># Gaussian-Copula</span>
+    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>  <span class="c1"># GC</span>
         <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">gcpac</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">idp</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; is not recognized as a valid pac &quot;</span>
@@ -304,6 +307,8 @@
 
 <div class="viewcode-block" id="mvl"><a class="viewcode-back" href="../../../generated/tensorpac.methods.mvl.html#tensorpac.methods.mvl">[docs]</a><span class="k">def</span> <span class="nf">mvl</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Mean Vector Length.</span>
+
+<span class="sd">    Adapted from :cite:`canolty2006high`</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -315,11 +320,6 @@
 <span class="sd">    -------</span>
 <span class="sd">    pac : array_like</span>
 <span class="sd">        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)</span>
-
-<span class="sd">    References</span>
-<span class="sd">    ----------</span>
-<span class="sd">    Canolty RT (2006) High Gamma Power Is Phase-Locked to Theta. science</span>
-<span class="sd">    1128115:313.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span>
                             <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha</span><span class="p">)))</span> <span class="o">/</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
@@ -327,6 +327,8 @@
 
 <div class="viewcode-block" id="kld"><a class="viewcode-back" href="../../../generated/tensorpac.methods.kld.html#tensorpac.methods.kld">[docs]</a><span class="k">def</span> <span class="nf">kld</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Kullback Leibler Distance.</span>
+
+<span class="sd">    Adapted from :cite:`tort2010measuring`</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -340,12 +342,6 @@
 <span class="sd">    -------</span>
 <span class="sd">    pac : array_like</span>
 <span class="sd">        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)</span>
-
-<span class="sd">    References</span>
-<span class="sd">    ----------</span>
-<span class="sd">    Tort ABL, Komorowski R, Eichenbaum H, Kopell N (2010) Measuring</span>
-<span class="sd">    Phase-Amplitude Coupling Between Neuronal Oscillations of Different</span>
-<span class="sd">    Frequencies. Journal of Neurophysiology 104:1195–1210.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Get the phase locked binarized amplitude :</span>
     <span class="n">p_j</span> <span class="o">=</span> <span class="n">_kl_hr</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">)</span>
@@ -363,6 +359,8 @@
 <div class="viewcode-block" id="hr"><a class="viewcode-back" href="../../../generated/tensorpac.methods.hr.html#tensorpac.methods.hr">[docs]</a><span class="k">def</span> <span class="nf">hr</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Heights ratio.</span>
 
+<span class="sd">    Adapted from :cite:`lakatos2005oscillatory`</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    pha, amp : array_like</span>
@@ -375,12 +373,6 @@
 <span class="sd">    -------</span>
 <span class="sd">    pac : array_like</span>
 <span class="sd">        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)</span>
-
-<span class="sd">    References</span>
-<span class="sd">    ----------</span>
-<span class="sd">    Lakatos P (2005) An Oscillatory Hierarchy Controlling Neuronal</span>
-<span class="sd">    Excitability and Stimulus Processing in the Auditory Cortex. Journal of</span>
-<span class="sd">    Neurophysiology 94:1904–1911.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Get the phase locked binarized amplitude :</span>
     <span class="n">p_j</span> <span class="o">=</span> <span class="n">_kl_hr</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">)</span>
@@ -417,6 +409,8 @@
 <div class="viewcode-block" id="ndpac"><a class="viewcode-back" href="../../../generated/tensorpac.methods.ndpac.html#tensorpac.methods.ndpac">[docs]</a><span class="k">def</span> <span class="nf">ndpac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Normalized direct Pac.</span>
 
+<span class="sd">    Adapted from :cite:`ozkurt2012statistically`</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    pha, amp : array_like</span>
@@ -431,12 +425,6 @@
 <span class="sd">    -------</span>
 <span class="sd">    pac : array_like</span>
 <span class="sd">        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)</span>
-
-<span class="sd">    References</span>
-<span class="sd">    ----------</span>
-<span class="sd">    Ozkurt TE (2012) Statistically Reliable and Fast Direct Estimation of</span>
-<span class="sd">    Phase-Amplitude Cross-Frequency Coupling. Biomedical Engineering, IEEE</span>
-<span class="sd">    Transactions on 59:1943–1950.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">npts</span> <span class="o">=</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="c1"># Normalize amplitude :</span>
@@ -459,11 +447,11 @@
 
 
 <div class="viewcode-block" id="ps"><a class="viewcode-back" href="../../../generated/tensorpac.methods.ps.html#tensorpac.methods.ps">[docs]</a><span class="k">def</span> <span class="nf">ps</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">pha_amp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Phase Synchrony (Penny, 2008; Cohen, 2008).</span>
+    <span class="sd">&quot;&quot;&quot;Phase Synchrony.</span>
 
 <span class="sd">    In order to measure the phase synchrony, the phase of the amplitude of the</span>
 <span class="sd">    higher-frequency signal must be provided, and not the amplitude as in most</span>
-<span class="sd">    other PAC functions.</span>
+<span class="sd">    other PAC functions. Adapted from :cite:`lachaux1999measuring`</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -476,14 +464,6 @@
 <span class="sd">    -------</span>
 <span class="sd">    pac : array_like</span>
 <span class="sd">        Array of phase amplitude coupling of shape (n_pha_amp, n_pha, ...)</span>
-
-<span class="sd">    References</span>
-<span class="sd">    ----------</span>
-<span class="sd">    Penny WD, Duzel E, Miller KJ, Ojemann JG (2008) Testing for nested</span>
-<span class="sd">    oscillation. Journal of Neuroscience Methods 174:50–61.</span>
-<span class="sd">    Cohen MX, Elger CE, Fell J (2008) Oscillatory activity and phase amplitude</span>
-<span class="sd">    coupling in the human medial frontal cortex during decision making. Journal</span>
-<span class="sd">    of cognitive neuroscience 21:390–402.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha_amp</span><span class="p">),</span>
                     <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha</span><span class="p">))</span>
@@ -496,7 +476,7 @@
 <span class="sd">    This function assumes that phases and amplitudes have already been</span>
 <span class="sd">    prepared i.e. phases should be represented in a unit circle</span>
 <span class="sd">    (np.c_[np.sin(pha), np.cos(pha)]) and both inputs should also have been</span>
-<span class="sd">    copnormed.</span>
+<span class="sd">    copnormed. Adapted from :cite:`ince2017statistical`</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -508,13 +488,6 @@
 <span class="sd">    -------</span>
 <span class="sd">    pac : array_like</span>
 <span class="sd">        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)</span>
-
-<span class="sd">    References</span>
-<span class="sd">    ----------</span>
-<span class="sd">    Ince RAA, Giordano BL, Kayser C, Rousselet GA, Gross J, Schyns PG (2017) A</span>
-<span class="sd">    statistical framework for neuroimaging data analysis based on mutual</span>
-<span class="sd">    information estimated via a gaussian copula: Gaussian Copula Mutual</span>
-<span class="sd">    Information. Human Brain Mapping 38:1541–1573.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># prepare the shape of gcpac</span>
     <span class="n">n_pha</span><span class="p">,</span> <span class="n">n_amp</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -548,6 +521,8 @@
                 <li style="font-weight:bold"><a href="../../../community.html">Community</a></li>
                 <li>·</li>
                 <li style="font-weight:bold"><a href="../../../cite.html">Citation</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../../../references.html">References</a></li>
             </ul>
          </div>
         <!-- <br> -->

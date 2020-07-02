@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_auto_examples_erpac_plot_erpac_stats.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_auto_examples_erpac_plot_erpac_stats.py:
+        Click :ref:`here <sphx_glr_download_auto_examples_erpac_plot_erpac_stats.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_auto_examples_erpac_plot_erpac_stats.py:
 
 
 ======================================
@@ -97,6 +99,7 @@ Define an ERPAC object and extract the phase and the amplitude
 
 
 .. image:: /auto_examples/erpac/images/sphx_glr_plot_erpac_stats_001.png
+    :alt: Gaussian-Copula ERPAC (Ince et al. 2017)
     :class: sphx-glr-single-img
 
 
@@ -106,7 +109,7 @@ Define an ERPAC object and extract the phase and the amplitude
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  46.491 seconds)
+   **Total running time of the script:** ( 0 minutes  56.627 seconds)
 
 
 .. _sphx_glr_download_auto_examples_erpac_plot_erpac_stats.py:
@@ -119,13 +122,13 @@ Define an ERPAC object and extract the phase and the amplitude
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: plot_erpac_stats.py <plot_erpac_stats.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: plot_erpac_stats.ipynb <plot_erpac_stats.ipynb>`
 

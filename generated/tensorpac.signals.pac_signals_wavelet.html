@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tensorpac.signals.pac_signals_wavelet &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tp_style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -226,12 +229,12 @@
       
   <div class="section" id="tensorpac-signals-pac-signals-wavelet">
 <h1>tensorpac.signals.pac_signals_wavelet<a class="headerlink" href="#tensorpac-signals-pac-signals-wavelet" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="py function">
 <dt id="tensorpac.signals.pac_signals_wavelet">
-<code class="sig-prename descclassname">tensorpac.signals.</code><code class="sig-name descname">pac_signals_wavelet</code><span class="sig-paren">(</span><em class="sig-param">f_pha=10.0</em>, <em class="sig-param">f_amp=100.0</em>, <em class="sig-param">sf=1024.0</em>, <em class="sig-param">n_times=4000.0</em>, <em class="sig-param">n_epochs=10</em>, <em class="sig-param">noise=0.1</em>, <em class="sig-param">pp=0.0</em>, <em class="sig-param">rnd_state=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/signals.html#pac_signals_wavelet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.signals.pac_signals_wavelet" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">tensorpac.signals.</code><code class="sig-name descname">pac_signals_wavelet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_pha</span><span class="o">=</span><span class="default_value">10.0</span></em>, <em class="sig-param"><span class="n">f_amp</span><span class="o">=</span><span class="default_value">100.0</span></em>, <em class="sig-param"><span class="n">sf</span><span class="o">=</span><span class="default_value">1024.0</span></em>, <em class="sig-param"><span class="n">n_times</span><span class="o">=</span><span class="default_value">4000.0</span></em>, <em class="sig-param"><span class="n">n_epochs</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">noise</span><span class="o">=</span><span class="default_value">0.1</span></em>, <em class="sig-param"><span class="n">pp</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">rnd_state</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/signals.html#pac_signals_wavelet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.signals.pac_signals_wavelet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate artificially phase-amplitude coupled signals using wavelets.</p>
 <p>This function is inspired by the code of the pactools toolbox developped by
-Tom Dupre la Tour.</p>
+Tom Dupre la Tour <a class="bibtex reference internal" href="../references.html#la2017non" id="id1">[5]</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
@@ -290,6 +293,8 @@ frequency of a band (like [60, 80]) for a bandwidth.</p>
                 <li style="font-weight:bold"><a href="../community.html">Community</a></li>
                 <li>·</li>
                 <li style="font-weight:bold"><a href="../cite.html">Citation</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../references.html">References</a></li>
             </ul>
          </div>
         <!-- <br> -->

@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compute and plot the Phase Locking Value (PLV) &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/tp_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
@@ -226,7 +229,7 @@
       
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-misc-plot-plv-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-misc-plot-plv-py"><span class="std std-ref">here</span></a>     to download the full example code</p>
 </div>
 <div class="sphx-glr-example-title section" id="compute-and-plot-the-phase-locking-value-plv">
 <span id="sphx-glr-auto-examples-misc-plot-plv-py"></span><h1>Compute and plot the Phase Locking Value (PLV)<a class="headerlink" href="#compute-and-plot-the-phase-locking-value-plv" title="Permalink to this headline">¶</a></h1>
@@ -266,7 +269,7 @@ synchronisation between them except around 0 seconde</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (secondes)&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude (V)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_plv_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_plv_001.png" />
+<img alt="plot plv" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_plv_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(Text(0.5, 0, &#39;Time (secondes)&#39;), Text(0, 0.5, &#39;Amplitude (V)&#39;))
 </pre></div>
@@ -283,9 +286,9 @@ trials</p>
 <span class="n">psd</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f_max</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_plv_002.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_plv_002.png" />
+<img alt="PSD mean over 100 trials" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_plv_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot object at 0x7f559c4749e8&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot object at 0x7f9d65853978&gt;
 </pre></div>
 </div>
 </div>
@@ -314,13 +317,13 @@ sphinx_gallery_thumbnail_number = 3</p>
 <span class="n">plv</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_plv_003.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_plv_003.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  4.184 seconds)</p>
+<img alt="Phase Locking Value across 100 trials, Phase Locking Value across 100 trials" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_plv_003.png" />
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  5.238 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-misc-plot-plv-py">
-<div class="sphx-glr-download docutils container">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/b3ae2a60f74668e858ebf6605d2ba0ff/plot_plv.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_plv.py</span></code></a></p>
 </div>
-<div class="sphx-glr-download docutils container">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/77268125b7687e800a2411339bbf2607/plot_plv.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_plv.ipynb</span></code></a></p>
 </div>
 </div>
@@ -350,6 +353,8 @@ sphinx_gallery_thumbnail_number = 3</p>
                 <li style="font-weight:bold"><a href="../../community.html">Community</a></li>
                 <li>·</li>
                 <li style="font-weight:bold"><a href="../../cite.html">Citation</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../../references.html">References</a></li>
             </ul>
          </div>
         <!-- <br> -->

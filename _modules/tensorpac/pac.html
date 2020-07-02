@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tensorpac.pac &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/tp_style.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
@@ -426,27 +429,29 @@
 
 <span class="sd">        * First digit : refer to the pac method</span>
 
-<span class="sd">            - &#39;1&#39; : Mean Vector Length (MVL) [#f1]_</span>
-<span class="sd">            - &#39;2&#39; : Kullback-Leibler Distance (KLD) [#f2]_</span>
-<span class="sd">            - &#39;3&#39; : Heights Ratio (HR) [#f3]_</span>
-<span class="sd">            - &#39;4&#39; : ndPAC [#f4]_</span>
-<span class="sd">            - &#39;5&#39; : Phase Synchrony [#f3]_</span>
-<span class="sd">            - &#39;6&#39; : Gaussian Copula PAC [#f7]_</span>
+<span class="sd">            - 1 : Mean Vector Length (MVL) :cite:`canolty2006high`</span>
+<span class="sd">            - 2 : Kullback-Leibler Distance (KLD) :cite:`tort2010measuring`</span>
+<span class="sd">            - 3 : Heights Ratio (HR) :cite:`lakatos2005oscillatory`</span>
+<span class="sd">            - 4 : ndPAC :cite:`ozkurt2012statistically`</span>
+<span class="sd">            - 5 : Phase-Locking Value :cite:`lachaux1999measuring`</span>
+<span class="sd">            - 6 : Gaussian Copula PAC :cite:`ince2017statistical`</span>
 
 <span class="sd">        * Second digit : refer to the method for computing surrogates</span>
 
-<span class="sd">            - &#39;0&#39; : No surrogates</span>
-<span class="sd">            - &#39;1&#39; : Swap phase / amplitude across trials [#f2]_</span>
-<span class="sd">            - &#39;2&#39; : Swap amplitude time blocks [#f5]_</span>
-<span class="sd">            - &#39;3&#39; : Time lag [#f1]_</span>
+<span class="sd">            - 0 : No surrogates</span>
+<span class="sd">            - 1 : Swap phase / amplitude across trials</span>
+<span class="sd">              :cite:`tort2010measuring`</span>
+<span class="sd">            - 2 : Swap amplitude time blocks</span>
+<span class="sd">              :cite:`bahramisharif2013propagating`</span>
+<span class="sd">            - 3 : Time lag :cite:`canolty2006high`</span>
 
 <span class="sd">        * Third digit : refer to the normalization method for correction</span>
 
-<span class="sd">            - &#39;0&#39; : No normalization</span>
-<span class="sd">            - &#39;1&#39; : Substract the mean of surrogates</span>
-<span class="sd">            - &#39;2&#39; : Divide by the mean of surrogates</span>
-<span class="sd">            - &#39;3&#39; : Substract then divide by the mean of surrogates</span>
-<span class="sd">            - &#39;4&#39; : Z-score</span>
+<span class="sd">            - 0 : No normalization</span>
+<span class="sd">            - 1 : Substract the mean of surrogates</span>
+<span class="sd">            - 2 : Divide by the mean of surrogates</span>
+<span class="sd">            - 3 : Substract then divide by the mean of surrogates</span>
+<span class="sd">            - 4 : Z-score</span>
 
 <span class="sd">    f_pha, f_amp : list/tuple/array | def: [2, 4] and [60, 200]</span>
 <span class="sd">        Frequency vector for the phase and amplitude. Here you can use</span>
@@ -466,26 +471,12 @@
 <span class="sd">        Control the number of cycles for filtering (only if dcomplex is</span>
 <span class="sd">        &#39;hilbert&#39;). Should be a tuple of integers where the first one</span>
 <span class="sd">        refers to the number of cycles for the phase and the second for the</span>
-<span class="sd">        amplitude [#f5]_.</span>
+<span class="sd">        amplitude :cite:`bahramisharif2013propagating`.</span>
 <span class="sd">    width : int | 7</span>
 <span class="sd">        Width of the Morlet&#39;s wavelet.</span>
 <span class="sd">    n_bins : int | 18</span>
-<span class="sd">        Number of bins for the KLD and HR PAC method [#f2]_ [#f3]_</span>
-
-<span class="sd">    References</span>
-<span class="sd">    ----------</span>
-<span class="sd">    .. [#f1] `Canolty et al, 2006 &lt;http://www.ncbi.nlm.nih.gov/pmc/articles/</span>
-<span class="sd">       PMC2628289/&gt;`_</span>
-<span class="sd">    .. [#f2] `Tort et al, 2010 &lt;http://www.ncbi.nlm.nih.gov/pmc/articles/</span>
-<span class="sd">       PMC2941206/&gt;`_</span>
-<span class="sd">    .. [#f3] `Lakatos et al, 2005 &lt;https://www.ncbi.nlm.nih.gov/pubmed/</span>
-<span class="sd">       15901760&gt;`_</span>
-<span class="sd">    .. [#f4] `Ozkurt et al, 2012 &lt;http://www.ncbi.nlm.nih.gov/pubmed/</span>
-<span class="sd">       22531738/&gt;`_</span>
-<span class="sd">    .. [#f5] `Bahramisharif et al, 2013 &lt;http://www.jneurosci.org/content/33/</span>
-<span class="sd">       48/18849.short/&gt;`_</span>
-<span class="sd">    .. [#f7] `Ince et al, 2017 &lt;https://onlinelibrary.wiley.com/doi/full/10.</span>
-<span class="sd">       1002/hbm.23471&gt;`_</span>
+<span class="sd">        Number of bins for the KLD and HR PAC method</span>
+<span class="sd">        :cite:`tort2010measuring,lakatos2005oscillatory`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Pac.__init__"><a class="viewcode-back" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idpac</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">f_pha</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span>
@@ -500,7 +491,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">n_bins</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_bins</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Phase Amplitude Coupling object defined&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Pac.fit"><a class="viewcode-back" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute PAC on filtered data.</span>
 
 <span class="sd">        Parameters</span>
@@ -586,9 +577,9 @@
                         <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">str_norm</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
             <span class="n">normalize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">pac</span><span class="p">,</span> <span class="n">surro</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">pac</span></div>
+        <span class="k">return</span> <span class="n">pac</span>
 
-<div class="viewcode-block" id="Pac.filterfit"><a class="viewcode-back" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">x_amp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">x_amp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
                   <span class="n">edges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Filt the data then compute PAC on it.</span>
 
@@ -646,9 +637,9 @@
 
         <span class="c1"># Compute pac :</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="n">n_perm</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
-                        <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
+                        <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Pac.infer_pvalues"><a class="viewcode-back" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.infer_pvalues">[docs]</a>    <span class="k">def</span> <span class="nf">infer_pvalues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">infer_pvalues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Infer p-values based on surrogate distribution.</span>
 
 <span class="sd">        Parameters</span>
@@ -680,7 +671,7 @@
         <span class="n">th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">max_dist</span><span class="p">,</span> <span class="mf">100.</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                            <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span><span class="p">[</span><span class="n">m_pac</span> <span class="o">&gt;</span> <span class="n">th</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pvalues</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pvalues</span>
 
     <span class="k">def</span> <span class="nf">_idcheck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idpac</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check the idpac parameter.&quot;&quot;&quot;</span>
@@ -764,12 +755,12 @@
         <span class="n">_PacPlt</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Event Related PAC object defined&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="EventRelatedPac.fit"><a class="viewcode-back" href="../../generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;circular&#39;</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;circular&#39;</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
             <span class="n">n_perm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute the Event-Related Phase-Amplitude Coupling (ERPAC).</span>
 
-<span class="sd">        The ERPAC [#f6]_ is used to measure PAC across trials and is</span>
-<span class="sd">        interesting for real-time estimation.</span>
+<span class="sd">        The ERPAC :cite:`voytek2013method` is used to measure PAC across trials</span>
+<span class="sd">        and is interesting for real-time estimation.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -779,7 +770,8 @@
 <span class="sd">            oscillations of shape (n_pha, n_epochs, n_times).</span>
 <span class="sd">        method : {&#39;circular&#39;, &#39;gc&#39;}</span>
 <span class="sd">            Name of the method for computing erpac. Use &#39;circular&#39; for</span>
-<span class="sd">            reproducing [#f6]_ or &#39;gc&#39; for a Gaussian-Copula based erpac.</span>
+<span class="sd">            reproducing :cite:`voytek2013method` or &#39;gc&#39; for a Gaussian-Copula</span>
+<span class="sd">            based erpac :cite:`ince2017statistical`.</span>
 <span class="sd">        smooth : int | None</span>
 <span class="sd">            Half number of time-points to use to produce a smoothing. Only</span>
 <span class="sd">            active with the Gaussian-Copula (&#39;gc&#39;) method.</span>
@@ -794,13 +786,6 @@
 <span class="sd">        -------</span>
 <span class="sd">        erpac : array_like</span>
 <span class="sd">            The ERPAC estimation of shape (n_amp, n_pha, n_times)</span>
-
-<span class="sd">        References</span>
-<span class="sd">        ----------</span>
-<span class="sd">        .. [#f6] `Voytek et al, 2013 &lt;https://www.ncbi.nlm.nih.gov/pubmed/</span>
-<span class="sd">           22986076&gt;`_</span>
-<span class="sd">        .. [#f7] `Ince et al, 2017 &lt;https://onlinelibrary.wiley.com/doi/full/10</span>
-<span class="sd">           .1002/hbm.23471&gt;`_</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">set_log_level</span><span class="p">(</span><span class="n">verbose</span><span class="p">)</span>
         <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phampcheck</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">)</span>
@@ -826,9 +811,9 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_surrogates</span> <span class="o">=</span> <span class="n">_ergcpac_perm</span><span class="p">(</span><span class="n">sco</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="n">smooth</span><span class="p">,</span>
                                                  <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="n">n_perm</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">infer_pvalues</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">erpac</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">erpac</span>
 
-<div class="viewcode-block" id="EventRelatedPac.filterfit"><a class="viewcode-back" href="../../generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">x_amp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;circular&#39;</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">x_amp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;circular&#39;</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                   <span class="n">n_perm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Extract phases, amplitudes and compute ERPAC.</span>
 
@@ -845,10 +830,12 @@
 <span class="sd">            the same shape.</span>
 <span class="sd">        method : {&#39;circular&#39;, &#39;gc&#39;}</span>
 <span class="sd">            Name of the method for computing erpac. Use &#39;circular&#39; for</span>
-<span class="sd">            reproducing [#f6]_ or &#39;gc&#39; for a Gaussian-Copula based erpac.</span>
+<span class="sd">            reproducing :cite:`voytek2013method` or &#39;gc&#39; for a Gaussian-Copula</span>
+<span class="sd">            based erpac.</span>
 <span class="sd">        smooth : int | None</span>
 <span class="sd">            Half number of time-points to use to produce a smoothing. Only</span>
-<span class="sd">            active with the Gaussian-Copula (&#39;gc&#39;) method.</span>
+<span class="sd">            active with the Gaussian-Copula (&#39;gc&#39;) method</span>
+<span class="sd">            :cite:`ince2017statistical`.</span>
 <span class="sd">        n_perm : int | None</span>
 <span class="sd">            Number of permutations to compute for assessing p-values for the</span>
 <span class="sd">            gaussian-copula (&#39;gc&#39;) method. Statistics are performed by randomly</span>
@@ -862,13 +849,6 @@
 <span class="sd">        -------</span>
 <span class="sd">        erpac : array_like</span>
 <span class="sd">            The ERPAC estimation of shape (n_amp, n_pha, n_times)</span>
-
-<span class="sd">        References</span>
-<span class="sd">        ----------</span>
-<span class="sd">        .. [#f6] `Voytek et al, 2013 &lt;https://www.ncbi.nlm.nih.gov/pubmed/</span>
-<span class="sd">           22986076&gt;`_</span>
-<span class="sd">        .. [#f7] `Ince et al, 2017 &lt;https://onlinelibrary.wiley.com/doi/full/10</span>
-<span class="sd">           .1002/hbm.23471&gt;`_</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">x_amp</span> <span class="o">=</span> <span class="n">x_pha</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x_amp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">else</span> <span class="n">x_amp</span>
         <span class="c1"># extract phases and amplitudes</span>
@@ -879,9 +859,9 @@
         <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_amp</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
         <span class="c1"># compute erpac</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="n">smooth</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
-                        <span class="n">n_perm</span><span class="o">=</span><span class="n">n_perm</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
+                        <span class="n">n_perm</span><span class="o">=</span><span class="n">n_perm</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
 
-<div class="viewcode-block" id="EventRelatedPac.infer_pvalues"><a class="viewcode-back" href="../../generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.infer_pvalues">[docs]</a>    <span class="k">def</span> <span class="nf">infer_pvalues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">infer_pvalues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Infer p-values based on surrogate distribution.</span>
 
 <span class="sd">        Parameters</span>
@@ -908,7 +888,7 @@
                            <span class="mf">100.</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">erpac</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">erpac</span> <span class="o">&gt;</span> <span class="n">th</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pvalues</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pvalues</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">erpac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -965,7 +945,7 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Preferred phase object defined&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Preferred-Phase (PP)&#39;</span></div>
 
-<div class="viewcode-block" id="PreferredPhase.fit"><a class="viewcode-back" href="../../generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">72</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">72</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute the preferred-phase.</span>
 
 <span class="sd">        Parameters</span>
@@ -991,9 +971,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Check phase and amplitude shapes :</span>
         <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phampcheck</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">preferred_phase</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">preferred_phase</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">)</span>
 
-<div class="viewcode-block" id="PreferredPhase.filterfit"><a class="viewcode-back" href="../../generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">x_amp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">x_amp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
                   <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Extract phases, amplitudes and compute the preferred phase (PP).</span>
 
@@ -1033,7 +1013,7 @@
         <span class="n">pha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
         <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_amp</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
         <span class="c1"># compute pp</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">)</span></div>
 </pre></div>
 
     </div>
@@ -1057,6 +1037,8 @@
                 <li style="font-weight:bold"><a href="../../community.html">Community</a></li>
                 <li>·</li>
                 <li style="font-weight:bold"><a href="../../cite.html">Citation</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../../references.html">References</a></li>
             </ul>
          </div>
         <!-- <br> -->

@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tensorpac.methods.ps &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tp_style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -226,13 +229,13 @@
       
   <div class="section" id="tensorpac-methods-ps">
 <h1>tensorpac.methods.ps<a class="headerlink" href="#tensorpac-methods-ps" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="py function">
 <dt id="tensorpac.methods.ps">
-<code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">ps</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">pha_amp</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_pac.html#ps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.ps" title="Permalink to this definition">¶</a></dt>
-<dd><p>Phase Synchrony (Penny, 2008; Cohen, 2008).</p>
+<code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">ps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pha</span></em>, <em class="sig-param"><span class="n">pha_amp</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_pac.html#ps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.ps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Phase Synchrony.</p>
 <p>In order to measure the phase synchrony, the phase of the amplitude of the
 higher-frequency signal must be provided, and not the amplitude as in most
-other PAC functions.</p>
+other PAC functions. Adapted from <a class="bibtex reference internal" href="../references.html#lachaux1999measuring" id="id1">[6]</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
@@ -249,12 +252,6 @@ shape (n_pha_amp, …, n_times) for the higher frequency.</p>
 </dl>
 </dd>
 </dl>
-<p class="rubric">References</p>
-<p>Penny WD, Duzel E, Miller KJ, Ojemann JG (2008) Testing for nested
-oscillation. Journal of Neuroscience Methods 174:50–61.
-Cohen MX, Elger CE, Fell J (2008) Oscillatory activity and phase amplitude
-coupling in the human medial frontal cortex during decision making. Journal
-of cognitive neuroscience 21:390–402.</p>
 </dd></dl>
 
 </div>
@@ -281,6 +278,8 @@ of cognitive neuroscience 21:390–402.</p>
                 <li style="font-weight:bold"><a href="../community.html">Community</a></li>
                 <li>·</li>
                 <li style="font-weight:bold"><a href="../cite.html">Citation</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../references.html">References</a></li>
             </ul>
          </div>
         <!-- <br> -->

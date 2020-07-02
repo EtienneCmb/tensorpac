@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tensorpac.utils.PLV &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tp_style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -226,9 +229,9 @@
       
   <div class="section" id="tensorpac-utils-plv">
 <h1>tensorpac.utils.PLV<a class="headerlink" href="#tensorpac-utils-plv" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
+<dl class="py class">
 <dt id="tensorpac.utils.PLV">
-<em class="property">class </em><code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">PLV</code><span class="sig-paren">(</span><em class="sig-param">x, sf, f_pha=[2, 4], dcomplex='hilbert', cycle=3, width=7, edges=None, n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PLV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PLV" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">PLV</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">sf</span></em>, <em class="sig-param"><span class="n">f_pha</span><span class="o">=</span><span class="default_value">[2, 4]</span></em>, <em class="sig-param"><span class="n">dcomplex</span><span class="o">=</span><span class="default_value">'hilbert'</span></em>, <em class="sig-param"><span class="n">cycle</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">width</span><span class="o">=</span><span class="default_value">7</span></em>, <em class="sig-param"><span class="n">edges</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_jobs</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PLV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PLV" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Phase Locking Value (PLV).</p>
 <p>The Phase Locking Value (PLV) can be used to measure the phase synchrony
 across trials <a class="footnote-reference brackets" href="#f1" id="id1">1</a></p>
@@ -261,9 +264,9 @@ is ‘hilbert’).</p>
 <dd><p><a class="reference external" href="https://onlinelibrary.wiley.com/doi/abs/10.1002/(SICI)1097-0193(1999)8:4%3C194::AID-HBM4%3E3.0.CO;2-C">Lachaux et al, 1999</a></p>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="tensorpac.utils.PLV.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">self, x, sf, f_pha=[2, 4], dcomplex='hilbert', cycle=3, width=7, edges=None, n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PLV.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PLV.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">sf</span></em>, <em class="sig-param"><span class="n">f_pha</span><span class="o">=</span><span class="default_value">[2, 4]</span></em>, <em class="sig-param"><span class="n">dcomplex</span><span class="o">=</span><span class="default_value">'hilbert'</span></em>, <em class="sig-param"><span class="n">cycle</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">width</span><span class="o">=</span><span class="default_value">7</span></em>, <em class="sig-param"><span class="n">edges</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">n_jobs</span><span class="o">=</span><span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PLV.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PLV.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Init.</p>
 </dd></dl>
 
@@ -274,16 +277,16 @@ is ‘hilbert’).</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.__init__" title="tensorpac.utils.PLV.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self, x, sf[, f_pha, dcomplex, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.__init__" title="tensorpac.utils.PLV.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(x, sf[, f_pha, dcomplex, cycle, …])</p></td>
 <td><p>Init.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.filter" title="tensorpac.utils.PLV.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(self, sf, x[, ftype, keepfilt, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code>(sf, x[, ftype, keepfilt, edges, n_jobs])</p></td>
 <td><p>Filt the data in the specified frequency bands.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.plot" title="tensorpac.utils.PLV.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(self[, time])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code>([time])</p></td>
 <td><p>Plot the Phase Locking Value.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.show" title="tensorpac.utils.PLV.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>(self)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code>()</p></td>
 <td><p>Show the figure.</p></td>
 </tr>
 </tbody>
@@ -295,143 +298,32 @@ is ‘hilbert’).</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.cycle" title="tensorpac.utils.PLV.cycle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cycle</span></code></a></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cycle</span></code></p></td>
 <td><p>Get the cycle value.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.dcomplex" title="tensorpac.utils.PLV.dcomplex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dcomplex</span></code></a></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dcomplex</span></code></p></td>
 <td><p>Get the dcomplex value.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.f_amp" title="tensorpac.utils.PLV.f_amp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_amp</span></code></a></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_amp</span></code></p></td>
 <td><p>Vector of amplitudes of shape (n_amp, 2).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.f_pha" title="tensorpac.utils.PLV.f_pha"><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_pha</span></code></a></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">f_pha</span></code></p></td>
 <td><p>Vector of phases of shape (n_pha, 2).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.plv" title="tensorpac.utils.PLV.plv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plv</span></code></a></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plv</span></code></p></td>
 <td><p>Get the plv value.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.width" title="tensorpac.utils.PLV.width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">width</span></code></a></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">width</span></code></p></td>
 <td><p>Get the width value.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.xvec" title="tensorpac.utils.PLV.xvec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xvec</span></code></a></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">xvec</span></code></p></td>
 <td><p>Vector of phases of shape (n_pha,) use for plotting.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PLV.yvec" title="tensorpac.utils.PLV.yvec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">yvec</span></code></a></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">yvec</span></code></p></td>
 <td><p>Vector of amplitudes of shape (n_amp,) use for plotting.</p></td>
 </tr>
 </tbody>
 </table>
-<dl class="method">
-<dt id="tensorpac.utils.PLV.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">sf</em>, <em class="sig-param">x</em>, <em class="sig-param">ftype='phase'</em>, <em class="sig-param">keepfilt=False</em>, <em class="sig-param">edges=None</em>, <em class="sig-param">n_jobs=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.utils.PLV.filter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filt the data in the specified frequency bands.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>sf</strong><span class="classifier">float</span></dt><dd><p>The sampling frequency.</p>
-</dd>
-<dt><strong>x</strong><span class="classifier">array_like</span></dt><dd><p>Array of data of shape (n_epochs, n_times)</p>
-</dd>
-<dt><strong>ftype</strong><span class="classifier">{‘phase’, ‘amplitude’}</span></dt><dd><p>Specify if you want to extract phase (‘phase’) or the amplitude
-(‘amplitude’).</p>
-</dd>
-<dt><strong>n_jobs</strong><span class="classifier">int | -1</span></dt><dd><p>Number of jobs to compute PAC in parallel. For very large data,
-set this parameter to 1 in order to prevent large memory usage.</p>
-</dd>
-<dt><strong>keepfilt</strong><span class="classifier">bool | False</span></dt><dd><p>Specify if you only want the filtered data (True). This parameter
-is only available with dcomplex=’hilbert’ and not wavelet.</p>
-</dd>
-<dt><strong>edges</strong><span class="classifier">int | None</span></dt><dd><p>Number of samples to discard to avoid edge effects due to filtering</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>xfilt</strong><span class="classifier">array_like</span></dt><dd><p>The filtered data of shape (n_freqs, n_epochs, n_times)</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.utils.PLV.plot">
-<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">time=None</em>, <em class="sig-param">**kw</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PLV.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PLV.plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot the Phase Locking Value.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>time</strong><span class="classifier">array_like | None</span></dt><dd><p>Custom time vector to use</p>
-</dd>
-<dt><strong>kw</strong><span class="classifier">dict | {}</span></dt><dd><p>Additional inputs are either pass to the matplotlib.pyplot.plot
-function if a single phase band is used, otherwise to the
-matplotlib.pyplot.pcolormesh function</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>ax</strong><span class="classifier">Matplotlib axis</span></dt><dd><p>The matplotlib axis that contains the figure</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.utils.PLV.show">
-<code class="sig-name descname">show</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PLV.show"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PLV.show" title="Permalink to this definition">¶</a></dt>
-<dd><p>Show the figure.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.utils.PLV.cycle">
-<em class="property">property </em><code class="sig-name descname">cycle</code><a class="headerlink" href="#tensorpac.utils.PLV.cycle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the cycle value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.utils.PLV.dcomplex">
-<em class="property">property </em><code class="sig-name descname">dcomplex</code><a class="headerlink" href="#tensorpac.utils.PLV.dcomplex" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the dcomplex value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.utils.PLV.f_amp">
-<em class="property">property </em><code class="sig-name descname">f_amp</code><a class="headerlink" href="#tensorpac.utils.PLV.f_amp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vector of amplitudes of shape (n_amp, 2).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.utils.PLV.f_pha">
-<em class="property">property </em><code class="sig-name descname">f_pha</code><a class="headerlink" href="#tensorpac.utils.PLV.f_pha" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vector of phases of shape (n_pha, 2).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.utils.PLV.plv">
-<em class="property">property </em><code class="sig-name descname">plv</code><a class="headerlink" href="#tensorpac.utils.PLV.plv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the plv value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.utils.PLV.width">
-<em class="property">property </em><code class="sig-name descname">width</code><a class="headerlink" href="#tensorpac.utils.PLV.width" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the width value.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.utils.PLV.xvec">
-<em class="property">property </em><code class="sig-name descname">xvec</code><a class="headerlink" href="#tensorpac.utils.PLV.xvec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vector of phases of shape (n_pha,) use for plotting.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.utils.PLV.yvec">
-<em class="property">property </em><code class="sig-name descname">yvec</code><a class="headerlink" href="#tensorpac.utils.PLV.yvec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Vector of amplitudes of shape (n_amp,) use for plotting.</p>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -458,6 +350,8 @@ matplotlib.pyplot.pcolormesh function</p>
                 <li style="font-weight:bold"><a href="../community.html">Community</a></li>
                 <li>·</li>
                 <li style="font-weight:bold"><a href="../cite.html">Citation</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../references.html">References</a></li>
             </ul>
          </div>
         <!-- <br> -->

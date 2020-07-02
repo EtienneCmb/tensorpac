@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_auto_examples_misc_plot_fmin_fmax_optmization.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_auto_examples_misc_plot_fmin_fmax_optmization.py:
+        Click :ref:`here <sphx_glr_download_auto_examples_misc_plot_fmin_fmax_optmization.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_auto_examples_misc_plot_fmin_fmax_optmization.py:
 
 
 ==========================
@@ -18,6 +20,7 @@ ending and therefore, bandwidth coupling.
 
 
 .. image:: /auto_examples/misc/images/sphx_glr_plot_fmin_fmax_optmization_001.png
+    :alt: Optimal $[Fmin; Fmax]hz$ band for amplitude
     :class: sphx-glr-single-img
 
 
@@ -56,7 +59,7 @@ ending and therefore, bandwidth coupling.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.219 seconds)
+   **Total running time of the script:** ( 0 minutes  2.883 seconds)
 
 
 .. _sphx_glr_download_auto_examples_misc_plot_fmin_fmax_optmization.py:
@@ -69,13 +72,13 @@ ending and therefore, bandwidth coupling.
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: plot_fmin_fmax_optmization.py <plot_fmin_fmax_optmization.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: plot_fmin_fmax_optmization.ipynb <plot_fmin_fmax_optmization.ipynb>`
 

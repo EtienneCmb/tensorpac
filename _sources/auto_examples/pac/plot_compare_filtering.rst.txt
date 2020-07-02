@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_auto_examples_pac_plot_compare_filtering.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_auto_examples_pac_plot_compare_filtering.py:
+        Click :ref:`here <sphx_glr_download_auto_examples_pac_plot_compare_filtering.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_auto_examples_pac_plot_compare_filtering.py:
 
 
 ============================
@@ -19,6 +21,7 @@ Tensorpac provides two ways for extracting phase and amplitude :
 
 
 .. image:: /auto_examples/pac/images/sphx_glr_plot_compare_filtering_001.png
+    :alt: Fir1 - cycle (1, 3), Fir1 - cycle (2, 4), Fir1 - cycle (3, 6), Wavelet - width 7, Wavelet - width 9, Wavelet - width 12
     :class: sphx-glr-single-img
 
 
@@ -82,7 +85,7 @@ Tensorpac provides two ways for extracting phase and amplitude :
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  4.583 seconds)
+   **Total running time of the script:** ( 0 minutes  6.843 seconds)
 
 
 .. _sphx_glr_download_auto_examples_pac_plot_compare_filtering.py:
@@ -95,13 +98,13 @@ Tensorpac provides two ways for extracting phase and amplitude :
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: plot_compare_filtering.py <plot_compare_filtering.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: plot_compare_filtering.ipynb <plot_compare_filtering.ipynb>`
 

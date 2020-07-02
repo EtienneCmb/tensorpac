@@ -1,10 +1,12 @@
-.. note::
-    :class: sphx-glr-download-link-note
+.. only:: html
 
-    Click :ref:`here <sphx_glr_download_auto_examples_pac_plot_readme.py>` to download the full example code
-.. rst-class:: sphx-glr-example-title
+    .. note::
+        :class: sphx-glr-download-link-note
 
-.. _sphx_glr_auto_examples_pac_plot_readme.py:
+        Click :ref:`here <sphx_glr_download_auto_examples_pac_plot_readme.py>`     to download the full example code
+    .. rst-class:: sphx-glr-example-title
+
+    .. _sphx_glr_auto_examples_pac_plot_readme.py:
 
 
 ==============
@@ -16,6 +18,7 @@ Reproduced the figure in the README.
 
 
 .. image:: /auto_examples/pac/images/sphx_glr_plot_readme_001.png
+    :alt: Contour plot with 5 regions
     :class: sphx-glr-single-img
 
 
@@ -51,7 +54,7 @@ Reproduced the figure in the README.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  12.402 seconds)
+   **Total running time of the script:** ( 0 minutes  10.019 seconds)
 
 
 .. _sphx_glr_download_auto_examples_pac_plot_readme.py:
@@ -64,13 +67,13 @@ Reproduced the figure in the README.
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-python
 
      :download:`Download Python source code: plot_readme.py <plot_readme.py>`
 
 
 
-  .. container:: sphx-glr-download
+  .. container:: sphx-glr-download sphx-glr-download-jupyter
 
      :download:`Download Jupyter notebook: plot_readme.ipynb <plot_readme.ipynb>`
 

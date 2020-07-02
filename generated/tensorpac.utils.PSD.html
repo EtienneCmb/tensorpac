@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tensorpac.utils.PSD &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tp_style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -226,9 +229,9 @@
       
   <div class="section" id="tensorpac-utils-psd">
 <h1>tensorpac.utils.PSD<a class="headerlink" href="#tensorpac-utils-psd" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
+<dl class="py class">
 <dt id="tensorpac.utils.PSD">
-<em class="property">class </em><code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">PSD</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">sf</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">PSD</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">sf</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Power Spectrum Density for electrophysiological brain data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -240,9 +243,9 @@
 </dl>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="tensorpac.utils.PSD.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">x</em>, <em class="sig-param">sf</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">sf</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Init.</p>
 </dd></dl>
 
@@ -253,13 +256,13 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.__init__" title="tensorpac.utils.PSD.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(self, x, sf)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.__init__" title="tensorpac.utils.PSD.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(x, sf)</p></td>
 <td><p>Init.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.plot" title="tensorpac.utils.PSD.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(self[, f_min, f_max, confidence, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code>([f_min, f_max, confidence, interp, …])</p></td>
 <td><p>Plot the PSD.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.show" title="tensorpac.utils.PSD.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>(self)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code>()</p></td>
 <td><p>Display the PSD figure.</p></td>
 </tr>
 </tbody>
@@ -271,62 +274,14 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.freqs" title="tensorpac.utils.PSD.freqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freqs</span></code></a></p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">freqs</span></code></p></td>
 <td><p>Get the frequency vector.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.psd" title="tensorpac.utils.PSD.psd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">psd</span></code></a></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">psd</span></code></p></td>
 <td><p>Get the psd value.</p></td>
 </tr>
 </tbody>
 </table>
-<dl class="method">
-<dt id="tensorpac.utils.PSD.plot">
-<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">f_min=None</em>, <em class="sig-param">f_max=None</em>, <em class="sig-param">confidence=95</em>, <em class="sig-param">interp=None</em>, <em class="sig-param">log=False</em>, <em class="sig-param">grid=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD.plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot the PSD.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>f_min, f_max</strong><span class="classifier">(int, float) | None</span></dt><dd><p>Frequency bounds to use for plotting</p>
-</dd>
-<dt><strong>confidence</strong><span class="classifier">(int, float) | None</span></dt><dd><p>Light gray confidence interval. If None, no interval will be
-displayed</p>
-</dd>
-<dt><strong>interp</strong><span class="classifier">int | None</span></dt><dd><p>Line interpolation integer. For example, if interp is 10 the number
-of points is going to be multiply by 10</p>
-</dd>
-<dt><strong>log</strong><span class="classifier">bool | False</span></dt><dd><p>Use a log scale representation</p>
-</dd>
-<dt><strong>grid</strong><span class="classifier">bool | True</span></dt><dd><p>Add a grid to the plot</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>ax</strong><span class="classifier">Matplotlib axis</span></dt><dd><p>The matplotlib axis that contains the figure</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.utils.PSD.show">
-<code class="sig-name descname">show</code><span class="sig-paren">(</span><em class="sig-param">self</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD.show"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD.show" title="Permalink to this definition">¶</a></dt>
-<dd><p>Display the PSD figure.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.utils.PSD.freqs">
-<em class="property">property </em><code class="sig-name descname">freqs</code><a class="headerlink" href="#tensorpac.utils.PSD.freqs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the frequency vector.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="tensorpac.utils.PSD.psd">
-<em class="property">property </em><code class="sig-name descname">psd</code><a class="headerlink" href="#tensorpac.utils.PSD.psd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the psd value.</p>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -353,6 +308,8 @@ of points is going to be multiply by 10</p>
                 <li style="font-weight:bold"><a href="../community.html">Community</a></li>
                 <li>·</li>
                 <li style="font-weight:bold"><a href="../cite.html">Citation</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../references.html">References</a></li>
             </ul>
          </div>
         <!-- <br> -->
