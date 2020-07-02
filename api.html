@@ -80,6 +80,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.ITC.html">tensorpac.utils.ITC</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
@@ -100,6 +101,7 @@
 <li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
 <li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
 <li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.plv.html">tensorpac.methods.plv</a></li>
 <li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
 </ul>
 </li>
@@ -277,13 +279,16 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD" title="tensorpac.utils.PSD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PSD</span></code></a>(x, sf)</p></td>
 <td><p>Power Spectrum Density for electrophysiological brain data.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude" title="tensorpac.utils.BinAmplitude"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BinAmplitude</span></code></a>(x, sf[, f_pha, f_amp, n_bins, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC" title="tensorpac.utils.ITC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ITC</span></code></a>(x, sf[, f_pha, dcomplex, cycle, width, …])</p></td>
+<td><p>Compute the Inter-Trials Coherence (ITC).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude" title="tensorpac.utils.BinAmplitude"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BinAmplitude</span></code></a>(x, sf[, f_pha, f_amp, n_bins, …])</p></td>
 <td><p>Bin the amplitude according to the phase.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.utils.pac_vec.html#tensorpac.utils.pac_vec" title="tensorpac.utils.pac_vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac_vec</span></code></a>([f_pha, f_amp])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.utils.pac_vec.html#tensorpac.utils.pac_vec" title="tensorpac.utils.pac_vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac_vec</span></code></a>([f_pha, f_amp])</p></td>
 <td><p>Generate cross-frequency coupling vectors.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.utils.pac_trivec.html#tensorpac.utils.pac_trivec" title="tensorpac.utils.pac_trivec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac_trivec</span></code></a>([f_start, f_end, f_width])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.utils.pac_trivec.html#tensorpac.utils.pac_trivec" title="tensorpac.utils.pac_trivec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac_trivec</span></code></a>([f_start, f_end, f_width])</p></td>
 <td><p>Generate triangular vector.</p></td>
 </tr>
 </tbody>
@@ -347,7 +352,10 @@ and use it on phase / amplitude to compute PAC.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.methods.ndpac.html#tensorpac.methods.ndpac" title="tensorpac.methods.ndpac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ndpac</span></code></a>(pha, amp[, p])</p></td>
 <td><p>Normalized direct Pac.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.methods.gcpac.html#tensorpac.methods.gcpac" title="tensorpac.methods.gcpac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gcpac</span></code></a>(pha, amp)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.methods.plv.html#tensorpac.methods.plv" title="tensorpac.methods.plv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plv</span></code></a>(pha, pha_amp)</p></td>
+<td><p>Phase Locking-Value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.methods.gcpac.html#tensorpac.methods.gcpac" title="tensorpac.methods.gcpac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gcpac</span></code></a>(pha, amp)</p></td>
 <td><p>Gaussian Copula Phase-amplitude coupling.</p></td>
 </tr>
 </tbody>

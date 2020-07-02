@@ -1,0 +1,38 @@
+tensorpac.utils.ITC
+===================
+
+.. currentmodule:: tensorpac.utils
+
+.. autoclass:: ITC
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ITC.__init__
+      ~ITC.filter
+      ~ITC.plot
+      ~ITC.show
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ITC.cycle
+      ~ITC.dcomplex
+      ~ITC.f_amp
+      ~ITC.f_pha
+      ~ITC.itc
+      ~ITC.width
+      ~ITC.xvec
+      ~ITC.yvec
+   
+   

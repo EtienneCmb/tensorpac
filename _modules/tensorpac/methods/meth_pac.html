@@ -78,6 +78,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api.html#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.utils.ITC.html">tensorpac.utils.ITC</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
@@ -98,6 +99,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.plv.html">tensorpac.methods.plv</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
 </ul>
 </li>
@@ -444,7 +446,7 @@
     <span class="k">return</span> <span class="n">pac</span></div>
 
 
-<span class="k">def</span> <span class="nf">plv</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">pha_amp</span><span class="p">):</span>
+<div class="viewcode-block" id="plv"><a class="viewcode-back" href="../../../generated/tensorpac.methods.plv.html#tensorpac.methods.plv">[docs]</a><span class="k">def</span> <span class="nf">plv</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">pha_amp</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Phase Locking-Value.</span>
 
 <span class="sd">    In order to measure the phase locking value, the phase of the amplitude of</span>
@@ -466,7 +468,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha_amp</span><span class="p">),</span>
                     <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pac</span><span class="p">)</span> <span class="o">/</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pac</span><span class="p">)</span> <span class="o">/</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="gcpac"><a class="viewcode-back" href="../../../generated/tensorpac.methods.gcpac.html#tensorpac.methods.gcpac">[docs]</a><span class="k">def</span> <span class="nf">gcpac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>

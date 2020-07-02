@@ -1,0 +1,6 @@
+tensorpac.methods.plv
+=====================
+
+.. currentmodule:: tensorpac.methods
+
+.. autofunction:: plv

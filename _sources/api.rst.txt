@@ -34,7 +34,7 @@ Utility functions
    :toctree: generated/
 
    PSD
-   PLV
+   ITC
    BinAmplitude
    pac_vec
    pac_trivec
@@ -85,7 +85,7 @@ and use it on phase / amplitude to compute PAC.
    kld
    hr
    ndpac
-   ps
+   plv
    gcpac
 
 Event Related PAC methods
