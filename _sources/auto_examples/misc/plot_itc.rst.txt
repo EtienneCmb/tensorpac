@@ -3,25 +3,26 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_auto_examples_misc_plot_plv.py>`     to download the full example code
+        Click :ref:`here <sphx_glr_download_auto_examples_misc_plot_itc.py>`     to download the full example code
     .. rst-class:: sphx-glr-example-title
 
-    .. _sphx_glr_auto_examples_misc_plot_plv.py:
+    .. _sphx_glr_auto_examples_misc_plot_itc.py:
 
 
-==============================================
-Compute and plot the Phase Locking Value (PLV)
-==============================================
+================================================
+Compute and plot the Inter-Trial Coherence (ITC)
+================================================
 
-This example illustrate how to compute and plot the Phase Locking Value (PLV).
-The PLV can be used to inspect if phases are aligned across trials.
+This example illustrate how to compute and plot the Inter-Trial Coherence
+(ITC). The ITC can be used to inspect if phases are aligned across trials or
+said differently, it provides a measure of the consistency across trials.
 
 
 .. code-block:: default
 
     import numpy as np
 
-    from tensorpac.utils import PLV, PSD
+    from tensorpac.utils import ITC, PSD
 
     import matplotlib.pyplot as plt
 
@@ -36,7 +37,7 @@ Generate a random data of shape (n_epochs, n_times)
 ##############################################################################
  the dataset used in this example is composed of pure sines and noise. All
  sines across epochs are going to have a unique frequency so that there is no
- synchronisation between them except around 0 seconde
+ synchronization between them except around 0 second
 
 
 .. code-block:: default
@@ -55,17 +56,17 @@ Generate a random data of shape (n_epochs, n_times)
     data = np.sin(2 * np.pi * freqs.reshape(-1, 1) * time.reshape(1, -1))
     data += .1 * np.random.rand(n_epochs, n_pts)
 
-    # plot some trials and see how sines are synchronized arround 0
+    # plot some trials and see how sines are synchronized around 0
     trials = np.linspace(0, n_epochs - 1, 10).astype(int)
     plt.figure(0)
-    plt.plot(time, data[trials, :].T)
-    plt.xlabel('Time (secondes)'), plt.ylabel('Amplitude (V)')
+    plt.plot(time, data[trials, :].T, alpha=.5)
+    plt.xlabel('Time (seconds)'), plt.ylabel('Amplitude (V)')
 
 
 
 
-.. image:: /auto_examples/misc/images/sphx_glr_plot_plv_001.png
-    :alt: plot plv
+.. image:: /auto_examples/misc/images/sphx_glr_plot_itc_001.png
+    :alt: plot itc
     :class: sphx-glr-single-img
 
 
@@ -76,7 +77,7 @@ Generate a random data of shape (n_epochs, n_times)
  .. code-block:: none
 
 
-    (Text(0.5, 0, 'Time (secondes)'), Text(0, 0.5, 'Amplitude (V)'))
+    (Text(0.5, 0, 'Time (seconds)'), Text(0, 0.5, 'Amplitude (V)'))
 
 
 
@@ -96,7 +97,7 @@ Compute and plot the Power Spectrum Density (PSD)
 
 
 
-.. image:: /auto_examples/misc/images/sphx_glr_plot_plv_002.png
+.. image:: /auto_examples/misc/images/sphx_glr_plot_itc_002.png
     :alt: PSD mean over 100 trials
     :class: sphx-glr-single-img
 
@@ -108,13 +109,13 @@ Compute and plot the Power Spectrum Density (PSD)
  .. code-block:: none
 
 
-    <matplotlib.axes._subplots.AxesSubplot object at 0x7f9d65853978>
+    <matplotlib.axes._subplots.AxesSubplot object at 0x7fc70aca9c50>
 
 
 
-Compute and plot the Phase Locking Value
+Compute and plot the Inter-Trial Coherence (ITC)
 ##############################################################################
- finally, compute and plot the PLV
+ finally, compute and plot the ITC
  sphinx_gallery_thumbnail_number = 3
 
 
@@ -126,23 +127,23 @@ Compute and plot the Phase Locking Value
 
     plt.figure(2, figsize=(14, 4))
 
-    # compute PLV for phases between [2, 30]Hz
-    plv = PLV(data, sf, f_pha=[f_min, f_max], edges=edges, cycle=cycle, n_jobs=1)
+    # compute ITC for phases between [2, 30]Hz
+    itc = ITC(data, sf, f_pha=[f_min, f_max], edges=edges, cycle=cycle, n_jobs=1)
     plt.subplot(121)
-    plv.plot(time=time)
+    itc.plot(time=time)
     plt.axvline(0, linestyle='--', color='black', lw=2)
 
-    # compute PLV for phases between [2, 30]Hz with frequency steps
-    plv = PLV(data, sf, f_pha=(2, 30, 1, .5), edges=edges, cycle=cycle, n_jobs=1)
+    # compute ITC for phases between [2, 30]Hz with frequency steps
+    itc = ITC(data, sf, f_pha=(2, 30, 1, .5), edges=edges, cycle=cycle, n_jobs=1)
     plt.subplot(122)
-    plv.plot(time=time, cmap='viridis')
+    itc.plot(time=time, cmap='viridis')
     plt.axvline(0, linestyle='--', color='white', lw=2)
-    plv.show()
+    itc.show()
 
 
 
-.. image:: /auto_examples/misc/images/sphx_glr_plot_plv_003.png
-    :alt: Phase Locking Value across 100 trials, Phase Locking Value across 100 trials
+.. image:: /auto_examples/misc/images/sphx_glr_plot_itc_003.png
+    :alt: Inter-Trials Coherence (100 trials), Inter-Trials Coherence (100 trials)
     :class: sphx-glr-single-img
 
 
@@ -152,10 +153,10 @@ Compute and plot the Phase Locking Value
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  5.238 seconds)
+   **Total running time of the script:** ( 0 minutes  2.802 seconds)
 
 
-.. _sphx_glr_download_auto_examples_misc_plot_plv.py:
+.. _sphx_glr_download_auto_examples_misc_plot_itc.py:
 
 
 .. only :: html
@@ -167,13 +168,13 @@ Compute and plot the Phase Locking Value
 
   .. container:: sphx-glr-download sphx-glr-download-python
 
-     :download:`Download Python source code: plot_plv.py <plot_plv.py>`
+     :download:`Download Python source code: plot_itc.py <plot_itc.py>`
 
 
 
   .. container:: sphx-glr-download sphx-glr-download-jupyter
 
-     :download:`Download Jupyter notebook: plot_plv.ipynb <plot_plv.ipynb>`
+     :download:`Download Jupyter notebook: plot_itc.ipynb <plot_itc.ipynb>`
 
 
 .. only:: html

@@ -5,7 +5,8 @@ Event-Related Phase Amplitude Coupling
 
 Event-Related Phase-Amplitude Coupling (ERPAC) do not measure PAC across time
 cycle but instead, across trials (just as proposed JP. Lachaux with the
-PLV/PLS). Measuring across trials enable to have a real-time estimation of PAC.
+PLV/PLS) or with the Inter-Trial Coherence (ITC). Measuring across trials
+enable to have a real-time estimation of PAC.
 
 In this example, we generate a signal that have a 10hz phase <->100 hz
 amplitude coupling first followed by a random noise.

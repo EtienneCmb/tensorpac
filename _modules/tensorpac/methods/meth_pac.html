@@ -78,7 +78,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api.html#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.utils.PLV.html">tensorpac.utils.PLV</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
@@ -99,7 +98,6 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.ps.html">tensorpac.methods.ps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
 </ul>
 </li>
@@ -132,8 +130,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/pac/plot_pvalues.html">Compute p-values</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/pac/plot_compare_surrogates.html">Compare surrogate methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/pac/plot_compare_normalizations.html">Compare normalizations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/pac/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/pac/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/pac/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/pac/plot_long_range_coupling.html">Long-range PAC</a></li>
 </ul>
 </li>
@@ -165,10 +163,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/misc/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/misc/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/misc/plot_frequency_vectors.html">Define frequency vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/misc/plot_plv.html">Compute and plot the Phase Locking Value (PLV)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/misc/plot_plv.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/misc/plot_plv.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/misc/plot_plv.html#compute-and-plot-the-phase-locking-value">Compute and plot the Phase Locking Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/misc/plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/misc/plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/misc/plot_itc.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/misc/plot_itc.html#id1">Compute and plot the Inter-Trial Coherence (ITC)</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/misc/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
@@ -243,7 +241,7 @@
     <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
         <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;ndPac (Ozkurt et al. 2012)&#39;</span>
     <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
-        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Phase-Synchrony (Cohen et al. 2008; Penny et al. 2008)&#39;</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Phase-Locking Value (Lachaux et al. 1999)&#39;</span>
     <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
         <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Gaussian Copula PAC (Ince et al. 2017)&#39;</span>
     <span class="k">else</span><span class="p">:</span>
@@ -297,7 +295,7 @@
     <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># ndPAC</span>
         <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">ndpac</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>  <span class="c1"># PLV</span>
-        <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">ps</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">plv</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>  <span class="c1"># GC</span>
         <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">gcpac</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -446,12 +444,13 @@
     <span class="k">return</span> <span class="n">pac</span></div>
 
 
-<div class="viewcode-block" id="ps"><a class="viewcode-back" href="../../../generated/tensorpac.methods.ps.html#tensorpac.methods.ps">[docs]</a><span class="k">def</span> <span class="nf">ps</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">pha_amp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Phase Synchrony.</span>
+<span class="k">def</span> <span class="nf">plv</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">pha_amp</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Phase Locking-Value.</span>
 
-<span class="sd">    In order to measure the phase synchrony, the phase of the amplitude of the</span>
-<span class="sd">    higher-frequency signal must be provided, and not the amplitude as in most</span>
-<span class="sd">    other PAC functions. Adapted from :cite:`lachaux1999measuring`</span>
+<span class="sd">    In order to measure the phase locking value, the phase of the amplitude of</span>
+<span class="sd">    the higher-frequency signal must be provided, and not the amplitude as in</span>
+<span class="sd">    most other PAC functions. Adapted from</span>
+<span class="sd">    :cite:`lachaux1999measuring,penny2008testing`</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -467,7 +466,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha_amp</span><span class="p">),</span>
                     <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pac</span><span class="p">)</span> <span class="o">/</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">pac</span><span class="p">)</span> <span class="o">/</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="gcpac"><a class="viewcode-back" href="../../../generated/tensorpac.methods.gcpac.html#tensorpac.methods.gcpac">[docs]</a><span class="k">def</span> <span class="nf">gcpac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>

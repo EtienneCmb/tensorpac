@@ -1,6 +1,0 @@
-tensorpac.methods.ps
-====================
-
-.. currentmodule:: tensorpac.methods
-
-.. autofunction:: ps

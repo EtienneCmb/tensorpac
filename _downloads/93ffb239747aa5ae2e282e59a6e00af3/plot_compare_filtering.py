@@ -23,7 +23,7 @@ data, time = pac_signals_wavelet(f_pha=10, f_amp=100, noise=1.,
                                  n_epochs=n_epochs, n_times=n_times)
 
 # First, let's use the MVL, without any further correction by surrogates :
-p = Pac(idpac=(4, 0, 0), f_pha=(5, 14, 2, .3), f_amp=(80, 120, 2, 1),
+p = Pac(idpac=(1, 0, 0), f_pha=(5, 14, 2, .3), f_amp=(80, 120, 2, 1),
         verbose=False)
 
 plt.figure(figsize=(18, 9))

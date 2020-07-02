@@ -80,7 +80,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PLV.html">tensorpac.utils.PLV</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
@@ -101,7 +100,6 @@
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.ps.html">tensorpac.methods.ps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
 </ul>
 </li>
@@ -134,8 +132,8 @@
 <li class="toctree-l3"><a class="reference internal" href="plot_pvalues.html">Compute p-values</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Compare surrogate methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalizations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
 </ul>
 </li>
@@ -167,10 +165,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_frequency_vectors.html">Define frequency vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../misc/plot_plv.html">Compute and plot the Phase Locking Value (PLV)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../misc/plot_plv.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../misc/plot_plv.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../misc/plot_plv.html#compute-and-plot-the-phase-locking-value">Compute and plot the Phase Locking Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../misc/plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_itc.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_itc.html#id1">Compute and plot the Inter-Trial Coherence (ITC)</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
@@ -251,9 +249,9 @@ PAC estimation.</p>
 <span class="n">data</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">pac_signals_wavelet</span><span class="p">(</span><span class="n">sf</span><span class="o">=</span><span class="n">sf</span><span class="p">,</span> <span class="n">f_pha</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">3.</span><span class="p">,</span>
                                  <span class="n">n_epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="mi">4000</span><span class="p">)</span>
 
-<span class="c1"># First, let&#39;s use the MVL, without any further correction by surrogates :</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">Pac</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">),</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dcomplex</span><span class="o">=</span><span class="s1">&#39;wavelet&#39;</span><span class="p">,</span>
-        <span class="n">width</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="c1"># First, let&#39;s use the PLV, without any further correction by surrogates :</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Pac</span><span class="p">(</span><span class="n">idpac</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">f_pha</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">),</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">dcomplex</span><span class="o">=</span><span class="s1">&#39;wavelet&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
 <span class="c1"># Now, we want to compare PAC methods, hence it&#39;s useless to systematically</span>
 <span class="c1"># filter the data. So we extract the phase and the amplitude only once :</span>
@@ -273,7 +271,7 @@ PAC estimation.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  39.492 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.550 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-pac-plot-compare-surrogates-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/bf49e998f74f4100f3da09ed99ba34cd/plot_compare_surrogates.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_compare_surrogates.py</span></code></a></p>

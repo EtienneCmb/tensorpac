@@ -22,8 +22,11 @@ n_times = 4000  # Number of time points
 data, time = pac_signals_tort(sf=sf, f_pha=5, f_amp=100, noise=2.,
                               n_epochs=n_epochs, n_times=n_times)
 
-# First, let's use the MVL, without any further correction by surrogates :
-p = Pac(f_pha=(2, 20, 1, 1), f_amp=(60, 150, 5, 5))
+# First, let's use the MVL, without any further correction by surrogates
+# for the definition of phase / amplitude frequency range, we use the automated
+# mid-resolution ('lres'=low-resolution; 'mres'=mid-resolution;
+# 'hres'=high-resolution)
+p = Pac(f_pha='mres', f_amp='mres')
 
 # Now, we want to compare PAC methods, hence it's useless to systematically
 # filter the data. So we extract the phase and the amplitude only once :
@@ -40,5 +43,7 @@ for i, k in enumerate([1, 2, 3, 4, 5, 6]):
     # Plot :
     plt.subplot(2, 3, k)
     p.comodulogram(xpac.mean(-1), title=p.method, cmap='Spectral_r')
+    if k <= 3:
+        plt.xlabel('')
 
 plt.show()

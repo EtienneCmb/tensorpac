@@ -80,7 +80,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.PLV.html">tensorpac.utils.PLV</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
@@ -101,7 +100,6 @@
 <li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.ps.html">tensorpac.methods.ps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
 </ul>
 </li>
@@ -134,8 +132,8 @@
 <li class="toctree-l3"><a class="reference internal" href="pac/plot_pvalues.html">Compute p-values</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pac/plot_compare_surrogates.html">Compare surrogate methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pac/plot_compare_normalizations.html">Compare normalizations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pac/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pac/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pac/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pac/plot_long_range_coupling.html">Long-range PAC</a></li>
 </ul>
 </li>
@@ -167,10 +165,10 @@
 <li class="toctree-l3"><a class="reference internal" href="misc/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l3"><a class="reference internal" href="misc/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="misc/plot_frequency_vectors.html">Define frequency vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="misc/plot_plv.html">Compute and plot the Phase Locking Value (PLV)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="misc/plot_plv.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="misc/plot_plv.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="misc/plot_plv.html#compute-and-plot-the-phase-locking-value">Compute and plot the Phase Locking Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="misc/plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="misc/plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="misc/plot_itc.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="misc/plot_itc.html#id1">Compute and plot the Inter-Trial Coherence (ITC)</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="misc/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
@@ -275,15 +273,15 @@
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="Compute PAC on multiple datasets and compare implemented methods. "><div class="figure align-default" id="id9">
-<img alt="Compare PAC methods" src="../_images/sphx_glr_plot_pac_methods_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="pac/plot_pac_methods.html#sphx-glr-auto-examples-pac-plot-pac-methods-py"><span class="std std-ref">Compare PAC methods</span></a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="Tensorpac provides two ways for extracting phase and amplitude :"><div class="figure align-default" id="id9">
+<img alt="Compare filtering properties" src="../_images/sphx_glr_plot_compare_filtering_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="pac/plot_compare_filtering.html#sphx-glr-auto-examples-pac-plot-compare-filtering-py"><span class="std std-ref">Compare filtering properties</span></a></span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="Tensorpac provides two ways for extracting phase and amplitude :"><div class="figure align-default" id="id10">
-<img alt="Compare filtering properties" src="../_images/sphx_glr_plot_compare_filtering_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="pac/plot_compare_filtering.html#sphx-glr-auto-examples-pac-plot-compare-filtering-py"><span class="std std-ref">Compare filtering properties</span></a></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="Compute PAC on multiple datasets and compare implemented methods. "><div class="figure align-default" id="id10">
+<img alt="Compare PAC methods" src="../_images/sphx_glr_plot_pac_methods_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="pac/plot_pac_methods.html#sphx-glr-auto-examples-pac-plot-pac-methods-py"><span class="std std-ref">Compare PAC methods</span></a></span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
@@ -345,7 +343,7 @@
 <li><p>how to generate artificial signals that contain coupling</p></li>
 <li><p>how to define frequency vectors for extracting phases and amplitudes</p></li>
 <li><p>how to assess a frequency bandwidth exploration</p></li>
-<li><p>how to compute the Preferred Phase (PP), Phase-Locking Value (PLV), Power Spectrum Density (PSD) etc.</p></li>
+<li><p>how to compute the Preferred Phase (PP), Inter-Trial Coherence (ITC), Power Spectrum Density (PSD) etc.</p></li>
 </ul>
 </div>
 <div class="sphx-glr-thumbcontainer" tooltip="This example illustrate how to compute and plot the Power Spectrum Density (PSD) of an electrop..."><div class="figure align-default" id="id15">
@@ -372,9 +370,9 @@
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This example illustrate how to compute and plot the Phase Locking Value (PLV). The PLV can be u..."><div class="figure align-default" id="id19">
-<img alt="Compute and plot the Phase Locking Value (PLV)" src="../_images/sphx_glr_plot_plv_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="misc/plot_plv.html#sphx-glr-auto-examples-misc-plot-plv-py"><span class="std std-ref">Compute and plot the Phase Locking Value (PLV)</span></a></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+<div class="sphx-glr-thumbcontainer" tooltip="This example illustrate how to compute and plot the Inter-Trial Coherence (ITC). The ITC can be..."><div class="figure align-default" id="id19">
+<img alt="Compute and plot the Inter-Trial Coherence (ITC)" src="../_images/sphx_glr_plot_itc_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="misc/plot_itc.html#sphx-glr-auto-examples-misc-plot-itc-py"><span class="std std-ref">Compute and plot the Inter-Trial Coherence (ITC)</span></a></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>

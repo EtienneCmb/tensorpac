@@ -80,7 +80,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PLV.html">tensorpac.utils.PLV</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
@@ -101,7 +100,6 @@
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.ps.html">tensorpac.methods.ps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
 </ul>
 </li>
@@ -134,8 +132,8 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Compute p-values</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_compare_surrogates.html">Compare surrogate methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalizations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
 </ul>
 </li>
@@ -167,10 +165,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_frequency_vectors.html">Define frequency vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../misc/plot_plv.html">Compute and plot the Phase Locking Value (PLV)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../misc/plot_plv.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../misc/plot_plv.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../misc/plot_plv.html#compute-and-plot-the-phase-locking-value">Compute and plot the Phase Locking Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../misc/plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_itc.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_itc.html#id1">Compute and plot the Inter-Trial Coherence (ITC)</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
@@ -236,7 +234,7 @@
 <p>For the visualization, we used a comodulogram.</p>
 <img alt="Mean Vector Length (MVL, Canolty et al. 2006)" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_pvalues_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/circleci/project/tensorpac/visu.py:134: UserWarning: No contour levels were found within the data range.
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/circleci/project/tensorpac/visu.py:141: UserWarning: No contour levels were found within the data range.
   levels=levels, cmap=levelcmap)
 </pre></div>
 </div>
@@ -269,7 +267,7 @@
 <span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  7.857 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.824 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-pac-plot-pvalues-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/313f8a1de4f83d1eb1bdf18afc32c1f4/plot_pvalues.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_pvalues.py</span></code></a></p>

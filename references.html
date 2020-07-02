@@ -78,7 +78,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.PLV.html">tensorpac.utils.PLV</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
@@ -99,7 +98,6 @@
 <li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
 <li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
 <li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.ps.html">tensorpac.methods.ps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
 </ul>
 </li>
@@ -132,8 +130,8 @@
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/pac/plot_pvalues.html">Compute p-values</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/pac/plot_compare_surrogates.html">Compare surrogate methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/pac/plot_compare_normalizations.html">Compare normalizations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/pac/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/pac/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/pac/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/pac/plot_long_range_coupling.html">Long-range PAC</a></li>
 </ul>
 </li>
@@ -165,10 +163,10 @@
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_frequency_vectors.html">Define frequency vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_plv.html">Compute and plot the Phase Locking Value (PLV)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_plv.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_plv.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_plv.html#compute-and-plot-the-phase-locking-value">Compute and plot the Phase Locking Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_itc.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_itc.html#id1">Compute and plot the Inter-Trial Coherence (ITC)</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
@@ -249,13 +247,16 @@
 <dt class="bibtex label" id="lakatos2005oscillatory"><span class="brackets">7</span></dt>
 <dd><p>Peter Lakatos, Ankoor S Shah, Kevin H Knuth, Istvan Ulbert, George Karmos, and Charles E Schroeder. An oscillatory hierarchy controlling neuronal excitability and stimulus processing in the auditory cortex. <em>Journal of neurophysiology</em>, 94(3):1904–1911, 2005.</p>
 </dd>
-<dt class="bibtex label" id="tort2010measuring"><span class="brackets">8</span></dt>
+<dt class="bibtex label" id="penny2008testing"><span class="brackets">8</span></dt>
+<dd><p>WD Penny, E Duzel, KJ Miller, and JG Ojemann. Testing for nested oscillation. <em>Journal of neuroscience methods</em>, 174(1):50–61, 2008.</p>
+</dd>
+<dt class="bibtex label" id="tort2010measuring"><span class="brackets">9</span></dt>
 <dd><p>Adriano BL Tort, Robert Komorowski, Howard Eichenbaum, and Nancy Kopell. Measuring phase-amplitude coupling between neuronal oscillations of different frequencies. <em>Journal of neurophysiology</em>, 104(2):1195–1210, 2010.</p>
 </dd>
-<dt class="bibtex label" id="voytek2013method"><span class="brackets">9</span></dt>
+<dt class="bibtex label" id="voytek2013method"><span class="brackets">10</span></dt>
 <dd><p>Bradley Voytek, Mark D’Esposito, Nathan Crone, and Robert T Knight. A method for event-related phase/amplitude coupling. <em>Neuroimage</em>, 64:416–424, 2013.</p>
 </dd>
-<dt class="bibtex label" id="ozkurt2012statistically"><span class="brackets">10</span></dt>
+<dt class="bibtex label" id="ozkurt2012statistically"><span class="brackets">11</span></dt>
 <dd><p>Tolga Esat Özkurt. Statistically reliable and fast direct estimation of phase-amplitude cross-frequency coupling. <em>IEEE Transactions on Biomedical Engineering</em>, 59(7):1943–1950, 2012.</p>
 </dd>
 </dl>

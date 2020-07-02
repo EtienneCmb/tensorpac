@@ -80,7 +80,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.PLV.html">tensorpac.utils.PLV</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
@@ -101,7 +100,6 @@
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.ps.html">tensorpac.methods.ps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
 </ul>
 </li>
@@ -134,8 +132,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_pvalues.html">Compute p-values</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_compare_surrogates.html">Compare surrogate methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_compare_normalizations.html">Compare normalizations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_long_range_coupling.html">Long-range PAC</a></li>
 </ul>
 </li>
@@ -167,10 +165,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/misc/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/misc/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/misc/plot_frequency_vectors.html">Define frequency vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../auto_examples/misc/plot_plv.html">Compute and plot the Phase Locking Value (PLV)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../auto_examples/misc/plot_plv.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../auto_examples/misc/plot_plv.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../auto_examples/misc/plot_plv.html#compute-and-plot-the-phase-locking-value">Compute and plot the Phase Locking Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/misc/plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/misc/plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/misc/plot_itc.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/misc/plot_itc.html#id1">Compute and plot the Inter-Trial Coherence (ITC)</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/misc/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
@@ -248,11 +246,12 @@ refer</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>1 : Mean Vector Length (MVL) <a class="bibtex reference internal" href="../references.html#canolty2006high" id="id1">[3]</a></p></li>
-<li><p>2 : Kullback-Leibler Distance (KLD) <a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id2">[8]</a></p></li>
+<li><p>2 : Kullback-Leibler Distance (KLD) <a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id2">[9]</a></p></li>
 <li><p>3 : Heights Ratio (HR) <a class="bibtex reference internal" href="../references.html#lakatos2005oscillatory" id="id3">[7]</a></p></li>
-<li><p>4 : ndPAC <a class="bibtex reference internal" href="../references.html#ozkurt2012statistically" id="id4">[10]</a></p></li>
-<li><p>5 : Phase-Locking Value <a class="bibtex reference internal" href="../references.html#lachaux1999measuring" id="id5">[6]</a></p></li>
-<li><p>6 : Gaussian Copula PAC <a class="bibtex reference internal" href="../references.html#ince2017statistical" id="id6">[4]</a></p></li>
+<li><p>4 : ndPAC <a class="bibtex reference internal" href="../references.html#ozkurt2012statistically" id="id4">[11]</a></p></li>
+<li><p>5 : Phase-Locking Value
+<a class="bibtex reference internal" href="../references.html#lachaux1999measuring" id="id5">[6]</a><a class="bibtex reference internal" href="../references.html#penny2008testing" id="id6">[8]</a></p></li>
+<li><p>6 : Gaussian Copula PAC <a class="bibtex reference internal" href="../references.html#ince2017statistical" id="id7">[4]</a></p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -261,10 +260,10 @@ refer</p>
 <div><ul class="simple">
 <li><p>0 : No surrogates</p></li>
 <li><p>1 : Swap phase / amplitude across trials
-<a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id7">[8]</a></p></li>
+<a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id8">[9]</a></p></li>
 <li><p>2 : Swap amplitude time blocks
-<a class="bibtex reference internal" href="../references.html#bahramisharif2013propagating" id="id8">[1]</a></p></li>
-<li><p>3 : Time lag <a class="bibtex reference internal" href="../references.html#canolty2006high" id="id9">[3]</a></p></li>
+<a class="bibtex reference internal" href="../references.html#bahramisharif2013propagating" id="id9">[1]</a></p></li>
+<li><p>3 : Time lag <a class="bibtex reference internal" href="../references.html#canolty2006high" id="id10">[3]</a></p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -300,12 +299,12 @@ respectively for low, middle and high resolution vectors</p></li>
 <dt><strong>cycle</strong><span class="classifier">tuple | (3, 6)</span></dt><dd><p>Control the number of cycles for filtering (only if dcomplex is
 ‘hilbert’). Should be a tuple of integers where the first one
 refers to the number of cycles for the phase and the second for the
-amplitude <a class="bibtex reference internal" href="../references.html#bahramisharif2013propagating" id="id10">[1]</a>.</p>
+amplitude <a class="bibtex reference internal" href="../references.html#bahramisharif2013propagating" id="id11">[1]</a>.</p>
 </dd>
 <dt><strong>width</strong><span class="classifier">int | 7</span></dt><dd><p>Width of the Morlet’s wavelet.</p>
 </dd>
 <dt><strong>n_bins</strong><span class="classifier">int | 18</span></dt><dd><p>Number of bins for the KLD and HR PAC method
-<a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id11">[8]</a><a class="bibtex reference internal" href="../references.html#lakatos2005oscillatory" id="id12">[7]</a></p>
+<a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id12">[9]</a><a class="bibtex reference internal" href="../references.html#lakatos2005oscillatory" id="id13">[7]</a></p>
 </dd>
 </dl>
 </dd>

@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compute and plot the Phase Locking Value (PLV) &#8212; Tensorpac 0.6.3 documentation</title>
+    <title>Compute and plot the Inter-Trial Coherence (ITC) &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/tp_style.css" />
@@ -80,7 +80,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PLV.html">tensorpac.utils.PLV</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
@@ -101,7 +100,6 @@
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.ps.html">tensorpac.methods.ps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
 </ul>
 </li>
@@ -134,8 +132,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../pac/plot_pvalues.html">Compute p-values</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../pac/plot_compare_surrogates.html">Compare surrogate methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../pac/plot_compare_normalizations.html">Compare normalizations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../pac/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../pac/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pac/plot_pac_methods.html">Compare PAC methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../pac/plot_long_range_coupling.html">Long-range PAC</a></li>
 </ul>
 </li>
@@ -167,10 +165,10 @@
 <li class="toctree-l3"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_frequency_vectors.html">Define frequency vectors</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Compute and plot the Phase Locking Value (PLV)</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#compute-and-plot-the-phase-locking-value">Compute and plot the Phase Locking Value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Compute and plot the Inter-Trial Coherence (ITC)</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
@@ -203,7 +201,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="../../_sources/auto_examples/misc/plot_plv.rst.txt"
+  <a href="../../_sources/auto_examples/misc/plot_itc.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -229,15 +227,16 @@
       
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-misc-plot-plv-py"><span class="std std-ref">here</span></a>     to download the full example code</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-misc-plot-itc-py"><span class="std std-ref">here</span></a>     to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="compute-and-plot-the-phase-locking-value-plv">
-<span id="sphx-glr-auto-examples-misc-plot-plv-py"></span><h1>Compute and plot the Phase Locking Value (PLV)<a class="headerlink" href="#compute-and-plot-the-phase-locking-value-plv" title="Permalink to this headline">¶</a></h1>
-<p>This example illustrate how to compute and plot the Phase Locking Value (PLV).
-The PLV can be used to inspect if phases are aligned across trials.</p>
+<div class="sphx-glr-example-title section" id="compute-and-plot-the-inter-trial-coherence-itc">
+<span id="sphx-glr-auto-examples-misc-plot-itc-py"></span><h1>Compute and plot the Inter-Trial Coherence (ITC)<a class="headerlink" href="#compute-and-plot-the-inter-trial-coherence-itc" title="Permalink to this headline">¶</a></h1>
+<p>This example illustrate how to compute and plot the Inter-Trial Coherence
+(ITC). The ITC can be used to inspect if phases are aligned across trials or
+said differently, it provides a measure of the consistency across trials.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">tensorpac.utils</span> <span class="kn">import</span> <span class="n">PLV</span><span class="p">,</span> <span class="n">PSD</span>
+<span class="kn">from</span> <span class="nn">tensorpac.utils</span> <span class="kn">import</span> <span class="n">ITC</span><span class="p">,</span> <span class="n">PSD</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
@@ -247,7 +246,7 @@ The PLV can be used to inspect if phases are aligned across trials.</p>
 <blockquote>
 <div><p>the dataset used in this example is composed of pure sines and noise. All
 sines across epochs are going to have a unique frequency so that there is no
-synchronisation between them except around 0 seconde</p>
+synchronization between them except around 0 second</p>
 </div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s start by creating a random dataset</span>
 <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># number of trials</span>
@@ -262,16 +261,16 @@ synchronisation between them except around 0 seconde</p>
 <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freqs</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">time</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">data</span> <span class="o">+=</span> <span class="o">.</span><span class="mi">1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_pts</span><span class="p">)</span>
 
-<span class="c1"># plot some trials and see how sines are synchronized arround 0</span>
+<span class="c1"># plot some trials and see how sines are synchronized around 0</span>
 <span class="n">trials</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_epochs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">trials</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (secondes)&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude (V)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">trials</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (seconds)&#39;</span><span class="p">),</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Amplitude (V)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="plot plv" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_plv_001.png" />
+<img alt="plot itc" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_itc_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(Text(0.5, 0, &#39;Time (secondes)&#39;), Text(0, 0.5, &#39;Amplitude (V)&#39;))
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>(Text(0.5, 0, &#39;Time (seconds)&#39;), Text(0, 0.5, &#39;Amplitude (V)&#39;))
 </pre></div>
 </div>
 </div>
@@ -286,16 +285,16 @@ trials</p>
 <span class="n">psd</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f_max</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="PSD mean over 100 trials" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_plv_002.png" />
+<img alt="PSD mean over 100 trials" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_itc_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot object at 0x7f9d65853978&gt;
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot object at 0x7fc70aca9c50&gt;
 </pre></div>
 </div>
 </div>
-<div class="section" id="compute-and-plot-the-phase-locking-value">
-<h2>Compute and plot the Phase Locking Value<a class="headerlink" href="#compute-and-plot-the-phase-locking-value" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h2>Compute and plot the Inter-Trial Coherence (ITC)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><p>finally, compute and plot the PLV
+<div><p>finally, compute and plot the ITC
 sphinx_gallery_thumbnail_number = 3</p>
 </div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">edges</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># remove 10 points to remove edge effects due to filtering</span>
@@ -303,28 +302,28 @@ sphinx_gallery_thumbnail_number = 3</p>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 
-<span class="c1"># compute PLV for phases between [2, 30]Hz</span>
-<span class="n">plv</span> <span class="o">=</span> <span class="n">PLV</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">f_pha</span><span class="o">=</span><span class="p">[</span><span class="n">f_min</span><span class="p">,</span> <span class="n">f_max</span><span class="p">],</span> <span class="n">edges</span><span class="o">=</span><span class="n">edges</span><span class="p">,</span> <span class="n">cycle</span><span class="o">=</span><span class="n">cycle</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># compute ITC for phases between [2, 30]Hz</span>
+<span class="n">itc</span> <span class="o">=</span> <span class="n">ITC</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">f_pha</span><span class="o">=</span><span class="p">[</span><span class="n">f_min</span><span class="p">,</span> <span class="n">f_max</span><span class="p">],</span> <span class="n">edges</span><span class="o">=</span><span class="n">edges</span><span class="p">,</span> <span class="n">cycle</span><span class="o">=</span><span class="n">cycle</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
-<span class="n">plv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">)</span>
+<span class="n">itc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="c1"># compute PLV for phases between [2, 30]Hz with frequency steps</span>
-<span class="n">plv</span> <span class="o">=</span> <span class="n">PLV</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">f_pha</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">),</span> <span class="n">edges</span><span class="o">=</span><span class="n">edges</span><span class="p">,</span> <span class="n">cycle</span><span class="o">=</span><span class="n">cycle</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># compute ITC for phases between [2, 30]Hz with frequency steps</span>
+<span class="n">itc</span> <span class="o">=</span> <span class="n">ITC</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">f_pha</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">),</span> <span class="n">edges</span><span class="o">=</span><span class="n">edges</span><span class="p">,</span> <span class="n">cycle</span><span class="o">=</span><span class="n">cycle</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
-<span class="n">plv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">itc</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plv</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">itc</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="Phase Locking Value across 100 trials, Phase Locking Value across 100 trials" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_plv_003.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  5.238 seconds)</p>
-<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-misc-plot-plv-py">
+<img alt="Inter-Trials Coherence (100 trials), Inter-Trials Coherence (100 trials)" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_itc_003.png" />
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.802 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-misc-plot-itc-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/b3ae2a60f74668e858ebf6605d2ba0ff/plot_plv.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_plv.py</span></code></a></p>
+<p><a class="reference download internal" download="" href="../../_downloads/a8023a6ad556bbe11ae3d4a0215c8620/plot_itc.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_itc.py</span></code></a></p>
 </div>
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/77268125b7687e800a2411339bbf2607/plot_plv.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_plv.ipynb</span></code></a></p>
+<p><a class="reference download internal" download="" href="../../_downloads/8ed14b785dcbdbbf00bd6fae03a00170/plot_itc.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_itc.ipynb</span></code></a></p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>

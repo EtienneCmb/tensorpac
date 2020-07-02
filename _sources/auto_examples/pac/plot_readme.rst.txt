@@ -18,7 +18,7 @@ Reproduced the figure in the README.
 
 
 .. image:: /auto_examples/pac/images/sphx_glr_plot_readme_001.png
-    :alt: Contour plot with 5 regions
+    :alt: 10hz phase$\Leftrightarrow$100Hz amplitude coupling
     :class: sphx-glr-single-img
 
 
@@ -32,29 +32,30 @@ Reproduced the figure in the README.
     from tensorpac.signals import pac_signals_tort
 
     # Dataset of signals artificially coupled between 10hz and 100hz :
-    n_epochs = 20
-    n_times = 4000
-    sf = 512.  # sampling frequency
+    n_epochs = 20   # number of trials
+    n_times = 4000  # number of time points
+    sf = 512.       # sampling frequency
 
     # Create artificially coupled signals using Tort method :
     data, time = pac_signals_tort(f_pha=10, f_amp=100, noise=2, n_epochs=n_epochs,
                                   dpha=10, damp=10, sf=sf, n_times=n_times)
 
-    # Define a PAC object :
-    p = Pac(idpac=(6, 0, 0), f_pha=(2, 20, 1, 1), f_amp=(60, 150, 5, 5))
-    # Filter the data and extract PAC :
+    # Define a Pac object
+    p = Pac(idpac=(6, 0, 0), f_pha='hres', f_amp='hres')
+    # Filter the data and extract pac
     xpac = p.filterfit(sf, data)
 
-    # Plot your Phase-Amplitude Coupling :
-    p.comodulogram(xpac.mean(-1), title='Contour plot with 5 regions',
-                   cmap='Spectral_r', plotas='contour', ncontours=5)
+    # plot your Phase-Amplitude Coupling :
+    p.comodulogram(xpac.mean(-1), cmap='Spectral_r', plotas='contour', ncontours=5,
+                   title=r'10hz phase$\Leftrightarrow$100Hz amplitude coupling',
+                   fz_title=14, fz_labels=13)
 
     p.show()
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  10.019 seconds)
+   **Total running time of the script:** ( 0 minutes  5.907 seconds)
 
 
 .. _sphx_glr_download_auto_examples_pac_plot_readme.py:

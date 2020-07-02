@@ -59,7 +59,7 @@ Tensorpac provides two ways for extracting phase and amplitude :
                                      n_epochs=n_epochs, n_times=n_times)
 
     # First, let's use the MVL, without any further correction by surrogates :
-    p = Pac(idpac=(4, 0, 0), f_pha=(5, 14, 2, .3), f_amp=(80, 120, 2, 1),
+    p = Pac(idpac=(1, 0, 0), f_pha=(5, 14, 2, .3), f_amp=(80, 120, 2, 1),
             verbose=False)
 
     plt.figure(figsize=(18, 9))
@@ -85,7 +85,7 @@ Tensorpac provides two ways for extracting phase and amplitude :
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  6.843 seconds)
+   **Total running time of the script:** ( 0 minutes  3.195 seconds)
 
 
 .. _sphx_glr_download_auto_examples_pac_plot_compare_filtering.py:

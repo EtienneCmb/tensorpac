@@ -18,7 +18,7 @@ Compute PAC on multiple datasets and compare implemented methods.
 
 
 .. image:: /auto_examples/pac/images/sphx_glr_plot_pac_methods_001.png
-    :alt: Mean Vector Length (MVL, Canolty et al. 2006), Kullback-Leiber Distance (KLD, Tort et al. 2010), Heights ratio (HR, Lakatos et al. 2005), ndPac (Ozkurt et al. 2012), Phase-Synchrony (Cohen et al. 2008; Penny et al. 2008), Gaussian Copula PAC (Ince et al. 2017)
+    :alt: Mean Vector Length (MVL, Canolty et al. 2006), Kullback-Leiber Distance (KLD, Tort et al. 2010), Heights ratio (HR, Lakatos et al. 2005), ndPac (Ozkurt et al. 2012), Phase-Locking Value (Lachaux et al. 1999), Gaussian Copula PAC (Ince et al. 2017)
     :class: sphx-glr-single-img
 
 
@@ -32,7 +32,7 @@ Compute PAC on multiple datasets and compare implemented methods.
     -> PAC using Kullback-Leiber Distance (KLD, Tort et al. 2010)
     -> PAC using Heights ratio (HR, Lakatos et al. 2005)
     -> PAC using ndPac (Ozkurt et al. 2012)
-    -> PAC using Phase-Synchrony (Cohen et al. 2008; Penny et al. 2008)
+    -> PAC using Phase-Locking Value (Lachaux et al. 1999)
     -> PAC using Gaussian Copula PAC (Ince et al. 2017)
 
 
@@ -62,8 +62,11 @@ Compute PAC on multiple datasets and compare implemented methods.
     data, time = pac_signals_tort(sf=sf, f_pha=5, f_amp=100, noise=2.,
                                   n_epochs=n_epochs, n_times=n_times)
 
-    # First, let's use the MVL, without any further correction by surrogates :
-    p = Pac(f_pha=(2, 20, 1, 1), f_amp=(60, 150, 5, 5))
+    # First, let's use the MVL, without any further correction by surrogates
+    # for the definition of phase / amplitude frequency range, we use the automated
+    # mid-resolution ('lres'=low-resolution; 'mres'=mid-resolution;
+    # 'hres'=high-resolution)
+    p = Pac(f_pha='mres', f_amp='mres')
 
     # Now, we want to compare PAC methods, hence it's useless to systematically
     # filter the data. So we extract the phase and the amplitude only once :
@@ -80,13 +83,15 @@ Compute PAC on multiple datasets and compare implemented methods.
         # Plot :
         plt.subplot(2, 3, k)
         p.comodulogram(xpac.mean(-1), title=p.method, cmap='Spectral_r')
+        if k <= 3:
+            plt.xlabel('')
 
     plt.show()
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.695 seconds)
+   **Total running time of the script:** ( 0 minutes  3.120 seconds)
 
 
 .. _sphx_glr_download_auto_examples_pac_plot_pac_methods.py:

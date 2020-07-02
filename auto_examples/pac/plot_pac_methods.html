@@ -19,8 +19,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Compare filtering properties" href="plot_compare_filtering.html" />
-    <link rel="prev" title="Compare normalizations" href="plot_compare_normalizations.html" />
+    <link rel="next" title="Long-range PAC" href="plot_long_range_coupling.html" />
+    <link rel="prev" title="Compare filtering properties" href="plot_compare_filtering.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -80,7 +80,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PLV.html">tensorpac.utils.PLV</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
@@ -101,7 +100,6 @@
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.ps.html">tensorpac.methods.ps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
 </ul>
 </li>
@@ -134,8 +132,8 @@
 <li class="toctree-l3"><a class="reference internal" href="plot_pvalues.html">Compute p-values</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_compare_surrogates.html">Compare surrogate methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalizations</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Compare PAC methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Compare PAC methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
 </ul>
 </li>
@@ -167,10 +165,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_frequency_vectors.html">Define frequency vectors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../misc/plot_plv.html">Compute and plot the Phase Locking Value (PLV)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../misc/plot_plv.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../misc/plot_plv.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../misc/plot_plv.html#compute-and-plot-the-phase-locking-value">Compute and plot the Phase Locking Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../misc/plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_itc.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_itc.html#id1">Compute and plot the Inter-Trial Coherence (ITC)</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
@@ -234,13 +232,13 @@
 <div class="sphx-glr-example-title section" id="compare-pac-methods">
 <span id="sphx-glr-auto-examples-pac-plot-pac-methods-py"></span><h1>Compare PAC methods<a class="headerlink" href="#compare-pac-methods" title="Permalink to this headline">¶</a></h1>
 <p>Compute PAC on multiple datasets and compare implemented methods.</p>
-<img alt="Mean Vector Length (MVL, Canolty et al. 2006), Kullback-Leiber Distance (KLD, Tort et al. 2010), Heights ratio (HR, Lakatos et al. 2005), ndPac (Ozkurt et al. 2012), Phase-Synchrony (Cohen et al. 2008; Penny et al. 2008), Gaussian Copula PAC (Ince et al. 2017)" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_pac_methods_001.png" />
+<img alt="Mean Vector Length (MVL, Canolty et al. 2006), Kullback-Leiber Distance (KLD, Tort et al. 2010), Heights ratio (HR, Lakatos et al. 2005), ndPac (Ozkurt et al. 2012), Phase-Locking Value (Lachaux et al. 1999), Gaussian Copula PAC (Ince et al. 2017)" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_pac_methods_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>-&gt; PAC using Mean Vector Length (MVL, Canolty et al. 2006)
 -&gt; PAC using Kullback-Leiber Distance (KLD, Tort et al. 2010)
 -&gt; PAC using Heights ratio (HR, Lakatos et al. 2005)
 -&gt; PAC using ndPac (Ozkurt et al. 2012)
--&gt; PAC using Phase-Synchrony (Cohen et al. 2008; Penny et al. 2008)
+-&gt; PAC using Phase-Locking Value (Lachaux et al. 1999)
 -&gt; PAC using Gaussian Copula PAC (Ince et al. 2017)
 </pre></div>
 </div>
@@ -264,8 +262,11 @@
 <span class="n">data</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">pac_signals_tort</span><span class="p">(</span><span class="n">sf</span><span class="o">=</span><span class="n">sf</span><span class="p">,</span> <span class="n">f_pha</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">2.</span><span class="p">,</span>
                               <span class="n">n_epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="n">n_times</span><span class="p">)</span>
 
-<span class="c1"># First, let&#39;s use the MVL, without any further correction by surrogates :</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">Pac</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1"># First, let&#39;s use the MVL, without any further correction by surrogates</span>
+<span class="c1"># for the definition of phase / amplitude frequency range, we use the automated</span>
+<span class="c1"># mid-resolution (&#39;lres&#39;=low-resolution; &#39;mres&#39;=mid-resolution;</span>
+<span class="c1"># &#39;hres&#39;=high-resolution)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Pac</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="s1">&#39;mres&#39;</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="s1">&#39;mres&#39;</span><span class="p">)</span>
 
 <span class="c1"># Now, we want to compare PAC methods, hence it&#39;s useless to systematically</span>
 <span class="c1"># filter the data. So we extract the phase and the amplitude only once :</span>
@@ -282,11 +283,13 @@
     <span class="c1"># Plot :</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
     <span class="n">p</span><span class="o">.</span><span class="n">comodulogram</span><span class="p">(</span><span class="n">xpac</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">method</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Spectral_r&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.695 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.120 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-pac-plot-pac-methods-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/9ce0d1cd3db4d3ccb80fe43c5d24418e/plot_pac_methods.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_pac_methods.py</span></code></a></p>
