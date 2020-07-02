@@ -209,7 +209,8 @@ class Pac(_PacObj, _PacPlt):
             - 2 : Kullback-Leibler Distance (KLD) :cite:`tort2010measuring`
             - 3 : Heights Ratio (HR) :cite:`lakatos2005oscillatory`
             - 4 : ndPAC :cite:`ozkurt2012statistically`
-            - 5 : Phase-Locking Value :cite:`lachaux1999measuring`
+            - 5 : Phase-Locking Value
+              :cite:`lachaux1999measuring,penny2008testing`
             - 6 : Gaussian Copula PAC :cite:`ince2017statistical`
 
         * Second digit : refer to the method for computing surrogates
@@ -305,7 +306,7 @@ class Pac(_PacObj, _PacPlt):
         # input checking
         pha, amp = self._phampcheck(pha, amp)
         self._pvalues, self._surrogates = None, None
-        # for the phase synchrony, extract the phase of the amplitude
+        # for the plv, extract the phase of the amplitude
         if self._idpac[0] == 5:
             amp = np.angle(hilbertm(amp))
 

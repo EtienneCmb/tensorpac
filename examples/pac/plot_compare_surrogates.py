@@ -21,9 +21,9 @@ sf = 512.  # sampling frequency
 data, time = pac_signals_wavelet(sf=sf, f_pha=6, f_amp=70, noise=3.,
                                  n_epochs=n_epochs, n_times=4000)
 
-# First, let's use the MVL, without any further correction by surrogates :
-p = Pac(f_pha=(3, 10, 1, .2), f_amp=(50, 90, 5, 1), dcomplex='wavelet',
-        width=12)
+# First, let's use the PLV, without any further correction by surrogates :
+p = Pac(idpac=(5, 0, 0), f_pha=(3, 10, 1, .2), f_amp=(50, 90, 5, 1),
+        dcomplex='wavelet', width=12)
 
 # Now, we want to compare PAC methods, hence it's useless to systematically
 # filter the data. So we extract the phase and the amplitude only once :

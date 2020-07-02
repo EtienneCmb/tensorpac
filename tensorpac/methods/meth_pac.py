@@ -19,7 +19,7 @@ def pacstr(idpac):
     elif idpac[0] == 4:
         method = 'ndPac (Ozkurt et al. 2012)'
     elif idpac[0] == 5:
-        method = 'Phase-Synchrony (Cohen et al. 2008; Penny et al. 2008)'
+        method = 'Phase-Locking Value (Lachaux et al. 1999)'
     elif idpac[0] == 6:
         method = 'Gaussian Copula PAC (Ince et al. 2017)'
     else:
@@ -73,7 +73,7 @@ def get_pac_fcn(idp, n_bins, p):
     elif idp == 4:  # ndPAC
         return partial(ndpac, p=p)
     elif idp == 5:  # PLV
-        return partial(ps)
+        return partial(plv)
     elif idp == 6:  # GC
         return partial(gcpac)
     else:
@@ -222,12 +222,13 @@ def ndpac(pha, amp, p=.05):
     return pac
 
 
-def ps(pha, pha_amp):
-    """Phase Synchrony.
+def plv(pha, pha_amp):
+    """Phase Locking-Value.
 
-    In order to measure the phase synchrony, the phase of the amplitude of the
-    higher-frequency signal must be provided, and not the amplitude as in most
-    other PAC functions. Adapted from :cite:`lachaux1999measuring`
+    In order to measure the phase locking value, the phase of the amplitude of
+    the higher-frequency signal must be provided, and not the amplitude as in
+    most other PAC functions. Adapted from
+    :cite:`lachaux1999measuring,penny2008testing`
 
     Parameters
     ----------
