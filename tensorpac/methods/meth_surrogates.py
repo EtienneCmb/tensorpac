@@ -22,6 +22,8 @@ def compute_surrogates(pha, amp, ids, fcn, n_perm, n_jobs):
 def swap_pha_amp(pha, amp):
     """Swap phase / amplitude trials.
 
+    Taken from :cite:`tort2010measuring`
+
     Parameters
     ----------
     pha, amp : array_like
@@ -33,12 +35,6 @@ def swap_pha_amp(pha, amp):
     pha, amp : array_like
         The phase and amplitude to use to compute the distribution of
         permutations
-
-    References
-    ----------
-    Tort ABL, Komorowski R, Eichenbaum H, Kopell N (2010) Measuring
-    Phase-Amplitude Coupling Between Neuronal Oscillations of Different
-    Frequencies. Journal of Neurophysiology 104:1195–1210.
     """
     tr_ = np.random.permutation(pha.shape[1])
     return pha[:, tr_, ...], amp
@@ -47,6 +43,8 @@ def swap_pha_amp(pha, amp):
 def swap_blocks(pha, amp):
     """Swap amplitudes time blocks.
 
+    Taken from :cite:`bahramisharif2013propagating`
+
     Parameters
     ----------
     pha, amp : array_like
@@ -58,13 +56,6 @@ def swap_blocks(pha, amp):
     pha, amp : array_like
         The phase and amplitude to use to compute the distribution of
         permutations
-
-    References
-    ----------
-    Bahramisharif A, van Gerven MAJ, Aarnoutse EJ, Mercier MR, Schwartz TH,
-    Foxe JJ, Ramsey NF, Jensen O (2013) Propagating Neocortical Gamma Bursts
-    Are Coordinated by Traveling Alpha Waves. Journal of Neuroscience
-    33:18849–18854.
     """
     # random cutting point along time axis
     cut_at = np.random.randint(1, amp.shape[-1], (1,))
@@ -78,6 +69,8 @@ def swap_blocks(pha, amp):
 def time_lag(pha, amp):
     """Introduce a time lag on phase series.
 
+    Taken from :cite:`canolty2006high`
+
     Parameters
     ----------
     pha, amp : array_like
@@ -89,11 +82,6 @@ def time_lag(pha, amp):
     pha, amp : array_like
         The phase and amplitude to use to compute the distribution of
         permutations
-
-    References
-    ----------
-    Canolty RT (2006) High Gamma Power Is Phase-Locked to Theta. science
-    1128115:313.
     """
     shift = np.random.randint(pha.shape[-1])
     return np.roll(pha, shift, axis=-1), amp

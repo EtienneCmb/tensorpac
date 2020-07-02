@@ -54,6 +54,7 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.coverage',
     'sphinx_gallery.gen_gallery',
+    'sphinxcontrib.bibtex',
     'numpydoc',
 ]
 

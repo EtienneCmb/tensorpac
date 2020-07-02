@@ -64,17 +64,17 @@ def pacstr(idpac):
 
 def get_pac_fcn(idp, n_bins, p):
     """Get the function for computing Phase-Amplitude coupling."""
-    if idp == 1:  # Mean Vector Length (Canolty, 2006)
+    if idp == 1:    # MVL
         return partial(mvl)
-    elif idp == 2:  # Kullback-Leiber distance (Tort, 2010)
+    elif idp == 2:  # KLD
         return partial(kld, n_bins=n_bins)
-    elif idp == 3:  # Heights ratio (Lakatos, 2005)
+    elif idp == 3:  # HR
         return partial(hr, n_bins=n_bins)
-    elif idp == 4:  # ndPac (Ozkurt, 2012)
+    elif idp == 4:  # ndPAC
         return partial(ndpac, p=p)
-    elif idp == 5:  # Phase-Synchrony (Penny, 2008; Cohen, 2008)
+    elif idp == 5:  # PLV
         return partial(ps)
-    elif idp == 6:  # Gaussian-Copula
+    elif idp == 6:  # GC
         return partial(gcpac)
     else:
         raise ValueError(str(idp) + " is not recognized as a valid pac "
@@ -83,6 +83,8 @@ def get_pac_fcn(idp, n_bins, p):
 
 def mvl(pha, amp):
     """Mean Vector Length.
+
+    Adapted from :cite:`canolty2006high`
 
     Parameters
     ----------
@@ -94,11 +96,6 @@ def mvl(pha, amp):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
-
-    References
-    ----------
-    Canolty RT (2006) High Gamma Power Is Phase-Locked to Theta. science
-    1128115:313.
     """
     return np.abs(np.einsum('i...j, k...j->ik...', amp,
                             np.exp(1j * pha))) / pha.shape[-1]
@@ -106,6 +103,8 @@ def mvl(pha, amp):
 
 def kld(pha, amp, n_bins=18):
     """Kullback Leibler Distance.
+
+    Adapted from :cite:`tort2010measuring`
 
     Parameters
     ----------
@@ -119,12 +118,6 @@ def kld(pha, amp, n_bins=18):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
-
-    References
-    ----------
-    Tort ABL, Komorowski R, Eichenbaum H, Kopell N (2010) Measuring
-    Phase-Amplitude Coupling Between Neuronal Oscillations of Different
-    Frequencies. Journal of Neurophysiology 104:1195–1210.
     """
     # Get the phase locked binarized amplitude :
     p_j = _kl_hr(pha, amp, n_bins)
@@ -142,6 +135,8 @@ def kld(pha, amp, n_bins=18):
 def hr(pha, amp, n_bins=18):
     """Heights ratio.
 
+    Adapted from :cite:`lakatos2005oscillatory`
+
     Parameters
     ----------
     pha, amp : array_like
@@ -154,12 +149,6 @@ def hr(pha, amp, n_bins=18):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
-
-    References
-    ----------
-    Lakatos P (2005) An Oscillatory Hierarchy Controlling Neuronal
-    Excitability and Stimulus Processing in the Auditory Cortex. Journal of
-    Neurophysiology 94:1904–1911.
     """
     # Get the phase locked binarized amplitude :
     p_j = _kl_hr(pha, amp, n_bins)
@@ -196,6 +185,8 @@ def _kl_hr(pha, amp, n_bins, mean_bins=True):
 def ndpac(pha, amp, p=.05):
     """Normalized direct Pac.
 
+    Adapted from :cite:`ozkurt2012statistically`
+
     Parameters
     ----------
     pha, amp : array_like
@@ -210,12 +201,6 @@ def ndpac(pha, amp, p=.05):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
-
-    References
-    ----------
-    Ozkurt TE (2012) Statistically Reliable and Fast Direct Estimation of
-    Phase-Amplitude Cross-Frequency Coupling. Biomedical Engineering, IEEE
-    Transactions on 59:1943–1950.
     """
     npts = amp.shape[-1]
     # Normalize amplitude :
@@ -238,11 +223,11 @@ def ndpac(pha, amp, p=.05):
 
 
 def ps(pha, pha_amp):
-    """Phase Synchrony (Penny, 2008; Cohen, 2008).
+    """Phase Synchrony.
 
     In order to measure the phase synchrony, the phase of the amplitude of the
     higher-frequency signal must be provided, and not the amplitude as in most
-    other PAC functions.
+    other PAC functions. Adapted from :cite:`lachaux1999measuring`
 
     Parameters
     ----------
@@ -255,14 +240,6 @@ def ps(pha, pha_amp):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_pha_amp, n_pha, ...)
-
-    References
-    ----------
-    Penny WD, Duzel E, Miller KJ, Ojemann JG (2008) Testing for nested
-    oscillation. Journal of Neuroscience Methods 174:50–61.
-    Cohen MX, Elger CE, Fell J (2008) Oscillatory activity and phase amplitude
-    coupling in the human medial frontal cortex during decision making. Journal
-    of cognitive neuroscience 21:390–402.
     """
     pac = np.einsum('i...j, k...j->ik...', np.exp(-1j * pha_amp),
                     np.exp(1j * pha))
@@ -275,7 +252,7 @@ def gcpac(pha, amp):
     This function assumes that phases and amplitudes have already been
     prepared i.e. phases should be represented in a unit circle
     (np.c_[np.sin(pha), np.cos(pha)]) and both inputs should also have been
-    copnormed.
+    copnormed. Adapted from :cite:`ince2017statistical`
 
     Parameters
     ----------
@@ -287,13 +264,6 @@ def gcpac(pha, amp):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
-
-    References
-    ----------
-    Ince RAA, Giordano BL, Kayser C, Rousselet GA, Gross J, Schyns PG (2017) A
-    statistical framework for neuroimaging data analysis based on mutual
-    information estimated via a gaussian copula: Gaussian Copula Mutual
-    Information. Human Brain Mapping 38:1541–1573.
     """
     # prepare the shape of gcpac
     n_pha, n_amp = pha.shape[0], amp.shape[0]

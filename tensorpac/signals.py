@@ -13,7 +13,7 @@ def pac_signals_wavelet(f_pha=10., f_amp=100., sf=1024., n_times=4000.,
     """Generate artificially phase-amplitude coupled signals using wavelets.
 
     This function is inspired by the code of the pactools toolbox developped by
-    Tom Dupre la Tour.
+    Tom Dupre la Tour :cite:`la2017non`.
 
     Parameters
     ----------
@@ -71,7 +71,8 @@ def pac_signals_tort(f_pha=10., f_amp=100., sf=1024, n_times=4000, n_epochs=10,
                      chi=0., noise=1., dpha=0., damp=0., rnd_state=0):
     """Generate artificially phase-amplitude coupled signals.
 
-    This function use the definition of Tort et al. 2010.
+    This function uses the definition of Tort et al. 2010
+    :cite:`tort2010measuring`.
 
     Parameters
     ----------

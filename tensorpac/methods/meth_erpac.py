@@ -43,7 +43,8 @@ def erpac(pha, amp):
     """Correlation coefficient between a circular and a linear random variable.
 
     Adapted from the function circ_corrcc Circular Statistics Toolbox for
-    Matlab By Philipp Berens, 2009.
+    Matlab By Philipp Berens, 2009 :cite:`berens2009circstat`. This function is
+    an adaptation of Voytek, 2013 :cite:`voytek2013method` for tensors.
 
     Parameters
     ----------
@@ -57,11 +58,6 @@ def erpac(pha, amp):
         Array of correlation coefficients of shape (n_amp, n_pha, ...)
     pval : array_like
         Array of p-values of shape (n_amp, n_pha, ...).
-
-    References
-    ----------
-    Voytek B, D’Esposito M, Crone N, Knight RT (2013) A method for
-    event-related phase/amplitude coupling. NeuroImage 64:416–424.
     """
     # Compute correlation coefficient for sin and cos independently
     n = pha.shape[-1]
@@ -86,7 +82,7 @@ def ergcpac(pha, amp, smooth=None, n_jobs=-1):
     This function assumes that phases and amplitudes have already been
     prepared i.e. phases should be represented in a unit circle
     (np.c_[np.sin(pha), np.cos(pha)]) and both inputs should also have been
-    copnormed.
+    copnormed :cite:`ince2017statistical`.
 
     Parameters
     ----------
@@ -98,13 +94,6 @@ def ergcpac(pha, amp, smooth=None, n_jobs=-1):
     -------
     erpac : array_like
         Array of correlation coefficients of shape (n_amp, n_pha, n_times)
-
-    References
-    ----------
-    Ince RAA, Giordano BL, Kayser C, Rousselet GA, Gross J, Schyns PG (2017) A
-    statistical framework for neuroimaging data analysis based on mutual
-    information estimated via a gaussian copula: Gaussian Copula Mutual
-    Information. Human Brain Mapping 38:1541–1573.
     """
     # get shapes
     (n_pha, n_times, _, n_epochs), n_amp = pha.shape, amp.shape[0]  # noqa
