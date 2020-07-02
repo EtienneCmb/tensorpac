@@ -458,6 +458,12 @@ class Pac(_PacObj, _PacPlt):
         # Ozkurt PAC case (doesn't need surrogates and normalization)
         if idpac[0] == 4:
             idpac = np.array([4, 0, 0])
+        if (idpac[0] == 1) and (idpac[1] == 0) and (idpac[2] == 0):
+            logger.warning(
+                "MVL is amplitude dependent which means that if the amplitude "
+                "increases, MVL also increases. You should select a "
+                "normalization method for correcting this limitation "
+                "(e.g idpac=(1, 2, 4))")
         if (idpac[2] != 0) and (idpac[1] == 0):
             logger.warning("If you want to normalize the estimated PAC, you "
                            "should select a surrogate method (second digit of "
