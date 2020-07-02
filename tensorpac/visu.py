@@ -13,11 +13,12 @@ class _PacVisual(object):
         self._autovmM = True
 
     def pacplot(self, pac, xvec, yvec, xlabel='', ylabel='', cblabel='',
-                title='', cmap='viridis', vmin=None, vmax=None, under=None,
-                over=None, bad=None, pvalues=None, p=0.05, interp=None,
-                rmaxis=False, dpaxis=False, plotas='imshow', ncontours=5,
-                levels=None, levelcmap='Reds', polar=False, colorbar=True,
-                y=1.02, subplot=111):
+                title='', fz_labels=12, fz_title=13, fz_cblabel=12,
+                cmap='viridis', vmin=None, vmax=None, under=None, over=None,
+                bad=None, pvalues=None, p=0.05, interp=None, rmaxis=False,
+                dpaxis=False, plotas='imshow', ncontours=5, levels=None,
+                levelcmap='Reds', polar=False, colorbar=True, y=1.02,
+                subplot=111):
         """Main plotting pac function.
 
         This method can be used to plot any 2D array.
@@ -38,6 +39,12 @@ class _PacVisual(object):
             Label for the colorbar.
         title : string | ''
             Title of the plot.
+        fz_labels : float | 12
+            Font size of the y- and x-labels
+        fz_title : float | 13
+            Font size of the title
+        fz_cblabel : float | 12
+            Font size of the colorbar label
         y : float | 1.02
             Title location.
         cmap : string | 'viridis'
@@ -143,15 +150,15 @@ class _PacVisual(object):
 
         # Title/Xlabel/Ylabel :
         plt.axis('tight')
-        plt.xlabel(xlabel)
-        plt.ylabel(ylabel)
-        plt.title(title, y=y)
+        plt.xlabel(xlabel, fontsize=fz_labels)
+        plt.ylabel(ylabel, fontsize=fz_labels)
+        plt.title(title, y=y, fontsize=fz_title)
         plt.clim(vmin=vmin, vmax=vmax)
 
         # Colorbar
         if colorbar:
             cb = plt.colorbar(im, shrink=0.7, pad=0.01, aspect=10)
-            cb.set_label(cblabel)
+            cb.set_label(cblabel, fontsize=fz_cblabel)
             cb.outline.set_visible(False)
         ax = plt.gca()
 
