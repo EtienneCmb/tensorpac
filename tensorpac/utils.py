@@ -313,11 +313,11 @@ class BinAmplitude(_PacObj):
         return self._phase
 
 
-class PLV(_PacObj):
-    """Compute the Phase Locking Value (PLV).
+class ITC(_PacObj):
+    """Compute the Inter-Trials Coherence (ITC).
 
-    The Phase Locking Value (PLV) can be used to measure the phase synchrony
-    across trials [#f1]_
+    The Inter-Trials Coherence (ITC) is a measure of phase consistency over
+    trials for a single recording site (electrode / sensor etc.).
 
     Parameters
     ----------
@@ -338,11 +338,6 @@ class PLV(_PacObj):
         Width of the Morlet's wavelet.
     edges : int | None
         Number of samples to discard to avoid edge effects due to filtering
-
-    References
-    ----------
-    .. [#f1] `Lachaux et al, 1999 <https://onlinelibrary.wiley.com/doi/abs/10.
-       1002/(SICI)1097-0193(1999)8:4%3C194::AID-HBM4%3E3.0.CO;2-C>`_
     """
 
     def __init__(self, x, sf, f_pha=[2, 4], dcomplex='hilbert', cycle=3,
@@ -358,12 +353,12 @@ class PLV(_PacObj):
         # extract phase and amplitude
         kw = dict(keepfilt=False, edges=edges, n_jobs=n_jobs)
         pha = self.filter(sf, x, 'phase', **kw)
-        # compute plv
-        self._plv = np.abs(np.exp(1j * pha).mean(1)).squeeze()
+        # compute itc
+        self._itc = np.abs(np.exp(1j * pha).mean(1)).squeeze()
         self._sf = sf
 
     def plot(self, time=None, **kw):
-        """Plot the Phase Locking Value.
+        """Plot the Inter-Trials Coherence.
 
         Parameters
         ----------
@@ -380,23 +375,23 @@ class PLV(_PacObj):
             The matplotlib axis that contains the figure
         """
         import matplotlib.pyplot as plt
-        n_pts = self._plv.shape[-1]
+        n_pts = self._itc.shape[-1]
         if not isinstance(time, np.ndarray):
             time = np.arange(n_pts) / self._sf
         time = time[self._edges]
         assert len(time) == n_pts, ("The length of the time vector should be "
                                     "{n_pts}")
-        if self._plv.ndim == 1:
-            plt.plot(time, self._plv, **kw)
-        elif self._plv.ndim == 2:
-            vmin = kw.get('vmin', np.percentile(self._plv, 1))
-            vmax = kw.get('vmax', np.percentile(self._plv, 99))
-            plt.pcolormesh(time, self.xvec, self._plv, vmin=vmin, vmax=vmax,
+        if self._itc.ndim == 1:
+            plt.plot(time, self._itc, **kw)
+        elif self._itc.ndim == 2:
+            vmin = kw.get('vmin', np.percentile(self._itc, 1))
+            vmax = kw.get('vmax', np.percentile(self._itc, 99))
+            plt.pcolormesh(time, self.xvec, self._itc, vmin=vmin, vmax=vmax,
                            **kw)
             plt.colorbar()
             plt.ylabel("Frequency for phase (Hz)")
         plt.xlabel('Time')
-        plt.title(f"Phase Locking Value across {self._n_trials} trials")
+        plt.title(f"Inter-Trials Coherence ({self._n_trials} trials)")
         return plt.gca()
 
     def show(self):
@@ -405,6 +400,6 @@ class PLV(_PacObj):
         plt.show()
 
     @property
-    def plv(self):
-        """Get the plv value."""
-        return self._plv
+    def itc(self):
+        """Get the itc value."""
+        return self._itc

@@ -2,7 +2,7 @@
 import numpy as np
 import matplotlib
 
-from tensorpac.utils import pac_vec, pac_trivec, PSD, BinAmplitude, PLV
+from tensorpac.utils import pac_vec, pac_trivec, PSD, BinAmplitude, ITC
 
 
 class TestUtils(object):
@@ -53,16 +53,16 @@ class TestUtils(object):
         binamp.phase
         binamp.amplitude
 
-    def test_plv(self):
+    def test_itc(self):
         """Test Phase-locking Value."""
         # test definition
         x = np.random.rand(10, 200)
-        plv_1d = PLV(x, 128, f_pha=[2, 4])
-        plv_2d = PLV(x, 128, f_pha=[[2, 4], [5, 7]])
+        itc_1d = ITC(x, 128, f_pha=[2, 4])
+        itc_2d = ITC(x, 128, f_pha=[[2, 4], [5, 7]])
         # test properties
-        plv_1d.plv
+        itc_1d.itc
         # test plot
-        plv_1d.plot()
-        plv_2d.plot()
-        plv_1d.show()
+        itc_1d.plot()
+        itc_2d.plot()
+        itc_1d.show()
         matplotlib.pyplot.close('all')
