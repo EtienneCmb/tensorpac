@@ -241,15 +241,21 @@
 
 
 <div class="viewcode-block" id="swap_pha_amp"><a class="viewcode-back" href="../../../generated/tensorpac.methods.swap_pha_amp.html#tensorpac.methods.swap_pha_amp">[docs]</a><span class="k">def</span> <span class="nf">swap_pha_amp</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Swap phase / amplitude trials.</span>
+    <span class="sd">&quot;&quot;&quot;Compute surrogates by swapping phase / amplitude trials.</span>
 
-<span class="sd">    Taken from :cite:`tort2010measuring`</span>
+<span class="sd">    This function destroys the relation between the phase and the amplitude in</span>
+<span class="sd">    order to correct for PAC that could be obtained by chance. To this end,</span>
+<span class="sd">    this function reorganize the relation from trial-to-trial between the phase</span>
+<span class="sd">    and the amplitude (swapping). In particular, in that case it is the trials</span>
+<span class="sd">    of the phase that are randomly swapped and the amplitude is leaved</span>
+<span class="sd">    unchanged. For a more detailed description, see :cite:`tort2010measuring`</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    pha, amp : array_like</span>
-<span class="sd">        Respectively the arrays of phases of shape (n_pha, ..., n_times) and</span>
-<span class="sd">        the array of amplitudes of shape (n_amp, ..., n_times).</span>
+<span class="sd">        Respectively the arrays of phases of shape</span>
+<span class="sd">        (n_pha, n_trials, ..., n_times) and the array of amplitudes of shape</span>
+<span class="sd">        (n_amp, n_trials, ..., n_times).</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -262,9 +268,13 @@
 
 
 <div class="viewcode-block" id="swap_blocks"><a class="viewcode-back" href="../../../generated/tensorpac.methods.swap_blocks.html#tensorpac.methods.swap_blocks">[docs]</a><span class="k">def</span> <span class="nf">swap_blocks</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Swap amplitudes time blocks.</span>
+    <span class="sd">&quot;&quot;&quot;Compute surrogates by swapping amplitudes time blocks.</span>
 
-<span class="sd">    Taken from :cite:`bahramisharif2013propagating`</span>
+<span class="sd">    This function destroys the relation between the phase and the amplitude in</span>
+<span class="sd">    order to correct for PAC that could be obtained by chance. To this end,</span>
+<span class="sd">    this function cut the amplitude at a random time point. Then, both time</span>
+<span class="sd">    blocks are swapped. For a more detailed description, see</span>
+<span class="sd">    :cite:`bahramisharif2013propagating`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -288,9 +298,12 @@
 
 
 <div class="viewcode-block" id="time_lag"><a class="viewcode-back" href="../../../generated/tensorpac.methods.time_lag.html#tensorpac.methods.time_lag">[docs]</a><span class="k">def</span> <span class="nf">time_lag</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Introduce a time lag on phase series.</span>
+    <span class="sd">&quot;&quot;&quot;Compute surrogates by introducing a time lag on phase series.</span>
 
-<span class="sd">    Taken from :cite:`canolty2006high`</span>
+<span class="sd">    This function destroys the relation between the phase and the amplitude in</span>
+<span class="sd">    order to correct for PAC that could be obtained by chance. To this end, a</span>
+<span class="sd">    random temporal lag is introduced at the beginning of the phase. For a more</span>
+<span class="sd">    detailed description, see :cite:`canolty2006high`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>

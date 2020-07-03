@@ -238,11 +238,11 @@
     <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
         <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Heights ratio (HR, Lakatos et al. 2005)&#39;</span>
     <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
-        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;ndPac (Ozkurt et al. 2012)&#39;</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Normalized Direct Pac (ndPac, Ozkurt et al. 2012)&#39;</span>
     <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
-        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Phase-Locking Value (Lachaux et al. 1999)&#39;</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Phase-Locking Value (PLV, Lachaux et al. 1999)&#39;</span>
     <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
-        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Gaussian Copula PAC (Ince et al. 2017)&#39;</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Gaussian Copula PAC (gcPac, Ince et al. 2017)&#39;</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No corresponding pac method.&quot;</span><span class="p">)</span>
 
@@ -303,7 +303,7 @@
 
 
 <div class="viewcode-block" id="mean_vector_length"><a class="viewcode-back" href="../../../generated/tensorpac.methods.mean_vector_length.html#tensorpac.methods.mean_vector_length">[docs]</a><span class="k">def</span> <span class="nf">mean_vector_length</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Mean Vector Length.</span>
+    <span class="sd">&quot;&quot;&quot;Compute PAC using the Mean Vector Length (MVL).</span>
 
 <span class="sd">    Adapted from :cite:`canolty2006high`</span>
 
@@ -323,7 +323,7 @@
 
 
 <div class="viewcode-block" id="modulation_index"><a class="viewcode-back" href="../../../generated/tensorpac.methods.modulation_index.html#tensorpac.methods.modulation_index">[docs]</a><span class="k">def</span> <span class="nf">modulation_index</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Modulation index.</span>
+    <span class="sd">&quot;&quot;&quot;Compute PAC using the Modulation index (MI).</span>
 
 <span class="sd">    The modulation index is obtained using the Kullback Leibler Distance.</span>
 <span class="sd">    Adapted from :cite:`tort2010measuring`</span>
@@ -355,7 +355,7 @@
 
 
 <div class="viewcode-block" id="heights_ratio"><a class="viewcode-back" href="../../../generated/tensorpac.methods.heights_ratio.html#tensorpac.methods.heights_ratio">[docs]</a><span class="k">def</span> <span class="nf">heights_ratio</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Heights ratio.</span>
+    <span class="sd">&quot;&quot;&quot;Compute PAC using the Heights ratio (HR).</span>
 
 <span class="sd">    Adapted from :cite:`lakatos2005oscillatory`</span>
 
@@ -405,7 +405,7 @@
 
 
 <div class="viewcode-block" id="norm_direct_pac"><a class="viewcode-back" href="../../../generated/tensorpac.methods.norm_direct_pac.html#tensorpac.methods.norm_direct_pac">[docs]</a><span class="k">def</span> <span class="nf">norm_direct_pac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Normalized direct Pac.</span>
+    <span class="sd">&quot;&quot;&quot;Compute PAC using the Normalized direct Pac (ndPAC).</span>
 
 <span class="sd">    Adapted from :cite:`ozkurt2012statistically`</span>
 
@@ -445,7 +445,7 @@
 
 
 <div class="viewcode-block" id="phase_locking_value"><a class="viewcode-back" href="../../../generated/tensorpac.methods.phase_locking_value.html#tensorpac.methods.phase_locking_value">[docs]</a><span class="k">def</span> <span class="nf">phase_locking_value</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">pha_amp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Phase Locking-Value.</span>
+    <span class="sd">&quot;&quot;&quot;Compute PAC using the Phase Locking-Value (PLV).</span>
 
 <span class="sd">    In order to measure the phase locking value, the phase of the amplitude of</span>
 <span class="sd">    the higher-frequency signal must be provided, and not the amplitude as in</span>
@@ -470,7 +470,7 @@
 
 
 <div class="viewcode-block" id="gauss_cop_pac"><a class="viewcode-back" href="../../../generated/tensorpac.methods.gauss_cop_pac.html#tensorpac.methods.gauss_cop_pac">[docs]</a><span class="k">def</span> <span class="nf">gauss_cop_pac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Gaussian Copula Phase-amplitude coupling.</span>
+    <span class="sd">&quot;&quot;&quot;Compute PAC using the Gaussian Copula PAC (gcPac).</span>
 
 <span class="sd">    This function assumes that phases and amplitudes have already been</span>
 <span class="sd">    prepared i.e. phases should be represented in a unit circle</span>

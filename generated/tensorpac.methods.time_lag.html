@@ -229,8 +229,11 @@
 <dl class="function">
 <dt id="tensorpac.methods.time_lag">
 <code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">time_lag</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_surrogates.html#time_lag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.time_lag" title="Permalink to this definition">¶</a></dt>
-<dd><p>Introduce a time lag on phase series.</p>
-<p>Taken from <a class="bibtex reference internal" href="../references.html#canolty2006high" id="id1">[3]</a></p>
+<dd><p>Compute surrogates by introducing a time lag on phase series.</p>
+<p>This function destroys the relation between the phase and the amplitude in
+order to correct for PAC that could be obtained by chance. To this end, a
+random temporal lag is introduced at the beginning of the phase. For a more
+detailed description, see <a class="bibtex reference internal" href="../references.html#canolty2006high" id="id1">[3]</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">

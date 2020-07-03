@@ -229,13 +229,19 @@
 <dl class="function">
 <dt id="tensorpac.methods.swap_pha_amp">
 <code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">swap_pha_amp</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_surrogates.html#swap_pha_amp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.swap_pha_amp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Swap phase / amplitude trials.</p>
-<p>Taken from <a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id1">[9]</a></p>
+<dd><p>Compute surrogates by swapping phase / amplitude trials.</p>
+<p>This function destroys the relation between the phase and the amplitude in
+order to correct for PAC that could be obtained by chance. To this end,
+this function reorganize the relation from trial-to-trial between the phase
+and the amplitude (swapping). In particular, in that case it is the trials
+of the phase that are randomly swapped and the amplitude is leaved
+unchanged. For a more detailed description, see <a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id1">[9]</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>pha, amp</strong><span class="classifier">array_like</span></dt><dd><p>Respectively the arrays of phases of shape (n_pha, …, n_times) and
-the array of amplitudes of shape (n_amp, …, n_times).</p>
+<dt><strong>pha, amp</strong><span class="classifier">array_like</span></dt><dd><p>Respectively the arrays of phases of shape
+(n_pha, n_trials, …, n_times) and the array of amplitudes of shape
+(n_amp, n_trials, …, n_times).</p>
 </dd>
 </dl>
 </dd>

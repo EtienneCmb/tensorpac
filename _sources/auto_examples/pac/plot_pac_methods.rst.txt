@@ -28,9 +28,9 @@ Compute PAC on multiple datasets and compare implemented methods.
     -> PAC using Mean Vector Length (MVL, Canolty et al. 2006)
     -> PAC using Modulation Index (MI, Tort et al. 2010)
     -> PAC using Heights ratio (HR, Lakatos et al. 2005)
-    -> PAC using ndPac (Ozkurt et al. 2012)
-    -> PAC using Phase-Locking Value (Lachaux et al. 1999)
-    -> PAC using Gaussian Copula PAC (Ince et al. 2017)
+    -> PAC using Normalized Direct Pac (ndPac, Ozkurt et al. 2012)
+    -> PAC using Phase-Locking Value (PLV, Lachaux et al. 1999)
+    -> PAC using Gaussian Copula PAC (gcPac, Ince et al. 2017)
 
 
 
@@ -87,7 +87,7 @@ Compute PAC on multiple datasets and compare implemented methods.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  4.333 seconds)
+   **Total running time of the script:** ( 0 minutes  3.286 seconds)
 
 
 .. _sphx_glr_download_auto_examples_pac_plot_pac_methods.py:
