@@ -1,13 +1,15 @@
 """Compare single trial vs tensor computations."""
 import json
-with open("paper.json", 'r') as f: cfg = json.load(f)  # noqa
+with open("../../paper.json", 'r') as f: cfg = json.load(f)  # noqa
 
 import numpy as np
 import pandas as pd
 from time import time as tst
 
 from tensorpac.signals import pac_signals_tort, pac_signals_wavelet
-from tensorpac.methods import (mvl, kld, hr, ndpac, ps)
+from tensorpac.methods import (mean_vector_length, modulation_index,
+                               heights_ratio, norm_direct_pac,
+                               phase_locking_value)
 from tensorpac import Pac
 
 
@@ -25,18 +27,16 @@ sf = 1024
 n_epochs = 100
 n_times = 3000
 res = 'hres'
-titles = ["MVL", "KLD", "HR", "ndPAC", "PS"]
-methods = dict(MVL=[0, slice(0, 2)], KLD=[0, slice(2, 4)],
+methods = dict(MVL=[0, slice(0, 2)], MI=[0, slice(2, 4)],
                HR=[0, slice(4, 6)], ndPAC=[1, slice(1, 3)],
-               PS=[1, slice(3, 5)])
+               PLV=[1, slice(3, 5)])
 ###############################################################################
 
-METHODS = dict(MVL=mvl, KLD=kld, HR=hr, ndPAC=ndpac, PS=ps)
+METHODS = dict(MVL=mean_vector_length, MI=modulation_index, HR=heights_ratio,
+               ndPAC=norm_direct_pac, PLV=phase_locking_value)
 
 data, time = pac_signals_wavelet(sf=sf, f_pha=10, f_amp=100, noise=2.,
                                  n_epochs=n_epochs, n_times=n_times)
-# p = Pac(idpac=(1, 0, 0), f_pha=cfg["phres"], f_amp=cfg["ahres"])
-# p = Pac(idpac=(1, 0, 0), f_pha=(1, 30, 1, 1), f_amp=(60, 160, 5, 5))
 p = Pac(idpac=(1, 0, 0), f_pha=res, f_amp=res)
 pha = p.filter(sf, data, ftype='phase', n_jobs=1)
 amp = p.filter(sf, data, ftype='amplitude', n_jobs=1)
@@ -91,6 +91,6 @@ plt.title("Computing time ratio\n(vector / tensor)")
 ax = plt.gca()
 ax.text(*tuple(cfg["nb_pos"]), 'B', transform=ax.transAxes, **cfg["nb_cfg"])
 
-plt.savefig(f"{cfg['path']}/Fig8_{res}.png", dpi=300, bbox_inches='tight')
+plt.savefig(f"../figures/Fig8_{res}.png", dpi=300, bbox_inches='tight')
 
 plt.show()

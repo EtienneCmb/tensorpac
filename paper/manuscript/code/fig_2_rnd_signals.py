@@ -1,6 +1,6 @@
 """Illustrative PAC example."""
 import json
-with open("paper.json", 'r') as f: cfg = json.load(f)  # noqa
+with open("../../paper.json", 'r') as f: cfg = json.load(f)  # noqa
 
 from tensorpac.signals import pac_signals_tort, pac_signals_wavelet
 from tensorpac import Pac
@@ -47,7 +47,8 @@ ax.text(*tuple(cfg["nb_pos"]), 'A', transform=ax.transAxes, **cfg["nb_cfg"])
 
 plt.subplot(222)
 p.comodulogram(xpac_t, title='Comodulogram', cmap=cfg['cmap'],
-               plotas='contour', ncontours=5)
+               plotas='contour', ncontours=5, fz_labels=18, fz_title=20,
+               fz_cblabel=18)
 plt.axvline(5, lw=1, color='white')
 plt.axhline(120, lw=1, color='white')
 plt.xlabel("")
@@ -64,14 +65,13 @@ ax = plt.gca()
 ax.text(*tuple(cfg["nb_pos"]), 'B', transform=ax.transAxes, **cfg["nb_cfg"])
 
 plt.subplot(224)
-p.comodulogram(xpac_w, title='', cmap=cfg['cmap'],
-               plotas='contour', ncontours=5)
+p.comodulogram(xpac_w, title='', cmap=cfg['cmap'], plotas='contour',
+               ncontours=5, fz_labels=18, fz_title=20, fz_cblabel=18)
 plt.axvline(5, lw=1, color='white')
 plt.axhline(120, lw=1, color='white')
 ax = plt.gca()
 
 plt.tight_layout()
-plt.savefig(f"{cfg['path']}/Fig2.png", dpi=300,
-            bbox_inches='tight')
+plt.savefig(f"../figures/Fig2.png", dpi=300, bbox_inches='tight')
 
 plt.show()

@@ -3,7 +3,7 @@
 This script provide an insight of the ndPAC's threshold.
 """
 import json
-with open("../paper.json", 'r') as f: cfg = json.load(f)  # noqa
+with open("../../paper.json", 'r') as f: cfg = json.load(f)  # noqa
 
 import numpy as np
 from scipy.special import erfinv
@@ -60,7 +60,6 @@ if __name__ == '__main__':
     # p_obj = Pac(idpac=(1, 0, 0), f_pha='mres', f_amp='mres')
     pha = p_obj.filter(sf, data, ftype='phase', n_jobs=1)
     amp = p_obj.filter(sf, data, ftype='amplitude', n_jobs=1)
-    print(pha.shape)
 
     # compute PAC (outside of the PAC object)
     pac_nt, pac, s = custom_ndpac(pha, amp, p=p)
@@ -79,7 +78,7 @@ if __name__ == '__main__':
     plt.ylabel('')
     plt.tight_layout()
 
-    plt.savefig(f"{cfg['rpath']}/r1_ndpac_threshold.png", dpi=300,
+    plt.savefig(f"../figures/r1_ndpac_threshold.png", dpi=300,
                 bbox_inches='tight')
 
     plt.show()

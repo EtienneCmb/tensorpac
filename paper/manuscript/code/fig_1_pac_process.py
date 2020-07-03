@@ -1,6 +1,6 @@
 """Built phase, amplitude and surrogates."""
 import json
-with open("paper.json", 'r') as f: cfg = json.load(f)  # noqa
+with open("../../paper.json", 'r') as f: cfg = json.load(f)  # noqa
 
 import numpy as np
 
@@ -35,7 +35,7 @@ def rmaxis(ax, torm=['top', 'right', 'bottom', 'left']):
 
 def savefig(save_as):
     """Save the figure."""
-    plt.savefig(f"{save_as}.pdf", dpi=600, bbox_inches='tight')
+    plt.savefig(f"../figures/Fig1_{save_as}.pdf", dpi=600, bbox_inches='tight')
 
 
 # random signals

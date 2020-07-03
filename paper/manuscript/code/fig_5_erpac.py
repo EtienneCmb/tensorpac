@@ -1,6 +1,6 @@
 """Event Related PAC."""
 import json
-with open("paper.json", 'r') as f: cfg = json.load(f)  # noqa
+with open("../../paper.json", 'r') as f: cfg = json.load(f)  # noqa
 
 import numpy as np
 
@@ -35,10 +35,10 @@ plt.figure(figsize=(8, 6))
 erpac = p.fit(pha, amp, method='circular', n_jobs=-1).squeeze()
 p.pacplot(erpac, time, p.yvec, xlabel='Time (second)', cmap=cfg["cmap"],
           ylabel='Frequency for amplitude (Hz)', title='Event Related PAC',
-          vmin=0., rmaxis=True)
+          vmin=0., rmaxis=True, fz_labels=20, fz_title=22, fz_cblabel=20)
 plt.axvline(1., linestyle='--', color='w', linewidth=2)
 
 plt.tight_layout()
-plt.savefig(f"{cfg['path']}/Fig5.png", dpi=300, bbox_inches='tight')
+plt.savefig(f"../figures/Fig5.png", dpi=300, bbox_inches='tight')
 
 plt.show()

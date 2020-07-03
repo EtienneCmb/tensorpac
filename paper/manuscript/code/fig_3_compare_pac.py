@@ -1,6 +1,6 @@
 """Compare PAC methods."""
 import json
-with open("paper.json", 'r') as f: cfg = json.load(f)  # noqa
+with open("../../paper.json", 'r') as f: cfg = json.load(f)  # noqa
 
 from tensorpac.signals import pac_signals_tort, pac_signals_wavelet
 from tensorpac import Pac
@@ -45,14 +45,13 @@ for k in range(5):
     sq = methods[titles[k]]
     plt.subplot(gs[sq[0], sq[1]])
     p.comodulogram(xpac, cblabel="", title=p.method.replace(' (', '\n('),
-                   cmap=cfg["cmap"], vmin=0, colorbar=True, fz_labels=14,
+                   cmap=cfg["cmap"], vmin=0, colorbar=True, fz_labels=15,
                    fz_title=16)
-    if k > 0:
+    if k in [1, 2, 4]:
         plt.ylabel("")
         # plt.tick_params(axis='y', which='both', labelleft=False)
 
 plt.tight_layout()
-plt.savefig(f"{cfg['path']}/Fig3.png", dpi=300,
-            bbox_inches='tight')
+plt.savefig(f"../figures/Fig3.png", dpi=300, bbox_inches='tight')
 
 p.show()

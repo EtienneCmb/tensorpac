@@ -292,8 +292,8 @@ class BinAmplitude(_PacObj):
             self._phase = np.linspace(-180, 180, self.n_bins)
             width = 360 / self.n_bins
         plt.bar(self._phase, self._amplitude.mean(1), width=width, **kw)
-        plt.xlabel(f"Frequency phase ({self.n_bins} bins)")
-        plt.ylabel("Amplitude")
+        plt.xlabel(f"Frequency phase ({self.n_bins} bins)", fontsize=18)
+        plt.ylabel("Amplitude", fontsize=18)
         plt.title("Binned amplitude")
         plt.autoscale(enable=True, axis='x', tight=True)
 

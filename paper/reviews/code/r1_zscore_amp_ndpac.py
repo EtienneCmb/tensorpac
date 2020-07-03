@@ -6,7 +6,7 @@ assumptions hold.
 
 """
 import json
-with open("../paper.json", 'r') as f: cfg = json.load(f)  # noqa
+with open("../../paper.json", 'r') as f: cfg = json.load(f)  # noqa
 
 from tensorpac.signals import pac_signals_tort, pac_signals_wavelet
 from tensorpac import Pac
@@ -39,7 +39,6 @@ amp = p.filter(sf, data, ftype='amplitude', n_jobs=1).squeeze()
 # z-score normalize the amplitude
 amp_n = (amp - amp.mean()) / amp.std()
 
-print(pha.shape, amp.shape)
 
 plt.figure(figsize=(18, 5))
 
@@ -56,7 +55,7 @@ plt.hist(amp_n, n_bins, color='orange')
 plt.title('Binned z-scored amplitude')
 
 
-plt.savefig(f"{cfg['rpath']}/r1_ndpac_assumptions.png", dpi=300,
+plt.savefig(f"../figures/r1_ndpac_assumptions.png", dpi=300,
             bbox_inches='tight')
 
 plt.show()

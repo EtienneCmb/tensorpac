@@ -1,6 +1,6 @@
 """[f_min, f_max] optimisation"""
 import json
-with open("paper.json", 'r') as f: cfg = json.load(f)  # noqa
+with open("../../paper.json", 'r') as f: cfg = json.load(f)  # noqa
 
 from tensorpac import Pac
 from tensorpac.signals import pac_signals_tort, pac_signals_wavelet
@@ -38,21 +38,23 @@ plt.figure(figsize=(16, 7))
 plt.subplot(121)
 ax = psd.plot(confidence=None, f_min=2, f_max=30, log=False, grid=True)
 plt.ylim(0, .15)
-plt.title("Power Spectrum Density (PSD)")
+plt.title("Power Spectrum Density (PSD)", fontsize=20)
 # plt.autoscale(enable=True, axis='y', tight=True)
 ax = plt.gca()
 ax.text(*tuple(cfg["nb_pos"]), 'A', transform=ax.transAxes, **cfg["nb_cfg"])
 
 plt.subplot(122)
 p.triplot(pac, trif, tridx, cmap=cfg["cmap"], rmaxis=True,
-          title=r'Optimal $[Fmin; Fmax]hz$ band for amplitude', cblabel="")
-plt.axvline(best_f[0], lw=1, color='w')
-plt.axhline(best_f[1], lw=1, color='w')
+          title=r"Optimal $[Fmin; Fmax]hz$ band"
+          "\n"
+          "for amplitude", cblabel="", fz_labels=18, fz_title=20)
+plt.axvline(best_f[0], lw=1, color='r')
+plt.axhline(best_f[1], lw=1, color='r')
 ax = plt.gca()
 ax.text(*tuple(cfg["nb_pos"]), 'B', transform=ax.transAxes, **cfg["nb_cfg"])
 
 plt.tight_layout()
-# plt.savefig(f"{cfg['path']}/Fig7.png", dpi=300, bbox_inches='tight')
+plt.savefig(f"../figures/Fig7.png", dpi=300, bbox_inches='tight')
 
 print("*" * 79)
 print(f"BEST FREQUENCY RANGE : {trif[pac.argmax()]}")

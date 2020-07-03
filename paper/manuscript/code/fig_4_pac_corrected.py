@@ -1,6 +1,6 @@
 """Rectify PAC estimation by surrogate distribution."""
 import json
-with open("paper.json", 'r') as f: cfg = json.load(f)  # noqa
+with open("../../paper.json", 'r') as f: cfg = json.load(f)  # noqa
 
 from tensorpac.signals import pac_signals_tort, pac_signals_wavelet
 from tensorpac import Pac
@@ -25,7 +25,6 @@ data, time = pac_signals_wavelet(sf=sf, f_pha=10, f_amp=100, noise=3.,
 
 
 p = Pac(idpac=(1, 2, 3), f_pha=cfg["phres"], f_amp=cfg["ahres"])
-# p = Pac(idpac=(1, 2, 3), f_pha=(1, 30, 1, 1), f_amp=(60, 160, 5, 5))
 # p = Pac(idpac=(1, 2, 3), f_pha='lres', f_amp='lres')
 xpac = p.filterfit(sf, data, n_perm=n_perm, p=.05, n_jobs=-1)
 
@@ -33,32 +32,34 @@ pacn = p.pac.mean(-1)
 pac = xpac.mean(-1)
 surro = p.surrogates.mean(0).max(-1)  # mean(perm).max(epochs)
 
+kw_plt = dict(fz_labels=20, fz_title=22, fz_cblabel=20)
+
 plt.figure(figsize=(22, 6))
 
 plt.subplot(1, 3, 1)
 p.comodulogram(pacn, cblabel="", title="Uncorrected PAC", cmap=cfg["cmap"],
-               vmin=0)
+               vmin=0, **kw_plt)
 ax = plt.gca()
 ax.text(*tuple(cfg["nb_pos"]), 'A', transform=ax.transAxes, **cfg["nb_cfg"])
 
 plt.subplot(1, 3, 2)
-p.comodulogram(surro, cblabel="", title="Mean of the surrogate distribution",
-               cmap=cfg["cmap"], vmin=0)
+p.comodulogram(surro, cblabel="", title="Mean of the surrogate\ndistribution",
+               cmap=cfg["cmap"], vmin=0, **kw_plt)
 plt.ylabel("")
-plt.tick_params(axis='y', which='both', labelleft=False)
+# plt.tick_params(axis='y', which='both', labelleft=False)
 ax = plt.gca()
 ax.text(*tuple(cfg["nb_pos"]), 'B', transform=ax.transAxes, **cfg["nb_cfg"])
 
 plt.subplot(1, 3, 3)
 p.comodulogram(pac, cblabel="", title="Corrected PAC", cmap=cfg["cmap"],
-               vmin=0)
+               vmin=0, **kw_plt)
 plt.ylabel("")
-plt.tick_params(axis='y', which='both', labelleft=False)
+# plt.tick_params(axis='y', which='both', labelleft=False)
 ax = plt.gca()
 ax.text(*tuple(cfg["nb_pos"]), 'C', transform=ax.transAxes, **cfg["nb_cfg"])
 
 
 plt.tight_layout()
-# plt.savefig(f"{cfg['path']}/Fig4.png", dpi=300, bbox_inches='tight')
+plt.savefig(f"../figures/Fig4.png", dpi=300, bbox_inches='tight')
 
 p.show()
