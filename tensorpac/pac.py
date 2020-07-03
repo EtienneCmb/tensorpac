@@ -206,21 +206,30 @@ class Pac(_PacObj, _PacPlt):
         * First digit : refer to the pac method
 
             - 1 : Mean Vector Length (MVL) :cite:`canolty2006high`
-            - 2 : Kullback-Leibler Distance (KLD) :cite:`tort2010measuring`
+              (see :func:`tensorpac.methods.mean_vector_length`)
+            - 2 : Modulation Index (MI) :cite:`tort2010measuring`
+              (see :func:`tensorpac.methods.modulation_index`)
             - 3 : Heights Ratio (HR) :cite:`lakatos2005oscillatory`
+              (see :func:`tensorpac.methods.heights_ratio`)
             - 4 : ndPAC :cite:`ozkurt2012statistically`
-            - 5 : Phase-Locking Value
+              (see :func:`tensorpac.methods.norm_direct_pac`)
+            - 5 : Phase-Locking Value (PLV)
               :cite:`lachaux1999measuring,penny2008testing`
-            - 6 : Gaussian Copula PAC :cite:`ince2017statistical`
+              (see :func:`tensorpac.methods.phase_locking_value`)
+            - 6 : Gaussian Copula PAC (GCPAC) :cite:`ince2017statistical`
+              (see :func:`tensorpac.methods.gauss_cop_pac`)
 
         * Second digit : refer to the method for computing surrogates
 
             - 0 : No surrogates
             - 1 : Swap phase / amplitude across trials
               :cite:`tort2010measuring`
+              (see :func:`tensorpac.methods.swap_pha_amp`)
             - 2 : Swap amplitude time blocks
               :cite:`bahramisharif2013propagating`
+              (see :func:`tensorpac.methods.swap_blocks`)
             - 3 : Time lag :cite:`canolty2006high`
+              (see :func:`tensorpac.methods.time_lag`)
 
         * Third digit : refer to the normalization method for correction
 

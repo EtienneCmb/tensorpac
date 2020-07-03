@@ -40,9 +40,11 @@ def pearson(x, y, st='i...j, k...j->ik...'):
 
 
 def erpac(pha, amp):
-    """Correlation coefficient between a circular and a linear random variable.
+    """Event-Related Phase Amplitude Coupling.
 
-    Adapted from the function circ_corrcc Circular Statistics Toolbox for
+    This function computed the correlation coefficient between a circular and a
+    linear random variable at each time point and across trials. Adapted from
+    the function circ_corrcc Circular Statistics Toolbox for
     Matlab By Philipp Berens, 2009 :cite:`berens2009circstat`. This function is
     an adaptation of Voytek, 2013 :cite:`voytek2013method` for tensors.
 
@@ -77,7 +79,7 @@ def erpac(pha, amp):
 
 
 def ergcpac(pha, amp, smooth=None, n_jobs=-1):
-    """Event Related PAC computed using the Gaussian Copula Mutual Information.
+    """Event Related PAC using the Gaussian Copula Mutual Information.
 
     This function assumes that phases and amplitudes have already been
     prepared i.e. phases should be represented in a unit circle

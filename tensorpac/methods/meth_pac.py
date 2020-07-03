@@ -13,7 +13,7 @@ def pacstr(idpac):
     if idpac[0] == 1:
         method = 'Mean Vector Length (MVL, Canolty et al. 2006)'
     elif idpac[0] == 2:
-        method = 'Kullback-Leiber Distance (KLD, Tort et al. 2010)'
+        method = 'Modulation Index (MI, Tort et al. 2010)'
     elif idpac[0] == 3:
         method = 'Heights ratio (HR, Lakatos et al. 2005)'
     elif idpac[0] == 4:
@@ -65,23 +65,23 @@ def pacstr(idpac):
 def get_pac_fcn(idp, n_bins, p):
     """Get the function for computing Phase-Amplitude coupling."""
     if idp == 1:    # MVL
-        return partial(mvl)
+        return partial(mean_vector_length)
     elif idp == 2:  # KLD
-        return partial(kld, n_bins=n_bins)
+        return partial(modulation_index, n_bins=n_bins)
     elif idp == 3:  # HR
-        return partial(hr, n_bins=n_bins)
+        return partial(heights_ratio, n_bins=n_bins)
     elif idp == 4:  # ndPAC
-        return partial(ndpac, p=p)
+        return partial(norm_direct_pac, p=p)
     elif idp == 5:  # PLV
-        return partial(plv)
+        return partial(phase_locking_value)
     elif idp == 6:  # GC
-        return partial(gcpac)
+        return partial(gauss_cop_pac)
     else:
         raise ValueError(str(idp) + " is not recognized as a valid pac "
                          "method.")
 
 
-def mvl(pha, amp):
+def mean_vector_length(pha, amp):
     """Mean Vector Length.
 
     Adapted from :cite:`canolty2006high`
@@ -101,9 +101,10 @@ def mvl(pha, amp):
                             np.exp(1j * pha))) / pha.shape[-1]
 
 
-def kld(pha, amp, n_bins=18):
-    """Kullback Leibler Distance.
+def modulation_index(pha, amp, n_bins=18):
+    """Modulation index.
 
+    The modulation index is obtained using the Kullback Leibler Distance.
     Adapted from :cite:`tort2010measuring`
 
     Parameters
@@ -132,7 +133,7 @@ def kld(pha, amp, n_bins=18):
     return pac
 
 
-def hr(pha, amp, n_bins=18):
+def heights_ratio(pha, amp, n_bins=18):
     """Heights ratio.
 
     Adapted from :cite:`lakatos2005oscillatory`
@@ -182,7 +183,7 @@ def _kl_hr(pha, amp, n_bins, mean_bins=True):
     return np.array(abin)
 
 
-def ndpac(pha, amp, p=.05):
+def norm_direct_pac(pha, amp, p=.05):
     """Normalized direct Pac.
 
     Adapted from :cite:`ozkurt2012statistically`
@@ -222,7 +223,7 @@ def ndpac(pha, amp, p=.05):
     return pac
 
 
-def plv(pha, pha_amp):
+def phase_locking_value(pha, pha_amp):
     """Phase Locking-Value.
 
     In order to measure the phase locking value, the phase of the amplitude of
@@ -247,7 +248,7 @@ def plv(pha, pha_amp):
     return np.abs(pac) / pha.shape[-1]
 
 
-def gcpac(pha, amp):
+def gauss_cop_pac(pha, amp):
     """Gaussian Copula Phase-amplitude coupling.
 
     This function assumes that phases and amplitudes have already been
