@@ -94,6 +94,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../api.html#pac-methods">PAC methods</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.heights_ratio.html">tensorpac.methods.heights_ratio</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
@@ -353,7 +354,7 @@
     <span class="k">return</span> <span class="n">pac</span></div>
 
 
-<span class="k">def</span> <span class="nf">heights_ratio</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
+<div class="viewcode-block" id="heights_ratio"><a class="viewcode-back" href="../../../generated/tensorpac.methods.heights_ratio.html#tensorpac.methods.heights_ratio">[docs]</a><span class="k">def</span> <span class="nf">heights_ratio</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Heights ratio.</span>
 
 <span class="sd">    Adapted from :cite:`lakatos2005oscillatory`</span>
@@ -379,7 +380,7 @@
     <span class="n">h_max</span><span class="p">,</span> <span class="n">h_min</span> <span class="o">=</span> <span class="n">p_j</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">p_j</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="c1"># Compute pac :</span>
     <span class="n">pac</span> <span class="o">=</span> <span class="p">(</span><span class="n">h_max</span> <span class="o">-</span> <span class="n">h_min</span><span class="p">)</span> <span class="o">/</span> <span class="n">h_max</span>
-    <span class="k">return</span> <span class="n">pac</span>
+    <span class="k">return</span> <span class="n">pac</span></div>
 
 
 <span class="k">def</span> <span class="nf">_kl_hr</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">,</span> <span class="n">mean_bins</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>

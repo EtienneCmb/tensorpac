@@ -1,0 +1,6 @@
+tensorpac.methods.heights\_ratio
+================================
+
+.. currentmodule:: tensorpac.methods
+
+.. autofunction:: heights_ratio

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>tensorpac.utils.pac_vec &#8212; Tensorpac 0.6.3 documentation</title>
+    <title>tensorpac.methods.heights_ratio &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
@@ -16,8 +16,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="tensorpac.utils.pac_trivec" href="tensorpac.utils.pac_trivec.html" />
-    <link rel="prev" title="tensorpac.utils.BinAmplitude" href="tensorpac.utils.BinAmplitude.html" />
+    <link rel="next" title="tensorpac.methods.norm_direct_pac" href="tensorpac.methods.norm_direct_pac.html" />
+    <link rel="prev" title="tensorpac.methods.modulation_index" href="tensorpac.methods.modulation_index.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -75,11 +75,11 @@
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.PreferredPhase.html">tensorpac.PreferredPhase</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="reference internal" href="../api.html#utility-functions">Utility functions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api.html#utility-functions">Utility functions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.ITC.html">tensorpac.utils.ITC</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">tensorpac.utils.pac_vec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
 </ul>
 </li>
@@ -92,11 +92,11 @@
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.stats.test_stationarity.html">tensorpac.stats.test_stationarity</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../api.html#individual-methods">Individual methods</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../api.html#pac-methods">PAC methods</a><ul>
+<li class="toctree-l2 current"><a class="reference internal" href="../api.html#individual-methods">Individual methods</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../api.html#pac-methods">PAC methods</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.heights_ratio.html">tensorpac.methods.heights_ratio</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">tensorpac.methods.heights_ratio</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
@@ -200,7 +200,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="../_sources/generated/tensorpac.utils.pac_vec.rst.txt"
+  <a href="../_sources/generated/tensorpac.methods.heights_ratio.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -224,24 +224,26 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="tensorpac-utils-pac-vec">
-<h1>tensorpac.utils.pac_vec<a class="headerlink" href="#tensorpac-utils-pac-vec" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="tensorpac-methods-heights-ratio">
+<h1>tensorpac.methods.heights_ratio<a class="headerlink" href="#tensorpac-methods-heights-ratio" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
-<dt id="tensorpac.utils.pac_vec">
-<code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">pac_vec</code><span class="sig-paren">(</span><em class="sig-param">f_pha=(2</em>, <em class="sig-param">30</em>, <em class="sig-param">2</em>, <em class="sig-param">1)</em>, <em class="sig-param">f_amp=(60</em>, <em class="sig-param">200</em>, <em class="sig-param">10</em>, <em class="sig-param">5)</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#pac_vec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.pac_vec" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate cross-frequency coupling vectors.</p>
+<dt id="tensorpac.methods.heights_ratio">
+<code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">heights_ratio</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">n_bins=18</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_pac.html#heights_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.heights_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heights ratio.</p>
+<p>Adapted from <a class="bibtex reference internal" href="../references.html#lakatos2005oscillatory" id="id1">[7]</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>f_pha, f_amp</strong><span class="classifier">tuple | (2, 30, 2, 1), (60, 200, 10, 5)</span></dt><dd><p>Frequency parameters for phase and amplitude. Each argument inside the
-tuple mean (starting fcy, ending fcy, bandwidth, step).</p>
+<dt><strong>pha, amp</strong><span class="classifier">array_like</span></dt><dd><p>Respectively the arrays of phases of shape (n_pha, …, n_times) and
+the array of amplitudes of shape (n_amp, …, n_times).</p>
+</dd>
+<dt><strong>n_bins</strong><span class="classifier">int | 18</span></dt><dd><p>Number of bins to binarize the amplitude according to phase intervals</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>f_pha, f_amp</strong><span class="classifier">array_like</span></dt><dd><p>Arrays containing the pairs of phase and amplitude frequencies. Each
-vector have a shape of (N, 2).</p>
+<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>Array of phase amplitude coupling of shape (n_amp, n_pha, …)</p>
 </dd>
 </dl>
 </dd>
