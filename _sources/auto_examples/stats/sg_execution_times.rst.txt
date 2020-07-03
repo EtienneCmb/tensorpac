@@ -5,6 +5,6 @@
 
 Computation times
 =================
-**00:01.120** total execution time for **auto_examples_stats** files:
+**00:01.354** total execution time for **auto_examples_stats** files:
 
-- **00:01.120**: :ref:`sphx_glr_auto_examples_stats_plot_stats_stationary.py` (``plot_stats_stationary.py``)
+- **00:01.354**: :ref:`sphx_glr_auto_examples_stats_plot_stats_stationary.py` (``plot_stats_stationary.py``)
