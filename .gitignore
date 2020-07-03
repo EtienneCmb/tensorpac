@@ -107,5 +107,6 @@ docs/source/auto_examples/
 *.svg
 *.pdf
 test_savefig.png
-paper/*.png
-paper/*.jpeg
+paper/manuscript/figures/*.png
+paper/manuscript/figures/*.pdf
+paper/reviews/figures/*.png
