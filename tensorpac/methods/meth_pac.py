@@ -17,11 +17,11 @@ def pacstr(idpac):
     elif idpac[0] == 3:
         method = 'Heights ratio (HR, Lakatos et al. 2005)'
     elif idpac[0] == 4:
-        method = 'ndPac (Ozkurt et al. 2012)'
+        method = 'Normalized Direct Pac (ndPac, Ozkurt et al. 2012)'
     elif idpac[0] == 5:
-        method = 'Phase-Locking Value (Lachaux et al. 1999)'
+        method = 'Phase-Locking Value (PLV, Lachaux et al. 1999)'
     elif idpac[0] == 6:
-        method = 'Gaussian Copula PAC (Ince et al. 2017)'
+        method = 'Gaussian Copula PAC (gcPac, Ince et al. 2017)'
     else:
         raise ValueError("No corresponding pac method.")
 
@@ -82,7 +82,7 @@ def get_pac_fcn(idp, n_bins, p):
 
 
 def mean_vector_length(pha, amp):
-    """Mean Vector Length.
+    """Compute PAC using the Mean Vector Length (MVL).
 
     Adapted from :cite:`canolty2006high`
 
@@ -102,7 +102,7 @@ def mean_vector_length(pha, amp):
 
 
 def modulation_index(pha, amp, n_bins=18):
-    """Modulation index.
+    """Compute PAC using the Modulation index (MI).
 
     The modulation index is obtained using the Kullback Leibler Distance.
     Adapted from :cite:`tort2010measuring`
@@ -134,7 +134,7 @@ def modulation_index(pha, amp, n_bins=18):
 
 
 def heights_ratio(pha, amp, n_bins=18):
-    """Heights ratio.
+    """Compute PAC using the Heights ratio (HR).
 
     Adapted from :cite:`lakatos2005oscillatory`
 
@@ -184,7 +184,7 @@ def _kl_hr(pha, amp, n_bins, mean_bins=True):
 
 
 def norm_direct_pac(pha, amp, p=.05):
-    """Normalized direct Pac.
+    """Compute PAC using the Normalized direct Pac (ndPAC).
 
     Adapted from :cite:`ozkurt2012statistically`
 
@@ -224,7 +224,7 @@ def norm_direct_pac(pha, amp, p=.05):
 
 
 def phase_locking_value(pha, pha_amp):
-    """Phase Locking-Value.
+    """Compute PAC using the Phase Locking-Value (PLV).
 
     In order to measure the phase locking value, the phase of the amplitude of
     the higher-frequency signal must be provided, and not the amplitude as in
@@ -249,7 +249,7 @@ def phase_locking_value(pha, pha_amp):
 
 
 def gauss_cop_pac(pha, amp):
-    """Gaussian Copula Phase-amplitude coupling.
+    """Compute PAC using the Gaussian Copula PAC (gcPac).
 
     This function assumes that phases and amplitudes have already been
     prepared i.e. phases should be represented in a unit circle

@@ -20,15 +20,21 @@ def compute_surrogates(pha, amp, ids, fcn, n_perm, n_jobs):
 
 
 def swap_pha_amp(pha, amp):
-    """Swap phase / amplitude trials.
+    """Compute surrogates by swapping phase / amplitude trials.
 
-    Taken from :cite:`tort2010measuring`
+    This function destroys the relation between the phase and the amplitude in
+    order to correct for PAC that could be obtained by chance. To this end,
+    this function reorganize the relation from trial-to-trial between the phase
+    and the amplitude (swapping). In particular, in that case it is the trials
+    of the phase that are randomly swapped and the amplitude is leaved
+    unchanged. For a more detailed description, see :cite:`tort2010measuring`
 
     Parameters
     ----------
     pha, amp : array_like
-        Respectively the arrays of phases of shape (n_pha, ..., n_times) and
-        the array of amplitudes of shape (n_amp, ..., n_times).
+        Respectively the arrays of phases of shape
+        (n_pha, n_trials, ..., n_times) and the array of amplitudes of shape
+        (n_amp, n_trials, ..., n_times).
 
     Returns
     -------
@@ -41,9 +47,13 @@ def swap_pha_amp(pha, amp):
 
 
 def swap_blocks(pha, amp):
-    """Swap amplitudes time blocks.
+    """Compute surrogates by swapping amplitudes time blocks.
 
-    Taken from :cite:`bahramisharif2013propagating`
+    This function destroys the relation between the phase and the amplitude in
+    order to correct for PAC that could be obtained by chance. To this end,
+    this function cut the amplitude at a random time point. Then, both time
+    blocks are swapped. For a more detailed description, see
+    :cite:`bahramisharif2013propagating`.
 
     Parameters
     ----------
@@ -67,9 +77,12 @@ def swap_blocks(pha, amp):
 
 
 def time_lag(pha, amp):
-    """Introduce a time lag on phase series.
+    """Compute surrogates by introducing a time lag on phase series.
 
-    Taken from :cite:`canolty2006high`
+    This function destroys the relation between the phase and the amplitude in
+    order to correct for PAC that could be obtained by chance. To this end, a
+    random temporal lag is introduced at the beginning of the phase. For a more
+    detailed description, see :cite:`canolty2006high`.
 
     Parameters
     ----------
