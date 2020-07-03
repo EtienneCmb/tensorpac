@@ -83,7 +83,7 @@ and use it on phase / amplitude to compute PAC.
 
    mean_vector_length
    modulation_index
-   heigths_ratio
+   heights_ratio
    norm_direct_pac
    phase_locking_value
    gauss_cop_pac
