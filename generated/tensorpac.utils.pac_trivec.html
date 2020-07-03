@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tensorpac.utils.pac_trivec &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tp_style.css" />
     <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/tp_style.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -97,12 +94,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api.html#individual-methods">Individual methods</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#pac-methods">PAC methods</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.mvl.html">tensorpac.methods.mvl</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.plv.html">tensorpac.methods.plv</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#event-related-pac-methods">Event Related PAC methods</a><ul>
@@ -229,9 +225,9 @@
       
   <div class="section" id="tensorpac-utils-pac-trivec">
 <h1>tensorpac.utils.pac_trivec<a class="headerlink" href="#tensorpac-utils-pac-trivec" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
+<dl class="function">
 <dt id="tensorpac.utils.pac_trivec">
-<code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">pac_trivec</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f_start</span><span class="o">=</span><span class="default_value">60.0</span></em>, <em class="sig-param"><span class="n">f_end</span><span class="o">=</span><span class="default_value">160.0</span></em>, <em class="sig-param"><span class="n">f_width</span><span class="o">=</span><span class="default_value">10.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#pac_trivec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.pac_trivec" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">pac_trivec</code><span class="sig-paren">(</span><em class="sig-param">f_start=60.0</em>, <em class="sig-param">f_end=160.0</em>, <em class="sig-param">f_width=10.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#pac_trivec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.pac_trivec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate triangular vector.</p>
 <p>By contrast with the pac_vec function, this function generate frequency
 vector with an increasing frequency bandwidth.</p>

@@ -1,0 +1,6 @@
+tensorpac.methods.norm\_direct\_pac
+===================================
+
+.. currentmodule:: tensorpac.methods
+
+.. autofunction:: norm_direct_pac

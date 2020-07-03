@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Computation times &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tp_style.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/tp_style.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -95,12 +92,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#individual-methods">Individual methods</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#pac-methods">PAC methods</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.mvl.html">tensorpac.methods.mvl</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.plv.html">tensorpac.methods.plv</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#event-related-pac-methods">Event Related PAC methods</a><ul>
@@ -227,44 +223,16 @@
       
   <div class="section" id="computation-times">
 <span id="sphx-glr-auto-examples-pac-sg-execution-times"></span><h1>Computation times<a class="headerlink" href="#computation-times" title="Permalink to this headline">¶</a></h1>
-<p><strong>00:36.264</strong> total execution time for <strong>auto_examples_pac</strong> files:</p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 84%" />
-<col style="width: 9%" />
-<col style="width: 7%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="plot_compare_surrogates.html#sphx-glr-auto-examples-pac-plot-compare-surrogates-py"><span class="std std-ref">Compare surrogate methods</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_surrogates.py</span></code>)</p></td>
-<td><p>00:08.685</p></td>
-<td><p>0.0 MB</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="plot_compare_normalizations.html#sphx-glr-auto-examples-pac-plot-compare-normalizations-py"><span class="std std-ref">Compare normalizations</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_normalizations.py</span></code>)</p></td>
-<td><p>00:07.227</p></td>
-<td><p>0.0 MB</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="plot_readme.html#sphx-glr-auto-examples-pac-plot-readme-py"><span class="std std-ref">README example</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_readme.py</span></code>)</p></td>
-<td><p>00:06.421</p></td>
-<td><p>0.0 MB</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="plot_long_range_coupling.html#sphx-glr-auto-examples-pac-plot-long-range-coupling-py"><span class="std std-ref">Long-range PAC</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_long_range_coupling.py</span></code>)</p></td>
-<td><p>00:04.891</p></td>
-<td><p>0.0 MB</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="plot_compare_filtering.html#sphx-glr-auto-examples-pac-plot-compare-filtering-py"><span class="std std-ref">Compare filtering properties</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_filtering.py</span></code>)</p></td>
-<td><p>00:03.675</p></td>
-<td><p>0.0 MB</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="plot_pac_methods.html#sphx-glr-auto-examples-pac-plot-pac-methods-py"><span class="std std-ref">Compare PAC methods</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_pac_methods.py</span></code>)</p></td>
-<td><p>00:03.290</p></td>
-<td><p>0.0 MB</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="plot_pvalues.html#sphx-glr-auto-examples-pac-plot-pvalues-py"><span class="std std-ref">Compute p-values</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_pvalues.py</span></code>)</p></td>
-<td><p>00:02.076</p></td>
-<td><p>0.0 MB</p></td>
-</tr>
-</tbody>
-</table>
+<p><strong>00:38.917</strong> total execution time for <strong>auto_examples_pac</strong> files:</p>
+<ul class="simple">
+<li><p><strong>00:08.337</strong>: <a class="reference internal" href="plot_compare_normalizations.html#sphx-glr-auto-examples-pac-plot-compare-normalizations-py"><span class="std std-ref">Compare normalizations</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_normalizations.py</span></code>)</p></li>
+<li><p><strong>00:07.697</strong>: <a class="reference internal" href="plot_compare_surrogates.html#sphx-glr-auto-examples-pac-plot-compare-surrogates-py"><span class="std std-ref">Compare surrogate methods</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_surrogates.py</span></code>)</p></li>
+<li><p><strong>00:07.167</strong>: <a class="reference internal" href="plot_readme.html#sphx-glr-auto-examples-pac-plot-readme-py"><span class="std std-ref">README example</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_readme.py</span></code>)</p></li>
+<li><p><strong>00:05.251</strong>: <a class="reference internal" href="plot_long_range_coupling.html#sphx-glr-auto-examples-pac-plot-long-range-coupling-py"><span class="std std-ref">Long-range PAC</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_long_range_coupling.py</span></code>)</p></li>
+<li><p><strong>00:04.533</strong>: <a class="reference internal" href="plot_compare_filtering.html#sphx-glr-auto-examples-pac-plot-compare-filtering-py"><span class="std std-ref">Compare filtering properties</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_filtering.py</span></code>)</p></li>
+<li><p><strong>00:03.792</strong>: <a class="reference internal" href="plot_pac_methods.html#sphx-glr-auto-examples-pac-plot-pac-methods-py"><span class="std std-ref">Compare PAC methods</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_pac_methods.py</span></code>)</p></li>
+<li><p><strong>00:02.139</strong>: <a class="reference internal" href="plot_pvalues.html#sphx-glr-auto-examples-pac-plot-pvalues-py"><span class="std std-ref">Compute p-values</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_pvalues.py</span></code>)</p></li>
+</ul>
 </div>
 
 

@@ -81,12 +81,12 @@ and use it on phase / amplitude to compute PAC.
 .. autosummary::
    :toctree: generated/
 
-   mvl
-   kld
-   hr
-   ndpac
-   plv
-   gcpac
+   mean_vector_length
+   modulation_index
+   heigths_ratio
+   norm_direct_pac
+   phase_locking_value
+   gauss_cop_pac
 
 Event Related PAC methods
 +++++++++++++++++++++++++

@@ -1,21 +1,19 @@
+
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/tp_style.css" />
     <link rel="stylesheet" type="text/css" href="_static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="_static/gallery-binder.css" />
-    <link rel="stylesheet" type="text/css" href="_static/gallery-dataframe.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/tp_style.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" />
@@ -95,12 +93,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#individual-methods">Individual methods</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api.html#pac-methods">PAC methods</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.mvl.html">tensorpac.methods.mvl</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.plv.html">tensorpac.methods.plv</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#event-related-pac-methods">Event Related PAC methods</a><ul>
@@ -226,17 +223,22 @@
 
 <div class="genindex-jumpbox">
  <a href="#_"><strong>_</strong></a>
+ | <a href="#A"><strong>A</strong></a>
  | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
- | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
- | <a href="#K"><strong>K</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
  | <a href="#P"><strong>P</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ | <a href="#X"><strong>X</strong></a>
+ | <a href="#Y"><strong>Y</strong></a>
  
 </div>
 <h2 id="_">_</h2>
@@ -259,6 +261,14 @@
   </ul></td>
 </tr></table>
 
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.amplitude">amplitude() (tensorpac.utils.BinAmplitude property)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -267,16 +277,120 @@
   </ul></td>
 </tr></table>
 
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.comodulogram">comodulogram() (tensorpac.Pac method)</a>
+</li>
+      <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.cycle">cycle() (tensorpac.EventRelatedPac property)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.cycle">(tensorpac.Pac property)</a>
+</li>
+        <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.cycle">(tensorpac.PreferredPhase property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.cycle">(tensorpac.utils.BinAmplitude property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.cycle">(tensorpac.utils.ITC property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.dcomplex">dcomplex() (tensorpac.EventRelatedPac property)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.dcomplex">(tensorpac.Pac property)</a>
+</li>
+        <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.dcomplex">(tensorpac.PreferredPhase property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.dcomplex">(tensorpac.utils.BinAmplitude property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.dcomplex">(tensorpac.utils.ITC property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/tensorpac.methods.ergcpac.html#tensorpac.methods.ergcpac">ergcpac() (in module tensorpac.methods)</a>
 </li>
+      <li><a href="generated/tensorpac.methods.erpac.html#tensorpac.methods.erpac">erpac() (in module tensorpac.methods)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.erpac">(tensorpac.EventRelatedPac property)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="generated/tensorpac.methods.erpac.html#tensorpac.methods.erpac">erpac() (in module tensorpac.methods)</a>
-</li>
       <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac">EventRelatedPac (class in tensorpac)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.f_amp">f_amp() (tensorpac.EventRelatedPac property)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.f_amp">(tensorpac.Pac property)</a>
+</li>
+        <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.f_amp">(tensorpac.PreferredPhase property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.f_amp">(tensorpac.utils.BinAmplitude property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.f_amp">(tensorpac.utils.ITC property)</a>
+</li>
+      </ul></li>
+      <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.f_pha">f_pha() (tensorpac.EventRelatedPac property)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.f_pha">(tensorpac.Pac property)</a>
+</li>
+        <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.f_pha">(tensorpac.PreferredPhase property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.f_pha">(tensorpac.utils.BinAmplitude property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.f_pha">(tensorpac.utils.ITC property)</a>
+</li>
+      </ul></li>
+      <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.filter">filter() (tensorpac.EventRelatedPac method)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.filter">(tensorpac.Pac method)</a>
+</li>
+        <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.filter">(tensorpac.PreferredPhase method)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.filter">(tensorpac.utils.BinAmplitude method)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.filter">(tensorpac.utils.ITC method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.filterfit">filterfit() (tensorpac.EventRelatedPac method)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.filterfit">(tensorpac.Pac method)</a>
+</li>
+        <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.filterfit">(tensorpac.PreferredPhase method)</a>
+</li>
+      </ul></li>
+      <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.fit">fit() (tensorpac.EventRelatedPac method)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.fit">(tensorpac.Pac method)</a>
+</li>
+        <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.fit">(tensorpac.PreferredPhase method)</a>
+</li>
+      </ul></li>
+      <li><a href="generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD.freqs">freqs() (tensorpac.utils.PSD property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -284,15 +398,7 @@
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="generated/tensorpac.methods.gcpac.html#tensorpac.methods.gcpac">gcpac() (in module tensorpac.methods)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="H">H</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="generated/tensorpac.methods.hr.html#tensorpac.methods.hr">hr() (in module tensorpac.methods)</a>
+      <li><a href="generated/tensorpac.methods.gauss_cop_pac.html#tensorpac.methods.gauss_cop_pac">gauss_cop_pac() (in module tensorpac.methods)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -300,15 +406,19 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.idpac">idpac() (tensorpac.Pac property)</a>
+</li>
+      <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.infer_pvalues">infer_pvalues() (tensorpac.EventRelatedPac method)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.infer_pvalues">(tensorpac.Pac method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC">ITC (class in tensorpac.utils)</a>
 </li>
-  </ul></td>
-</tr></table>
-
-<h2 id="K">K</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="generated/tensorpac.methods.kld.html#tensorpac.methods.kld">kld() (in module tensorpac.methods)</a>
+      <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.itc">itc() (tensorpac.utils.ITC property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -316,7 +426,11 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="generated/tensorpac.methods.mvl.html#tensorpac.methods.mvl">mvl() (in module tensorpac.methods)</a>
+      <li><a href="generated/tensorpac.methods.mean_vector_length.html#tensorpac.methods.mean_vector_length">mean_vector_length() (in module tensorpac.methods)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/tensorpac.methods.modulation_index.html#tensorpac.methods.modulation_index">modulation_index() (in module tensorpac.methods)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -324,7 +438,7 @@
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="generated/tensorpac.methods.ndpac.html#tensorpac.methods.ndpac">ndpac() (in module tensorpac.methods)</a>
+      <li><a href="generated/tensorpac.methods.norm_direct_pac.html#tensorpac.methods.norm_direct_pac">norm_direct_pac() (in module tensorpac.methods)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -338,17 +452,39 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac">Pac (class in tensorpac)</a>
 </li>
+      <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.pac">pac() (tensorpac.Pac property)</a>
+</li>
       <li><a href="generated/tensorpac.signals.pac_signals_tort.html#tensorpac.signals.pac_signals_tort">pac_signals_tort() (in module tensorpac.signals)</a>
 </li>
       <li><a href="generated/tensorpac.signals.pac_signals_wavelet.html#tensorpac.signals.pac_signals_wavelet">pac_signals_wavelet() (in module tensorpac.signals)</a>
 </li>
       <li><a href="generated/tensorpac.utils.pac_trivec.html#tensorpac.utils.pac_trivec">pac_trivec() (in module tensorpac.utils)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/tensorpac.utils.pac_vec.html#tensorpac.utils.pac_vec">pac_vec() (in module tensorpac.utils)</a>
 </li>
-      <li><a href="generated/tensorpac.methods.plv.html#tensorpac.methods.plv">plv() (in module tensorpac.methods)</a>
+      <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.pacplot">pacplot() (tensorpac.EventRelatedPac method)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.pacplot">(tensorpac.Pac method)</a>
+</li>
+        <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.pacplot">(tensorpac.PreferredPhase method)</a>
+</li>
+      </ul></li>
+      <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.phase">phase() (tensorpac.utils.BinAmplitude property)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/tensorpac.methods.phase_locking_value.html#tensorpac.methods.phase_locking_value">phase_locking_value() (in module tensorpac.methods)</a>
+</li>
+      <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.plot">plot() (tensorpac.utils.BinAmplitude method)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.plot">(tensorpac.utils.ITC method)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD.plot">(tensorpac.utils.PSD method)</a>
+</li>
+      </ul></li>
+      <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.polar">polar() (tensorpac.PreferredPhase method)</a>
 </li>
       <li><a href="generated/tensorpac.methods.preferred_phase.html#tensorpac.methods.preferred_phase">preferred_phase() (in module tensorpac.methods)</a>
 </li>
@@ -356,16 +492,52 @@
 </li>
       <li><a href="generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD">PSD (class in tensorpac.utils)</a>
 </li>
+      <li><a href="generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD.psd">psd() (tensorpac.utils.PSD property)</a>
+</li>
+      <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.pvalues">pvalues() (tensorpac.EventRelatedPac property)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.pvalues">(tensorpac.Pac property)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="generated/tensorpac.methods.swap_blocks.html#tensorpac.methods.swap_blocks">swap_blocks() (in module tensorpac.methods)</a>
+      <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.savefig">savefig() (tensorpac.EventRelatedPac method)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.savefig">(tensorpac.Pac method)</a>
 </li>
+        <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.savefig">(tensorpac.PreferredPhase method)</a>
+</li>
+      </ul></li>
+      <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.show">show() (tensorpac.EventRelatedPac method)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.show">(tensorpac.Pac method)</a>
+</li>
+        <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.show">(tensorpac.PreferredPhase method)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.show">(tensorpac.utils.BinAmplitude method)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.show">(tensorpac.utils.ITC method)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD.show">(tensorpac.utils.PSD method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.surrogates">surrogates() (tensorpac.EventRelatedPac property)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.surrogates">(tensorpac.Pac property)</a>
+</li>
+      </ul></li>
+      <li><a href="generated/tensorpac.methods.swap_blocks.html#tensorpac.methods.swap_blocks">swap_blocks() (in module tensorpac.methods)</a>
+</li>
       <li><a href="generated/tensorpac.methods.swap_pha_amp.html#tensorpac.methods.swap_pha_amp">swap_pha_amp() (in module tensorpac.methods)</a>
 </li>
   </ul></td>
@@ -380,6 +552,62 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/tensorpac.methods.time_lag.html#tensorpac.methods.time_lag">time_lag() (in module tensorpac.methods)</a>
 </li>
+      <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.triplot">triplot() (tensorpac.Pac method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.width">width() (tensorpac.EventRelatedPac property)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.width">(tensorpac.Pac property)</a>
+</li>
+        <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.width">(tensorpac.PreferredPhase property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.width">(tensorpac.utils.BinAmplitude property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.width">(tensorpac.utils.ITC property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="X">X</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.xvec">xvec() (tensorpac.EventRelatedPac property)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.xvec">(tensorpac.Pac property)</a>
+</li>
+        <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.xvec">(tensorpac.PreferredPhase property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.xvec">(tensorpac.utils.BinAmplitude property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.xvec">(tensorpac.utils.ITC property)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Y">Y</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.yvec">yvec() (tensorpac.EventRelatedPac property)</a>
+
+      <ul>
+        <li><a href="generated/tensorpac.Pac.html#tensorpac.Pac.yvec">(tensorpac.Pac property)</a>
+</li>
+        <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.yvec">(tensorpac.PreferredPhase property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.yvec">(tensorpac.utils.BinAmplitude property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.yvec">(tensorpac.utils.ITC property)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 

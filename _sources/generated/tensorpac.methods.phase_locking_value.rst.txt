@@ -1,0 +1,6 @@
+tensorpac.methods.phase\_locking\_value
+=======================================
+
+.. currentmodule:: tensorpac.methods
+
+.. autofunction:: phase_locking_value

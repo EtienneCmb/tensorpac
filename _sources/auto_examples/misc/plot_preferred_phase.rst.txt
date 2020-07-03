@@ -1,12 +1,10 @@
-.. only:: html
+.. note::
+    :class: sphx-glr-download-link-note
 
-    .. note::
-        :class: sphx-glr-download-link-note
+    Click :ref:`here <sphx_glr_download_auto_examples_misc_plot_preferred_phase.py>` to download the full example code
+.. rst-class:: sphx-glr-example-title
 
-        Click :ref:`here <sphx_glr_download_auto_examples_misc_plot_preferred_phase.py>`     to download the full example code
-    .. rst-class:: sphx-glr-example-title
-
-    .. _sphx_glr_auto_examples_misc_plot_preferred_phase.py:
+.. _sphx_glr_auto_examples_misc_plot_preferred_phase.py:
 
 
 =============================
@@ -36,7 +34,6 @@ amplitudes.
 
 
 
-
 Generate synthetic signals (sake of illustration)
 ##############################################################################
  to illustrate how does the preferred phase works, we generate synthetic
@@ -59,7 +56,6 @@ Generate synthetic signals (sake of illustration)
 
 
 
-
 Extract phases, amplitudes and compute the preferred phase
 ##############################################################################
 
@@ -74,7 +70,6 @@ Extract phases, amplitudes and compute the preferred phase
 
     # Now, compute the PP :
     ampbin, pp, vecbin = p.fit(pha, amp, n_bins=72)
-
 
 
 
@@ -130,9 +125,7 @@ Plot the preferred phase
 
 
 .. image:: /auto_examples/misc/images/sphx_glr_plot_preferred_phase_001.png
-    :alt: Single trial PP according to amplitudes. 100hz amplitudes are phase locked to 90° (pi/2), PP across trials for the 100hz amplitude
     :class: sphx-glr-single-img
-
 
 
 
@@ -140,7 +133,7 @@ Plot the preferred phase
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  6.602 seconds)
+   **Total running time of the script:** ( 0 minutes  6.954 seconds)
 
 
 .. _sphx_glr_download_auto_examples_misc_plot_preferred_phase.py:
@@ -153,13 +146,13 @@ Plot the preferred phase
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+  .. container:: sphx-glr-download
 
      :download:`Download Python source code: plot_preferred_phase.py <plot_preferred_phase.py>`
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
+  .. container:: sphx-glr-download
 
      :download:`Download Jupyter notebook: plot_preferred_phase.ipynb <plot_preferred_phase.ipynb>`
 

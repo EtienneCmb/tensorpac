@@ -1,6 +1,0 @@
-tensorpac.methods.ndpac
-=======================
-
-.. currentmodule:: tensorpac.methods
-
-.. autofunction:: ndpac

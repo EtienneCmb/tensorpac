@@ -1,0 +1,6 @@
+tensorpac.methods.gauss\_cop\_pac
+=================================
+
+.. currentmodule:: tensorpac.methods
+
+.. autofunction:: gauss_cop_pac

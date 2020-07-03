@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tensorpac.methods.mvl &#8212; Tensorpac 0.6.3 documentation</title>
+    <title>tensorpac.methods.phase_locking_value &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tp_style.css" />
     <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/tp_style.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="tensorpac.methods.kld" href="tensorpac.methods.kld.html" />
-    <link rel="prev" title="tensorpac.stats.test_stationarity" href="tensorpac.stats.test_stationarity.html" />
+    <link rel="next" title="tensorpac.methods.gauss_cop_pac" href="tensorpac.methods.gauss_cop_pac.html" />
+    <link rel="prev" title="tensorpac.methods.norm_direct_pac" href="tensorpac.methods.norm_direct_pac.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -97,12 +94,11 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../api.html#individual-methods">Individual methods</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../api.html#pac-methods">PAC methods</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">tensorpac.methods.mvl</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.plv.html">tensorpac.methods.plv</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">tensorpac.methods.phase_locking_value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#event-related-pac-methods">Event Related PAC methods</a><ul>
@@ -203,7 +199,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="../_sources/generated/tensorpac.methods.mvl.rst.txt"
+  <a href="../_sources/generated/tensorpac.methods.phase_locking_value.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -227,24 +223,28 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="tensorpac-methods-mvl">
-<h1>tensorpac.methods.mvl<a class="headerlink" href="#tensorpac-methods-mvl" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt id="tensorpac.methods.mvl">
-<code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">mvl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pha</span></em>, <em class="sig-param"><span class="n">amp</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_pac.html#mvl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.mvl" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mean Vector Length.</p>
-<p>Adapted from <a class="bibtex reference internal" href="../references.html#canolty2006high" id="id1">[3]</a></p>
+  <div class="section" id="tensorpac-methods-phase-locking-value">
+<h1>tensorpac.methods.phase_locking_value<a class="headerlink" href="#tensorpac-methods-phase-locking-value" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="tensorpac.methods.phase_locking_value">
+<code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">phase_locking_value</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">pha_amp</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_pac.html#phase_locking_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.phase_locking_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Phase Locking-Value.</p>
+<p>In order to measure the phase locking value, the phase of the amplitude of
+the higher-frequency signal must be provided, and not the amplitude as in
+most other PAC functions. Adapted from
+<a class="bibtex reference internal" href="../references.html#lachaux1999measuring" id="id1">[6]</a><a class="bibtex reference internal" href="../references.html#penny2008testing" id="id2">[8]</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>pha, amp</strong><span class="classifier">array_like</span></dt><dd><p>Respectively the arrays of phases of shape (n_pha, …, n_times) and
-the array of amplitudes of shape (n_amp, …, n_times).</p>
+<dt><strong>pha, pha_amp</strong><span class="classifier">array_like</span></dt><dd><p>Respectively the arrays of phases of shape (n_pha, …, n_times) for
+the lower frequency and the array of phase of the amplitude signal of
+shape (n_pha_amp, …, n_times) for the higher frequency.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>Array of phase amplitude coupling of shape (n_amp, n_pha, …)</p>
+<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>Array of phase amplitude coupling of shape (n_pha_amp, n_pha, …)</p>
 </dd>
 </dl>
 </dd>

@@ -1,12 +1,10 @@
-.. only:: html
+.. note::
+    :class: sphx-glr-download-link-note
 
-    .. note::
-        :class: sphx-glr-download-link-note
+    Click :ref:`here <sphx_glr_download_auto_examples_misc_plot_itc.py>` to download the full example code
+.. rst-class:: sphx-glr-example-title
 
-        Click :ref:`here <sphx_glr_download_auto_examples_misc_plot_itc.py>`     to download the full example code
-    .. rst-class:: sphx-glr-example-title
-
-    .. _sphx_glr_auto_examples_misc_plot_itc.py:
+.. _sphx_glr_auto_examples_misc_plot_itc.py:
 
 
 ================================================
@@ -25,7 +23,6 @@ said differently, it provides a measure of the consistency across trials.
     from tensorpac.utils import ITC, PSD
 
     import matplotlib.pyplot as plt
-
 
 
 
@@ -66,18 +63,8 @@ Generate a random data of shape (n_epochs, n_times)
 
 
 .. image:: /auto_examples/misc/images/sphx_glr_plot_itc_001.png
-    :alt: plot itc
     :class: sphx-glr-single-img
 
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    (Text(0.5, 0, 'Time (seconds)'), Text(0, 0.5, 'Amplitude (V)'))
 
 
 
@@ -98,18 +85,8 @@ Compute and plot the Power Spectrum Density (PSD)
 
 
 .. image:: /auto_examples/misc/images/sphx_glr_plot_itc_002.png
-    :alt: PSD mean over 100 trials
     :class: sphx-glr-single-img
 
-
-.. rst-class:: sphx-glr-script-out
-
- Out:
-
- .. code-block:: none
-
-
-    <matplotlib.axes._subplots.AxesSubplot object at 0x7f7010b5a6a0>
 
 
 
@@ -143,9 +120,7 @@ Compute and plot the Inter-Trial Coherence (ITC)
 
 
 .. image:: /auto_examples/misc/images/sphx_glr_plot_itc_003.png
-    :alt: Inter-Trials Coherence (100 trials), Inter-Trials Coherence (100 trials)
     :class: sphx-glr-single-img
-
 
 
 
@@ -153,7 +128,7 @@ Compute and plot the Inter-Trial Coherence (ITC)
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.838 seconds)
+   **Total running time of the script:** ( 0 minutes  3.971 seconds)
 
 
 .. _sphx_glr_download_auto_examples_misc_plot_itc.py:
@@ -166,13 +141,13 @@ Compute and plot the Inter-Trial Coherence (ITC)
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+  .. container:: sphx-glr-download
 
      :download:`Download Python source code: plot_itc.py <plot_itc.py>`
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
+  .. container:: sphx-glr-download
 
      :download:`Download Jupyter notebook: plot_itc.ipynb <plot_itc.ipynb>`
 

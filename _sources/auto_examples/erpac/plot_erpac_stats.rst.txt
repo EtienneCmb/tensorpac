@@ -1,12 +1,10 @@
-.. only:: html
+.. note::
+    :class: sphx-glr-download-link-note
 
-    .. note::
-        :class: sphx-glr-download-link-note
+    Click :ref:`here <sphx_glr_download_auto_examples_erpac_plot_erpac_stats.py>` to download the full example code
+.. rst-class:: sphx-glr-example-title
 
-        Click :ref:`here <sphx_glr_download_auto_examples_erpac_plot_erpac_stats.py>`     to download the full example code
-    .. rst-class:: sphx-glr-example-title
-
-    .. _sphx_glr_auto_examples_erpac_plot_erpac_stats.py:
+.. _sphx_glr_auto_examples_erpac_plot_erpac_stats.py:
 
 
 ======================================
@@ -29,7 +27,6 @@ amplitude coupling first followed by a random noise.
     from tensorpac.signals import pac_signals_wavelet
 
     import matplotlib.pyplot as plt
-
 
 
 
@@ -68,7 +65,6 @@ Generate a synthetic signal
 
 
 
-
 Define an ERPAC object and extract the phase and the amplitude
 ##############################################################################
  use :class:`tensorpac.EventRelatedPac.filter` method to extract phases and
@@ -99,9 +95,7 @@ Define an ERPAC object and extract the phase and the amplitude
 
 
 .. image:: /auto_examples/erpac/images/sphx_glr_plot_erpac_stats_001.png
-    :alt: Gaussian-Copula ERPAC (Ince et al. 2017)
     :class: sphx-glr-single-img
-
 
 
 
@@ -109,7 +103,7 @@ Define an ERPAC object and extract the phase and the amplitude
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  24.343 seconds)
+   **Total running time of the script:** ( 0 minutes  25.716 seconds)
 
 
 .. _sphx_glr_download_auto_examples_erpac_plot_erpac_stats.py:
@@ -122,13 +116,13 @@ Define an ERPAC object and extract the phase and the amplitude
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+  .. container:: sphx-glr-download
 
      :download:`Download Python source code: plot_erpac_stats.py <plot_erpac_stats.py>`
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
+  .. container:: sphx-glr-download
 
      :download:`Download Jupyter notebook: plot_erpac_stats.ipynb <plot_erpac_stats.ipynb>`
 

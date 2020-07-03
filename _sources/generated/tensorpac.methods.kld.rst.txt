@@ -1,6 +1,0 @@
-tensorpac.methods.kld
-=====================
-
-.. currentmodule:: tensorpac.methods
-
-.. autofunction:: kld

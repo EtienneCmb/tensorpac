@@ -1,12 +1,10 @@
-.. only:: html
+.. note::
+    :class: sphx-glr-download-link-note
 
-    .. note::
-        :class: sphx-glr-download-link-note
+    Click :ref:`here <sphx_glr_download_auto_examples_pac_plot_readme.py>` to download the full example code
+.. rst-class:: sphx-glr-example-title
 
-        Click :ref:`here <sphx_glr_download_auto_examples_pac_plot_readme.py>`     to download the full example code
-    .. rst-class:: sphx-glr-example-title
-
-    .. _sphx_glr_auto_examples_pac_plot_readme.py:
+.. _sphx_glr_auto_examples_pac_plot_readme.py:
 
 
 ==============
@@ -18,9 +16,7 @@ Reproduced the figure in the README.
 
 
 .. image:: /auto_examples/pac/images/sphx_glr_plot_readme_001.png
-    :alt: 10hz phase$\Leftrightarrow$100Hz amplitude coupling
     :class: sphx-glr-single-img
-
 
 
 
@@ -55,7 +51,7 @@ Reproduced the figure in the README.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  6.421 seconds)
+   **Total running time of the script:** ( 0 minutes  7.167 seconds)
 
 
 .. _sphx_glr_download_auto_examples_pac_plot_readme.py:
@@ -68,13 +64,13 @@ Reproduced the figure in the README.
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+  .. container:: sphx-glr-download
 
      :download:`Download Python source code: plot_readme.py <plot_readme.py>`
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
+  .. container:: sphx-glr-download
 
      :download:`Download Jupyter notebook: plot_readme.ipynb <plot_readme.ipynb>`
 

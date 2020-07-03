@@ -1,12 +1,10 @@
-.. only:: html
+.. note::
+    :class: sphx-glr-download-link-note
 
-    .. note::
-        :class: sphx-glr-download-link-note
+    Click :ref:`here <sphx_glr_download_auto_examples_pac_plot_compare_surrogates.py>` to download the full example code
+.. rst-class:: sphx-glr-example-title
 
-        Click :ref:`here <sphx_glr_download_auto_examples_pac_plot_compare_surrogates.py>`     to download the full example code
-    .. rst-class:: sphx-glr-example-title
-
-    .. _sphx_glr_auto_examples_pac_plot_compare_surrogates.py:
+.. _sphx_glr_auto_examples_pac_plot_compare_surrogates.py:
 
 
 =========================
@@ -19,9 +17,7 @@ PAC estimation.
 
 
 .. image:: /auto_examples/pac/images/sphx_glr_plot_compare_surrogates_001.png
-    :alt: No surrogates, Permute phase across trials (Tort et al. 2010), Swap amplitude time blocks (Bahramisharif et al. 2013), Time lag (Canolty et al. 2006)
     :class: sphx-glr-single-img
-
 
 
 
@@ -68,7 +64,7 @@ PAC estimation.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  8.685 seconds)
+   **Total running time of the script:** ( 0 minutes  7.697 seconds)
 
 
 .. _sphx_glr_download_auto_examples_pac_plot_compare_surrogates.py:
@@ -81,13 +77,13 @@ PAC estimation.
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+  .. container:: sphx-glr-download
 
      :download:`Download Python source code: plot_compare_surrogates.py <plot_compare_surrogates.py>`
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
+  .. container:: sphx-glr-download
 
      :download:`Download Jupyter notebook: plot_compare_surrogates.ipynb <plot_compare_surrogates.ipynb>`
 

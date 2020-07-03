@@ -1,12 +1,10 @@
-.. only:: html
+.. note::
+    :class: sphx-glr-download-link-note
 
-    .. note::
-        :class: sphx-glr-download-link-note
+    Click :ref:`here <sphx_glr_download_auto_examples_misc_plot_artificially_coupled_signals.py>` to download the full example code
+.. rst-class:: sphx-glr-example-title
 
-        Click :ref:`here <sphx_glr_download_auto_examples_misc_plot_artificially_coupled_signals.py>`     to download the full example code
-    .. rst-class:: sphx-glr-example-title
-
-    .. _sphx_glr_auto_examples_misc_plot_artificially_coupled_signals.py:
+.. _sphx_glr_auto_examples_misc_plot_artificially_coupled_signals.py:
 
 
 =====================================
@@ -18,9 +16,7 @@ Use the pac_signals_tort function to generate artificial PAC.
 
 
 .. image:: /auto_examples/misc/images/sphx_glr_plot_artificially_coupled_signals_001.png
-    :alt: Strong coupling between 2hz <-> 100hz, Weak and noisy coupling between 4hz <-> 60hz
     :class: sphx-glr-single-img
-
 
 
 
@@ -76,7 +72,7 @@ Use the pac_signals_tort function to generate artificial PAC.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.156 seconds)
+   **Total running time of the script:** ( 0 minutes  0.222 seconds)
 
 
 .. _sphx_glr_download_auto_examples_misc_plot_artificially_coupled_signals.py:
@@ -89,13 +85,13 @@ Use the pac_signals_tort function to generate artificial PAC.
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+  .. container:: sphx-glr-download
 
      :download:`Download Python source code: plot_artificially_coupled_signals.py <plot_artificially_coupled_signals.py>`
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
+  .. container:: sphx-glr-download
 
      :download:`Download Jupyter notebook: plot_artificially_coupled_signals.ipynb <plot_artificially_coupled_signals.ipynb>`
 

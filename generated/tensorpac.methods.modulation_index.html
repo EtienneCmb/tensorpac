@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tensorpac.methods.gcpac &#8212; Tensorpac 0.6.3 documentation</title>
+    <title>tensorpac.methods.modulation_index &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tp_style.css" />
     <link rel="stylesheet" type="text/css" href="../_static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery-binder.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/gallery-dataframe.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/tp_style.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="tensorpac.methods.erpac" href="tensorpac.methods.erpac.html" />
-    <link rel="prev" title="tensorpac.methods.plv" href="tensorpac.methods.plv.html" />
+    <link rel="next" title="tensorpac.methods.norm_direct_pac" href="tensorpac.methods.norm_direct_pac.html" />
+    <link rel="prev" title="tensorpac.methods.mean_vector_length" href="tensorpac.methods.mean_vector_length.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -97,12 +94,11 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../api.html#individual-methods">Individual methods</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../api.html#pac-methods">PAC methods</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.mvl.html">tensorpac.methods.mvl</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.plv.html">tensorpac.methods.plv</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">tensorpac.methods.gcpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">tensorpac.methods.modulation_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#event-related-pac-methods">Event Related PAC methods</a><ul>
@@ -203,7 +199,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="../_sources/generated/tensorpac.methods.gcpac.rst.txt"
+  <a href="../_sources/generated/tensorpac.methods.modulation_index.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -227,21 +223,21 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="tensorpac-methods-gcpac">
-<h1>tensorpac.methods.gcpac<a class="headerlink" href="#tensorpac-methods-gcpac" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt id="tensorpac.methods.gcpac">
-<code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">gcpac</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pha</span></em>, <em class="sig-param"><span class="n">amp</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_pac.html#gcpac"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.gcpac" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gaussian Copula Phase-amplitude coupling.</p>
-<p>This function assumes that phases and amplitudes have already been
-prepared i.e. phases should be represented in a unit circle
-(np.c_[np.sin(pha), np.cos(pha)]) and both inputs should also have been
-copnormed. Adapted from <a class="bibtex reference internal" href="../references.html#ince2017statistical" id="id1">[4]</a></p>
+  <div class="section" id="tensorpac-methods-modulation-index">
+<h1>tensorpac.methods.modulation_index<a class="headerlink" href="#tensorpac-methods-modulation-index" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="tensorpac.methods.modulation_index">
+<code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">modulation_index</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">n_bins=18</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_pac.html#modulation_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.modulation_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modulation index.</p>
+<p>The modulation index is obtained using the Kullback Leibler Distance.
+Adapted from <a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id1">[9]</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>pha, amp</strong><span class="classifier">array_like</span></dt><dd><p>Respectively the arrays of phases of shape (n_pha, …, n_times) and
 the array of amplitudes of shape (n_amp, …, n_times).</p>
+</dd>
+<dt><strong>n_bins</strong><span class="classifier">int | 18</span></dt><dd><p>Number of bins to binarize the amplitude according to phase intervals</p>
 </dd>
 </dl>
 </dd>

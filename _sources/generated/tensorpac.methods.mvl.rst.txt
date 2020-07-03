@@ -1,6 +1,0 @@
-tensorpac.methods.mvl
-=====================
-
-.. currentmodule:: tensorpac.methods
-
-.. autofunction:: mvl

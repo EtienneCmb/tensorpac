@@ -1,12 +1,10 @@
-.. only:: html
+.. note::
+    :class: sphx-glr-download-link-note
 
-    .. note::
-        :class: sphx-glr-download-link-note
+    Click :ref:`here <sphx_glr_download_auto_examples_pac_plot_compare_normalizations.py>` to download the full example code
+.. rst-class:: sphx-glr-example-title
 
-        Click :ref:`here <sphx_glr_download_auto_examples_pac_plot_compare_normalizations.py>`     to download the full example code
-    .. rst-class:: sphx-glr-example-title
-
-    .. _sphx_glr_auto_examples_pac_plot_compare_normalizations.py:
+.. _sphx_glr_auto_examples_pac_plot_compare_normalizations.py:
 
 
 ======================
@@ -19,7 +17,6 @@ with the chance distribution.
 
 
 .. image:: /auto_examples/pac/images/sphx_glr_plot_compare_normalizations_001.png
-    :alt: No normalization, Substract the mean of surrogates, Divide by the mean of surrogates, Substract then divide by the mean of surrogates, Substract the mean and divide by the deviation of the surrogates
     :class: sphx-glr-single-img
 
 
@@ -34,7 +31,6 @@ with the chance distribution.
     -> Normalization using Divide by the mean of surrogates
     -> Normalization using Substract then divide by the mean of surrogates
     -> Normalization using Substract the mean and divide by the deviation of the surrogates
-
 
 
 
@@ -83,7 +79,7 @@ with the chance distribution.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  7.227 seconds)
+   **Total running time of the script:** ( 0 minutes  8.337 seconds)
 
 
 .. _sphx_glr_download_auto_examples_pac_plot_compare_normalizations.py:
@@ -96,13 +92,13 @@ with the chance distribution.
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+  .. container:: sphx-glr-download
 
      :download:`Download Python source code: plot_compare_normalizations.py <plot_compare_normalizations.py>`
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
+  .. container:: sphx-glr-download
 
      :download:`Download Jupyter notebook: plot_compare_normalizations.ipynb <plot_compare_normalizations.ipynb>`
 

@@ -1,12 +1,10 @@
-.. only:: html
+.. note::
+    :class: sphx-glr-download-link-note
 
-    .. note::
-        :class: sphx-glr-download-link-note
+    Click :ref:`here <sphx_glr_download_auto_examples_pac_plot_pac_methods.py>` to download the full example code
+.. rst-class:: sphx-glr-example-title
 
-        Click :ref:`here <sphx_glr_download_auto_examples_pac_plot_pac_methods.py>`     to download the full example code
-    .. rst-class:: sphx-glr-example-title
-
-    .. _sphx_glr_auto_examples_pac_plot_pac_methods.py:
+.. _sphx_glr_auto_examples_pac_plot_pac_methods.py:
 
 
 ===================
@@ -18,7 +16,6 @@ Compute PAC on multiple datasets and compare implemented methods.
 
 
 .. image:: /auto_examples/pac/images/sphx_glr_plot_pac_methods_001.png
-    :alt: Mean Vector Length (MVL, Canolty et al. 2006), Kullback-Leiber Distance (KLD, Tort et al. 2010), Heights ratio (HR, Lakatos et al. 2005), ndPac (Ozkurt et al. 2012), Phase-Locking Value (Lachaux et al. 1999), Gaussian Copula PAC (Ince et al. 2017)
     :class: sphx-glr-single-img
 
 
@@ -29,12 +26,11 @@ Compute PAC on multiple datasets and compare implemented methods.
  .. code-block:: none
 
     -> PAC using Mean Vector Length (MVL, Canolty et al. 2006)
-    -> PAC using Kullback-Leiber Distance (KLD, Tort et al. 2010)
+    -> PAC using Modulation Index (MI, Tort et al. 2010)
     -> PAC using Heights ratio (HR, Lakatos et al. 2005)
     -> PAC using ndPac (Ozkurt et al. 2012)
     -> PAC using Phase-Locking Value (Lachaux et al. 1999)
     -> PAC using Gaussian Copula PAC (Ince et al. 2017)
-
 
 
 
@@ -91,7 +87,7 @@ Compute PAC on multiple datasets and compare implemented methods.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  3.290 seconds)
+   **Total running time of the script:** ( 0 minutes  3.792 seconds)
 
 
 .. _sphx_glr_download_auto_examples_pac_plot_pac_methods.py:
@@ -104,13 +100,13 @@ Compute PAC on multiple datasets and compare implemented methods.
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+  .. container:: sphx-glr-download
 
      :download:`Download Python source code: plot_pac_methods.py <plot_pac_methods.py>`
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
+  .. container:: sphx-glr-download
 
      :download:`Download Jupyter notebook: plot_pac_methods.ipynb <plot_pac_methods.ipynb>`
 

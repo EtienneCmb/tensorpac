@@ -1,12 +1,10 @@
-.. only:: html
+.. note::
+    :class: sphx-glr-download-link-note
 
-    .. note::
-        :class: sphx-glr-download-link-note
+    Click :ref:`here <sphx_glr_download_auto_examples_erpac_plot_erpac.py>` to download the full example code
+.. rst-class:: sphx-glr-example-title
 
-        Click :ref:`here <sphx_glr_download_auto_examples_erpac_plot_erpac.py>`     to download the full example code
-    .. rst-class:: sphx-glr-example-title
-
-    .. _sphx_glr_auto_examples_erpac_plot_erpac.py:
+.. _sphx_glr_auto_examples_erpac_plot_erpac.py:
 
 
 ======================================
@@ -30,7 +28,6 @@ amplitude coupling first followed by a random noise.
     from tensorpac.signals import pac_signals_wavelet
 
     import matplotlib.pyplot as plt
-
 
 
 
@@ -69,7 +66,6 @@ Generate a synthetic signal
 
 
 
-
 Define an ERPAC object and extract the phase and the amplitude
 ##############################################################################
  use :class:`tensorpac.EventRelatedPac.filter` method to extract phases and
@@ -85,7 +81,6 @@ Define an ERPAC object and extract the phase and the amplitude
     # extract phases and amplitudes
     pha = p.filter(sf, x, ftype='phase', n_jobs=1)
     amp = p.filter(sf, x, ftype='amplitude', n_jobs=1)
-
 
 
 
@@ -120,9 +115,7 @@ Compute the ERPAC using the two implemented methods and plot it
 
 
 .. image:: /auto_examples/erpac/images/sphx_glr_plot_erpac_001.png
-    :alt: ERPAC (Voytek et al. 2013), Gaussian-Copula ERPAC (Ince et al. 2017)
     :class: sphx-glr-single-img
-
 
 
 
@@ -130,7 +123,7 @@ Compute the ERPAC using the two implemented methods and plot it
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  8.827 seconds)
+   **Total running time of the script:** ( 0 minutes  9.540 seconds)
 
 
 .. _sphx_glr_download_auto_examples_erpac_plot_erpac.py:
@@ -143,13 +136,13 @@ Compute the ERPAC using the two implemented methods and plot it
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+  .. container:: sphx-glr-download
 
      :download:`Download Python source code: plot_erpac.py <plot_erpac.py>`
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
+  .. container:: sphx-glr-download
 
      :download:`Download Jupyter notebook: plot_erpac.ipynb <plot_erpac.ipynb>`
 

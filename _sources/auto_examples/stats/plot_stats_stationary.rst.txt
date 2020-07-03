@@ -1,12 +1,10 @@
-.. only:: html
+.. note::
+    :class: sphx-glr-download-link-note
 
-    .. note::
-        :class: sphx-glr-download-link-note
+    Click :ref:`here <sphx_glr_download_auto_examples_stats_plot_stats_stationary.py>` to download the full example code
+.. rst-class:: sphx-glr-example-title
 
-        Click :ref:`here <sphx_glr_download_auto_examples_stats_plot_stats_stationary.py>`     to download the full example code
-    .. rst-class:: sphx-glr-example-title
-
-    .. _sphx_glr_auto_examples_stats_plot_stats_stationary.py:
+.. _sphx_glr_auto_examples_stats_plot_stats_stationary.py:
 
 
 ====================================================
@@ -25,7 +23,6 @@ Here, we are going to use the Augmented Dickey-Fuller test.
     from tensorpac.stats import test_stationarity
 
     import matplotlib.pyplot as plt
-
 
 
 
@@ -75,7 +72,6 @@ Define a random dataset
 
 
 
-
 Compute the statistical test
 ##############################################################################
  now, run the Augmented Dickey-Fuller test in order to identify which trials
@@ -112,7 +108,6 @@ Compute the statistical test
 
 
 
-
 Plot each trial
 ##############################################################################
  finally, plot color-coded time-series (green : stationary,
@@ -137,9 +132,7 @@ Plot each trial
 
 
 .. image:: /auto_examples/stats/images/sphx_glr_plot_stats_stationary_001.png
-    :alt: constant offset, increasing linear trend, decreasing linear trend, constant oscillations, offset on second half, divide by 2 first half amplitude, modulated oscillations, random signal
     :class: sphx-glr-single-img
-
 
 
 
@@ -147,7 +140,7 @@ Plot each trial
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.030 seconds)
+   **Total running time of the script:** ( 0 minutes  1.445 seconds)
 
 
 .. _sphx_glr_download_auto_examples_stats_plot_stats_stationary.py:
@@ -160,13 +153,13 @@ Plot each trial
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-python
+  .. container:: sphx-glr-download
 
      :download:`Download Python source code: plot_stats_stationary.py <plot_stats_stationary.py>`
 
 
 
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
+  .. container:: sphx-glr-download
 
      :download:`Download Jupyter notebook: plot_stats_stationary.ipynb <plot_stats_stationary.ipynb>`
 

@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/tp_style.css" />
     <link rel="stylesheet" type="text/css" href="_static/gallery.css" />
-    <link rel="stylesheet" type="text/css" href="_static/gallery-binder.css" />
-    <link rel="stylesheet" type="text/css" href="_static/gallery-dataframe.css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/tp_style.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -97,12 +94,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#individual-methods">Individual methods</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pac-methods">PAC methods</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.mvl.html">tensorpac.methods.mvl</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.kld.html">tensorpac.methods.kld</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.hr.html">tensorpac.methods.hr</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.ndpac.html">tensorpac.methods.ndpac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.plv.html">tensorpac.methods.plv</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.gcpac.html">tensorpac.methods.gcpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#event-related-pac-methods">Event Related PAC methods</a><ul>
@@ -340,22 +336,22 @@ and use it on phase / amplitude to compute PAC.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.methods.mvl.html#tensorpac.methods.mvl" title="tensorpac.methods.mvl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mvl</span></code></a>(pha, amp)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.methods.mean_vector_length.html#tensorpac.methods.mean_vector_length" title="tensorpac.methods.mean_vector_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mean_vector_length</span></code></a>(pha, amp)</p></td>
 <td><p>Mean Vector Length.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.methods.kld.html#tensorpac.methods.kld" title="tensorpac.methods.kld"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kld</span></code></a>(pha, amp[, n_bins])</p></td>
-<td><p>Kullback Leibler Distance.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.methods.modulation_index.html#tensorpac.methods.modulation_index" title="tensorpac.methods.modulation_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modulation_index</span></code></a>(pha, amp[, n_bins])</p></td>
+<td><p>Modulation index.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.methods.hr.html#tensorpac.methods.hr" title="tensorpac.methods.hr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hr</span></code></a>(pha, amp[, n_bins])</p></td>
-<td><p>Heights ratio.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">heigths_ratio</span></code></p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.methods.ndpac.html#tensorpac.methods.ndpac" title="tensorpac.methods.ndpac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ndpac</span></code></a>(pha, amp[, p])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.methods.norm_direct_pac.html#tensorpac.methods.norm_direct_pac" title="tensorpac.methods.norm_direct_pac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">norm_direct_pac</span></code></a>(pha, amp[, p])</p></td>
 <td><p>Normalized direct Pac.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.methods.plv.html#tensorpac.methods.plv" title="tensorpac.methods.plv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plv</span></code></a>(pha, pha_amp)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.methods.phase_locking_value.html#tensorpac.methods.phase_locking_value" title="tensorpac.methods.phase_locking_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phase_locking_value</span></code></a>(pha, pha_amp)</p></td>
 <td><p>Phase Locking-Value.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.methods.gcpac.html#tensorpac.methods.gcpac" title="tensorpac.methods.gcpac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gcpac</span></code></a>(pha, amp)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.methods.gauss_cop_pac.html#tensorpac.methods.gauss_cop_pac" title="tensorpac.methods.gauss_cop_pac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gauss_cop_pac</span></code></a>(pha, amp)</p></td>
 <td><p>Gaussian Copula Phase-amplitude coupling.</p></td>
 </tr>
 </tbody>
@@ -370,10 +366,10 @@ and use it on phase / amplitude to compute PAC.</p>
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.methods.erpac.html#tensorpac.methods.erpac" title="tensorpac.methods.erpac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">erpac</span></code></a>(pha, amp)</p></td>
-<td><p>Correlation coefficient between a circular and a linear random variable.</p></td>
+<td><p>Event-Related Phase Amplitude Coupling.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.methods.ergcpac.html#tensorpac.methods.ergcpac" title="tensorpac.methods.ergcpac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ergcpac</span></code></a>(pha, amp[, smooth, n_jobs])</p></td>
-<td><p>Event Related PAC computed using the Gaussian Copula Mutual Information.</p></td>
+<td><p>Event Related PAC using the Gaussian Copula Mutual Information.</p></td>
 </tr>
 </tbody>
 </table>
