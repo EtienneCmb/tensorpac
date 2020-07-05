@@ -134,6 +134,34 @@ class _PacObj(object):
         pha = (pha + np.pi) % (2. * np.pi) - np.pi
         return pha, amp
 
+    def _infer_pvalues(self, effect, perm, p=.05):
+        """Global function for statistical inferences.
+
+        In order to work this method requires :
+
+            * effect = array like of shape (n_dims...)
+            * perm = array like of shape (n_perm, n_dims...)
+        """
+        assert all([isinstance(k, np.ndarray) for k in (effect, perm)])
+        n_perm = perm.shape[0]
+        # compute the minimum number of required permutations
+        n_perm_req = int(10. / p)
+        if n_perm < n_perm_req:
+            logger.warning(f"For inferences at p<{p}, it is recommended to per"
+                           f"form at least n_perm={n_perm_req} permutations")
+
+        # ---------------------------------------------------------------------
+        logger.info(f"    Infer p-values at p={p}")
+        # computes the pvalues
+        max_p = perm.reshape(n_perm, -1).max(1)
+        nb_over = (effect[..., np.newaxis] <= max_p[np.newaxis, ...]).sum(-1)
+        pvalues = nb_over / n_perm
+        # non-significant p-values are set to 1. and min(pvalues) = 1 / n_perm
+        pvalues[pvalues >= p] = 1.
+        pvalues = np.maximum(1. / n_perm, pvalues)
+
+        return pvalues
+
     @property
     def f_pha(self):
         """Vector of phases of shape (n_pha, 2)."""
@@ -431,7 +459,7 @@ class Pac(_PacObj, _PacPlt):
         Parameters
         ----------
         p : float | 0.05
-            Statistical threshold
+            Significiency threshold
 
         Returns
         -------
@@ -443,21 +471,12 @@ class Pac(_PacObj, _PacPlt):
         assert hasattr(self, 'pac'), ("You should compute PAC first. Use the "
                                       "`fit` method")
         assert hasattr(self, 'surrogates'), "No surrogates computed"
-        assert all([isinstance(k, np.ndarray) for k in (
-            self.pac, self.surrogates)])
-        n_perm = self.surrogates.shape[0]
 
-        # ---------------------------------------------------------------------
         # mean pac and surrogates across trials
         m_pac, m_surro = self.pac.mean(2), self.surrogates.mean(3)
-        self._pvalues = np.ones_like(m_pac)
-        # infer pvalues
-        logger.info(f"    Infer p-values at p={p}")
-        max_dist = m_surro.reshape(n_perm, -1).max(1)
-        th = np.percentile(max_dist, 100. * (1 - p), axis=0,
-                           interpolation='nearest')
-        self._pvalues[m_pac > th] = p
-        return self.pvalues
+        self._pvalues = self._infer_pvalues(m_pac, m_surro, p=p)
+
+        return self._pvalues
 
     def _idcheck(self, idpac):
         """Check the idpac parameter."""
@@ -671,16 +690,10 @@ class EventRelatedPac(_PacObj, _PacVisual):
         assert hasattr(self, 'erpac'), ("You should compute ERPAC first. Use "
                                         "the `fit` method")
         assert hasattr(self, 'surrogates'), "No surrogates computed"
-        assert all([isinstance(k, np.ndarray) for k in (
-            self.erpac, self.surrogates)])
-        n_perm = self.surrogates.shape[0]
 
-        logger.info(f"    Infer p-values at p={p}")
-        th = np.percentile(self.surrogates.reshape(n_perm, -1).max(1),
-                           100. * (1 - p), axis=0, interpolation='nearest')
-        self._pvalues = np.ones_like(self.erpac)
-        self._pvalues[self.erpac > th] = p
-        return self.pvalues
+        self._pvalues = self._infer_pvalues(self.erpac, self.surrogates, p=p)
+
+        return self._pvalues
 
     @property
     def erpac(self):
