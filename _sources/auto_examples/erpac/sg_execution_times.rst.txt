@@ -5,7 +5,7 @@
 
 Computation times
 =================
-**00:53.476** total execution time for **auto_examples_erpac** files:
+**00:40.467** total execution time for **auto_examples_erpac** files:
 
-- **00:41.283**: :ref:`sphx_glr_auto_examples_erpac_plot_erpac_stats.py` (``plot_erpac_stats.py``)
-- **00:12.193**: :ref:`sphx_glr_auto_examples_erpac_plot_erpac.py` (``plot_erpac.py``)
+- **00:28.393**: :ref:`sphx_glr_auto_examples_erpac_plot_erpac_stats.py` (``plot_erpac_stats.py``)
+- **00:12.074**: :ref:`sphx_glr_auto_examples_erpac_plot_erpac.py` (``plot_erpac.py``)

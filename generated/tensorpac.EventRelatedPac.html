@@ -285,7 +285,7 @@ amplitude.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.fit" title="tensorpac.EventRelatedPac.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(pha, amp[, method, smooth, n_jobs, …])</p></td>
 <td><p>Compute the Event-Related Phase-Amplitude Coupling (ERPAC).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.infer_pvalues" title="tensorpac.EventRelatedPac.infer_pvalues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">infer_pvalues</span></code></a>([p])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.infer_pvalues" title="tensorpac.EventRelatedPac.infer_pvalues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">infer_pvalues</span></code></a>([p, mcp])</p></td>
 <td><p>Infer p-values based on surrogate distribution.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.EventRelatedPac.pacplot" title="tensorpac.EventRelatedPac.pacplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pacplot</span></code></a>(pac, xvec, yvec[, xlabel, ylabel, …])</p></td>
@@ -373,7 +373,7 @@ is only available with dcomplex=’hilbert’ and not wavelet.</p>
 
 <dl class="method">
 <dt id="tensorpac.EventRelatedPac.filterfit">
-<code class="sig-name descname">filterfit</code><span class="sig-paren">(</span><em class="sig-param">sf</em>, <em class="sig-param">x_pha</em>, <em class="sig-param">x_amp=None</em>, <em class="sig-param">method='circular'</em>, <em class="sig-param">smooth=None</em>, <em class="sig-param">n_perm=None</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">edges=None</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.filterfit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">filterfit</code><span class="sig-paren">(</span><em class="sig-param">sf</em>, <em class="sig-param">x_pha</em>, <em class="sig-param">x_amp=None</em>, <em class="sig-param">method='circular'</em>, <em class="sig-param">smooth=None</em>, <em class="sig-param">n_perm=None</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">mcp='fdr'</em>, <em class="sig-param">edges=None</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.filterfit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract phases, amplitudes and compute ERPAC.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -401,6 +401,10 @@ swapping phase trials</p>
 </dd>
 <dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Statistical threshold for the gaussian-copula (‘gc’) method</p>
 </dd>
+<dt><strong>mcp</strong><span class="classifier">{‘fdr’, ‘bonferroni’}</span></dt><dd><p>Correct the p-values for multiple comparisons. This is needed when
+using the circular ERPAC (<a class="bibtex reference internal" href="../references.html#voytek2013method" id="id3">[10]</a>). Note that the
+correction is performed using MNE-Python.</p>
+</dd>
 <dt><strong>edges</strong><span class="classifier">int | None</span></dt><dd><p>Number of samples to discard to avoid edge effects due to filtering</p>
 </dd>
 </dl>
@@ -416,9 +420,9 @@ swapping phase trials</p>
 
 <dl class="method">
 <dt id="tensorpac.EventRelatedPac.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">method='circular'</em>, <em class="sig-param">smooth=None</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">n_perm=None</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">method='circular'</em>, <em class="sig-param">smooth=None</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">n_perm=None</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">mcp='fdr'</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Event-Related Phase-Amplitude Coupling (ERPAC).</p>
-<p>The ERPAC <a class="bibtex reference internal" href="../references.html#voytek2013method" id="id3">[10]</a> is used to measure PAC across trials
+<p>The ERPAC <a class="bibtex reference internal" href="../references.html#voytek2013method" id="id4">[10]</a> is used to measure PAC across trials
 and is interesting for real-time estimation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -428,8 +432,8 @@ and is interesting for real-time estimation.</p>
 oscillations of shape (n_pha, n_epochs, n_times).</p>
 </dd>
 <dt><strong>method</strong><span class="classifier">{‘circular’, ‘gc’}</span></dt><dd><p>Name of the method for computing erpac. Use ‘circular’ for
-reproducing <a class="bibtex reference internal" href="../references.html#voytek2013method" id="id4">[10]</a> or ‘gc’ for a Gaussian-Copula
-based erpac <a class="bibtex reference internal" href="../references.html#ince2017statistical" id="id5">[4]</a>.</p>
+reproducing <a class="bibtex reference internal" href="../references.html#voytek2013method" id="id5">[10]</a> or ‘gc’ for a Gaussian-Copula
+based erpac <a class="bibtex reference internal" href="../references.html#ince2017statistical" id="id6">[4]</a>.</p>
 </dd>
 <dt><strong>smooth</strong><span class="classifier">int | None</span></dt><dd><p>Half number of time-points to use to produce a smoothing. Only
 active with the Gaussian-Copula (‘gc’) method.</p>
@@ -439,6 +443,10 @@ gaussian-copula (‘gc’) method. Statistics are performed by randomly
 swapping phase trials</p>
 </dd>
 <dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Statistical threshold for the gaussian-copula (‘gc’) method</p>
+</dd>
+<dt><strong>mcp</strong><span class="classifier">{‘fdr’, ‘bonferroni’}</span></dt><dd><p>Correct the p-values for multiple comparisons. This is needed when
+using the circular ERPAC (<a class="bibtex reference internal" href="../references.html#voytek2013method" id="id7">[10]</a>). Note that the
+correction is performed using MNE-Python.</p>
 </dd>
 </dl>
 </dd>
@@ -453,12 +461,16 @@ swapping phase trials</p>
 
 <dl class="method">
 <dt id="tensorpac.EventRelatedPac.infer_pvalues">
-<code class="sig-name descname">infer_pvalues</code><span class="sig-paren">(</span><em class="sig-param">p=0.05</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.infer_pvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.infer_pvalues" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">infer_pvalues</code><span class="sig-paren">(</span><em class="sig-param">p=0.05</em>, <em class="sig-param">mcp='fdr'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.infer_pvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.infer_pvalues" title="Permalink to this definition">¶</a></dt>
 <dd><p>Infer p-values based on surrogate distribution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Statistical threshold</p>
+</dd>
+<dt><strong>mcp</strong><span class="classifier">{‘fdr’, ‘bonferroni’}</span></dt><dd><p>Correct the p-values for multiple comparisons. This is needed when
+using the circular ERPAC (<a class="bibtex reference internal" href="../references.html#voytek2013method" id="id8">[10]</a>). Note that the
+correction is performed using MNE-Python.</p>
 </dd>
 </dl>
 </dd>
