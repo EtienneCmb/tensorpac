@@ -283,6 +283,26 @@ Statistics
    :hidden:
 
    /auto_examples/stats/plot_stats_stationary
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example illustrates how to statistically compare the phase-amplitude coupling results comi...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/stats/images/thumb/sphx_glr_plot_compare_cond_cluster_thumb.png
+
+        :ref:`sphx_glr_auto_examples_stats_plot_compare_cond_cluster.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/stats/plot_compare_cond_cluster
 .. raw:: html
 
     <div style='clear:both'></div>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Compare PAC of two experimental conditions with cluster-based statistics &#8212; Tensorpac 0.6.3 documentation</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tp_style.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Compute and plot the Power Spectrum Density (PSD)" href="../misc/plot_psd.html" />
+    <link rel="prev" title="Identify stationary time-series using unit root test" href="plot_stats_stationary.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/ico64.png"></span>
+          Tensorpac</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.3</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../install.html">Install</a></li>
+                <li><a href="../../tutorial.html">Tutorial</a></li>
+                <li><a href="../../api.html">API</a></li>
+                <li><a href="../index.html">Examples</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#standard-installation">Standard installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#install-the-most-up-to-date-version">Install the most up-to-date version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#compute-phase-amplitude-coupling">Compute phase-amplitude coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.Pac.html">tensorpac.Pac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.EventRelatedPac.html">tensorpac.EventRelatedPac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.PreferredPhase.html">tensorpac.PreferredPhase</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#utility-functions">Utility functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.ITC.html">tensorpac.utils.ITC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.signals.pac_signals_wavelet.html">tensorpac.signals.pac_signals_wavelet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.signals.pac_signals_tort.html">tensorpac.signals.pac_signals_tort</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#statistics">Statistics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.stats.test_stationarity.html">tensorpac.stats.test_stationarity</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#individual-methods">Individual methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pac-methods">PAC methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.heights_ratio.html">tensorpac.methods.heights_ratio</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#event-related-pac-methods">Event Related PAC methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.erpac.html">tensorpac.methods.erpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.ergcpac.html">tensorpac.methods.ergcpac</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#preferred-phase">Preferred phase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.preferred_phase.html">tensorpac.methods.preferred_phase</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#surrogates-methods">Surrogates methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.swap_pha_amp.html">tensorpac.methods.swap_pha_amp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.swap_blocks.html">tensorpac.methods.swap_blocks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.time_lag.html">tensorpac.methods.time_lag</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#normalization">Normalization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.normalize.html">tensorpac.methods.normalize</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#phase-amplitude-coupling">Phase-Amplitude coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pac/plot_readme.html">README example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pac/plot_pvalues.html">Compute p-values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pac/plot_compare_surrogates.html">Compare surrogate methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pac/plot_compare_normalizations.html">Compare normalizations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pac/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pac/plot_pac_methods.html">Compare PAC methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pac/plot_long_range_coupling.html">Long-range PAC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#event-related-phase-amplitude-coupling">Event-Related Phase-Amplitude coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../erpac/plot_erpac_stats.html">Event-Related Phase Amplitude Coupling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../erpac/plot_erpac_stats.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../erpac/plot_erpac_stats.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../erpac/plot_erpac.html">Event-Related Phase Amplitude Coupling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../erpac/plot_erpac.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../erpac/plot_erpac.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../erpac/plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#statistics">Statistics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plot_stats_stationary.html">Identify stationary time-series using unit root test</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="plot_stats_stationary.html#define-a-random-dataset">Define a random dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_stats_stationary.html#compute-the-statistical-test">Compute the statistical test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_stats_stationary.html#plot-each-trial">Plot each trial</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Compare PAC of two experimental conditions with cluster-based statistics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#simulate-the-data-coming-from-two-experimental-conditions">Simulate the data coming from two experimental conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compute-the-single-trial-pac-on-both-datasets">Compute the single trial PAC on both datasets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#correct-for-multiple-comparisons-using-a-cluster-based-approach">Correct for multiple-comparisons using a cluster-based approach</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plot-the-significant-clusters">Plot the significant clusters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#miscellaneous">Miscellaneous</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../misc/plot_psd.html">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../misc/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../misc/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../misc/plot_frequency_vectors.html">Define frequency vectors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../misc/plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_itc.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_itc.html#id1">Compute and plot the Inter-Trial Coherence (ITC)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../misc/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../misc/plot_preferred_phase.html">Find the preferred phase (PP)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_preferred_phase.html#generate-synthetic-signals-sake-of-illustration">Generate synthetic signals (sake of illustration)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_preferred_phase.html#extract-phases-amplitudes-and-compute-the-preferred-phase">Extract phases, amplitudes and compute the preferred phase</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_preferred_phase.html#plot-the-preferred-phase">Plot the preferred phase</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributors.html#id1">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cite.html">Cite Tensorpac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community.html">Community</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html#report-an-issue">Report an issue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../community.html#chat">Chat</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../../_sources/auto_examples/stats/plot_compare_cond_cluster.rst.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-stats-plot-compare-cond-cluster-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="compare-pac-of-two-experimental-conditions-with-cluster-based-statistics">
+<span id="sphx-glr-auto-examples-stats-plot-compare-cond-cluster-py"></span><h1>Compare PAC of two experimental conditions with cluster-based statistics<a class="headerlink" href="#compare-pac-of-two-experimental-conditions-with-cluster-based-statistics" title="Permalink to this headline">¶</a></h1>
+<p>This example illustrates how to statistically compare the phase-amplitude
+coupling results coming from two experimental conditions. In particular, the
+script below a the cluster-based approach to correct for the multiple
+comparisons.</p>
+<p>In order to work, this script requires MNE-Python package to be installed in
+order to perform the cluster-based correction
+(<code class="xref py py-func docutils literal notranslate"><span class="pre">mne.stats.permutation_cluster_test()</span></code>)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">tensorpac</span> <span class="kn">import</span> <span class="n">Pac</span>
+<span class="kn">from</span> <span class="nn">tensorpac.signals</span> <span class="kn">import</span> <span class="n">pac_signals_wavelet</span>
+
+<span class="kn">from</span> <span class="nn">mne.stats</span> <span class="kn">import</span> <span class="n">permutation_cluster_test</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<div class="section" id="simulate-the-data-coming-from-two-experimental-conditions">
+<h2>Simulate the data coming from two experimental conditions<a class="headerlink" href="#simulate-the-data-coming-from-two-experimental-conditions" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Let’s start by simulating data coming from two experimental conditions. The
+first dataset is going to simulate a 10hz phase &lt;-&gt; 120hz amplitude
+coupling while the second dataset will not include any coupling (random data)</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># create the first dataset with a 10hz &lt;-&gt; 100hz coupling</span>
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">30</span>   <span class="c1"># number of datasets</span>
+<span class="n">sf</span> <span class="o">=</span> <span class="mf">512.</span>       <span class="c1"># sampling frequency</span>
+<span class="n">n_times</span> <span class="o">=</span> <span class="mi">4000</span>  <span class="c1"># Number of time points</span>
+<span class="n">x_1</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">pac_signals_wavelet</span><span class="p">(</span><span class="n">sf</span><span class="o">=</span><span class="n">sf</span><span class="p">,</span> <span class="n">f_pha</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">2.</span><span class="p">,</span>
+                             <span class="n">n_epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="n">n_times</span><span class="p">)</span>
+<span class="c1"># create a second random dataset without any coupling</span>
+<span class="n">x_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_times</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="compute-the-single-trial-pac-on-both-datasets">
+<h2>Compute the single trial PAC on both datasets<a class="headerlink" href="#compute-the-single-trial-pac-on-both-datasets" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>once the datasets created, we can now extract the PAC, computed across
+time-points for each trials and across several phase and amplitude
+frequencies</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># create the pac object. Use the Gaussian-Copula PAC</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Pac</span><span class="p">(</span><span class="n">idpac</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">f_pha</span><span class="o">=</span><span class="s1">&#39;hres&#39;</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="s1">&#39;hres&#39;</span><span class="p">,</span> <span class="n">dcomplex</span><span class="o">=</span><span class="s1">&#39;wavelet&#39;</span><span class="p">)</span>
+<span class="c1"># compute pac for both dataset</span>
+<span class="n">pac_1</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filterfit</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_1</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">pac_2</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filterfit</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_2</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="correct-for-multiple-comparisons-using-a-cluster-based-approach">
+<h2>Correct for multiple-comparisons using a cluster-based approach<a class="headerlink" href="#correct-for-multiple-comparisons-using-a-cluster-based-approach" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Then, we perform the cluster-based correction for multiple comparisons
+between the PAC coming from the two conditions. To this end we use the
+Python package MNE-Python and in particular, the function
+<code class="xref py py-func docutils literal notranslate"><span class="pre">mne.stats.permutation_cluster_test()</span></code></p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># mne requires that the first is represented by the number of trials (n_epochs)</span>
+<span class="c1"># Therefore, we transpose the output PACs of both conditions</span>
+<span class="n">pac_r1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">pac_1</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">pac_r2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">pac_2</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="n">n_perm</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># number of permutations</span>
+<span class="n">tail</span> <span class="o">=</span> <span class="mi">1</span>       <span class="c1"># only inspect the upper tail of the distribution</span>
+<span class="c1"># perform the correction</span>
+<span class="n">t_obs</span><span class="p">,</span> <span class="n">clusters</span><span class="p">,</span> <span class="n">cluster_p_values</span><span class="p">,</span> <span class="n">h0</span> <span class="o">=</span> <span class="n">permutation_cluster_test</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pac_r1</span><span class="p">,</span> <span class="n">pac_r2</span><span class="p">],</span> <span class="n">n_permutations</span><span class="o">=</span><span class="n">n_perm</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="n">tail</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Using a threshold of 4.006873
+stat_fun(H1): min=0.000001 max=68.927497
+Running initial clustering
+Found 10 clusters
+Permuting 999 times...
+
+  0%|          |  : 0/999 [00:00&lt;?,       ?it/s]
+  2%|1         |  : 19/999 [00:00&lt;00:01,  554.75it/s]
+  4%|3         |  : 39/999 [00:00&lt;00:01,  556.44it/s]
+  6%|5         |  : 59/999 [00:00&lt;00:01,  558.11it/s]
+  8%|8         |  : 80/999 [00:00&lt;00:01,  560.96it/s]
+ 10%|#         |  : 101/999 [00:00&lt;00:01,  563.50it/s]
+ 12%|#2        |  : 123/999 [00:00&lt;00:01,  567.32it/s]
+ 14%|#4        |  : 144/999 [00:00&lt;00:01,  569.72it/s]
+ 16%|#6        |  : 164/999 [00:00&lt;00:01,  570.67it/s]
+ 18%|#8        |  : 184/999 [00:00&lt;00:01,  571.70it/s]
+ 20%|##        |  : 202/999 [00:00&lt;00:01,  569.52it/s]
+ 22%|##2       |  : 221/999 [00:00&lt;00:01,  569.04it/s]
+ 24%|##4       |  : 240/999 [00:00&lt;00:01,  568.65it/s]
+ 26%|##6       |  : 260/999 [00:00&lt;00:01,  569.72it/s]
+ 28%|##8       |  : 280/999 [00:00&lt;00:01,  570.79it/s]
+ 30%|##9       |  : 298/999 [00:00&lt;00:01,  568.72it/s]
+ 32%|###1      |  : 319/999 [00:00&lt;00:01,  569.32it/s]
+ 34%|###4      |  : 340/999 [00:00&lt;00:01,  571.71it/s]
+ 36%|###6      |  : 360/999 [00:00&lt;00:01,  572.69it/s]
+ 39%|###9      |  : 390/999 [00:00&lt;00:01,  583.03it/s]
+ 42%|####2     |  : 421/999 [00:00&lt;00:00,  593.85it/s]
+ 45%|####4     |  : 447/999 [00:00&lt;00:00,  600.64it/s]
+ 47%|####7     |  : 470/999 [00:00&lt;00:00,  604.15it/s]
+ 49%|####9     |  : 494/999 [00:00&lt;00:00,  608.60it/s]
+ 52%|#####1    |  : 518/999 [00:00&lt;00:00,  612.96it/s]
+ 55%|#####4    |  : 546/999 [00:00&lt;00:00,  620.97it/s]
+ 57%|#####6    |  : 565/999 [00:00&lt;00:00,  617.61it/s]
+ 59%|#####9    |  : 590/999 [00:00&lt;00:00,  622.73it/s]
+ 61%|######1   |  : 610/999 [00:00&lt;00:00,  621.01it/s]
+ 64%|######3   |  : 639/999 [00:00&lt;00:00,  629.71it/s]
+ 66%|######6   |  : 660/999 [00:01&lt;00:00,  629.18it/s]
+ 68%|######8   |  : 681/999 [00:01&lt;00:00,  627.87it/s]
+ 70%|######9   |  : 698/999 [00:01&lt;00:00,  620.06it/s]
+ 72%|#######1  |  : 717/999 [00:01&lt;00:00,  616.75it/s]
+ 74%|#######3  |  : 737/999 [00:01&lt;00:00,  615.39it/s]
+ 76%|#######5  |  : 759/999 [00:01&lt;00:00,  616.92it/s]
+ 78%|#######8  |  : 781/999 [00:01&lt;00:00,  618.52it/s]
+ 80%|#######9  |  : 797/999 [00:01&lt;00:00,  609.13it/s]
+ 82%|########1 |  : 817/999 [00:01&lt;00:00,  608.16it/s]
+ 84%|########3 |  : 837/999 [00:01&lt;00:00,  607.07it/s]
+ 86%|########5 |  : 856/999 [00:01&lt;00:00,  604.50it/s]
+ 88%|########7 |  : 876/999 [00:01&lt;00:00,  603.85it/s]
+ 90%|########9 |  : 896/999 [00:01&lt;00:00,  603.21it/s]
+ 92%|#########1|  : 916/999 [00:01&lt;00:00,  602.60it/s]
+ 94%|#########3|  : 937/999 [00:01&lt;00:00,  603.45it/s]
+ 96%|#########5|  : 958/999 [00:01&lt;00:00,  604.15it/s]
+ 98%|#########8|  : 980/999 [00:01&lt;00:00,  606.25it/s]
+100%|##########|  : 999/999 [00:01&lt;00:00,  608.75it/s]
+100%|##########|  : 999/999 [00:01&lt;00:00,  627.95it/s]
+Computing cluster p-values
+Done.
+</pre></div>
+</div>
+</div>
+<div class="section" id="plot-the-significant-clusters">
+<h2>Plot the significant clusters<a class="headerlink" href="#plot-the-significant-clusters" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Finally, we plot the significant clusters. To this end, we used an elegant
+solution proposed by MNE where the non significant part appears using a
+gray scale colormap while significant clusters are going to be color coded.</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># create new stats image with only significant clusters</span>
+<span class="n">t_obs_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">t_obs</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">p_val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">clusters</span><span class="p">,</span> <span class="n">cluster_p_values</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">p_val</span> <span class="o">&lt;=</span> <span class="mf">0.001</span><span class="p">:</span>
+        <span class="n">t_obs_plot</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">t_obs</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+        <span class="n">t_obs</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+<span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Cluster-based corrected differences</span><span class="se">\n</span><span class="s1">between cond 1 and 2&#39;</span>
+<span class="n">p</span><span class="o">.</span><span class="n">comodulogram</span><span class="p">(</span><span class="n">t_obs</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">comodulogram</span><span class="p">(</span><span class="n">t_obs_plot</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_plot_compare_cond_cluster_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_compare_cond_cluster_001.png" />
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  21.134 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-stats-plot-compare-cond-cluster-py">
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/adb6d4bb25e242638fd01f4411e7543f/plot_compare_cond_cluster.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_compare_cond_cluster.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/c7ece4cc20f5cf3cc03e97aea8df17f1/plot_compare_cond_cluster.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_compare_cond_cluster.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+    <hr>
+    <footer>
+        <div class="container">
+            <img src="../../_static/baniere.png" alt="Ban" height="80">
+        </div>
+        <br>
+        <div class="container">
+            <ul class="list-inline">
+                <li style="font-weight:bold"><a href="../../genindex.html">Index</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="https://github.com/EtienneCmb/tensorpac">Github</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../../contributors.html">Contributors</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../../community.html">Community</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../../cite.html">Citation</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../../references.html">References</a></li>
+            </ul>
+         </div>
+        <!-- <br> -->
+        <p>&copy; Copyright 2019, Etienne Combrisson.</p>
+    </footer>
+
+  </body>
+</html>
