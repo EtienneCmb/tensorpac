@@ -37,7 +37,7 @@ class TestMethods(object):
         return meths
 
     def test_pacstr(self):
-        """Test getting pas string name."""
+        """Test getting pac string name."""
         for p in n_pac_range:
             for s in n_sur_range:
                 for n in n_norm_range:

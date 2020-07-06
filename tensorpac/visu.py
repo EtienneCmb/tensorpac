@@ -137,6 +137,7 @@ class _PacVisual(object):
 
         # Add levels :
         if levels is not None:
+            levels = [levels] if isinstance(levels, (int, float)) else levels
             plt.contour(pvalues, extent=[xvec[0], xvec[-1], yvec[0], yvec[-1]],
                         levels=levels, cmap=levelcmap)
 
