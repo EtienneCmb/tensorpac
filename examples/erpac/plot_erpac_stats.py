@@ -28,8 +28,8 @@ import matplotlib.pyplot as plt
 n_epochs = 300
 n_times = 1000
 sf = 1000.
-x1, tvec = pac_signals_wavelet(f_pha=10, f_amp=100, n_epochs=n_epochs, noise=2,
-                               n_times=n_times, sf=sf)
+x1, tvec = pac_signals_wavelet(f_pha=10, f_amp=100, n_epochs=n_epochs,
+                               noise=.8, n_times=n_times, sf=sf)
 
 # Second signal : one second of random noise
 x2 = np.random.rand(n_epochs, 1000)
@@ -48,10 +48,13 @@ time = np.arange(x.shape[1]) / sf
 # define an ERPAC object
 p = EventRelatedPac(f_pha=[9, 11], f_amp=(60, 140, 5, 1))
 
+# method for correcting p-values for multiple comparisons
+mcp = 'bonferroni'
 # extract phases and amplitudes
-erpac = p.filterfit(sf, x, method='gc', n_perm=20).squeeze()
-
+erpac = p.filterfit(sf, x, method='circular', mcp=mcp).squeeze()
+# get the p-values and squeeze unused dimensions
 pvalues = p.pvalues.squeeze()
+# set to nan everywhere it's not significant
 erpac[pvalues > .05] = np.nan
 
 vmin, vmax = np.nanmin(erpac), np.nanmax(erpac)

@@ -567,7 +567,7 @@ class EventRelatedPac(_PacObj, _PacVisual):
         logger.info("Event Related PAC object defined")
 
     def fit(self, pha, amp, method='circular', smooth=None, n_jobs=-1,
-            n_perm=None, p=.05, verbose=None):
+            n_perm=None, p=.05, mcp='fdr', verbose=None):
         """Compute the Event-Related Phase-Amplitude Coupling (ERPAC).
 
         The ERPAC :cite:`voytek2013method` is used to measure PAC across trials
@@ -592,6 +592,10 @@ class EventRelatedPac(_PacObj, _PacVisual):
             swapping phase trials
         p : float | 0.05
             Statistical threshold for the gaussian-copula ('gc') method
+        mcp : {'fdr', 'bonferroni'}
+            Correct the p-values for multiple comparisons. This is needed when
+            using the circular ERPAC (:cite:`voytek2013method`). Note that the
+            correction is performed using MNE-Python.
 
         Returns
         -------
@@ -609,6 +613,7 @@ class EventRelatedPac(_PacObj, _PacVisual):
             self.method = "ERPAC (Voytek et al. 2013)"
             logger.info(f"    Compute {self.method}")
             self._erpac, self._pvalues = erpac(pha, amp)
+            self.infer_pvalues(p=p, mcp=mcp)
         elif method == 'gc':
             self.method = "Gaussian-Copula ERPAC (Ince et al. 2017)"
             logger.info(f"    Compute {self.method}")
@@ -625,7 +630,8 @@ class EventRelatedPac(_PacObj, _PacVisual):
         return self.erpac
 
     def filterfit(self, sf, x_pha, x_amp=None, method='circular', smooth=None,
-                  n_perm=None, p=.05, edges=None, n_jobs=-1, verbose=None):
+                  n_perm=None, p=.05, mcp='fdr', edges=None, n_jobs=-1,
+                  verbose=None):
         """Extract phases, amplitudes and compute ERPAC.
 
         Parameters
@@ -653,6 +659,10 @@ class EventRelatedPac(_PacObj, _PacVisual):
             swapping phase trials
         p : float | 0.05
             Statistical threshold for the gaussian-copula ('gc') method
+        mcp : {'fdr', 'bonferroni'}
+            Correct the p-values for multiple comparisons. This is needed when
+            using the circular ERPAC (:cite:`voytek2013method`). Note that the
+            correction is performed using MNE-Python.
         edges : int | None
             Number of samples to discard to avoid edge effects due to filtering
 
@@ -670,15 +680,19 @@ class EventRelatedPac(_PacObj, _PacVisual):
         amp = self.filter(sf, x_amp, ftype='amplitude', **kw)
         # compute erpac
         return self.fit(pha, amp, method=method, smooth=smooth, n_jobs=n_jobs,
-                        n_perm=n_perm, p=p, verbose=verbose)
+                        n_perm=n_perm, p=p, mcp=mcp, verbose=verbose)
 
-    def infer_pvalues(self, p=0.05):
+    def infer_pvalues(self, p=0.05, mcp='fdr'):
         """Infer p-values based on surrogate distribution.
 
         Parameters
         ----------
         p : float | 0.05
             Statistical threshold
+        mcp : {'fdr', 'bonferroni'}
+            Correct the p-values for multiple comparisons. This is needed when
+            using the circular ERPAC (:cite:`voytek2013method`). Note that the
+            correction is performed using MNE-Python.
 
         Returns
         -------
@@ -689,9 +703,20 @@ class EventRelatedPac(_PacObj, _PacVisual):
         # check that pac and surrogates has already been computed
         assert hasattr(self, 'erpac'), ("You should compute ERPAC first. Use "
                                         "the `fit` method")
-        assert hasattr(self, 'surrogates'), "No surrogates computed"
+        assert mcp in ['fdr', 'bonferroni']
 
-        self._pvalues = self._infer_pvalues(self.erpac, self.surrogates, p=p)
+        # correct the p-values for multiple comparisons (Voytek's only)
+        if "Voytek" in self.method:
+            logger.info(f"    Correct p-values for multiple-comparisons using "
+                        f"{mcp} correction of MNE-Python")
+            from mne.stats import fdr_correction, bonferroni_correction
+            fcn = fdr_correction if mcp is 'fdr' else bonferroni_correction
+            _, self._pvalues = fcn(self._pvalues, alpha=p)
+        else:
+            assert hasattr(self, 'surrogates'), "No surrogates computed"
+            # compute the p-values using maxstat (gcPAC)
+            self._pvalues = self._infer_pvalues(self.erpac, self.surrogates,
+                                                p=p)
 
         return self._pvalues
 
