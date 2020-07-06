@@ -19,20 +19,7 @@ For the visualization, we used a comodulogram.
     :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
 
- Out:
-
- .. code-block:: none
-
-    /home/circleci/project/tensorpac/visu.py:141: UserWarning: No contour levels were found within the data range.
-      levels=levels, cmap=levelcmap)
-
-
-
-
-
-|
 
 
 .. code-block:: default
@@ -65,7 +52,7 @@ For the visualization, we used a comodulogram.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  2.089 seconds)
+   **Total running time of the script:** ( 0 minutes  2.052 seconds)
 
 
 .. _sphx_glr_download_auto_examples_pac_plot_pvalues.py:

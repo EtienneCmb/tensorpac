@@ -355,6 +355,34 @@
         <span class="n">pha</span> <span class="o">=</span> <span class="p">(</span><span class="n">pha</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
         <span class="k">return</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span>
 
+    <span class="k">def</span> <span class="nf">_infer_pvalues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">,</span> <span class="n">perm</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Global function for statistical inferences.</span>
+
+<span class="sd">        In order to work this method requires :</span>
+
+<span class="sd">            * effect = array like of shape (n_dims...)</span>
+<span class="sd">            * perm = array like of shape (n_perm, n_dims...)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="n">effect</span><span class="p">,</span> <span class="n">perm</span><span class="p">)])</span>
+        <span class="n">n_perm</span> <span class="o">=</span> <span class="n">perm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># compute the minimum number of required permutations</span>
+        <span class="n">n_perm_req</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">10.</span> <span class="o">/</span> <span class="n">p</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n_perm</span> <span class="o">&lt;</span> <span class="n">n_perm_req</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;For inferences at p&lt;</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">, it is recommended to per&quot;</span>
+                           <span class="sa">f</span><span class="s2">&quot;form at least n_perm=</span><span class="si">{</span><span class="n">n_perm_req</span><span class="si">}</span><span class="s2"> permutations&quot;</span><span class="p">)</span>
+
+        <span class="c1"># ---------------------------------------------------------------------</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Infer p-values at p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># computes the pvalues</span>
+        <span class="n">max_p</span> <span class="o">=</span> <span class="n">perm</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_perm</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">nb_over</span> <span class="o">=</span> <span class="p">(</span><span class="n">effect</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">max_p</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">pvalues</span> <span class="o">=</span> <span class="n">nb_over</span> <span class="o">/</span> <span class="n">n_perm</span>
+        <span class="c1"># non-significant p-values are set to 1. and min(pvalues) = 1 / n_perm</span>
+        <span class="n">pvalues</span><span class="p">[</span><span class="n">pvalues</span> <span class="o">&gt;=</span> <span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+        <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">n_perm</span><span class="p">,</span> <span class="n">pvalues</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">pvalues</span>
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">f_pha</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Vector of phases of shape (n_pha, 2).&quot;&quot;&quot;</span>
@@ -652,7 +680,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        p : float | 0.05</span>
-<span class="sd">            Statistical threshold</span>
+<span class="sd">            Significiency threshold</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -664,21 +692,12 @@
         <span class="k">assert</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;pac&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;You should compute PAC first. Use the &quot;</span>
                                       <span class="s2">&quot;`fit` method&quot;</span><span class="p">)</span>
         <span class="k">assert</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;surrogates&#39;</span><span class="p">),</span> <span class="s2">&quot;No surrogates computed&quot;</span>
-        <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pac</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">surrogates</span><span class="p">)])</span>
-        <span class="n">n_perm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">surrogates</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="c1"># ---------------------------------------------------------------------</span>
         <span class="c1"># mean pac and surrogates across trials</span>
         <span class="n">m_pac</span><span class="p">,</span> <span class="n">m_surro</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pac</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">surrogates</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">m_pac</span><span class="p">)</span>
-        <span class="c1"># infer pvalues</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Infer p-values at p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">max_dist</span> <span class="o">=</span> <span class="n">m_surro</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_perm</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">max_dist</span><span class="p">,</span> <span class="mf">100.</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                           <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span><span class="p">[</span><span class="n">m_pac</span> <span class="o">&gt;</span> <span class="n">th</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pvalues</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_infer_pvalues</span><span class="p">(</span><span class="n">m_pac</span><span class="p">,</span> <span class="n">m_surro</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span></div>
 
     <span class="k">def</span> <span class="nf">_idcheck</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idpac</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check the idpac parameter.&quot;&quot;&quot;</span>
@@ -892,16 +911,10 @@
         <span class="k">assert</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;erpac&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;You should compute ERPAC first. Use &quot;</span>
                                         <span class="s2">&quot;the `fit` method&quot;</span><span class="p">)</span>
         <span class="k">assert</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;surrogates&#39;</span><span class="p">),</span> <span class="s2">&quot;No surrogates computed&quot;</span>
-        <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">erpac</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">surrogates</span><span class="p">)])</span>
-        <span class="n">n_perm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">surrogates</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Infer p-values at p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">surrogates</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_perm</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
-                           <span class="mf">100.</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">erpac</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">erpac</span> <span class="o">&gt;</span> <span class="n">th</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pvalues</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_infer_pvalues</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">erpac</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">surrogates</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">erpac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
