@@ -132,8 +132,8 @@ class TestPac(object):
         b_amp = np.abs(p.yvec.reshape(-1, 1) - np.array([[95, 105]])).argmin(0)
         gt[b_amp[0]:b_amp[1] + 1, b_pha[0]:b_pha[1] + 1] = True
 
-        plt.figure(figsize=(18, 5))
-        plt.subplot(1, 6, 1)
+        plt.figure(figsize=(12, 9))
+        plt.subplot(2, 3, 1)
         p.comodulogram(gt, title='Gound truth', cmap='magma', colorbar=False)
         # loop over implemented methods
         for i, k in enumerate([1, 2, 3, 5, 6]):
@@ -144,15 +144,19 @@ class TestPac(object):
             is_coupling = pval <= .05
             # count the number of correct pixels. This includes both true
             # positives and true negatives
-            trpr = (is_coupling == gt).sum() / n_pix
-            assert trpr > .95
+            acc = 100 * (is_coupling == gt).sum() / n_pix
+            assert acc > 95.
             # build title of the figure (for sanity check)
             meth = p.method.replace(' (', '\n(')
-            title = f"Method={meth}\nPrecision={np.around(trpr * 100, 2)}"
+            title = f"Method={meth}\nAccuracy={np.around(acc, 2)}%"
+            # set to nan everywhere it's not significant
+            xpac[~is_coupling] = np.nan
+            vmin, vmax = np.nanmin(xpac), np.nanmax(xpac)
             # plot the results
-            plt.subplot(1, 6, i + 2)
-            p.comodulogram(xpac, pvalues=pval, colorbar=False,
+            plt.subplot(2, 3, i + 2)
+            p.comodulogram(xpac, colorbar=False, vmin=vmin, vmax=vmax,
                            title=title)
+            plt.ylabel(''), plt.xlabel('')
         plt.tight_layout()
         plt.show()  # show on demand
 
@@ -191,35 +195,41 @@ class TestErpac(object):
         """Test function test_functional_pac."""
         # erpac simultation
         n_epochs, n_times, sf, edges = 400, 1000, 512., 50
-        x, tvec = pac_signals_wavelet(f_pha=10, f_amp=100, n_epochs=n_epochs,
-                                      noise=.1, n_times=n_times, sf=sf)
+        x, times = pac_signals_wavelet(f_pha=10, f_amp=100, n_epochs=n_epochs,
+                                       noise=.1, n_times=n_times, sf=sf)
+        times = times[edges:-edges]
         # phase / amplitude extraction (single time)
         p = EventRelatedPac(f_pha=[8, 12], f_amp=(30, 200, 5, 5),
                             dcomplex='wavelet', width=12)
         kw = dict(n_jobs=1, edges=edges)
         phases = p.filter(sf, x, ftype='phase', **kw)
         amplitudes = p.filter(sf, x, ftype='amplitude', **kw)
-        gt_x = np.random.normal(100, 20, size=(len(p.yvec),))
+        n_amp = len(p.yvec)
         # generate a normal distribution
-        gt = normal(p.yvec, 100, 10)
-        gt /= gt.max()
+        gt = np.zeros((n_amp, n_times - 2 * edges))
+        b_amp = np.abs(p.yvec.reshape(-1, 1) - np.array([[80, 120]])).argmin(0)
+        gt[b_amp[0]:b_amp[1] + 1, :] = True
 
-        plt.figure()
+        plt.figure(figsize=(16, 5))
+        plt.subplot(131)
+        p.pacplot(gt, times, p.yvec, title='Ground truth', cmap='magma')
+
         for n_meth, meth in enumerate(['circular', 'gc']):
-            # compute erpac
-            erpac = p.fit(phases, amplitudes, method=meth).squeeze()
-            ermean = erpac.mean(1)
-            ermean -= ermean.min()
-            ermean /= ermean.max()
-            # test wether mean across time points are normally distributed
-            _, pval = stats.normaltest(ermean)
-            assert pval < .05
-
-            plt.subplot(1, 2, n_meth + 1)
-            plt.plot(p.yvec, gt, label="Prior")
-            plt.plot(p.yvec, ermean, label="Posterior")
-            plt.title(f"Method={meth}")
-            plt.legend()
+            # compute erpac + p-values
+            erpac = p.fit(phases, amplitudes, method=meth,
+                          mcp='bonferroni', n_perm=30).squeeze()
+            pvalues = p.pvalues.squeeze()
+            # find everywhere erpac is significant + compare to ground truth
+            is_signi = pvalues < .05
+            erpac[~is_signi] = np.nan
+            # computes accuracy
+            acc = 100 * (is_signi == gt).sum() / (n_amp * n_times)
+            assert acc > 80.
+            # plot the result
+            title = f"Method={p.method}\nAccuracy={np.around(acc, 2)}%"
+            plt.subplot(1, 3, n_meth + 2)
+            p.pacplot(erpac, times, p.yvec, title=title)
+        plt.tight_layout()
         plt.show()
 
 
