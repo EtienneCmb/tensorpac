@@ -439,7 +439,7 @@ class Pac(_PacObj, _PacPlt):
         assert x_pha.shape == x_amp.shape, ("Inputs `x_pha` and `x_amp` must "
                                             "have the same shape.")
         # Extract phase (npha, ...) and amplitude (namp, ...) :
-        logger.info(f"    Extract phases (n_pha={len(self.xvec)}) and "
+        logger.info(f"    extract phases (n_pha={len(self.xvec)}) and "
                     f"amplitudes (n_amps={len(self.yvec)})")
         kw = dict(keepfilt=False, edges=edges, n_jobs=1)
         pha = self.filter(sf, x_pha, 'phase', **kw)
