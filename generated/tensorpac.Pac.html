@@ -128,7 +128,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/index.html#phase-amplitude-coupling">Phase-Amplitude coupling</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_readme.html">README example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_pvalues.html">Compute p-values</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_compare_surrogates.html">Compare surrogate methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_compare_normalizations.html">Compare normalizations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_compare_filtering.html">Compare filtering properties</a></li>
@@ -155,6 +154,11 @@
 <li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_stats_stationary.html#define-a-random-dataset">Define a random dataset</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_stats_stationary.html#compute-the-statistical-test">Compute the statistical test</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_stats_stationary.html#plot-each-trial">Plot each trial</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/stats/plot_pvalues.html">Compute and plot the p-values</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_pvalues.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_pvalues.html#compute-true-pac-estimation-and-surrogates-distribution">Compute true PAC estimation and surrogates distribution</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/stats/plot_compare_cond_cluster.html">Compare PAC of two experimental conditions with cluster-based statistics</a><ul>
@@ -251,18 +255,18 @@ refer</p>
 <li><p>First digit : refer to the pac method</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>1 : Mean Vector Length (MVL) <a class="bibtex reference internal" href="../references.html#canolty2006high" id="id1">[3]</a>
+<li><p>1 : Mean Vector Length (MVL) <a class="bibtex reference internal" href="../references.html#canolty2006high" id="id1">[4]</a>
 (see <a class="reference internal" href="tensorpac.methods.mean_vector_length.html#tensorpac.methods.mean_vector_length" title="tensorpac.methods.mean_vector_length"><code class="xref py py-func docutils literal notranslate"><span class="pre">tensorpac.methods.mean_vector_length()</span></code></a>)</p></li>
-<li><p>2 : Modulation Index (MI) <a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id2">[9]</a>
+<li><p>2 : Modulation Index (MI) <a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id2">[10]</a>
 (see <a class="reference internal" href="tensorpac.methods.modulation_index.html#tensorpac.methods.modulation_index" title="tensorpac.methods.modulation_index"><code class="xref py py-func docutils literal notranslate"><span class="pre">tensorpac.methods.modulation_index()</span></code></a>)</p></li>
-<li><p>3 : Heights Ratio (HR) <a class="bibtex reference internal" href="../references.html#lakatos2005oscillatory" id="id3">[7]</a>
+<li><p>3 : Heights Ratio (HR) <a class="bibtex reference internal" href="../references.html#lakatos2005oscillatory" id="id3">[8]</a>
 (see <a class="reference internal" href="tensorpac.methods.heights_ratio.html#tensorpac.methods.heights_ratio" title="tensorpac.methods.heights_ratio"><code class="xref py py-func docutils literal notranslate"><span class="pre">tensorpac.methods.heights_ratio()</span></code></a>)</p></li>
-<li><p>4 : ndPAC <a class="bibtex reference internal" href="../references.html#ozkurt2012statistically" id="id4">[11]</a>
+<li><p>4 : ndPAC <a class="bibtex reference internal" href="../references.html#ozkurt2012statistically" id="id4">[12]</a>
 (see <a class="reference internal" href="tensorpac.methods.norm_direct_pac.html#tensorpac.methods.norm_direct_pac" title="tensorpac.methods.norm_direct_pac"><code class="xref py py-func docutils literal notranslate"><span class="pre">tensorpac.methods.norm_direct_pac()</span></code></a>)</p></li>
 <li><p>5 : Phase-Locking Value (PLV)
-<a class="bibtex reference internal" href="../references.html#lachaux1999measuring" id="id5">[6]</a><a class="bibtex reference internal" href="../references.html#penny2008testing" id="id6">[8]</a>
+<a class="bibtex reference internal" href="../references.html#lachaux1999measuring" id="id5">[7]</a><a class="bibtex reference internal" href="../references.html#penny2008testing" id="id6">[9]</a>
 (see <a class="reference internal" href="tensorpac.methods.phase_locking_value.html#tensorpac.methods.phase_locking_value" title="tensorpac.methods.phase_locking_value"><code class="xref py py-func docutils literal notranslate"><span class="pre">tensorpac.methods.phase_locking_value()</span></code></a>)</p></li>
-<li><p>6 : Gaussian Copula PAC (GCPAC) <a class="bibtex reference internal" href="../references.html#ince2017statistical" id="id7">[4]</a>
+<li><p>6 : Gaussian Copula PAC (GCPAC) <a class="bibtex reference internal" href="../references.html#ince2017statistical" id="id7">[5]</a>
 (see <a class="reference internal" href="tensorpac.methods.gauss_cop_pac.html#tensorpac.methods.gauss_cop_pac" title="tensorpac.methods.gauss_cop_pac"><code class="xref py py-func docutils literal notranslate"><span class="pre">tensorpac.methods.gauss_cop_pac()</span></code></a>)</p></li>
 </ul>
 </div></blockquote>
@@ -272,12 +276,12 @@ refer</p>
 <div><ul class="simple">
 <li><p>0 : No surrogates</p></li>
 <li><p>1 : Swap phase / amplitude across trials
-<a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id8">[9]</a>
+<a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id8">[10]</a>
 (see <a class="reference internal" href="tensorpac.methods.swap_pha_amp.html#tensorpac.methods.swap_pha_amp" title="tensorpac.methods.swap_pha_amp"><code class="xref py py-func docutils literal notranslate"><span class="pre">tensorpac.methods.swap_pha_amp()</span></code></a>)</p></li>
 <li><p>2 : Swap amplitude time blocks
-<a class="bibtex reference internal" href="../references.html#bahramisharif2013propagating" id="id9">[1]</a>
+<a class="bibtex reference internal" href="../references.html#bahramisharif2013propagating" id="id9">[2]</a>
 (see <a class="reference internal" href="tensorpac.methods.swap_blocks.html#tensorpac.methods.swap_blocks" title="tensorpac.methods.swap_blocks"><code class="xref py py-func docutils literal notranslate"><span class="pre">tensorpac.methods.swap_blocks()</span></code></a>)</p></li>
-<li><p>3 : Time lag <a class="bibtex reference internal" href="../references.html#canolty2006high" id="id10">[3]</a>
+<li><p>3 : Time lag <a class="bibtex reference internal" href="../references.html#canolty2006high" id="id10">[4]</a>
 (see <a class="reference internal" href="tensorpac.methods.time_lag.html#tensorpac.methods.time_lag" title="tensorpac.methods.time_lag"><code class="xref py py-func docutils literal notranslate"><span class="pre">tensorpac.methods.time_lag()</span></code></a>)</p></li>
 </ul>
 </div></blockquote>
@@ -314,12 +318,12 @@ respectively for low, middle and high resolution vectors</p></li>
 <dt><strong>cycle</strong><span class="classifier">tuple | (3, 6)</span></dt><dd><p>Control the number of cycles for filtering (only if dcomplex is
 ‘hilbert’). Should be a tuple of integers where the first one
 refers to the number of cycles for the phase and the second for the
-amplitude <a class="bibtex reference internal" href="../references.html#bahramisharif2013propagating" id="id11">[1]</a>.</p>
+amplitude <a class="bibtex reference internal" href="../references.html#bahramisharif2013propagating" id="id11">[2]</a>.</p>
 </dd>
 <dt><strong>width</strong><span class="classifier">int | 7</span></dt><dd><p>Width of the Morlet’s wavelet.</p>
 </dd>
 <dt><strong>n_bins</strong><span class="classifier">int | 18</span></dt><dd><p>Number of bins for the KLD and HR PAC method
-<a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id12">[9]</a><a class="bibtex reference internal" href="../references.html#lakatos2005oscillatory" id="id13">[7]</a></p>
+<a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id12">[10]</a><a class="bibtex reference internal" href="../references.html#lakatos2005oscillatory" id="id13">[8]</a></p>
 </dd>
 </dl>
 </dd>

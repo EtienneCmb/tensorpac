@@ -128,7 +128,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/index.html#phase-amplitude-coupling">Phase-Amplitude coupling</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_readme.html">README example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_pvalues.html">Compute p-values</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_compare_surrogates.html">Compare surrogate methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_compare_normalizations.html">Compare normalizations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_compare_filtering.html">Compare filtering properties</a></li>
@@ -155,6 +154,11 @@
 <li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_stats_stationary.html#define-a-random-dataset">Define a random dataset</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_stats_stationary.html#compute-the-statistical-test">Compute the statistical test</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_stats_stationary.html#plot-each-trial">Plot each trial</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/stats/plot_pvalues.html">Compute and plot the p-values</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_pvalues.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_pvalues.html#compute-true-pac-estimation-and-surrogates-distribution">Compute true PAC estimation and surrogates distribution</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/stats/plot_compare_cond_cluster.html">Compare PAC of two experimental conditions with cluster-based statistics</a><ul>
@@ -240,7 +244,7 @@
 <p>This function assumes that phases and amplitudes have already been
 prepared i.e. phases should be represented in a unit circle
 (np.c_[np.sin(pha), np.cos(pha)]) and both inputs should also have been
-copnormed <a class="bibtex reference internal" href="../references.html#ince2017statistical" id="id1">[4]</a>.</p>
+copnormed <a class="bibtex reference internal" href="../references.html#ince2017statistical" id="id1">[5]</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">

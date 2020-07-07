@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Identify stationary time-series using unit root test &#8212; Tensorpac 0.6.3 documentation</title>
+    <title>Compute and plot the p-values &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
@@ -16,8 +16,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Compute and plot the p-values" href="plot_pvalues.html" />
-    <link rel="prev" title="Event-Related Phase Amplitude Coupling" href="../erpac/plot_erpac.html" />
+    <link rel="next" title="Compare PAC of two experimental conditions with cluster-based statistics" href="plot_compare_cond_cluster.html" />
+    <link rel="prev" title="Identify stationary time-series using unit root test" href="plot_stats_stationary.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -150,15 +150,15 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#statistics">Statistics</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Identify stationary time-series using unit root test</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#define-a-random-dataset">Define a random dataset</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#compute-the-statistical-test">Compute the statistical test</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#plot-each-trial">Plot each trial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_stats_stationary.html">Identify stationary time-series using unit root test</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="plot_stats_stationary.html#define-a-random-dataset">Define a random dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_stats_stationary.html#compute-the-statistical-test">Compute the statistical test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_stats_stationary.html#plot-each-trial">Plot each trial</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="plot_pvalues.html">Compute and plot the p-values</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="plot_pvalues.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
-<li class="toctree-l4"><a class="reference internal" href="plot_pvalues.html#compute-true-pac-estimation-and-surrogates-distribution">Compute true PAC estimation and surrogates distribution</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Compute and plot the p-values</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compute-true-pac-estimation-and-surrogates-distribution">Compute true PAC estimation and surrogates distribution</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="plot_compare_cond_cluster.html">Compare PAC of two experimental conditions with cluster-based statistics</a><ul>
@@ -211,7 +211,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="../../_sources/auto_examples/stats/plot_stats_stationary.rst.txt"
+  <a href="../../_sources/auto_examples/stats/plot_pvalues.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -237,107 +237,102 @@
       
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-stats-plot-stats-stationary-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-stats-plot-pvalues-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="sphx-glr-auto-examples-stats-plot-stats-stationary-py">
-<span id="identify-stationary-time-series-using-unit-root-test"></span><h1>Identify stationary time-series using unit root test<a class="headerlink" href="#sphx-glr-auto-examples-stats-plot-stats-stationary-py" title="Permalink to this headline">¶</a></h1>
-<p>This example illustrates how to identify stationary time-series (i.e.
-time-series with constant statistical properties such as mean, variance etc.).
-Here, we are going to use the Augmented Dickey-Fuller test.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="kn">from</span> <span class="nn">tensorpac.stats</span> <span class="kn">import</span> <span class="n">test_stationarity</span>
+<div class="sphx-glr-example-title section" id="compute-and-plot-the-p-values">
+<span id="sphx-glr-auto-examples-stats-plot-pvalues-py"></span><h1>Compute and plot the p-values<a class="headerlink" href="#compute-and-plot-the-p-values" title="Permalink to this headline">¶</a></h1>
+<p>This example illustrates how to compute and plot the p-values. To this end,
+Tensorpac uses permutations to estimate the distribution of PAC that could be
+obtained by chance. Then, the true PAC estimation is compared with those
+surrogates in order to get the p-values.</p>
+<p>Note that the correction for multiple comparisons is automatically performed
+across all phases and amplitudes. Tensorpac uses the maximum statistics to
+perform this correction. Indeed, the permutations are computed for each
+(phase, amplitude) pairs. The p-values are then inferred using the maximum
+across all of the pairs.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorpac</span> <span class="kn">import</span> <span class="n">Pac</span>
+<span class="kn">from</span> <span class="nn">tensorpac.signals</span> <span class="kn">import</span> <span class="n">pac_signals_wavelet</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
-<div class="section" id="define-a-random-dataset">
-<h2>Define a random dataset<a class="headerlink" href="#define-a-random-dataset" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="simulate-artificial-coupling">
+<h2>Simulate artificial coupling<a class="headerlink" href="#simulate-artificial-coupling" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><p>Let first create a random dataset and change temporal properties</p>
+<div><p>first, we generate a single trial that contains a coupling between a 6z phase
+and a 90hz amplitude. By default, the returned dataset is organized as
+(n_epochs, n_times) where n_times is the number of time points and n_epochs
+is the number of trials</p>
 </div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">8</span>   <span class="c1"># number of epochs</span>
-<span class="n">n_times</span> <span class="o">=</span> <span class="mi">200</span>  <span class="c1"># number of time points</span>
-<span class="n">sf</span> <span class="o">=</span> <span class="mf">128.</span>
-
-<span class="c1"># create a reproducable random dataset</span>
-<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_times</span><span class="p">)</span>
-<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_times</span><span class="p">)</span> <span class="o">/</span> <span class="n">sf</span>
-
-<span class="c1"># if we run the test on this random dataset, every epochs are going to be found</span>
-<span class="c1"># as stationary as statistical properties are constant across time. Hence, we</span>
-<span class="c1"># can introduce some randomness into this dataset to illustrate the sensibility</span>
-<span class="c1"># of the test</span>
-
-<span class="n">titles</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;constant offset&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;increasing linear trend&quot;</span><span class="p">,</span>
-          <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;decreasing linear trend&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;constant oscillations&quot;</span><span class="p">,</span>
-          <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;offset on second half&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;divide by 2 first half amplitude&quot;</span><span class="p">,</span>
-          <span class="mi">6</span><span class="p">:</span> <span class="s2">&quot;modulated oscillations&quot;</span><span class="p">,</span> <span class="mi">7</span><span class="p">:</span> <span class="s2">&quot;random signal&quot;</span><span class="p">}</span>
-
-<span class="c1"># Epoch 0 : constant offset</span>
-<span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+=</span> <span class="mf">10.</span>
-<span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_times</span><span class="p">)</span>
-<span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n_times</span><span class="p">)</span>
-<span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">time</span><span class="p">)</span>
-<span class="n">data</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">:]</span> <span class="o">+=</span> <span class="mf">30.</span>
-<span class="n">data</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span> <span class="o">/=</span> <span class="mi">2</span>
-<span class="n">data</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">time</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n_times</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f_pha</span> <span class="o">=</span> <span class="mi">6</span>       <span class="c1"># frequency phase for the coupling</span>
+<span class="n">f_amp</span> <span class="o">=</span> <span class="mi">90</span>      <span class="c1"># frequency amplitude for the coupling</span>
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">1</span>    <span class="c1"># number of trials</span>
+<span class="n">n_times</span> <span class="o">=</span> <span class="mi">4000</span>  <span class="c1"># number of time points</span>
+<span class="n">sf</span> <span class="o">=</span> <span class="mf">512.</span>       <span class="c1"># sampling frequency</span>
+<span class="n">data</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">pac_signals_wavelet</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="n">f_pha</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="n">f_amp</span><span class="p">,</span> <span class="n">noise</span><span class="o">=.</span><span class="mi">8</span><span class="p">,</span>
+                                 <span class="n">n_epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="n">n_times</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="n">sf</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="compute-the-statistical-test">
-<h2>Compute the statistical test<a class="headerlink" href="#compute-the-statistical-test" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="compute-true-pac-estimation-and-surrogates-distribution">
+<h2>Compute true PAC estimation and surrogates distribution<a class="headerlink" href="#compute-true-pac-estimation-and-surrogates-distribution" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><p>now, run the Augmented Dickey-Fuller test in order to identify which trials
-are statisticaly considered as stationary</p>
+<div><p>Now, we compute the PAC using multiple phases and amplitudes such as the
+distribution of surrogates. In this example, we used the method proposed by
+bahramisharif et al. 2013 <a class="bibtex reference internal" href="../../references.html#bahramisharif2013propagating" id="id1">[2]</a> and also
+recommended by Aru et al. 2015 <a class="bibtex reference internal" href="../../references.html#aru2015untangling" id="id2">[1]</a>. This method
+consists in swapping two time blocks of amplitudes cut at a random time
+point. Then, we used the method <a class="reference internal" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.infer_pvalues" title="tensorpac.Pac.infer_pvalues"><code class="xref py py-class docutils literal notranslate"><span class="pre">tensorpac.Pac.infer_pvalues</span></code></a> in order
+to get the corrected p-values across all possible (phase, amplitude)
+frequency pairs.</p>
 </div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">test_stationarity</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</pre></div>
-</div>
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>    Epochs  ...   CV (1%)
-0  epoch 0  ... -3.463815
-1  epoch 1  ... -3.465244
-2  epoch 2  ... -3.466005
-3  epoch 3  ... -3.466398
-4  epoch 4  ... -3.463645
-5  epoch 5  ... -3.465059
-6  epoch 6  ... -3.466398
-7  epoch 7  ... -3.463645
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># define the Pac object</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Pac</span><span class="p">(</span><span class="n">idpac</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">f_pha</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">),</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="c1"># compute true pac and surrogates</span>
+<span class="n">n_perm</span> <span class="o">=</span> <span class="mi">200</span>  <span class="c1"># number of permutations</span>
+<span class="n">xpac</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filterfit</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="n">n_perm</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+<span class="c1"># get the corrected p-values</span>
+<span class="n">pval</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">infer_pvalues</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="c1"># get the mean pac values where it&#39;s detected as significant</span>
+<span class="n">xpac_smean</span> <span class="o">=</span> <span class="n">xpac</span><span class="p">[</span><span class="n">pval</span> <span class="o">&lt;</span> <span class="o">.</span><span class="mi">05</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
-[8 rows x 6 columns]
-</pre></div>
-</div>
-</div>
-<div class="section" id="plot-each-trial">
-<h2>Plot each trial<a class="headerlink" href="#plot-each-trial" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><p>finally, plot color-coded time-series (green : stationary,
-red: non-stationary)</p>
-</div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="kc">True</span><span class="p">:</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">}</span>
+<span class="c1"># if you want to see how the surrogates looks like, you can have to access</span>
+<span class="c1"># using :class:`tensorpac.Pac.surrogates`</span>
+<span class="n">surro</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">surrogates</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Surrogates shape (n_perm, n_amp, n_pha) : </span><span class="si">{</span><span class="n">surro</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># get the maximum of the surrogates across (phase, amplitude) pairs</span>
+<span class="n">surro_max</span> <span class="o">=</span> <span class="n">surro</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 
-<span class="n">is_stationary</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Stationary&quot;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">comodulogram</span><span class="p">(</span><span class="n">xpac</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Spectral_r&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">pvalues</span><span class="o">=</span><span class="n">pval</span><span class="p">,</span>
+               <span class="n">levels</span><span class="o">=.</span><span class="mi">05</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">is_stationary</span><span class="p">[</span><span class="n">k</span><span class="p">]])</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">comodulogram</span><span class="p">(</span><span class="n">pval</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;P-values&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bwr_r&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">n_perm</span><span class="p">,</span>
+               <span class="n">vmax</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">over</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">surro_max</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Corrected distribution of surrogates&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">xpac_smean</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="../../_images/sphx_glr_plot_stats_stationary_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_stats_stationary_001.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  2.173 seconds)</p>
-<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-stats-plot-stats-stationary-py">
+<img alt="../../_images/sphx_glr_plot_pvalues_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_pvalues_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Surrogates shape (n_perm, n_amp, n_pha) : (200, 55, 55)
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  7.958 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-stats-plot-pvalues-py">
 <div class="sphx-glr-download docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/3dfb9a99ba9eecaaa246e8e522cd5975/plot_stats_stationary.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_stats_stationary.py</span></code></a></p>
+<p><a class="reference download internal" download="" href="../../_downloads/9c6c042faee357eac58abf6fb9bbae78/plot_pvalues.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_pvalues.py</span></code></a></p>
 </div>
 <div class="sphx-glr-download docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/b2a4ab40aebab2fd20ec57f0efb904cd/plot_stats_stationary.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_stats_stationary.ipynb</span></code></a></p>
+<p><a class="reference download internal" download="" href="../../_downloads/375ab6a680067f5613d641d47af5c5ac/plot_pvalues.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_pvalues.ipynb</span></code></a></p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>

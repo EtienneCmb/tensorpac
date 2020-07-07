@@ -126,7 +126,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../../auto_examples/index.html">Examples</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/index.html#phase-amplitude-coupling">Phase-Amplitude coupling</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../auto_examples/pac/plot_readme.html">README example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/pac/plot_pvalues.html">Compute p-values</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../auto_examples/pac/plot_compare_surrogates.html">Compare surrogate methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../auto_examples/pac/plot_compare_normalizations.html">Compare normalizations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../auto_examples/pac/plot_compare_filtering.html">Compare filtering properties</a></li>
@@ -153,6 +152,11 @@
 <li class="toctree-l4"><a class="reference internal" href="../../auto_examples/stats/plot_stats_stationary.html#define-a-random-dataset">Define a random dataset</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../auto_examples/stats/plot_stats_stationary.html#compute-the-statistical-test">Compute the statistical test</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../auto_examples/stats/plot_stats_stationary.html#plot-each-trial">Plot each trial</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/stats/plot_pvalues.html">Compute and plot the p-values</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../auto_examples/stats/plot_pvalues.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../auto_examples/stats/plot_pvalues.html#compute-true-pac-estimation-and-surrogates-distribution">Compute true PAC estimation and surrogates distribution</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../auto_examples/stats/plot_compare_cond_cluster.html">Compare PAC of two experimental conditions with cluster-based statistics</a><ul>
@@ -667,7 +671,7 @@
         <span class="k">assert</span> <span class="n">x_pha</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">x_amp</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;Inputs `x_pha` and `x_amp` must &quot;</span>
                                             <span class="s2">&quot;have the same shape.&quot;</span><span class="p">)</span>
         <span class="c1"># Extract phase (npha, ...) and amplitude (namp, ...) :</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Extract phases (n_pha=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xvec</span><span class="p">)</span><span class="si">}</span><span class="s2">) and &quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    extract phases (n_pha=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xvec</span><span class="p">)</span><span class="si">}</span><span class="s2">) and &quot;</span>
                     <span class="sa">f</span><span class="s2">&quot;amplitudes (n_amps=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">yvec</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
         <span class="n">kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">keepfilt</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="n">edges</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">pha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>

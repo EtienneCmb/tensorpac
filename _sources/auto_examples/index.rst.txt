@@ -61,26 +61,6 @@ Phase-Amplitude coupling
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="For the visualization, we used a comodulogram. ">
-
-.. only:: html
-
-    .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_pvalues_thumb.png
-
-        :ref:`sphx_glr_auto_examples_pac_plot_pvalues.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/pac/plot_pvalues
-
-.. raw:: html
-
     <div class="sphx-glr-thumbcontainer" tooltip="Surrogates are used to generate a chance ditribution in order to correct the PAC estimation. ">
 
 .. only:: html
@@ -283,6 +263,26 @@ Statistics
    :hidden:
 
    /auto_examples/stats/plot_stats_stationary
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example illustrates how to compute and plot the p-values. To this end, Tensorpac uses perm...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/stats/images/thumb/sphx_glr_plot_pvalues_thumb.png
+
+        :ref:`sphx_glr_auto_examples_stats_plot_pvalues.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/stats/plot_pvalues
 
 .. raw:: html
 

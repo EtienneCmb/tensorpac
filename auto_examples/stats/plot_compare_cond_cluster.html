@@ -17,7 +17,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Compute and plot the Power Spectrum Density (PSD)" href="../misc/plot_psd.html" />
-    <link rel="prev" title="Identify stationary time-series using unit root test" href="plot_stats_stationary.html" />
+    <link rel="prev" title="Compute and plot the p-values" href="plot_pvalues.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -128,7 +128,6 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../index.html#phase-amplitude-coupling">Phase-Amplitude coupling</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../pac/plot_readme.html">README example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../pac/plot_pvalues.html">Compute p-values</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../pac/plot_compare_surrogates.html">Compare surrogate methods</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../pac/plot_compare_normalizations.html">Compare normalizations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../pac/plot_compare_filtering.html">Compare filtering properties</a></li>
@@ -155,6 +154,11 @@
 <li class="toctree-l4"><a class="reference internal" href="plot_stats_stationary.html#define-a-random-dataset">Define a random dataset</a></li>
 <li class="toctree-l4"><a class="reference internal" href="plot_stats_stationary.html#compute-the-statistical-test">Compute the statistical test</a></li>
 <li class="toctree-l4"><a class="reference internal" href="plot_stats_stationary.html#plot-each-trial">Plot each trial</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="plot_pvalues.html">Compute and plot the p-values</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="plot_pvalues.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_pvalues.html#compute-true-pac-estimation-and-surrogates-distribution">Compute true PAC estimation and surrogates distribution</a></li>
 </ul>
 </li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Compare PAC of two experimental conditions with cluster-based statistics</a><ul>
@@ -309,59 +313,58 @@ Python package MNE-Python and in particular, the function
 </div>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Using a threshold of 4.006873
-stat_fun(H1): min=0.000000 max=78.169918
+stat_fun(H1): min=0.000000 max=78.297166
 Running initial clustering
-Found 11 clusters
+Found 10 clusters
 Permuting 999 times...
 
   0%|          |  : 0/999 [00:00&lt;?,       ?it/s]
-  2%|2         |  : 21/999 [00:00&lt;00:01,  612.99it/s]
-  5%|5         |  : 50/999 [00:00&lt;00:01,  621.83it/s]
-  6%|6         |  : 64/999 [00:00&lt;00:01,  606.34it/s]
-  9%|8         |  : 87/999 [00:00&lt;00:01,  609.37it/s]
- 12%|#1        |  : 115/999 [00:00&lt;00:01,  617.52it/s]
- 13%|#2        |  : 129/999 [00:00&lt;00:01,  602.42it/s]
- 15%|#5        |  : 151/999 [00:00&lt;00:01,  604.58it/s]
- 18%|#7        |  : 178/999 [00:00&lt;00:01,  612.02it/s]
- 19%|#9        |  : 192/999 [00:00&lt;00:01,  597.55it/s]
- 22%|##1       |  : 216/999 [00:00&lt;00:01,  602.27it/s]
- 24%|##4       |  : 242/999 [00:00&lt;00:01,  608.39it/s]
- 26%|##5       |  : 257/999 [00:00&lt;00:01,  596.99it/s]
- 28%|##8       |  : 280/999 [00:00&lt;00:01,  600.57it/s]
- 31%|###       |  : 306/999 [00:00&lt;00:01,  607.21it/s]
- 32%|###2      |  : 320/999 [00:00&lt;00:01,  593.11it/s]
- 35%|###4      |  : 347/999 [00:00&lt;00:01,  600.74it/s]
- 37%|###7      |  : 371/999 [00:00&lt;00:01,  605.37it/s]
- 39%|###8      |  : 385/999 [00:00&lt;00:01,  591.47it/s]
- 41%|####1     |  : 412/999 [00:00&lt;00:00,  599.12it/s]
- 44%|####3     |  : 436/999 [00:00&lt;00:00,  603.84it/s]
- 45%|####5     |  : 450/999 [00:00&lt;00:00,  590.07it/s]
- 48%|####7     |  : 477/999 [00:00&lt;00:00,  597.76it/s]
- 50%|#####     |  : 500/999 [00:00&lt;00:00,  601.35it/s]
- 51%|#####1    |  : 514/999 [00:00&lt;00:00,  587.83it/s]
- 54%|#####4    |  : 542/999 [00:00&lt;00:00,  596.41it/s]
- 56%|#####6    |  : 563/999 [00:00&lt;00:00,  597.49it/s]
- 58%|#####7    |  : 578/999 [00:00&lt;00:00,  587.15it/s]
- 61%|######    |  : 608/999 [00:00&lt;00:00,  597.24it/s]
- 63%|######2   |  : 628/999 [00:00&lt;00:00,  596.92it/s]
- 64%|######4   |  : 643/999 [00:01&lt;00:00,  586.58it/s]
- 67%|######7   |  : 672/999 [00:01&lt;00:00,  595.94it/s]
- 69%|######9   |  : 691/999 [00:01&lt;00:00,  594.05it/s]
- 71%|#######   |  : 707/999 [00:01&lt;00:00,  586.38it/s]
- 74%|#######3  |  : 738/999 [00:01&lt;00:00,  597.15it/s]
- 76%|#######5  |  : 756/999 [00:01&lt;00:00,  593.55it/s]
- 77%|#######7  |  : 771/999 [00:01&lt;00:00,  583.50it/s]
- 80%|########  |  : 803/999 [00:01&lt;00:00,  594.92it/s]
- 82%|########2 |  : 820/999 [00:01&lt;00:00,  589.51it/s]
- 84%|########3 |  : 838/999 [00:01&lt;00:00,  586.23it/s]
- 87%|########6 |  : 868/999 [00:01&lt;00:00,  596.33it/s]
- 89%|########8 |  : 885/999 [00:01&lt;00:00,  590.62it/s]
- 90%|######### |  : 903/999 [00:01&lt;00:00,  587.27it/s]
- 93%|#########3|  : 934/999 [00:01&lt;00:00,  598.07it/s]
- 95%|#########4|  : 949/999 [00:01&lt;00:00,  587.77it/s]
- 97%|#########6|  : 968/999 [00:01&lt;00:00,  586.26it/s]
-100%|##########|  : 999/999 [00:01&lt;00:00,  597.39it/s]
-100%|##########|  : 999/999 [00:01&lt;00:00,  639.98it/s]
+  2%|2         |  : 23/999 [00:00&lt;00:01,  677.86it/s]
+  4%|3         |  : 38/999 [00:00&lt;00:01,  660.07it/s]
+  7%|6         |  : 67/999 [00:00&lt;00:01,  667.65it/s]
+  9%|9         |  : 91/999 [00:00&lt;00:01,  669.53it/s]
+ 11%|#         |  : 107/999 [00:00&lt;00:01,  655.73it/s]
+ 14%|#3        |  : 136/999 [00:00&lt;00:01,  663.43it/s]
+ 16%|#5        |  : 158/999 [00:00&lt;00:01,  662.77it/s]
+ 17%|#7        |  : 173/999 [00:00&lt;00:01,  646.63it/s]
+ 20%|##        |  : 203/999 [00:00&lt;00:01,  655.47it/s]
+ 23%|##2       |  : 225/999 [00:00&lt;00:01,  655.13it/s]
+ 24%|##4       |  : 240/999 [00:00&lt;00:01,  639.71it/s]
+ 27%|##7       |  : 272/999 [00:00&lt;00:01,  650.27it/s]
+ 29%|##9       |  : 294/999 [00:00&lt;00:01,  650.32it/s]
+ 31%|###       |  : 308/999 [00:00&lt;00:01,  631.78it/s]
+ 34%|###3      |  : 338/999 [00:00&lt;00:01,  640.93it/s]
+ 36%|###5      |  : 359/999 [00:00&lt;00:01,  639.90it/s]
+ 37%|###7      |  : 374/999 [00:00&lt;00:00,  625.93it/s]
+ 41%|####      |  : 405/999 [00:00&lt;00:00,  636.06it/s]
+ 43%|####2     |  : 425/999 [00:00&lt;00:00,  633.66it/s]
+ 44%|####4     |  : 441/999 [00:00&lt;00:00,  622.92it/s]
+ 47%|####7     |  : 474/999 [00:00&lt;00:00,  634.43it/s]
+ 49%|####9     |  : 494/999 [00:00&lt;00:00,  632.19it/s]
+ 51%|#####1    |  : 511/999 [00:00&lt;00:00,  624.08it/s]
+ 54%|#####4    |  : 544/999 [00:00&lt;00:00,  635.58it/s]
+ 56%|#####6    |  : 562/999 [00:00&lt;00:00,  629.53it/s]
+ 58%|#####7    |  : 579/999 [00:00&lt;00:00,  621.45it/s]
+ 61%|######1   |  : 610/999 [00:00&lt;00:00,  631.65it/s]
+ 63%|######2   |  : 628/999 [00:00&lt;00:00,  625.83it/s]
+ 65%|######4   |  : 646/999 [00:00&lt;00:00,  620.26it/s]
+ 68%|######7   |  : 679/999 [00:01&lt;00:00,  631.80it/s]
+ 70%|######9   |  : 695/999 [00:01&lt;00:00,  621.28it/s]
+ 71%|#######1  |  : 713/999 [00:01&lt;00:00,  615.96it/s]
+ 74%|#######4  |  : 744/999 [00:01&lt;00:00,  626.28it/s]
+ 76%|#######5  |  : 759/999 [00:01&lt;00:00,  613.69it/s]
+ 78%|#######7  |  : 777/999 [00:01&lt;00:00,  608.95it/s]
+ 81%|########  |  : 809/999 [00:01&lt;00:00,  619.97it/s]
+ 82%|########2 |  : 824/999 [00:01&lt;00:00,  607.73it/s]
+ 85%|########4 |  : 845/999 [00:01&lt;00:00,  608.16it/s]
+ 88%|########7 |  : 877/999 [00:01&lt;00:00,  619.25it/s]
+ 89%|########9 |  : 892/999 [00:01&lt;00:00,  607.10it/s]
+ 91%|#########1|  : 913/999 [00:01&lt;00:00,  607.70it/s]
+ 94%|#########4|  : 943/999 [00:01&lt;00:00,  617.42it/s]
+ 96%|#########5|  : 958/999 [00:01&lt;00:00,  605.38it/s]
+ 98%|#########7|  : 979/999 [00:01&lt;00:00,  606.09it/s]
+100%|##########|  : 999/999 [00:01&lt;00:00,  617.62it/s]
+100%|##########|  : 999/999 [00:01&lt;00:00,  660.72it/s]
 Computing cluster p-values
 Done.
 </pre></div>
@@ -389,7 +392,7 @@ gray scale colormap while significant clusters are going to be color coded.</p>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_plot_compare_cond_cluster_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_compare_cond_cluster_001.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  23.909 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  22.097 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-stats-plot-compare-cond-cluster-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/adb6d4bb25e242638fd01f4411e7543f/plot_compare_cond_cluster.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_compare_cond_cluster.py</span></code></a></p>
