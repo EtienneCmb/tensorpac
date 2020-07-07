@@ -263,6 +263,14 @@
 <div class="figure align-center">
 <img alt="_images/tp.png" src="_images/tp.png" />
 </div>
+<div class="section" id="tensor-based-implementation">
+<h2>Tensor based implementation<a class="headerlink" href="#tensor-based-implementation" title="Permalink to this headline">¶</a></h2>
+<p>In general, most of the softwares implemented the PAC in a vectorial fashion. This means that the PAC is computed between a single vector of phase and a single vector of amplitude. One of the limitation of this approach is that it can be relatively slow when exploring multi-dimensional data (e.g number of electrodes / sensors, number of trials, several frequency bands etc.). Tensorpac uses a different approach, using the Einstein summation, where the PAC is implemented in order to support multi-dimensional arrays (i.e tensors). This type of implementation can drastically decrease computational cost, especially if it’s combined with parallel computing as it is the case in Tensorpac.</p>
+<div class="figure align-center" id="id1">
+<img alt="_images/10_detailed_loop_vs_tensor.png" src="_images/10_detailed_loop_vs_tensor.png" />
+<p class="caption"><span class="caption-text">On the left, a traditional loop implementation to compute PAC between vectors. On the right, an illustration of the tensor-based implementation.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
 <div class="section" id="contents">
 <h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">

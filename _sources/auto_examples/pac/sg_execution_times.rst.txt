@@ -5,11 +5,11 @@
 
 Computation times
 =================
-**00:59.061** total execution time for **auto_examples_pac** files:
+**02:13.350** total execution time for **auto_examples_pac** files:
 
-- **00:13.897**: :ref:`sphx_glr_auto_examples_pac_plot_compare_surrogates.py` (``plot_compare_surrogates.py``)
-- **00:13.745**: :ref:`sphx_glr_auto_examples_pac_plot_readme.py` (``plot_readme.py``)
-- **00:11.032**: :ref:`sphx_glr_auto_examples_pac_plot_compare_normalizations.py` (``plot_compare_normalizations.py``)
-- **00:08.045**: :ref:`sphx_glr_auto_examples_pac_plot_pac_methods.py` (``plot_pac_methods.py``)
-- **00:06.412**: :ref:`sphx_glr_auto_examples_pac_plot_compare_filtering.py` (``plot_compare_filtering.py``)
-- **00:05.929**: :ref:`sphx_glr_auto_examples_pac_plot_long_range_coupling.py` (``plot_long_range_coupling.py``)
+- **00:42.961**: :ref:`sphx_glr_auto_examples_pac_plot_compare_surrogates.py` (``plot_compare_surrogates.py``)
+- **00:36.468**: :ref:`sphx_glr_auto_examples_pac_plot_readme.py` (``plot_readme.py``)
+- **00:28.899**: :ref:`sphx_glr_auto_examples_pac_plot_pac_methods.py` (``plot_pac_methods.py``)
+- **00:13.128**: :ref:`sphx_glr_auto_examples_pac_plot_compare_normalizations.py` (``plot_compare_normalizations.py``)
+- **00:06.048**: :ref:`sphx_glr_auto_examples_pac_plot_compare_filtering.py` (``plot_compare_filtering.py``)
+- **00:05.845**: :ref:`sphx_glr_auto_examples_pac_plot_long_range_coupling.py` (``plot_long_range_coupling.py``)
