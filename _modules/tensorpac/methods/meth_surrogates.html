@@ -288,6 +288,10 @@
 <span class="sd">    pha, amp : array_like</span>
 <span class="sd">        The phase and amplitude to use to compute the distribution of</span>
 <span class="sd">        permutations</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Tort et al. 2010 :cite:`tort2010measuring`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">tr_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">pha</span><span class="p">[:,</span> <span class="n">tr_</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">amp</span></div>
@@ -313,6 +317,10 @@
 <span class="sd">    pha, amp : array_like</span>
 <span class="sd">        The phase and amplitude to use to compute the distribution of</span>
 <span class="sd">        permutations</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Bahramisharif et al. 2013 :cite:`bahramisharif2013propagating`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># random cutting point along time axis</span>
     <span class="n">cut_at</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
@@ -342,6 +350,10 @@
 <span class="sd">    pha, amp : array_like</span>
 <span class="sd">        The phase and amplitude to use to compute the distribution of</span>
 <span class="sd">        permutations</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Canolty et al. 2006 :cite:`canolty2006high`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">shift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span> <span class="n">amp</span></div>

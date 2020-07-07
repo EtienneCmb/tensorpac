@@ -256,8 +256,9 @@
 <dt id="tensorpac.methods.modulation_index">
 <code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">modulation_index</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">n_bins=18</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_pac.html#modulation_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.modulation_index" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute PAC using the Modulation index (MI).</p>
-<p>The modulation index is obtained using the Kullback Leibler Distance.
-Adapted from <a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id1">[10]</a></p>
+<p>The modulation index is obtained using the Kullback Leibler Distance which
+measures how much the distribution of binned amplitude differs from a
+uniform distribution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
@@ -275,6 +276,8 @@ the array of amplitudes of shape (n_amp, …, n_times).</p>
 </dl>
 </dd>
 </dl>
+<p class="rubric">References</p>
+<p>Tort et al. 2010 <a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id1">[10]</a></p>
 </dd></dl>
 
 </div>

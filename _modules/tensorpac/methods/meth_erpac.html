@@ -307,6 +307,10 @@
 <span class="sd">        Array of correlation coefficients of shape (n_amp, n_pha, ...)</span>
 <span class="sd">    pval : array_like</span>
 <span class="sd">        Array of p-values of shape (n_amp, n_pha, ...).</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Voytek et al. 2013 :cite:`voytek2013method`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Compute correlation coefficient for sin and cos independently</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -331,7 +335,7 @@
 <span class="sd">    This function assumes that phases and amplitudes have already been</span>
 <span class="sd">    prepared i.e. phases should be represented in a unit circle</span>
 <span class="sd">    (np.c_[np.sin(pha), np.cos(pha)]) and both inputs should also have been</span>
-<span class="sd">    copnormed :cite:`ince2017statistical`.</span>
+<span class="sd">    copnormed.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -343,6 +347,10 @@
 <span class="sd">    -------</span>
 <span class="sd">    erpac : array_like</span>
 <span class="sd">        Array of correlation coefficients of shape (n_amp, n_pha, n_times)</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Ince et al. 2017 :cite:`ince2017statistical`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># get shapes</span>
     <span class="p">(</span><span class="n">n_pha</span><span class="p">,</span> <span class="n">n_times</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">),</span> <span class="n">n_amp</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># noqa</span>
