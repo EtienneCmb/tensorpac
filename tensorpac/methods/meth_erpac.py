@@ -60,6 +60,10 @@ def erpac(pha, amp):
         Array of correlation coefficients of shape (n_amp, n_pha, ...)
     pval : array_like
         Array of p-values of shape (n_amp, n_pha, ...).
+
+    References
+    ----------
+    Voytek et al. 2013 :cite:`voytek2013method`
     """
     # Compute correlation coefficient for sin and cos independently
     n = pha.shape[-1]
@@ -84,7 +88,7 @@ def ergcpac(pha, amp, smooth=None, n_jobs=-1):
     This function assumes that phases and amplitudes have already been
     prepared i.e. phases should be represented in a unit circle
     (np.c_[np.sin(pha), np.cos(pha)]) and both inputs should also have been
-    copnormed :cite:`ince2017statistical`.
+    copnormed.
 
     Parameters
     ----------
@@ -96,6 +100,10 @@ def ergcpac(pha, amp, smooth=None, n_jobs=-1):
     -------
     erpac : array_like
         Array of correlation coefficients of shape (n_amp, n_pha, n_times)
+
+    References
+    ----------
+    Ince et al. 2017 :cite:`ince2017statistical`
     """
     # get shapes
     (n_pha, n_times, _, n_epochs), n_amp = pha.shape, amp.shape[0]  # noqa

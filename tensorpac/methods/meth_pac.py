@@ -21,7 +21,7 @@ def pacstr(idpac):
     elif idpac[0] == 5:
         method = 'Phase-Locking Value (PLV, Lachaux et al. 1999)'
     elif idpac[0] == 6:
-        method = 'Gaussian Copula PAC (gcPac, Ince et al. 2017)'
+        method = 'Gaussian Copula PAC (gcPac)'
     else:
         raise ValueError("No corresponding pac method.")
 
@@ -84,8 +84,6 @@ def get_pac_fcn(idp, n_bins, p):
 def mean_vector_length(pha, amp):
     """Compute PAC using the Mean Vector Length (MVL).
 
-    Adapted from :cite:`canolty2006high`
-
     Parameters
     ----------
     pha, amp : array_like
@@ -96,6 +94,10 @@ def mean_vector_length(pha, amp):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+
+    References
+    ----------
+    Canolty et al. 2006 :cite:`canolty2006high`
     """
     return np.abs(np.einsum('i...j, k...j->ik...', amp,
                             np.exp(1j * pha))) / pha.shape[-1]
@@ -104,8 +106,9 @@ def mean_vector_length(pha, amp):
 def modulation_index(pha, amp, n_bins=18):
     """Compute PAC using the Modulation index (MI).
 
-    The modulation index is obtained using the Kullback Leibler Distance.
-    Adapted from :cite:`tort2010measuring`
+    The modulation index is obtained using the Kullback Leibler Distance which
+    measures how much the distribution of binned amplitude differs from a
+    uniform distribution.
 
     Parameters
     ----------
@@ -119,6 +122,10 @@ def modulation_index(pha, amp, n_bins=18):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+
+    References
+    ----------
+    Tort et al. 2010 :cite:`tort2010measuring`
     """
     # Get the phase locked binarized amplitude :
     p_j = _kl_hr(pha, amp, n_bins)
@@ -136,8 +143,6 @@ def modulation_index(pha, amp, n_bins=18):
 def heights_ratio(pha, amp, n_bins=18):
     """Compute PAC using the Heights ratio (HR).
 
-    Adapted from :cite:`lakatos2005oscillatory`
-
     Parameters
     ----------
     pha, amp : array_like
@@ -150,6 +155,10 @@ def heights_ratio(pha, amp, n_bins=18):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+
+    References
+    ----------
+    Lakatos et al. 2005 :cite:`lakatos2005oscillatory`
     """
     # Get the phase locked binarized amplitude :
     p_j = _kl_hr(pha, amp, n_bins)
@@ -186,8 +195,6 @@ def _kl_hr(pha, amp, n_bins, mean_bins=True):
 def norm_direct_pac(pha, amp, p=.05):
     """Compute PAC using the Normalized direct Pac (ndPAC).
 
-    Adapted from :cite:`ozkurt2012statistically`
-
     Parameters
     ----------
     pha, amp : array_like
@@ -202,6 +209,10 @@ def norm_direct_pac(pha, amp, p=.05):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+
+    References
+    ----------
+    Ozkurt et al. :cite:`ozkurt2012statistically`
     """
     npts = amp.shape[-1]
     # Normalize amplitude :
@@ -228,8 +239,7 @@ def phase_locking_value(pha, pha_amp):
 
     In order to measure the phase locking value, the phase of the amplitude of
     the higher-frequency signal must be provided, and not the amplitude as in
-    most other PAC functions. Adapted from
-    :cite:`lachaux1999measuring,penny2008testing`
+    most other PAC functions.
 
     Parameters
     ----------
@@ -242,6 +252,11 @@ def phase_locking_value(pha, pha_amp):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_pha_amp, n_pha, ...)
+
+    References
+    ----------
+    Lachaux et al. 1999, :cite:`lachaux1999measuring`,
+    Penny et al. 2008 :cite:`penny2008testing`
     """
     pac = np.einsum('i...j, k...j->ik...', np.exp(-1j * pha_amp),
                     np.exp(1j * pha))
@@ -254,7 +269,7 @@ def gauss_cop_pac(pha, amp):
     This function assumes that phases and amplitudes have already been
     prepared i.e. phases should be represented in a unit circle
     (np.c_[np.sin(pha), np.cos(pha)]) and both inputs should also have been
-    copnormed. Adapted from :cite:`ince2017statistical`
+    copnormed.
 
     Parameters
     ----------
@@ -266,6 +281,10 @@ def gauss_cop_pac(pha, amp):
     -------
     pac : array_like
         Array of phase amplitude coupling of shape (n_amp, n_pha, ...)
+
+    References
+    ----------
+    Ince et al 2017. :cite:`ince2017statistical`
     """
     # prepare the shape of gcpac
     n_pha, n_amp = pha.shape[0], amp.shape[0]

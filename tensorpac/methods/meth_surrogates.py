@@ -41,6 +41,10 @@ def swap_pha_amp(pha, amp):
     pha, amp : array_like
         The phase and amplitude to use to compute the distribution of
         permutations
+
+    References
+    ----------
+    Tort et al. 2010 :cite:`tort2010measuring`
     """
     tr_ = np.random.permutation(pha.shape[1])
     return pha[:, tr_, ...], amp
@@ -66,6 +70,10 @@ def swap_blocks(pha, amp):
     pha, amp : array_like
         The phase and amplitude to use to compute the distribution of
         permutations
+
+    References
+    ----------
+    Bahramisharif et al. 2013 :cite:`bahramisharif2013propagating`
     """
     # random cutting point along time axis
     cut_at = np.random.randint(1, amp.shape[-1], (1,))
@@ -95,6 +103,10 @@ def time_lag(pha, amp):
     pha, amp : array_like
         The phase and amplitude to use to compute the distribution of
         permutations
+
+    References
+    ----------
+    Canolty et al. 2006 :cite:`canolty2006high`
     """
     shift = np.random.randint(pha.shape[-1])
     return np.roll(pha, shift, axis=-1), amp
