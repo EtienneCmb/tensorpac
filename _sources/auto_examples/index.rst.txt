@@ -61,7 +61,27 @@ Phase-Amplitude coupling
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Surrogates are used to generate a chance ditribution in order to correct the PAC estimation. ">
+    <div class="sphx-glr-thumbcontainer" tooltip="This script offers a comparison between all of the implemented PAC methods, in particular the m...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_pac_methods_thumb.png
+
+        :ref:`sphx_glr_auto_examples_pac_plot_pac_methods.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/pac/plot_pac_methods
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example illustrates the different implemented methods in order to generate the distributio...">
 
 .. only:: html
 
@@ -81,7 +101,7 @@ Phase-Amplitude coupling
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="The normalization correspond on the method used to correct the PAC estimation with the chance d...">
+    <div class="sphx-glr-thumbcontainer" tooltip="This example illustrates the effect of the different implemented normalizations. First, the tru...">
 
 .. only:: html
 
@@ -118,26 +138,6 @@ Phase-Amplitude coupling
    :hidden:
 
    /auto_examples/pac/plot_compare_filtering
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Compute PAC on multiple datasets and compare implemented methods. ">
-
-.. only:: html
-
-    .. figure:: /auto_examples/pac/images/thumb/sphx_glr_plot_pac_methods_thumb.png
-
-        :ref:`sphx_glr_auto_examples_pac_plot_pac_methods.py`
-
-.. raw:: html
-
-    </div>
-
-
-.. toctree::
-   :hidden:
-
-   /auto_examples/pac/plot_pac_methods
 
 .. raw:: html
 

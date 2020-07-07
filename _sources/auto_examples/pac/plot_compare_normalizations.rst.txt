@@ -7,12 +7,109 @@
 .. _sphx_glr_auto_examples_pac_plot_compare_normalizations.py:
 
 
-======================
-Compare normalizations
-======================
+===========================
+Compare normalization types
+===========================
 
-The normalization correspond on the method used to correct the PAC estimation
-with the chance distribution.
+This example illustrates the effect of the different implemented
+normalizations. First, the true PAC is estimated, then this is the surrogate
+distribution that is estimated (i.e the PAC that could be obtained by chance).
+Finally, the true PAC is corrected by this distribution. Tensorpac includes
+four types of normalization that should give similar results :
+
+    * Substract the mean of surrogates (1)
+    * Divide by the mean of surrogates (2)
+    * Substract then divide by the mean of surrogates (3)
+    * Substract the mean then divide by the deviation of surrogates
+      (z-score, 4)
+
+
+.. code-block:: default
+
+    from textwrap import wrap
+
+    from tensorpac import Pac
+    from tensorpac.signals import pac_signals_wavelet
+
+    import matplotlib.pyplot as plt
+ 
+
+
+
+
+
+
+Simulate artificial coupling
+##############################################################################
+ first, we generate a single trial that contains a coupling between a 10z
+ phase and a 100hz amplitude. By default, the returned dataset is organized as
+ (n_epochs, n_times) where n_times is the number of time points and n_epochs
+ is the number of trials
+
+
+.. code-block:: default
+
+
+    f_pha = 10      # frequency phase for the coupling
+    f_amp = 100     # frequency amplitude for the coupling
+    n_epochs = 20   # number of trials
+    n_times = 2000  # number of time points
+    sf = 512.       # sampling frequency
+    data, time = pac_signals_wavelet(f_pha=f_pha, f_amp=f_amp, noise=2.,
+                                     n_epochs=n_epochs, n_times=n_times, sf=sf)
+
+
+
+
+
+
+
+Extract phases and amplitudes
+##############################################################################
+ now we can extract all of the phases and amplitudes
+
+
+.. code-block:: default
+
+
+    # define the pac object
+    p = Pac(f_pha='mres', f_amp='mres')
+    # Now, we want to compare PAC methods, hence it's useless to systematically
+    # filter the data. So we extract the phase and the amplitude only once
+    phases = p.filter(sf, data, ftype='phase', n_jobs=1)
+    amplitudes = p.filter(sf, data, ftype='amplitude', n_jobs=1)
+
+
+
+
+
+
+
+Recompute PAC and surrogates and switch the normalization types
+##############################################################################
+ finally, we can recompute PAC and surrogates and then switch the
+ normalization type. In particular this script uses the Gaussian-Copula PAC
+ as the main measure and then permutes times blocks of amplitudes cut at a
+ random time point
+
+
+.. code-block:: default
+
+
+    plt.figure(figsize=(14, 8))
+    for i, k in enumerate(range(5)):
+        # switch the normalization method
+        p.idpac = (6, 2, k)
+        print('-> Normalization using ' + p.str_norm)
+        # compute pac and surrogates (n_perm)
+        xpac = p.fit(phases, amplitudes, n_perm=20)
+        # plot
+        plt.subplot(2, 3, k + 1)
+        title = '\n'.join(wrap(f"{p.str_norm} ({k})", 40))
+        p.comodulogram(xpac.mean(-1), title=title, cmap='plasma', vmin=0.)
+
+    plt.tight_layout()
+    plt.show()
 
 
 
@@ -35,51 +132,9 @@ with the chance distribution.
 
 
 
-
-|
-
-
-.. code-block:: default
-
-    from __future__ import print_function
-    import matplotlib.pyplot as plt
-    from tensorpac import Pac
-    from tensorpac.signals import pac_signals_wavelet
-    plt.style.use('seaborn-paper')
-
-    # First, we generate a dataset of signals artificially coupled between 10hz
-    # and 100hz. By default, this dataset is organized as (n_epochs, n_times) where
-    # n_times is the number of time points.
-    n_epochs = 10  # number of datasets
-    sf = 512.  # sampling frequency
-    data, time = pac_signals_wavelet(sf=sf, f_pha=10, f_amp=100, noise=1.,
-                                     n_epochs=n_epochs, n_times=2000)
-
-    # First, let's use the MVL, without any further correction by surrogates :
-    p = Pac(f_pha=(5, 16, 1, .1), f_amp=(80, 130, 5, 2))
-
-    # Now, we want to compare PAC methods, hence it's useless to systematically
-    # filter the data. So we extract the phase and the amplitude only once :
-    phases = p.filter(sf, data, ftype='phase', n_jobs=1)
-    amplitudes = p.filter(sf, data, ftype='amplitude', n_jobs=1)
-
-    plt.figure(figsize=(18, 9))
-    for i, k in enumerate(range(5)):
-        # Change the pac method :
-        p.idpac = (1, 2, k)
-        print('-> Normalization using ' + p.str_norm)
-        # Compute only the PAC without filtering :
-        xpac = p.fit(phases, amplitudes, n_perm=20)
-        # Plot :
-        plt.subplot(2, 3, k + 1)
-        p.comodulogram(xpac.mean(-1), title=p.str_norm, cmap='Spectral_r')
-
-    plt.show()
-
-
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  10.410 seconds)
+   **Total running time of the script:** ( 0 minutes  11.032 seconds)
 
 
 .. _sphx_glr_download_auto_examples_pac_plot_compare_normalizations.py:

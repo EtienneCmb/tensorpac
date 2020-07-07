@@ -51,7 +51,7 @@ Reproduced the figure in the README.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  10.864 seconds)
+   **Total running time of the script:** ( 0 minutes  13.745 seconds)
 
 
 .. _sphx_glr_download_auto_examples_pac_plot_readme.py:
