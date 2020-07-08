@@ -82,7 +82,7 @@ def get_pac_fcn(idp, n_bins, p):
 
 
 def mean_vector_length(pha, amp):
-    """Compute PAC using the Mean Vector Length (MVL).
+    """Tensor-based Mean Vector Length (MVL).
 
     Parameters
     ----------
@@ -104,7 +104,7 @@ def mean_vector_length(pha, amp):
 
 
 def modulation_index(pha, amp, n_bins=18):
-    """Compute PAC using the Modulation index (MI).
+    """Tensor-based Modulation index (MI).
 
     The modulation index is obtained using the Kullback Leibler Distance which
     measures how much the distribution of binned amplitude differs from a
@@ -141,7 +141,7 @@ def modulation_index(pha, amp, n_bins=18):
 
 
 def heights_ratio(pha, amp, n_bins=18):
-    """Compute PAC using the Heights ratio (HR).
+    """Tensor-based Heights ratio (HR).
 
     Parameters
     ----------
@@ -193,7 +193,7 @@ def _kl_hr(pha, amp, n_bins, mean_bins=True):
 
 
 def norm_direct_pac(pha, amp, p=.05):
-    """Compute PAC using the Normalized direct Pac (ndPAC).
+    """Tensor-based Normalized direct Pac (ndPAC).
 
     Parameters
     ----------
@@ -214,28 +214,28 @@ def norm_direct_pac(pha, amp, p=.05):
     ----------
     Ozkurt et al. :cite:`ozkurt2012statistically`
     """
-    npts = amp.shape[-1]
-    # Normalize amplitude :
-    # Use the sample standard deviation, as in original Matlab code from author
+    n_times = amp.shape[-1]
+    # normalize amplitude
+    # use the sample standard deviation, as in original matlab code from author
     amp = np.subtract(amp, np.mean(amp, axis=-1, keepdims=True))
     amp = np.divide(amp, np.std(amp, ddof=1, axis=-1, keepdims=True))
-    # Compute pac :
+    # compute pac
     pac = np.abs(np.einsum('i...j, k...j->ik...', amp, np.exp(1j * pha)))
 
+    # no thresholding
     if p == 1. or p is None:
-        # No thresholding
-        return pac / npts
+        return pac / n_times
 
-    s = pac**2
-    pac /= npts
-    # Set to zero non-significant values:
-    xlim = npts * erfinv(1 - p)**2
+    s = pac ** 2
+    pac /= n_times
+    # set to zero non-significant values
+    xlim = n_times * erfinv(1 - p) ** 2
     pac[s <= 2 * xlim] = 0.
     return pac
 
 
 def phase_locking_value(pha, pha_amp):
-    """Compute PAC using the Phase Locking-Value (PLV).
+    """Tensor-based Phase Locking-Value (PLV).
 
     In order to measure the phase locking value, the phase of the amplitude of
     the higher-frequency signal must be provided, and not the amplitude as in
@@ -264,7 +264,7 @@ def phase_locking_value(pha, pha_amp):
 
 
 def gauss_cop_pac(pha, amp):
-    """Compute PAC using the Gaussian Copula PAC (gcPac).
+    """Tensor-based Gaussian Copula PAC (gcPac).
 
     This function assumes that phases and amplitudes have already been
     prepared i.e. phases should be represented in a unit circle
