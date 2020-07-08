@@ -576,7 +576,7 @@ class PeakLockedTF(_PacObj, _PacVisual):
             fill = np.full((n_freqs, abs(st_shift)), fill_with,
                            dtype=st_sig.dtype)
             # shift this specific trial
-            if st_shift >= 0:   # move forward = prepend zeros
+            if st_shift > 0:   # move forward = prepend zeros
                 sig_shifted[:, tr, :] = np.c_[fill, st_sig][:, 0:-st_shift]
             elif st_shift < 0:  # move backward = append zeros
                 sig_shifted[:, tr, :] = np.c_[st_sig, fill][:, abs(st_shift):]
