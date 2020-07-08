@@ -1,6 +1,6 @@
 """Test PAC methods."""
 import numpy as np
-from tensorpac.methods.meth_pac import get_pac_fcn, pacstr
+from tensorpac.methods.meth_switch import get_pac_fcn, pacstr
 from tensorpac.methods.meth_surrogates import compute_surrogates, normalize
 from tensorpac.methods.meth_pp import preferred_phase
 from tensorpac.methods.meth_erpac import erpac, ergcpac, _ergcpac_perm
@@ -25,14 +25,14 @@ class TestMethods(object):
     """Test individual pac methods."""
 
     @staticmethod
-    def _get_methods():
+    def _get_methods(implementation='tensor'):
         meths = []
         q = 1
         while q is not None:
             try:
-                meths += [get_pac_fcn(q, n_bins, pval)]
+                meths += [get_pac_fcn(q, n_bins, pval, implementation)]
                 q += 1
-            except ValueError as e:  # noqa
+            except KeyError as e:  # noqa
                 q = None
         return meths
 
@@ -59,18 +59,20 @@ class TestMethods(object):
 
     def test_pac_methods(self):
         """Test individual pac methods."""
-        for n, meth in enumerate(self._get_methods()):
-            if n + 1 == 6:  # gc pac need additional multivariate axis
-                _pha = np.stack([np.sin(pha), np.cos(pha)], axis=-2)
-                _amp = amp[..., np.newaxis, :]
-                pac = meth(_pha, _amp)
-            elif n + 1 == 4:  # Try with different values of p for coverage
-                pac = meth(pha, amp, p=0.5)
-                pac = meth(pha, amp, p=1)
-                pac = meth(pha, amp, p=None)
-            else:
-                pac = meth(pha, amp)
-            assert pac.shape == (n_amp_freqs, n_pha_freqs, n_epochs)
+        for imp in ['tensor']:  # 'numba' = FAIL (core dumped)
+            for n, meth in enumerate(self._get_methods(imp)):
+                # print(meth.func.__name__)
+                if n + 1 == 6:  # gc pac need additional multivariate axis
+                    _pha = np.stack([np.sin(pha), np.cos(pha)], axis=-2)
+                    _amp = amp[..., np.newaxis, :]
+                    pac = meth(_pha, _amp)
+                elif n + 1 == 4:  # Try with different values of p for coverage
+                    pac = meth(pha, amp, p=0.5)
+                    pac = meth(pha, amp, p=1)
+                    pac = meth(pha, amp, p=None)
+                else:
+                    pac = meth(pha, amp)
+                assert pac.shape == (n_amp_freqs, n_pha_freqs, n_epochs)
 
     def test_surrogates(self):
         """Test computing surrogates."""

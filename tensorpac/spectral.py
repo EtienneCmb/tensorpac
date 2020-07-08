@@ -65,11 +65,11 @@ def spectral(x, sf, f, stype, dcomplex, cycle, width, n_jobs):
 
     # Extract phase / amplitude :
     if stype is 'pha':
-        return np.angle(xd)
+        return np.angle(xd).astype(np.float64)
     elif stype is 'amp':
-        return np.abs(xd)
+        return np.abs(xd).astype(np.float64)
     elif stype is None:
-        return xd
+        return xd.astype(np.float64)
 
 ###############################################################################
 ###############################################################################

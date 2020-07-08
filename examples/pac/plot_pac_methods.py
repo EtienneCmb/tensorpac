@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 # (n_epochs, n_times) where n_times is the number of time points and n_epochs
 # is the number of trials
 
-f_pha = 5      # frequency phase for the coupling
+f_pha = 5       # frequency phase for the coupling
 f_amp = 100     # frequency amplitude for the coupling
 n_epochs = 20   # number of trials
 n_times = 4000  # number of time points
