@@ -24,7 +24,7 @@ from tensorpac.signals import pac_signals_wavelet
 ###############################################################################
 # Simulate artificial coupling
 ###############################################################################
-# first, we generate a single trial that contains a coupling between a 6z phase
+# first, we generate several trials that contains a coupling between a 6z phase
 # and a 90hz amplitude. By default, the returned dataset is organized as
 # (n_epochs, n_times) where n_times is the number of time points and n_epochs
 # is the number of trials
