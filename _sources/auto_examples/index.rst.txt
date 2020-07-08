@@ -391,6 +391,26 @@ Miscellaneous
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="This example illustrates how to realign time-frequency representations according to a phase. In...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/misc/images/thumb/sphx_glr_plot_align_tf_pha_peak_thumb.png
+
+        :ref:`sphx_glr_auto_examples_misc_plot_align_tf_pha_peak.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/misc/plot_align_tf_pha_peak
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="In Tensorpac, you can define your phase and amplitude vectors in sevral ways :">
 
 .. only:: html

@@ -17,7 +17,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Compute and plot the Inter-Trial Coherence (ITC)" href="plot_itc.html" />
-    <link rel="prev" title="Bin amplitude according to the phase" href="plot_binned_amplitude.html" />
+    <link rel="prev" title="Align time-frequency representations according to phase peak" href="plot_align_tf_pha_peak.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -79,6 +79,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.ITC.html">tensorpac.utils.ITC</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PeakLockedTF.html">tensorpac.utils.PeakLockedTF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
 </ul>
@@ -189,6 +190,12 @@
 <li class="toctree-l3"><a class="reference internal" href="plot_psd.html">Compute and plot the Power Spectrum Density (PSD)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_align_tf_pha_peak.html">Align time-frequency representations according to phase peak</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="plot_align_tf_pha_peak.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_align_tf_pha_peak.html#define-the-peak-locking-object-and-realign-tf-representations">Define the peak-locking object and realign TF representations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_align_tf_pha_peak.html#plotting-the-realignment">Plotting the realignment</a></li>
+</ul>
+</li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Define frequency vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
@@ -315,7 +322,7 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.292 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.395 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-misc-plot-frequency-vectors-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/fdfc1cbe3fc58a82279ab1301c204c8d/plot_frequency_vectors.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_frequency_vectors.py</span></code></a></p>

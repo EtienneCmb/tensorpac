@@ -79,6 +79,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.ITC.html">tensorpac.utils.ITC</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.PeakLockedTF.html">tensorpac.utils.PeakLockedTF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
 </ul>
@@ -189,6 +190,12 @@
 <li class="toctree-l3"><a class="reference internal" href="misc/plot_psd.html">Compute and plot the Power Spectrum Density (PSD)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="misc/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l3"><a class="reference internal" href="misc/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="misc/plot_align_tf_pha_peak.html">Align time-frequency representations according to phase peak</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="misc/plot_align_tf_pha_peak.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="misc/plot_align_tf_pha_peak.html#define-the-peak-locking-object-and-realign-tf-representations">Define the peak-locking object and realign TF representations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="misc/plot_align_tf_pha_peak.html#plotting-the-realignment">Plotting the realignment</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="misc/plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="misc/plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="misc/plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
@@ -255,14 +262,14 @@
 <div class="contents local topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#phase-amplitude-coupling" id="id23">Phase-Amplitude coupling</a></p></li>
-<li><p><a class="reference internal" href="#event-related-phase-amplitude-coupling" id="id24">Event-Related Phase-Amplitude coupling</a></p></li>
-<li><p><a class="reference internal" href="#statistics" id="id25">Statistics</a></p></li>
-<li><p><a class="reference internal" href="#miscellaneous" id="id26">Miscellaneous</a></p></li>
+<li><p><a class="reference internal" href="#phase-amplitude-coupling" id="id24">Phase-Amplitude coupling</a></p></li>
+<li><p><a class="reference internal" href="#event-related-phase-amplitude-coupling" id="id25">Event-Related Phase-Amplitude coupling</a></p></li>
+<li><p><a class="reference internal" href="#statistics" id="id26">Statistics</a></p></li>
+<li><p><a class="reference internal" href="#miscellaneous" id="id27">Miscellaneous</a></p></li>
 </ul>
 </div>
 <div style='clear:both'></div><div class="section" id="phase-amplitude-coupling">
-<span id="sphx-glr-auto-examples-pac"></span><h2><a class="toc-backref" href="#id23">Phase-Amplitude coupling</a><a class="headerlink" href="#phase-amplitude-coupling" title="Permalink to this headline">¶</a></h2>
+<span id="sphx-glr-auto-examples-pac"></span><h2><a class="toc-backref" href="#id24">Phase-Amplitude coupling</a><a class="headerlink" href="#phase-amplitude-coupling" title="Permalink to this headline">¶</a></h2>
 <p><strong>Measure Phase-Amplitude Coupling (PAC) on electrophysiological data</strong></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -312,7 +319,7 @@
 </div>
 <div style='clear:both'></div></div>
 <div class="section" id="event-related-phase-amplitude-coupling">
-<span id="sphx-glr-auto-examples-erpac"></span><h2><a class="toc-backref" href="#id24">Event-Related Phase-Amplitude coupling</a><a class="headerlink" href="#event-related-phase-amplitude-coupling" title="Permalink to this headline">¶</a></h2>
+<span id="sphx-glr-auto-examples-erpac"></span><h2><a class="toc-backref" href="#id25">Event-Related Phase-Amplitude coupling</a><a class="headerlink" href="#event-related-phase-amplitude-coupling" title="Permalink to this headline">¶</a></h2>
 <p><strong>Measure Event-Related Phase-Amplitude Coupling (ERPAC) on electrophysiological data</strong></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -336,7 +343,7 @@
 </div>
 <div style='clear:both'></div></div>
 <div class="section" id="statistics">
-<span id="sphx-glr-auto-examples-stats"></span><h2><a class="toc-backref" href="#id25">Statistics</a><a class="headerlink" href="#statistics" title="Permalink to this headline">¶</a></h2>
+<span id="sphx-glr-auto-examples-stats"></span><h2><a class="toc-backref" href="#id26">Statistics</a><a class="headerlink" href="#statistics" title="Permalink to this headline">¶</a></h2>
 <p><strong>Statistically based examples</strong></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -365,7 +372,7 @@
 </div>
 <div style='clear:both'></div></div>
 <div class="section" id="miscellaneous">
-<span id="sphx-glr-auto-examples-misc"></span><h2><a class="toc-backref" href="#id26">Miscellaneous</a><a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
+<span id="sphx-glr-auto-examples-misc"></span><h2><a class="toc-backref" href="#id27">Miscellaneous</a><a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h2>
 <p><strong>Miscellaneous examples</strong></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -395,27 +402,33 @@
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="In Tensorpac, you can define your phase and amplitude vectors in sevral ways :"><div class="figure align-default" id="id19">
+<div class="sphx-glr-thumbcontainer" tooltip="This example illustrates how to realign time-frequency representations according to a phase. In..."><div class="figure align-default" id="id19">
+<img alt="../_images/sphx_glr_plot_align_tf_pha_peak_thumb.png" src="../_images/sphx_glr_plot_align_tf_pha_peak_thumb.png" />
+<p class="caption"><span class="caption-text"><a class="reference internal" href="misc/plot_align_tf_pha_peak.html#sphx-glr-auto-examples-misc-plot-align-tf-pha-peak-py"><span class="std std-ref">Align time-frequency representations according to phase peak</span></a></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+</div>
+</div><div class="toctree-wrapper compound">
+</div>
+<div class="sphx-glr-thumbcontainer" tooltip="In Tensorpac, you can define your phase and amplitude vectors in sevral ways :"><div class="figure align-default" id="id20">
 <img alt="../_images/sphx_glr_plot_frequency_vectors_thumb.png" src="../_images/sphx_glr_plot_frequency_vectors_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="misc/plot_frequency_vectors.html#sphx-glr-auto-examples-misc-plot-frequency-vectors-py"><span class="std std-ref">Define frequency vectors</span></a></span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="misc/plot_frequency_vectors.html#sphx-glr-auto-examples-misc-plot-frequency-vectors-py"><span class="std std-ref">Define frequency vectors</span></a></span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="This example illustrate how to compute and plot the Inter-Trial Coherence (ITC). The ITC can be..."><div class="figure align-default" id="id20">
+<div class="sphx-glr-thumbcontainer" tooltip="This example illustrate how to compute and plot the Inter-Trial Coherence (ITC). The ITC can be..."><div class="figure align-default" id="id21">
 <img alt="../_images/sphx_glr_plot_itc_thumb.png" src="../_images/sphx_glr_plot_itc_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="misc/plot_itc.html#sphx-glr-auto-examples-misc-plot-itc-py"><span class="std std-ref">Compute and plot the Inter-Trial Coherence (ITC)</span></a></span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="misc/plot_itc.html#sphx-glr-auto-examples-misc-plot-itc-py"><span class="std std-ref">Compute and plot the Inter-Trial Coherence (ITC)</span></a></span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="Use the pac_signals_tort function to generate artificial PAC. "><div class="figure align-default" id="id21">
+<div class="sphx-glr-thumbcontainer" tooltip="Use the pac_signals_tort function to generate artificial PAC. "><div class="figure align-default" id="id22">
 <img alt="../_images/sphx_glr_plot_artificially_coupled_signals_thumb.png" src="../_images/sphx_glr_plot_artificially_coupled_signals_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="misc/plot_artificially_coupled_signals.html#sphx-glr-auto-examples-misc-plot-artificially-coupled-signals-py"><span class="std std-ref">Generate artificially coupled signals</span></a></span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="misc/plot_artificially_coupled_signals.html#sphx-glr-auto-examples-misc-plot-artificially-coupled-signals-py"><span class="std std-ref">Generate artificially coupled signals</span></a></span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>
-<div class="sphx-glr-thumbcontainer" tooltip="First, the amplitude is binned according to phase slices (360 degrees/nbins). Then, the PP is d..."><div class="figure align-default" id="id22">
+<div class="sphx-glr-thumbcontainer" tooltip="First, the amplitude is binned according to phase slices (360 degrees/nbins). Then, the PP is d..."><div class="figure align-default" id="id23">
 <img alt="../_images/sphx_glr_plot_preferred_phase_thumb.png" src="../_images/sphx_glr_plot_preferred_phase_thumb.png" />
-<p class="caption"><span class="caption-text"><a class="reference internal" href="misc/plot_preferred_phase.html#sphx-glr-auto-examples-misc-plot-preferred-phase-py"><span class="std std-ref">Find the preferred phase (PP)</span></a></span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text"><a class="reference internal" href="misc/plot_preferred_phase.html#sphx-glr-auto-examples-misc-plot-preferred-phase-py"><span class="std std-ref">Find the preferred phase (PP)</span></a></span><a class="headerlink" href="#id23" title="Permalink to this image">¶</a></p>
 </div>
 </div><div class="toctree-wrapper compound">
 </div>

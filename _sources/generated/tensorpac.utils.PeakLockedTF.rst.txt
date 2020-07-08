@@ -1,0 +1,39 @@
+tensorpac.utils.PeakLockedTF
+============================
+
+.. currentmodule:: tensorpac.utils
+
+.. autoclass:: PeakLockedTF
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~PeakLockedTF.__init__
+      ~PeakLockedTF.filter
+      ~PeakLockedTF.pacplot
+      ~PeakLockedTF.plot
+      ~PeakLockedTF.savefig
+      ~PeakLockedTF.show
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~PeakLockedTF.cycle
+      ~PeakLockedTF.dcomplex
+      ~PeakLockedTF.f_amp
+      ~PeakLockedTF.f_pha
+      ~PeakLockedTF.width
+      ~PeakLockedTF.xvec
+      ~PeakLockedTF.yvec
+   
+   

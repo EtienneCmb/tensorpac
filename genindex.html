@@ -78,6 +78,7 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.ITC.html">tensorpac.utils.ITC</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.PeakLockedTF.html">tensorpac.utils.PeakLockedTF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
 </ul>
@@ -188,6 +189,12 @@
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_psd.html">Compute and plot the Power Spectrum Density (PSD)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_align_tf_pha_peak.html">Align time-frequency representations according to phase peak</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_align_tf_pha_peak.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_align_tf_pha_peak.html#define-the-peak-locking-object-and-realign-tf-representations">Define the peak-locking object and realign TF representations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_align_tf_pha_peak.html#plotting-the-realignment">Plotting the realignment</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
@@ -283,6 +290,8 @@
 </li>
         <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.__init__">(tensorpac.utils.ITC method)</a>
 </li>
+        <li><a href="generated/tensorpac.utils.PeakLockedTF.html#tensorpac.utils.PeakLockedTF.__init__">(tensorpac.utils.PeakLockedTF method)</a>
+</li>
         <li><a href="generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD.__init__">(tensorpac.utils.PSD method)</a>
 </li>
       </ul></li>
@@ -321,6 +330,8 @@
 </li>
         <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.cycle">(tensorpac.utils.ITC property)</a>
 </li>
+        <li><a href="generated/tensorpac.utils.PeakLockedTF.html#tensorpac.utils.PeakLockedTF.cycle">(tensorpac.utils.PeakLockedTF property)</a>
+</li>
       </ul></li>
   </ul></td>
 </tr></table>
@@ -338,6 +349,8 @@
         <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.dcomplex">(tensorpac.utils.BinAmplitude property)</a>
 </li>
         <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.dcomplex">(tensorpac.utils.ITC property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.PeakLockedTF.html#tensorpac.utils.PeakLockedTF.dcomplex">(tensorpac.utils.PeakLockedTF property)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -375,6 +388,8 @@
 </li>
         <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.f_amp">(tensorpac.utils.ITC property)</a>
 </li>
+        <li><a href="generated/tensorpac.utils.PeakLockedTF.html#tensorpac.utils.PeakLockedTF.f_amp">(tensorpac.utils.PeakLockedTF property)</a>
+</li>
       </ul></li>
       <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.f_pha">f_pha() (tensorpac.EventRelatedPac property)</a>
 
@@ -387,7 +402,11 @@
 </li>
         <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.f_pha">(tensorpac.utils.ITC property)</a>
 </li>
+        <li><a href="generated/tensorpac.utils.PeakLockedTF.html#tensorpac.utils.PeakLockedTF.f_pha">(tensorpac.utils.PeakLockedTF property)</a>
+</li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.filter">filter() (tensorpac.EventRelatedPac method)</a>
 
       <ul>
@@ -399,9 +418,9 @@
 </li>
         <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.filter">(tensorpac.utils.ITC method)</a>
 </li>
+        <li><a href="generated/tensorpac.utils.PeakLockedTF.html#tensorpac.utils.PeakLockedTF.filter">(tensorpac.utils.PeakLockedTF method)</a>
+</li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.filterfit">filterfit() (tensorpac.EventRelatedPac method)</a>
 
       <ul>
@@ -505,7 +524,11 @@
 </li>
         <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.pacplot">(tensorpac.PreferredPhase method)</a>
 </li>
+        <li><a href="generated/tensorpac.utils.PeakLockedTF.html#tensorpac.utils.PeakLockedTF.pacplot">(tensorpac.utils.PeakLockedTF method)</a>
+</li>
       </ul></li>
+      <li><a href="generated/tensorpac.utils.PeakLockedTF.html#tensorpac.utils.PeakLockedTF">PeakLockedTF (class in tensorpac.utils)</a>
+</li>
       <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.phase">phase() (tensorpac.utils.BinAmplitude property)</a>
 </li>
   </ul></td>
@@ -516,6 +539,8 @@
 
       <ul>
         <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.plot">(tensorpac.utils.ITC method)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.PeakLockedTF.html#tensorpac.utils.PeakLockedTF.plot">(tensorpac.utils.PeakLockedTF method)</a>
 </li>
         <li><a href="generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD.plot">(tensorpac.utils.PSD method)</a>
 </li>
@@ -549,6 +574,8 @@
 </li>
         <li><a href="generated/tensorpac.PreferredPhase.html#tensorpac.PreferredPhase.savefig">(tensorpac.PreferredPhase method)</a>
 </li>
+        <li><a href="generated/tensorpac.utils.PeakLockedTF.html#tensorpac.utils.PeakLockedTF.savefig">(tensorpac.utils.PeakLockedTF method)</a>
+</li>
       </ul></li>
       <li><a href="generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.show">show() (tensorpac.EventRelatedPac method)</a>
 
@@ -560,6 +587,8 @@
         <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.show">(tensorpac.utils.BinAmplitude method)</a>
 </li>
         <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.show">(tensorpac.utils.ITC method)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.PeakLockedTF.html#tensorpac.utils.PeakLockedTF.show">(tensorpac.utils.PeakLockedTF method)</a>
 </li>
         <li><a href="generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD.show">(tensorpac.utils.PSD method)</a>
 </li>
@@ -607,6 +636,8 @@
 </li>
         <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.width">(tensorpac.utils.ITC property)</a>
 </li>
+        <li><a href="generated/tensorpac.utils.PeakLockedTF.html#tensorpac.utils.PeakLockedTF.width">(tensorpac.utils.PeakLockedTF property)</a>
+</li>
       </ul></li>
   </ul></td>
 </tr></table>
@@ -625,6 +656,8 @@
 </li>
         <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.xvec">(tensorpac.utils.ITC property)</a>
 </li>
+        <li><a href="generated/tensorpac.utils.PeakLockedTF.html#tensorpac.utils.PeakLockedTF.xvec">(tensorpac.utils.PeakLockedTF property)</a>
+</li>
       </ul></li>
   </ul></td>
 </tr></table>
@@ -642,6 +675,8 @@
         <li><a href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.yvec">(tensorpac.utils.BinAmplitude property)</a>
 </li>
         <li><a href="generated/tensorpac.utils.ITC.html#tensorpac.utils.ITC.yvec">(tensorpac.utils.ITC property)</a>
+</li>
+        <li><a href="generated/tensorpac.utils.PeakLockedTF.html#tensorpac.utils.PeakLockedTF.yvec">(tensorpac.utils.PeakLockedTF property)</a>
 </li>
       </ul></li>
   </ul></td>

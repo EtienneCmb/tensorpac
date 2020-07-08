@@ -77,6 +77,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.ITC.html">tensorpac.utils.ITC</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PeakLockedTF.html">tensorpac.utils.PeakLockedTF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
 </ul>
@@ -187,6 +188,12 @@
 <li class="toctree-l3"><a class="reference internal" href="plot_psd.html">Compute and plot the Power Spectrum Density (PSD)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_align_tf_pha_peak.html">Align time-frequency representations according to phase peak</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="plot_align_tf_pha_peak.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_align_tf_pha_peak.html#define-the-peak-locking-object-and-realign-tf-representations">Define the peak-locking object and realign TF representations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_align_tf_pha_peak.html#plotting-the-realignment">Plotting the realignment</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
@@ -250,15 +257,16 @@
       
   <div class="section" id="computation-times">
 <span id="sphx-glr-auto-examples-misc-sg-execution-times"></span><h1>Computation times<a class="headerlink" href="#computation-times" title="Permalink to this headline">¶</a></h1>
-<p><strong>00:14.997</strong> total execution time for <strong>auto_examples_misc</strong> files:</p>
+<p><strong>00:19.043</strong> total execution time for <strong>auto_examples_misc</strong> files:</p>
 <ul class="simple">
-<li><p><strong>00:07.734</strong>: <a class="reference internal" href="plot_preferred_phase.html#sphx-glr-auto-examples-misc-plot-preferred-phase-py"><span class="std std-ref">Find the preferred phase (PP)</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_preferred_phase.py</span></code>)</p></li>
-<li><p><strong>00:03.820</strong>: <a class="reference internal" href="plot_itc.html#sphx-glr-auto-examples-misc-plot-itc-py"><span class="std std-ref">Compute and plot the Inter-Trial Coherence (ITC)</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_itc.py</span></code>)</p></li>
-<li><p><strong>00:02.082</strong>: <a class="reference internal" href="plot_fmin_fmax_optmization.html#sphx-glr-auto-examples-misc-plot-fmin-fmax-optmization-py"><span class="std std-ref">Find the optimal bandwidth</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_fmin_fmax_optmization.py</span></code>)</p></li>
-<li><p><strong>00:00.586</strong>: <a class="reference internal" href="plot_binned_amplitude.html#sphx-glr-auto-examples-misc-plot-binned-amplitude-py"><span class="std std-ref">Bin amplitude according to the phase</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_binned_amplitude.py</span></code>)</p></li>
-<li><p><strong>00:00.292</strong>: <a class="reference internal" href="plot_frequency_vectors.html#sphx-glr-auto-examples-misc-plot-frequency-vectors-py"><span class="std std-ref">Define frequency vectors</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_frequency_vectors.py</span></code>)</p></li>
-<li><p><strong>00:00.271</strong>: <a class="reference internal" href="plot_artificially_coupled_signals.html#sphx-glr-auto-examples-misc-plot-artificially-coupled-signals-py"><span class="std std-ref">Generate artificially coupled signals</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_artificially_coupled_signals.py</span></code>)</p></li>
-<li><p><strong>00:00.212</strong>: <a class="reference internal" href="plot_psd.html#sphx-glr-auto-examples-misc-plot-psd-py"><span class="std std-ref">Compute and plot the Power Spectrum Density (PSD)</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_psd.py</span></code>)</p></li>
+<li><p><strong>00:08.640</strong>: <a class="reference internal" href="plot_preferred_phase.html#sphx-glr-auto-examples-misc-plot-preferred-phase-py"><span class="std std-ref">Find the preferred phase (PP)</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_preferred_phase.py</span></code>)</p></li>
+<li><p><strong>00:04.738</strong>: <a class="reference internal" href="plot_itc.html#sphx-glr-auto-examples-misc-plot-itc-py"><span class="std std-ref">Compute and plot the Inter-Trial Coherence (ITC)</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_itc.py</span></code>)</p></li>
+<li><p><strong>00:02.785</strong>: <a class="reference internal" href="plot_fmin_fmax_optmization.html#sphx-glr-auto-examples-misc-plot-fmin-fmax-optmization-py"><span class="std std-ref">Find the optimal bandwidth</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_fmin_fmax_optmization.py</span></code>)</p></li>
+<li><p><strong>00:01.419</strong>: <a class="reference internal" href="plot_align_tf_pha_peak.html#sphx-glr-auto-examples-misc-plot-align-tf-pha-peak-py"><span class="std std-ref">Align time-frequency representations according to phase peak</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_align_tf_pha_peak.py</span></code>)</p></li>
+<li><p><strong>00:00.496</strong>: <a class="reference internal" href="plot_binned_amplitude.html#sphx-glr-auto-examples-misc-plot-binned-amplitude-py"><span class="std std-ref">Bin amplitude according to the phase</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_binned_amplitude.py</span></code>)</p></li>
+<li><p><strong>00:00.395</strong>: <a class="reference internal" href="plot_frequency_vectors.html#sphx-glr-auto-examples-misc-plot-frequency-vectors-py"><span class="std std-ref">Define frequency vectors</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_frequency_vectors.py</span></code>)</p></li>
+<li><p><strong>00:00.306</strong>: <a class="reference internal" href="plot_artificially_coupled_signals.html#sphx-glr-auto-examples-misc-plot-artificially-coupled-signals-py"><span class="std std-ref">Generate artificially coupled signals</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_artificially_coupled_signals.py</span></code>)</p></li>
+<li><p><strong>00:00.264</strong>: <a class="reference internal" href="plot_psd.html#sphx-glr-auto-examples-misc-plot-psd-py"><span class="std std-ref">Compute and plot the Power Spectrum Density (PSD)</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_psd.py</span></code>)</p></li>
 </ul>
 </div>
 

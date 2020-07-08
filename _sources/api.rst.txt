@@ -36,6 +36,7 @@ Utility functions
    PSD
    ITC
    BinAmplitude
+   PeakLockedTF
    pac_vec
    pac_trivec
 

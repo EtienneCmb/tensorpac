@@ -16,7 +16,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="tensorpac.utils.pac_vec" href="tensorpac.utils.pac_vec.html" />
+    <link rel="next" title="tensorpac.utils.PeakLockedTF" href="tensorpac.utils.PeakLockedTF.html" />
     <link rel="prev" title="tensorpac.utils.ITC" href="tensorpac.utils.ITC.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -79,6 +79,7 @@
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.ITC.html">tensorpac.utils.ITC</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">tensorpac.utils.BinAmplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.PeakLockedTF.html">tensorpac.utils.PeakLockedTF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
 </ul>
@@ -189,6 +190,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/misc/plot_psd.html">Compute and plot the Power Spectrum Density (PSD)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/misc/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/misc/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/misc/plot_align_tf_pha_peak.html">Align time-frequency representations according to phase peak</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/misc/plot_align_tf_pha_peak.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/misc/plot_align_tf_pha_peak.html#define-the-peak-locking-object-and-realign-tf-representations">Define the peak-locking object and realign TF representations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/misc/plot_align_tf_pha_peak.html#plotting-the-realignment">Plotting the realignment</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/misc/plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/misc/plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../auto_examples/misc/plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
@@ -277,7 +284,7 @@ amplitude</p>
 <dt><strong>cycle</strong><span class="classifier">tuple | (3, 6)</span></dt><dd><p>Control the number of cycles for filtering (only if dcomplex is
 ‘hilbert’). Should be a tuple of integers where the first one
 refers to the number of cycles for the phase and the second for the
-amplitude <a href="#id3"><span class="problematic" id="id1">[#f5]_</span></a>.</p>
+amplitude <a class="bibtex reference internal" href="../references.html#bahramisharif2013propagating" id="id1">[2]</a>.</p>
 </dd>
 <dt><strong>width</strong><span class="classifier">int | 7</span></dt><dd><p>Width of the Morlet’s wavelet.</p>
 </dd>

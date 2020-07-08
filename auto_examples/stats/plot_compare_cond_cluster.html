@@ -79,6 +79,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.ITC.html">tensorpac.utils.ITC</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PeakLockedTF.html">tensorpac.utils.PeakLockedTF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
 </ul>
@@ -189,6 +190,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_psd.html">Compute and plot the Power Spectrum Density (PSD)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../misc/plot_align_tf_pha_peak.html">Align time-frequency representations according to phase peak</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_align_tf_pha_peak.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_align_tf_pha_peak.html#define-the-peak-locking-object-and-realign-tf-representations">Define the peak-locking object and realign TF representations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_align_tf_pha_peak.html#plotting-the-realignment">Plotting the realignment</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../misc/plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
@@ -328,51 +335,55 @@ Python package MNE-Python and in particular, the function
 </div>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Using a threshold of 4.006873
-stat_fun(H1): min=0.000000 max=79.408246
+stat_fun(H1): min=0.000000 max=65.941123
 Running initial clustering
-Found 14 clusters
+Found 11 clusters
 Permuting 999 times...
 
   0%|          |  : 0/999 [00:00&lt;?,       ?it/s]
-  3%|2         |  : 29/999 [00:00&lt;00:01,  856.82it/s]
-  6%|5         |  : 59/999 [00:00&lt;00:01,  858.36it/s]
-  9%|9         |  : 90/999 [00:00&lt;00:01,  861.13it/s]
- 12%|#2        |  : 120/999 [00:00&lt;00:01,  862.36it/s]
- 15%|#5        |  : 153/999 [00:00&lt;00:00,  867.36it/s]
- 19%|#8        |  : 185/999 [00:00&lt;00:00,  871.07it/s]
- 22%|##1       |  : 218/999 [00:00&lt;00:00,  875.84it/s]
- 25%|##4       |  : 249/999 [00:00&lt;00:00,  877.85it/s]
- 28%|##7       |  : 275/999 [00:00&lt;00:00,  871.68it/s]
- 30%|###       |  : 304/999 [00:00&lt;00:00,  871.05it/s]
- 33%|###2      |  : 329/999 [00:00&lt;00:00,  863.37it/s]
- 36%|###5      |  : 359/999 [00:00&lt;00:00,  864.47it/s]
- 39%|###9      |  : 390/999 [00:00&lt;00:00,  867.00it/s]
- 42%|####1     |  : 418/999 [00:00&lt;00:00,  864.91it/s]
- 45%|####5     |  : 450/999 [00:00&lt;00:00,  868.63it/s]
- 48%|####7     |  : 477/999 [00:00&lt;00:00,  864.93it/s]
- 50%|#####     |  : 504/999 [00:00&lt;00:00,  861.40it/s]
- 53%|#####3    |  : 532/999 [00:00&lt;00:00,  859.73it/s]
- 56%|#####5    |  : 557/999 [00:00&lt;00:00,  852.72it/s]
- 58%|#####7    |  : 578/999 [00:00&lt;00:00,  837.03it/s]
- 61%|######    |  : 609/999 [00:00&lt;00:00,  840.61it/s]
- 63%|######3   |  : 632/999 [00:00&lt;00:00,  830.87it/s]
- 66%|######6   |  : 660/999 [00:00&lt;00:00,  830.75it/s]
- 69%|######9   |  : 690/999 [00:00&lt;00:00,  833.43it/s]
- 72%|#######1  |  : 719/999 [00:00&lt;00:00,  834.65it/s]
- 74%|#######4  |  : 743/999 [00:00&lt;00:00,  827.21it/s]
- 77%|#######7  |  : 773/999 [00:00&lt;00:00,  830.01it/s]
- 80%|#######9  |  : 798/999 [00:00&lt;00:00,  824.96it/s]
- 82%|########1 |  : 818/999 [00:00&lt;00:00,  808.88it/s]
- 84%|########3 |  : 839/999 [00:01&lt;00:00,  796.96it/s]
- 87%|########6 |  : 866/999 [00:01&lt;00:00,  797.11it/s]
- 89%|########8 |  : 885/999 [00:01&lt;00:00,  780.73it/s]
- 91%|######### |  : 905/999 [00:01&lt;00:00,  768.50it/s]
- 93%|#########2|  : 925/999 [00:01&lt;00:00,  757.21it/s]
- 94%|#########4|  : 944/999 [00:01&lt;00:00,  744.22it/s]
- 96%|#########6|  : 963/999 [00:01&lt;00:00,  732.37it/s]
- 98%|#########8|  : 982/999 [00:01&lt;00:00,  721.48it/s]
-100%|##########|  : 999/999 [00:01&lt;00:00,  710.86it/s]
-100%|##########|  : 999/999 [00:01&lt;00:00,  779.24it/s]
+  2%|1         |  : 15/999 [00:00&lt;00:02,  436.95it/s]
+  4%|4         |  : 42/999 [00:00&lt;00:02,  447.02it/s]
+  7%|7         |  : 72/999 [00:00&lt;00:02,  458.40it/s]
+  9%|8         |  : 88/999 [00:00&lt;00:01,  459.01it/s]
+ 11%|#1        |  : 114/999 [00:00&lt;00:01,  468.39it/s]
+ 14%|#4        |  : 143/999 [00:00&lt;00:01,  479.23it/s]
+ 16%|#6        |  : 160/999 [00:00&lt;00:01,  480.17it/s]
+ 19%|#8        |  : 186/999 [00:00&lt;00:01,  489.24it/s]
+ 21%|##1       |  : 214/999 [00:00&lt;00:01,  499.44it/s]
+ 23%|##3       |  : 230/999 [00:00&lt;00:01,  497.92it/s]
+ 26%|##6       |  : 260/999 [00:00&lt;00:01,  509.04it/s]
+ 29%|##8       |  : 287/999 [00:00&lt;00:01,  518.46it/s]
+ 30%|###       |  : 303/999 [00:00&lt;00:01,  515.93it/s]
+ 33%|###3      |  : 333/999 [00:00&lt;00:01,  526.92it/s]
+ 36%|###5      |  : 359/999 [00:00&lt;00:01,  535.30it/s]
+ 38%|###7      |  : 375/999 [00:00&lt;00:01,  531.55it/s]
+ 41%|####      |  : 406/999 [00:00&lt;00:01,  542.90it/s]
+ 43%|####3     |  : 430/999 [00:00&lt;00:01,  549.32it/s]
+ 45%|####4     |  : 447/999 [00:00&lt;00:01,  546.69it/s]
+ 48%|####7     |  : 477/999 [00:00&lt;00:00,  557.35it/s]
+ 50%|#####     |  : 502/999 [00:00&lt;00:00,  564.31it/s]
+ 52%|#####1    |  : 518/999 [00:00&lt;00:00,  558.72it/s]
+ 55%|#####4    |  : 549/999 [00:00&lt;00:00,  569.77it/s]
+ 57%|#####7    |  : 571/999 [00:00&lt;00:00,  573.34it/s]
+ 59%|#####8    |  : 587/999 [00:00&lt;00:00,  567.18it/s]
+ 62%|######2   |  : 621/999 [00:00&lt;00:00,  579.79it/s]
+ 64%|######4   |  : 643/999 [00:00&lt;00:00,  582.99it/s]
+ 66%|######6   |  : 660/999 [00:00&lt;00:00,  578.13it/s]
+ 69%|######9   |  : 694/999 [00:00&lt;00:00,  590.63it/s]
+ 72%|#######1  |  : 716/999 [00:01&lt;00:00,  593.40it/s]
+ 73%|#######3  |  : 734/999 [00:01&lt;00:00,  589.92it/s]
+ 77%|#######6  |  : 768/999 [00:01&lt;00:00,  602.40it/s]
+ 79%|#######8  |  : 789/999 [00:01&lt;00:00,  603.32it/s]
+ 81%|########  |  : 806/999 [00:01&lt;00:00,  597.22it/s]
+ 84%|########3 |  : 839/999 [00:01&lt;00:00,  609.08it/s]
+ 86%|########5 |  : 859/999 [00:01&lt;00:00,  608.22it/s]
+ 88%|########7 |  : 877/999 [00:01&lt;00:00,  603.83it/s]
+ 91%|#########1|  : 911/999 [00:01&lt;00:00,  616.15it/s]
+ 93%|#########3|  : 930/999 [00:01&lt;00:00,  613.23it/s]
+ 95%|#########4|  : 949/999 [00:01&lt;00:00,  610.36it/s]
+ 98%|#########8|  : 982/999 [00:01&lt;00:00,  621.98it/s]
+100%|##########|  : 999/999 [00:01&lt;00:00,  619.48it/s]
+100%|##########|  : 999/999 [00:01&lt;00:00,  703.38it/s]
 Computing cluster p-values
 Done.
 </pre></div>
@@ -400,7 +411,7 @@ gray scale colormap while significant clusters are going to be color coded.</p>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_plot_compare_cond_cluster_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_compare_cond_cluster_001.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  18.035 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  21.634 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-stats-plot-compare-cond-cluster-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/adb6d4bb25e242638fd01f4411e7543f/plot_compare_cond_cluster.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_compare_cond_cluster.py</span></code></a></p>

@@ -77,6 +77,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.ITC.html">tensorpac.utils.ITC</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.PeakLockedTF.html">tensorpac.utils.PeakLockedTF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
 </ul>
@@ -187,6 +188,12 @@
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_psd.html">Compute and plot the Power Spectrum Density (PSD)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../misc/plot_align_tf_pha_peak.html">Align time-frequency representations according to phase peak</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_align_tf_pha_peak.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_align_tf_pha_peak.html#define-the-peak-locking-object-and-realign-tf-representations">Define the peak-locking object and realign TF representations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../misc/plot_align_tf_pha_peak.html#plotting-the-realignment">Plotting the realignment</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../misc/plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../misc/plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
@@ -250,11 +257,11 @@
       
   <div class="section" id="computation-times">
 <span id="sphx-glr-auto-examples-stats-sg-execution-times"></span><h1>Computation times<a class="headerlink" href="#computation-times" title="Permalink to this headline">¶</a></h1>
-<p><strong>00:25.476</strong> total execution time for <strong>auto_examples_stats</strong> files:</p>
+<p><strong>00:32.181</strong> total execution time for <strong>auto_examples_stats</strong> files:</p>
 <ul class="simple">
-<li><p><strong>00:18.035</strong>: <a class="reference internal" href="plot_compare_cond_cluster.html#sphx-glr-auto-examples-stats-plot-compare-cond-cluster-py"><span class="std std-ref">Compare PAC of two experimental conditions with cluster-based statistics</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_cond_cluster.py</span></code>)</p></li>
-<li><p><strong>00:06.346</strong>: <a class="reference internal" href="plot_pvalues.html#sphx-glr-auto-examples-stats-plot-pvalues-py"><span class="std std-ref">Compute and plot the p-values</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_pvalues.py</span></code>)</p></li>
-<li><p><strong>00:01.095</strong>: <a class="reference internal" href="plot_stats_stationary.html#sphx-glr-auto-examples-stats-plot-stats-stationary-py"><span class="std std-ref">Identify stationary time-series using unit root test</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_stats_stationary.py</span></code>)</p></li>
+<li><p><strong>00:21.634</strong>: <a class="reference internal" href="plot_compare_cond_cluster.html#sphx-glr-auto-examples-stats-plot-compare-cond-cluster-py"><span class="std std-ref">Compare PAC of two experimental conditions with cluster-based statistics</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_compare_cond_cluster.py</span></code>)</p></li>
+<li><p><strong>00:07.625</strong>: <a class="reference internal" href="plot_pvalues.html#sphx-glr-auto-examples-stats-plot-pvalues-py"><span class="std std-ref">Compute and plot the p-values</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_pvalues.py</span></code>)</p></li>
+<li><p><strong>00:02.921</strong>: <a class="reference internal" href="plot_stats_stationary.html#sphx-glr-auto-examples-stats-plot-stats-stationary-py"><span class="std std-ref">Identify stationary time-series using unit root test</span></a> (<code class="docutils literal notranslate"><span class="pre">plot_stats_stationary.py</span></code>)</p></li>
 </ul>
 </div>
 

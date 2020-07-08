@@ -79,6 +79,7 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.ITC.html">tensorpac.utils.ITC</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.PeakLockedTF.html">tensorpac.utils.PeakLockedTF</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
 </ul>
@@ -189,6 +190,12 @@
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_psd.html">Compute and plot the Power Spectrum Density (PSD)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_align_tf_pha_peak.html">Align time-frequency representations according to phase peak</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_align_tf_pha_peak.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_align_tf_pha_peak.html#define-the-peak-locking-object-and-realign-tf-representations">Define the peak-locking object and realign TF representations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_align_tf_pha_peak.html#plotting-the-realignment">Plotting the realignment</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_frequency_vectors.html">Define frequency vectors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="auto_examples/misc/plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="auto_examples/misc/plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
@@ -308,10 +315,13 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude" title="tensorpac.utils.BinAmplitude"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BinAmplitude</span></code></a>(x, sf[, f_pha, f_amp, n_bins, …])</p></td>
 <td><p>Bin the amplitude according to the phase.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.utils.pac_vec.html#tensorpac.utils.pac_vec" title="tensorpac.utils.pac_vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac_vec</span></code></a>([f_pha, f_amp])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.utils.PeakLockedTF.html#tensorpac.utils.PeakLockedTF" title="tensorpac.utils.PeakLockedTF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PeakLockedTF</span></code></a>(x, sf, cue[, times, f_pha, …])</p></td>
+<td><p>Peak-Locked Time-frequency representation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.utils.pac_vec.html#tensorpac.utils.pac_vec" title="tensorpac.utils.pac_vec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac_vec</span></code></a>([f_pha, f_amp])</p></td>
 <td><p>Generate cross-frequency coupling vectors.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.utils.pac_trivec.html#tensorpac.utils.pac_trivec" title="tensorpac.utils.pac_trivec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac_trivec</span></code></a>([f_start, f_end, f_width])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.utils.pac_trivec.html#tensorpac.utils.pac_trivec" title="tensorpac.utils.pac_trivec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pac_trivec</span></code></a>([f_start, f_end, f_width])</p></td>
 <td><p>Generate triangular vector.</p></td>
 </tr>
 </tbody>
