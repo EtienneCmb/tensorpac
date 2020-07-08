@@ -2,7 +2,8 @@
 import numpy as np
 import matplotlib
 
-from tensorpac.utils import pac_vec, pac_trivec, PSD, BinAmplitude, ITC
+from tensorpac.utils import (pac_vec, pac_trivec, PSD, BinAmplitude, ITC,
+                             PeakLockedTF)
 
 
 class TestUtils(object):
@@ -66,3 +67,12 @@ class TestUtils(object):
         itc_2d.plot()
         itc_1d.show()
         matplotlib.pyplot.close('all')
+
+    def test_peaklockedtf(self):
+        """Test class PeakLockedTF."""
+        x = np.random.rand(10, 1000)
+        times = np.linspace(-1, 1, 1000)
+        PeakLockedTF(x, 512, 100,)
+        p_obj = PeakLockedTF(x, 512, 0., times=times)
+        p_obj.plot(zscore=False)
+        p_obj.plot(zscore=True, edges=10)

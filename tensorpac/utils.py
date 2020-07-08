@@ -5,7 +5,11 @@ import numpy as np
 from scipy.signal import periodogram
 
 from tensorpac.methods.meth_pac import _kl_hr
-from tensorpac.pac import _PacObj
+from tensorpac.pac import _PacObj, _PacVisual
+from tensorpac.io import set_log_level
+
+from matplotlib.gridspec import GridSpec
+import matplotlib.pyplot as plt
 
 logger = logging.getLogger('tensorpac')
 
@@ -235,7 +239,7 @@ class BinAmplitude(_PacObj):
         Control the number of cycles for filtering (only if dcomplex is
         'hilbert'). Should be a tuple of integers where the first one
         refers to the number of cycles for the phase and the second for the
-        amplitude [#f5]_.
+        amplitude :cite:`bahramisharif2013propagating`.
     width : int | 7
         Width of the Morlet's wavelet.
     edges : int | None
@@ -403,3 +407,240 @@ class ITC(_PacObj):
     def itc(self):
         """Get the itc value."""
         return self._itc
+
+
+class PeakLockedTF(_PacObj, _PacVisual):
+    """Peak-Locked Time-frequency representation.
+
+    This class can be used in order to re-align time-frequency representations
+    around a time-point (cue) according to the closest phase peak. This type
+    of visualization can bring out a cyclic behavior of the amplitude at a
+    given phase, potentially indicating the presence of a phase-amplitude
+    coupling. Here's the detailed pipeline :
+
+        * Filter around a single phase frequency bands and across multiple
+          amplitude frequencies
+        * Use a `cue` which define the time-point to use for the realignment
+        * Detect in the filtered phase the closest peak to the cue. This step
+          is repeated to each trial in order to get a list of length (n_epochs)
+          that contains the number of sample (shift) so that if the phase is
+          moved, the peak fall onto the cue. A positive shift indicates that
+          the phase is moved forward while a negative shift is for a backward
+          move
+        * Apply, to each trial, this shift to the amplitude
+        * Plot the mean re-aligned amplitudes
+
+    Parameters
+    ----------
+    x : array_like
+        Array of data of shape (n_epochs, n_times)
+    sf : float
+        The sampling frequency
+    cue : int, float
+        Time-point to use in order to detect the closest phase peak. This
+        parameter works in conjunction with the `times` input below. Use
+        either :
+
+            * An integer and `times` is None to indicate that you want to
+              realign according to a time-point in sample
+            * A integer or a float with `times` the time vector if you want
+              that Tensorpac automatically infer the sample number around which
+              to align
+    times : array_like | None
+        Time vector
+    f_pha : tuple, list | [2, 4]
+        List of two floats describing the frequency bounds for extracting the
+        phase
+    f_amp : tuple, list | [60, 80]
+        Frequency vector for the amplitude. Here you can use several forms to
+        define those vectors :
+
+            * Dynamic definition : (start, stop, width, step)
+            * Using a string : `f_amp` can be 'lres', 'mres', 'hres'
+              respectively for low, middle and high resolution vectors
+    cycle : tuple | (3, 6)
+        Control the number of cycles for filtering. Should be a tuple of
+        integers where the first one refers to the number of cycles for the
+        phase and the second for the amplitude
+        :cite:`bahramisharif2013propagating`.
+    """
+
+    def __init__(self, x, sf, cue, times=None, f_pha=[5, 7], f_amp='hres',
+                 cycle=(3, 6), n_jobs=-1, verbose=None):
+        """Init."""
+        set_log_level(verbose)
+        # initialize to retrieve filtering methods
+        _PacObj.__init__(self, f_pha=f_pha, f_amp=f_amp, dcomplex='hilbert',
+                         cycle=cycle)
+        _PacVisual.__init__(self)
+        logger.info("PeakLockedTF object defined")
+        # inputs checking
+        x = np.atleast_2d(x)
+        assert isinstance(x, np.ndarray) and (x.ndim == 2)
+        assert isinstance(sf, (int, float))
+        assert isinstance(cue, (int, float))
+        assert isinstance(f_pha, (list, tuple)) and (len(f_pha) == 2)
+        n_epochs, n_times = x.shape
+
+        # manage cur conversion
+        if times is None:
+            cue = int(cue)
+            times = np.arange(n_times)
+            logger.info(f"    align on sample cue={cue}")
+        else:
+            assert isinstance(times, np.ndarray) and (len(times) == n_times)
+            cue_time = cue
+            cue = np.abs(times - cue).argmin() - 1
+            logger.info(f"    align on time-point={cue_time} (sample={cue})")
+        self.cue, self._times = cue, times
+
+        # extract phase and amplitudes
+        logger.info(f"    extract phase and amplitudes "
+                    f"(n_amps={len(self.yvec)})")
+        kw = dict(keepfilt=False, n_jobs=n_jobs)
+        pha = self.filter(sf, x, 'phase', n_jobs=n_jobs, keepfilt=True)
+        amp = self.filter(sf, x, 'amplitude', n_jobs=n_jobs)
+        self._pha, self._amp = pha, amp ** 2
+
+        # peak detection
+        logger.info(f"    running peak detection around sample={cue}")
+        self.shifts = self._peak_detection(self._pha.squeeze(), cue)
+
+        # realign phases and amplitudes
+        logger.info(f"    realign the {n_epochs} phases and amplitudes")
+        self.amp_a = self._shift_signals(self._amp, self.shifts, fill_with=0.)
+        self.pha_a = self._shift_signals(self._pha, self.shifts, fill_with=0.)
+
+    @staticmethod
+    def _peak_detection(pha, cue):
+        """Single trial closest to a cue peak detection.
+        
+        Parameters
+        ----------
+        pha : array_like
+            Array of single trial phases of shape (n_trials, n_times)
+        cue : int
+            Cue to use as a reference (in sample unit)
+        
+        Returns
+        -------
+        peaks : array_like
+            Array of length (n_trials,) describing each delay to apply
+            to each trial in order to realign the phases. In detail :
+            
+                * Positive delays means that zeros should be prepend
+                * Negative delays means that zeros should be append
+        """
+        n_trials, n_times = pha.shape
+        peaks = []
+        for tr in range(n_trials):
+            # select the single trial phase
+            st_pha = pha[tr, :]
+            # detect all peaks across time points
+            st_peaks = []
+            for t in range(n_times - 1):
+                if (st_pha[t - 1] < st_pha[t]) and (st_pha[t] > st_pha[t + 1]):
+                    st_peaks += [t]
+            # detect the minimum peak
+            min_peak = st_peaks[np.abs(np.array(st_peaks) - cue).argmin()]
+            peaks += [cue - min_peak]
+
+        return np.array(peaks)
+
+    @staticmethod
+    def _shift_signals(sig, n_shifts, fill_with=0):
+        """Shift an array of signals according to an array of delays.
+        
+        Parameters
+        ----------
+        sig : array_like
+            Array of signals of shape (n_freq, n_trials, n_times)
+        n_shifts : array_like
+            Array of delays to apply to each trial of shape (n_trials,)
+        fill_with : int
+            Value to prepend / append to each shifted time-series
+        
+        Returns
+        -------
+        sig_shifted : array_like
+            Array of shifted signals with the same shape as the input
+        """
+        # prepare the needed variables
+        n_freqs, n_trials, n_pts = sig.shape
+        sig_shifted = np.zeros_like(sig)
+        # shift each trial
+        for tr in range(n_trials):
+            # select the data of a specific trial
+            st_shift = n_shifts[tr]
+            st_sig = sig[:, tr, :]
+            fill = np.full((n_freqs, abs(st_shift)), fill_with,
+                           dtype=st_sig.dtype)
+            # shift this specific trial
+            if st_shift >= 0:   # move forward = prepend zeros
+                sig_shifted[:, tr, :] = np.c_[fill, st_sig][:, 0:-st_shift]
+            elif st_shift < 0:  # move backward = append zeros
+                sig_shifted[:, tr, :] = np.c_[st_sig, fill][:, abs(st_shift):]
+
+        return sig_shifted
+
+    def plot(self, zscore=False, edges=0, **kwargs):
+        """Integrated Peak-Locked TF plotting function.
+
+        Parameters
+        ----------
+        zscore : bool | False
+            Normalize the power by using a z-score normalization. This can be
+            useful in order to compensate the 1 / f effect in the power
+            spectrum. If True, the mean and deviation are computed at the
+            single trial level and across all time points
+        edges : int | 0
+            Number of pixels to discard to compensate filtering edge effect
+            (`power[edges:-edges]`).
+        kwargs : dict | {}
+            Additional arguments are sent to the
+            :class:`tensorpac.utils.PeakLockedTF.pacplot` method
+        """
+        # manage additional arguments
+        kwargs['colorbar'] = False
+        kwargs['ylabel'] = 'Frequency for amplitude (hz)'
+        kwargs['xlabel'] = ''
+        kwargs['fz_labels'] = kwargs.get('fz_labels', 14)
+        kwargs['fz_cblabel'] = kwargs.get('fz_cblabel', 14)
+        kwargs['fz_title'] = kwargs.get('fz_title', 16)
+        sl_times = slice(edges, len(self._times) - edges)
+        times = self._times[sl_times]
+        pha_n = self.pha_a[..., sl_times].squeeze()
+        # z-score normalization
+        if zscore:
+            _mean = self.amp_a[..., sl_times].mean(2, keepdims=True)
+            _std = self.amp_a[..., sl_times].std(2, keepdims=True)
+            amp_n = (self.amp_a[..., sl_times] - _mean) / _std
+        else:
+            amp_n = self.amp_a[..., sl_times]
+
+        # grid definition
+        gs = GridSpec(8, 8)
+        # image plot
+        plt.subplot(gs[slice(0, 6), 0:-1])
+        self.pacplot(amp_n.mean(1), times, self.yvec, **kwargs)
+        plt.axvline(times[self.cue], color='w', lw=2)
+        plt.tick_params(bottom=False, labelbottom=False)
+        # external colorbar
+        plt.subplot(gs[slice(1, 5), -1])
+        cb = plt.colorbar(self._plt_im, pad=0.01, cax=plt.gca())
+        cb.set_label('Power (V**2/Hz)', fontsize=kwargs['fz_cblabel'])
+        cb.outline.set_visible(False)
+        # phase plot
+        plt.subplot(gs[slice(6, 8), 0:-1])
+        plt.plot(times, pha_n.T, color='lightgray', alpha=.2, lw=1.)
+        plt.plot(times, pha_n.mean(0), label='single trial phases', alpha=.2,
+                 lw=1.)  # legend tweaking
+        plt.plot(times, pha_n.mean(0), label='mean phases',
+                 color='#1f77b4')
+        plt.axvline(times[self.cue], color='k', lw=2)
+        plt.autoscale(axis='both', tight=True, enable=True)
+        plt.xlabel("Times", fontsize=kwargs['fz_labels'])
+        plt.ylabel("V / Hz", fontsize=kwargs['fz_labels'])
+        # bottom legend
+        plt.legend(loc='center', bbox_to_anchor=(.5, -.5),
+                   fontsize='x-large', ncol=2)

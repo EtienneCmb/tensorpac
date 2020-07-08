@@ -134,6 +134,7 @@ class _PacVisual(object):
         else:
             raise ValueError("The plotas parameter must either be 'imshow' or "
                              "'contour'")
+        self._plt_im = im
 
         # Add levels :
         if levels is not None:
