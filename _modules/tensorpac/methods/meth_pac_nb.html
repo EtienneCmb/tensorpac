@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>tensorpac.methods.meth_pac_nb &#8212; Tensorpac 0.6.3 documentation</title>
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tp_style.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../index.html"><span><img src="../../../_static/ico64.png"></span>
+          Tensorpac</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.3</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../../install.html">Install</a></li>
+                <li><a href="../../../tutorial.html">Tutorial</a></li>
+                <li><a href="../../../api.html">API</a></li>
+                <li><a href="../../../auto_examples/index.html">Examples</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#standard-installation">Standard installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../install.html#install-the-most-up-to-date-version">Install the most up-to-date version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api.html#compute-phase-amplitude-coupling">Compute phase-amplitude coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.Pac.html">tensorpac.Pac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.EventRelatedPac.html">tensorpac.EventRelatedPac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.PreferredPhase.html">tensorpac.PreferredPhase</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api.html#utility-functions">Utility functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.utils.PSD.html">tensorpac.utils.PSD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.utils.ITC.html">tensorpac.utils.ITC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.utils.BinAmplitude.html">tensorpac.utils.BinAmplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.utils.PeakLockedTF.html">tensorpac.utils.PeakLockedTF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.utils.pac_vec.html">tensorpac.utils.pac_vec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.utils.pac_trivec.html">tensorpac.utils.pac_trivec</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api.html#generate-synthetic-signals">Generate synthetic signals</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.signals.pac_signals_wavelet.html">tensorpac.signals.pac_signals_wavelet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.signals.pac_signals_tort.html">tensorpac.signals.pac_signals_tort</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api.html#statistics">Statistics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../generated/tensorpac.stats.test_stationarity.html">tensorpac.stats.test_stationarity</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api.html#individual-methods">Individual methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api.html#pac-methods">PAC methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api.html#tensor-based-implementation">Tensor-based implementation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.heights_ratio.html">tensorpac.methods.heights_ratio</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api.html#numba-based-implementation">Numba-based implementation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.mean_vector_length_nb.html">tensorpac.methods.mean_vector_length_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.modulation_index_nb.html">tensorpac.methods.modulation_index_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.heights_ratio_nb.html">tensorpac.methods.heights_ratio_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.norm_direct_pac_nb.html">tensorpac.methods.norm_direct_pac_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.phase_locking_value_nb.html">tensorpac.methods.phase_locking_value_nb</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api.html#event-related-pac-methods">Event Related PAC methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.erpac.html">tensorpac.methods.erpac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.ergcpac.html">tensorpac.methods.ergcpac</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api.html#preferred-phase">Preferred phase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.preferred_phase.html">tensorpac.methods.preferred_phase</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api.html#surrogates-methods">Surrogates methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.swap_pha_amp.html">tensorpac.methods.swap_pha_amp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.swap_blocks.html">tensorpac.methods.swap_blocks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.time_lag.html">tensorpac.methods.time_lag</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api.html#normalization">Normalization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.normalize.html">tensorpac.methods.normalize</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#phase-amplitude-coupling">Phase-Amplitude coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/pac/plot_readme.html">README example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/pac/plot_pac_methods.html">Comparison of the implemented PAC methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/pac/plot_pac_methods.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/pac/plot_pac_methods.html#extract-phases-and-amplitudes">Extract phases and amplitudes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/pac/plot_pac_methods.html#compute-plot-and-compare-pac">Compute, plot and compare PAC</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/pac/plot_compare_surrogates.html">Compare methods to correct PAC for spurious coupling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/pac/plot_compare_surrogates.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/pac/plot_compare_surrogates.html#extract-phases-and-amplitudes">Extract phases and amplitudes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/pac/plot_compare_surrogates.html#compute-pac-and-surrogates">Compute PAC and surrogates</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/pac/plot_compare_normalizations.html">Compare normalization types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/pac/plot_compare_normalizations.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/pac/plot_compare_normalizations.html#extract-phases-and-amplitudes">Extract phases and amplitudes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/pac/plot_compare_normalizations.html#recompute-pac-and-surrogates-and-switch-the-normalization-types">Recompute PAC and surrogates and switch the normalization types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/pac/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/pac/plot_long_range_coupling.html">Long-range PAC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#event-related-phase-amplitude-coupling">Event-Related Phase-Amplitude coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/erpac/plot_erpac_stats.html">Event-Related Phase Amplitude Coupling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/erpac/plot_erpac_stats.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/erpac/plot_erpac_stats.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/erpac/plot_erpac.html">Event-Related Phase Amplitude Coupling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/erpac/plot_erpac.html#generate-a-synthetic-signal">Generate a synthetic signal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/erpac/plot_erpac.html#define-an-erpac-object-and-extract-the-phase-and-the-amplitude">Define an ERPAC object and extract the phase and the amplitude</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/erpac/plot_erpac.html#compute-the-erpac-using-the-two-implemented-methods-and-plot-it">Compute the ERPAC using the two implemented methods and plot it</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#statistics">Statistics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/stats/plot_stats_stationary.html">Identify stationary time-series using unit root test</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/stats/plot_stats_stationary.html#define-a-random-dataset">Define a random dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/stats/plot_stats_stationary.html#compute-the-statistical-test">Compute the statistical test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/stats/plot_stats_stationary.html#plot-each-trial">Plot each trial</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/stats/plot_pvalues.html">Compute and plot the p-values</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/stats/plot_pvalues.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/stats/plot_pvalues.html#compute-true-pac-estimation-and-surrogates-distribution">Compute true PAC estimation and surrogates distribution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/stats/plot_compare_cond_cluster.html">Compare PAC of two experimental conditions with cluster-based statistics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/stats/plot_compare_cond_cluster.html#simulate-the-data-coming-from-two-experimental-conditions">Simulate the data coming from two experimental conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/stats/plot_compare_cond_cluster.html#compute-the-single-trial-pac-on-both-datasets">Compute the single trial PAC on both datasets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/stats/plot_compare_cond_cluster.html#correct-for-multiple-comparisons-using-a-cluster-based-approach">Correct for multiple-comparisons using a cluster-based approach</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/stats/plot_compare_cond_cluster.html#plot-the-significant-clusters">Plot the significant clusters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../auto_examples/index.html#miscellaneous">Miscellaneous</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/misc/plot_psd.html">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/misc/plot_fmin_fmax_optmization.html">Find the optimal bandwidth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/misc/plot_binned_amplitude.html">Bin amplitude according to the phase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/misc/plot_align_tf_pha_peak.html">Align time-frequency representations according to phase peak</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/misc/plot_align_tf_pha_peak.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/misc/plot_align_tf_pha_peak.html#define-the-peak-locking-object-and-realign-tf-representations">Define the peak-locking object and realign TF representations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/misc/plot_align_tf_pha_peak.html#plotting-the-realignment">Plotting the realignment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/misc/plot_frequency_vectors.html">Define frequency vectors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/misc/plot_itc.html">Compute and plot the Inter-Trial Coherence (ITC)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/misc/plot_itc.html#generate-a-random-data-of-shape-n-epochs-n-times">Generate a random data of shape (n_epochs, n_times)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/misc/plot_itc.html#compute-and-plot-the-power-spectrum-density-psd">Compute and plot the Power Spectrum Density (PSD)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/misc/plot_itc.html#id1">Compute and plot the Inter-Trial Coherence (ITC)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/misc/plot_artificially_coupled_signals.html">Generate artificially coupled signals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../auto_examples/misc/plot_preferred_phase.html">Find the preferred phase (PP)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/misc/plot_preferred_phase.html#generate-synthetic-signals-sake-of-illustration">Generate synthetic signals (sake of illustration)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/misc/plot_preferred_phase.html#extract-phases-amplitudes-and-compute-the-preferred-phase">Extract phases, amplitudes and compute the preferred phase</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../auto_examples/misc/plot_preferred_phase.html#plot-the-preferred-phase">Plot the preferred phase</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributors.html#id1">Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cite.html">Cite Tensorpac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../community.html">Community</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../community.html#report-an-issue">Report an issue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../community.html#chat">Chat</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <h1>Source code for tensorpac.methods.meth_pac_nb</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Numba implementation of some PAC functions.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">erfinv</span>
+
+
+<span class="c1"># if Numba not installed, this section should return a Numba-free jit wrapper</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">numba</span>
+    <span class="k">def</span> <span class="nf">jit</span><span class="p">(</span><span class="n">signature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nogil</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fastmath</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># noqa</span>
+            <span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">numba</span><span class="o">.</span><span class="n">jit</span><span class="p">(</span><span class="n">signature_or_function</span><span class="o">=</span><span class="n">signature</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">,</span>
+                         <span class="n">nogil</span><span class="o">=</span><span class="n">nogil</span><span class="p">,</span> <span class="n">fastmath</span><span class="o">=</span><span class="n">fastmath</span><span class="p">,</span> <span class="n">nopython</span><span class="o">=</span><span class="n">nopython</span><span class="p">,</span>
+                         <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">jit</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># noqa</span>
+        <span class="k">def</span> <span class="nf">_jit</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">func</span>
+        <span class="k">return</span> <span class="n">_jit</span>
+
+
+<div class="viewcode-block" id="mean_vector_length_nb"><a class="viewcode-back" href="../../../generated/tensorpac.methods.mean_vector_length_nb.html#tensorpac.methods.mean_vector_length_nb">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="s2">&quot;f8[:,:,:](f8[:,:,:], f8[:,:,:])&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">mean_vector_length_nb</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Numba-based Mean Vector Length (MVL).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pha, amp : array_like</span>
+<span class="sd">        Respectively the arrays of phases of shape (n_pha, n_epochs, n_times)</span>
+<span class="sd">        and the array of amplitudes of shape (n_amp, n_epochs, n_times). Both</span>
+<span class="sd">        arrays should be of type float64 (np.float64)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pac : array_like</span>
+<span class="sd">        Array of phase amplitude coupling of shape (n_amp, n_pha, n_epochs)</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Canolty et al. 2006 :cite:`canolty2006high`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_pha</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_times</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">n_amp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">pac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_amp</span><span class="p">,</span> <span class="n">n_pha</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="c1"># single conversion</span>
+    <span class="n">exp_pha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha</span><span class="p">)</span>
+    <span class="n">amp_comp</span> <span class="o">=</span> <span class="n">amp</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_amp</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pha</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+                <span class="n">_pha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">exp_pha</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="p">:])</span>
+                <span class="n">_amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">amp_comp</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="p">:])</span>
+                <span class="n">pac</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">tr</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_amp</span><span class="p">,</span> <span class="n">_pha</span><span class="p">))</span>
+    <span class="n">pac</span> <span class="o">/=</span> <span class="n">n_times</span>
+
+    <span class="k">return</span> <span class="n">pac</span></div>
+
+
+<span class="nd">@jit</span><span class="p">(</span><span class="s2">&quot;f8[:](f8[:], f8[:], u8, b1)&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_kl_hr_nb</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">mean_bins</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Binarize the amplitude according to phase values.</span>
+
+<span class="sd">    This function is shared by the Kullback-Leibler Distance and the</span>
+<span class="sd">    Height Ratio.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">vecbin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">n_bins</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">phad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">digitize</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">vecbin</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">u_phad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">phad</span><span class="p">)</span>
+
+    <span class="n">abin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">u_phad</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">n_i</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">u_phad</span><span class="p">):</span>
+        <span class="c1"># find where phase take vecbin values</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">((</span><span class="n">phad</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="k">if</span> <span class="n">mean_bins</span> <span class="k">else</span> <span class="mf">1.</span>
+        <span class="c1"># take the sum of amplitude inside the bin</span>
+        <span class="n">abin</span><span class="p">[</span><span class="n">n_i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">amp</span><span class="p">),</span> <span class="n">idx</span><span class="p">)</span> <span class="o">/</span> <span class="n">m</span>
+
+    <span class="k">return</span> <span class="n">abin</span>
+
+
+<div class="viewcode-block" id="modulation_index_nb"><a class="viewcode-back" href="../../../generated/tensorpac.methods.modulation_index_nb.html#tensorpac.methods.modulation_index_nb">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="s2">&quot;f8[:,:,:](f8[:,:,:], f8[:,:,:], u8)&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">modulation_index_nb</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Numba-based Modulation index (MI).</span>
+
+<span class="sd">    The modulation index is obtained using the Kullback Leibler Distance which</span>
+<span class="sd">    measures how much the distribution of binned amplitude differs from a</span>
+<span class="sd">    uniform distribution.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pha, amp : array_like</span>
+<span class="sd">        Respectively the arrays of phases of shape (n_pha, n_epochs, n_times)</span>
+<span class="sd">        and the array of amplitudes of shape (n_amp, n_epochs, n_times). Both</span>
+<span class="sd">        arrays should be of type float64 (np.float64)</span>
+<span class="sd">    n_bins : int | 18</span>
+<span class="sd">        Number of bins to binarize the amplitude according to phase intervals</span>
+<span class="sd">        (should be np.int64)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pac : array_like</span>
+<span class="sd">        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Tort et al. 2010 :cite:`tort2010measuring`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_pha</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_times</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">n_amp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">pac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_amp</span><span class="p">,</span> <span class="n">n_pha</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">bin_log</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n_bins</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_amp</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pha</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+                <span class="c1"># select phase and amplitude</span>
+                <span class="n">_pha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">pha</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="p">:])</span>
+                <span class="n">_amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">amp</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="p">:])</span>
+                <span class="c1"># get the probability of each amp bin</span>
+                <span class="n">p_j</span> <span class="o">=</span> <span class="n">_kl_hr_nb</span><span class="p">(</span><span class="n">_pha</span><span class="p">,</span> <span class="n">_amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">,</span> <span class="n">mean_bins</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">p_j</span> <span class="o">/=</span> <span class="n">p_j</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+                <span class="c1"># log it (only if strictly positive)</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">p_j</span> <span class="o">&gt;</span> <span class="mf">0.</span><span class="p">):</span>
+                    <span class="n">p_j</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p_j</span><span class="p">)</span>
+                    <span class="c1"># compute the PAC</span>
+                    <span class="n">pac</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">tr</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">+</span> <span class="n">p_j</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">bin_log</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pac</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">tr</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+
+    <span class="k">return</span> <span class="n">pac</span></div>
+
+
+<div class="viewcode-block" id="heights_ratio_nb"><a class="viewcode-back" href="../../../generated/tensorpac.methods.heights_ratio_nb.html#tensorpac.methods.heights_ratio_nb">[docs]</a><span class="nd">@jit</span><span class="p">(</span><span class="s2">&quot;f8[:,:,:](f8[:,:,:], f8[:,:,:], u8)&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">heights_ratio_nb</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Numba-based Heights ratio (HR).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pha, amp : array_like</span>
+<span class="sd">        Respectively the arrays of phases of shape (n_pha, n_epochs, n_times)</span>
+<span class="sd">        and the array of amplitudes of shape (n_amp, n_epochs, n_times). Both</span>
+<span class="sd">        arrays should be of type float64 (np.float64)</span>
+<span class="sd">    n_bins : int | 18</span>
+<span class="sd">        Number of bins to binarize the amplitude according to phase intervals</span>
+<span class="sd">        (should be np.int64)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pac : array_like</span>
+<span class="sd">        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Lakatos et al. 2005 :cite:`lakatos2005oscillatory`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_pha</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_times</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">n_amp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">pac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_amp</span><span class="p">,</span> <span class="n">n_pha</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_amp</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pha</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+                <span class="c1"># select phase and amplitude</span>
+                <span class="n">_pha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">pha</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="p">:])</span>
+                <span class="n">_amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">amp</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="p">:])</span>
+                <span class="c1"># get the probability of each amp bin</span>
+                <span class="n">p_j</span> <span class="o">=</span> <span class="n">_kl_hr_nb</span><span class="p">(</span><span class="n">_pha</span><span class="p">,</span> <span class="n">_amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">,</span> <span class="n">mean_bins</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">p_j</span> <span class="o">/=</span> <span class="n">p_j</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+                <span class="c1"># find (maximum, minimum) of the binned distribution</span>
+                <span class="n">h_max</span><span class="p">,</span> <span class="n">h_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">p_j</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">p_j</span><span class="p">)</span>
+                <span class="c1"># compute the PAC</span>
+                <span class="n">pac</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">tr</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">h_max</span> <span class="o">-</span> <span class="n">h_min</span><span class="p">)</span> <span class="o">/</span> <span class="n">h_max</span>
+
+    <span class="k">return</span> <span class="n">pac</span></div>
+
+
+<div class="viewcode-block" id="phase_locking_value_nb"><a class="viewcode-back" href="../../../generated/tensorpac.methods.phase_locking_value_nb.html#tensorpac.methods.phase_locking_value_nb">[docs]</a><span class="k">def</span> <span class="nf">phase_locking_value_nb</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">pha_amp</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Numba-based Phase Locking-Value (PLV).</span>
+
+<span class="sd">    In order to measure the phase locking value, the phase of the amplitude of</span>
+<span class="sd">    the higher-frequency signal must be provided, and not the amplitude as in</span>
+<span class="sd">    most other PAC functions.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pha, pha_amp : array_like</span>
+<span class="sd">        Respectively the arrays of phases of shape (n_pha, n_epochs, n_times)</span>
+<span class="sd">        for the lower frequency and the array of phase of the amplitude signal</span>
+<span class="sd">        of shape (n_pha_amp, n_epochs, n_times) for the higher frequency. Both</span>
+<span class="sd">        arrays should be of type float64 (np.float64)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pac : array_like</span>
+<span class="sd">        Array of phase amplitude coupling of shape (n_pha_amp, n_pha, ...)</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Lachaux et al. 1999, :cite:`lachaux1999measuring`,</span>
+<span class="sd">    Penny et al. 2008 :cite:`penny2008testing`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_pha</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_times</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">n_amp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">pha_amp</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">pac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_amp</span><span class="p">,</span> <span class="n">n_pha</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="c1"># single conversion</span>
+    <span class="n">exp_pha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha</span><span class="p">)</span>
+    <span class="n">exp_pha_amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha_amp</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_amp</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_pha</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+                <span class="n">_pha</span> <span class="o">=</span> <span class="n">exp_pha</span><span class="p">[</span><span class="n">p</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="p">:]</span>
+                <span class="n">_pha_amp</span> <span class="o">=</span> <span class="n">exp_pha_amp</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">tr</span><span class="p">,</span> <span class="p">:]</span>
+                <span class="n">pac</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">tr</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">_pha</span><span class="p">,</span> <span class="n">_pha_amp</span><span class="p">))</span>
+    <span class="n">pac</span> <span class="o">/=</span> <span class="n">n_times</span>
+
+    <span class="k">return</span> <span class="n">pac</span></div>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">I don&#39;t think this function can be entirely compiled with Numba because of two</span>
+<span class="sd">issues :</span>
+
+<span class="sd">    * Numba supports the mean / std but not across a specific axis</span>
+<span class="sd">    * erfinv is a special function of scipy that don&#39;t seems to be supported</span>
+<span class="sd">      for the moment</span>
+
+<span class="sd">Therefore, the beginning and the end of the function are tensor-based while the</span>
+<span class="sd">core function that computes PAC is the Numba compliant MVL.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="norm_direct_pac_nb"><a class="viewcode-back" href="../../../generated/tensorpac.methods.norm_direct_pac_nb.html#tensorpac.methods.norm_direct_pac_nb">[docs]</a><span class="k">def</span> <span class="nf">norm_direct_pac_nb</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Numba-based Normalized direct Pac (ndPAC).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pha, amp : array_like</span>
+<span class="sd">        Respectively the arrays of phases of shape (n_pha, n_epochs, n_times)</span>
+<span class="sd">        and the array of amplitudes of shape (n_amp, n_epochs, n_times). Both</span>
+<span class="sd">        arrays should be of type float64 (np.float64)</span>
+<span class="sd">    p : float | .05</span>
+<span class="sd">        P-value to use for thresholding. Sub-threshold PAC values</span>
+<span class="sd">        will be set to 0. To disable this behavior (no masking), use ``p=1`` or</span>
+<span class="sd">        ``p=None``. Should be a np.float64</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pac : array_like</span>
+<span class="sd">        Array of phase amplitude coupling of shape (n_amp, n_pha, ...)</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Ozkurt et al. :cite:`ozkurt2012statistically`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_times</span> <span class="o">=</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># z-score normalization to approximate assumptions</span>
+    <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="c1"># compute pac using MVL (need to remultiply by n_times)</span>
+    <span class="n">pac</span> <span class="o">=</span> <span class="n">mean_vector_length_nb</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">)</span> <span class="o">*</span> <span class="n">n_times</span>
+
+    <span class="c1"># no thresholding</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mf">1.</span> <span class="ow">or</span> <span class="n">p</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pac</span> <span class="o">/</span> <span class="n">n_times</span>
+
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pac</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">pac</span> <span class="o">/=</span> <span class="n">n_times</span>
+    <span class="c1"># set to zero non-significant values</span>
+    <span class="n">xlim</span> <span class="o">=</span> <span class="n">n_times</span> <span class="o">*</span> <span class="n">erfinv</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">pac</span><span class="p">[</span><span class="n">s</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">xlim</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">return</span> <span class="n">pac</span></div>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+    <hr>
+    <footer>
+        <div class="container">
+            <img src="../../../_static/baniere.png" alt="Ban" height="80">
+        </div>
+        <br>
+        <div class="container">
+            <ul class="list-inline">
+                <li style="font-weight:bold"><a href="../../../genindex.html">Index</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="https://github.com/EtienneCmb/tensorpac">Github</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../../../contributors.html">Contributors</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../../../community.html">Community</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../../../cite.html">Citation</a></li>
+                <li>·</li>
+                <li style="font-weight:bold"><a href="../../../references.html">References</a></li>
+            </ul>
+         </div>
+        <!-- <br> -->
+        <p>&copy; Copyright 2019, Etienne Combrisson.</p>
+    </footer>
+
+  </body>
+</html>

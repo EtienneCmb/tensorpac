@@ -95,12 +95,23 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#individual-methods">Individual methods</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#pac-methods">PAC methods</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.heights_ratio.html">tensorpac.methods.heights_ratio</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../generated/tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api.html#tensor-based-implementation">Tensor-based implementation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../generated/tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../generated/tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../generated/tensorpac.methods.heights_ratio.html">tensorpac.methods.heights_ratio</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../generated/tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../generated/tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../generated/tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../api.html#numba-based-implementation">Numba-based implementation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../generated/tensorpac.methods.mean_vector_length_nb.html">tensorpac.methods.mean_vector_length_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../generated/tensorpac.methods.modulation_index_nb.html">tensorpac.methods.modulation_index_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../generated/tensorpac.methods.heights_ratio_nb.html">tensorpac.methods.heights_ratio_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../generated/tensorpac.methods.norm_direct_pac_nb.html">tensorpac.methods.norm_direct_pac_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../generated/tensorpac.methods.phase_locking_value_nb.html">tensorpac.methods.phase_locking_value_nb</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#event-related-pac-methods">Event Related PAC methods</a><ul>
@@ -279,7 +290,7 @@ phase and a 100hz amplitude. By default, the returned dataset is organized as
 (n_epochs, n_times) where n_times is the number of time points and n_epochs
 is the number of trials</p>
 </div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f_pha</span> <span class="o">=</span> <span class="mi">5</span>      <span class="c1"># frequency phase for the coupling</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f_pha</span> <span class="o">=</span> <span class="mi">5</span>       <span class="c1"># frequency phase for the coupling</span>
 <span class="n">f_amp</span> <span class="o">=</span> <span class="mi">100</span>     <span class="c1"># frequency amplitude for the coupling</span>
 <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">20</span>   <span class="c1"># number of trials</span>
 <span class="n">n_times</span> <span class="o">=</span> <span class="mi">4000</span>  <span class="c1"># number of time points</span>
@@ -327,7 +338,7 @@ ietrating over the implemented methods.</p>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_plot_pac_methods_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_pac_methods_001.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  8.316 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.243 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-pac-plot-pac-methods-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/9ce0d1cd3db4d3ccb80fe43c5d24418e/plot_pac_methods.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_pac_methods.py</span></code></a></p>

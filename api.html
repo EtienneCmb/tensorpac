@@ -95,12 +95,23 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#individual-methods">Individual methods</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#pac-methods">PAC methods</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.heights_ratio.html">tensorpac.methods.heights_ratio</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
-<li class="toctree-l4"><a class="reference internal" href="generated/tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tensor-based-implementation">Tensor-based implementation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/tensorpac.methods.heights_ratio.html">tensorpac.methods.heights_ratio</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#numba-based-implementation">Numba-based implementation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/tensorpac.methods.mean_vector_length_nb.html">tensorpac.methods.mean_vector_length_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/tensorpac.methods.modulation_index_nb.html">tensorpac.methods.modulation_index_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/tensorpac.methods.heights_ratio_nb.html">tensorpac.methods.heights_ratio_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/tensorpac.methods.norm_direct_pac_nb.html">tensorpac.methods.norm_direct_pac_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/tensorpac.methods.phase_locking_value_nb.html">tensorpac.methods.phase_locking_value_nb</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#event-related-pac-methods">Event Related PAC methods</a><ul>
@@ -366,7 +377,9 @@
 <div class="section" id="pac-methods">
 <h3><a class="toc-backref" href="#id7">PAC methods</a><a class="headerlink" href="#pac-methods" title="Permalink to this headline">¶</a></h3>
 <p>If you don’t want to use the <a class="reference internal" href="generated/tensorpac.Pac.html#tensorpac.Pac" title="tensorpac.Pac"><code class="xref py py-class docutils literal notranslate"><span class="pre">tensorpac.Pac</span></code></a> class, you can also manually import the method of your choice
-and use it on phase / amplitude to compute PAC.</p>
+and use it on phase / amplitude to compute PAC. Note that some functions have both a tensor or Numba-based implementation.</p>
+<div class="section" id="tensor-based-implementation">
+<h4>Tensor-based implementation<a class="headerlink" href="#tensor-based-implementation" title="Permalink to this headline">¶</a></h4>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -374,25 +387,52 @@ and use it on phase / amplitude to compute PAC.</p>
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.methods.mean_vector_length.html#tensorpac.methods.mean_vector_length" title="tensorpac.methods.mean_vector_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mean_vector_length</span></code></a>(pha, amp)</p></td>
-<td><p>Compute PAC using the Mean Vector Length (MVL).</p></td>
+<td><p>Tensor-based Mean Vector Length (MVL).</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.methods.modulation_index.html#tensorpac.methods.modulation_index" title="tensorpac.methods.modulation_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modulation_index</span></code></a>(pha, amp[, n_bins])</p></td>
-<td><p>Compute PAC using the Modulation index (MI).</p></td>
+<td><p>Tensor-based Modulation index (MI).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.methods.heights_ratio.html#tensorpac.methods.heights_ratio" title="tensorpac.methods.heights_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">heights_ratio</span></code></a>(pha, amp[, n_bins])</p></td>
-<td><p>Compute PAC using the Heights ratio (HR).</p></td>
+<td><p>Tensor-based Heights ratio (HR).</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.methods.norm_direct_pac.html#tensorpac.methods.norm_direct_pac" title="tensorpac.methods.norm_direct_pac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">norm_direct_pac</span></code></a>(pha, amp[, p])</p></td>
-<td><p>Compute PAC using the Normalized direct Pac (ndPAC).</p></td>
+<td><p>Tensor-based Normalized direct Pac (ndPAC).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.methods.phase_locking_value.html#tensorpac.methods.phase_locking_value" title="tensorpac.methods.phase_locking_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phase_locking_value</span></code></a>(pha, pha_amp)</p></td>
-<td><p>Compute PAC using the Phase Locking-Value (PLV).</p></td>
+<td><p>Tensor-based Phase Locking-Value (PLV).</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.methods.gauss_cop_pac.html#tensorpac.methods.gauss_cop_pac" title="tensorpac.methods.gauss_cop_pac"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gauss_cop_pac</span></code></a>(pha, amp)</p></td>
-<td><p>Compute PAC using the Gaussian Copula PAC (gcPac).</p></td>
+<td><p>Tensor-based Gaussian Copula PAC (gcPac).</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="numba-based-implementation">
+<h4>Numba-based implementation<a class="headerlink" href="#numba-based-implementation" title="Permalink to this headline">¶</a></h4>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.methods.mean_vector_length_nb.html#tensorpac.methods.mean_vector_length_nb" title="tensorpac.methods.mean_vector_length_nb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mean_vector_length_nb</span></code></a>(pha, amp)</p></td>
+<td><p>Numba-based Mean Vector Length (MVL).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.methods.modulation_index_nb.html#tensorpac.methods.modulation_index_nb" title="tensorpac.methods.modulation_index_nb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modulation_index_nb</span></code></a>(pha, amp[, n_bins])</p></td>
+<td><p>Numba-based Modulation index (MI).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.methods.heights_ratio_nb.html#tensorpac.methods.heights_ratio_nb" title="tensorpac.methods.heights_ratio_nb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">heights_ratio_nb</span></code></a>(pha, amp[, n_bins])</p></td>
+<td><p>Numba-based Heights ratio (HR).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/tensorpac.methods.norm_direct_pac_nb.html#tensorpac.methods.norm_direct_pac_nb" title="tensorpac.methods.norm_direct_pac_nb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">norm_direct_pac_nb</span></code></a>(pha, amp[, p])</p></td>
+<td><p>Numba-based Normalized direct Pac (ndPAC).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/tensorpac.methods.phase_locking_value_nb.html#tensorpac.methods.phase_locking_value_nb" title="tensorpac.methods.phase_locking_value_nb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phase_locking_value_nb</span></code></a>(pha, pha_amp)</p></td>
+<td><p>Numba-based Phase Locking-Value (PLV).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div class="section" id="event-related-pac-methods">
 <h3><a class="toc-backref" href="#id8">Event Related PAC methods</a><a class="headerlink" href="#event-related-pac-methods" title="Permalink to this headline">¶</a></h3>

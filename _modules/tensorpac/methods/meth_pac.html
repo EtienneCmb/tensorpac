@@ -93,12 +93,23 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../api.html#individual-methods">Individual methods</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../api.html#pac-methods">PAC methods</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.heights_ratio.html">tensorpac.methods.heights_ratio</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../generated/tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api.html#tensor-based-implementation">Tensor-based implementation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.heights_ratio.html">tensorpac.methods.heights_ratio</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api.html#numba-based-implementation">Numba-based implementation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.mean_vector_length_nb.html">tensorpac.methods.mean_vector_length_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.modulation_index_nb.html">tensorpac.methods.modulation_index_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.heights_ratio_nb.html">tensorpac.methods.heights_ratio_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.norm_direct_pac_nb.html">tensorpac.methods.norm_direct_pac_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../generated/tensorpac.methods.phase_locking_value_nb.html">tensorpac.methods.phase_locking_value_nb</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api.html#event-related-pac-methods">Event Related PAC methods</a><ul>
@@ -256,87 +267,11 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">erfinv</span>
 
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
-
 <span class="kn">from</span> <span class="nn">tensorpac.gcmi</span> <span class="kn">import</span> <span class="n">nd_mi_gg</span>
 
 
-<span class="k">def</span> <span class="nf">pacstr</span><span class="p">(</span><span class="n">idpac</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return correspond methods string.&quot;&quot;&quot;</span>
-    <span class="c1"># Pac methods :</span>
-    <span class="k">if</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Mean Vector Length (MVL, Canolty et al. 2006)&#39;</span>
-    <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Modulation Index (MI, Tort et al. 2010)&#39;</span>
-    <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Heights ratio (HR, Lakatos et al. 2005)&#39;</span>
-    <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
-        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Normalized Direct Pac (ndPac, Ozkurt et al. 2012)&#39;</span>
-    <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
-        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Phase-Locking Value (PLV, Lachaux et al. 1999)&#39;</span>
-    <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
-        <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;Gaussian Copula PAC (gcPac)&#39;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No corresponding pac method.&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Surrogate method :</span>
-    <span class="k">if</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">suro</span> <span class="o">=</span> <span class="s1">&#39;No surrogates&#39;</span>
-    <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">suro</span> <span class="o">=</span> <span class="s1">&#39;Permute phase across trials (Tort et al. 2010)&#39;</span>
-    <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">suro</span> <span class="o">=</span> <span class="s1">&#39;Swap amplitude time blocks (Bahramisharif et al. 2013)&#39;</span>
-    <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="n">suro</span> <span class="o">=</span> <span class="s1">&#39;Time lag (Canolty et al. 2006)&#39;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No corresponding surrogate method.&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Normalization methods :</span>
-    <span class="k">if</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">norm</span> <span class="o">=</span> <span class="s1">&#39;No normalization&#39;</span>
-    <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">norm</span> <span class="o">=</span> <span class="s1">&#39;Substract the mean of surrogates&#39;</span>
-    <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">norm</span> <span class="o">=</span> <span class="s1">&#39;Divide by the mean of surrogates&#39;</span>
-    <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="n">norm</span> <span class="o">=</span> <span class="s1">&#39;Substract then divide by the mean of surrogates&#39;</span>
-    <span class="k">elif</span> <span class="n">idpac</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
-        <span class="n">norm</span> <span class="o">=</span> <span class="s2">&quot;Substract the mean and divide by the deviation of the &quot;</span> <span class="o">+</span> \
-               <span class="s2">&quot;surrogates&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No corresponding normalization method.&quot;</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">method</span><span class="p">,</span> <span class="n">suro</span><span class="p">,</span> <span class="n">norm</span>
-
-
-<span class="c1">###############################################################################</span>
-<span class="c1">###############################################################################</span>
-<span class="c1">#                                   PAC</span>
-<span class="c1">###############################################################################</span>
-<span class="c1">###############################################################################</span>
-
-
-<span class="k">def</span> <span class="nf">get_pac_fcn</span><span class="p">(</span><span class="n">idp</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Get the function for computing Phase-Amplitude coupling.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>    <span class="c1"># MVL</span>
-        <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">mean_vector_length</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># KLD</span>
-        <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">modulation_index</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># HR</span>
-        <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">heights_ratio</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># ndPAC</span>
-        <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">norm_direct_pac</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>  <span class="c1"># PLV</span>
-        <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">phase_locking_value</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">idp</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>  <span class="c1"># GC</span>
-        <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">gauss_cop_pac</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">idp</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; is not recognized as a valid pac &quot;</span>
-                         <span class="s2">&quot;method.&quot;</span><span class="p">)</span>
-
-
 <div class="viewcode-block" id="mean_vector_length"><a class="viewcode-back" href="../../../generated/tensorpac.methods.mean_vector_length.html#tensorpac.methods.mean_vector_length">[docs]</a><span class="k">def</span> <span class="nf">mean_vector_length</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute PAC using the Mean Vector Length (MVL).</span>
+    <span class="sd">&quot;&quot;&quot;Tensor-based Mean Vector Length (MVL).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -358,7 +293,7 @@
 
 
 <div class="viewcode-block" id="modulation_index"><a class="viewcode-back" href="../../../generated/tensorpac.methods.modulation_index.html#tensorpac.methods.modulation_index">[docs]</a><span class="k">def</span> <span class="nf">modulation_index</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute PAC using the Modulation index (MI).</span>
+    <span class="sd">&quot;&quot;&quot;Tensor-based Modulation index (MI).</span>
 
 <span class="sd">    The modulation index is obtained using the Kullback Leibler Distance which</span>
 <span class="sd">    measures how much the distribution of binned amplitude differs from a</span>
@@ -395,7 +330,7 @@
 
 
 <div class="viewcode-block" id="heights_ratio"><a class="viewcode-back" href="../../../generated/tensorpac.methods.heights_ratio.html#tensorpac.methods.heights_ratio">[docs]</a><span class="k">def</span> <span class="nf">heights_ratio</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute PAC using the Heights ratio (HR).</span>
+    <span class="sd">&quot;&quot;&quot;Tensor-based Heights ratio (HR).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -447,7 +382,7 @@
 
 
 <div class="viewcode-block" id="norm_direct_pac"><a class="viewcode-back" href="../../../generated/tensorpac.methods.norm_direct_pac.html#tensorpac.methods.norm_direct_pac">[docs]</a><span class="k">def</span> <span class="nf">norm_direct_pac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute PAC using the Normalized direct Pac (ndPAC).</span>
+    <span class="sd">&quot;&quot;&quot;Tensor-based Normalized direct Pac (ndPAC).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -468,28 +403,28 @@
 <span class="sd">    ----------</span>
 <span class="sd">    Ozkurt et al. :cite:`ozkurt2012statistically`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">npts</span> <span class="o">=</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="c1"># Normalize amplitude :</span>
-    <span class="c1"># Use the sample standard deviation, as in original Matlab code from author</span>
+    <span class="n">n_times</span> <span class="o">=</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># normalize amplitude</span>
+    <span class="c1"># use the sample standard deviation, as in original matlab code from author</span>
     <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
     <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">amp</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-    <span class="c1"># Compute pac :</span>
+    <span class="c1"># compute pac</span>
     <span class="n">pac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;i...j, k...j-&gt;ik...&#39;</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">pha</span><span class="p">)))</span>
 
+    <span class="c1"># no thresholding</span>
     <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="mf">1.</span> <span class="ow">or</span> <span class="n">p</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="c1"># No thresholding</span>
-        <span class="k">return</span> <span class="n">pac</span> <span class="o">/</span> <span class="n">npts</span>
+        <span class="k">return</span> <span class="n">pac</span> <span class="o">/</span> <span class="n">n_times</span>
 
-    <span class="n">s</span> <span class="o">=</span> <span class="n">pac</span><span class="o">**</span><span class="mi">2</span>
-    <span class="n">pac</span> <span class="o">/=</span> <span class="n">npts</span>
-    <span class="c1"># Set to zero non-significant values:</span>
-    <span class="n">xlim</span> <span class="o">=</span> <span class="n">npts</span> <span class="o">*</span> <span class="n">erfinv</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pac</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">pac</span> <span class="o">/=</span> <span class="n">n_times</span>
+    <span class="c1"># set to zero non-significant values</span>
+    <span class="n">xlim</span> <span class="o">=</span> <span class="n">n_times</span> <span class="o">*</span> <span class="n">erfinv</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
     <span class="n">pac</span><span class="p">[</span><span class="n">s</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">xlim</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
     <span class="k">return</span> <span class="n">pac</span></div>
 
 
 <div class="viewcode-block" id="phase_locking_value"><a class="viewcode-back" href="../../../generated/tensorpac.methods.phase_locking_value.html#tensorpac.methods.phase_locking_value">[docs]</a><span class="k">def</span> <span class="nf">phase_locking_value</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">pha_amp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute PAC using the Phase Locking-Value (PLV).</span>
+    <span class="sd">&quot;&quot;&quot;Tensor-based Phase Locking-Value (PLV).</span>
 
 <span class="sd">    In order to measure the phase locking value, the phase of the amplitude of</span>
 <span class="sd">    the higher-frequency signal must be provided, and not the amplitude as in</span>
@@ -518,7 +453,7 @@
 
 
 <div class="viewcode-block" id="gauss_cop_pac"><a class="viewcode-back" href="../../../generated/tensorpac.methods.gauss_cop_pac.html#tensorpac.methods.gauss_cop_pac">[docs]</a><span class="k">def</span> <span class="nf">gauss_cop_pac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute PAC using the Gaussian Copula PAC (gcPac).</span>
+    <span class="sd">&quot;&quot;&quot;Tensor-based Gaussian Copula PAC (gcPac).</span>
 
 <span class="sd">    This function assumes that phases and amplitudes have already been</span>
 <span class="sd">    prepared i.e. phases should be represented in a unit circle</span>

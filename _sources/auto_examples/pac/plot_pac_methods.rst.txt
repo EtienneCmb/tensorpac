@@ -39,7 +39,7 @@ Simulate artificial coupling
 .. code-block:: default
 
 
-    f_pha = 5      # frequency phase for the coupling
+    f_pha = 5       # frequency phase for the coupling
     f_amp = 100     # frequency amplitude for the coupling
     n_epochs = 20   # number of trials
     n_times = 4000  # number of time points
@@ -112,7 +112,7 @@ Compute, plot and compare PAC
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  8.316 seconds)
+   **Total running time of the script:** ( 0 minutes  6.243 seconds)
 
 
 .. _sphx_glr_download_auto_examples_pac_plot_pac_methods.py:

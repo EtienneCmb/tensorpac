@@ -95,12 +95,23 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../api.html#individual-methods">Individual methods</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../api.html#pac-methods">PAC methods</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">tensorpac.methods.heights_ratio</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
-<li class="toctree-l4"><a class="reference internal" href="tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../api.html#tensor-based-implementation">Tensor-based implementation</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="tensorpac.methods.mean_vector_length.html">tensorpac.methods.mean_vector_length</a></li>
+<li class="toctree-l5"><a class="reference internal" href="tensorpac.methods.modulation_index.html">tensorpac.methods.modulation_index</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#">tensorpac.methods.heights_ratio</a></li>
+<li class="toctree-l5"><a class="reference internal" href="tensorpac.methods.norm_direct_pac.html">tensorpac.methods.norm_direct_pac</a></li>
+<li class="toctree-l5"><a class="reference internal" href="tensorpac.methods.phase_locking_value.html">tensorpac.methods.phase_locking_value</a></li>
+<li class="toctree-l5"><a class="reference internal" href="tensorpac.methods.gauss_cop_pac.html">tensorpac.methods.gauss_cop_pac</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api.html#numba-based-implementation">Numba-based implementation</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="tensorpac.methods.mean_vector_length_nb.html">tensorpac.methods.mean_vector_length_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="tensorpac.methods.modulation_index_nb.html">tensorpac.methods.modulation_index_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="tensorpac.methods.heights_ratio_nb.html">tensorpac.methods.heights_ratio_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="tensorpac.methods.norm_direct_pac_nb.html">tensorpac.methods.norm_direct_pac_nb</a></li>
+<li class="toctree-l5"><a class="reference internal" href="tensorpac.methods.phase_locking_value_nb.html">tensorpac.methods.phase_locking_value_nb</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../api.html#event-related-pac-methods">Event Related PAC methods</a><ul>
@@ -262,7 +273,7 @@
 <dl class="function">
 <dt id="tensorpac.methods.heights_ratio">
 <code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">heights_ratio</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">n_bins=18</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_pac.html#heights_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.heights_ratio" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute PAC using the Heights ratio (HR).</p>
+<dd><p>Tensor-based Heights ratio (HR).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">

@@ -1,0 +1,6 @@
+tensorpac.methods.mean\_vector\_length\_nb
+==========================================
+
+.. currentmodule:: tensorpac.methods
+
+.. autofunction:: mean_vector_length_nb

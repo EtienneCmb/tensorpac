@@ -75,7 +75,10 @@ PAC methods
 +++++++++++
 
 If you don't want to use the :class:`tensorpac.Pac` class, you can also manually import the method of your choice
-and use it on phase / amplitude to compute PAC.
+and use it on phase / amplitude to compute PAC. Note that some functions have both a tensor or Numba-based implementation.
+
+Tensor-based implementation
+***************************
 
 .. currentmodule:: tensorpac.methods
 
@@ -88,6 +91,19 @@ and use it on phase / amplitude to compute PAC.
    norm_direct_pac
    phase_locking_value
    gauss_cop_pac
+
+Numba-based implementation
+**************************
+
+.. autosummary::
+   :toctree: generated/
+
+   mean_vector_length_nb
+   modulation_index_nb
+   heights_ratio_nb
+   norm_direct_pac_nb
+   phase_locking_value_nb
+
 
 Event Related PAC methods
 +++++++++++++++++++++++++

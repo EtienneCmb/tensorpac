@@ -1,0 +1,6 @@
+tensorpac.methods.modulation\_index\_nb
+=======================================
+
+.. currentmodule:: tensorpac.methods
+
+.. autofunction:: modulation_index_nb
