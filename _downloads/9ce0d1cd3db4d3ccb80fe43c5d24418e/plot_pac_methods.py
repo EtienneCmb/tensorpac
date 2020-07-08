@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 ###############################################################################
 # Simulate artificial coupling
 ###############################################################################
-# first, we generate a single trial that contains a coupling between a 5z
+# first, we generate several trials that contains a coupling between a 5z
 # phase and a 100hz amplitude. By default, the returned dataset is organized as
 # (n_epochs, n_times) where n_times is the number of time points and n_epochs
 # is the number of trials

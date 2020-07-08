@@ -59,7 +59,7 @@ This example illustrate how to bin the amplitude according to the phase.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.496 seconds)
+   **Total running time of the script:** ( 0 minutes  0.466 seconds)
 
 
 .. _sphx_glr_download_auto_examples_misc_plot_binned_amplitude.py:
