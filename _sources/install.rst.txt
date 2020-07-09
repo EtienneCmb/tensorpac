@@ -15,6 +15,11 @@ Tensorpac relies on three packages :
 Then if you want to be able to plot your results you'll need to install
 `Matplotlib <https://matplotlib.org/>`_.
 
+Some additional packages might also be required, in particular :
+
+* `MNE Python <https://mne.tools/stable/index.html>`_ for running some examples, in particular some statistical functions are needed
+* `Numba <http://numba.pydata.org/>`_, a Python compiler to speed up some functions
+
 Standard installation
 +++++++++++++++++++++
 

@@ -507,7 +507,7 @@
 <span class="sd">            - 4 : ndPAC :cite:`ozkurt2012statistically`</span>
 <span class="sd">              (see :func:`tensorpac.methods.norm_direct_pac`)</span>
 <span class="sd">            - 5 : Phase-Locking Value (PLV)</span>
-<span class="sd">              :cite:`lachaux1999measuring,penny2008testing`</span>
+<span class="sd">              :cite:`penny2008testing,lachaux1999measuring`</span>
 <span class="sd">              (see :func:`tensorpac.methods.phase_locking_value`)</span>
 <span class="sd">            - 6 : Gaussian Copula PAC (GCPAC) :cite:`ince2017statistical`</span>
 <span class="sd">              (see :func:`tensorpac.methods.gauss_cop_pac`)</span>
@@ -880,7 +880,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_erpac</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span> <span class="o">=</span> <span class="n">erpac</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">infer_pvalues</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">mcp</span><span class="o">=</span><span class="n">mcp</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;gc&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;Gaussian-Copula ERPAC (Ince et al. 2017)&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;Gaussian-Copula ERPAC&quot;</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Compute </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">method</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="c1"># copnorm phases and amplitudes then compute erpac</span>
             <span class="n">sco</span> <span class="o">=</span> <span class="n">copnorm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">pha</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">pha</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">2</span><span class="p">))</span>
