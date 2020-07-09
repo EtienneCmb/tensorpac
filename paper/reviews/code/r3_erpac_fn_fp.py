@@ -55,7 +55,7 @@ for n_meth, meth in enumerate(['circular', 'gc']):
     p.pacplot(erpac, times, p.yvec, title=title)
 plt.tight_layout()
 
-plt.savefig(f"../figures/r2_functional_erpac.png", dpi=300,
+plt.savefig(f"../figures/r3_functional_erpac.png", dpi=300,
             bbox_inches='tight')
 
 plt.show()

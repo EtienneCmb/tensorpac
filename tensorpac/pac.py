@@ -242,7 +242,7 @@ class Pac(_PacObj, _PacPlt):
             - 4 : ndPAC :cite:`ozkurt2012statistically`
               (see :func:`tensorpac.methods.norm_direct_pac`)
             - 5 : Phase-Locking Value (PLV)
-              :cite:`lachaux1999measuring,penny2008testing`
+              :cite:`penny2008testing,lachaux1999measuring`
               (see :func:`tensorpac.methods.phase_locking_value`)
             - 6 : Gaussian Copula PAC (GCPAC) :cite:`ince2017statistical`
               (see :func:`tensorpac.methods.gauss_cop_pac`)
@@ -615,7 +615,7 @@ class EventRelatedPac(_PacObj, _PacVisual):
             self._erpac, self._pvalues = erpac(pha, amp)
             self.infer_pvalues(p=p, mcp=mcp)
         elif method == 'gc':
-            self.method = "Gaussian-Copula ERPAC (Ince et al. 2017)"
+            self.method = "Gaussian-Copula ERPAC"
             logger.info(f"    Compute {self.method}")
             # copnorm phases and amplitudes then compute erpac
             sco = copnorm(np.stack([np.sin(pha), np.cos(pha)], axis=-2))

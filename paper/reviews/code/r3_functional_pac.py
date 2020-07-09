@@ -58,6 +58,6 @@ for i, k in enumerate([1, 2, 3, 5, 6]):
     plt.ylabel(''), plt.xlabel('')
 plt.tight_layout()
 
-plt.savefig(f"../figures/r2_functional_pac.png", dpi=300, bbox_inches='tight')
+plt.savefig(f"../figures/r3_functional_pac.png", dpi=300, bbox_inches='tight')
 
 plt.show()  # show on demand

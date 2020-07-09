@@ -195,8 +195,8 @@ def phase_locking_value_nb(pha, pha_amp):
 
     References
     ----------
-    Lachaux et al. 1999, :cite:`lachaux1999measuring`,
-    Penny et al. 2008 :cite:`penny2008testing`
+    Penny et al. 2008 :cite:`penny2008testing`, Lachaux et al. 1999
+    :cite:`lachaux1999measuring`
     """
     n_pha, n_epochs, n_times = pha.shape
     n_amp, _, _ = pha_amp.shape

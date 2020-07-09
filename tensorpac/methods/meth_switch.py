@@ -3,7 +3,7 @@ import numpy as np
 from functools import partial
 
 
-def get_pac_fcn(idp, n_bins, p, implementation="tensor"):
+def get_pac_fcn(idp, n_bins, p, implementation="tensor", full=False):
     """Get the function for computing Phase-Amplitude coupling.
 
     This function also allow to switch between Tensor / Numba implementations
@@ -37,7 +37,10 @@ def get_pac_fcn(idp, n_bins, p, implementation="tensor"):
             5: partial(phase_locking_value_nb),
             6: partial(gauss_cop_pac)}
 
-    return METH[idp]
+    if full:
+        return METH
+    else:
+        return METH[idp]
 
 
 def pacstr(idpac):
@@ -52,7 +55,7 @@ def pacstr(idpac):
     elif idpac[0] == 4:
         method = 'Normalized Direct Pac (ndPac, Ozkurt et al. 2012)'
     elif idpac[0] == 5:
-        method = 'Phase-Locking Value (PLV, Lachaux et al. 1999)'
+        method = 'Phase-Locking Value (PLV, Penny et al. 2008)'
     elif idpac[0] == 6:
         method = 'Gaussian Copula PAC (gcPac)'
     else:

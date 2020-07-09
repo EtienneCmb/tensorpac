@@ -8,7 +8,7 @@ with open("../../paper.json", 'r') as f: cfg = json.load(f)  # noqa
 import numpy as np
 from scipy.special import erfinv
 
-from tensorpac.signals import pac_signals_tort, pac_signals_wavelet
+from tensorpac.signals import pac_signals_wavelet
 from tensorpac import Pac
 
 import seaborn as sns

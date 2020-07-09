@@ -1,5 +1,6 @@
 """Compare PAC methods."""
 import json
+import string
 with open("../../paper.json", 'r') as f: cfg = json.load(f)  # noqa
 
 from tensorpac.signals import pac_signals_tort, pac_signals_wavelet
@@ -25,12 +26,14 @@ methods = dict(MVL=[0, slice(0, 2)], KLD=[0, slice(2, 4)],
                PLV=[1, slice(2, 4)], GC=[1, slice(4, 6)])
 ###############################################################################
 
+# simulate PAC
 data, time = pac_signals_wavelet(sf=sf, f_pha=10, f_amp=100, noise=2.,
                                  n_epochs=n_epochs, n_times=n_times)
+alphabet = string.ascii_uppercase
 
 
-# p = Pac(idpac=(1, 2, 3), f_pha=cfg["phres"], f_amp=cfg["ahres"])
-p = Pac(idpac=(1, 2, 3), f_pha='lres', f_amp='lres')
+p = Pac(idpac=(1, 2, 3), f_pha=cfg["phres"], f_amp=cfg["ahres"])
+# p = Pac(idpac=(1, 2, 3), f_pha='lres', f_amp='lres')
 pha = p.filter(sf, data, ftype='phase', n_jobs=1)
 amp = p.filter(sf, data, ftype='amplitude', n_jobs=1)
 
@@ -50,6 +53,10 @@ for k in range(6):
     # clean up x-y labels
     if k % 3 != 0: plt.ylabel("")  # noqa
     if k in [0, 1, 2]: plt.xlabel('')  # noqa
+    # adding letter for better reference
+    ax = plt.gca()
+    ax.text(*tuple(cfg["nb_pos"]), alphabet[k], transform=ax.transAxes,
+            **cfg["nb_cfg"])
 
 plt.tight_layout()
 plt.savefig(f"../figures/Fig3.png", dpi=300, bbox_inches='tight')
