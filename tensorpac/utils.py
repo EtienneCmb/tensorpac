@@ -583,7 +583,7 @@ class PeakLockedTF(_PacObj, _PacVisual):
 
         return sig_shifted
 
-    def plot(self, zscore=False, edges=0, **kwargs):
+    def plot(self, zscore=False, baseline=None, edges=0, **kwargs):
         """Integrated Peak-Locked TF plotting function.
 
         Parameters
@@ -593,6 +593,9 @@ class PeakLockedTF(_PacObj, _PacVisual):
             useful in order to compensate the 1 / f effect in the power
             spectrum. If True, the mean and deviation are computed at the
             single trial level and across all time points
+        baseline : tuple | None
+            Baseline period to use in order to apply the z-score correction.
+            Should be in samples.
         edges : int | 0
             Number of pixels to discard to compensate filtering edge effect
             (`power[edges:-edges]`).
@@ -612,8 +615,14 @@ class PeakLockedTF(_PacObj, _PacVisual):
         pha_n = self.pha_a[..., sl_times].squeeze()
         # z-score normalization
         if zscore:
-            _mean = self.amp_a[..., sl_times].mean(2, keepdims=True)
-            _std = self.amp_a[..., sl_times].std(2, keepdims=True)
+            if baseline is None:
+                bsl_idx = sl_times
+            else:
+                assert len(baseline) == 2
+                bsl_idx = slice(baseline[0], baseline[1])
+            _mean = self.amp_a[..., bsl_idx].mean(2, keepdims=True)
+            _std = self.amp_a[..., bsl_idx].std(2, keepdims=True)
+            _std[_std == 0.] = 1.  # correction from NaN
             amp_n = (self.amp_a[..., sl_times] - _mean) / _std
         else:
             amp_n = self.amp_a[..., sl_times]
