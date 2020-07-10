@@ -58,12 +58,15 @@ class TestPac(object):
         pha = np.random.rand(2, 7, 1024)
         amp = np.random.rand(3, 7, 1024)
         nmeth, nsuro, nnorm = 5, 4, 5
-        p = Pac()
+        p = Pac(verbose=False)
         for k in range(nmeth):
             for i in range(nsuro):
                 for j in range(nnorm):
                     p.idpac = (k + 1, i, j)
                     p.fit(pha, amp, n_jobs=1, n_perm=10)
+                    if (i >= 1) and (k + 1 != 4):
+                        for mcp in ['maxstat', 'fdr', 'bonferroni']:
+                            p.infer_pvalues(mcp=mcp)
 
     def test_filterfit(self):
         """Test filtering test computing PAC."""
@@ -274,5 +277,5 @@ class TestPreferredPhase(object):
 
 
 if __name__ == '__main__':
-    # TestPac().test_functional_pac()
-    TestErpac().test_functional_erpac()
+    TestPac().test_fit()
+    # TestErpac().test_functional_erpac()

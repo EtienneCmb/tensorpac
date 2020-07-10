@@ -134,7 +134,7 @@ class _PacObj(object):
         pha = (pha + np.pi) % (2. * np.pi) - np.pi
         return pha, amp
 
-    def _infer_pvalues(self, effect, perm, p=.05):
+    def _infer_pvalues(self, effect, perm, p=.05, mcp='maxstat'):
         """Global function for statistical inferences.
 
         In order to work this method requires :
@@ -151,14 +151,24 @@ class _PacObj(object):
                            f"form at least n_perm={n_perm_req} permutations")
 
         # ---------------------------------------------------------------------
-        logger.info(f"    Infer p-values at p={p}")
+        logger.info(f"    infer p-values at (p={p}, mcp={mcp})")
         # computes the pvalues
-        max_p = perm.reshape(n_perm, -1).max(1)
-        nb_over = (effect[..., np.newaxis] <= max_p[np.newaxis, ...]).sum(-1)
-        pvalues = nb_over / n_perm
-        # non-significant p-values are set to 1. and min(pvalues) = 1 / n_perm
-        pvalues[pvalues >= p] = 1.
-        pvalues = np.maximum(1. / n_perm, pvalues)
+        if mcp is 'maxstat':
+            max_p = perm.reshape(n_perm, -1).max(1)[np.newaxis, ...]
+            nb_over = (effect[..., np.newaxis] <= max_p).sum(-1)
+            pvalues = nb_over / n_perm
+            # non-signi. p-values are set to 1. and min(pvalues) = 1 / n_perm
+            pvalues[pvalues >= p] = 1.
+            pvalues = np.maximum(1. / n_perm, pvalues)
+        elif mcp in ['fdr', 'bonferroni']:
+            from mne.stats import fdr_correction, bonferroni_correction
+            fcn = fdr_correction if mcp is 'fdr' else bonferroni_correction
+            # compute the p-values
+            pvalues = (effect[np.newaxis, ...] <= perm).sum(0) / n_perm
+            pvalues = np.maximum(1. / n_perm, pvalues)
+            # apply correction
+            is_signi, pvalues = fcn(pvalues, alpha=p)
+            pvalues[~is_signi] = 1.
 
         return pvalues
 
@@ -305,7 +315,8 @@ class Pac(_PacObj, _PacPlt):
         self.n_bins = int(n_bins)
         logger.info("Phase Amplitude Coupling object defined")
 
-    def fit(self, pha, amp, n_perm=200, p=.05, n_jobs=-1, verbose=None):
+    def fit(self, pha, amp, n_perm=200, p=.05, mcp='maxstat', n_jobs=-1,
+            verbose=None):
         """Compute PAC on filtered data.
 
         Parameters
@@ -319,6 +330,12 @@ class Pac(_PacObj, _PacPlt):
             Number of surrogates to compute.
         p : float | 0.05
             Statistical threshold
+        mcp : {'fdr', 'bonferroni'}
+            Correct the p-values for multiple comparisons. Use either :
+
+                * 'maxstat' : maximum statistics
+                * 'fdr' : FDR correction (need MNE-Python)
+                * 'bonferroni' : Bonferroni correction (need MNE-Python)
         n_jobs : int | -1
             Number of jobs to compute PAC in parallel. For very large data,
             set this parameter to 1 in order to prevent large memory usage.
@@ -381,7 +398,7 @@ class Pac(_PacObj, _PacPlt):
             self._surrogates = surro
 
             # infer pvalues
-            self.infer_pvalues(p)
+            self.infer_pvalues(p, mcp=mcp)
 
         # ---------------------------------------------------------------------
         # normalize (if needed)
@@ -393,8 +410,8 @@ class Pac(_PacObj, _PacPlt):
 
         return pac
 
-    def filterfit(self, sf, x_pha, x_amp=None, n_perm=200, p=.05, n_jobs=-1,
-                  edges=None, verbose=None):
+    def filterfit(self, sf, x_pha, x_amp=None, n_perm=200, p=.05,
+                  mcp='maxstat', n_jobs=-1, edges=None, verbose=None):
         """Filt the data then compute PAC on it.
 
         Parameters
@@ -411,6 +428,12 @@ class Pac(_PacObj, _PacPlt):
             Number of surrogates to compute.
         p : float | 0.05
             Statistical threshold
+        mcp : {'fdr', 'bonferroni'}
+            Correct the p-values for multiple comparisons. Use either :
+
+                * 'maxstat' : maximum statistics
+                * 'fdr' : FDR correction (need MNE-Python)
+                * 'bonferroni' : Bonferroni correction (need MNE-Python)
         edges : int | None
             Number of samples to discard to avoid edge effects due to filtering
         n_jobs : int | -1
@@ -450,10 +473,10 @@ class Pac(_PacObj, _PacPlt):
             amp = np.angle(hilbertm(amp))
 
         # Compute pac :
-        return self.fit(pha, amp, p=p, n_perm=n_perm, n_jobs=n_jobs,
+        return self.fit(pha, amp, p=p, mcp=mcp, n_perm=n_perm, n_jobs=n_jobs,
                         verbose=verbose)
 
-    def infer_pvalues(self, p=0.05):
+    def infer_pvalues(self, p=0.05, mcp='maxstat'):
         """Infer p-values based on surrogate distribution.
 
         Parameters
@@ -465,6 +488,12 @@ class Pac(_PacObj, _PacPlt):
         -------
         pvalues : array_like
             Array of p-values of shape (n_amp, n_pha)
+        mcp : {'fdr', 'bonferroni'}
+            Correct the p-values for multiple comparisons. Use either :
+
+                * 'maxstat' : maximum statistics
+                * 'fdr' : FDR correction (need MNE-Python)
+                * 'bonferroni' : Bonferroni correction (need MNE-Python)
         """
         # ---------------------------------------------------------------------
         # check that pac and surrogates has already been computed
@@ -474,7 +503,7 @@ class Pac(_PacObj, _PacPlt):
 
         # mean pac and surrogates across trials
         m_pac, m_surro = self.pac.mean(2), self.surrogates.mean(3)
-        self._pvalues = self._infer_pvalues(m_pac, m_surro, p=p)
+        self._pvalues = self._infer_pvalues(m_pac, m_surro, p=p, mcp=mcp)
 
         return self._pvalues
 
@@ -626,7 +655,7 @@ class EventRelatedPac(_PacObj, _PacVisual):
                 logger.info(f"    Compute {n_perm} permutations")
                 self._surrogates = _ergcpac_perm(sco, amp, smooth=smooth,
                                                  n_jobs=n_jobs, n_perm=n_perm)
-                self.infer_pvalues(p=p)
+                self.infer_pvalues(p=p, mcp=mcp)
         return self.erpac
 
     def filterfit(self, sf, x_pha, x_amp=None, method='circular', smooth=None,
