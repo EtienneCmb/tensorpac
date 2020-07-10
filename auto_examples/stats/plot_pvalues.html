@@ -177,6 +177,11 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#statistics">Statistics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plot_compare_mcp.html">Comparison of methods for correcting p-values for multiple comparisons</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="plot_compare_mcp.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_compare_mcp.html#compute-true-pac-estimation-and-surrogates-distribution">Compute true PAC estimation and surrogates distribution</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="plot_stats_stationary.html">Identify stationary time-series using unit root test</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="plot_stats_stationary.html#define-a-random-dataset">Define a random dataset</a></li>
 <li class="toctree-l4"><a class="reference internal" href="plot_stats_stationary.html#compute-the-statistical-test">Compute the statistical test</a></li>
@@ -312,7 +317,7 @@ is the number of trials</p>
 <blockquote>
 <div><p>Now, we compute the PAC using multiple phases and amplitudes such as the
 distribution of surrogates. In this example, we used the method proposed by
-bahramisharif et al. 2013 <a class="bibtex reference internal" href="../../references.html#bahramisharif2013propagating" id="id1">[2]</a> and also
+Bahramisharif et al. 2013 <a class="bibtex reference internal" href="../../references.html#bahramisharif2013propagating" id="id1">[2]</a> and also
 recommended by Aru et al. 2015 <a class="bibtex reference internal" href="../../references.html#aru2015untangling" id="id2">[1]</a>. This method
 consists in swapping two time blocks of amplitudes cut at a random time
 point. Then, we used the method <a class="reference internal" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.infer_pvalues" title="tensorpac.Pac.infer_pvalues"><code class="xref py py-class docutils literal notranslate"><span class="pre">tensorpac.Pac.infer_pvalues</span></code></a> in order
@@ -359,7 +364,7 @@ frequency pairs.</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Surrogates shape (n_perm, n_amp, n_pha) : (200, 55, 55)
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  7.038 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.096 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-stats-plot-pvalues-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/9c6c042faee357eac58abf6fb9bbae78/plot_pvalues.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_pvalues.py</span></code></a></p>

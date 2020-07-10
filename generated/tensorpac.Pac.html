@@ -177,6 +177,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/index.html#statistics">Statistics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/stats/plot_compare_mcp.html">Comparison of methods for correcting p-values for multiple comparisons</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_compare_mcp.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_compare_mcp.html#compute-true-pac-estimation-and-surrogates-distribution">Compute true PAC estimation and surrogates distribution</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/stats/plot_stats_stationary.html">Identify stationary time-series using unit root test</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_stats_stationary.html#define-a-random-dataset">Define a random dataset</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_stats_stationary.html#compute-the-statistical-test">Compute the statistical test</a></li>
@@ -386,10 +391,10 @@ amplitude <a class="bibtex reference internal" href="../references.html#bahramis
 <tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.filterfit" title="tensorpac.Pac.filterfit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filterfit</span></code></a>(sf, x_pha[, x_amp, n_perm, p, …])</p></td>
 <td><p>Filt the data then compute PAC on it.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.fit" title="tensorpac.Pac.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(pha, amp[, n_perm, p, n_jobs, verbose])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.fit" title="tensorpac.Pac.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(pha, amp[, n_perm, p, mcp, n_jobs, verbose])</p></td>
 <td><p>Compute PAC on filtered data.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.infer_pvalues" title="tensorpac.Pac.infer_pvalues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">infer_pvalues</span></code></a>([p])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.infer_pvalues" title="tensorpac.Pac.infer_pvalues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">infer_pvalues</span></code></a>([p, mcp])</p></td>
 <td><p>Infer p-values based on surrogate distribution.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.pacplot" title="tensorpac.Pac.pacplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pacplot</span></code></a>(pac, xvec, yvec[, xlabel, ylabel, …])</p></td>
@@ -511,11 +516,11 @@ is only available with dcomplex=’hilbert’ and not wavelet.</p>
 
 <dl class="method">
 <dt id="tensorpac.Pac.filterfit">
-<code class="sig-name descname">filterfit</code><span class="sig-paren">(</span><em class="sig-param">sf</em>, <em class="sig-param">x_pha</em>, <em class="sig-param">x_amp=None</em>, <em class="sig-param">n_perm=200</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">edges=None</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">filterfit</code><span class="sig-paren">(</span><em class="sig-param">sf</em>, <em class="sig-param">x_pha</em>, <em class="sig-param">x_amp=None</em>, <em class="sig-param">n_perm=200</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">mcp='maxstat'</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">edges=None</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filt the data then compute PAC on it.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
+<dd class="field-odd"><dl>
 <dt><strong>sf</strong><span class="classifier">float</span></dt><dd><p>The sampling frequency.</p>
 </dd>
 <dt><strong>x_pha, x_amp</strong><span class="classifier">array_like</span></dt><dd><p>Array of data for computing PAC. x_pha is the data used for
@@ -527,6 +532,15 @@ x_amp could be different but still must to have the same shape.</p>
 <dt><strong>n_perm</strong><span class="classifier">int | 200</span></dt><dd><p>Number of surrogates to compute.</p>
 </dd>
 <dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Statistical threshold</p>
+</dd>
+<dt><strong>mcp</strong><span class="classifier">{‘fdr’, ‘bonferroni’}</span></dt><dd><p>Correct the p-values for multiple comparisons. Use either :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>‘maxstat’ : maximum statistics</p></li>
+<li><p>‘fdr’ : FDR correction (need MNE-Python)</p></li>
+<li><p>‘bonferroni’ : Bonferroni correction (need MNE-Python)</p></li>
+</ul>
+</div></blockquote>
 </dd>
 <dt><strong>edges</strong><span class="classifier">int | None</span></dt><dd><p>Number of samples to discard to avoid edge effects due to filtering</p>
 </dd>
@@ -557,11 +571,11 @@ n_pha, n_epochs)</p>
 
 <dl class="method">
 <dt id="tensorpac.Pac.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">n_perm=200</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">n_perm=200</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">mcp='maxstat'</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute PAC on filtered data.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
+<dd class="field-odd"><dl>
 <dt><strong>pha</strong><span class="classifier">array_like</span></dt><dd><p>Array of phases of shape (n_pha, n_epochs, n_times).
 Angles should be in rad.</p>
 </dd>
@@ -570,6 +584,15 @@ Angles should be in rad.</p>
 <dt><strong>n_perm</strong><span class="classifier">int | 200</span></dt><dd><p>Number of surrogates to compute.</p>
 </dd>
 <dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Statistical threshold</p>
+</dd>
+<dt><strong>mcp</strong><span class="classifier">{‘fdr’, ‘bonferroni’}</span></dt><dd><p>Correct the p-values for multiple comparisons. Use either :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>‘maxstat’ : maximum statistics</p></li>
+<li><p>‘fdr’ : FDR correction (need MNE-Python)</p></li>
+<li><p>‘bonferroni’ : Bonferroni correction (need MNE-Python)</p></li>
+</ul>
+</div></blockquote>
 </dd>
 <dt><strong>n_jobs</strong><span class="classifier">int | -1</span></dt><dd><p>Number of jobs to compute PAC in parallel. For very large data,
 set this parameter to 1 in order to prevent large memory usage.</p>
@@ -598,9 +621,9 @@ n_pha, n_epochs)</p>
 
 <dl class="method">
 <dt id="tensorpac.Pac.infer_pvalues">
-<code class="sig-name descname">infer_pvalues</code><span class="sig-paren">(</span><em class="sig-param">p=0.05</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.infer_pvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.infer_pvalues" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">infer_pvalues</code><span class="sig-paren">(</span><em class="sig-param">p=0.05</em>, <em class="sig-param">mcp='maxstat'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.infer_pvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.infer_pvalues" title="Permalink to this definition">¶</a></dt>
 <dd><p>Infer p-values based on surrogate distribution.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Significiency threshold</p>
@@ -608,8 +631,17 @@ n_pha, n_epochs)</p>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
+<dd class="field-even"><dl>
 <dt><strong>pvalues</strong><span class="classifier">array_like</span></dt><dd><p>Array of p-values of shape (n_amp, n_pha)</p>
+</dd>
+<dt><strong>mcp</strong><span class="classifier">{‘fdr’, ‘bonferroni’}</span></dt><dd><p>Correct the p-values for multiple comparisons. Use either :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>‘maxstat’ : maximum statistics</p></li>
+<li><p>‘fdr’ : FDR correction (need MNE-Python)</p></li>
+<li><p>‘bonferroni’ : Bonferroni correction (need MNE-Python)</p></li>
+</ul>
+</div></blockquote>
 </dd>
 </dl>
 </dd>

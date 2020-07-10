@@ -66,7 +66,7 @@ Compute true PAC estimation and surrogates distribution
 ##############################################################################
  Now, we compute the PAC using multiple phases and amplitudes such as the
  distribution of surrogates. In this example, we used the method proposed by 
- bahramisharif et al. 2013 :cite:`bahramisharif2013propagating` and also
+ Bahramisharif et al. 2013 :cite:`bahramisharif2013propagating` and also
  recommended by Aru et al. 2015 :cite:`aru2015untangling`. This method
  consists in swapping two time blocks of amplitudes cut at a random time
  point. Then, we used the method :class:`tensorpac.Pac.infer_pvalues` in order
@@ -130,7 +130,7 @@ Compute true PAC estimation and surrogates distribution
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  7.038 seconds)
+   **Total running time of the script:** ( 0 minutes  6.096 seconds)
 
 
 .. _sphx_glr_download_auto_examples_stats_plot_pvalues.py:

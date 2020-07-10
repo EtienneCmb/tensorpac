@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Compare filtering properties &#8212; Tensorpac 0.6.3 documentation</title>
+    <title>Comparison of methods for correcting p-values for multiple comparisons &#8212; Tensorpac 0.6.3 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
@@ -16,8 +16,8 @@
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Long-range PAC" href="plot_long_range_coupling.html" />
-    <link rel="prev" title="Compare normalization types" href="plot_compare_normalizations.html" />
+    <link rel="next" title="Identify stationary time-series using unit root test" href="plot_stats_stationary.html" />
+    <link rel="prev" title="Event-Related Phase Amplitude Coupling" href="../erpac/plot_erpac.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -138,28 +138,28 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html#phase-amplitude-coupling">Phase-Amplitude coupling</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="plot_readme.html">README example</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_pac_methods.html">Comparison of the implemented PAC methods</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="plot_pac_methods.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
-<li class="toctree-l4"><a class="reference internal" href="plot_pac_methods.html#extract-phases-and-amplitudes">Extract phases and amplitudes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="plot_pac_methods.html#compute-plot-and-compare-pac">Compute, plot and compare PAC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#phase-amplitude-coupling">Phase-Amplitude coupling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pac/plot_readme.html">README example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pac/plot_pac_methods.html">Comparison of the implemented PAC methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pac/plot_pac_methods.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pac/plot_pac_methods.html#extract-phases-and-amplitudes">Extract phases and amplitudes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pac/plot_pac_methods.html#compute-plot-and-compare-pac">Compute, plot and compare PAC</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="plot_compare_surrogates.html">Compare methods to correct PAC for spurious coupling</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="plot_compare_surrogates.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
-<li class="toctree-l4"><a class="reference internal" href="plot_compare_surrogates.html#extract-phases-and-amplitudes">Extract phases and amplitudes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="plot_compare_surrogates.html#compute-pac-and-surrogates">Compute PAC and surrogates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pac/plot_compare_surrogates.html">Compare methods to correct PAC for spurious coupling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pac/plot_compare_surrogates.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pac/plot_compare_surrogates.html#extract-phases-and-amplitudes">Extract phases and amplitudes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pac/plot_compare_surrogates.html#compute-pac-and-surrogates">Compute PAC and surrogates</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="plot_compare_normalizations.html">Compare normalization types</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="plot_compare_normalizations.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
-<li class="toctree-l4"><a class="reference internal" href="plot_compare_normalizations.html#extract-phases-and-amplitudes">Extract phases and amplitudes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="plot_compare_normalizations.html#recompute-pac-and-surrogates-and-switch-the-normalization-types">Recompute PAC and surrogates and switch the normalization types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pac/plot_compare_normalizations.html">Compare normalization types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../pac/plot_compare_normalizations.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pac/plot_compare_normalizations.html#extract-phases-and-amplitudes">Extract phases and amplitudes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pac/plot_compare_normalizations.html#recompute-pac-and-surrogates-and-switch-the-normalization-types">Recompute PAC and surrogates and switch the normalization types</a></li>
 </ul>
 </li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Compare filtering properties</a></li>
-<li class="toctree-l3"><a class="reference internal" href="plot_long_range_coupling.html">Long-range PAC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pac/plot_compare_filtering.html">Compare filtering properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pac/plot_long_range_coupling.html">Long-range PAC</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../index.html#event-related-phase-amplitude-coupling">Event-Related Phase-Amplitude coupling</a><ul>
@@ -176,28 +176,28 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../index.html#statistics">Statistics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../stats/plot_compare_mcp.html">Comparison of methods for correcting p-values for multiple comparisons</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../stats/plot_compare_mcp.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../stats/plot_compare_mcp.html#compute-true-pac-estimation-and-surrogates-distribution">Compute true PAC estimation and surrogates distribution</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#statistics">Statistics</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Comparison of methods for correcting p-values for multiple comparisons</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compute-true-pac-estimation-and-surrogates-distribution">Compute true PAC estimation and surrogates distribution</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../stats/plot_stats_stationary.html">Identify stationary time-series using unit root test</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../stats/plot_stats_stationary.html#define-a-random-dataset">Define a random dataset</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../stats/plot_stats_stationary.html#compute-the-statistical-test">Compute the statistical test</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../stats/plot_stats_stationary.html#plot-each-trial">Plot each trial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_stats_stationary.html">Identify stationary time-series using unit root test</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="plot_stats_stationary.html#define-a-random-dataset">Define a random dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_stats_stationary.html#compute-the-statistical-test">Compute the statistical test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_stats_stationary.html#plot-each-trial">Plot each trial</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../stats/plot_pvalues.html">Compute and plot the p-values</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../stats/plot_pvalues.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../stats/plot_pvalues.html#compute-true-pac-estimation-and-surrogates-distribution">Compute true PAC estimation and surrogates distribution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_pvalues.html">Compute and plot the p-values</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="plot_pvalues.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_pvalues.html#compute-true-pac-estimation-and-surrogates-distribution">Compute true PAC estimation and surrogates distribution</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../stats/plot_compare_cond_cluster.html">Compare PAC of two experimental conditions with cluster-based statistics</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../stats/plot_compare_cond_cluster.html#simulate-the-data-coming-from-two-experimental-conditions">Simulate the data coming from two experimental conditions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../stats/plot_compare_cond_cluster.html#compute-the-single-trial-pac-on-both-datasets">Compute the single trial PAC on both datasets</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../stats/plot_compare_cond_cluster.html#correct-for-multiple-comparisons-using-a-cluster-based-approach">Correct for multiple-comparisons using a cluster-based approach</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../stats/plot_compare_cond_cluster.html#plot-the-significant-clusters">Plot the significant clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_compare_cond_cluster.html">Compare PAC of two experimental conditions with cluster-based statistics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="plot_compare_cond_cluster.html#simulate-the-data-coming-from-two-experimental-conditions">Simulate the data coming from two experimental conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_compare_cond_cluster.html#compute-the-single-trial-pac-on-both-datasets">Compute the single trial PAC on both datasets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_compare_cond_cluster.html#correct-for-multiple-comparisons-using-a-cluster-based-approach">Correct for multiple-comparisons using a cluster-based approach</a></li>
+<li class="toctree-l4"><a class="reference internal" href="plot_compare_cond_cluster.html#plot-the-significant-clusters">Plot the significant clusters</a></li>
 </ul>
 </li>
 </ul>
@@ -249,7 +249,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="../../_sources/auto_examples/pac/plot_compare_filtering.rst.txt"
+  <a href="../../_sources/auto_examples/stats/plot_compare_mcp.rst.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -275,73 +275,100 @@
       
   <div class="sphx-glr-download-link-note admonition note">
 <p class="admonition-title">Note</p>
-<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-pac-plot-compare-filtering-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-stats-plot-compare-mcp-py"><span class="std std-ref">here</span></a> to download the full example code</p>
 </div>
-<div class="sphx-glr-example-title section" id="compare-filtering-properties">
-<span id="sphx-glr-auto-examples-pac-plot-compare-filtering-py"></span><h1>Compare filtering properties<a class="headerlink" href="#compare-filtering-properties" title="Permalink to this headline">¶</a></h1>
-<p>Tensorpac provides two ways for extracting phase and amplitude :</p>
-<ul class="simple">
-<li><p>Using filtering followed by Hilbert transform.</p></li>
-<li><p>Using wavelets.</p></li>
+<div class="sphx-glr-example-title section" id="comparison-of-methods-for-correcting-p-values-for-multiple-comparisons">
+<span id="sphx-glr-auto-examples-stats-plot-compare-mcp-py"></span><h1>Comparison of methods for correcting p-values for multiple comparisons<a class="headerlink" href="#comparison-of-methods-for-correcting-p-values-for-multiple-comparisons" title="Permalink to this headline">¶</a></h1>
+<p>This script illustrates three methods to correct the p-values for multiple
+comparisons (i.e by the number of phases and by the number of amplitudes) :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Using the maximum statistics</p></li>
+<li><p>Using a FDR correction</p></li>
+<li><p>Using a Bonferroni correction</p></li>
 </ul>
-<img alt="../../_images/sphx_glr_plot_compare_filtering_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_compare_filtering_001.png" />
-<p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Filtering with fir1 filter
-Filtering with wavelets
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</div></blockquote>
+<p>Note that for the FDR and Bonferroni corrections, MNE-Python is needed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
 <span class="kn">from</span> <span class="nn">tensorpac</span> <span class="kn">import</span> <span class="n">Pac</span>
 <span class="kn">from</span> <span class="nn">tensorpac.signals</span> <span class="kn">import</span> <span class="n">pac_signals_wavelet</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-paper&#39;</span><span class="p">)</span>
 
-<span class="c1"># First, we generate a dataset of signals artificially coupled between 10hz</span>
-<span class="c1"># and 100hz. By default, this dataset is organized as (ntrials, n_times) where</span>
-<span class="c1"># n_times is the number of time points.</span>
-<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">5</span>         <span class="c1"># number of datasets</span>
-<span class="n">n_times</span> <span class="o">=</span> <span class="mi">4000</span>  <span class="c1"># number of time points</span>
-<span class="n">data</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">pac_signals_wavelet</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
-                                 <span class="n">n_epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="n">n_times</span><span class="p">)</span>
-
-<span class="c1"># First, let&#39;s use the MVL, without any further correction by surrogates :</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">Pac</span><span class="p">(</span><span class="n">idpac</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">f_pha</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">3</span><span class="p">),</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-        <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
-<span class="c1"># Define several cycle options for the fir1 (eegfilt like) filter :</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Filtering with fir1 filter&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]):</span>
-    <span class="n">p</span><span class="o">.</span><span class="n">cycle</span> <span class="o">=</span> <span class="n">k</span>
-    <span class="n">xpac</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filterfit</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">p</span><span class="o">.</span><span class="n">comodulogram</span><span class="p">(</span><span class="n">xpac</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Fir1 - cycle &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
-
-<span class="c1"># Define several wavelet width :</span>
-<span class="n">p</span><span class="o">.</span><span class="n">dcomplex</span> <span class="o">=</span> <span class="s1">&#39;wavelet&#39;</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Filtering with wavelets&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">]):</span>
-    <span class="n">p</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">k</span>
-    <span class="n">xpac</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filterfit</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
-    <span class="n">p</span><span class="o">.</span><span class="n">comodulogram</span><span class="p">(</span><span class="n">xpac</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Wavelet - width &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.736 seconds)</p>
-<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-pac-plot-compare-filtering-py">
+<div class="section" id="simulate-artificial-coupling">
+<h2>Simulate artificial coupling<a class="headerlink" href="#simulate-artificial-coupling" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>first, we generate several trials that contains a coupling between a 6z phase
+and a 90hz amplitude. By default, the returned dataset is organized as
+(n_epochs, n_times) where n_times is the number of time points and n_epochs
+is the number of trials</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f_pha</span> <span class="o">=</span> <span class="mi">6</span>       <span class="c1"># frequency phase for the coupling</span>
+<span class="n">f_amp</span> <span class="o">=</span> <span class="mi">90</span>      <span class="c1"># frequency amplitude for the coupling</span>
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">30</span>   <span class="c1"># number of trials</span>
+<span class="n">n_times</span> <span class="o">=</span> <span class="mi">4000</span>  <span class="c1"># number of time points</span>
+<span class="n">sf</span> <span class="o">=</span> <span class="mf">512.</span>       <span class="c1"># sampling frequency</span>
+<span class="n">data</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">pac_signals_wavelet</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="n">f_pha</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="n">f_amp</span><span class="p">,</span> <span class="n">noise</span><span class="o">=.</span><span class="mi">4</span><span class="p">,</span>
+                                 <span class="n">n_epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="n">n_times</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="n">sf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="compute-true-pac-estimation-and-surrogates-distribution">
+<h2>Compute true PAC estimation and surrogates distribution<a class="headerlink" href="#compute-true-pac-estimation-and-surrogates-distribution" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Now, we compute the PAC using multiple phases and amplitudes such as the
+distribution of surrogates. In this example, we used the method proposed by
+Tort et al. 2010 <a class="bibtex reference internal" href="../../references.html#tort2010measuring" id="id1">[10]</a>. This method consists in swapping
+phase and amplitude trials. Then, we used the method
+<a class="reference internal" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.infer_pvalues" title="tensorpac.Pac.infer_pvalues"><code class="xref py py-class docutils literal notranslate"><span class="pre">tensorpac.Pac.infer_pvalues</span></code></a> in order to get the corrected p-values
+across all possible (phase, amplitude) frequency pairs.</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># define the Pac object</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Pac</span><span class="p">(</span><span class="n">idpac</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">f_pha</span><span class="o">=</span><span class="s1">&#39;mres&#39;</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="s1">&#39;mres&#39;</span><span class="p">)</span>
+<span class="c1"># compute true pac and surrogates</span>
+<span class="n">n_perm</span> <span class="o">=</span> <span class="mi">200</span>  <span class="c1"># number of permutations</span>
+<span class="n">xpac</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filterfit</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="n">n_perm</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">n_mcp</span><span class="p">,</span> <span class="n">mcp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;maxstat&#39;</span><span class="p">,</span> <span class="s1">&#39;fdr&#39;</span><span class="p">,</span> <span class="s1">&#39;bonferroni&#39;</span><span class="p">]):</span>
+    <span class="c1"># get the corrected p-values</span>
+    <span class="n">pval</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">infer_pvalues</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">mcp</span><span class="o">=</span><span class="n">mcp</span><span class="p">)</span>
+    <span class="c1"># set to gray non significant p-values and in color significant values</span>
+    <span class="n">pac_ns</span> <span class="o">=</span> <span class="n">xpac</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">pac_ns</span><span class="p">[</span><span class="n">pval</span> <span class="o">&lt;=</span> <span class="o">.</span><span class="mi">05</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="n">pac_s</span> <span class="o">=</span> <span class="n">xpac</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">pac_s</span><span class="p">[</span><span class="n">pval</span> <span class="o">&gt;</span> <span class="o">.</span><span class="mi">05</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">n_mcp</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">comodulogram</span><span class="p">(</span><span class="n">pac_ns</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">pac_ns</span><span class="p">),</span>
+                   <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">pac_ns</span><span class="p">))</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">comodulogram</span><span class="p">(</span><span class="n">pac_s</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;MCP=</span><span class="si">{</span><span class="n">mcp</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span>
+                   <span class="n">vmin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">pac_s</span><span class="p">),</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">pac_s</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_plot_compare_mcp_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_compare_mcp_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/circleci/project/examples/stats/plot_compare_mcp.py:69: RuntimeWarning: All-NaN slice encountered
+  vmin=np.nanmin(pac_s), vmax=np.nanmax(pac_s))
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  12.194 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-stats-plot-compare-mcp-py">
 <div class="sphx-glr-download docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/93ffb239747aa5ae2e282e59a6e00af3/plot_compare_filtering.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_compare_filtering.py</span></code></a></p>
+<p><a class="reference download internal" download="" href="../../_downloads/e4e14c884cdbd2df4badf0300d75f463/plot_compare_mcp.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_compare_mcp.py</span></code></a></p>
 </div>
 <div class="sphx-glr-download docutils container">
-<p><a class="reference download internal" download="" href="../../_downloads/42907ca139259e2a03611c2ef7305c3b/plot_compare_filtering.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_compare_filtering.ipynb</span></code></a></p>
+<p><a class="reference download internal" download="" href="../../_downloads/1fc0f5fc68595215bbe368c117a0c34e/plot_compare_mcp.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_compare_mcp.ipynb</span></code></a></p>
 </div>
 </div>
 <p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
 </div>
 
 

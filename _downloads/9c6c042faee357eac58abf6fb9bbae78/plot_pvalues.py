@@ -41,7 +41,7 @@ data, time = pac_signals_wavelet(f_pha=f_pha, f_amp=f_amp, noise=.8,
 ###############################################################################
 # Now, we compute the PAC using multiple phases and amplitudes such as the
 # distribution of surrogates. In this example, we used the method proposed by 
-# bahramisharif et al. 2013 :cite:`bahramisharif2013propagating` and also
+# Bahramisharif et al. 2013 :cite:`bahramisharif2013propagating` and also
 # recommended by Aru et al. 2015 :cite:`aru2015untangling`. This method
 # consists in swapping two time blocks of amplitudes cut at a random time
 # point. Then, we used the method :class:`tensorpac.Pac.infer_pvalues` in order

@@ -246,6 +246,26 @@ Statistics
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="This script illustrates three methods to correct the p-values for multiple comparisons (i.e by ...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/stats/images/thumb/sphx_glr_plot_compare_mcp_thumb.png
+
+        :ref:`sphx_glr_auto_examples_stats_plot_compare_mcp.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/stats/plot_compare_mcp
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="This example illustrates how to identify stationary time-series (i.e. time-series with constant...">
 
 .. only:: html

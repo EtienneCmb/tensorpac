@@ -175,6 +175,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../auto_examples/index.html#statistics">Statistics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../auto_examples/stats/plot_compare_mcp.html">Comparison of methods for correcting p-values for multiple comparisons</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../auto_examples/stats/plot_compare_mcp.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../auto_examples/stats/plot_compare_mcp.html#compute-true-pac-estimation-and-surrogates-distribution">Compute true PAC estimation and surrogates distribution</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../../auto_examples/stats/plot_stats_stationary.html">Identify stationary time-series using unit root test</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../auto_examples/stats/plot_stats_stationary.html#define-a-random-dataset">Define a random dataset</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../auto_examples/stats/plot_stats_stationary.html#compute-the-statistical-test">Compute the statistical test</a></li>
@@ -399,7 +404,7 @@
         <span class="n">pha</span> <span class="o">=</span> <span class="p">(</span><span class="n">pha</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
         <span class="k">return</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span>
 
-    <span class="k">def</span> <span class="nf">_infer_pvalues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">,</span> <span class="n">perm</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_infer_pvalues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">,</span> <span class="n">perm</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">mcp</span><span class="o">=</span><span class="s1">&#39;maxstat&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Global function for statistical inferences.</span>
 
 <span class="sd">        In order to work this method requires :</span>
@@ -416,14 +421,24 @@
                            <span class="sa">f</span><span class="s2">&quot;form at least n_perm=</span><span class="si">{</span><span class="n">n_perm_req</span><span class="si">}</span><span class="s2"> permutations&quot;</span><span class="p">)</span>
 
         <span class="c1"># ---------------------------------------------------------------------</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Infer p-values at p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    infer p-values at (p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">, mcp=</span><span class="si">{</span><span class="n">mcp</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
         <span class="c1"># computes the pvalues</span>
-        <span class="n">max_p</span> <span class="o">=</span> <span class="n">perm</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_perm</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">nb_over</span> <span class="o">=</span> <span class="p">(</span><span class="n">effect</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">max_p</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">pvalues</span> <span class="o">=</span> <span class="n">nb_over</span> <span class="o">/</span> <span class="n">n_perm</span>
-        <span class="c1"># non-significant p-values are set to 1. and min(pvalues) = 1 / n_perm</span>
-        <span class="n">pvalues</span><span class="p">[</span><span class="n">pvalues</span> <span class="o">&gt;=</span> <span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
-        <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">n_perm</span><span class="p">,</span> <span class="n">pvalues</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mcp</span> <span class="ow">is</span> <span class="s1">&#39;maxstat&#39;</span><span class="p">:</span>
+            <span class="n">max_p</span> <span class="o">=</span> <span class="n">perm</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_perm</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+            <span class="n">nb_over</span> <span class="o">=</span> <span class="p">(</span><span class="n">effect</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">max_p</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">pvalues</span> <span class="o">=</span> <span class="n">nb_over</span> <span class="o">/</span> <span class="n">n_perm</span>
+            <span class="c1"># non-signi. p-values are set to 1. and min(pvalues) = 1 / n_perm</span>
+            <span class="n">pvalues</span><span class="p">[</span><span class="n">pvalues</span> <span class="o">&gt;=</span> <span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+            <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">n_perm</span><span class="p">,</span> <span class="n">pvalues</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">mcp</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;fdr&#39;</span><span class="p">,</span> <span class="s1">&#39;bonferroni&#39;</span><span class="p">]:</span>
+            <span class="kn">from</span> <span class="nn">mne.stats</span> <span class="kn">import</span> <span class="n">fdr_correction</span><span class="p">,</span> <span class="n">bonferroni_correction</span>
+            <span class="n">fcn</span> <span class="o">=</span> <span class="n">fdr_correction</span> <span class="k">if</span> <span class="n">mcp</span> <span class="ow">is</span> <span class="s1">&#39;fdr&#39;</span> <span class="k">else</span> <span class="n">bonferroni_correction</span>
+            <span class="c1"># compute the p-values</span>
+            <span class="n">pvalues</span> <span class="o">=</span> <span class="p">(</span><span class="n">effect</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">perm</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">n_perm</span>
+            <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">n_perm</span><span class="p">,</span> <span class="n">pvalues</span><span class="p">)</span>
+            <span class="c1"># apply correction</span>
+            <span class="n">is_signi</span><span class="p">,</span> <span class="n">pvalues</span> <span class="o">=</span> <span class="n">fcn</span><span class="p">(</span><span class="n">pvalues</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+            <span class="n">pvalues</span><span class="p">[</span><span class="o">~</span><span class="n">is_signi</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
 
         <span class="k">return</span> <span class="n">pvalues</span>
 
@@ -570,7 +585,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">n_bins</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_bins</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Phase Amplitude Coupling object defined&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Pac.fit"><a class="viewcode-back" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Pac.fit"><a class="viewcode-back" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">mcp</span><span class="o">=</span><span class="s1">&#39;maxstat&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute PAC on filtered data.</span>
 
 <span class="sd">        Parameters</span>
@@ -584,6 +600,12 @@
 <span class="sd">            Number of surrogates to compute.</span>
 <span class="sd">        p : float | 0.05</span>
 <span class="sd">            Statistical threshold</span>
+<span class="sd">        mcp : {&#39;fdr&#39;, &#39;bonferroni&#39;}</span>
+<span class="sd">            Correct the p-values for multiple comparisons. Use either :</span>
+
+<span class="sd">                * &#39;maxstat&#39; : maximum statistics</span>
+<span class="sd">                * &#39;fdr&#39; : FDR correction (need MNE-Python)</span>
+<span class="sd">                * &#39;bonferroni&#39; : Bonferroni correction (need MNE-Python)</span>
 <span class="sd">        n_jobs : int | -1</span>
 <span class="sd">            Number of jobs to compute PAC in parallel. For very large data,</span>
 <span class="sd">            set this parameter to 1 in order to prevent large memory usage.</span>
@@ -646,7 +668,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_surrogates</span> <span class="o">=</span> <span class="n">surro</span>
 
             <span class="c1"># infer pvalues</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">infer_pvalues</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">infer_pvalues</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">mcp</span><span class="o">=</span><span class="n">mcp</span><span class="p">)</span>
 
         <span class="c1"># ---------------------------------------------------------------------</span>
         <span class="c1"># normalize (if needed)</span>
@@ -658,8 +680,8 @@
 
         <span class="k">return</span> <span class="n">pac</span></div>
 
-<div class="viewcode-block" id="Pac.filterfit"><a class="viewcode-back" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">x_amp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
-                  <span class="n">edges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Pac.filterfit"><a class="viewcode-back" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">x_amp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span>
+                  <span class="n">mcp</span><span class="o">=</span><span class="s1">&#39;maxstat&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Filt the data then compute PAC on it.</span>
 
 <span class="sd">        Parameters</span>
@@ -676,6 +698,12 @@
 <span class="sd">            Number of surrogates to compute.</span>
 <span class="sd">        p : float | 0.05</span>
 <span class="sd">            Statistical threshold</span>
+<span class="sd">        mcp : {&#39;fdr&#39;, &#39;bonferroni&#39;}</span>
+<span class="sd">            Correct the p-values for multiple comparisons. Use either :</span>
+
+<span class="sd">                * &#39;maxstat&#39; : maximum statistics</span>
+<span class="sd">                * &#39;fdr&#39; : FDR correction (need MNE-Python)</span>
+<span class="sd">                * &#39;bonferroni&#39; : Bonferroni correction (need MNE-Python)</span>
 <span class="sd">        edges : int | None</span>
 <span class="sd">            Number of samples to discard to avoid edge effects due to filtering</span>
 <span class="sd">        n_jobs : int | -1</span>
@@ -715,10 +743,10 @@
             <span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">hilbertm</span><span class="p">(</span><span class="n">amp</span><span class="p">))</span>
 
         <span class="c1"># Compute pac :</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="n">n_perm</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">mcp</span><span class="o">=</span><span class="n">mcp</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="n">n_perm</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
                         <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Pac.infer_pvalues"><a class="viewcode-back" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.infer_pvalues">[docs]</a>    <span class="k">def</span> <span class="nf">infer_pvalues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<div class="viewcode-block" id="Pac.infer_pvalues"><a class="viewcode-back" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.infer_pvalues">[docs]</a>    <span class="k">def</span> <span class="nf">infer_pvalues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">mcp</span><span class="o">=</span><span class="s1">&#39;maxstat&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Infer p-values based on surrogate distribution.</span>
 
 <span class="sd">        Parameters</span>
@@ -730,6 +758,12 @@
 <span class="sd">        -------</span>
 <span class="sd">        pvalues : array_like</span>
 <span class="sd">            Array of p-values of shape (n_amp, n_pha)</span>
+<span class="sd">        mcp : {&#39;fdr&#39;, &#39;bonferroni&#39;}</span>
+<span class="sd">            Correct the p-values for multiple comparisons. Use either :</span>
+
+<span class="sd">                * &#39;maxstat&#39; : maximum statistics</span>
+<span class="sd">                * &#39;fdr&#39; : FDR correction (need MNE-Python)</span>
+<span class="sd">                * &#39;bonferroni&#39; : Bonferroni correction (need MNE-Python)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># ---------------------------------------------------------------------</span>
         <span class="c1"># check that pac and surrogates has already been computed</span>
@@ -739,7 +773,7 @@
 
         <span class="c1"># mean pac and surrogates across trials</span>
         <span class="n">m_pac</span><span class="p">,</span> <span class="n">m_surro</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pac</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">surrogates</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_infer_pvalues</span><span class="p">(</span><span class="n">m_pac</span><span class="p">,</span> <span class="n">m_surro</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_infer_pvalues</span><span class="p">(</span><span class="n">m_pac</span><span class="p">,</span> <span class="n">m_surro</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">mcp</span><span class="o">=</span><span class="n">mcp</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pvalues</span></div>
 
@@ -891,7 +925,7 @@
                 <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Compute </span><span class="si">{</span><span class="n">n_perm</span><span class="si">}</span><span class="s2"> permutations&quot;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_surrogates</span> <span class="o">=</span> <span class="n">_ergcpac_perm</span><span class="p">(</span><span class="n">sco</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="n">smooth</span><span class="p">,</span>
                                                  <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="n">n_perm</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">infer_pvalues</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">infer_pvalues</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">mcp</span><span class="o">=</span><span class="n">mcp</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">erpac</span></div>
 
 <div class="viewcode-block" id="EventRelatedPac.filterfit"><a class="viewcode-back" href="../../generated/tensorpac.EventRelatedPac.html#tensorpac.EventRelatedPac.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">x_amp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;circular&#39;</span><span class="p">,</span> <span class="n">smooth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>

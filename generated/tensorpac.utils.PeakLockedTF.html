@@ -177,6 +177,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/index.html#statistics">Statistics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/stats/plot_compare_mcp.html">Comparison of methods for correcting p-values for multiple comparisons</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_compare_mcp.html#simulate-artificial-coupling">Simulate artificial coupling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_compare_mcp.html#compute-true-pac-estimation-and-surrogates-distribution">Compute true PAC estimation and surrogates distribution</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/stats/plot_stats_stationary.html">Identify stationary time-series using unit root test</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_stats_stationary.html#define-a-random-dataset">Define a random dataset</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../auto_examples/stats/plot_stats_stationary.html#compute-the-statistical-test">Compute the statistical test</a></li>
@@ -359,7 +364,7 @@ phase and the second for the amplitude
 <tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PeakLockedTF.pacplot" title="tensorpac.utils.PeakLockedTF.pacplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pacplot</span></code></a>(pac, xvec, yvec[, xlabel, ylabel, …])</p></td>
 <td><p>Main plotting pac function.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PeakLockedTF.plot" title="tensorpac.utils.PeakLockedTF.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>([zscore, edges])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PeakLockedTF.plot" title="tensorpac.utils.PeakLockedTF.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>([zscore, baseline, edges])</p></td>
 <td><p>Integrated Peak-Locked TF plotting function.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PeakLockedTF.savefig" title="tensorpac.utils.PeakLockedTF.savefig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">savefig</span></code></a>(filename[, dpi])</p></td>
@@ -513,7 +518,7 @@ of p-values to use as levels.</p>
 
 <dl class="method">
 <dt id="tensorpac.utils.PeakLockedTF.plot">
-<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">zscore=False</em>, <em class="sig-param">edges=0</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PeakLockedTF.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PeakLockedTF.plot" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">zscore=False</em>, <em class="sig-param">baseline=None</em>, <em class="sig-param">edges=0</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PeakLockedTF.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PeakLockedTF.plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Integrated Peak-Locked TF plotting function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -522,6 +527,9 @@ of p-values to use as levels.</p>
 useful in order to compensate the 1 / f effect in the power
 spectrum. If True, the mean and deviation are computed at the
 single trial level and across all time points</p>
+</dd>
+<dt><strong>baseline</strong><span class="classifier">tuple | None</span></dt><dd><p>Baseline period to use in order to apply the z-score correction.
+Should be in samples.</p>
 </dd>
 <dt><strong>edges</strong><span class="classifier">int | 0</span></dt><dd><p>Number of pixels to discard to compensate filtering edge effect
 (<cite>power[edges:-edges]</cite>).</p>
