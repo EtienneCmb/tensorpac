@@ -56,7 +56,6 @@ Contents:
    :maxdepth: 2
 
    install
-   tutorial
    api
    auto_examples/index.rst
    contributors

@@ -63,7 +63,8 @@ sphinx_gallery_conf = {
     'gallery_dirs': 'auto_examples',
     'backreferences_dir': 'generated',
     'default_thumb_file': 'source/picture/ico.png',
-    'subsection_order': ExplicitOrder(['../../examples/pac',
+    'subsection_order': ExplicitOrder(['../../examples/tutorials',
+                                       '../../examples/pac',
                                        '../../examples/erpac',
                                        '../../examples/stats',
                                        '../../examples/misc']),
@@ -143,7 +144,6 @@ html_theme_options = {
     'navbar_fixed_top': True,
     'navbar_links': [
                         ("Install", "install"),
-                        ("Tutorial", "tutorial"),
                         ("API", "api"),
                         ("Examples", "auto_examples/index")
     ],
