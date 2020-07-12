@@ -133,7 +133,7 @@ class PSD(object):
                                              scaling='density', axis=1)
 
     def plot(self, f_min=None, f_max=None, confidence=95, interp=None,
-             log=False, grid=True):
+             log=False, grid=True, fz_title=18, fz_labels=15):
         """Plot the PSD.
 
         Parameters
@@ -150,6 +150,10 @@ class PSD(object):
             Use a log scale representation
         grid : bool | True
             Add a grid to the plot
+        fz_title : int | 18
+            Font size for the title
+        fz_labels : int | 15
+            Font size the x/y labels
 
         Returns
         -------
@@ -183,9 +187,10 @@ class PSD(object):
             plt.fill_between(xvec, psd_max, psd_min, color='lightgray',
                              alpha=0.5,
                              label=f"{confidence}th confidence interval")
-            plt.legend()
-        plt.xlabel("Frequencies (Hz)"), plt.ylabel("Power (V**2/Hz)")  # noqa
-        plt.title(f"PSD mean over {self._n_trials} trials")
+            plt.legend(fontsize=fz_labels)
+        plt.xlabel("Frequencies (Hz)", fontsize=fz_labels)
+        plt.ylabel("Power (V**2/Hz)", fontsize=fz_labels)
+        plt.title(f"PSD mean over {self._n_trials} trials", fontsize=fz_title)
         plt.xlim(f_min, f_max)
         if log:
             from matplotlib.ticker import ScalarFormatter
@@ -317,7 +322,7 @@ class BinAmplitude(_PacObj):
         return self._phase
 
 
-class ITC(_PacObj):
+class ITC(_PacObj, _PacVisual):
     """Compute the Inter-Trials Coherence (ITC).
 
     The Inter-Trials Coherence (ITC) is a measure of phase consistency over
@@ -345,15 +350,19 @@ class ITC(_PacObj):
     """
 
     def __init__(self, x, sf, f_pha=[2, 4], dcomplex='hilbert', cycle=3,
-                 width=7, edges=None, n_jobs=-1):
+                 width=7, edges=None, n_jobs=-1, verbose=None):
         """Init."""
+        set_log_level(verbose)
         _PacObj.__init__(self, f_pha=f_pha, f_amp=[60, 80], dcomplex=dcomplex,
                          cycle=(cycle, 6), width=width)
+        _PacVisual.__init__(self)
         # check
         x = np.atleast_2d(x)
         assert x.ndim <= 2, ("`x` input should be an array of shape "
                              "(n_epochs, n_times)")
         self._n_trials = x.shape[0]
+        logger.info("Inter-Trials Coherence (ITC)")
+        logger.info(f"    extracting {len(self.xvec)} phases")
         # extract phase and amplitude
         kw = dict(keepfilt=False, edges=edges, n_jobs=n_jobs)
         pha = self.filter(sf, x, 'phase', **kw)
@@ -361,12 +370,12 @@ class ITC(_PacObj):
         self._itc = np.abs(np.exp(1j * pha).mean(1)).squeeze()
         self._sf = sf
 
-    def plot(self, time=None, **kw):
+    def plot(self, times=None, **kw):
         """Plot the Inter-Trials Coherence.
 
         Parameters
         ----------
-        time : array_like | None
+        times : array_like | None
             Custom time vector to use
         kw : dict | {}
             Additional inputs are either pass to the matplotlib.pyplot.plot
@@ -380,22 +389,21 @@ class ITC(_PacObj):
         """
         import matplotlib.pyplot as plt
         n_pts = self._itc.shape[-1]
-        if not isinstance(time, np.ndarray):
-            time = np.arange(n_pts) / self._sf
-        time = time[self._edges]
-        assert len(time) == n_pts, ("The length of the time vector should be "
-                                    "{n_pts}")
+        if not isinstance(times, np.ndarray):
+            times = np.arange(n_pts) / self._sf
+        times = times[self._edges]
+        assert len(times) == n_pts, ("The length of the time vector should be "
+                                     "{n_pts}")
+        xlab = 'Time'
+        title = f"Inter-Trials Coherence ({self._n_trials} trials)"
         if self._itc.ndim == 1:
-            plt.plot(time, self._itc, **kw)
+            plt.plot(times, self._itc, **kw)
         elif self._itc.ndim == 2:
             vmin = kw.get('vmin', np.percentile(self._itc, 1))
             vmax = kw.get('vmax', np.percentile(self._itc, 99))
-            plt.pcolormesh(time, self.xvec, self._itc, vmin=vmin, vmax=vmax,
-                           **kw)
-            plt.colorbar()
-            plt.ylabel("Frequency for phase (Hz)")
-        plt.xlabel('Time')
-        plt.title(f"Inter-Trials Coherence ({self._n_trials} trials)")
+            self.pacplot(self._itc, times, self.xvec, vmin=vmin, vmax=vmax,
+                         ylabel="Frequency for phase (Hz)", xlabel=xlab,
+                         title=title, **kw)
         return plt.gca()
 
     def show(self):
@@ -634,6 +642,7 @@ class PeakLockedTF(_PacObj, _PacVisual):
         self.pacplot(amp_n.mean(1), times, self.yvec, **kwargs)
         plt.axvline(times[self.cue], color='w', lw=2)
         plt.tick_params(bottom=False, labelbottom=False)
+        ax_1 = plt.gca()
         # external colorbar
         plt.subplot(gs[slice(1, 5), -1])
         cb = plt.colorbar(self._plt_im, pad=0.01, cax=plt.gca())
@@ -653,3 +662,6 @@ class PeakLockedTF(_PacObj, _PacVisual):
         # bottom legend
         plt.legend(loc='center', bbox_to_anchor=(.5, -.5),
                    fontsize='x-large', ncol=2)
+        ax_2 = plt.gca()
+
+        return [ax_1, ax_2]
