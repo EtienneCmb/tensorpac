@@ -292,9 +292,10 @@
 <div class="sphx-glr-example-title section" id="phase-amplitude-coupling-tutorial-on-seeg-data">
 <span id="sphx-glr-auto-examples-tuto-plot-real-data-py"></span><h1>Phase-Amplitude Coupling tutorial on sEEG data<a class="headerlink" href="#phase-amplitude-coupling-tutorial-on-seeg-data" title="Permalink to this headline">¶</a></h1>
 <p>In this example, we illustrate how to conduct a PAC analysis on real data. The
-data used here are taken from <a class="bibtex reference internal" href="../../references.html#combrisson2017intentions" id="id1">[5]</a>. The task is a
-center-out motor task where the subject have to reach a target on a screen
-with the mouse. A single trial consists in three periods :</p>
+data used here are taken from Combrisson et al. 2017
+<a class="bibtex reference internal" href="../../references.html#combrisson2017intentions" id="id1">[5]</a>. The task is a center-out motor task where the
+subject have to reach a target on a screen with the mouse. A single trial
+consists in three periods :</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>From [-1000, 0]ms it is the baseline period (REST)</p></li>
@@ -566,7 +567,7 @@ time-point and then swap the two blocks of amplitudes (Bahramisharif et al.
 multiple times (e.g 200 or 1000 times) in order to obtained the distribution.
 Finally, the p-value is inferred by computing the proportion exceeded by the
 true coupling. In addition, the correction for multiple comparison is
-obtained using the maximum statistics.</p>
+obtained using the FDR.</p>
 </div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># still using the Gaussian-Copula PAC but this time, we also select the method</span>
 <span class="c1"># for computing the permutations</span>
@@ -574,13 +575,13 @@ obtained using the maximum statistics.</p>
 <span class="c1"># compute pac and 200 surrogates</span>
 <span class="n">pac_prep</span> <span class="o">=</span> <span class="n">p_obj</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha_p</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">time_prep</span><span class="p">],</span> <span class="n">amp_p</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">time_prep</span><span class="p">],</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 <span class="c1"># get the p-values</span>
-<span class="n">pvalues</span> <span class="o">=</span> <span class="n">p_obj</span><span class="o">.</span><span class="n">infer_pvalues</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">mcp</span><span class="o">=</span><span class="s1">&#39;maxstat&#39;</span><span class="p">)</span>
+<span class="n">pvalues</span> <span class="o">=</span> <span class="n">p_obj</span><span class="o">.</span><span class="n">infer_pvalues</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">mcp</span><span class="o">=</span><span class="s1">&#39;fdr&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 7</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">title</span> <span class="o">=</span> <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Significant alpha$\Leftrightarrow$gamma coupling occurring during &quot;</span>
-         <span class="s2">&quot;the motor planning phase</span><span class="se">\n</span><span class="s2">(p&lt;0.05, corrected for multiple &quot;</span>
+         <span class="s2">&quot;the motor planning phase</span><span class="se">\n</span><span class="s2">(p&lt;0.05, FDR-corrected for multiple &quot;</span>
          <span class="s2">&quot;comparisons)&quot;</span><span class="p">)</span>
 <span class="c1"># plot the non-significant pac in gray</span>
 <span class="n">pac_prep_ns</span> <span class="o">=</span> <span class="n">pac_prep</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -597,7 +598,7 @@ obtained using the maximum statistics.</p>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_plot_real_data_007.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_real_data_007.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  37.481 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  25.720 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-tuto-plot-real-data-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/035413fda3d318e84c6045e52126d555/plot_real_data.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_real_data.py</span></code></a></p>
