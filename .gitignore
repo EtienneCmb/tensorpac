@@ -110,3 +110,4 @@ test_savefig.png
 paper/manuscript/figures/*.png
 paper/manuscript/figures/*.pdf
 paper/reviews/figures/*.png
+*.npz
