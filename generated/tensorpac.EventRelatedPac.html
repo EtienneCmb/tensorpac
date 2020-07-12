@@ -136,6 +136,20 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../auto_examples/index.html#tutorials">Tutorials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../auto_examples/tuto/plot_real_data.html">Phase-Amplitude Coupling tutorial on sEEG data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/tuto/plot_real_data.html#download-the-data">Download the data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/tuto/plot_real_data.html#plot-the-raw-data">Plot the raw data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/tuto/plot_real_data.html#compute-and-plot-inter-trial-coherence">Compute and plot Inter Trial Coherence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/tuto/plot_real_data.html#compute-and-plot-the-power-spectrum-density">Compute and plot the Power Spectrum Density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/tuto/plot_real_data.html#compute-and-plot-the-event-related-pac">Compute and plot the Event-Related PAC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/tuto/plot_real_data.html#align-time-frequency-map-based-on-alpha-phase-peak">Align time-frequency map based on alpha phase peak</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/tuto/plot_real_data.html#compute-and-compare-pac-that-is-occurring-during-rest-planning-and-execution">Compute and compare PAC that is occurring during rest, planning and execution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../auto_examples/tuto/plot_real_data.html#test-if-the-alpha-gamma-pac-is-significant-during-motor-planning">Test if the alpha-gamma PAC is significant during motor planning</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../auto_examples/index.html#phase-amplitude-coupling">Phase-Amplitude coupling</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_readme.html">README example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../auto_examples/pac/plot_pac_methods.html">Comparison of the implemented PAC methods</a><ul>
@@ -435,12 +449,12 @@ coupling, x_pha and x_amp could be different but still must to have
 the same shape.</p>
 </dd>
 <dt><strong>method</strong><span class="classifier">{‘circular’, ‘gc’}</span></dt><dd><p>Name of the method for computing erpac. Use ‘circular’ for
-reproducing <a class="bibtex reference internal" href="../references.html#voytek2013method" id="id1">[11]</a> or ‘gc’ for a Gaussian-Copula
+reproducing <a class="bibtex reference internal" href="../references.html#voytek2013method" id="id1">[12]</a> or ‘gc’ for a Gaussian-Copula
 based erpac.</p>
 </dd>
 <dt><strong>smooth</strong><span class="classifier">int | None</span></dt><dd><p>Half number of time-points to use to produce a smoothing. Only
 active with the Gaussian-Copula (‘gc’) method
-<a class="bibtex reference internal" href="../references.html#ince2017statistical" id="id2">[5]</a>.</p>
+<a class="bibtex reference internal" href="../references.html#ince2017statistical" id="id2">[6]</a>.</p>
 </dd>
 <dt><strong>n_perm</strong><span class="classifier">int | None</span></dt><dd><p>Number of permutations to compute for assessing p-values for the
 gaussian-copula (‘gc’) method. Statistics are performed by randomly
@@ -449,7 +463,7 @@ swapping phase trials</p>
 <dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Statistical threshold for the gaussian-copula (‘gc’) method</p>
 </dd>
 <dt><strong>mcp</strong><span class="classifier">{‘fdr’, ‘bonferroni’}</span></dt><dd><p>Correct the p-values for multiple comparisons. This is needed when
-using the circular ERPAC (<a class="bibtex reference internal" href="../references.html#voytek2013method" id="id3">[11]</a>). Note that the
+using the circular ERPAC (<a class="bibtex reference internal" href="../references.html#voytek2013method" id="id3">[12]</a>). Note that the
 correction is performed using MNE-Python.</p>
 </dd>
 <dt><strong>edges</strong><span class="classifier">int | None</span></dt><dd><p>Number of samples to discard to avoid edge effects due to filtering</p>
@@ -469,7 +483,7 @@ correction is performed using MNE-Python.</p>
 <dt id="tensorpac.EventRelatedPac.fit">
 <code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">method='circular'</em>, <em class="sig-param">smooth=None</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">n_perm=None</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">mcp='fdr'</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#EventRelatedPac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.EventRelatedPac.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Event-Related Phase-Amplitude Coupling (ERPAC).</p>
-<p>The ERPAC <a class="bibtex reference internal" href="../references.html#voytek2013method" id="id4">[11]</a> is used to measure PAC across trials
+<p>The ERPAC <a class="bibtex reference internal" href="../references.html#voytek2013method" id="id4">[12]</a> is used to measure PAC across trials
 and is interesting for real-time estimation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -479,8 +493,8 @@ and is interesting for real-time estimation.</p>
 oscillations of shape (n_pha, n_epochs, n_times).</p>
 </dd>
 <dt><strong>method</strong><span class="classifier">{‘circular’, ‘gc’}</span></dt><dd><p>Name of the method for computing erpac. Use ‘circular’ for
-reproducing <a class="bibtex reference internal" href="../references.html#voytek2013method" id="id5">[11]</a> or ‘gc’ for a Gaussian-Copula
-based erpac <a class="bibtex reference internal" href="../references.html#ince2017statistical" id="id6">[5]</a>.</p>
+reproducing <a class="bibtex reference internal" href="../references.html#voytek2013method" id="id5">[12]</a> or ‘gc’ for a Gaussian-Copula
+based erpac <a class="bibtex reference internal" href="../references.html#ince2017statistical" id="id6">[6]</a>.</p>
 </dd>
 <dt><strong>smooth</strong><span class="classifier">int | None</span></dt><dd><p>Half number of time-points to use to produce a smoothing. Only
 active with the Gaussian-Copula (‘gc’) method.</p>
@@ -492,7 +506,7 @@ swapping phase trials</p>
 <dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Statistical threshold for the gaussian-copula (‘gc’) method</p>
 </dd>
 <dt><strong>mcp</strong><span class="classifier">{‘fdr’, ‘bonferroni’}</span></dt><dd><p>Correct the p-values for multiple comparisons. This is needed when
-using the circular ERPAC (<a class="bibtex reference internal" href="../references.html#voytek2013method" id="id7">[11]</a>). Note that the
+using the circular ERPAC (<a class="bibtex reference internal" href="../references.html#voytek2013method" id="id7">[12]</a>). Note that the
 correction is performed using MNE-Python.</p>
 </dd>
 </dl>
@@ -516,7 +530,7 @@ correction is performed using MNE-Python.</p>
 <dt><strong>p</strong><span class="classifier">float | 0.05</span></dt><dd><p>Statistical threshold</p>
 </dd>
 <dt><strong>mcp</strong><span class="classifier">{‘fdr’, ‘bonferroni’}</span></dt><dd><p>Correct the p-values for multiple comparisons. This is needed when
-using the circular ERPAC (<a class="bibtex reference internal" href="../references.html#voytek2013method" id="id8">[11]</a>). Note that the
+using the circular ERPAC (<a class="bibtex reference internal" href="../references.html#voytek2013method" id="id8">[12]</a>). Note that the
 correction is performed using MNE-Python.</p>
 </dd>
 </dl>

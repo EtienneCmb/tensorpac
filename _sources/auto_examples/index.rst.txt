@@ -19,6 +19,44 @@ Examples
 
 
 
+.. _sphx_glr_auto_examples_tuto:
+
+Tutorials
+---------
+
+**Phase-Amplitude Coupling tutorials**
+
+
+.. contents:: Contents
+   :local:
+   :depth: 2
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In this example, we illustrate how to conduct a PAC analysis on real data. The data used here a...">
+
+.. only:: html
+
+    .. figure:: /auto_examples/tuto/images/thumb/sphx_glr_plot_real_data_thumb.png
+
+        :ref:`sphx_glr_auto_examples_tuto_plot_real_data.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/tuto/plot_real_data
+.. raw:: html
+
+    <div style='clear:both'></div>
+
+
+
 .. _sphx_glr_auto_examples_pac:
 
 Phase-Amplitude coupling
