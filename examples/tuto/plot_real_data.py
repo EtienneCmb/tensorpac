@@ -12,7 +12,7 @@ consists in three periods :
     * From [-1000, 0]ms it is the baseline period (REST)
     * From [0, 1500]ms the subject have to prepare the movement (MOTOR
       PLANNING period)
-    * From [1500, 4000]ms the subject perform the movement to reach the target
+    * From [1500, 3000]ms the subject perform the movement to reach the target
       on the screen (MOTOR EXECUTION period)
 
 The recorded electrophysiological data comes from an epileptic subject with
@@ -227,7 +227,7 @@ plt.show()
 # periods
 
 
-p_obj = Pac(idpac=(6, 0, 0), f_pha=(6, 13, 4, .2), f_amp=(60, 120, 20, 2))
+p_obj = Pac(idpac=(6, 0, 0), f_pha=(6, 14, 4, .2), f_amp=(60, 120, 20, 2))
 # extract all of the phases and amplitudes
 pha_p = p_obj.filter(sf, data, ftype='phase')
 amp_p = p_obj.filter(sf, data, ftype='amplitude')
