@@ -47,7 +47,6 @@
           <ul class="nav navbar-nav">
             
                 <li><a href="../install.html">Install</a></li>
-                <li><a href="../tutorial.html">Tutorial</a></li>
                 <li><a href="../api.html">API</a></li>
                 <li><a href="../auto_examples/index.html">Examples</a></li>
             
@@ -67,7 +66,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../install.html#install-the-most-up-to-date-version">Install the most up-to-date version</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../api.html#compute-phase-amplitude-coupling">Compute phase-amplitude coupling</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.Pac.html">tensorpac.Pac</a></li>
@@ -330,7 +328,7 @@
 </table>
 <dl class="method">
 <dt id="tensorpac.utils.PSD.plot">
-<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">f_min=None</em>, <em class="sig-param">f_max=None</em>, <em class="sig-param">confidence=95</em>, <em class="sig-param">interp=None</em>, <em class="sig-param">log=False</em>, <em class="sig-param">grid=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD.plot" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">f_min=None</em>, <em class="sig-param">f_max=None</em>, <em class="sig-param">confidence=95</em>, <em class="sig-param">interp=None</em>, <em class="sig-param">log=False</em>, <em class="sig-param">grid=True</em>, <em class="sig-param">fz_title=18</em>, <em class="sig-param">fz_labels=15</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD.plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plot the PSD.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -346,6 +344,10 @@ of points is going to be multiply by 10</p>
 <dt><strong>log</strong><span class="classifier">bool | False</span></dt><dd><p>Use a log scale representation</p>
 </dd>
 <dt><strong>grid</strong><span class="classifier">bool | True</span></dt><dd><p>Add a grid to the plot</p>
+</dd>
+<dt><strong>fz_title</strong><span class="classifier">int | 18</span></dt><dd><p>Font size for the title</p>
+</dd>
+<dt><strong>fz_labels</strong><span class="classifier">int | 15</span></dt><dd><p>Font size the x/y labels</p>
 </dd>
 </dl>
 </dd>

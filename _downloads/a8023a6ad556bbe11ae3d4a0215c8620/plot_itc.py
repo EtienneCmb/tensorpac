@@ -63,12 +63,12 @@ plt.figure(2, figsize=(14, 4))
 # compute ITC for phases between [2, 30]Hz
 itc = ITC(data, sf, f_pha=[f_min, f_max], edges=edges, cycle=cycle, n_jobs=1)
 plt.subplot(121)
-itc.plot(time=time)
+itc.plot(times=time)
 plt.axvline(0, linestyle='--', color='black', lw=2)
 
 # compute ITC for phases between [2, 30]Hz with frequency steps
 itc = ITC(data, sf, f_pha=(2, 30, 1, .5), edges=edges, cycle=cycle, n_jobs=1)
 plt.subplot(122)
-itc.plot(time=time, cmap='viridis')
+itc.plot(times=time, cmap='viridis')
 plt.axvline(0, linestyle='--', color='white', lw=2)
 itc.show()

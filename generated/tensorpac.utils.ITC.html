@@ -47,7 +47,6 @@
           <ul class="nav navbar-nav">
             
                 <li><a href="../install.html">Install</a></li>
-                <li><a href="../tutorial.html">Tutorial</a></li>
                 <li><a href="../api.html">API</a></li>
                 <li><a href="../auto_examples/index.html">Examples</a></li>
             
@@ -67,7 +66,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../install.html#install-the-most-up-to-date-version">Install the most up-to-date version</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../api.html#compute-phase-amplitude-coupling">Compute phase-amplitude coupling</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="tensorpac.Pac.html">tensorpac.Pac</a></li>
@@ -277,7 +275,7 @@
 <h1>tensorpac.utils.ITC<a class="headerlink" href="#tensorpac-utils-itc" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="tensorpac.utils.ITC">
-<em class="property">class </em><code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">ITC</code><span class="sig-paren">(</span><em class="sig-param">x, sf, f_pha=[2, 4], dcomplex='hilbert', cycle=3, width=7, edges=None, n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#ITC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.ITC" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">ITC</code><span class="sig-paren">(</span><em class="sig-param">x, sf, f_pha=[2, 4], dcomplex='hilbert', cycle=3, width=7, edges=None, n_jobs=-1, verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#ITC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.ITC" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Inter-Trials Coherence (ITC).</p>
 <p>The Inter-Trials Coherence (ITC) is a measure of phase consistency over
 trials for a single recording site (electrode / sensor etc.).</p>
@@ -306,7 +304,7 @@ is ‘hilbert’).</p>
 </dl>
 <dl class="method">
 <dt id="tensorpac.utils.ITC.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">x, sf, f_pha=[2, 4], dcomplex='hilbert', cycle=3, width=7, edges=None, n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#ITC.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.ITC.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">x, sf, f_pha=[2, 4], dcomplex='hilbert', cycle=3, width=7, edges=None, n_jobs=-1, verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#ITC.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.ITC.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Init.</p>
 </dd></dl>
 
@@ -323,8 +321,14 @@ is ‘hilbert’).</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.ITC.filter" title="tensorpac.utils.ITC.filter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filter</span></code></a>(sf, x[, ftype, keepfilt, edges, n_jobs])</p></td>
 <td><p>Filt the data in the specified frequency bands.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.ITC.plot" title="tensorpac.utils.ITC.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>([time])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.ITC.pacplot" title="tensorpac.utils.ITC.pacplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pacplot</span></code></a>(pac, xvec, yvec[, xlabel, ylabel, …])</p></td>
+<td><p>Main plotting pac function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.ITC.plot" title="tensorpac.utils.ITC.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>([times])</p></td>
 <td><p>Plot the Inter-Trials Coherence.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.ITC.savefig" title="tensorpac.utils.ITC.savefig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">savefig</span></code></a>(filename[, dpi])</p></td>
+<td><p>Save the figure.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.ITC.show" title="tensorpac.utils.ITC.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>()</p></td>
 <td><p>Show the figure.</p></td>
@@ -398,13 +402,91 @@ is only available with dcomplex=’hilbert’ and not wavelet.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="tensorpac.utils.ITC.pacplot">
+<code class="sig-name descname">pacplot</code><span class="sig-paren">(</span><em class="sig-param">pac</em>, <em class="sig-param">xvec</em>, <em class="sig-param">yvec</em>, <em class="sig-param">xlabel=''</em>, <em class="sig-param">ylabel=''</em>, <em class="sig-param">cblabel=''</em>, <em class="sig-param">title=''</em>, <em class="sig-param">fz_labels=12</em>, <em class="sig-param">fz_title=13</em>, <em class="sig-param">fz_cblabel=12</em>, <em class="sig-param">cmap='viridis'</em>, <em class="sig-param">vmin=None</em>, <em class="sig-param">vmax=None</em>, <em class="sig-param">under=None</em>, <em class="sig-param">over=None</em>, <em class="sig-param">bad=None</em>, <em class="sig-param">pvalues=None</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">interp=None</em>, <em class="sig-param">rmaxis=False</em>, <em class="sig-param">dpaxis=False</em>, <em class="sig-param">plotas='imshow'</em>, <em class="sig-param">ncontours=5</em>, <em class="sig-param">levels=None</em>, <em class="sig-param">levelcmap='Reds'</em>, <em class="sig-param">polar=False</em>, <em class="sig-param">colorbar=True</em>, <em class="sig-param">y=1.02</em>, <em class="sig-param">subplot=111</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.utils.ITC.pacplot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main plotting pac function.</p>
+<p>This method can be used to plot any 2D array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pac</strong><span class="classifier">array_like</span></dt><dd><p>A 2D array.</p>
+</dd>
+<dt><strong>xvec</strong><span class="classifier">array_like</span></dt><dd><p>The vector to use for the x-axis.</p>
+</dd>
+<dt><strong>yvec</strong><span class="classifier">array_like</span></dt><dd><p>The vector to use for the y-axis.</p>
+</dd>
+<dt><strong>xlabel</strong><span class="classifier">string | ‘’</span></dt><dd><p>Label for the x-axis.</p>
+</dd>
+<dt><strong>ylabel</strong><span class="classifier">string | ‘’</span></dt><dd><p>Label for the y-axis.</p>
+</dd>
+<dt><strong>cblabel</strong><span class="classifier">string | ‘’</span></dt><dd><p>Label for the colorbar.</p>
+</dd>
+<dt><strong>title</strong><span class="classifier">string | ‘’</span></dt><dd><p>Title of the plot.</p>
+</dd>
+<dt><strong>fz_labels</strong><span class="classifier">float | 12</span></dt><dd><p>Font size of the y- and x-labels</p>
+</dd>
+<dt><strong>fz_title</strong><span class="classifier">float | 13</span></dt><dd><p>Font size of the title</p>
+</dd>
+<dt><strong>fz_cblabel</strong><span class="classifier">float | 12</span></dt><dd><p>Font size of the colorbar label</p>
+</dd>
+<dt><strong>y</strong><span class="classifier">float | 1.02</span></dt><dd><p>Title location.</p>
+</dd>
+<dt><strong>cmap</strong><span class="classifier">string | ‘viridis’</span></dt><dd><p>Name of one Matplotlib’s colomap.</p>
+</dd>
+<dt><strong>vmin</strong><span class="classifier">float | None</span></dt><dd><p>Threshold under which set the color to the uner parameter.</p>
+</dd>
+<dt><strong>vmax</strong><span class="classifier">float | None</span></dt><dd><p>Threshold over which set the color in the over parameter.</p>
+</dd>
+<dt><strong>under</strong><span class="classifier">string | ‘gray’</span></dt><dd><p>Color for values under the vmin parameter.</p>
+</dd>
+<dt><strong>over</strong><span class="classifier">string | ‘red’</span></dt><dd><p>Color for values over the vmax parameter.</p>
+</dd>
+<dt><strong>bad</strong><span class="classifier">string | None</span></dt><dd><p>Color for non-significant values.</p>
+</dd>
+<dt><strong>pvalues</strong><span class="classifier">array_like | None</span></dt><dd><p>P-values to use for masking PAC values. The shape of this
+parameter must be the same as the shape as pac.</p>
+</dd>
+<dt><strong>p</strong><span class="classifier">float | .05</span></dt><dd><p>If pvalues is pass, use this threshold for masking
+non-significant PAC.</p>
+</dd>
+<dt><strong>interp</strong><span class="classifier">tuple | None</span></dt><dd><p>Tuple for controlling the 2D interpolation. For example,
+(.1, .1) will multiply the number of row and columns by 10.</p>
+</dd>
+<dt><strong>rmaxis</strong><span class="classifier">bool | False</span></dt><dd><p>Remove unecessary axis.</p>
+</dd>
+<dt><strong>dpaxis</strong><span class="classifier">bool | False</span></dt><dd><p>Despine axis.</p>
+</dd>
+<dt><strong>plotas</strong><span class="classifier">{‘imshow’, ‘contour’, ‘pcolor’}</span></dt><dd><p>Choose how to display the comodulogram, either using imshow
+(‘imshow’) or contours (‘contour’). If you choose ‘contour’,
+use the ncontours parameter for controlling the number of
+contours.</p>
+</dd>
+<dt><strong>ncontours</strong><span class="classifier">int | 5</span></dt><dd><p>Number of contours if plotas is ‘contour’.</p>
+</dd>
+<dt><strong>levels</strong><span class="classifier">list | None</span></dt><dd><p>Add significency levels. This parameter must be a sorted list
+of p-values to use as levels.</p>
+</dd>
+<dt><strong>levelcmap</strong><span class="classifier">string | Reds</span></dt><dd><p>Colormap of signifiency levels.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>gca: axes</dt><dd><p>The current matplotlib axes.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="tensorpac.utils.ITC.plot">
-<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">time=None</em>, <em class="sig-param">**kw</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#ITC.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.ITC.plot" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">times=None</em>, <em class="sig-param">**kw</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#ITC.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.ITC.plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plot the Inter-Trials Coherence.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>time</strong><span class="classifier">array_like | None</span></dt><dd><p>Custom time vector to use</p>
+<dt><strong>times</strong><span class="classifier">array_like | None</span></dt><dd><p>Custom time vector to use</p>
 </dd>
 <dt><strong>kw</strong><span class="classifier">dict | {}</span></dt><dd><p>Additional inputs are either pass to the matplotlib.pyplot.plot
 function if a single phase band is used, otherwise to the
@@ -415,6 +497,22 @@ matplotlib.pyplot.pcolormesh function</p>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
 <dt><strong>ax</strong><span class="classifier">Matplotlib axis</span></dt><dd><p>The matplotlib axis that contains the figure</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.ITC.savefig">
+<code class="sig-name descname">savefig</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">dpi=600</em><span class="sig-paren">)</span><a class="headerlink" href="#tensorpac.utils.ITC.savefig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the figure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>filename</strong><span class="classifier">string</span></dt><dd><p>The name of the figure to save.</p>
+</dd>
+<dt><strong>dpi</strong><span class="classifier">int | 600</span></dt><dd><p>DPI of the figure.</p>
 </dd>
 </dl>
 </dd>

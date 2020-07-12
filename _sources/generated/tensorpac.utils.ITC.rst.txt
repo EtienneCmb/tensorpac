@@ -15,7 +15,9 @@ tensorpac.utils.ITC
    
       ~ITC.__init__
       ~ITC.filter
+      ~ITC.pacplot
       ~ITC.plot
+      ~ITC.savefig
       ~ITC.show
    
    
