@@ -63,7 +63,7 @@ sphinx_gallery_conf = {
     'gallery_dirs': 'auto_examples',
     'backreferences_dir': 'generated',
     'default_thumb_file': 'source/picture/ico.png',
-    'subsection_order': ExplicitOrder(['../../examples/tutorials',
+    'subsection_order': ExplicitOrder(['../../examples/tuto',
                                        '../../examples/pac',
                                        '../../examples/erpac',
                                        '../../examples/stats',

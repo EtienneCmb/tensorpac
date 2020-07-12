@@ -1,5 +1,5 @@
 Tutorials
-----------
+---------
 
 **Phase-Amplitude Coupling tutorials**
 
