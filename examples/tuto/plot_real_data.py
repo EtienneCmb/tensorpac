@@ -4,9 +4,10 @@ Phase-Amplitude Coupling tutorial on sEEG data
 ==============================================
 
 In this example, we illustrate how to conduct a PAC analysis on real data. The
-data used here are taken from :cite:`combrisson2017intentions`. The task is a
-center-out motor task where the subject have to reach a target on a screen
-with the mouse. A single trial consists in three periods :
+data used here are taken from Combrisson et al. 2017
+:cite:`combrisson2017intentions`. The task is a center-out motor task where the
+subject have to reach a target on a screen with the mouse. A single trial
+consists in three periods :
 
     * From [-1000, 0]ms it is the baseline period (REST)
     * From [0, 1500]ms the subject have to prepare the movement (MOTOR
@@ -276,7 +277,7 @@ plt.show()
 # multiple times (e.g 200 or 1000 times) in order to obtained the distribution.
 # Finally, the p-value is inferred by computing the proportion exceeded by the
 # true coupling. In addition, the correction for multiple comparison is
-# obtained using the maximum statistics.
+# obtained using the FDR.
 
 # still using the Gaussian-Copula PAC but this time, we also select the method
 # for computing the permutations
@@ -284,14 +285,14 @@ p_obj.idpac = (6, 2, 0)
 # compute pac and 200 surrogates
 pac_prep = p_obj.fit(pha_p[..., time_prep], amp_p[..., time_prep], n_perm=200)
 # get the p-values
-pvalues = p_obj.infer_pvalues(p=0.05, mcp='maxstat')
+pvalues = p_obj.infer_pvalues(p=0.05, mcp='fdr')
 
 ###############################################################################
 
 # sphinx_gallery_thumbnail_number = 7
 plt.figure(figsize=(8, 6))
 title = (r"Significant alpha$\Leftrightarrow$gamma coupling occurring during "
-         "the motor planning phase\n(p<0.05, corrected for multiple "
+         "the motor planning phase\n(p<0.05, FDR-corrected for multiple "
          "comparisons)")
 # plot the non-significant pac in gray
 pac_prep_ns = pac_prep.mean(-1).copy()
