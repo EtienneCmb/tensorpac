@@ -358,7 +358,7 @@ Compute and compare PAC that is occurring during rest, planning and execution
 
 
 
-    p_obj = Pac(idpac=(6, 0, 0), f_pha=(6, 15, 4, .2), f_amp=(50, 120, 20, 2))
+    p_obj = Pac(idpac=(6, 0, 0), f_pha=(6, 13, 4, .2), f_amp=(60, 120, 20, 2))
     # extract all of the phases and amplitudes
     pha_p = p_obj.filter(sf, data, ftype='phase')
     amp_p = p_obj.filter(sf, data, ftype='amplitude')
@@ -475,7 +475,7 @@ Test if the alpha-gamma PAC is significant during motor planning
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 3 minutes  33.947 seconds)
+   **Total running time of the script:** ( 1 minutes  50.889 seconds)
 
 
 .. _sphx_glr_download_auto_examples_tuto_plot_real_data.py:
