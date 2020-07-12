@@ -403,7 +403,7 @@ amplitude <a class="bibtex reference internal" href="../references.html#bahramis
 <tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.filterfit" title="tensorpac.Pac.filterfit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">filterfit</span></code></a>(sf, x_pha[, x_amp, n_perm, p, …])</p></td>
 <td><p>Filt the data then compute PAC on it.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.fit" title="tensorpac.Pac.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(pha, amp[, n_perm, p, mcp, n_jobs, verbose])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.Pac.fit" title="tensorpac.Pac.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(pha, amp[, n_perm, p, mcp, n_jobs, …])</p></td>
 <td><p>Compute PAC on filtered data.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.Pac.infer_pvalues" title="tensorpac.Pac.infer_pvalues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">infer_pvalues</span></code></a>([p, mcp])</p></td>
@@ -528,7 +528,7 @@ is only available with dcomplex=’hilbert’ and not wavelet.</p>
 
 <dl class="method">
 <dt id="tensorpac.Pac.filterfit">
-<code class="sig-name descname">filterfit</code><span class="sig-paren">(</span><em class="sig-param">sf</em>, <em class="sig-param">x_pha</em>, <em class="sig-param">x_amp=None</em>, <em class="sig-param">n_perm=200</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">mcp='maxstat'</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">edges=None</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">filterfit</code><span class="sig-paren">(</span><em class="sig-param">sf</em>, <em class="sig-param">x_pha</em>, <em class="sig-param">x_amp=None</em>, <em class="sig-param">n_perm=200</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">mcp='maxstat'</em>, <em class="sig-param">edges=None</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">random_state=None</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.filterfit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.filterfit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filt the data then compute PAC on it.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>
@@ -559,6 +559,8 @@ x_amp could be different but still must to have the same shape.</p>
 <dt><strong>n_jobs</strong><span class="classifier">int | -1</span></dt><dd><p>Number of jobs to compute PAC in parallel. For very large data,
 set this parameter to 1 in order to prevent large memory usage.</p>
 </dd>
+<dt><strong>random_state</strong><span class="classifier">int | None</span></dt><dd><p>Fix the random state of the machine for reproducible results.</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -583,7 +585,7 @@ n_pha, n_epochs)</p>
 
 <dl class="method">
 <dt id="tensorpac.Pac.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">n_perm=200</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">mcp='maxstat'</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">n_perm=200</em>, <em class="sig-param">p=0.05</em>, <em class="sig-param">mcp='maxstat'</em>, <em class="sig-param">n_jobs=-1</em>, <em class="sig-param">random_state=None</em>, <em class="sig-param">verbose=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/pac.html#Pac.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.Pac.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute PAC on filtered data.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>
@@ -608,6 +610,8 @@ Angles should be in rad.</p>
 </dd>
 <dt><strong>n_jobs</strong><span class="classifier">int | -1</span></dt><dd><p>Number of jobs to compute PAC in parallel. For very large data,
 set this parameter to 1 in order to prevent large memory usage.</p>
+</dd>
+<dt><strong>random_state</strong><span class="classifier">int | None</span></dt><dd><p>Fix the random state of the machine for reproducible results.</p>
 </dd>
 </dl>
 </dd>

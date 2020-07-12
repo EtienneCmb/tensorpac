@@ -431,7 +431,8 @@ Test if the alpha-gamma PAC is significant during motor planning
     # for computing the permutations
     p_obj.idpac = (6, 2, 0)
     # compute pac and 200 surrogates
-    pac_prep = p_obj.fit(pha_p[..., time_prep], amp_p[..., time_prep], n_perm=200)
+    pac_prep = p_obj.fit(pha_p[..., time_prep], amp_p[..., time_prep], n_perm=200,
+                         random_state=0)
     # get the p-values
     mcp = 'maxstat'
     pvalues = p_obj.infer_pvalues(p=0.05, mcp=mcp)
@@ -475,7 +476,7 @@ Test if the alpha-gamma PAC is significant during motor planning
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 2 minutes  29.077 seconds)
+   **Total running time of the script:** ( 2 minutes  6.367 seconds)
 
 
 .. _sphx_glr_download_auto_examples_tuto_plot_real_data.py:

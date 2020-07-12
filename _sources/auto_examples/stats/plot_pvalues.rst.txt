@@ -81,7 +81,8 @@ Compute true PAC estimation and surrogates distribution
     p = Pac(idpac=(2, 2, 0), f_pha=(2, 15, 2, .2), f_amp=(60, 120, 5, 1))
     # compute true pac and surrogates
     n_perm = 200  # number of permutations
-    xpac = p.filterfit(sf, data, n_perm=n_perm, n_jobs=-1).squeeze()
+    xpac = p.filterfit(sf, data, n_perm=n_perm, n_jobs=-1,
+                       random_state=0).squeeze()
     # get the corrected p-values
     pval = p.infer_pvalues(p=0.05)
     # get the mean pac values where it's detected as significant
@@ -130,7 +131,7 @@ Compute true PAC estimation and surrogates distribution
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  8.107 seconds)
+   **Total running time of the script:** ( 0 minutes  10.336 seconds)
 
 
 .. _sphx_glr_download_auto_examples_stats_plot_pvalues.py:

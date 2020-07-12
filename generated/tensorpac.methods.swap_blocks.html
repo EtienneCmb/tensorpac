@@ -289,7 +289,7 @@
 <h1>tensorpac.methods.swap_blocks<a class="headerlink" href="#tensorpac-methods-swap-blocks" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="tensorpac.methods.swap_blocks">
-<code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">swap_blocks</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_surrogates.html#swap_blocks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.swap_blocks" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">tensorpac.methods.</code><code class="sig-name descname">swap_blocks</code><span class="sig-paren">(</span><em class="sig-param">pha</em>, <em class="sig-param">amp</em>, <em class="sig-param">random_state=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/methods/meth_surrogates.html#swap_blocks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.methods.swap_blocks" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute surrogates by swapping amplitudes time blocks.</p>
 <p>This function destroys the relation between the phase and the amplitude in
 order to correct for PAC that could be obtained by chance. To this end,
@@ -301,6 +301,8 @@ blocks are swapped. For a more detailed description, see
 <dd class="field-odd"><dl class="simple">
 <dt><strong>pha, amp</strong><span class="classifier">array_like</span></dt><dd><p>Respectively the arrays of phases of shape (n_pha, …, n_times) and
 the array of amplitudes of shape (n_amp, …, n_times).</p>
+</dd>
+<dt><strong>random_state</strong><span class="classifier">int | None</span></dt><dd><p>Fix the random state of the machine for reproducible results.</p>
 </dd>
 </dl>
 </dd>

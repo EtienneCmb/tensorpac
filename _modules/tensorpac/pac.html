@@ -598,7 +598,7 @@
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Phase Amplitude Coupling object defined&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Pac.fit"><a class="viewcode-back" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span> <span class="n">mcp</span><span class="o">=</span><span class="s1">&#39;maxstat&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+            <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Compute PAC on filtered data.</span>
 
 <span class="sd">        Parameters</span>
@@ -621,6 +621,8 @@
 <span class="sd">        n_jobs : int | -1</span>
 <span class="sd">            Number of jobs to compute PAC in parallel. For very large data,</span>
 <span class="sd">            set this parameter to 1 in order to prevent large memory usage.</span>
+<span class="sd">        random_state : int | None</span>
+<span class="sd">            Fix the random state of the machine for reproducible results.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -673,10 +675,12 @@
         <span class="c1"># ---------------------------------------------------------------------</span>
         <span class="c1"># compute surrogates (if needed)</span>
         <span class="k">if</span> <span class="n">compute_surro</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">random_state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">random_state</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    compute surrogates (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">str_surro</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">n_perm</span><span class="si">}</span><span class="s2"> &quot;</span>
-                        <span class="s2">&quot;permutations)&quot;</span><span class="p">)</span>
+                        <span class="sa">f</span><span class="s2">&quot;permutations, random_state=</span><span class="si">{</span><span class="n">random_state</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
             <span class="n">surro</span> <span class="o">=</span> <span class="n">compute_surrogates</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">idpac</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">fcn</span><span class="p">,</span> <span class="n">n_perm</span><span class="p">,</span>
-                                       <span class="n">n_jobs</span><span class="p">)</span>
+                                       <span class="n">n_jobs</span><span class="p">,</span> <span class="n">random_state</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_surrogates</span> <span class="o">=</span> <span class="n">surro</span>
 
             <span class="c1"># infer pvalues</span>
@@ -693,7 +697,8 @@
         <span class="k">return</span> <span class="n">pac</span></div>
 
 <div class="viewcode-block" id="Pac.filterfit"><a class="viewcode-back" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.filterfit">[docs]</a>    <span class="k">def</span> <span class="nf">filterfit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">x_pha</span><span class="p">,</span> <span class="n">x_amp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">p</span><span class="o">=.</span><span class="mi">05</span><span class="p">,</span>
-                  <span class="n">mcp</span><span class="o">=</span><span class="s1">&#39;maxstat&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                  <span class="n">mcp</span><span class="o">=</span><span class="s1">&#39;maxstat&#39;</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Filt the data then compute PAC on it.</span>
 
 <span class="sd">        Parameters</span>
@@ -721,6 +726,8 @@
 <span class="sd">        n_jobs : int | -1</span>
 <span class="sd">            Number of jobs to compute PAC in parallel. For very large data,</span>
 <span class="sd">            set this parameter to 1 in order to prevent large memory usage.</span>
+<span class="sd">        random_state : int | None</span>
+<span class="sd">            Fix the random state of the machine for reproducible results.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -756,7 +763,7 @@
 
         <span class="c1"># Compute pac :</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">mcp</span><span class="o">=</span><span class="n">mcp</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="n">n_perm</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
-                        <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
+                        <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Pac.infer_pvalues"><a class="viewcode-back" href="../../generated/tensorpac.Pac.html#tensorpac.Pac.infer_pvalues">[docs]</a>    <span class="k">def</span> <span class="nf">infer_pvalues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">mcp</span><span class="o">=</span><span class="s1">&#39;maxstat&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Infer p-values based on surrogate distribution.</span>

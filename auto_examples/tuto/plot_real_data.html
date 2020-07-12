@@ -572,7 +572,8 @@ obtained using the FDR.</p>
 <span class="c1"># for computing the permutations</span>
 <span class="n">p_obj</span><span class="o">.</span><span class="n">idpac</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="c1"># compute pac and 200 surrogates</span>
-<span class="n">pac_prep</span> <span class="o">=</span> <span class="n">p_obj</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha_p</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">time_prep</span><span class="p">],</span> <span class="n">amp_p</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">time_prep</span><span class="p">],</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">pac_prep</span> <span class="o">=</span> <span class="n">p_obj</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">pha_p</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">time_prep</span><span class="p">],</span> <span class="n">amp_p</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">time_prep</span><span class="p">],</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                     <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="c1"># get the p-values</span>
 <span class="n">mcp</span> <span class="o">=</span> <span class="s1">&#39;maxstat&#39;</span>
 <span class="n">pvalues</span> <span class="o">=</span> <span class="n">p_obj</span><span class="o">.</span><span class="n">infer_pvalues</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">mcp</span><span class="o">=</span><span class="n">mcp</span><span class="p">)</span>
@@ -598,7 +599,7 @@ obtained using the FDR.</p>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_plot_real_data_007.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_real_data_007.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  29.077 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 2 minutes  6.367 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-tuto-plot-real-data-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/035413fda3d318e84c6045e52126d555/plot_real_data.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_real_data.py</span></code></a></p>

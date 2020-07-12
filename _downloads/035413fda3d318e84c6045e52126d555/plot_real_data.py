@@ -282,7 +282,8 @@ plt.show()
 # for computing the permutations
 p_obj.idpac = (6, 2, 0)
 # compute pac and 200 surrogates
-pac_prep = p_obj.fit(pha_p[..., time_prep], amp_p[..., time_prep], n_perm=200)
+pac_prep = p_obj.fit(pha_p[..., time_prep], amp_p[..., time_prep], n_perm=200,
+                     random_state=0)
 # get the p-values
 mcp = 'maxstat'
 pvalues = p_obj.infer_pvalues(p=0.05, mcp=mcp)
