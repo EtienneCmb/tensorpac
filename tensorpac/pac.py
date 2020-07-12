@@ -316,7 +316,7 @@ class Pac(_PacObj, _PacPlt):
         logger.info("Phase Amplitude Coupling object defined")
 
     def fit(self, pha, amp, n_perm=200, p=.05, mcp='maxstat', n_jobs=-1,
-            verbose=None):
+            random_state=None, verbose=None):
         """Compute PAC on filtered data.
 
         Parameters
@@ -339,6 +339,8 @@ class Pac(_PacObj, _PacPlt):
         n_jobs : int | -1
             Number of jobs to compute PAC in parallel. For very large data,
             set this parameter to 1 in order to prevent large memory usage.
+        random_state : int | None
+            Fix the random state of the machine for reproducible results.
 
         Returns
         -------
@@ -391,10 +393,12 @@ class Pac(_PacObj, _PacPlt):
         # ---------------------------------------------------------------------
         # compute surrogates (if needed)
         if compute_surro:
+            if random_state is None:
+                random_state = int(np.random.randint(0, 10000, size=1))
             logger.info(f"    compute surrogates ({self.str_surro}, {n_perm} "
-                        "permutations)")
+                        f"permutations, random_state={random_state})")
             surro = compute_surrogates(pha, amp, self.idpac[1], fcn, n_perm,
-                                       n_jobs)
+                                       n_jobs, random_state)
             self._surrogates = surro
 
             # infer pvalues
@@ -411,7 +415,8 @@ class Pac(_PacObj, _PacPlt):
         return pac
 
     def filterfit(self, sf, x_pha, x_amp=None, n_perm=200, p=.05,
-                  mcp='maxstat', n_jobs=-1, edges=None, verbose=None):
+                  mcp='maxstat', edges=None, n_jobs=-1, random_state=None,
+                  verbose=None):
         """Filt the data then compute PAC on it.
 
         Parameters
@@ -439,6 +444,8 @@ class Pac(_PacObj, _PacPlt):
         n_jobs : int | -1
             Number of jobs to compute PAC in parallel. For very large data,
             set this parameter to 1 in order to prevent large memory usage.
+        random_state : int | None
+            Fix the random state of the machine for reproducible results.
 
         Returns
         -------
@@ -474,7 +481,7 @@ class Pac(_PacObj, _PacPlt):
 
         # Compute pac :
         return self.fit(pha, amp, p=p, mcp=mcp, n_perm=n_perm, n_jobs=n_jobs,
-                        verbose=verbose)
+                        random_state=random_state, verbose=verbose)
 
     def infer_pvalues(self, p=0.05, mcp='maxstat'):
         """Infer p-values based on surrogate distribution.

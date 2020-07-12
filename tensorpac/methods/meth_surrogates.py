@@ -5,21 +5,21 @@ from joblib import Parallel, delayed
 from tensorpac.config import CONFIG
 
 
-def compute_surrogates(pha, amp, ids, fcn, n_perm, n_jobs):
+def compute_surrogates(pha, amp, ids, fcn, n_perm, n_jobs, random_state):
     """Compute surrogates using tensors and parallel computing."""
     if ids == 0:
         return None
     else:
         fcn_p = {1: swap_pha_amp, 2: swap_blocks, 3: time_lag}[ids]
 
-    def para_surr():  # noqa
-        return fcn(*fcn_p(pha, amp))
+    def para_surr(rnd):  # noqa
+        return fcn(*fcn_p(pha, amp, random_state=random_state + rnd))
     s = Parallel(n_jobs=n_jobs, **CONFIG['JOBLIB_CFG'])(delayed(para_surr)(
-    ) for k in range(n_perm))
+        k) for k in range(n_perm))
     return np.array(s)
 
 
-def swap_pha_amp(pha, amp):
+def swap_pha_amp(pha, amp, random_state=None):
     """Compute surrogates by swapping phase / amplitude trials.
 
     This function destroys the relation between the phase and the amplitude in
@@ -35,6 +35,8 @@ def swap_pha_amp(pha, amp):
         Respectively the arrays of phases of shape
         (n_pha, n_trials, ..., n_times) and the array of amplitudes of shape
         (n_amp, n_trials, ..., n_times).
+    random_state : int | None
+        Fix the random state of the machine for reproducible results.
 
     Returns
     -------
@@ -46,11 +48,14 @@ def swap_pha_amp(pha, amp):
     ----------
     Tort et al. 2010 :cite:`tort2010measuring`
     """
-    tr_ = np.random.permutation(pha.shape[1])
+    if random_state is None:
+        random_state = int(np.random.randint(0, 10000, size=1))
+    rnd = np.random.RandomState(random_state)
+    tr_ = rnd.permutation(pha.shape[1])
     return pha[:, tr_, ...], amp
 
 
-def swap_blocks(pha, amp):
+def swap_blocks(pha, amp, random_state=None):
     """Compute surrogates by swapping amplitudes time blocks.
 
     This function destroys the relation between the phase and the amplitude in
@@ -64,6 +69,8 @@ def swap_blocks(pha, amp):
     pha, amp : array_like
         Respectively the arrays of phases of shape (n_pha, ..., n_times) and
         the array of amplitudes of shape (n_amp, ..., n_times).
+    random_state : int | None
+        Fix the random state of the machine for reproducible results.
 
     Returns
     -------
@@ -75,8 +82,11 @@ def swap_blocks(pha, amp):
     ----------
     Bahramisharif et al. 2013 :cite:`bahramisharif2013propagating`
     """
+    if random_state is None:
+        random_state = int(np.random.randint(0, 10000, size=1))
+    rnd = np.random.RandomState(random_state)
     # random cutting point along time axis
-    cut_at = np.random.randint(1, amp.shape[-1], (1,))
+    cut_at = rnd.randint(1, amp.shape[-1], (1,))
     # Split amplitude across time into two parts :
     ampl = np.array_split(amp, cut_at, axis=-1)
     # Revered elements :
@@ -84,7 +94,7 @@ def swap_blocks(pha, amp):
     return pha, np.concatenate(ampl, axis=-1)
 
 
-def time_lag(pha, amp):
+def time_lag(pha, amp, random_state=None):
     """Compute surrogates by introducing a time lag on phase series.
 
     This function destroys the relation between the phase and the amplitude in
@@ -97,6 +107,8 @@ def time_lag(pha, amp):
     pha, amp : array_like
         Respectively the arrays of phases of shape (n_pha, ..., n_times) and
         the array of amplitudes of shape (n_amp, ..., n_times).
+    random_state : int | None
+        Fix the random state of the machine for reproducible results.
 
     Returns
     -------
@@ -108,7 +120,10 @@ def time_lag(pha, amp):
     ----------
     Canolty et al. 2006 :cite:`canolty2006high`
     """
-    shift = np.random.randint(pha.shape[-1])
+    if random_state is None:
+        random_state = int(np.random.randint(0, 10000, size=1))
+    rnd = np.random.RandomState(random_state)
+    shift = rnd.randint(pha.shape[-1])
     return np.roll(pha, shift, axis=-1), amp
 
 

@@ -79,7 +79,7 @@ class TestMethods(object):
         fcn = get_pac_fcn(1, n_bins, pval)
         s_shape = (n_perm, n_amp_freqs, n_pha_freqs, n_epochs)
         for s in n_sur_range:
-            surro = compute_surrogates(pha, amp, s, fcn, n_perm, 1)
+            surro = compute_surrogates(pha, amp, s, fcn, n_perm, 1, 0)
             assert (surro is None) or (surro.shape == s_shape)
 
     def test_normalize(self):

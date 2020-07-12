@@ -52,7 +52,8 @@ data, time = pac_signals_wavelet(f_pha=f_pha, f_amp=f_amp, noise=.8,
 p = Pac(idpac=(2, 2, 0), f_pha=(2, 15, 2, .2), f_amp=(60, 120, 5, 1))
 # compute true pac and surrogates
 n_perm = 200  # number of permutations
-xpac = p.filterfit(sf, data, n_perm=n_perm, n_jobs=-1).squeeze()
+xpac = p.filterfit(sf, data, n_perm=n_perm, n_jobs=-1,
+                   random_state=0).squeeze()
 # get the corrected p-values
 pval = p.infer_pvalues(p=0.05)
 # get the mean pac values where it's detected as significant
