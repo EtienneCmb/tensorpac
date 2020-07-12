@@ -58,7 +58,6 @@ structure :
 .. code-block:: default
 
     import os
-    import urllib.request
     import urllib
 
     import numpy as np
@@ -434,7 +433,8 @@ Test if the alpha-gamma PAC is significant during motor planning
     # compute pac and 200 surrogates
     pac_prep = p_obj.fit(pha_p[..., time_prep], amp_p[..., time_prep], n_perm=200)
     # get the p-values
-    pvalues = p_obj.infer_pvalues(p=0.05, mcp='fdr')
+    mcp = 'maxstat'
+    pvalues = p_obj.infer_pvalues(p=0.05, mcp=mcp)
 
 
 
@@ -449,8 +449,8 @@ Test if the alpha-gamma PAC is significant during motor planning
     # sphinx_gallery_thumbnail_number = 7
     plt.figure(figsize=(8, 6))
     title = (r"Significant alpha$\Leftrightarrow$gamma coupling occurring during "
-             "the motor planning phase\n(p<0.05, FDR-corrected for multiple "
-             "comparisons)")
+             f"the motor planning phase\n(p<0.05, {mcp}-corrected for multiple "
+              "comparisons)")
     # plot the non-significant pac in gray
     pac_prep_ns = pac_prep.mean(-1).copy()
     pac_prep_ns[pvalues < .05] = np.nan
@@ -475,7 +475,7 @@ Test if the alpha-gamma PAC is significant during motor planning
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 2 minutes  25.720 seconds)
+   **Total running time of the script:** ( 3 minutes  33.947 seconds)
 
 
 .. _sphx_glr_download_auto_examples_tuto_plot_real_data.py:

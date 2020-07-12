@@ -47,7 +47,6 @@ structure :
        PAC that could be obtained by chance (:class:`tensorpac.Pac`)
 """
 import os
-import urllib.request
 import urllib
 
 import numpy as np
@@ -285,15 +284,16 @@ p_obj.idpac = (6, 2, 0)
 # compute pac and 200 surrogates
 pac_prep = p_obj.fit(pha_p[..., time_prep], amp_p[..., time_prep], n_perm=200)
 # get the p-values
-pvalues = p_obj.infer_pvalues(p=0.05, mcp='fdr')
+mcp = 'maxstat'
+pvalues = p_obj.infer_pvalues(p=0.05, mcp=mcp)
 
 ###############################################################################
 
 # sphinx_gallery_thumbnail_number = 7
 plt.figure(figsize=(8, 6))
 title = (r"Significant alpha$\Leftrightarrow$gamma coupling occurring during "
-         "the motor planning phase\n(p<0.05, FDR-corrected for multiple "
-         "comparisons)")
+         f"the motor planning phase\n(p<0.05, {mcp}-corrected for multiple "
+          "comparisons)")
 # plot the non-significant pac in gray
 pac_prep_ns = pac_prep.mean(-1).copy()
 pac_prep_ns[pvalues < .05] = np.nan
