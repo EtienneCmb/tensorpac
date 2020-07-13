@@ -15,6 +15,7 @@ tensorpac.utils.PSD
    
       ~PSD.__init__
       ~PSD.plot
+      ~PSD.plot_st_psd
       ~PSD.show
    
    

@@ -111,7 +111,6 @@ plt.xlabel('Times (in seconds)', fontsize=15)
 plt.ylabel('V', fontsize=15)
 plt.ylim(-600, 800)
 add_motor_condition(700.)
-
 plt.show()
 
 
@@ -145,10 +144,19 @@ psd = PSD(data, sf)
 
 ###############################################################################
 
-plt.figure(figsize=(8, 6))
+plt.figure(figsize=(14, 6))
+# adding the mean PSD over trials
+plt.subplot(1, 2, 1)
 ax = psd.plot(confidence=95, f_min=5, f_max=100, log=True, grid=True)
 plt.axvline(8, lw=2, color='red')
 plt.axvline(12, lw=2, color='red')
+# adding the single trial PSD
+plt.subplot(1, 2, 2)
+psd.plot_st_psd(cmap='Greys', f_min=2, f_max=100, vmax=.5e6, vmin=0., log=True,
+                grid=True)
+plt.axvline(8, lw=2, color='red')
+plt.axvline(12, lw=2, color='red')
+plt.tight_layout()
 plt.show()
 
 ###############################################################################

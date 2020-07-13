@@ -486,6 +486,65 @@
 
         <span class="k">return</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span></div>
 
+<div class="viewcode-block" id="PSD.plot_st_psd"><a class="viewcode-back" href="../../generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD.plot_st_psd">[docs]</a>    <span class="k">def</span> <span class="nf">plot_st_psd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f_min</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">f_max</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">fz_title</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">fz_labels</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fz_cblabel</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Single-trial PSD plot.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        f_min, f_max : (int, float) | None</span>
+<span class="sd">            Frequency bounds to use for plotting</span>
+<span class="sd">        log : bool | False</span>
+<span class="sd">            Use a log scale representation</span>
+<span class="sd">        grid : bool | True</span>
+<span class="sd">            Add a grid to the plot</span>
+<span class="sd">        fz_title : int | 18</span>
+<span class="sd">            Font size for the title</span>
+<span class="sd">        fz_labels : int | 15</span>
+<span class="sd">            Font size the x/y labels</span>
+<span class="sd">        fz_cblabel : int | 15</span>
+<span class="sd">            Font size the colorbar label labels</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ax : Matplotlib axis</span>
+<span class="sd">            The matplotlib axis that contains the figure</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># manage input variables</span>
+        <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;fz_labels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fz_labels&#39;</span><span class="p">,</span> <span class="n">fz_labels</span><span class="p">)</span>
+        <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;fz_title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fz_title&#39;</span><span class="p">,</span> <span class="n">fz_title</span><span class="p">)</span>
+        <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;fz_cblabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fz_cblabel&#39;</span><span class="p">,</span> <span class="n">fz_title</span><span class="p">)</span>
+        <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;xlabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;xlabel&#39;</span><span class="p">,</span> <span class="s2">&quot;Frequencies (Hz)&quot;</span><span class="p">)</span>
+        <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;ylabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ylabel&#39;</span><span class="p">,</span> <span class="s2">&quot;Trials&quot;</span><span class="p">)</span>
+        <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s2">&quot;Single-trial PSD&quot;</span><span class="p">)</span>
+        <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;cblabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cblabel&#39;</span><span class="p">,</span> <span class="s2">&quot;Power (V**2/Hz)&quot;</span><span class="p">)</span>
+        <span class="c1"># (f_min, f_max)</span>
+        <span class="n">xvec</span><span class="p">,</span> <span class="n">psd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_freqs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_psd</span>
+        <span class="n">f_types</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+        <span class="n">f_min</span> <span class="o">=</span> <span class="n">xvec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f_min</span><span class="p">,</span> <span class="n">f_types</span><span class="p">)</span> <span class="k">else</span> <span class="n">f_min</span>
+        <span class="n">f_max</span> <span class="o">=</span> <span class="n">xvec</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f_max</span><span class="p">,</span> <span class="n">f_types</span><span class="p">)</span> <span class="k">else</span> <span class="n">f_max</span>
+        <span class="c1"># locate (f_min, f_max) indices</span>
+        <span class="n">f_min_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xvec</span> <span class="o">-</span> <span class="n">f_min</span><span class="p">)</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span>
+        <span class="n">f_max_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xvec</span> <span class="o">-</span> <span class="n">f_max</span><span class="p">)</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span>
+        <span class="n">sl_freq</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">f_min_idx</span><span class="p">,</span> <span class="n">f_max_idx</span><span class="p">)</span>
+        <span class="n">xvec</span> <span class="o">=</span> <span class="n">xvec</span><span class="p">[</span><span class="n">sl_freq</span><span class="p">]</span>
+        <span class="n">psd</span> <span class="o">=</span> <span class="n">psd</span><span class="p">[:,</span> <span class="n">sl_freq</span><span class="p">]</span>
+        <span class="c1"># make the 2D plot</span>
+        <span class="n">_viz</span> <span class="o">=</span> <span class="n">_PacVisual</span><span class="p">()</span>
+        <span class="n">trials</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_trials</span><span class="p">)</span>
+        <span class="n">_viz</span><span class="o">.</span><span class="n">pacplot</span><span class="p">(</span><span class="n">psd</span><span class="p">,</span> <span class="n">xvec</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">ScalarFormatter</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">basex</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">ScalarFormatter</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">grid</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;major&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>
+                     <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;minor&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+                     <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span></div>
+
 <div class="viewcode-block" id="PSD.show"><a class="viewcode-back" href="../../generated/tensorpac.utils.PSD.html#tensorpac.utils.PSD.show">[docs]</a>    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Display the PSD figure.&quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>

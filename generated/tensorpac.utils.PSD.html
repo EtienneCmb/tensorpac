@@ -320,7 +320,10 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.plot" title="tensorpac.utils.PSD.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>([f_min, f_max, confidence, interp, …])</p></td>
 <td><p>Plot the PSD.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.show" title="tensorpac.utils.PSD.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.plot_st_psd" title="tensorpac.utils.PSD.plot_st_psd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_st_psd</span></code></a>([f_min, f_max, log, grid, …])</p></td>
+<td><p>Single-trial PSD plot.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tensorpac.utils.PSD.show" title="tensorpac.utils.PSD.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>()</p></td>
 <td><p>Display the PSD figure.</p></td>
 </tr>
 </tbody>
@@ -362,6 +365,36 @@ of points is going to be multiply by 10</p>
 <dt><strong>fz_title</strong><span class="classifier">int | 18</span></dt><dd><p>Font size for the title</p>
 </dd>
 <dt><strong>fz_labels</strong><span class="classifier">int | 15</span></dt><dd><p>Font size the x/y labels</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>ax</strong><span class="classifier">Matplotlib axis</span></dt><dd><p>The matplotlib axis that contains the figure</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tensorpac.utils.PSD.plot_st_psd">
+<code class="sig-name descname">plot_st_psd</code><span class="sig-paren">(</span><em class="sig-param">f_min=None</em>, <em class="sig-param">f_max=None</em>, <em class="sig-param">log=False</em>, <em class="sig-param">grid=True</em>, <em class="sig-param">fz_title=18</em>, <em class="sig-param">fz_labels=15</em>, <em class="sig-param">fz_cblabel=15</em>, <em class="sig-param">**kw</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#PSD.plot_st_psd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.PSD.plot_st_psd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Single-trial PSD plot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>f_min, f_max</strong><span class="classifier">(int, float) | None</span></dt><dd><p>Frequency bounds to use for plotting</p>
+</dd>
+<dt><strong>log</strong><span class="classifier">bool | False</span></dt><dd><p>Use a log scale representation</p>
+</dd>
+<dt><strong>grid</strong><span class="classifier">bool | True</span></dt><dd><p>Add a grid to the plot</p>
+</dd>
+<dt><strong>fz_title</strong><span class="classifier">int | 18</span></dt><dd><p>Font size for the title</p>
+</dd>
+<dt><strong>fz_labels</strong><span class="classifier">int | 15</span></dt><dd><p>Font size the x/y labels</p>
+</dd>
+<dt><strong>fz_cblabel</strong><span class="classifier">int | 15</span></dt><dd><p>Font size the colorbar label labels</p>
 </dd>
 </dl>
 </dd>
