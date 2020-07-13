@@ -204,6 +204,65 @@ class PSD(object):
 
         return plt.gca()
 
+    def plot_st_psd(self, f_min=None, f_max=None, log=False, grid=True,
+                    fz_title=18, fz_labels=15, fz_cblabel=15, **kw):
+        """Single-trial PSD plot.
+
+        Parameters
+        ----------
+        f_min, f_max : (int, float) | None
+            Frequency bounds to use for plotting
+        log : bool | False
+            Use a log scale representation
+        grid : bool | True
+            Add a grid to the plot
+        fz_title : int | 18
+            Font size for the title
+        fz_labels : int | 15
+            Font size the x/y labels
+        fz_cblabel : int | 15
+            Font size the colorbar label labels
+
+        Returns
+        -------
+        ax : Matplotlib axis
+            The matplotlib axis that contains the figure
+        """
+        # manage input variables
+        kw['fz_labels'] = kw.get('fz_labels', fz_labels)
+        kw['fz_title'] = kw.get('fz_title', fz_title)
+        kw['fz_cblabel'] = kw.get('fz_cblabel', fz_title)
+        kw['xlabel'] = kw.get('xlabel', "Frequencies (Hz)")
+        kw['ylabel'] = kw.get('ylabel', "Trials")
+        kw['title'] = kw.get('title', "Single-trial PSD")
+        kw['cblabel'] = kw.get('cblabel', "Power (V**2/Hz)")
+        # (f_min, f_max)
+        xvec, psd = self._freqs, self._psd
+        f_types = (int, float)
+        f_min = xvec[0] if not isinstance(f_min, f_types) else f_min
+        f_max = xvec[-1] if not isinstance(f_max, f_types) else f_max
+        # locate (f_min, f_max) indices
+        f_min_idx = np.abs(xvec - f_min).argmin()
+        f_max_idx = np.abs(xvec - f_max).argmin()
+        sl_freq = slice(f_min_idx, f_max_idx)
+        xvec = xvec[sl_freq]
+        psd = psd[:, sl_freq]
+        # make the 2D plot
+        _viz = _PacVisual()
+        trials = np.arange(self._n_trials)
+        _viz.pacplot(psd, xvec, trials, **kw)
+        if log:
+            from matplotlib.ticker import ScalarFormatter
+            plt.xscale('log', basex=10)
+            plt.gca().xaxis.set_major_formatter(ScalarFormatter())
+        if grid:
+            plt.grid(color='grey', which='major', linestyle='-',
+                     linewidth=1., alpha=0.5)
+            plt.grid(color='lightgrey', which='minor', linestyle='--',
+                     linewidth=0.5, alpha=0.5)
+
+        return plt.gca()
+
     def show(self):
         """Display the PSD figure."""
         import matplotlib.pyplot as plt

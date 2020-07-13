@@ -37,6 +37,7 @@ class TestUtils(object):
         matplotlib.use('agg')
         psd.plot(confidence=None, log=True, grid=True, interp=.1)
         psd.plot(confidence=.95, log=False, grid=False, interp=None)
+        psd.plot_st_psd(log=True, grid=True)
         psd.show()
         matplotlib.pyplot.close('all')
 
