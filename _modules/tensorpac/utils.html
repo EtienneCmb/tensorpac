@@ -144,6 +144,8 @@
 <li class="toctree-l4"><a class="reference internal" href="../../auto_examples/tuto/plot_real_data.html#align-time-frequency-map-based-on-alpha-phase-peak">Align time-frequency map based on alpha phase peak</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../auto_examples/tuto/plot_real_data.html#compute-and-compare-pac-that-is-occurring-during-rest-planning-and-execution">Compute and compare PAC that is occurring during rest, planning and execution</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../auto_examples/tuto/plot_real_data.html#test-if-the-alpha-gamma-pac-is-significant-during-motor-planning">Test if the alpha-gamma PAC is significant during motor planning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../auto_examples/tuto/plot_real_data.html#binning-gamma-amplitude-according-to-alpha-phase">Binning gamma amplitude according to alpha phase</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../auto_examples/tuto/plot_real_data.html#identify-the-preferred-phase">Identify the preferred phase</a></li>
 </ul>
 </li>
 </ul>
@@ -609,6 +611,8 @@
         <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">f_amp</span><span class="p">]),</span> <span class="p">(</span>
             <span class="s2">&quot;`f_amp` input should be a list of two integers / floats&quot;</span><span class="p">)</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n_bins</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="s2">&quot;`n_bins` should be an integer&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Binning </span><span class="si">{</span><span class="n">f_amp</span><span class="si">}</span><span class="s2">Hz amplitude according to </span><span class="si">{</span><span class="n">f_pha</span><span class="si">}</span><span class="s2">Hz &quot;</span>
+                    <span class="s2">&quot;phase&quot;</span><span class="p">)</span>
         <span class="c1"># extract phase and amplitude</span>
         <span class="n">kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">keepfilt</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="n">edges</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)</span>
         <span class="n">pha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
@@ -617,7 +621,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_amplitude</span> <span class="o">=</span> <span class="n">_kl_hr</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">,</span> <span class="n">mean_bins</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_bins</span> <span class="o">=</span> <span class="n">n_bins</span></div>
 
-<div class="viewcode-block" id="BinAmplitude.plot"><a class="viewcode-back" href="../../generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;rad&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+<div class="viewcode-block" id="BinAmplitude.plot"><a class="viewcode-back" href="../../generated/tensorpac.utils.BinAmplitude.html#tensorpac.utils.BinAmplitude.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;rad&#39;</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Plot the amplitude.</span>
 
 <span class="sd">        Parameters</span>
@@ -625,6 +629,8 @@
 <span class="sd">        unit : {&#39;rad&#39;, &#39;deg&#39;}</span>
 <span class="sd">            The unit to use for the phase. Use either &#39;deg&#39; for degree or &#39;rad&#39;</span>
 <span class="sd">            for radians</span>
+<span class="sd">        normalize : bool | None</span>
+<span class="sd">            Normalize the histogram by the maximum</span>
 <span class="sd">        kw : dict | {}</span>
 <span class="sd">            Additional inputs are passed to the matplotlib.pyplot.bar function</span>
 
@@ -641,7 +647,9 @@
         <span class="k">elif</span> <span class="n">unit</span> <span class="o">==</span> <span class="s1">&#39;deg&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_phase</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_bins</span><span class="p">)</span>
             <span class="n">width</span> <span class="o">=</span> <span class="mi">360</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_bins</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_phase</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_amplitude</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="n">amp_mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_amplitude</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">amp_mean</span> <span class="o">/=</span> <span class="n">amp_mean</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_phase</span><span class="p">,</span> <span class="n">amp_mean</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Frequency phase (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_bins</span><span class="si">}</span><span class="s2"> bins)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitude&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Binned amplitude&quot;</span><span class="p">)</span>

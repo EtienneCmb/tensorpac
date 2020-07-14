@@ -9,3 +9,29 @@ blockquote {
     margin: 0 0 22px;
     font-size: 20px;
 }
+
+/* ############################ FONT ############################*/
+body {
+    font-size: 16;
+}
+a:link {  /* link */
+    color: #2e88c5;
+    font-weight: bold;
+}
+a:visited {  /* visited link */
+    color: #2e88c5;
+}
+a:hover {  /* mouse over link */
+    color: #2ecc71;
+}
+a:active {  /* selected link */
+    color: #2ecc71;
+}
+code {
+    color: #ab4642 !important;
+    background-color: #eedad9 !important;
+}
+
+/*p {
+  font-size: 20px;
+}*/

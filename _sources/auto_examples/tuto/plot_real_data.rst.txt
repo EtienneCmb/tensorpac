@@ -53,6 +53,8 @@ structure :
     5. Compute the comodulogram and statistics in order to test if the
        hypothetic coupling can be considered as statistically different from
        PAC that could be obtained by chance (:class:`tensorpac.Pac`)
+    6. Preferred-phase identification (:class:`tensorpac.utils.BinAmplitude`
+       and :class:`tensorpac.PreferredPhase`)
 
 
 .. code-block:: default
@@ -63,8 +65,8 @@ structure :
     import numpy as np
     from scipy.io import loadmat
 
-    from tensorpac import Pac, EventRelatedPac
-    from tensorpac.utils import PeakLockedTF, PSD, ITC
+    from tensorpac import Pac, EventRelatedPac, PreferredPhase
+    from tensorpac.utils import PeakLockedTF, PSD, ITC, BinAmplitude
 
     import matplotlib.pyplot as plt
 
@@ -255,14 +257,15 @@ Compute and plot the Power Spectrum Density
 From the PSD above, we can see a clear peak around 10hz that could indicate
 an alpha <-> gamma coupling. This peak is essentially comprised between
 [8, 12]Hz. This range of frequencies is then gonig to be used to see if there
-is indeed an alpha <-> gamma coupling (Aru et al. :cite:`aru2015untangling`)
+is indeed an alpha <-> gamma coupling (Aru et al. 2015
+:cite:`aru2015untangling`)
 
 Compute and plot the Event-Related PAC
 ##############################################################################
  To go one step further we can use the Event-Related PAC (ERPAC) in order to
  isolate the gamma range that is coupled with the alpha phase such as when, in
  time, this coupling occurs. Here, we compute the ERPAC using the
- Gaussian-Copula mutual information # (Ince et al. 2017
+ Gaussian-Copula mutual information (Ince et al. 2017
  :cite:`ince2017statistical`), between the alpha [8, 12]Hz and several gamma
  amplitudes, at each time point.
 
@@ -374,10 +377,14 @@ Compute and compare PAC that is occurring during rest, planning and execution
     time_rest = slice(0, 1000)
     time_prep = slice(1000, 2500)
     time_exec = slice(2500, 4000)
+    # define phase / amplitude during rest / planning / execution
+    pha_rest, amp_rest = pha_p[..., time_rest], amp_p[..., time_rest]
+    pha_prep, amp_prep = pha_p[..., time_prep], amp_p[..., time_prep]
+    pha_exec, amp_exec = pha_p[..., time_exec], amp_p[..., time_exec]
     # compute PAC inside rest, planning, and execution
-    pac_rest = p_obj.fit(pha_p[..., time_rest], amp_p[..., time_rest]).mean(-1)
-    pac_prep = p_obj.fit(pha_p[..., time_prep], amp_p[..., time_prep]).mean(-1)
-    pac_exec = p_obj.fit(pha_p[..., time_exec], amp_p[..., time_exec]).mean(-1)
+    pac_rest = p_obj.fit(pha_rest, amp_rest).mean(-1)
+    pac_prep = p_obj.fit(pha_prep, amp_prep).mean(-1)
+    pac_exec = p_obj.fit(pha_exec, amp_exec).mean(-1)
 
 
 
@@ -385,6 +392,8 @@ Compute and compare PAC that is occurring during rest, planning and execution
 
 
 
+
+plot the comodulograms inside the rest, planning and execution period
 
 
 .. code-block:: default
@@ -475,16 +484,148 @@ Test if the alpha-gamma PAC is significant during motor planning
 
 
 
+
+
 .. image:: /auto_examples/tuto/images/sphx_glr_plot_real_data_007.png
     :class: sphx-glr-single-img
 
 
 
 
+Binning gamma amplitude according to alpha phase
+##############################################################################
+ Another sanity check of whether the amplitude is indeed modulated by the
+ alpha phase is to bin this amplitude according to phase slices. If there's no
+ modulation, the bin amplitude should looks like a uniform distribution (i.e
+ flat)
+
+
+.. code-block:: default
+
+
+    # define phase and amplitude filtering properties
+    kw_filt = dict(f_pha=[8, 12], f_amp=[75, 105], n_bins=20)
+    # bin the rest, planning and execution periods. Note that ideally, the entire
+    # trial should be filtered and then binning should be performed
+    bin_rest = BinAmplitude(data[:, time_rest], sf, **kw_filt)
+    bin_prep = BinAmplitude(data[:, time_prep], sf, **kw_filt)
+    bin_exec = BinAmplitude(data[:, time_exec], sf, **kw_filt)
+
+
+
+
+
+
+
+now plot the binned amplitude inside the rest, planning and execution periods
+
+
+.. code-block:: default
+
+
+    plt.figure(figsize=(16, 5))
+    # bin rest period
+    plt.subplot(1, 3, 1)
+    bin_rest.plot(normalize=True, color='gray', unit='deg')
+    plt.ylim(0.5, 1.2), plt.title("REST", fontsize=18)
+    # bin planning period
+    plt.subplot(1, 3, 2)
+    bin_prep.plot(normalize=True, unit='deg')
+    plt.ylim(0.5, 1.2), plt.ylabel(''), plt.title("MOTOR PLANNING", fontsize=18)
+    # bin execution period
+    plt.subplot(1, 3, 3)
+    bin_exec.plot(normalize=True, color='red', unit='deg')
+    plt.ylim(0.5, 1.2), plt.ylabel(''), plt.title("MOTOR EXECUTION", fontsize=18)
+    plt.tight_layout()
+    plt.show()
+
+
+
+
+.. image:: /auto_examples/tuto/images/sphx_glr_plot_real_data_008.png
+    :class: sphx-glr-single-img
+
+
+
+
+As you can see, the amplitude is modulated inside the resting and even more
+inside the planning phase. On the other hand, during the execution, the
+distribution stays flat. Note also that the amplitude is maximum arround
+-150° (or 210°) during the planning phase
+
+Identify the preferred phase
+##############################################################################
+ The preferred phase is given by the phase bin at which the amplitude is
+ maximum. Said differently, the gamma amplitude is binned according to the
+ alpha phase. The preferred-phase is computed as the maximum of this
+ histogram. To identify this preferred-phase, we propose here a polar plotting
+ method to visualize retrieve the previous result using the histogram method
+
+
+.. code-block:: default
+
+
+    # define the preferred phase object
+    pp_obj = PreferredPhase(f_pha=[8, 12])
+    # only extract the alpha phase
+    pp_pha = pp_obj.filter(sf, data, ftype='phase')
+    pp_pha_rest = pp_pha[..., time_rest]
+    pp_pha_prep = pp_pha[..., time_prep]
+    pp_pha_exec = pp_pha[..., time_exec]
+    # compute the preferred phase (reuse the amplitude computed above)
+    ampbin_rest, _, vecbin = pp_obj.fit(pp_pha_rest, amp_rest, n_bins=72)
+    ampbin_prep, _, vecbin = pp_obj.fit(pp_pha_prep, amp_prep, n_bins=72)
+    ampbin_exec, _, vecbin = pp_obj.fit(pp_pha_exec, amp_exec, n_bins=72)
+    # mean binned amplitude across trials
+    ampbin_rest = np.squeeze(ampbin_rest).mean(-1).T
+    ampbin_prep = np.squeeze(ampbin_prep).mean(-1).T
+    ampbin_exec = np.squeeze(ampbin_exec).mean(-1).T
+
+
+
+
+
+
+
+circular plot of the preferred-phase : the radius of each circle is the
+chosen amplitude, the angle is the phase and the maximum of the disc values
+(i.e the brightest color) gives the preferred-phase
+
+
+.. code-block:: default
+
+
+    plt.figure(figsize=(18, 5.2))
+    kw_plt = dict(cmap='Spectral_r', interp=.1, cblabel='Amplitude bins',
+                  vmin=0.012, vmax=0.016, colorbar=True, y=1.05, fz_title=18)
+    pp_obj.polar(ampbin_rest, vecbin, p_obj.yvec, subplot=131, title='REST',
+                 **kw_plt)
+    pp_obj.polar(ampbin_prep, vecbin, p_obj.yvec, subplot=132,
+                 title='MOTOR PLANNING', **kw_plt)
+    pp_obj.polar(ampbin_exec, vecbin, p_obj.yvec, subplot=133,
+                 title='MOTOR EXECUTION', **kw_plt)
+    plt.tight_layout()
+    plt.show()
+
+
+
+
+
+.. image:: /auto_examples/tuto/images/sphx_glr_plot_real_data_009.png
+    :class: sphx-glr-single-img
+
+
+
+
+As you can see, we retrieve that the preferred bin alpha phase is around
+-150° or 210° during the rest period but even more in the planning period.
+While during the execution, it seems that the amplitude is not modulated by
+the alpha phase
+
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 1 minutes  46.398 seconds)
+   **Total running time of the script:** ( 1 minutes  51.889 seconds)
 
 
 .. _sphx_glr_download_auto_examples_tuto_plot_real_data.py:
