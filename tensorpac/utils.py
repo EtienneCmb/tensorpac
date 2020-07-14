@@ -364,7 +364,8 @@ class BinAmplitude(_PacObj):
             self._phase = np.linspace(-180, 180, self.n_bins)
             width = 360 / self.n_bins
         amp_mean = self._amplitude.mean(1)
-        amp_mean /= amp_mean.max()
+        if normalize:
+            amp_mean /= amp_mean.max()
         plt.bar(self._phase, amp_mean, width=width, **kw)
         plt.xlabel(f"Frequency phase ({self.n_bins} bins)", fontsize=18)
         plt.ylabel("Amplitude", fontsize=18)
