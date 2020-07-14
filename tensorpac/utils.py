@@ -327,6 +327,8 @@ class BinAmplitude(_PacObj):
         assert all([isinstance(k, (int, float)) for k in f_amp]), (
             "`f_amp` input should be a list of two integers / floats")
         assert isinstance(n_bins, int), "`n_bins` should be an integer"
+        logger.info(f"Binning {f_amp}Hz amplitude according to {f_pha}Hz "
+                    "phase")
         # extract phase and amplitude
         kw = dict(keepfilt=False, edges=edges, n_jobs=n_jobs)
         pha = self.filter(sf, x, 'phase', **kw)
@@ -335,7 +337,7 @@ class BinAmplitude(_PacObj):
         self._amplitude = _kl_hr(pha, amp, n_bins, mean_bins=False).squeeze()
         self.n_bins = n_bins
 
-    def plot(self, unit='rad', **kw):
+    def plot(self, unit='rad', normalize=False, **kw):
         """Plot the amplitude.
 
         Parameters
@@ -343,6 +345,8 @@ class BinAmplitude(_PacObj):
         unit : {'rad', 'deg'}
             The unit to use for the phase. Use either 'deg' for degree or 'rad'
             for radians
+        normalize : bool | None
+            Normalize the histogram by the maximum
         kw : dict | {}
             Additional inputs are passed to the matplotlib.pyplot.bar function
 
@@ -359,7 +363,9 @@ class BinAmplitude(_PacObj):
         elif unit == 'deg':
             self._phase = np.linspace(-180, 180, self.n_bins)
             width = 360 / self.n_bins
-        plt.bar(self._phase, self._amplitude.mean(1), width=width, **kw)
+        amp_mean = self._amplitude.mean(1)
+        amp_mean /= amp_mean.max()
+        plt.bar(self._phase, amp_mean, width=width, **kw)
         plt.xlabel(f"Frequency phase ({self.n_bins} bins)", fontsize=18)
         plt.ylabel("Amplitude", fontsize=18)
         plt.title("Binned amplitude")
