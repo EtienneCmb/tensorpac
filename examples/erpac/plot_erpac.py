@@ -47,7 +47,7 @@ time = np.arange(x.shape[1]) / sf
 # amplitudes
 
 # define an ERPAC object
-p = EventRelatedPac(f_pha=[9, 11], f_amp=(60, 140, 5, 3))
+p = EventRelatedPac(f_pha=[9, 11], f_amp='hres')
 
 # extract phases and amplitudes
 pha = p.filter(sf, x, ftype='phase', n_jobs=1)
@@ -60,7 +60,7 @@ amp = p.filter(sf, x, ftype='amplitude', n_jobs=1)
 # implemented ERPAC methods
 methods = ['circular', 'gc']
 
-plt.figure(figsize=(16, 8))
+plt.figure(figsize=(14, 8))
 for n_m, m in enumerate(methods):
     # compute the erpac
     erpac = p.fit(pha, amp, method=m, smooth=100, n_jobs=-1).squeeze()
@@ -72,4 +72,5 @@ for n_m, m in enumerate(methods):
               cblabel='ERPAC', vmin=0., rmaxis=True)
     plt.axvline(1., linestyle='--', color='w', linewidth=2)
 
+plt.tight_layout()
 p.show()

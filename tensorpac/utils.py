@@ -14,14 +14,23 @@ import matplotlib.pyplot as plt
 logger = logging.getLogger('tensorpac')
 
 
-def pac_vec(f_pha=(2, 30, 2, 1), f_amp=(60, 200, 10, 5)):
+def pac_vec(f_pha='mres', f_amp='mres'):
     """Generate cross-frequency coupling vectors.
 
     Parameters
     ----------
-    f_pha, f_amp : tuple | (2, 30, 2, 1), (60, 200, 10, 5)
-        Frequency parameters for phase and amplitude. Each argument inside the
-        tuple mean (starting fcy, ending fcy, bandwidth, step).
+    Frequency vector for the phase and amplitude. Here you can use
+    several forms to define those vectors :
+
+        * Basic list/tuple (ex: [2, 4] or [8, 12]...)
+        * List of frequency bands (ex: [[2, 4], [5, 7]]...)
+        * Dynamic definition : (start, stop, width, step)
+        * Range definition (ex : np.arange(3) => [[0, 1], [1, 2]])
+        * Using a string. `f_pha` and `f_amp` can be 'lres', 'mres', 'hres'
+          respectively for low, middle and high resolution vectors. In that
+          case, it uses the definition proposed by Bahramisharif et al. 2013
+          :cite:`bahramisharif2013propagating` i.e
+          f_pha = [f - f / 4, f + f / 4] and f_amp = [f - f / 8, f + f / 8]
 
     Returns
     -------
@@ -29,20 +38,22 @@ def pac_vec(f_pha=(2, 30, 2, 1), f_amp=(60, 200, 10, 5)):
         Arrays containing the pairs of phase and amplitude frequencies. Each
         vector have a shape of (N, 2).
     """
+    nb_fcy = dict(lres=10, mres=30, hres=50, demon=70, hulk=100)
     if isinstance(f_pha, str):
-        if f_pha == 'lres':    # low resolution phase
-            f_pha = (2, 30, 2, 2)
-        elif f_pha == 'mres':  # middle resolution phase
-            f_pha = (2, 30, 2, 1)
-        elif f_pha == 'hres':  # high resolution phase
-            f_pha = (2, 30, 1, .5)
+        # get where phase frequencies start / finish / number
+        f_pha_start, f_pha_end = 2, 20
+        f_pha_nb = nb_fcy[f_pha]
+        # f_pha = [f - f / 4, f + f / 4]
+        f_pha_mid = np.linspace(f_pha_start, f_pha_end, f_pha_nb)
+        f_pha = np.c_[f_pha_mid - f_pha_mid / 4., f_pha_mid + f_pha_mid / 4.]
     if isinstance(f_amp, str):
-        if f_amp == 'lres':    # low resolution amplitude
-            f_amp = (60, 160, 10, 10)
-        elif f_amp == 'mres':  # middle resolution amplitude
-            f_amp = (60, 160, 5, 4)
-        elif f_amp == 'hres':  # high resolution amplitude
-            f_amp = (60, 160, 4, 2)
+        # get where amplitude frequencies start / finish / number
+        f_amp_start, f_amp_end = 60, 160
+        f_amp_nb = nb_fcy[f_amp]
+        # f_amp = [f - f / 8, f + f / 8]
+        f_amp_mid = np.linspace(f_amp_start, f_amp_end, f_amp_nb)
+        f_amp = np.c_[f_amp_mid - f_amp_mid / 8., f_amp_mid + f_amp_mid / 8.]
+
     return _check_freq(f_pha), _check_freq(f_amp)
 
 
@@ -588,20 +599,20 @@ class PeakLockedTF(_PacObj, _PacVisual):
     @staticmethod
     def _peak_detection(pha, cue):
         """Single trial closest to a cue peak detection.
-        
+
         Parameters
         ----------
         pha : array_like
             Array of single trial phases of shape (n_trials, n_times)
         cue : int
             Cue to use as a reference (in sample unit)
-        
+
         Returns
         -------
         peaks : array_like
             Array of length (n_trials,) describing each delay to apply
             to each trial in order to realign the phases. In detail :
-            
+
                 * Positive delays means that zeros should be prepend
                 * Negative delays means that zeros should be append
         """
@@ -624,7 +635,7 @@ class PeakLockedTF(_PacObj, _PacVisual):
     @staticmethod
     def _shift_signals(sig, n_shifts, fill_with=0):
         """Shift an array of signals according to an array of delays.
-        
+
         Parameters
         ----------
         sig : array_like
@@ -633,7 +644,7 @@ class PeakLockedTF(_PacObj, _PacVisual):
             Array of delays to apply to each trial of shape (n_trials,)
         fill_with : int
             Value to prepend / append to each shifted time-series
-        
+
         Returns
         -------
         sig_shifted : array_like

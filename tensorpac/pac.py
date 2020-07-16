@@ -286,7 +286,10 @@ class Pac(_PacObj, _PacPlt):
             * Dynamic definition : (start, stop, width, step)
             * Range definition (ex : np.arange(3) => [[0, 1], [1, 2]])
             * Using a string. `f_pha` and `f_amp` can be 'lres', 'mres', 'hres'
-              respectively for low, middle and high resolution vectors
+              respectively for low, middle and high resolution vectors. In that
+              case, it uses the definition proposed by Bahramisharif et al.
+              2013 :cite:`bahramisharif2013propagating` i.e
+              f_pha = [f - f / 4, f + f / 4] and f_amp = [f - f / 8, f + f / 8]
 
     dcomplex : {'wavelet', 'hilbert'}
         Method for the complex definition. Use either 'hilbert' or
