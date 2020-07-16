@@ -298,6 +298,8 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorpac</span> <span class="kn">import</span> <span class="n">Pac</span>
 <span class="kn">from</span> <span class="nn">tensorpac.signals</span> <span class="kn">import</span> <span class="n">pac_signals_tort</span>
 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
 <span class="c1"># Dataset of signals artificially coupled between 10hz and 100hz :</span>
 <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">20</span>   <span class="c1"># number of trials</span>
 <span class="n">n_times</span> <span class="o">=</span> <span class="mi">4000</span>  <span class="c1"># number of time points</span>
@@ -316,11 +318,12 @@
 <span class="n">p</span><span class="o">.</span><span class="n">comodulogram</span><span class="p">(</span><span class="n">xpac</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Spectral_r&#39;</span><span class="p">,</span> <span class="n">plotas</span><span class="o">=</span><span class="s1">&#39;contour&#39;</span><span class="p">,</span> <span class="n">ncontours</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                <span class="n">title</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;10hz phase$\Leftrightarrow$100Hz amplitude coupling&#39;</span><span class="p">,</span>
                <span class="n">fz_title</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fz_labels</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
-
+<span class="c1"># export the figure</span>
+<span class="c1"># plt.savefig(&#39;readme.png&#39;, bbox_inches=&#39;tight&#39;, dpi=300)</span>
 <span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.517 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.888 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-pac-plot-readme-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/e84dcef4f9095cdbbba0506eb042996e/plot_readme.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_readme.py</span></code></a></p>

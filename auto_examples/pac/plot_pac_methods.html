@@ -296,7 +296,7 @@
 <p>This script offers a comparison between all of the implemented PAC methods, in
 particular the methods that are computed across times-points.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorpac</span> <span class="kn">import</span> <span class="n">Pac</span>
-<span class="kn">from</span> <span class="nn">tensorpac.signals</span> <span class="kn">import</span> <span class="n">pac_signals_tort</span>
+<span class="kn">from</span> <span class="nn">tensorpac.signals</span> <span class="kn">import</span> <span class="n">pac_signals_wavelet</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
@@ -304,17 +304,17 @@ particular the methods that are computed across times-points.</p>
 <div class="section" id="simulate-artificial-coupling">
 <h2>Simulate artificial coupling<a class="headerlink" href="#simulate-artificial-coupling" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div><p>first, we generate several trials that contains a coupling between a 5z
+<div><p>first, we generate several trials that contains a coupling between a 10hz
 phase and a 100hz amplitude. By default, the returned dataset is organized as
 (n_epochs, n_times) where n_times is the number of time points and n_epochs
 is the number of trials</p>
 </div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f_pha</span> <span class="o">=</span> <span class="mi">5</span>       <span class="c1"># frequency phase for the coupling</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f_pha</span> <span class="o">=</span> <span class="mi">10</span>      <span class="c1"># frequency phase for the coupling</span>
 <span class="n">f_amp</span> <span class="o">=</span> <span class="mi">100</span>     <span class="c1"># frequency amplitude for the coupling</span>
 <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">20</span>   <span class="c1"># number of trials</span>
 <span class="n">n_times</span> <span class="o">=</span> <span class="mi">4000</span>  <span class="c1"># number of time points</span>
 <span class="n">sf</span> <span class="o">=</span> <span class="mf">512.</span>       <span class="c1"># sampling frequency</span>
-<span class="n">data</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">pac_signals_tort</span><span class="p">(</span><span class="n">sf</span><span class="o">=</span><span class="n">sf</span><span class="p">,</span> <span class="n">f_pha</span><span class="o">=</span><span class="n">f_pha</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="n">f_amp</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">2.</span><span class="p">,</span>
+<span class="n">data</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">pac_signals_wavelet</span><span class="p">(</span><span class="n">sf</span><span class="o">=</span><span class="n">sf</span><span class="p">,</span> <span class="n">f_pha</span><span class="o">=</span><span class="n">f_pha</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="n">f_amp</span><span class="p">,</span> <span class="n">noise</span><span class="o">=.</span><span class="mi">8</span><span class="p">,</span>
                               <span class="n">n_epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span> <span class="n">n_times</span><span class="o">=</span><span class="n">n_times</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -325,8 +325,9 @@ is the number of trials</p>
 <div><p>Since we’re going to compute PAC using several methods, we’re first going
 to extract all of the phases and amplitudes only once</p>
 </div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a pac object</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">Pac</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="s1">&#39;mres&#39;</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="s1">&#39;mres&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a pac object and extract high-resolution phases and amplitudes using</span>
+<span class="c1"># Morlet&#39;s wavelets</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Pac</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="s1">&#39;hres&#39;</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="s1">&#39;hres&#39;</span><span class="p">,</span> <span class="n">dcomplex</span><span class="o">=</span><span class="s1">&#39;wavelet&#39;</span><span class="p">)</span>
 <span class="c1"># etract all of the phases and amplitudes</span>
 <span class="n">phases</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">amplitudes</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">ftype</span><span class="o">=</span><span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -348,7 +349,7 @@ ietrating over the implemented methods.</p>
     <span class="c1"># plot</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
     <span class="n">title</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; (&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39; (</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">)</span><span class="se">\n</span><span class="s1">(&#39;</span><span class="p">)</span>
-    <span class="n">p</span><span class="o">.</span><span class="n">comodulogram</span><span class="p">(</span><span class="n">xpac</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;cividis&#39;</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">comodulogram</span><span class="p">(</span><span class="n">xpac</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 
@@ -357,7 +358,7 @@ ietrating over the implemented methods.</p>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_plot_pac_methods_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_pac_methods_001.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  6.180 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  17.190 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-pac-plot-pac-methods-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/9ce0d1cd3db4d3ccb80fe43c5d24418e/plot_pac_methods.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_pac_methods.py</span></code></a></p>

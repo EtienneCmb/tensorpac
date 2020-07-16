@@ -8,6 +8,8 @@ Reproduced the figure in the README.
 from tensorpac import Pac
 from tensorpac.signals import pac_signals_tort
 
+import matplotlib.pyplot as plt
+
 # Dataset of signals artificially coupled between 10hz and 100hz :
 n_epochs = 20   # number of trials
 n_times = 4000  # number of time points
@@ -26,5 +28,6 @@ xpac = p.filterfit(sf, data)
 p.comodulogram(xpac.mean(-1), cmap='Spectral_r', plotas='contour', ncontours=5,
                title=r'10hz phase$\Leftrightarrow$100Hz amplitude coupling',
                fz_title=14, fz_labels=13)
-
+# export the figure
+# plt.savefig('readme.png', bbox_inches='tight', dpi=300)
 p.show()

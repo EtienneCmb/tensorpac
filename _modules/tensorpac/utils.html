@@ -298,14 +298,23 @@
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;tensorpac&#39;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="pac_vec"><a class="viewcode-back" href="../../generated/tensorpac.utils.pac_vec.html#tensorpac.utils.pac_vec">[docs]</a><span class="k">def</span> <span class="nf">pac_vec</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">f_amp</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)):</span>
+<div class="viewcode-block" id="pac_vec"><a class="viewcode-back" href="../../generated/tensorpac.utils.pac_vec.html#tensorpac.utils.pac_vec">[docs]</a><span class="k">def</span> <span class="nf">pac_vec</span><span class="p">(</span><span class="n">f_pha</span><span class="o">=</span><span class="s1">&#39;mres&#39;</span><span class="p">,</span> <span class="n">f_amp</span><span class="o">=</span><span class="s1">&#39;mres&#39;</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generate cross-frequency coupling vectors.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    f_pha, f_amp : tuple | (2, 30, 2, 1), (60, 200, 10, 5)</span>
-<span class="sd">        Frequency parameters for phase and amplitude. Each argument inside the</span>
-<span class="sd">        tuple mean (starting fcy, ending fcy, bandwidth, step).</span>
+<span class="sd">    Frequency vector for the phase and amplitude. Here you can use</span>
+<span class="sd">    several forms to define those vectors :</span>
+
+<span class="sd">        * Basic list/tuple (ex: [2, 4] or [8, 12]...)</span>
+<span class="sd">        * List of frequency bands (ex: [[2, 4], [5, 7]]...)</span>
+<span class="sd">        * Dynamic definition : (start, stop, width, step)</span>
+<span class="sd">        * Range definition (ex : np.arange(3) =&gt; [[0, 1], [1, 2]])</span>
+<span class="sd">        * Using a string. `f_pha` and `f_amp` can be &#39;lres&#39;, &#39;mres&#39;, &#39;hres&#39;</span>
+<span class="sd">          respectively for low, middle and high resolution vectors. In that</span>
+<span class="sd">          case, it uses the definition proposed by Bahramisharif et al. 2013</span>
+<span class="sd">          :cite:`bahramisharif2013propagating` i.e</span>
+<span class="sd">          f_pha = [f - f / 4, f + f / 4] and f_amp = [f - f / 8, f + f / 8]</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -313,20 +322,22 @@
 <span class="sd">        Arrays containing the pairs of phase and amplitude frequencies. Each</span>
 <span class="sd">        vector have a shape of (N, 2).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nb_fcy</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">lres</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">mres</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">hres</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">demon</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">hulk</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f_pha</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">f_pha</span> <span class="o">==</span> <span class="s1">&#39;lres&#39;</span><span class="p">:</span>    <span class="c1"># low resolution phase</span>
-            <span class="n">f_pha</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">f_pha</span> <span class="o">==</span> <span class="s1">&#39;mres&#39;</span><span class="p">:</span>  <span class="c1"># middle resolution phase</span>
-            <span class="n">f_pha</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">f_pha</span> <span class="o">==</span> <span class="s1">&#39;hres&#39;</span><span class="p">:</span>  <span class="c1"># high resolution phase</span>
-            <span class="n">f_pha</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">5</span><span class="p">)</span>
+        <span class="c1"># get where phase frequencies start / finish / number</span>
+        <span class="n">f_pha_start</span><span class="p">,</span> <span class="n">f_pha_end</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">20</span>
+        <span class="n">f_pha_nb</span> <span class="o">=</span> <span class="n">nb_fcy</span><span class="p">[</span><span class="n">f_pha</span><span class="p">]</span>
+        <span class="c1"># f_pha = [f - f / 4, f + f / 4]</span>
+        <span class="n">f_pha_mid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">f_pha_start</span><span class="p">,</span> <span class="n">f_pha_end</span><span class="p">,</span> <span class="n">f_pha_nb</span><span class="p">)</span>
+        <span class="n">f_pha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">f_pha_mid</span> <span class="o">-</span> <span class="n">f_pha_mid</span> <span class="o">/</span> <span class="mf">4.</span><span class="p">,</span> <span class="n">f_pha_mid</span> <span class="o">+</span> <span class="n">f_pha_mid</span> <span class="o">/</span> <span class="mf">4.</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f_amp</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">f_amp</span> <span class="o">==</span> <span class="s1">&#39;lres&#39;</span><span class="p">:</span>    <span class="c1"># low resolution amplitude</span>
-            <span class="n">f_amp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">f_amp</span> <span class="o">==</span> <span class="s1">&#39;mres&#39;</span><span class="p">:</span>  <span class="c1"># middle resolution amplitude</span>
-            <span class="n">f_amp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">f_amp</span> <span class="o">==</span> <span class="s1">&#39;hres&#39;</span><span class="p">:</span>  <span class="c1"># high resolution amplitude</span>
-            <span class="n">f_amp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># get where amplitude frequencies start / finish / number</span>
+        <span class="n">f_amp_start</span><span class="p">,</span> <span class="n">f_amp_end</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">160</span>
+        <span class="n">f_amp_nb</span> <span class="o">=</span> <span class="n">nb_fcy</span><span class="p">[</span><span class="n">f_amp</span><span class="p">]</span>
+        <span class="c1"># f_amp = [f - f / 8, f + f / 8]</span>
+        <span class="n">f_amp_mid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">f_amp_start</span><span class="p">,</span> <span class="n">f_amp_end</span><span class="p">,</span> <span class="n">f_amp_nb</span><span class="p">)</span>
+        <span class="n">f_amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">f_amp_mid</span> <span class="o">-</span> <span class="n">f_amp_mid</span> <span class="o">/</span> <span class="mf">8.</span><span class="p">,</span> <span class="n">f_amp_mid</span> <span class="o">+</span> <span class="n">f_amp_mid</span> <span class="o">/</span> <span class="mf">8.</span><span class="p">]</span>
+
     <span class="k">return</span> <span class="n">_check_freq</span><span class="p">(</span><span class="n">f_pha</span><span class="p">),</span> <span class="n">_check_freq</span><span class="p">(</span><span class="n">f_amp</span><span class="p">)</span></div>
 
 
@@ -648,7 +659,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_phase</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_bins</span><span class="p">)</span>
             <span class="n">width</span> <span class="o">=</span> <span class="mi">360</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_bins</span>
         <span class="n">amp_mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_amplitude</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">amp_mean</span> <span class="o">/=</span> <span class="n">amp_mean</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">normalize</span><span class="p">:</span>
+            <span class="n">amp_mean</span> <span class="o">/=</span> <span class="n">amp_mean</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_phase</span><span class="p">,</span> <span class="n">amp_mean</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Frequency phase (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_bins</span><span class="si">}</span><span class="s2"> bins)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitude&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
@@ -871,20 +883,20 @@
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_peak_detection</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">cue</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Single trial closest to a cue peak detection.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        pha : array_like</span>
 <span class="sd">            Array of single trial phases of shape (n_trials, n_times)</span>
 <span class="sd">        cue : int</span>
 <span class="sd">            Cue to use as a reference (in sample unit)</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        peaks : array_like</span>
 <span class="sd">            Array of length (n_trials,) describing each delay to apply</span>
 <span class="sd">            to each trial in order to realign the phases. In detail :</span>
-<span class="sd">            </span>
+
 <span class="sd">                * Positive delays means that zeros should be prepend</span>
 <span class="sd">                * Negative delays means that zeros should be append</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -907,7 +919,7 @@
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_shift_signals</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">n_shifts</span><span class="p">,</span> <span class="n">fill_with</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Shift an array of signals according to an array of delays.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        sig : array_like</span>
@@ -916,7 +928,7 @@
 <span class="sd">            Array of delays to apply to each trial of shape (n_trials,)</span>
 <span class="sd">        fill_with : int</span>
 <span class="sd">            Value to prepend / append to each shifted time-series</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        sig_shifted : array_like</span>

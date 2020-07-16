@@ -360,7 +360,10 @@ several forms to define those vectors :</p>
 <li><p>Dynamic definition : (start, stop, width, step)</p></li>
 <li><p>Range definition (ex : np.arange(3) =&gt; [[0, 1], [1, 2]])</p></li>
 <li><p>Using a string. <cite>f_pha</cite> and <cite>f_amp</cite> can be ‘lres’, ‘mres’, ‘hres’
-respectively for low, middle and high resolution vectors</p></li>
+respectively for low, middle and high resolution vectors. In that
+case, it uses the definition proposed by Bahramisharif et al.
+2013 <a class="bibtex reference internal" href="../references.html#bahramisharif2013propagating" id="id11">[2]</a> i.e
+f_pha = [f - f / 4, f + f / 4] and f_amp = [f - f / 8, f + f / 8]</p></li>
 </ul>
 </div></blockquote>
 </dd>
@@ -370,12 +373,12 @@ respectively for low, middle and high resolution vectors</p></li>
 <dt><strong>cycle</strong><span class="classifier">tuple | (3, 6)</span></dt><dd><p>Control the number of cycles for filtering (only if dcomplex is
 ‘hilbert’). Should be a tuple of integers where the first one
 refers to the number of cycles for the phase and the second for the
-amplitude <a class="bibtex reference internal" href="../references.html#bahramisharif2013propagating" id="id11">[2]</a>.</p>
+amplitude <a class="bibtex reference internal" href="../references.html#bahramisharif2013propagating" id="id12">[2]</a>.</p>
 </dd>
 <dt><strong>width</strong><span class="classifier">int | 7</span></dt><dd><p>Width of the Morlet’s wavelet.</p>
 </dd>
 <dt><strong>n_bins</strong><span class="classifier">int | 18</span></dt><dd><p>Number of bins for the KLD and HR PAC method
-<a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id12">[11]</a><a class="bibtex reference internal" href="../references.html#lakatos2005oscillatory" id="id13">[9]</a></p>
+<a class="bibtex reference internal" href="../references.html#tort2010measuring" id="id13">[11]</a><a class="bibtex reference internal" href="../references.html#lakatos2005oscillatory" id="id14">[9]</a></p>
 </dd>
 </dl>
 </dd>

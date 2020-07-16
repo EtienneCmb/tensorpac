@@ -5,9 +5,9 @@
 
 Computation times
 =================
-**00:38.857** total execution time for **auto_examples_stats** files:
+**00:38.937** total execution time for **auto_examples_stats** files:
 
-- **00:18.331**: :ref:`sphx_glr_auto_examples_stats_plot_compare_cond_cluster.py` (``plot_compare_cond_cluster.py``)
-- **00:13.025**: :ref:`sphx_glr_auto_examples_stats_plot_compare_mcp.py` (``plot_compare_mcp.py``)
-- **00:06.224**: :ref:`sphx_glr_auto_examples_stats_plot_pvalues.py` (``plot_pvalues.py``)
-- **00:01.276**: :ref:`sphx_glr_auto_examples_stats_plot_stats_stationary.py` (``plot_stats_stationary.py``)
+- **00:16.882**: :ref:`sphx_glr_auto_examples_stats_plot_compare_cond_cluster.py` (``plot_compare_cond_cluster.py``)
+- **00:14.945**: :ref:`sphx_glr_auto_examples_stats_plot_compare_mcp.py` (``plot_compare_mcp.py``)
+- **00:05.856**: :ref:`sphx_glr_auto_examples_stats_plot_pvalues.py` (``plot_pvalues.py``)
+- **00:01.255**: :ref:`sphx_glr_auto_examples_stats_plot_stats_stationary.py` (``plot_stats_stationary.py``)

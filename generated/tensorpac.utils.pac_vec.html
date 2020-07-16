@@ -291,13 +291,23 @@
 <h1>tensorpac.utils.pac_vec<a class="headerlink" href="#tensorpac-utils-pac-vec" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="tensorpac.utils.pac_vec">
-<code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">pac_vec</code><span class="sig-paren">(</span><em class="sig-param">f_pha=(2</em>, <em class="sig-param">30</em>, <em class="sig-param">2</em>, <em class="sig-param">1)</em>, <em class="sig-param">f_amp=(60</em>, <em class="sig-param">200</em>, <em class="sig-param">10</em>, <em class="sig-param">5)</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#pac_vec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.pac_vec" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">tensorpac.utils.</code><code class="sig-name descname">pac_vec</code><span class="sig-paren">(</span><em class="sig-param">f_pha='mres'</em>, <em class="sig-param">f_amp='mres'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tensorpac/utils.html#pac_vec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tensorpac.utils.pac_vec" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate cross-frequency coupling vectors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>f_pha, f_amp</strong><span class="classifier">tuple | (2, 30, 2, 1), (60, 200, 10, 5)</span></dt><dd><p>Frequency parameters for phase and amplitude. Each argument inside the
-tuple mean (starting fcy, ending fcy, bandwidth, step).</p>
+<dt><strong>Frequency vector for the phase and amplitude. Here you can use</strong></dt><dd></dd>
+<dt><strong>several forms to define those vectors :</strong></dt><dd><ul class="simple">
+<li><p>Basic list/tuple (ex: [2, 4] or [8, 12]…)</p></li>
+<li><p>List of frequency bands (ex: [[2, 4], [5, 7]]…)</p></li>
+<li><p>Dynamic definition : (start, stop, width, step)</p></li>
+<li><p>Range definition (ex : np.arange(3) =&gt; [[0, 1], [1, 2]])</p></li>
+<li><p>Using a string. <cite>f_pha</cite> and <cite>f_amp</cite> can be ‘lres’, ‘mres’, ‘hres’
+respectively for low, middle and high resolution vectors. In that
+case, it uses the definition proposed by Bahramisharif et al. 2013
+<a class="bibtex reference internal" href="../references.html#bahramisharif2013propagating" id="id1">[2]</a> i.e
+f_pha = [f - f / 4, f + f / 4] and f_amp = [f - f / 8, f + f / 8]</p></li>
+</ul>
 </dd>
 </dl>
 </dd>
