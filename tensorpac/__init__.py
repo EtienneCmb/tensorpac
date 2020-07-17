@@ -14,4 +14,4 @@ from tensorpac.io import set_log_level
 logger = logging.getLogger('brainets')
 set_log_level('info')
 
-__version__ = "0.6.3"
+__version__ = "0.6.4"
