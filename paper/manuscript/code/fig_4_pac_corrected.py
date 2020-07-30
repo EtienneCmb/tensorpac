@@ -24,9 +24,8 @@ data, time = pac_signals_wavelet(sf=sf, f_pha=10, f_amp=100, noise=3.,
                                  n_epochs=n_epochs, n_times=n_times)
 
 
-p = Pac(idpac=(1, 2, 3), f_pha=cfg["phres"], f_amp=cfg["ahres"])
-# p = Pac(idpac=(1, 2, 3), f_pha='lres', f_amp='lres')
-xpac = p.filterfit(sf, data, n_perm=n_perm, p=.05, n_jobs=-1)
+p = Pac(idpac=(1, 2, 3), f_pha='hres', f_amp='hres')
+xpac = p.filterfit(sf, data, n_perm=n_perm, p=.05, n_jobs=-1, random_state=0)
 
 pacn = p.pac.mean(-1)
 pac = xpac.mean(-1)
@@ -34,7 +33,7 @@ surro = p.surrogates.mean(0).max(-1)  # mean(perm).max(epochs)
 
 kw_plt = dict(fz_labels=20, fz_title=22, fz_cblabel=20)
 
-plt.figure(figsize=(22, 6))
+plt.figure(figsize=(20, 6))
 
 plt.subplot(1, 3, 1)
 p.comodulogram(pacn, cblabel="", title="Uncorrected PAC", cmap=cfg["cmap"],

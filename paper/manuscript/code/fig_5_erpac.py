@@ -27,16 +27,15 @@ x = np.concatenate((x1, x2), axis=1)
 time = np.arange(x.shape[1]) / sf
 
 
-p = EventRelatedPac(f_pha=[9, 11], f_amp=cfg["ahres"])
-# p = EventRelatedPac(f_pha=[9, 11], f_amp='lres')
+p = EventRelatedPac(f_pha=[9, 11], f_amp='hres')
 pha = p.filter(sf, x, ftype='phase', n_jobs=-1)
 amp = p.filter(sf, x, ftype='amplitude', n_jobs=-1)
 
-plt.figure(figsize=(16, 6))
+plt.figure(figsize=(14, 6))
 for n_m, (method, nb) in enumerate(zip(['circular', 'gc'], ['A', 'B'])):
     # to be fair with the comparison between ERPAC and gcERPAC, the smoothing
-    # parameter of the gcERPAC but results could look way better if for
-    # example with add a `smooth=20`
+    # parameter of the gcERPAC is turned off but results could look way better
+    # if for example with add a `smooth=20`
     erpac = p.fit(pha, amp, method=method, n_jobs=-1).squeeze()
     plt.subplot(1, 2, n_m + 1)
     p.pacplot(erpac, time, p.yvec, xlabel='Time (second)', cmap=cfg["cmap"],

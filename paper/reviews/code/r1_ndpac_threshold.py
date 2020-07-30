@@ -52,12 +52,12 @@ if __name__ == '__main__':
     ###########################################################################
 
     data, time = pac_signals_wavelet(sf=sf, f_pha=10, f_amp=100, noise=2.,
-                                     n_epochs=n_epochs, n_times=n_times)
+                                     n_epochs=n_epochs, n_times=n_times,
+                                     rnd_state=0)
 
 
     # extract the phase and the amplitude
-    p_obj = Pac(idpac=(1, 0, 0), f_pha=cfg["phres"], f_amp=cfg["ahres"])
-    # p_obj = Pac(idpac=(1, 0, 0), f_pha='mres', f_amp='mres')
+    p_obj = Pac(idpac=(1, 0, 0), f_pha='hres', f_amp='hres')
     pha = p_obj.filter(sf, data, ftype='phase', n_jobs=1)
     amp = p_obj.filter(sf, data, ftype='amplitude', n_jobs=1)
 

@@ -36,7 +36,8 @@ best_f = trif[pac.argmax()]
 
 plt.figure(figsize=(16, 7))
 plt.subplot(121)
-ax = psd.plot(confidence=None, f_min=2, f_max=30, log=False, grid=True)
+ax = psd.plot(confidence=None, f_min=2, f_max=30, log=False, grid=True,
+              fz_labels=18, fz_title=20)
 plt.ylim(0, .15)
 plt.title("Power Spectrum Density (PSD)", fontsize=20)
 # plt.autoscale(enable=True, axis='y', tight=True)

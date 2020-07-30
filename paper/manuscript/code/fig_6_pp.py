@@ -34,7 +34,7 @@ b_obj = BinAmplitude(data, sf, f_pha=[5, 7], f_amp=[90, 110], n_jobs=1,
                      n_bins=18)
 
 # compute the preferred phase
-p = PreferredPhase(f_pha=[5, 7], f_amp=(60, 200, 10, 1))
+p = PreferredPhase(f_pha=[5, 7], f_amp='hres')
 pha = p.filter(sf, data, ftype='phase', n_jobs=1)
 amp = p.filter(sf, data, ftype='amplitude', n_jobs=1)
 ampbin, pp, vecbin = p.fit(pha, amp, n_bins=72)

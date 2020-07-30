@@ -28,7 +28,8 @@ n_bins = 30
 ###############################################################################
 
 data, time = pac_signals_wavelet(sf=sf, f_pha=10, f_amp=100, noise=2.,
-                                 n_epochs=n_epochs, n_times=n_times)
+                                 n_epochs=n_epochs, n_times=n_times,
+                                 rnd_state=0)
 
 
 # extract the phase and the amplitude

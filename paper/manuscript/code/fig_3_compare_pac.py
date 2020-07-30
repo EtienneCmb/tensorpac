@@ -32,8 +32,7 @@ data, time = pac_signals_wavelet(sf=sf, f_pha=10, f_amp=100, noise=2.,
 alphabet = string.ascii_uppercase
 
 
-p = Pac(idpac=(1, 2, 3), f_pha=cfg["phres"], f_amp=cfg["ahres"])
-# p = Pac(idpac=(1, 2, 3), f_pha='lres', f_amp='lres')
+p = Pac(idpac=(1, 2, 3), f_pha='hres', f_amp='hres')
 pha = p.filter(sf, data, ftype='phase', n_jobs=1)
 amp = p.filter(sf, data, ftype='amplitude', n_jobs=1)
 
@@ -43,7 +42,7 @@ gs = GridSpec(2, 7)
 for k in range(6):
     p.idpac = (k + 1, 2, 3)
     xpac = p.fit(pha.copy(), amp.copy(), n_perm=n_perm, p=.05,
-                 n_jobs=-1).mean(-1)
+                 n_jobs=-1, random_state=0).mean(-1)
 
     sq = methods[titles[k]]
     plt.subplot(gs[sq[0], sq[1]])
