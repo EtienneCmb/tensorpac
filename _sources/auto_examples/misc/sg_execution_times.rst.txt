@@ -5,13 +5,13 @@
 
 Computation times
 =================
-**00:31.778** total execution time for **auto_examples_misc** files:
+**00:16.181** total execution time for **auto_examples_misc** files:
 
-- **00:20.821**: :ref:`sphx_glr_auto_examples_misc_plot_preferred_phase.py` (``plot_preferred_phase.py``)
-- **00:04.993**: :ref:`sphx_glr_auto_examples_misc_plot_itc.py` (``plot_itc.py``)
-- **00:02.841**: :ref:`sphx_glr_auto_examples_misc_plot_fmin_fmax_optmization.py` (``plot_fmin_fmax_optmization.py``)
-- **00:01.489**: :ref:`sphx_glr_auto_examples_misc_plot_align_tf_pha_peak.py` (``plot_align_tf_pha_peak.py``)
-- **00:00.662**: :ref:`sphx_glr_auto_examples_misc_plot_binned_amplitude.py` (``plot_binned_amplitude.py``)
-- **00:00.429**: :ref:`sphx_glr_auto_examples_misc_plot_frequency_vectors.py` (``plot_frequency_vectors.py``)
-- **00:00.278**: :ref:`sphx_glr_auto_examples_misc_plot_artificially_coupled_signals.py` (``plot_artificially_coupled_signals.py``)
-- **00:00.265**: :ref:`sphx_glr_auto_examples_misc_plot_psd.py` (``plot_psd.py``)
+- **00:07.594**: :ref:`sphx_glr_auto_examples_misc_plot_preferred_phase.py` (``plot_preferred_phase.py``)
+- **00:03.567**: :ref:`sphx_glr_auto_examples_misc_plot_itc.py` (``plot_itc.py``)
+- **00:02.497**: :ref:`sphx_glr_auto_examples_misc_plot_fmin_fmax_optmization.py` (``plot_fmin_fmax_optmization.py``)
+- **00:01.242**: :ref:`sphx_glr_auto_examples_misc_plot_align_tf_pha_peak.py` (``plot_align_tf_pha_peak.py``)
+- **00:00.468**: :ref:`sphx_glr_auto_examples_misc_plot_binned_amplitude.py` (``plot_binned_amplitude.py``)
+- **00:00.328**: :ref:`sphx_glr_auto_examples_misc_plot_frequency_vectors.py` (``plot_frequency_vectors.py``)
+- **00:00.279**: :ref:`sphx_glr_auto_examples_misc_plot_artificially_coupled_signals.py` (``plot_artificially_coupled_signals.py``)
+- **00:00.207**: :ref:`sphx_glr_auto_examples_misc_plot_psd.py` (``plot_psd.py``)

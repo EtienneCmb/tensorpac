@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Compare PAC of two experimental conditions with cluster-based statistics &#8212; Tensorpac 0.6.4 documentation</title>
+    <title>Compare PAC of two experimental conditions with cluster-based statistics &#8212; Tensorpac 0.6.5 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
@@ -40,7 +40,7 @@
         </button>
         <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/ico64.png"></span>
           Tensorpac</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.6.4</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>0.6.5</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -365,54 +365,48 @@ Python package MNE-Python and in particular, the function
 </div>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Using a threshold of 4.006873
-stat_fun(H1): min=0.000001 max=66.414519
+stat_fun(H1): min=0.000001 max=53.801548
 Running initial clustering
-Found 14 clusters
+Found 8 clusters
 Permuting 999 times...
 
   0%|          |  : 0/999 [00:00&lt;?,       ?it/s]
-  2%|2         |  : 23/999 [00:00&lt;00:01,  675.30it/s]
-  5%|4         |  : 47/999 [00:00&lt;00:01,  676.90it/s]
-  7%|7         |  : 72/999 [00:00&lt;00:01,  679.74it/s]
- 10%|9         |  : 98/999 [00:00&lt;00:01,  683.66it/s]
- 12%|#2        |  : 124/999 [00:00&lt;00:01,  687.44it/s]
- 15%|#4        |  : 149/999 [00:00&lt;00:01,  689.90it/s]
- 17%|#7        |  : 174/999 [00:00&lt;00:01,  692.14it/s]
- 20%|#9        |  : 199/999 [00:00&lt;00:01,  694.29it/s]
- 22%|##2       |  : 223/999 [00:00&lt;00:01,  695.09it/s]
- 25%|##5       |  : 250/999 [00:00&lt;00:01,  699.62it/s]
- 28%|##7       |  : 276/999 [00:00&lt;00:01,  702.78it/s]
- 30%|###       |  : 303/999 [00:00&lt;00:00,  706.94it/s]
- 33%|###2      |  : 327/999 [00:00&lt;00:00,  707.00it/s]
- 35%|###5      |  : 351/999 [00:00&lt;00:00,  707.09it/s]
- 38%|###7      |  : 375/999 [00:00&lt;00:00,  707.22it/s]
- 40%|####      |  : 401/999 [00:00&lt;00:00,  710.09it/s]
- 43%|####2     |  : 426/999 [00:00&lt;00:00,  711.46it/s]
- 45%|####5     |  : 452/999 [00:00&lt;00:00,  714.06it/s]
- 48%|####7     |  : 478/999 [00:00&lt;00:00,  716.53it/s]
- 50%|#####     |  : 502/999 [00:00&lt;00:00,  716.15it/s]
- 53%|#####2    |  : 528/999 [00:00&lt;00:00,  718.60it/s]
- 55%|#####5    |  : 553/999 [00:00&lt;00:00,  719.55it/s]
- 58%|#####7    |  : 579/999 [00:00&lt;00:00,  721.79it/s]
- 61%|######    |  : 606/999 [00:00&lt;00:00,  725.23it/s]
- 63%|######3   |  : 632/999 [00:00&lt;00:00,  727.20it/s]
- 66%|######5   |  : 659/999 [00:00&lt;00:00,  730.42it/s]
- 69%|######8   |  : 685/999 [00:00&lt;00:00,  732.19it/s]
- 71%|#######   |  : 709/999 [00:00&lt;00:00,  730.86it/s]
- 73%|#######3  |  : 730/999 [00:00&lt;00:00,  724.43it/s]
- 75%|#######5  |  : 750/999 [00:01&lt;00:00,  716.11it/s]
- 77%|#######7  |  : 771/999 [00:01&lt;00:00,  710.62it/s]
- 79%|#######9  |  : 793/999 [00:01&lt;00:00,  707.29it/s]
- 82%|########1 |  : 815/999 [00:01&lt;00:00,  704.22it/s]
- 83%|########3 |  : 834/999 [00:01&lt;00:00,  695.48it/s]
- 86%|########5 |  : 858/999 [00:01&lt;00:00,  696.17it/s]
- 89%|########8 |  : 885/999 [00:01&lt;00:00,  700.63it/s]
- 91%|#########1|  : 911/999 [00:01&lt;00:00,  703.71it/s]
- 94%|#########3|  : 935/999 [00:01&lt;00:00,  703.91it/s]
- 96%|#########5|  : 956/999 [00:01&lt;00:00,  699.16it/s]
- 98%|#########8|  : 981/999 [00:01&lt;00:00,  701.07it/s]
-100%|##########|  : 999/999 [00:01&lt;00:00,  698.08it/s]
-100%|##########|  : 999/999 [00:01&lt;00:00,  722.33it/s]
+  2%|2         |  : 22/999 [00:00&lt;00:01,  644.61it/s]
+  5%|4         |  : 47/999 [00:00&lt;00:01,  648.72it/s]
+  8%|7         |  : 75/999 [00:00&lt;00:01,  655.81it/s]
+ 10%|#         |  : 103/999 [00:00&lt;00:01,  662.73it/s]
+ 13%|#3        |  : 131/999 [00:00&lt;00:01,  669.32it/s]
+ 16%|#6        |  : 163/999 [00:00&lt;00:01,  679.29it/s]
+ 19%|#9        |  : 193/999 [00:00&lt;00:01,  687.38it/s]
+ 21%|##1       |  : 213/999 [00:00&lt;00:01,  681.92it/s]
+ 23%|##3       |  : 232/999 [00:00&lt;00:01,  674.80it/s]
+ 25%|##5       |  : 251/999 [00:00&lt;00:01,  668.11it/s]
+ 27%|##7       |  : 271/999 [00:00&lt;00:01,  663.83it/s]
+ 30%|###       |  : 302/999 [00:00&lt;00:01,  673.13it/s]
+ 33%|###3      |  : 332/999 [00:00&lt;00:00,  681.29it/s]
+ 36%|###6      |  : 362/999 [00:00&lt;00:00,  689.28it/s]
+ 39%|###8      |  : 385/999 [00:00&lt;00:00,  688.82it/s]
+ 41%|####1     |  : 412/999 [00:00&lt;00:00,  693.57it/s]
+ 44%|####4     |  : 442/999 [00:00&lt;00:00,  701.24it/s]
+ 47%|####7     |  : 473/999 [00:00&lt;00:00,  709.58it/s]
+ 51%|#####     |  : 505/999 [00:00&lt;00:00,  718.59it/s]
+ 54%|#####3    |  : 536/999 [00:00&lt;00:00,  726.36it/s]
+ 56%|#####6    |  : 563/999 [00:00&lt;00:00,  729.69it/s]
+ 59%|#####9    |  : 594/999 [00:00&lt;00:00,  737.24it/s]
+ 63%|######2   |  : 626/999 [00:00&lt;00:00,  745.52it/s]
+ 66%|######5   |  : 658/999 [00:00&lt;00:00,  753.52it/s]
+ 69%|######9   |  : 690/999 [00:00&lt;00:00,  761.27it/s]
+ 72%|#######2  |  : 721/999 [00:00&lt;00:00,  767.82it/s]
+ 75%|#######5  |  : 751/999 [00:00&lt;00:00,  773.05it/s]
+ 78%|#######8  |  : 782/999 [00:00&lt;00:00,  779.19it/s]
+ 81%|########1 |  : 811/999 [00:00&lt;00:00,  782.77it/s]
+ 84%|########4 |  : 841/999 [00:01&lt;00:00,  787.46it/s]
+ 87%|########7 |  : 873/999 [00:01&lt;00:00,  794.12it/s]
+ 90%|######### |  : 904/999 [00:01&lt;00:00,  799.51it/s]
+ 93%|#########3|  : 932/999 [00:01&lt;00:00,  800.92it/s]
+ 96%|#########6|  : 964/999 [00:01&lt;00:00,  807.17it/s]
+100%|#########9|  : 996/999 [00:01&lt;00:00,  813.20it/s]
+100%|##########|  : 999/999 [00:01&lt;00:00,  841.43it/s]
 Computing cluster p-values
 Done.
 </pre></div>
@@ -440,7 +434,7 @@ gray scale colormap while significant clusters are going to be color coded.</p>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_plot_compare_cond_cluster_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_compare_cond_cluster_001.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  20.260 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  18.750 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-stats-plot-compare-cond-cluster-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/adb6d4bb25e242638fd01f4411e7543f/plot_compare_cond_cluster.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_compare_cond_cluster.py</span></code></a></p>
