@@ -18,7 +18,7 @@ plt.rc('font', family=cfg["font"])
 ###############################################################################
 sf = 1024
 n_epochs = 20
-n_times = 3000
+n_times = 7000
 n_perm = 20
 titles = ["MVL", "KLD", "HR", "ndPAC", "PLV", "GC"]
 methods = dict(MVL=[0, slice(0, 2)], KLD=[0, slice(2, 4)],
@@ -42,7 +42,7 @@ gs = GridSpec(2, 7)
 for k in range(6):
     p.idpac = (k + 1, 2, 3)
     xpac = p.fit(pha.copy(), amp.copy(), n_perm=n_perm, p=.05,
-                 n_jobs=-1, random_state=0).mean(-1)
+                 n_jobs=-1, random_state=k).mean(-1)
 
     sq = methods[titles[k]]
     plt.subplot(gs[sq[0], sq[1]])
