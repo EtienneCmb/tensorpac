@@ -125,13 +125,15 @@ Compute true PAC estimation and surrogates distribution
  .. code-block:: none
 
     Surrogates shape (n_perm, n_amp, n_pha) : (200, 55, 55)
+    /home/circleci/project/tensorpac/visu.py:149: MatplotlibDeprecationWarning: You are modifying the state of a globally registered colormap. In future versions, you will not be able to modify a registered colormap in-place. To remove this warning, you can make a copy of the colormap first. cmap = copy.copy(mpl.cm.get_cmap("bwr_r"))
+      im.cmap.set_over(color=over)
 
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  5.658 seconds)
+   **Total running time of the script:** ( 0 minutes  6.924 seconds)
 
 
 .. _sphx_glr_download_auto_examples_stats_plot_pvalues.py:

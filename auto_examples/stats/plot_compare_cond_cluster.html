@@ -365,43 +365,55 @@ Python package MNE-Python and in particular, the function
 </div>
 <p class="sphx-glr-script-out">Out:</p>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Using a threshold of 4.006873
-stat_fun(H1): min=0.000003 max=72.081383
+/home/circleci/project/examples/stats/plot_compare_cond_cluster.py:71: DeprecationWarning: The default for &quot;out_type&quot; will change from &quot;mask&quot; to &quot;indices&quot; in version 0.22. To avoid this warning, explicitly set &quot;out_type&quot; to one of its string values.
+  [pac_r1, pac_r2], n_permutations=n_perm, tail=tail)
+stat_fun(H1): min=0.000000 max=52.333180
 Running initial clustering
-Found 15 clusters
+Found 13 clusters
 Permuting 999 times...
 
   0%|          |  : 0/999 [00:00&lt;?,       ?it/s]
-  3%|3         |  : 32/999 [00:00&lt;00:01,  930.17it/s]
-  7%|6         |  : 66/999 [00:00&lt;00:00,  933.60it/s]
- 10%|#         |  : 101/999 [00:00&lt;00:00,  938.27it/s]
- 13%|#3        |  : 134/999 [00:00&lt;00:00,  940.09it/s]
- 17%|#6        |  : 169/999 [00:00&lt;00:00,  944.46it/s]
- 20%|##        |  : 203/999 [00:00&lt;00:00,  947.35it/s]
- 24%|##3       |  : 236/999 [00:00&lt;00:00,  948.75it/s]
- 27%|##7       |  : 270/999 [00:00&lt;00:00,  951.51it/s]
- 30%|###       |  : 304/999 [00:00&lt;00:00,  954.16it/s]
- 34%|###3      |  : 337/999 [00:00&lt;00:00,  955.33it/s]
- 37%|###7      |  : 371/999 [00:00&lt;00:00,  957.78it/s]
- 40%|####      |  : 404/999 [00:00&lt;00:00,  958.65it/s]
- 44%|####3     |  : 438/999 [00:00&lt;00:00,  960.85it/s]
- 47%|####7     |  : 472/999 [00:00&lt;00:00,  963.09it/s]
- 51%|#####     |  : 506/999 [00:00&lt;00:00,  965.11it/s]
- 54%|#####4    |  : 540/999 [00:00&lt;00:00,  967.05it/s]
- 57%|#####7    |  : 574/999 [00:00&lt;00:00,  968.98it/s]
- 61%|######    |  : 608/999 [00:00&lt;00:00,  970.57it/s]
- 64%|######4   |  : 642/999 [00:00&lt;00:00,  972.32it/s]
- 68%|######7   |  : 676/999 [00:00&lt;00:00,  973.92it/s]
- 71%|#######1  |  : 710/999 [00:00&lt;00:00,  975.55it/s]
- 74%|#######4  |  : 744/999 [00:00&lt;00:00,  977.12it/s]
- 78%|#######7  |  : 778/999 [00:00&lt;00:00,  978.60it/s]
- 81%|########1 |  : 812/999 [00:00&lt;00:00,  980.02it/s]
- 85%|########4 |  : 845/999 [00:00&lt;00:00,  979.91it/s]
- 88%|########7 |  : 879/999 [00:00&lt;00:00,  981.20it/s]
- 91%|#########1|  : 913/999 [00:00&lt;00:00,  982.34it/s]
- 95%|#########4|  : 946/999 [00:00&lt;00:00,  982.12it/s]
- 98%|#########8|  : 980/999 [00:00&lt;00:00,  983.35it/s]
-100%|##########|  : 999/999 [00:00&lt;00:00,  986.35it/s]
-100%|##########|  : 999/999 [00:00&lt;00:00,  999.96it/s]
+  3%|2         |  : 25/999 [00:00&lt;00:01,  710.88it/s]
+  5%|5         |  : 53/999 [00:00&lt;00:01,  715.89it/s]
+  8%|7         |  : 77/999 [00:00&lt;00:01,  715.62it/s]
+ 11%|#         |  : 106/999 [00:00&lt;00:01,  721.62it/s]
+ 14%|#3        |  : 135/999 [00:00&lt;00:01,  727.40it/s]
+ 16%|#5        |  : 158/999 [00:00&lt;00:01,  724.90it/s]
+ 19%|#8        |  : 187/999 [00:00&lt;00:01,  730.49it/s]
+ 22%|##1       |  : 215/999 [00:00&lt;00:01,  734.75it/s]
+ 24%|##4       |  : 241/999 [00:00&lt;00:01,  736.31it/s]
+ 27%|##6       |  : 268/999 [00:00&lt;00:00,  739.12it/s]
+ 29%|##9       |  : 291/999 [00:00&lt;00:00,  735.92it/s]
+ 31%|###1      |  : 311/999 [00:00&lt;00:00,  727.03it/s]
+ 33%|###3      |  : 330/999 [00:00&lt;00:00,  716.55it/s]
+ 35%|###5      |  : 353/999 [00:00&lt;00:00,  714.59it/s]
+ 38%|###8      |  : 380/999 [00:00&lt;00:00,  718.31it/s]
+ 41%|####1     |  : 411/999 [00:00&lt;00:00,  726.10it/s]
+ 44%|####3     |  : 435/999 [00:00&lt;00:00,  725.21it/s]
+ 46%|####6     |  : 461/999 [00:00&lt;00:00,  727.15it/s]
+ 49%|####9     |  : 493/999 [00:00&lt;00:00,  735.62it/s]
+ 51%|#####1    |  : 512/999 [00:00&lt;00:00,  724.28it/s]
+ 53%|#####3    |  : 530/999 [00:00&lt;00:00,  711.37it/s]
+ 55%|#####4    |  : 549/999 [00:00&lt;00:00,  702.08it/s]
+ 57%|#####6    |  : 566/999 [00:00&lt;00:00,  688.17it/s]
+ 59%|#####8    |  : 587/999 [00:00&lt;00:00,  684.39it/s]
+ 61%|######    |  : 608/999 [00:00&lt;00:00,  680.84it/s]
+ 64%|######3   |  : 635/999 [00:00&lt;00:00,  685.91it/s]
+ 66%|######5   |  : 659/999 [00:00&lt;00:00,  686.73it/s]
+ 68%|######7   |  : 679/999 [00:00&lt;00:00,  681.28it/s]
+ 70%|######9   |  : 699/999 [00:00&lt;00:00,  676.08it/s]
+ 72%|#######2  |  : 720/999 [00:01&lt;00:00,  673.11it/s]
+ 74%|#######4  |  : 743/999 [00:01&lt;00:00,  673.24it/s]
+ 77%|#######6  |  : 769/999 [00:01&lt;00:00,  677.48it/s]
+ 80%|#######9  |  : 795/999 [00:01&lt;00:00,  681.57it/s]
+ 82%|########2 |  : 824/999 [00:01&lt;00:00,  688.59it/s]
+ 85%|########5 |  : 852/999 [00:01&lt;00:00,  694.45it/s]
+ 88%|########7 |  : 878/999 [00:01&lt;00:00,  697.83it/s]
+ 91%|######### |  : 905/999 [00:01&lt;00:00,  702.29it/s]
+ 94%|#########3|  : 937/999 [00:01&lt;00:00,  711.50it/s]
+ 97%|#########6|  : 968/999 [00:01&lt;00:00,  719.37it/s]
+ 99%|#########9|  : 994/999 [00:01&lt;00:00,  721.72it/s]
+100%|##########|  : 999/999 [00:01&lt;00:00,  733.16it/s]
 Computing cluster p-values
 Done.
 </pre></div>
@@ -429,7 +441,7 @@ gray scale colormap while significant clusters are going to be color coded.</p>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_plot_compare_cond_cluster_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_compare_cond_cluster_001.png" />
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  16.442 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  19.566 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-stats-plot-compare-cond-cluster-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/adb6d4bb25e242638fd01f4411e7543f/plot_compare_cond_cluster.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_compare_cond_cluster.py</span></code></a></p>

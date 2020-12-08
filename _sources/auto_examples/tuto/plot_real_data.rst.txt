@@ -252,6 +252,17 @@ Compute and plot the Power Spectrum Density
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    /home/circleci/project/tensorpac/utils.py:208: MatplotlibDeprecationWarning: The 'basex' parameter of __init__() has been renamed 'base' since Matplotlib 3.3; support for the old name will be dropped two minor releases later.
+      plt.xscale('log', basex=10)
+    /home/circleci/project/tensorpac/utils.py:267: MatplotlibDeprecationWarning: The 'basex' parameter of __init__() has been renamed 'base' since Matplotlib 3.3; support for the old name will be dropped two minor releases later.
+      plt.xscale('log', basex=10)
+
 
 
 From the PSD above, we can see a clear peak around 10hz that could indicate
@@ -615,6 +626,15 @@ chosen amplitude, the angle is the phase and the maximum of the disc values
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    /home/circleci/project/tensorpac/visu.py:133: MatplotlibDeprecationWarning: shading='flat' when X and Y have the same dimensions as C is deprecated since 3.3.  Either specify the corners of the quadrilaterals with X and Y, or pass shading='auto', 'nearest' or 'gouraud', or set rcParams['pcolor.shading'].  This will become an error two minor releases later.
+      vmax=vmax, antialiased=True)
+
 
 
 As you can see, we retrieve that the preferred bin alpha phase is around
@@ -625,7 +645,7 @@ the alpha phase
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 1 minutes  31.853 seconds)
+   **Total running time of the script:** ( 1 minutes  55.010 seconds)
 
 
 .. _sphx_glr_download_auto_examples_tuto_plot_real_data.py:

@@ -128,12 +128,23 @@ Plot the preferred phase
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
+
+ Out:
+
+ .. code-block:: none
+
+    /home/circleci/project/examples/misc/plot_preferred_phase.py:61: MatplotlibDeprecationWarning: shading='flat' when X and Y have the same dimensions as C is deprecated since 3.3.  Either specify the corners of the quadrilaterals with X and Y, or pass shading='auto', 'nearest' or 'gouraud', or set rcParams['pcolor.shading'].  This will become an error two minor releases later.
+      plt.pcolormesh(p.yvec, np.arange(100), np.rad2deg(pp), cmap='RdBu_r')
+    /home/circleci/project/tensorpac/visu.py:133: MatplotlibDeprecationWarning: shading='flat' when X and Y have the same dimensions as C is deprecated since 3.3.  Either specify the corners of the quadrilaterals with X and Y, or pass shading='auto', 'nearest' or 'gouraud', or set rcParams['pcolor.shading'].  This will become an error two minor releases later.
+      vmax=vmax, antialiased=True)
+
 
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  8.408 seconds)
+   **Total running time of the script:** ( 0 minutes  7.505 seconds)
 
 
 .. _sphx_glr_download_auto_examples_misc_plot_preferred_phase.py:

@@ -21,7 +21,20 @@ ending and therefore, bandwidth coupling.
     :class: sphx-glr-single-img
 
 
+.. rst-class:: sphx-glr-script-out
 
+ Out:
+
+ .. code-block:: none
+
+    /home/circleci/project/tensorpac/visu.py:151: MatplotlibDeprecationWarning: You are modifying the state of a globally registered colormap. In future versions, you will not be able to modify a registered colormap in-place. To remove this warning, you can make a copy of the colormap first. cmap = copy.copy(mpl.cm.get_cmap("Spectral_r"))
+      im.cmap.set_bad(color=bad)
+
+
+
+
+
+|
 
 
 .. code-block:: default
@@ -55,7 +68,7 @@ ending and therefore, bandwidth coupling.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.902 seconds)
+   **Total running time of the script:** ( 0 minutes  2.321 seconds)
 
 
 .. _sphx_glr_download_auto_examples_misc_plot_fmin_fmax_optmization.py:

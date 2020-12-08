@@ -461,6 +461,13 @@ and plot the mean PSD over the 160 trials</p>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_plot_real_data_003.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_real_data_003.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/circleci/project/tensorpac/utils.py:208: MatplotlibDeprecationWarning: The &#39;basex&#39; parameter of __init__() has been renamed &#39;base&#39; since Matplotlib 3.3; support for the old name will be dropped two minor releases later.
+  plt.xscale(&#39;log&#39;, basex=10)
+/home/circleci/project/tensorpac/utils.py:267: MatplotlibDeprecationWarning: The &#39;basex&#39; parameter of __init__() has been renamed &#39;base&#39; since Matplotlib 3.3; support for the old name will be dropped two minor releases later.
+  plt.xscale(&#39;log&#39;, basex=10)
+</pre></div>
+</div>
 <p>From the PSD above, we can see a clear peak around 10hz that could indicate
 an alpha &lt;-&gt; gamma coupling. This peak is essentially comprised between
 [8, 12]Hz. This range of frequencies is then gonig to be used to see if there
@@ -702,11 +709,16 @@ chosen amplitude, the angle is the phase and the maximum of the disc values
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_plot_real_data_009.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_plot_real_data_009.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/circleci/project/tensorpac/visu.py:133: MatplotlibDeprecationWarning: shading=&#39;flat&#39; when X and Y have the same dimensions as C is deprecated since 3.3.  Either specify the corners of the quadrilaterals with X and Y, or pass shading=&#39;auto&#39;, &#39;nearest&#39; or &#39;gouraud&#39;, or set rcParams[&#39;pcolor.shading&#39;].  This will become an error two minor releases later.
+  vmax=vmax, antialiased=True)
+</pre></div>
+</div>
 <p>As you can see, we retrieve that the preferred bin alpha phase is around
 -150° or 210° during the rest period but even more in the planning period.
 While during the execution, it seems that the amplitude is not modulated by
 the alpha phase</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 1 minutes  31.853 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 1 minutes  55.010 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-tuto-plot-real-data-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/035413fda3d318e84c6045e52126d555/plot_real_data.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_real_data.py</span></code></a></p>
