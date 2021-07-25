@@ -8,9 +8,6 @@ from tensorpac.methods.meth_pac import _kl_hr
 from tensorpac.pac import _PacObj, _PacVisual
 from tensorpac.io import set_log_level
 
-from matplotlib.gridspec import GridSpec
-import matplotlib.pyplot as plt
-
 logger = logging.getLogger('tensorpac')
 
 
@@ -239,6 +236,7 @@ class PSD(object):
         ax : Matplotlib axis
             The matplotlib axis that contains the figure
         """
+        import matplotlib.pyplot as plt
         # manage input variables
         kw['fz_labels'] = kw.get('fz_labels', fz_labels)
         kw['fz_title'] = kw.get('fz_title', fz_title)
@@ -688,6 +686,8 @@ class PeakLockedTF(_PacObj, _PacVisual):
             Additional arguments are sent to the
             :class:`tensorpac.utils.PeakLockedTF.pacplot` method
         """
+        import matplotlib.pyplot as plt
+        from matplotlib.gridspec import GridSpec
         # manage additional arguments
         kwargs['colorbar'] = False
         kwargs['ylabel'] = 'Frequency for amplitude (hz)'
