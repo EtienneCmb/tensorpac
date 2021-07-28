@@ -1,0 +1,28 @@
+cff-version: 1.1.0
+message: Please cite the following works when using this software.
+authors:
+  - family-names: Combrisson
+    given-names: Etienne
+  - family-names: Nest
+    given-names: Timothy
+  - family-names: Brovelli
+    given-names: Andrea
+  - family-names: Ince
+    given-names: Robin A A
+  - family-names: Soto
+    given-names: Juan L P
+  - family-names: Guillot
+    given-names: Aymeric
+  - family-names: Jerbi
+    given-names: Karim
+doi: 10.1371/JOURNAL.PCBI.1008302
+identifiers:
+  - type: doi
+    value: 10.1371/JOURNAL.PCBI.1008302
+  - type: other
+    value: urn:issn:1553-734X
+  - type: other
+    value: pmid:33119593
+title: >-
+  Tensorpac: An open-source Python toolbox for tensor-based phase-amplitude
+  coupling measurement in electrophysiological brain signals
