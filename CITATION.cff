@@ -18,5 +18,4 @@ authors:
   given-names: "Karim"
 doi: 10.1371/journal.pcbi.1008302
 url: "https://github.com/EtienneCmb/tensorpac"
-title: "Tensorpac: An open-source Python toolbox for tensor-based phase-amplitude
-  coupling measurement in electrophysiological brain signals"
+title: "Tensorpac: An open-source Python toolbox for tensor-based phase-amplitude coupling measurement in electrophysiological brain signals"
