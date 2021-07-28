@@ -1,21 +1,28 @@
-cff-version: 1.2.0
-message: "Please cite the following works when using this software."
 authors: 
-  - family-names: "Combrisson"
-    given-names: "Etienne"
+  - 
+    family-names: Combrisson
+    given-names: Etienne
     orcid: "https://orcid.org/0000-0002-7362-3247"
-  - family-names: "Nest"
-    given-names: "Timothy"
-  - family-names: "Brovelli"
-    given-names: "Andrea"
-  - family-names: "Ince"
+  - 
+    family-names: Nest
+    given-names: Timothy
+  - 
+    family-names: Brovelli
+    given-names: Andrea
+  - 
+    family-names: Ince
     given-names: "Robin A A"
-  - family-names: "Soto"
+  - 
+    family-names: Soto
     given-names: "Juan L P"
-  - family-names: "Guillot"
-    given-names: "Aymeric"
-  - family-names: "Jerbi"
-    given-names: "Karim"
+  - 
+    family-names: Guillot
+    given-names: Aymeric
+  - 
+    family-names: Jerbi
+    given-names: Karim
+cff-version: "1.2.0"
 doi: 10.1371/journal.pcbi.1008302
-url: "https://github.com/EtienneCmb/tensorpac"
+message: "Please cite the following works when using this software."
 title: "Tensorpac: An open-source Python toolbox for tensor-based phase-amplitude coupling measurement in electrophysiological brain signals"
+url: "https://github.com/EtienneCmb/tensorpac"
