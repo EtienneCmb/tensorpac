@@ -26,6 +26,9 @@ Tensorpac
 .. image:: https://badges.gitter.im/EtienneCmb/tensorpac.svg
     :target: https://gitter.im/EtienneCmb/tensorpac?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
 
+.. image:: https://zenodo.org/badge/93316276.svg
+   :target: https://zenodo.org/badge/latestdoi/93316276
+
 
 .. figure::  https://github.com/EtienneCmb/tensorpac/blob/master/docs/source/picture/tp.png
    :align:   center
