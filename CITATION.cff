@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "Please cite the following works when using this software."
-authors:
+authors: 
   - family-names: "Combrisson"
     given-names: "Etienne"
     orcid: "https://orcid.org/0000-0002-7362-3247"
