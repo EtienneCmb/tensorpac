@@ -126,11 +126,11 @@ class _PacObj(object):
         assert pha.shape[1:] == amp.shape[1:], ("`pha` and `amp` must have the"
                                                 " same number of trials, "
                                                 "channels and time points")
-        assert np.ptp(pha) <= 2 * np.pi, ("Your phase is probably in degrees "
-                                          "and should be converted in radians "
-                                          "using either np.degrees or "
-                                          "np.deg2rad.")
-        # Force the phase to be in [-pi, pi] :
+        if np.ptp(pha) <= 2 * np.pi:
+            logger.error("Your phase is probably in degrees and should be "
+                         "converted in radians using either np.degrees or "
+                         "np.deg2rad.")
+        # force the phase to be in [-pi, pi]
         pha = (pha + np.pi) % (2. * np.pi) - np.pi
         return pha, amp
 
