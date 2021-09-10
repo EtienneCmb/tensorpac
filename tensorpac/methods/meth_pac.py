@@ -51,16 +51,14 @@ def modulation_index(pha, amp, n_bins=18):
     ----------
     Tort et al. 2010 :cite:`tort2010measuring`
     """
-    # Get the phase locked binarized amplitude :
+    # get the phase locked binarized amplitude
     p_j = _kl_hr(pha, amp, n_bins)
-    # Divide the binned amplitude by the mean over the bins :
+    # divide the binned amplitude by the mean over the bins
     p_j /= p_j.sum(axis=0, keepdims=True)
-    # Take the log of non-zero values :
-    p_j = p_j * np.ma.log(p_j).filled(-np.inf)
-    # Compute the PAC :
+    # take the log of non-zero values
+    p_j = p_j * np.ma.log(p_j).filled(0.)
+    # compute the pac
     pac = 1 + p_j.sum(axis=0) / np.log(n_bins)
-    # Set distribution distances that are really closed to zero :
-    pac[np.isinf(pac)] = 0.
     return pac
 
 
@@ -101,15 +99,18 @@ def _kl_hr(pha, amp, n_bins, mean_bins=True):
     This function is shared by the Kullback-Leibler Distance and the
     Height Ratio.
     """
-    vecbin = np.linspace(-np.pi, np.pi, n_bins + 1)
+    eps = np.finfo(pha.dtype).eps * 2
+    vecbin = np.linspace(-np.pi - eps, np.pi + eps, n_bins + 1)
     phad = np.digitize(pha, vecbin) - 1
 
     abin = []
     for i in np.unique(phad):
-        # Find where phase take vecbin values :
+        # skip if value of phases not in the b
+        if i < 0: continue
+        # find where phase take vecbin values
         idx = phad == i
         m = idx.sum() if mean_bins else 1.
-        # Take the sum of amplitude inside the bin :
+        # take the sum of amplitude inside the bin
         abin_pha = np.einsum('i...j, k...j->ik...', amp, idx) / m
         abin.append(abin_pha)
 
