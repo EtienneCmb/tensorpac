@@ -176,7 +176,6 @@ class _PacVisual(object):
             for loc, spine in ax.spines.items():
                 if loc in ['left', 'bottom']:
                     spine.set_position(('outward', 10))
-                    spine.set_smart_bounds(True)
 
         if polar:
             ax.grid(True)
