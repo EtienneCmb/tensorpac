@@ -66,7 +66,7 @@ for i, k in enumerate(range(4)):
     # change the pac method
     p.idpac = (5, k, 1)
     # compute only the pac without filtering
-    xpac = p.fit(phases, amplitudes, n_perm=20)
+    xpac = p.fit(phases, amplitudes, n_perm=20, random_state=0)
     # plot
     title = p.str_surro.replace(' (', '\n(')
     plt.subplot(2, 2, k + 1)

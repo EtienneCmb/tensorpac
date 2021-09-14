@@ -85,11 +85,15 @@ def swap_blocks(pha, amp, random_state=None):
     if random_state is None:
         random_state = int(np.random.randint(0, 10000, size=1))
     rnd = np.random.RandomState(random_state)
+    # get the minimum / maximum shift
+    min_shift, max_shift = CONFIG['MIN_SHIFT'], CONFIG['MAX_SHIFT']
+    if not isinstance(max_shift, (int, float)):
+        max_shift = amp.shape[-1]
     # random cutting point along time axis
-    cut_at = rnd.randint(1, amp.shape[-1], (1,))
-    # Split amplitude across time into two parts :
+    cut_at = rnd.randint(min_shift, max_shift, (1,))
+    # split amplitude across time into two parts
     ampl = np.array_split(amp, cut_at, axis=-1)
-    # Revered elements :
+    # revered elements
     ampl.reverse()
     return pha, np.concatenate(ampl, axis=-1)
 
@@ -123,7 +127,12 @@ def time_lag(pha, amp, random_state=None):
     if random_state is None:
         random_state = int(np.random.randint(0, 10000, size=1))
     rnd = np.random.RandomState(random_state)
-    shift = rnd.randint(pha.shape[-1])
+    # get the minimum / maximum shift
+    min_shift, max_shift = CONFIG['MIN_SHIFT'], CONFIG['MAX_SHIFT']
+    if not isinstance(max_shift, (int, float)):
+        max_shift = pha.shape[-1]
+    # random cutting point along time axis
+    shift = rnd.randint(min_shift, max_shift, (1,))
     return np.roll(pha, shift, axis=-1), amp
 
 

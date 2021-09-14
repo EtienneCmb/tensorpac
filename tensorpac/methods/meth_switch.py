@@ -2,6 +2,8 @@
 import numpy as np
 from functools import partial
 
+from tensorpac.config import CONFIG
+
 
 def get_pac_fcn(idp, n_bins, p, implementation="tensor", full=False):
     """Get the function for computing Phase-Amplitude coupling.
@@ -45,7 +47,7 @@ def get_pac_fcn(idp, n_bins, p, implementation="tensor", full=False):
 
 def pacstr(idpac):
     """Return correspond methods string."""
-    # Pac methods :
+    # pac methods
     if idpac[0] == 1:
         method = 'Mean Vector Length (MVL, Canolty et al. 2006)'
     elif idpac[0] == 2:
@@ -61,19 +63,24 @@ def pacstr(idpac):
     else:
         raise ValueError("No corresponding pac method.")
 
-    # Surrogate method :
+    # surrogate method
+    min_shift, max_shift = CONFIG['MIN_SHIFT'], CONFIG['MAX_SHIFT']
+    if not isinstance(max_shift, (int, float)):
+        max_shift = 'n_times'
     if idpac[1] == 0:
         suro = 'No surrogates'
     elif idpac[1] == 1:
         suro = 'Permute phase across trials (Tort et al. 2010)'
     elif idpac[1] == 2:
-        suro = 'Swap amplitude time blocks (Bahramisharif et al. 2013)'
+        suro = (f'Swap amplitude time blocks (min_shift={min_shift}; '
+                f'max_shift={max_shift}) (Bahramisharif et al. 2013)')
     elif idpac[1] == 3:
-        suro = 'Time lag (Canolty et al. 2006)'
+        suro = (f'Time lag (min_shift={min_shift}; max_shift={max_shift}) '
+                f'(Canolty et al. 2006)')
     else:
         raise ValueError("No corresponding surrogate method.")
 
-    # Normalization methods :
+    # normalization methods
     if idpac[2] == 0:
         norm = 'No normalization'
     elif idpac[2] == 1:
