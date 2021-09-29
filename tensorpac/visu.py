@@ -111,7 +111,9 @@ class _PacVisual(object):
         # Polar plot :
         if polar:
             plotas = 'pcolor'
-            plt.subplot(subplot, projection='polar')
+            if isinstance(subplot, int):
+                subplot = [int(k) for k in str(subplot)]
+            plt.subplot(*tuple(subplot), projection='polar')
         # Check vmin / vmax
         if (vmin is None) and (vmax is None) and self._autovmM:
             vmin, vmax = min(0, np.nanmin(pac)), max(0, np.nanmax(pac))

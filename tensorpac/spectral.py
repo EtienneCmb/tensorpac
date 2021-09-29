@@ -79,10 +79,13 @@ def spectral(x, sf, f, stype, dcomplex, cycle, width, n_jobs):
 
 
 def fir_order(fs, sizevec, flow, cycle=3):
-    filtorder = cycle * (fs // flow)
+    if cycle is None:
+        filtorder = 3 * np.fix(fs / flow)
+    else:
+        filtorder = cycle * (fs // flow)
 
-    if (sizevec < 3 * filtorder):
-        filtorder = (sizevec - 1) // 3
+        if (sizevec < 3 * filtorder):
+            filtorder = (sizevec - 1) // 3
 
     return int(filtorder)
 

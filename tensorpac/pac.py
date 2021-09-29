@@ -98,21 +98,24 @@ class _PacObj(object):
 
     def _speccheck(self, dcomplex=None, cycle=None, width=None):
         """Check spectral parameters."""
-        # Check cycle :
+        # check cycle
         if cycle is not None:
             cycle = np.asarray(cycle)
             if (len(cycle) is not 2) or not cycle.dtype == int:
                 raise ValueError("Cycle must be a tuple of two integers.")
             else:
                 self._cycle = cycle
-        # Check complex decomposition :
+        else:
+            logger.warning("Use automatic filter order")
+            self._cycle = (None, None)
+        # check complex decomposition
         if dcomplex is not None:
             if dcomplex not in ['hilbert', 'wavelet']:
                 raise ValueError("dcomplex must either be 'hilbert' or "
                                  "'wavelet'.")
             else:
                 self._dcomplex = dcomplex
-        # Convert Morlet's width :
+        # convert morlet's width
         if width is not None:
             self._width = int(width)
 
