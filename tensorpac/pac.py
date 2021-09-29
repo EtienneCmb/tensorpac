@@ -102,12 +102,11 @@ class _PacObj(object):
         if cycle is not None:
             cycle = np.asarray(cycle)
             if (len(cycle) is not 2) or not cycle.dtype == int:
-                raise ValueError("Cycle must be a tuple of two integers.")
+                logger.warning("Use automatic filter order")
+                self._cycle = (None, None)
             else:
                 self._cycle = cycle
-        else:
-            logger.warning("Use automatic filter order")
-            self._cycle = (None, None)
+
         # check complex decomposition
         if dcomplex is not None:
             if dcomplex not in ['hilbert', 'wavelet']:
