@@ -94,7 +94,7 @@ def nd_mi_gg(x, y):
     ln2 = np.log(2)
     if CONFIG['MI_BIASCORRECT']:
         vec = np.arange(1, nvarxy + 1)
-        psiterms = psi((ntrl - vec).astype(np.float) / 2.0) / 2.0
+        psiterms = psi((ntrl - vec).astype(float) / 2.0) / 2.0
         dterm = (ln2 - np.log(ntrl - 1.0)) / 2.0
         hx = hx - nvarx * dterm - psiterms[:nvarx].sum()
         hy = hy - nvary * dterm - psiterms[:nvary].sum()
