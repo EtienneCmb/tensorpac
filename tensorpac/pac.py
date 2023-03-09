@@ -62,7 +62,7 @@ class _PacObj(object):
         assert isinstance(sf, (int, float)), ("The sampling frequency must be "
                                               "a float number.")
         # Compatibility between keepfilt and wavelet :
-        if (keepfilt is True) and (self._dcomplex is 'wavelet'):
+        if (keepfilt is True) and (self._dcomplex == 'wavelet'):
             raise ValueError("Using wavelet for the complex decomposition do "
                              "not allow to get filtered data only. Set the "
                              "keepfilt parameter to False or set dcomplex to "
@@ -86,11 +86,11 @@ class _PacObj(object):
 
         # ---------------------------------------------------------------------
         # Switch between phase or amplitude :
-        if ftype is 'phase':
+        if ftype == 'phase':
             tosend = 'pha' if not keepfilt else None
             xfilt = spectral(x, sf, self.f_pha, tosend, self._dcomplex,
                              self._cycle[0], self._width, n_jobs)
-        elif ftype is 'amplitude':
+        elif ftype == 'amplitude':
             tosend = 'amp' if not keepfilt else None
             xfilt = spectral(x, sf, self.f_amp, tosend, self._dcomplex,
                              self._cycle[1], self._width, n_jobs)
@@ -155,7 +155,7 @@ class _PacObj(object):
         # ---------------------------------------------------------------------
         logger.info(f"    infer p-values at (p={p}, mcp={mcp})")
         # computes the pvalues
-        if mcp is 'maxstat':
+        if mcp == 'maxstat':
             max_p = perm.reshape(n_perm, -1).max(1)[np.newaxis, ...]
             nb_over = (effect[..., np.newaxis] <= max_p).sum(-1)
             pvalues = nb_over / n_perm
@@ -164,7 +164,7 @@ class _PacObj(object):
             pvalues = np.maximum(1. / n_perm, pvalues)
         elif mcp in ['fdr', 'bonferroni']:
             from mne.stats import fdr_correction, bonferroni_correction
-            fcn = fdr_correction if mcp is 'fdr' else bonferroni_correction
+            fcn = fdr_correction if mcp == 'fdr' else bonferroni_correction
             # compute the p-values
             pvalues = (effect[np.newaxis, ...] <= perm).sum(0) / n_perm
             pvalues = np.maximum(1. / n_perm, pvalues)

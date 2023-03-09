@@ -61,7 +61,7 @@ def _check_freq(f):
     if len(f.reshape(-1)) == 1:
         raise ValueError("The length of f should at least be 2.")
     elif 2 in f.shape:  # f of shape (N, 2) or (2, N)
-        if f.shape[1] is not 2:
+        if f.shape[1] != 2:
             f = f.T
     elif np.squeeze(f).shape == (4,):  # (f_start, f_end, f_width, f_step)
         f = _pair_vectors(*tuple(np.squeeze(f)))
@@ -202,7 +202,7 @@ class PSD(object):
         plt.xlim(f_min, f_max)
         if log:
             from matplotlib.ticker import ScalarFormatter
-            plt.xscale('log', basex=10)
+            plt.xscale('log', base=10)
             plt.gca().xaxis.set_major_formatter(ScalarFormatter())
         if grid:
             plt.grid(color='grey', which='major', linestyle='-',
@@ -262,7 +262,7 @@ class PSD(object):
         _viz.pacplot(psd, xvec, trials, **kw)
         if log:
             from matplotlib.ticker import ScalarFormatter
-            plt.xscale('log', basex=10)
+            plt.xscale('log', base=10)
             plt.gca().xaxis.set_major_formatter(ScalarFormatter())
         if grid:
             plt.grid(color='grey', which='major', linestyle='-',
