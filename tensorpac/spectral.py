@@ -42,7 +42,7 @@ def spectral(x, sf, f, stype, dcomplex, cycle, width, n_jobs):
     """
     n_freqs = f.shape[0]
     # Filtering + complex decomposition :
-    if dcomplex is 'hilbert':
+    if dcomplex == 'hilbert':
         # get filtering coefficients
         b = []
         a = np.zeros((n_freqs,), dtype=float)
@@ -58,15 +58,15 @@ def spectral(x, sf, f, stype, dcomplex, cycle, width, n_jobs):
         xd = np.asarray(xf)
         if stype is not None:
             xd = hilbertm(xd)
-    elif dcomplex is 'wavelet':
+    elif dcomplex == 'wavelet':
         f = f.mean(1)  # centered frequencies
         xd = Parallel(n_jobs=n_jobs, **CONFIG['JOBLIB_CFG'])(delayed(morlet)(
             x, sf, k, width) for k in f)
 
     # Extract phase / amplitude :
-    if stype is 'pha':
+    if stype == 'pha':
         return np.angle(xd).astype(np.float64)
-    elif stype is 'amp':
+    elif stype == 'amp':
         return np.abs(xd).astype(np.float64)
     elif stype is None:
         return xd.astype(np.float64)
