@@ -202,7 +202,7 @@ class PSD(object):
         plt.xlim(f_min, f_max)
         if log:
             from matplotlib.ticker import ScalarFormatter
-            plt.xscale('log', basex=10)
+            plt.xscale('log', base=10)
             plt.gca().xaxis.set_major_formatter(ScalarFormatter())
         if grid:
             plt.grid(color='grey', which='major', linestyle='-',
@@ -262,7 +262,7 @@ class PSD(object):
         _viz.pacplot(psd, xvec, trials, **kw)
         if log:
             from matplotlib.ticker import ScalarFormatter
-            plt.xscale('log', basex=10)
+            plt.xscale('log', base=10)
             plt.gca().xaxis.set_major_formatter(ScalarFormatter())
         if grid:
             plt.grid(color='grey', which='major', linestyle='-',
