@@ -189,7 +189,7 @@ class PSD(object):
         if isinstance(confidence, (int, float)) and (0 < confidence < 100):
             logger.info(f"    Add {confidence}th confidence interval")
             interval = (100. - confidence) / 2
-            kw = dict(axis=0, interpolation='nearest')
+            kw = dict(axis=0, method='nearest')
             psd_min = np.percentile(yvec, interval, **kw)
             psd_max = np.percentile(yvec, 100. - interval, **kw)
             plt.fill_between(xvec, psd_max, psd_min, color='lightgray',

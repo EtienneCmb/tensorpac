@@ -399,7 +399,7 @@ class Pac(_PacObj, _PacPlt):
         # compute surrogates (if needed)
         if compute_surro:
             if random_state is None:
-                random_state = int(np.random.randint(0, 10000, size=1))
+                random_state = int(np.random.randint(0, 10000, size=1))[0]
             logger.info(f"    compute surrogates ({self.str_surro}, {n_perm} "
                         f"permutations, random_state={random_state})")
             surro = compute_surrogates(pha, amp, self.idpac[1], fcn, n_perm,
